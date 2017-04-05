@@ -10,7 +10,7 @@ class WpDayDetail extends Migration
     {
         Schema::create('wp_DayDetail', function (Blueprint $table) {
             $table->integer('traineeId', true);
-            $table->integer('instructorId',  true);
+            $table->integer('instructorId');
             $table->string('WorkoutPlanId');
             $table->string('wPlanDay');
         });
