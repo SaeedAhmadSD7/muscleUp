@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Comment extends Migration
+class CreateBootcampTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class Comment extends Migration
      */
     public function up()
     {
-        Schema::create('comment', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('content');
-            $table->timestamps();
-        });
+        Schema::create('bootcamp', function (Blueprint $table) {
+        $table->increments('bootcampId');
+        $table->integer('gymId');
+        $table->string('bootcampName');
+        $table->integer('duraction');
+        $table->timestamps();
+    });
     }
 
     /**
@@ -27,7 +29,6 @@ class Comment extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comment');
-
+        Schema::dropIfExists('bootcamp');
     }
 }
