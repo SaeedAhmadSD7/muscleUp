@@ -9,7 +9,7 @@ class WorkoutplanAssign extends Migration
     public function up()
     {
         Schema::create('wp_PlanAssign', function (Blueprint $table) {
-            $table->integer('traineeId', true);
+            $table->integer('traineeId', true, true);
             $table->integer('instructorId');
             $table->string('WorkoutPlanId');
             $table->string('workoutPlanType');

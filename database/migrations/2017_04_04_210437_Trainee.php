@@ -9,7 +9,7 @@ class Trainee extends Migration
     public function up()
     {
         Schema::create('trainee', function (Blueprint $table) {
-            $table->integer('traineeId', true);
+            $table->integer('traineeId', true, true);
             $table->integer('userId');
             $table->string('Name');
             $table->string('email');

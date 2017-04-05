@@ -9,7 +9,7 @@ class WorkoutPlan extends Migration
     public function up()
     {
         Schema::create('Workout_Plan', function (Blueprint $table) {
-            $table->integer('wPlanId', true);
+            $table->integer('wPlanId', true,true);
             $table->integer('GymId');
             $table->string('wPlanType');
         });

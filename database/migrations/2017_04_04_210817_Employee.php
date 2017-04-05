@@ -9,7 +9,7 @@ class Employee extends Migration
     public function up()
 {
     Schema::create('employee', function (Blueprint $table) {
-        $table->integer('EmployeeId', true);
+        $table->integer('EmployeeId', true, true);
         $table->integer('userId');
         $table->string('Name');
         $table->string('email');
