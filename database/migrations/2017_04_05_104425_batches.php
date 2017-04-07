@@ -14,9 +14,12 @@ class Batches extends Migration
     public function up()
     {
         Schema::create('batches', function (Blueprint $table) {
-            $table->integer('traineeId', true);
-            $table->string('exercisetype');
+            $table->integer('batchId', true);
+            $table->integer('traineeId');
+            $table->integer('employeeId');
+            $table->string('exerciseType');
             $table->string('exerciseSchedule');
+            $table->integer('noOfTraineess');
 
         });
     }

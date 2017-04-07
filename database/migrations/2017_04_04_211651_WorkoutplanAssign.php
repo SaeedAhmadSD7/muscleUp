@@ -10,8 +10,8 @@ class WorkoutplanAssign extends Migration
     {
         Schema::create('wp_PlanAssign', function (Blueprint $table) {
             $table->integer('traineeId', true, true);
-            $table->integer('instructorId');
             $table->string('WorkoutPlanId');
+            $table->integer('instructorId');
             $table->string('workoutPlanType');
             $table->string('Duration');
         });

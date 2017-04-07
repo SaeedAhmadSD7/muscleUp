@@ -11,7 +11,6 @@ class UserType extends Migration
         Schema::create('User_Type', function (Blueprint $table) {
             $table->integer('userId', true, true);
             $table->integer('GymId');
-            $table->integer('BranchId');
             $table->string('userType');
         });
 

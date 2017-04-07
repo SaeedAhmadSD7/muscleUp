@@ -15,8 +15,9 @@ class Initialmangament extends Migration
     {
         Schema::create('initialmanagement', function (Blueprint $table) {
             $table->integer('traineeId', true);
-            $table->string('medicalhistory');
-            $table->string('currentfitnessdata');
+            $table->integer('employeeId');
+            $table->string('medicalHistory');
+            $table->string('currentFitnessData');
 
         });
     }

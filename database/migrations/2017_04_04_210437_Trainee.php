@@ -11,11 +11,15 @@ class Trainee extends Migration
         Schema::create('trainee', function (Blueprint $table) {
             $table->integer('traineeId', true, true);
             $table->integer('userId');
+            $table->integer('gymId');
             $table->string('Name');
+            $table->integer('dateOfBirth');
             $table->string('email');
-            $table->string('Age');
+            $table->string('sex');
             $table->integer('Contact Number');
             $table->string('Address');
+            $table->string('foodAlergies');
+            $table->string('medicalHistory');
         });
 
     }

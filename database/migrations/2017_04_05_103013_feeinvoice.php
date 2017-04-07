@@ -14,9 +14,11 @@ class Feeinvoice extends Migration
     public function up()
     {
         Schema::create('feeinvoice', function (Blueprint $table) {
-            $table->integer('feeinvoiceId', true);
+            $table->integer('feeInvoiceId', true);
+            $table->integer('gymId');
+            $table->integer('traineeId');
             $table->integer('amount');
-            $table->integer('enddate');
+            $table->integer('endDate');
 
         });
     }

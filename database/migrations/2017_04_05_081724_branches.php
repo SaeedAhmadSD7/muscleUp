@@ -16,8 +16,8 @@ class Branches extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->increments('branchId');
             $table->integer('gymId');
+            $table->integer('contactNumber');
             $table->string('address');
-            $table->integer('contact');
             $table->timestamps();
         });
     }
