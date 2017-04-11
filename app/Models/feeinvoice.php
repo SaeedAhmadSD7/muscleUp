@@ -10,4 +10,8 @@ class feeInvoice extends Model
         return $this-> belongsTo(gym :: class);
 
     }
+    function employee(){
+        return $this-> belongsTomany(employee :: class);
+
+    }
 }

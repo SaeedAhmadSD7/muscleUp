@@ -10,4 +10,8 @@ class trainee extends Model
         return $this-> belongsToMany( gym:: class);
 
     }
+    function employee(){
+        return $this-> belongsTo( emoployee:: class);
+
+    }
 }

@@ -10,4 +10,8 @@ class deals extends Model
         return $this-> hasOne(gym :: class);
 
     }
+    function employee(){
+        return $this-> belongsTo( emplotyee:: class);
+
+    }
 }

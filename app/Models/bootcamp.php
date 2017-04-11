@@ -10,4 +10,8 @@ class bootcamp extends Model
         return $this-> belongsTo(bootcmap :: class);
 
     }
+    function employee(){
+        return $this-> belongsTo(employee :: class);
+
+    }
 }

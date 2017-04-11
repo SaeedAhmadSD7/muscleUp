@@ -10,4 +10,8 @@ class services extends Model
         return $this-> belongsTo(gym :: class);
 
     }
+    function employee(){
+        return $this-> belongsto(employee :: class);
+
+    }
 }

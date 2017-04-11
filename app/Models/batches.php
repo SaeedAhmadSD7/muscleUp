@@ -10,4 +10,8 @@ class batches extends Model
         return $this-> hasOne(gym :: class);
 
     }
+    function employee(){
+        return $this-> belongsToMany( emplotyee:: class);
+
+    }
 }
