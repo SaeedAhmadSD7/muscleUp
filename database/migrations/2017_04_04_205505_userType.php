@@ -9,9 +9,8 @@ class UserType extends Migration
     public function up()
     {
         Schema::create('User_Type', function (Blueprint $table) {
-            $table->integer('userId', true);
+            $table->integer('userId', true, true);
             $table->integer('GymId');
-            $table->integer('BranchId');
             $table->string('userType');
         });
 

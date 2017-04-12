@@ -14,10 +14,12 @@ class CreateBootcampTable extends Migration
     public function up()
     {
         Schema::create('bootcamp', function (Blueprint $table) {
-        $table->increments('bootcampId');
+        $table->increments('bootCampId');
         $table->integer('gymId');
-        $table->string('bootcampName');
-        $table->integer('duraction');
+        $table->integer('traineeId');
+        $table->integer('employeeId');
+        $table->string('bootCampName');
+        $table->integer('duration');
         $table->timestamps();
     });
     }
