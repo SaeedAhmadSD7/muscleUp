@@ -6,12 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class deals extends Model
 {
+
     function gym(){
-        return $this-> hasOne(gym :: class);
+        return $this->belongsTo(gym :: class);
 
     }
-    function employee(){
-        return $this-> belongsTo( emplotyee:: class);
+
+    function trainee()
+    {
+        return $this->belongsToMany(trainee:: class);
 
     }
+
+
 }

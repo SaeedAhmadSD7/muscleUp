@@ -6,58 +6,62 @@ use Illuminate\Database\Eloquent\Model;
 
 class employee extends Model
 {
-    function gym(){
-        return $this-> belongsTo(gym :: class);
+
+    function branches()
+    {
+        return $this->belongsToMany(branches:: class);
 
     }
+
     function trainee(){
         return $this-> hasMany( trainee:: class);
 
     }
-    function branches(){
-        return $this-> hasMany( branches:: class);
 
-    }
     function batches(){
-        return $this-> hasmany( batches:: class);
+        return $this->belongsToMany(batches:: class);
 
     }
-    function deals(){
-        return $this-> hasmany( deals:: class);
+
+
+    function bootCamp()
+    {
+        return $this->belongsToMany(bootCamp:: class);
 
     }
-    function bootcamp(){
-        return $this-> hasone( bootcamp:: class);
 
-    }
-    function feeinvoice(){
-        return $this-> hasone(feeinvoice :: class);
-
-    }
-    function initialmanagement(){
-        return $this-> hasmany(initialmanagement :: class);
-
-    }
     function services(){
-        return $this-> hasmany(services :: class);
+        return $this->belongsToMany(services :: class);
 
     }
-    function user_Type(){
-        return $this-> hasmany(user_Type :: class);
+
+    function userType()
+    {
+        return $this->belongsTo(userType :: class);
 
     }
-    function workout_Plan(){
-        return $this-> hasmany(workout_Plan :: class);
+
+    function workoutPlan()
+    {
+        return $this->hasMany(workoutPlan :: class);
 
     }
-    function wp_DayDetail(){
-        return $this-> hasmany(wp_DayDetail :: class);
+
+    function wpDayDetail()
+    {
+        return $this->hasMany(wpDayDetail :: class);
 
     }
-    function wp_PlanAssign(){
-        return $this-> hasmany(wp_PlanAssign :: class);
+
+    function wpAssign()
+    {
+        return $this->hasMany(wpAssign :: class);
 
     }
-   
+
+    function measurements()
+    {
+        return $this->hasOne(measurements:: class);
+    }
 
 }
