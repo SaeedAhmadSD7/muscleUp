@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class gym extends Model
 {
+
     function branches(){
         return $this-> hasMany(branches :: class);
 

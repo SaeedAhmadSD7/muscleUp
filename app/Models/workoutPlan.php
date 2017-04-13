@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class workoutPlan extends Model
 {
+
     function gym(){
         return $this-> belongsTo(gym :: class);
 

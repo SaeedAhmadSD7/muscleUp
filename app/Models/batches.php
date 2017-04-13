@@ -19,5 +19,4 @@ class batches extends Model
     {
         return $this->hasMany(trainee:: class);
     }
-
 }

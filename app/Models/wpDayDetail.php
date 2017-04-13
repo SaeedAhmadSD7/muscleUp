@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class wpDayDetail extends Model
 {
+
     function employee(){
         return $this->belongsTo(employee :: class);
 

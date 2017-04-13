@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class wpAssign extends Model
 {
+
     function employee(){
         return $this-> belongsto(employee :: class);
 
