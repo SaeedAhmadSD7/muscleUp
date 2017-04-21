@@ -13,7 +13,6 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
   function index (){
-      $helloworld = "";
-      return view('muscle-up-app.home',compact('helloworld'));
+      return view('muscle-up-app.home.index');
   }
 }

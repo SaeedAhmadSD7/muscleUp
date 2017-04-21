@@ -1,6 +1,3 @@
 <?php
 
-Route::get('/', function () {
-    return view('home/index');
-
-});
+Route::get('/', 'MuscleUpApp\HomeController@index');
