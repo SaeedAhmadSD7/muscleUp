@@ -17,7 +17,7 @@
 
             <div class="navbar-collapse collapse clearfix">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="current dropdown"><a href="index.html">Home</a>
+                    <li class="current dropdown"><a href="index.html">Tour</a>
                         <ul class="submenu">
                             <li><a href="index.html">Home Style One</a></li>
                             <li><a href="index-2.html">Home Style Two</a></li>
@@ -25,7 +25,7 @@
                             <li><a href="index-one-page-version.html"> One Page Version</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="#">Pages</a>
+                    <li class="dropdown"><a href="#">Deals</a>
                         <ul class="submenu">
                             <li><a href="faq.html">FAQ</a></li>
                             <li><a href="qa.html">Q & A</a></li>
@@ -43,20 +43,20 @@
                             </li>
                         </ul>
                     </li>
-                    <li class=" dropdown"><a href="about-us.html">About us</a>
+                    <li class=" dropdown"><a href="about-us.html">Events</a>
                         <ul class="submenu">
                             <li><a href="our-team.html">Our Team</a></li>
                             <li><a href="pricing.html">Our Pricing</a></li>
 
                         </ul>
                     </li>
-                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="courses.html">Services</a></li>
                     <li class="dropdown"><a href="services.html">Services</a>
                         <ul class="submenu">
                             <li><a href="schedule.html">Our Schedule</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="blog.html">Blog</a>
+                    <li class="dropdown"><a href="blog.html">Join Now</a>
                         <ul class="submenu">
                             <li><a href="blog-without-sidebar.html">Blog Full Width</a></li>
                             <li><a href="blog.html">Blog Left Sidebar</a></li>
@@ -66,7 +66,7 @@
                         </ul>
                     </li>
 
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="contact.html">Members</a></li>
                 </ul>
                 <div class="clearfix"></div>
             </div>

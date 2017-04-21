@@ -13,6 +13,6 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
   function index (){
-      return view('muscle-up-app.home.index');
+      return view('muscle-up-app\home\index');
   }
 }
