@@ -13,7 +13,7 @@
     <!-- Main Slider -->
       @include('partials._mainSlider')
     <!--Featured Services-->
-       @yield('content')
+
 
     <!--Main Footer-->
      @include('partials._footer')
