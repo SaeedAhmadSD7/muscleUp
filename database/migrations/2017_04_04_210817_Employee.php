@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
+use \App\Utils\Globals\EmployeeType;
 class Employee extends Migration
 {
     public function up()
@@ -13,7 +13,7 @@ class Employee extends Migration
         $table->integer('gymId');
         $table->integer('branchId');
         $table->string('Name');
-        $table->string('employType');
+        $table->enum('employType',array_keys(EmployeeType::$types));
         $table->integer('Contact Number');
         $table->string('dateOfBirth');
         $table->string('sex');

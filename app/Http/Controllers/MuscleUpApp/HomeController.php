@@ -9,10 +9,16 @@
 namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Http\Controllers\Controller;
+use App\User;
 
 class HomeController extends Controller
 {
-  function index (){
-      return view('muscle-up-app\home\index');
-  }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    function index (){
+        return view('muscle-up-app\home\index');
+    }
 }
