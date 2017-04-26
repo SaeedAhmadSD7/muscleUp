@@ -1,7 +1,25 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: soft
- * Date: 4/25/2017
- * Time: 3:15 PM
- */
+<!DOCTYPE html>
+<html>
+<head>
+    @include('muscle-up-app.includes.frondends._styleSheet')
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- Main Header -->
+@include('muscle-up-app.includes.frondends._mainHeader')
+<!--End Main Header -->
+
+    <!-- Main Slider -->
+@include('muscle-up-app.includes.frondends._mainSlider')
+<!--Featured Services-->
+
+@yield('content')
+<!--Main Footer-->
+    @include('muscle-up-app.includes.frondends._footer')
+
+</div>
+@include('muscle-up-app.includes.frondends._javascript')
+</body>
+
+</html>

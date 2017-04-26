@@ -1,4 +1,4 @@
-@extends('muscle-up-app.shared.main')
+@extends('muscle-up-app.layouts.frontend-main')
 @section('title','|homepage')
 
 @section('content')
