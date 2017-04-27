@@ -21,4 +21,5 @@ class HomeController extends Controller
     function index (){
         return view('muscle-up-app\home\index');
     }
+
 }

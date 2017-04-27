@@ -26,4 +26,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function saveUser($params){
+
+        $isValid = true;
+        $response = null;
+        $user = null;
+        if($params['first_name'] != ''){
+            $isValid = false;
+            $response = ['success'=>false,'error'=>true, 'message' => ''];
+        }
+        if($isValid){
+            $user = self::save($params);
+            $response = ['success'=>false,'error'=>true, 'message' => '', 'Model' => $user];
+        }
+        return $response;
+    }
 }
