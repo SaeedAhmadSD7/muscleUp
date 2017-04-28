@@ -14,6 +14,7 @@ class Employee extends Migration
         $table->integer('branchId');
         $table->string('Name');
         $table->enum('employType',array_keys(EmployeeType::$types));
+        $table->string('password',60);
         $table->integer('Contact Number');
         $table->string('dateOfBirth');
         $table->string('sex');

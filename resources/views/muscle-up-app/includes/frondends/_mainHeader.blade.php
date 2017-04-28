@@ -56,14 +56,8 @@
                             <li><a href="schedule.html">Our Schedule</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="blog.html">Join Now</a>
-                        <ul class="submenu">
-                            <li><a href="blog-without-sidebar.html">Blog Full Width</a></li>
-                            <li><a href="blog.html">Blog Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                            <li><a href="blog-left-right-sidebar.html">Blog Left Right Sidebar</a></li>
-                            <li><a href="blog-detail.html">Single Post</a></li>
-                        </ul>
+                    <li class="dropdown"><a href="register">Join Now</a>
+
                     </li>
 
                     <li><a href="contact.html">Members</a></li>

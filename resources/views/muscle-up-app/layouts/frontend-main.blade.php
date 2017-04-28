@@ -10,8 +10,7 @@
 @include('muscle-up-app.includes.frondends._mainHeader')
 <!--End Main Header -->
 
-    <!-- Main Slider -->
-@include('muscle-up-app.includes.frondends._mainSlider')
+
 <!--Featured Services-->
 
 @yield('content')

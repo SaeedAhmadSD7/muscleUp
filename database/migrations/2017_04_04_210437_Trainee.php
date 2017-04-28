@@ -15,6 +15,7 @@ class Trainee extends Migration
             $table->string('Name');
             $table->integer('dateOfBirth');
             $table->string('email');
+            $table->string('password');
             $table->string('sex');
             $table->integer('Contact Number');
             $table->string('Address');
