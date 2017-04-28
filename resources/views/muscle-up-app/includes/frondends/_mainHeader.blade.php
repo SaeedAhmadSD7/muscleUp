@@ -2,7 +2,7 @@
     <div class="auto-container clearfix">
 
         <!-- Logo -->
-        <div class="logo"><a href="#"><img src="images/logo.png" alt="Logo" title="StayFit"></a></div>
+        <div class="logo"><a href="/"><img src="images/logo.png" alt="Logo" title="StayFit"></a></div>
 
         <!-- Main Menu -->
         <nav class="main-menu">
@@ -60,7 +60,16 @@
 
                     </li>
 
-                    <li><a href="contact.html">Members</a></li>
+                    @if(Auth::check())
+
+                        <li><a href="login">Logout</a></li>
+                    @else
+
+                    <li><a href="login">Login</a></li>
+
+                    @endif
+
+
                 </ul>
                 <div class="clearfix"></div>
             </div>
