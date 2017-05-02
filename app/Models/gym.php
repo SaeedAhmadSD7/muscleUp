@@ -4,46 +4,45 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class gym extends Model
+class Gym extends Model
 {
-
     function branches(){
-        return $this-> hasMany(branches :: class);
+        return $this-> hasMany(Branch :: class);
 
     }
 
     function bootCamp(){
-        return $this->hasMany(bootCamp :: class);
+        return $this->hasMany(BootCamp :: class);
 
     }
 
     function batches(){
-        return $this-> hasMany(batches :: class);
+        return $this-> hasMany(Batch :: class);
 
     }
 
     function deals(){
-        return $this-> hasMany(deals :: class);
+        return $this-> hasMany(Deal :: class);
 
     }
 
     function trainee(){
-        return $this-> hasMany(trainee :: class);
+        return $this-> hasMany(Trainee :: class);
 
     }
 
     function feeInvoice(){
-        return $this-> hasMany(feeInvoice :: class);
+        return $this-> hasMany(FeeInvoice :: class);
 
     }
 
     function workoutPlan(){
-        return $this->hasMany(workoutPlan :: class);
+        return $this->hasMany(WorkoutPlan :: class);
 
     }
 
     function services(){
-        return $this-> hasMany(services :: class);
+        return $this-> hasMany(Servic :: class);
 
     }
 
@@ -51,5 +50,4 @@ class gym extends Model
     {
         return $this->hasMany(userType :: class);
     }
-
 }

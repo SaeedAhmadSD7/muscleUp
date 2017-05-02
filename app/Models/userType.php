@@ -4,22 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class userType extends Model
+class UserType extends Model
 {
-
     function gym()
     {
-        return $this->belongsTo(gym:: class);
+        return $this->belongsTo(Gym:: class);
     }
 
-    function employee(){
-        return $this-> belongsto(employee :: class);
+    function employee()
+    {
+        return $this->belongsto(Employee :: class);
 
     }
 
     function trainee()
     {
-        return $this->belongsTo(trainee:: class);
-    }
 
+    }
 }

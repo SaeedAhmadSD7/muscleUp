@@ -4,18 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class wpAssign extends Model
+class WpAssign extends Model
 {
-
     function employee(){
-        return $this-> belongsto(employee :: class);
+        return $this-> belongsto(Employee :: class);
 
     }
 
     function trainee()
     {
-        return $this->belongsTo(trainee:: class);
+        return $this->belongsTo(Trainee:: class);
     }
-
 }
-

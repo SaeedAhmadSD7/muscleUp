@@ -4,19 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class deals extends Model
+class Deal extends Model
 {
-
     function gym(){
-        return $this->belongsTo(gym :: class);
+        return $this->belongsTo(Gym :: class);
 
     }
 
     function trainee()
     {
-        return $this->belongsToMany(trainee:: class);
+        return $this->belongsToMany(Trainee:: class);
 
     }
-
-
 }

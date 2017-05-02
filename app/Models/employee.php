@@ -4,64 +4,63 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class employee extends Model
+class Employee extends Model
 {
 
     function branches()
     {
-        return $this->belongsToMany(branches:: class);
+        return $this->belongsToMany(Branch:: class);
 
     }
 
     function trainee(){
-        return $this-> hasMany( trainee:: class);
+        return $this-> hasMany( Trainee:: class);
 
     }
 
     function batches(){
-        return $this->belongsToMany(batches:: class);
+        return $this->belongsToMany(Batche:: class);
 
     }
 
 
     function bootCamp()
     {
-        return $this->belongsToMany(bootCamp:: class);
+        return $this->belongsToMany(BootCamp:: class);
 
     }
 
     function services(){
-        return $this->belongsToMany(services :: class);
+        return $this->belongsToMany(Service :: class);
 
     }
 
     function userType()
     {
-        return $this->belongsTo(userType :: class);
+        return $this->belongsTo(UserType :: class);
 
     }
 
     function workoutPlan()
     {
-        return $this->hasMany(workoutPlan :: class);
+        return $this->hasMany(WorkoutPlan :: class);
 
     }
 
     function wpDayDetail()
     {
-        return $this->hasMany(wpDayDetail :: class);
+        return $this->hasMany(WpDayDetail :: class);
 
     }
 
     function wpAssign()
     {
-        return $this->hasMany(wpAssign :: class);
+        return $this->hasMany(WpAssign :: class);
 
     }
 
     function measurements()
     {
-        return $this->hasOne(measurements:: class);
+        return $this->hasOne(Measurement:: class);
     }
-
 }

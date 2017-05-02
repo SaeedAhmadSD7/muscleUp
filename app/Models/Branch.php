@@ -4,16 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FeeInvoice extends Model
+class Branch extends Model
 {
     function gym(){
         return $this-> belongsTo(Gym :: class);
 
     }
 
-    function trainee()
-    {
-        return $this->belongsTo(Employee :: class);
-
+    function employee(){
+        return $this->hasMany(Employee:: class);
     }
 }

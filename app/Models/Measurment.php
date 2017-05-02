@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class WpDayDetail extends Model
+class Measurment extends Model
 {
     function employee(){
-        return $this->belongsTo(Employee :: class);
+        return $this-> belongsTo(Employee :: class);
 
     }
 

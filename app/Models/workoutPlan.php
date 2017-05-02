@@ -4,20 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class workoutPlan extends Model
+class WorkoutPlan extends Model
 {
 
     function gym(){
-        return $this-> belongsTo(gym :: class);
+        return $this-> belongsTo(Gym :: class);
 
     }
     function employee(){
-        return $this-> belongsto(employee :: class);
+        return $this-> belongsto(Employee :: class);
 
     }
 
     function wpAssign()
     {
-        return $this->belongsTo(wpAssign:: class);
+        return $this->belongsTo(WpAssign:: class);
     }
 }

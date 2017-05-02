@@ -4,22 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BootCamp extends Model
+class Servic extends Model
 {
-
-    function gym()
-    {
-        return $this->belongsTo(Gym :: class);
+    function gym(){
+        return $this-> belongsTo(Gym :: class);
     }
 
-    function employee()
-    {
+    function employee(){
         return $this->hasMany(Employee :: class);
     }
 
     function trainee()
     {
         return $this->hasMany(Trainee :: class);
-
     }
 }

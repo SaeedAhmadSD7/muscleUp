@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class Branches extends Migration
+class CreateBranchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,7 @@ class Branches extends Migration
     public function up()
     {
         Schema::create('branches', function (Blueprint $table) {
-            $table->increments('branch_id');
-            $table->integer('gymId');
-            $table->integer('contactNumber');
-            $table->string('address');
+            $table->increments('id');
             $table->timestamps();
         });
     }

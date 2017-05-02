@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class Deals extends Migration
+class CreateDealsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,7 @@ class Deals extends Migration
     public function up()
     {
         Schema::create('deals', function (Blueprint $table) {
-            $table->increments('dealId');
-            $table->integer('gymId');
-            $table->string('dealType');
-            $table->integer('duration');
+            $table->increments('id');
             $table->timestamps();
         });
     }

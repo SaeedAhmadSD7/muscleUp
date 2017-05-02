@@ -8,6 +8,7 @@
 
     <!-- Main Header -->
 @include('muscle-up-app.includes.frondends._mainHeader')
+
 <!--End Main Header -->
 
 
@@ -17,8 +18,11 @@
 <!--Main Footer-->
     @include('muscle-up-app.includes.frondends._footer')
 
+
 </div>
 @include('muscle-up-app.includes.frondends._javascript')
+
+
 </body>
 
 </html>
