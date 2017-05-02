@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
-class UserTableSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,11 +12,11 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('Trainee')->delete();
-        User ::create([
+        DB::table('trainees')->delete();
+        trainee ::create(array(
             'name'=>'wajahat',
             'email'=>'w@gmail.com',
             'password'=> bcrypt('wajahat')
-        ]);
+        ));
     }
 }
