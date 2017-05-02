@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Servic extends Model
+class Service extends Model
 {
     function gym(){
         return $this-> belongsTo(Gym :: class);
