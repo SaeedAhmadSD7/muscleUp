@@ -42,7 +42,7 @@ class Gym extends Model
     }
 
     function services(){
-        return $this-> hasMany(Servic :: class);
+        return $this-> hasMany(Service :: class);
 
     }
 

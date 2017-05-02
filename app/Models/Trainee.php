@@ -26,7 +26,7 @@ class Trainee extends Model
 
     function services()
     {
-        return $this->hasMany(Servic:: class);
+        return $this->hasMany(Service:: class);
     }
 
     function userType()
