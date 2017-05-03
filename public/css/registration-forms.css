@@ -354,6 +354,12 @@ form.registration-form fieldset{
     border-radius: 0  4px 4px 0!important;
 }
 
+.intl-tel-input{
+    color: #808080;
+}
+
+
+
 .tr-form-box .basic-information .sex{
     color: #fff;
     padding-left: 20px;
