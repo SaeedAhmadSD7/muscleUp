@@ -19,6 +19,6 @@ class UserType extends Model
 
     function trainee()
     {
-
+        return $this->belongsTo(trainee:: class);
     }
 }
