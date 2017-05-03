@@ -2,7 +2,7 @@ jQuery(document).ready(function() {
 
     /*      Background Image Changer	*/
 
-   $('body').backstretch("assets/img/backgrounds/1.jpg");
+   $('body').backstretch("/images/background/trainee-registration-bg.jpg");
 
     $('.btn-date').on('click', function(e) {
         e.preventDefault();
@@ -31,7 +31,7 @@ jQuery(document).ready(function() {
         // placeholderNumberType: "MOBILE",
         // preferredCountries: ['cn', 'jp'],
          separateDialCode: true,
-        utilsScript: "assets/js/utils.js"
+        utilsScript: "js/utils.js"
     });
 
     $('.registration-form fieldset:first-child').fadeIn('slow');

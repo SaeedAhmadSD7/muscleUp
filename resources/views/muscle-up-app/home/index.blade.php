@@ -1,7 +1,9 @@
 @extends('muscle-up-app.layouts.frontend-main')
 @section('title','|homepage')
+
 <!-- Main Slider -->
 @include('muscle-up-app.includes.frondends._mainSlider')
+
 @section('content')
     <section class="features-services">
         <div class="auto-container">

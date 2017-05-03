@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+@extends('muscle-up-app.layouts.frontend-main')
+@section('title','|Trainee Registration page')
 
-<html lang="en">
-<head>
+@section('style-sheet')
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -14,9 +14,10 @@
     <link href="{{url('css/jquery.dateselect.css')}}" rel="stylesheet">
     <link href="{{url('css/intlTelInput.css')}}" rel="stylesheet">
     <link href="{{url('css/registration-forms.css')}}" rel="stylesheet">
-</head>
+@endsection
 
-<body>
+
+@section('content')
 <div class="tr-form-container section-container">
     <div class="container-fluid">
         <div class="row">
@@ -535,8 +536,11 @@
         </div>
     </div>
 </div>
+@stop
 
 
+
+@section('scripts')
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
@@ -547,16 +551,14 @@
 
 <!-- Script Files-->
 <script src="{{url('js/jquery-3.2.1.js')}}"></script>
-<script src="{{url('bootstrap/js/bootstrap.js')}}"></script>
+<script src="{{url('js/bootstrap.js')}}"></script>
 <script src="{{url('js/jquery.backstretch.js')}}"></script>
 <script src="{{url('js/jquery.dateselect.js')}}"></script>
 <script src="{{url('js/intlTelInput.js')}}"></script>
 <script src="{{url('js/registration-forms.js')}}"></script>
 <script src="{{url('js/jquery.easing.1.3.js')}}"></script>
 
-{{--<!--[if lt IE 10]>--}}
-{{--<script src="{{url('js/placeholder.js')}}"></script>--}}
-{{--<![endif]-->--}}
-
-</body>
-</html>
+<!--[if lt IE 10]>
+<script src="{{url('js/placeholder.js')}}"></script>
+<![endif]-->
+@endsection

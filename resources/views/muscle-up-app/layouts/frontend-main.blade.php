@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    @yield('style-sheet')
     @include('muscle-up-app.includes.frondends._styleSheet')
 </head>
 <body>
@@ -24,5 +25,7 @@
 
 
 </body>
+
+@yield('scripts')
 
 </html>
