@@ -19,7 +19,7 @@ class Employee extends Model
     }
 
     function batches(){
-        return $this->belongsToMany(Batche:: class);
+        return $this->belongsToMany(Batch:: class);
 
     }
 

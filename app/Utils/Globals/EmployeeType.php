@@ -9,6 +9,7 @@
 namespace App\Utils\Globals;
 
 
+
 class EmployeeType
 {
     const ADMIN = 'Admin';
