@@ -13,19 +13,16 @@ class CreateUserTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_types', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::create('User_Type', function (Blueprint $table) {
+            $table->integer('userId', true, true);
+            $table->integer('GymId');
+            $table->string('userType');
         });
+
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('user_types');
+        Schema::dropIfExists('User_Type');
     }
 }

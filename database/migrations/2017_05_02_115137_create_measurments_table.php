@@ -13,9 +13,11 @@ class CreateMeasurmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('measurments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::create('measurements', function (Blueprint $table) {
+            $table->integer('traineeId', true);
+            $table->integer('employeeId');
+            $table->string('currentFitnessdata');
+            $table->string('interval');
         });
     }
 
@@ -26,6 +28,6 @@ class CreateMeasurmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('measurments');
+        Schema::dropIfExists('measurements');
     }
 }

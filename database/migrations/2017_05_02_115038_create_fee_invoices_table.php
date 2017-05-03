@@ -13,9 +13,13 @@ class CreateFeeInvoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('fee_invoices', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::create('feeinvoice', function (Blueprint $table) {
+            $table->integer('feeInvoiceId', true);
+            $table->integer('gymId');
+            $table->integer('traineeId');
+            $table->integer('amount');
+            $table->integer('endDate');
+
         });
     }
 
@@ -26,6 +30,7 @@ class CreateFeeInvoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fee_invoices');
+        Schema::dropIfExists('feeinvoice');
     }
 }
+

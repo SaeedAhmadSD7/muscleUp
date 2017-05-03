@@ -13,19 +13,18 @@ class CreateWpAssignsTable extends Migration
      */
     public function up()
     {
-        Schema::create('wp_assigns', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::create('wp_PlanAssign', function (Blueprint $table) {
+            $table->integer('traineeId', true, true);
+            $table->string('WorkoutPlanId');
+            $table->integer('instructorId');
+            $table->string('workoutPlanType');
+            $table->string('Duration');
         });
+
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('wp_assigns');
+        Schema::dropIfExists('wp_PlanAssign');
     }
 }

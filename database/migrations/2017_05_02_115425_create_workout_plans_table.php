@@ -13,19 +13,16 @@ class CreateWorkoutPlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('workout_plans', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::create('Workout_Plan', function (Blueprint $table) {
+            $table->integer('wPlanId', true,true);
+            $table->integer('GymId');
+            $table->string('wPlanType');
         });
+
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('workout_plans');
+        Schema::dropIfExists('Workout_Plan');
     }
 }

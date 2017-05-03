@@ -13,8 +13,13 @@ class CreateBootCampsTable extends Migration
      */
     public function up()
     {
-        Schema::create('boot_camps', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('bootcamp', function (Blueprint $table) {
+            $table->increments('bootCampId');
+            $table->integer('gymId');
+            $table->integer('traineeId');
+            $table->integer('employeeId');
+            $table->string('bootCampName');
+            $table->integer('duration');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateBootCampsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('boot_camps');
+        Schema::dropIfExists('bootcamp');
     }
 }

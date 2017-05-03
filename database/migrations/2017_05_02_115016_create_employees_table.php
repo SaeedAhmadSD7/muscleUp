@@ -13,19 +13,24 @@ class CreateEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::create('employee', function (Blueprint $table) {
+            $table->integer('EmployeeId', true, true);
+            $table->integer('gymId');
+            $table->integer('branchId');
+            $table->string('Name');
+            $table->enum('employType',array_keys(EmployeeType::$types));
+            $table->string('password',60);
+            $table->integer('Contact Number');
+            $table->string('dateOfBirth');
+            $table->string('sex');
+            $table->string('email');
+            $table->string('Address');
         });
+
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('employee');
     }
 }

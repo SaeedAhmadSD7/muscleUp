@@ -13,19 +13,17 @@ class CreateWpDayDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('wp_day_details', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::create('wp_DayDetail', function (Blueprint $table) {
+            $table->integer('traineeId', true, true);
+            $table->string('WorkoutPlanId');
+            $table->integer('employeeId');
+            $table->string('wPlanDay');
         });
+
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('wp_day_details');
+        Schema::dropIfExists('wp_DayDetail');
     }
 }
