@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\MuscleUpApp;
-
 use Illuminate\Http\Request;
-use App\Models\Deal;
+use App\Models\Service;
 use Illuminate\Routing\Controller;
 
-class DealController extends Controller
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,27 +36,26 @@ class DealController extends Controller
     public function store(Request $request)
     {
         $values =array(
-//            'gymId'=>'1',
-            'dealType' => 'Solo',
-            'duration' => 'oneyear'
+
+            'serviceName' => 'dietplan',
+            'serviceCharges' => '1000'
 
         );
         //validate the data
 //        $this->validate($request,array(
-//            'gymId' => 'required',
-//            'dealType'=>'required',
-//            'duration' => 'required'
+//            'serviceName'=>'required',
+//            'serviceCharges' => 'required'
 //        ));
         //store data in database
-        $deal = new Deal();
-//        $deal->dealType= $values['gymId'];
-        $deal->dealType= $values['dealType'];
-        $deal->duration= $values['duration'];
-        $deal->save();
+        $service = new Service();
+
+        $service->servicename= $values['serviceName'];
+        $service->serviceCharges= $values['serviceCharges'];
+        $service->save();
 
         //redirect to other page
 
-        return redirect()->route('home-page',$deal->id);
+        return redirect()->route('home-page',$service->id);
     }
 
     /**
