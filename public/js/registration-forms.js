@@ -34,40 +34,8 @@ jQuery(document).ready(function() {
         utilsScript: "js/utils.js"
     });
 
-    $('.registration-form fieldset:first-child').fadeIn('slow');
+    $('.registration-form ').fadeIn('slow');
 
-
-    // next step
-    $('.registration-form .next-btn').on('click', function() {
-        var parent_fieldset = $(this).parents('fieldset');
-
-        parent_fieldset.fadeOut(400, function() {
-                $(this).next().fadeIn();
-            });
-
-    });
-
-    // previous step
-   $('.registration-form .previous-btn').on('click', function() {
-        $(this).parents('fieldset').fadeOut(400, function() {
-            $(this).prev().fadeIn();
-        });
-    });
-
-    // submit
-  /*  $('.registration-form').on('submit', function(e) {
-
-        $(this).find('input[type="text"], input[type="password"], textarea').each(function() {
-            if( $(this).val() == "" ) {
-                e.preventDefault();
-                $(this).addClass('input-error');
-            }
-            else {
-                $(this).removeClass('input-error');
-            }
-        });
-
-    }); */
 
 
 });

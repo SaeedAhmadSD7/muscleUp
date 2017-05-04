@@ -43,7 +43,7 @@ img {
     max-width: 100%;
 }
 
-form.registration-form fieldset{
+form.registration-form {
     display: none;
 }
 
@@ -94,7 +94,7 @@ form.registration-form fieldset{
 
 
 .tr-form-container {
-    margin-top: 200px;
+    margin-top: 70px;
 }
 
 .tr-form {
@@ -186,6 +186,7 @@ form.registration-form fieldset{
     -webkit-transition: all .3s;
     -ms-transition: all .3s;
     transition: all .3s;
+    align-content: center;
 }
 
 .tr-form-box textarea,
@@ -232,14 +233,16 @@ form.registration-form fieldset{
 .tr-form-box button.btn {
     position: relative;
     height: 50px;
-    margin: 0;
-    padding: 0 20px;
+    display: table;
+    margin: 0 auto;
     vertical-align: middle;
     border: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 300;
     line-height: 50px;
+    background: #be5254;
+    padding:0 35px;
     color: #fff;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -313,29 +316,17 @@ form.registration-form fieldset{
     background: #ddd;
 }
 
-.tr-form-box .next-btn{
-    background: #be5254;
-    padding:0 35px!important;
-}
-
-.tr-form-box .previous-btn{
-    background: #999999;
-    margin-right: 2px!important;
-}
-
-
-
 /*Basic Information*/
 
-.tr-form-box .basic-information  first-name{
-    width:55%;
+.tr-form-box .basic-information  .first-name{
     float: left;
+    width:56%;
 }
 
-.tr-form-box .basic-information last-name{
-    width:45%;
-    float: left;
-    padding-left: 10px;
+.tr-form-box .basic-information .last-name{
+    margin-left: 2%;
+    width:42%;
+    display: inline-block;
 }
 
 .tr-form-box .basic-information  .date-birth{
@@ -358,8 +349,6 @@ form.registration-form fieldset{
     color: #808080;
 }
 
-
-
 .tr-form-box .basic-information .sex{
     color: #fff;
     padding-left: 20px;
@@ -369,27 +358,6 @@ form.registration-form fieldset{
     display: inline-block;
     padding-left: 20px ;
 }
-
-
-/***Medical-Form***/
-.tr-form-box .medical-history{
-    color: #fff;
-    width: 100%;
-    display: inline-block;
-    margin-top: 15px;
-    padding-left: 5px;
-}
-
-.tr-form-box .medical-history .q-left{
-    float: left;
-    width: 75%;
-}
-
-.tr-form-box .medical-history .options{
-    float: left;
-    width: 25%;
-}
-
 
 
 /***** MEDIA QUERIES *****/

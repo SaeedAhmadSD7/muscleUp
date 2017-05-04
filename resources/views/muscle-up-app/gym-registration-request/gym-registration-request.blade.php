@@ -1,5 +1,5 @@
 @extends('muscle-up-app.layouts.frontend-main')
-@section('title','|Trainee Registration page')
+@section('title','|Gym Request Registration')
 
 @section('style-sheet')
     <meta charset="utf-8">
@@ -10,7 +10,6 @@
     <link href="{{url('https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic')}}" rel="stylesheet">
     <link href="{{url('css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{url('css/font-awesome.css')}}" rel="stylesheet">
-    <link href="{{url('css/jquery.dateselect.css')}}" rel="stylesheet">
     <link href="{{url('css/intlTelInput.css')}}" rel="stylesheet">
     <link href="{{url('css/registration-forms.css')}}" rel="stylesheet">
 @endsection
@@ -28,21 +27,20 @@
 
                         <div class="tr-form-top">
                             <div class="tr-form-top-left">
-                                <h3>Step 1</h3>
-                                <p>Please enter the required information and click Next.</p></div>
+                                <h3>Gym Request Registration</h3>
+                                <p>Please enter the required information and click Submit Request.</p></div>
                             <div class="tr-form-top-right"><i class="fa fa-sign-in"></i></div>
                         </div>
 
 
                         <div class="tr-form-bottom">
                             <div class="form-group">
-                                <input class="first-name form-control" id="first-name" name="first-name" placeholder="First name..." type="text">
-                                <input class="last-name form-control" id="last-name" name="last-name" placeholder="Last name..." type="text">
+                                <input class="gym-name form-control" id="gym-name" name="gym-name" placeholder="Gym name..." type="text">
                             </div>
 
 
                             <div class="form-group">
-                                <input class="email form-control" id="email" name="email" placeholder="Email..." type="text">
+                                <input class="owner-email form-control" id="owner-email" name="owner-email" placeholder="Owner's Email Address..." type="text">
                             </div>
 
 
@@ -55,24 +53,8 @@
                                 <input class="repeat-password form-control" id="repeat-password" name="repeat-password" placeholder="Repeat password..." type="password">
                             </div>
 
-
                             <div class="form-group">
-                                <input class="date-birth form-control" disabled id="date-birth" name="date-birth" placeholder="Date of Birth..." type="text">
-                                <button class="btn btn-primary btn-date" type="button"><i class="fa fa-calendar"></i></button>
-                            </div>
-
-
-                            <div class="form-group sex">
-                                <label>Sex :</label>
-
-                                <div class="sex-options">
-                                    <label class="radio-inline"><input name="sex-options" type="radio" value="Male"> Male</label> <label class="radio-inline"><input name="sex-options" type="radio" value="Female"> Female</label>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <input class="form-control p-number" id="p-number" name="p-number" placeholder="Phone Number..." type="text">
+                                <input class="form-control p-number" id="p-number" name="p-number" placeholder="Contact Number..." type="text">
                             </div>
 
 
@@ -112,7 +94,6 @@
 <script src="{{url('js/jquery-3.2.1.js')}}"></script>
 <script src="{{url('js/bootstrap.js')}}"></script>
 <script src="{{url('js/jquery.backstretch.js')}}"></script>
-<script src="{{url('js/jquery.dateselect.js')}}"></script>
 <script src="{{url('js/intlTelInput.js')}}"></script>
 <script src="{{url('js/registration-forms.js')}}"></script>
 
