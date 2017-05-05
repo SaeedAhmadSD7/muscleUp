@@ -15,7 +15,8 @@ class DealController extends Controller
      */
     public function index()
     {
-        //
+        $Deals= Deal::all();
+        return view('muscle-up-app\deal\deal')->with('Deals',$Deals);
     }
 
     /**
@@ -40,7 +41,6 @@ class DealController extends Controller
 //            'gymId'=>'1',
             'dealType' => 'Solo',
             'duration' => 'oneyear'
-
         );
         //validate the data
 //        $this->validate($request,array(
@@ -50,14 +50,14 @@ class DealController extends Controller
 //        ));
         //store data in database
         $deal = new Deal();
-//        $deal->dealType= $values['gymId'];
+//      $deal->dealType= $values['gymId'];
         $deal->dealType= $values['dealType'];
         $deal->duration= $values['duration'];
         $deal->save();
 
         //redirect to other page
 
-        return redirect()->route('home-page',$deal->id);
+        return redirect()->route('deal',$deal->id);
     }
 
     /**

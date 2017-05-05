@@ -14,12 +14,13 @@ Route::get('/', ['as' => 'home-page', 'uses' => 'MuscleUpApp\HomeController@inde
 
 
 //contactUs
-Route::get('/home/store', ['as' => 'home.store', 'uses' => 'MuscleUpApp\ContactController@store']);
+Route::get('/home/contact', ['as' => 'home.store', 'uses' => 'MuscleUpApp\ContactController@store']);
 
 
 
 //deals
-Route::get('home/deal',['as'=>'deal','uses'=>'MuscleUpApp\DealController@store']);
+Route::get('home/deal',['as'=>'deal' , 'uses' =>'MuscleUpApp\DealController@index']);
+Route::get('/deal',['as'=>'SaveDeal','uses'=>'MuscleUpApp\DealController@store']);
 
 
 //service
