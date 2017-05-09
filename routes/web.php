@@ -8,18 +8,22 @@ Route::get('test', function (){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/admin', 'Auth\AdminController@index');
+
+
+Route::get('/home', 'AdminController@index');
 
 Route::get('/', ['as' => 'home-page', 'uses' => 'MuscleUpApp\HomeController@index']);
 
 
 //contactUs
-Route::get('/home/store', ['as' => 'home.store', 'uses' => 'MuscleUpApp\ContactController@store']);
+Route::get('/home/contact', ['as' => 'home.store', 'uses' => 'MuscleUpApp\ContactController@store']);
 
 
 
 //deals
-Route::get('home/deal',['as'=>'deal','uses'=>'MuscleUpApp\DealController@store']);
+Route::get('home/deal',['as'=>'deal' , 'uses' =>'MuscleUpApp\DealController@index']);
+Route::get('/deal',['as'=>'SaveDeal','uses'=>'MuscleUpApp\DealController@store']);
 
 
 //service
