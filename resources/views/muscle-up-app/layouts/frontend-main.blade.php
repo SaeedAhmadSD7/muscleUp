@@ -1,33 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    @include('muscle-up-app.includes.frontend._styleSheet')
-    @yield('stylesheet')
+    @yield('style-sheet')
+    @include('muscle-up-app.includes.frondends._styleSheet')
 </head>
 <body>
-
-
-
 <div class="page-wrapper">
 
-<!-- Main Header -->
-@include('muscle-up-app.includes.frontend._mainHeader')
+    <!-- Main Header -->
+@include('muscle-up-app.includes.frondends._mainHeader')
+
 <!--End Main Header -->
 
 
-
-    <!--Featured Services-->
+<!--Featured Services-->
 
 @yield('content')
 <!--Main Footer-->
-    @include('muscle-up-app.includes.frontend._footer')
+    @include('muscle-up-app.includes.frondends._footer')
 
 
 </div>
+@include('muscle-up-app.includes.frondends._javascript')
 
-@include('muscle-up-app.includes.frontend._javascript')
-@yield('scripts')
 
 </body>
+
+@yield('scripts')
 
 </html>

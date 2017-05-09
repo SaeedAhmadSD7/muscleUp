@@ -1,0 +1,10 @@
+<!--End pagewrapper-->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/revolution.min.js"></script>
+<script src="js/bxslider.js"></script>
+<script src="js/jquery.appear.js"></script>
+<script src="js/wow.js"></script>
+<script src="js/knob.js"></script>
+<script src="js/validate.js"></script>
+<script src="js/script.js"></script>
