@@ -25,23 +25,8 @@
                             <li><a href="index-one-page-version.html"> One Page Version</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="#">Deals</a>
-                        <ul class="submenu">
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="qa.html">Q & A</a></li>
-                            <li><a href="testimonials.html">Testimonials</a></li>
-                            <li class="dropdown"><a href="gallery-page-2-col.html">Gallery</a>
-                                <ul class="submenu">
-                                    <li><a href="gallery-page-2-col.html">Gallery Two Col</a></li>
-                                    <li><a href="gallery-page-3-col.html">Gallery Three Col</a></li>
-                                    <li><a href="gallery-page-3-col-full-width.html">Gallery Three Col Full Width</a></li>
-                                    <li><a href="gallery-page-4-col.html">Gallery Four Col</a></li>
-                                    <li><a href="gallery-page-4-col-full-width.html">Gallery Four Col Full Width</a></li>
-                                    <li><a href="gallery-page-6-col.html">Gallery Six Col</a></li>
-                                    <li><a href="gallery-page-6-col-full-width.html">Gallery Six Col Full Width</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <li class="dropdown"><a href="home/deal">Deals</a>
+
                     </li>
                     <li class=" dropdown"><a href="about-us.html">Events</a>
                         <ul class="submenu">

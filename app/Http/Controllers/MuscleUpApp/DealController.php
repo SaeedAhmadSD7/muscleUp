@@ -40,7 +40,7 @@ class DealController extends Controller
         $values =array(
 //            'gymId'=>'1',
             'dealType' => 'Solo',
-            'duration' => 'oneyear'
+            'duration' => 'twoyear'
         );
         //validate the data
 //        $this->validate($request,array(

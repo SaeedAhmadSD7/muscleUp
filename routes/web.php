@@ -8,7 +8,10 @@ Route::get('test', function (){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/admin', 'Auth\AdminController@index');
+
+
+Route::get('/home', 'AdminController@index');
 
 Route::get('/', ['as' => 'home-page', 'uses' => 'MuscleUpApp\HomeController@index']);
 
