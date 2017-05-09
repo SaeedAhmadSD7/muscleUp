@@ -1,10 +1,16 @@
 @extends('muscle-up-app.layouts.frontend-main')
 @section('title','|homepage')
 
-<!-- Main Slider -->
-@include('muscle-up-app.includes.frondends._mainSlider')
+@section('stylesheet')
+    <link href="{{url('/assets/plugins/revolution-slider/css/revolution-slider.css')}}" rel="stylesheet">
+    <link href="{{url('/assets/css/index-style.css')}}" rel="stylesheet">
+@endsection
 
 @section('content')
+
+    <!-- Main Slider -->
+    @include('muscle-up-app.includes.frontend._mainSlider')
+
     <section class="features-services">
         <div class="auto-container">
             <div class="row clearfix">
@@ -25,7 +31,7 @@
                 <!-- Style Two -->
                 <article class="col-md-4 col-sm-6 col-xs-12">
                     <div class="post style-two wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
-                        <img src="images/resource/image-1.png" alt="">
+                        <img src="{{url('/assets/images/resource/image-1.png')}}" alt="">
                         <div class="title-box">
                             <h2 class="clearfix">
                                 <span class="pull-left"><span class="med-text">INDOOR </span><br><span class="small-text">CARDIO WORKOUTS</span></span>
@@ -40,7 +46,7 @@
                 <!-- Style Three -->
                 <article class="col-md-4 col-sm-12 col-xs-12">
                     <div class="post style-three wow fadeInRight" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
-                        <img src="images/resource/image-2.png" alt="">
+                        <img src="{{url('/assets/images/resource/image-2.png')}}" alt="">
                         <div class="post-cont">
                             <div class="post-text">
                                 <div><span class="med-text">PERSONAL</span><br><span class="small-text">TRAINING</span></div>
@@ -86,9 +92,9 @@
                                 <a href="#" class="price">19,99$</a>
                             </div>
                             <div class="images clearfix">
-                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="images/resource/image-3.jpg" alt="" title=""></div>
-                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="images/resource/image-4.jpg" alt="" title=""></div>
-                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="images/resource/image-5.jpg" alt="" title=""></div>
+                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="{{url('/assets/images/resource/image-3.jpg')}}" alt="" title=""></div>
+                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="{{url('/assets/images/resource/image-4.jpg')}}" alt="" title=""></div>
+                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="{{url('/assets/images/resource/image-5.jpg')}}" alt="" title=""></div>
                             </div>
                         </div>
 
@@ -102,9 +108,9 @@
                                 <a href="#" class="price">19,99$</a>
                             </div>
                             <div class="images clearfix">
-                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="images/resource/image-6.jpg" alt="" title=""></div>
-                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="images/resource/image-7.jpg" alt="" title=""></div>
-                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="images/resource/image-8.jpg" alt="" title=""></div>
+                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="{{url('/assets/images/resource/image-6.jpg')}}" alt="" title=""></div>
+                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="{{url('/assets/images/resource/image-7.jpg')}}" alt="" title=""></div>
+                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="{{url('/assets/images/resource/image-8.jpg')}}" alt="" title=""></div>
                             </div>
                         </div>
 
@@ -182,7 +188,7 @@
                     </div>
 
                     <figure class="image-box">
-                        <div class="image-layer" style="background-image:url(images/resource/image-11.jpg);"></div>
+                        <div class="image-layer" style="background-image:url(/assets/images/resource/image-11.jpg);"></div>
                         <div class="text-layer">
                             <ul class="text">
                                 <li>Jenna Jameson</li>
@@ -208,7 +214,7 @@
                     </div>
 
                     <figure class="image-box">
-                        <div class="image-layer" style="background-image:url(images/resource/image-12.jpg);"></div>
+                        <div class="image-layer" style="background-image:url(/assets/images/resource/image-12.jpg);"></div>
                         <div class="text-layer">
                             <ul class="text">
                                 <li>Liza Boye</li>
@@ -234,7 +240,7 @@
                     </div>
 
                     <figure class="image-box">
-                        <div class="image-layer" style="background-image:url(images/resource/image-11.jpg);"></div>
+                        <div class="image-layer" style="background-image:url(/assets/images/resource/image-11.jpg);"></div>
                         <div class="text-layer">
                             <ul class="text">
                                 <li>Jenna Jameson</li>
@@ -260,7 +266,7 @@
                     </div>
 
                     <figure class="image-box">
-                        <div class="image-layer" style="background-image:url(images/resource/image-12.jpg);"></div>
+                        <div class="image-layer" style="background:url(/assets/images/resource/image-12.jpg);"></div>
                         <div class="text-layer">
                             <ul class="text">
                                 <li>Liza Boye</li>
@@ -358,9 +364,9 @@
         <!--Image Scroller-->
         <div class="image-scroller-container">
             <ul class="image-scroller">
-                <li class="slide-item"><span class="image" style="background-image:url(images/resource/scroller-image-4.png);"></span></li>
-                <li class="slide-item"><span class="image" style="background-image:url(images/resource/scroller-image-5.png);"></span></li>
-                <li class="slide-item"><span class="image" style="background-image:url(images/resource/scroller-image-6.png);"></span></li>
+                <li class="slide-item"><span class="image" style="background-image:url(/assets/images/resource/scroller-image-4.png);"></span></li>
+                <li class="slide-item"><span class="image" style="background-image:url(/assets/images/resource/scroller-image-5.png);"></span></li>
+                <li class="slide-item"><span class="image" style="background-image:url(/assets/images/resource/scroller-image-6.png);"></span></li>
             </ul>
         </div>
 
@@ -379,7 +385,7 @@
                     <div class="text">We are an independent gym that is committed to working with you to gain the results you want. Whether your aim is to loose weight, tone up, build bulk or gain weight we can put together a gym programme or recommend the right classes for you to attend in our studios.</div>
                     <figure class="image">
                         <div class="img-circle light-blue">$19<sup>99</sup></div>
-                        <img src="images/resource/image-9.jpg" alt="" title="">
+                        <img src="{{url('/assets/images/resource/image-9.jpg')}}" alt="" title="">
                     </figure>
                 </article>
 
@@ -391,7 +397,7 @@
                     <div class="text">Our members benefit from a free gym programme and review every month, free studio classes and price reductions on our personal training sessions. As a member you can also access our pool and tennis courts for free and have priority for booking any of the pre-book activities, classes or sessions that we run.</div>
                     <figure class="image">
                         <div class="img-circle light-pink">$19<sup>99</sup></div>
-                        <img src="images/resource/image-10.jpg" alt="" title="">
+                        <img src="{{url('/assets/images/resource/image-10.jpg')}}" alt="" title="">
                     </figure>
                 </article>
 
@@ -399,3 +405,18 @@
         </div>
     </section>
 @endsection
+
+
+@section('scripts')
+    <script src="{{url('/assets/plugins/revolution-slider/js/revolution.min.js')}}"></script>
+    <script src="{{url('/assets/plugins/bxslider-4.2.12/js/jquery.bxslider.js')}}"></script>
+    <script src="{{url('/assets/plugins/jquery-appear-0.3.6/js/jquery.appear.js')}}"></script>
+    <script src="{{url('/assets/plugins/wow-1.1.0/js/wow.min.js')}}"></script>
+    <script src="{{url('/assets/plugins/jquery-knob-1.2.13/js/jquery.knob.js')}}"></script>
+    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/jquery.validate.js')}}"></script>
+    <script src="{{url('/assets/js/index-script.js')}}"></script>
+@endsection
+
+
+
+
