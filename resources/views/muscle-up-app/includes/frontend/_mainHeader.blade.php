@@ -1,5 +1,5 @@
 <!-- Preloader -->
-{{--<div class="preloader"></div>--}}
+<div class="preloader"></div>
 
 
 <header class="main-header">

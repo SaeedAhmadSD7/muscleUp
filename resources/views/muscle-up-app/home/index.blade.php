@@ -1,10 +1,5 @@
 @extends('muscle-up-app.layouts.frontend-main')
-@section('title','|homepage')
-
-@section('stylesheet')
-    <link href="{{url('/assets/plugins/revolution-slider/css/revolution-slider.css')}}" rel="stylesheet">
-    <link href="{{url('/assets/css/index-style.css')}}" rel="stylesheet">
-@endsection
+@section('title','MuscleUP')
 
 @section('content')
 
@@ -405,18 +400,3 @@
         </div>
     </section>
 @endsection
-
-
-@section('scripts')
-    <script src="{{url('/assets/plugins/revolution-slider/js/revolution.min.js')}}"></script>
-    <script src="{{url('/assets/plugins/bxslider-4.2.12/js/jquery.bxslider.js')}}"></script>
-    <script src="{{url('/assets/plugins/jquery-appear-0.3.6/js/jquery.appear.js')}}"></script>
-    <script src="{{url('/assets/plugins/wow-1.1.0/js/wow.min.js')}}"></script>
-    <script src="{{url('/assets/plugins/jquery-knob-1.2.13/js/jquery.knob.js')}}"></script>
-    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/jquery.validate.js')}}"></script>
-    <script src="{{url('/assets/js/index-script.js')}}"></script>
-@endsection
-
-
-
-
