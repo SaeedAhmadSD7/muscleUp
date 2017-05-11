@@ -15,9 +15,10 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('gym_id')->default('1');
-            $table->string('eventType');
-            $table->string('duration');
+            $table->string('name');
+            $table->string('type');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }

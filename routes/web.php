@@ -34,3 +34,12 @@ Route::resource('deals','MuscleUpApp\DealController');
 
 //service
 Route::get('home/service',['as'=>'service','uses'=>'MuscleUpApp\ServiceController@store']);
+
+
+/**
+ * Events Routes
+ */
+
+Route::get('create-event',['as'=>'create-event','uses' => 'MuscleUpApp\EventController@create']);
+Route::post('save-event',['as'=>'save-event','uses'=>'MuscleUpApp\EventController@store']);
+Route::get('event-show/{id}',['as'=>'event-show','uses'=>'MuscleUpApp\EventController@retrieve']);
