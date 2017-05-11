@@ -8,10 +8,12 @@ Route::get('test', function (){
 
 Auth::routes();
 
+
+
 Route::get('/admin', 'Auth\AdminController@index');
-
-
 Route::get('/home', 'HomeController@index');
+
+
 
 Route::get('/', ['as' => 'home-page', 'uses' => 'MuscleUpApp\HomeController@index']);
 
@@ -22,24 +24,13 @@ Route::get('/home/contact', ['as' => 'home.store', 'uses' => 'MuscleUpApp\Contac
 
 
 //deals
-Route::get('home/deal',['as'=>'deal' , 'uses' =>'MuscleUpApp\DealController@index']);
-Route::get('/deal',['as'=>'SaveDeal','uses'=>'MuscleUpApp\DealController@store']);
-
-
-//Event
-Route::get('/create-event',['as'=>'EnterEvent','uses'=>'MuscleUpApp\EventController@create']);
+Route::get('/create/deal',['as'=>'create-deal' , 'uses' =>'MuscleUpApp\DealController@create']);
+Route::get('/deal',['as'=>'deal' , 'uses' =>'MuscleUpApp\DealController@index']);
+Route::post('/save/deal',['as'=>'save-deal','uses'=>'MuscleUpApp\DealController@store']);
+Route::get('/show/deal/{id}',['as'=>'show-deal','uses'=>'MuscleUpApp\DealController@show']);
+Route::delete('/deal/delete/{id}',['as'=>'delete' , 'uses' =>'MuscleUpApp\DealController@delete']);
+Route::resource('deals','MuscleUpApp\DealController');
 
 
 //service
 Route::get('home/service',['as'=>'service','uses'=>'MuscleUpApp\ServiceController@store']);
-
-Route::get('/gregister',function () {
-
-    return view('muscle-up-app.gym-registration-request.gym-registration-request');
-});
-
-Route::get('/tregister',function () {
-
-    return view('muscle-up-app.gym-registration-request.gym-registration-request');
-});
-

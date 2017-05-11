@@ -29,7 +29,7 @@
                             <li><a href="index-one-page-version.html"> One Page Version</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="home/deal">Deals</a>
+                    <li class="dropdown"><a href="deal">Deals</a>
 
                     </li>
                     <li class=" dropdown"><a href="about-us.html">Events</a>
