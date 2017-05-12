@@ -21,14 +21,7 @@ class EventController extends Controller
 
     }
 
-    public function store(Request $request){
-        //store data in database
-
-//        $request->name = 'Event One';
-//        $request->type = 'Premium Event';
-//        $request->start_date = '2017-05-11';
-//        $request->end_date = '2017-05-11';
-
+    public function save(Request $request){
 
         $event = new Event();
         $event->name =$request->name;
@@ -39,38 +32,33 @@ class EventController extends Controller
     }
 
 
-    public function retrieve($id)
+    public function retrieve(Event $event)
     {
-
-        $event=Event::find($id);
-
         return view('muscle-up-app.event.show')->with('event',$event);
     }
 
 
-    public function edit($id)
+    public function edit(Event $event)
     {
-        $event=Event::find($id);
-
-        return view('muscle-up-app.event.update')->with('event',$event);
+        return view('muscle-up-app.event.edit')->with('event',$event);
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Event $event)
     {
-        $event = Event::find($id);
-        $event->name = $request->input('name');
-        $event->type = $request->input('type');
-        $event->start_date = $request->input('date_start');
-        $event->end_date = $request->input('date_end');
+//        $event->id = $request->id;
+        $event->name = $request->name;
+        $event->type = $request->type;
+        $event->start_date = $request->start_date;
+        $event->end_date = $request->end_date;
         $event->save();
 
 //        Set flash data with success flash message
-        Session::flash('success','This event was successfully saved.');
+//        Session::flash('success','This event was successfully saved.');
 
 
 //        Redirect with flash data to post.show
-        return redirect()->route('events.show',$event->id);
+//        return redirect()->route('events.show',$event->id);
 
     }
 

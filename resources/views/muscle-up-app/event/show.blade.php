@@ -39,13 +39,13 @@
             </div>
         </div>
 
-        <div  class="row col-sm-12" >
-            <div class="col-sm-2 col-sm-offset-2">
-                <a class="btn btn-primary" href="{{route()}}" >Update</a>
-            </div>
-            <div class="col-sm-2">
-                <a class="btn btn-danger" href="{{route()}}" >Delete</a>
-            </div>
-        </div>
+        {{--<div  class="row col-sm-12" >--}}
+            {{--<div class="col-sm-2 col-sm-offset-2">--}}
+                {{--<a class="btn btn-primary" href="{{route()}}" >Update</a>--}}
+            {{--</div>--}}
+            {{--<div class="col-sm-2">--}}
+                {{--<a class="btn btn-danger" href="{{route()}}" >Delete</a>--}}
+            {{--</div>--}}
+        {{--</div>--}}
     </div>
 @endsection

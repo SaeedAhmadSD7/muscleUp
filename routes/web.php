@@ -41,5 +41,7 @@ Route::get('home/service',['as'=>'service','uses'=>'MuscleUpApp\ServiceControlle
  */
 
 Route::get('create-event',['as'=>'create-event','uses' => 'MuscleUpApp\EventController@create']);
-Route::post('save-event',['as'=>'save-event','uses'=>'MuscleUpApp\EventController@store']);
-Route::get('event-show/{id}',['as'=>'event-show','uses'=>'MuscleUpApp\EventController@retrieve']);
+Route::post('save-event/',['as'=>'save-event','uses'=>'MuscleUpApp\EventController@save']);
+Route::get('show-event/{event}',['as'=>'show-event','uses'=>'MuscleUpApp\EventController@retrieve']);
+Route::get('edit-event/{event}',['as'=>'edit-event','uses'=>'MuscleUpApp\EventController@edit']);
+Route::post('update-event/{event}',['as'=>'update-event','uses'=>'MuscleUpApp\EventController@update']);
