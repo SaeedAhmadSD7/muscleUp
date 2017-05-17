@@ -32,7 +32,7 @@
                     <li class="dropdown"><a href="deal">Deals</a>
 
                     </li>
-                    <li class=" dropdown"><a href="about-us.html">Events</a>
+                    <li class=" dropdown"><a href="{{url('events')}}">Events</a>
                         <ul class="submenu">
                             <li><a href="our-team.html">Our Team</a></li>
                             <li><a href="pricing.html">Our Pricing</a></li>

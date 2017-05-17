@@ -28,7 +28,7 @@ Route::get('/create/deal',['as'=>'create-deal' , 'uses' =>'MuscleUpApp\DealContr
 Route::get('/deal',['as'=>'deal' , 'uses' =>'MuscleUpApp\DealController@index']);
 Route::post('/save/deal',['as'=>'save-deal','uses'=>'MuscleUpApp\DealController@store']);
 Route::get('/show/deal/{id}',['as'=>'show-deal','uses'=>'MuscleUpApp\DealController@show']);
-Route::delete('/deal/delete/{id}',['as'=>'delete' , 'uses' =>'MuscleUpApp\DealController@delete']);
+Route::delete('/deal/delete/{id}',['as'=>'delete' , 'uses' =>'MuscleUpApp\DealController@destroy']);
 Route::resource('deals','MuscleUpApp\DealController');
 
 
@@ -45,3 +45,13 @@ Route::post('save-event/',['as'=>'save-event','uses'=>'MuscleUpApp\EventControll
 Route::get('show-event/{event}',['as'=>'show-event','uses'=>'MuscleUpApp\EventController@retrieve']);
 Route::get('edit-event/{event}',['as'=>'edit-event','uses'=>'MuscleUpApp\EventController@edit']);
 Route::post('update-event/{event}',['as'=>'update-event','uses'=>'MuscleUpApp\EventController@update']);
+Route::get('delete-event/{event}',['as'=>'delete','uses'=>'MuscleUpApp\EventController@destroy']);
+Route::resource('events','MuscleUpApp\EventController');
+
+/*
+Trainee Registration
+ */
+
+Route::get('register-trainee', function () {
+    return view('muscle-up-app.trainee-registration.registration-form');
+});

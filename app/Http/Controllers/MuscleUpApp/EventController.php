@@ -9,6 +9,12 @@ use App\Models\Event;
 class EventController extends Controller
 {
 
+    public function index()
+    {
+        $Events = Event::all();
+        return view('muscle-up-app\event\index')->with('Events',$Events);
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -46,23 +52,16 @@ class EventController extends Controller
 
     public function update(Request $request, Event $event)
     {
-//        $event->id = $request->id;
         $event->name = $request->name;
         $event->type = $request->type;
         $event->start_date = $request->start_date;
         $event->end_date = $request->end_date;
         $event->save();
-
-//        Set flash data with success flash message
-//        Session::flash('success','This event was successfully saved.');
-
-
-//        Redirect with flash data to post.show
-//        return redirect()->route('events.show',$event->id);
-
     }
 
-
-
-
+    public function destroy(Event $event)
+    {
+        return $event;
+//        $event->delete();
+    }
 }
