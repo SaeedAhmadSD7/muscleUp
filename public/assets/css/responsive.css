@@ -220,19 +220,19 @@
 		width:100%;
 	}
 
-	.trainee-reg .form-head:after{
+	.trainee-reg .t-reg-form:after{
 		display:none;
 	}
 
-	.trainee-reg .form-head{
+	.trainee-reg .t-reg-form{
 		width:100%;
 		float:none;
-		padding:50px;
+		padding:20px;
 	}
 
-	.trainee-reg .form-head,
-	.trainee-reg .form-head .contact-title,
-	.trainee-reg .form-head .contact-form{
+	.trainee-reg .t-reg-form,
+	.trainee-reg .t-reg-form .t-reg-top,
+	.trainee-reg .t-reg-form .reg-form{
 		transform:skewX(0deg);
 		-webkit-transform:skewX(0deg);
 		-ms-transform:skewX(0deg);
@@ -240,16 +240,38 @@
 		-moz-transform:skewX(0deg);
 	}
 
-	.trainee-reg .form-head .contact-title .space,
-	.trainee-reg .form-head .contact-form .fields{
+	.trainee-reg .t-reg-form .t-reg-top .space,
+	.trainee-reg .t-reg-form .reg-form .fields{
 		padding-left:0px;
 	}
 
-	.trainee-reg .form-head .contact-form .form-group{
-		margin-left:-15px;
-		margin-right:-15px;
+	.trainee-reg .t-reg-form .reg-form .form-group{
+		/*margin-left:-15px;*/
+		/*margin-right:-15px;*/
+		padding-right: 0!important;
+		padding-left: 0!important;
+
 	}
 
+	.trainee-reg .t-reg-form .reg-form .text-field:before{
+		content:'';
+		position:absolute;
+		left:0px;
+		bottom:0px;
+		width:1px;
+		height:8px;
+		background:rgba(255,255,255,0.60);
+	}
+
+	.trainee-reg .t-reg-form .reg-form .text-field:after{
+		content:'';
+		position:absolute;
+		right:0px;
+		bottom:0px;
+		width:1px;
+		height:8px;
+		background:rgba(255,255,255,0.60);
+	}
 
 
 
