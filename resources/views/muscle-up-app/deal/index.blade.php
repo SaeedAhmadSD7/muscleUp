@@ -1,11 +1,11 @@
 @extends('muscle-up-app.layouts.frontend-main')
 @section('title','|Deal')
-{{--<div class="row">
-    <h1>Deals</h1>
-</div>--}}
+
 @section('content')
-    <section class="features-services">
+
+
         <div class="auto-container">
+            <div class="row clearfix">
                 <div class="row">
                     <div class="col-md-6">
                      <h1>DEAL</h1>
@@ -21,10 +21,10 @@
 
                         @endforeach
                     </div>
-
-                </div>
+                   </div>
+            </div>
         </div>
-    </section>
+
 
 
 @endsection

@@ -32,5 +32,16 @@ Route::delete('/deal/delete/{id}',['as'=>'delete' , 'uses' =>'MuscleUpApp\DealCo
 Route::resource('deals','MuscleUpApp\DealController');
 
 
+//package
+Route::get('/package',['as'=>'packages' , 'uses' =>'MuscleUpApp\PackageController@index']);
+Route::get('/create/package',['as'=>'create-package' , 'uses' =>'MuscleUpApp\PackageController@create']);
+Route::get('/show/package/{id}',['as'=>'show-package','uses'=>'MuscleUpApp\PackageController@show']);
+//Route::delete('/package/delete/{id}',['as'=>'delete' , 'uses' =>'MuscleUpApp\packageController@destroy']);
+Route::resource('package','MuscleUpApp\PackageController');
+
+
 //service
 Route::get('home/service',['as'=>'service','uses'=>'MuscleUpApp\ServiceController@store']);
+
+
+

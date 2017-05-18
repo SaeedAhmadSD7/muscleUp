@@ -2,12 +2,15 @@
 @section('title','| view Deal')
 
 @section('content')
-    <section class="features-services">
+
         <div class="auto-container">
           <div class="row">
            <div class="col-md-8">
-                 <H1> {{$deal->dealType}}</H1>
-                 <P class="lead">{{$deal->duration}}</P>
+               <h1>Deal Type:</h1>
+               <h3>{{$deal->dealType}}</h3>
+
+               <h1>Deal Duration:</h1>
+               <h3>{{$deal->duration}}</h3>
              </div>
               <div class="col-md-4">
                   <div class="well">
@@ -23,12 +26,12 @@
                       <hr>
                       <div class="row">
                           <div class="col-sm-6">
-                              {!! Html::linkRoute('deals.edit', 'edit', array($deal->id), array('class' => 'btn btn-success btn-block')) !!}
+                              {!! Html::linkRoute('deals.edit', 'Edit', array($deal->id), array('class' => 'btn btn-primary btn-block')) !!}
                           </div>
                           <div class="col-sm-6">
                               {!! Form::open(['route'=>['deals.destroy',$deal->id],'method'=>'DELETE']) !!}
 
-                               {!! Form::submit('delete',['class'=>'btn btn-danger btn-block']) !!}
+                               {!! Form::submit('Delete',['class'=>'btn btn-danger btn-block']) !!}
 
                               {!! Form::close() !!}
 
@@ -39,7 +42,7 @@
               </div>
           </div>
         </div>
-    </section>
+
 
 
 

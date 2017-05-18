@@ -39,7 +39,7 @@ class ContactController extends Controller
         $value =  array(
             'name'=>'wajahat',
             'email'=>'wajaht@gmail.com',
-            'body'=>'hello-Hello-hello-hello'
+            'body'=>'hello'
         );
 
 

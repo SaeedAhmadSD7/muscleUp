@@ -2,12 +2,12 @@
 @section('title','| Edit Deal')
 
 @section('content')
-    <section class="features-services">
+
         <div class="auto-container">
             <div class="row">
                 {!! Form::model($deal, ['route' => ['deals.update', $deal->id],'method'=>'PUT']) !!}
                 <div class="col-md-8">
-
+                      <h1> Edit Deals</h1>
                     {{ Form::label('dealType', 'DealType:') }}
                     {{ Form::text('dealType', null, ["class" => 'form-control input-lg']) }}
 
@@ -19,7 +19,7 @@
                     {{--<H1> {{$deal->dealType}}</H1>--}}
                     {{--<P class="lead">{{$deal->duration}}</P>--}}
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-8">
                     <div class="well">
                         <div class="row">
                             <div class="col-sm-6">
@@ -35,5 +35,5 @@
                 {!! Form::close() !!}
             </div>
         </div>
-    </section>
+
 @endsection
