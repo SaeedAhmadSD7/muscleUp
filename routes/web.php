@@ -62,3 +62,36 @@ Trainee Registration
 Route::get('register-trainee', function () {
     return view('muscle-up-app.trainee-registration.registration-form');
 });
+
+/*
+login form
+ */
+
+//Route::get('login-form', function () {
+//    return view('muscle-up-app.login_form.login');
+//});
+
+
+
+Route::get('login', ['uses'=>'MuscleUpApp\LoginController@index','as'=>'login']);
+
+
+Route::post('check-login', ['uses'=>'MuscleUpApp\LoginController@login','as'=>'check-login']);
+
+Route::get('/trainee', ['as'=>'trainee',function () {
+    return ('trainee');}
+    ]);
+
+Route::get('/gym', ['as'=>'gym',function () {
+    return ('gym');}
+    ]);
+
+Route::get('/admin', ['as'=>'admin',function () {
+    return ('admin');}
+    ]);
+
+Route::get('/elselink', ['as'=>'elselink',function () {
+    return ('else');}
+    ]);
+
+
