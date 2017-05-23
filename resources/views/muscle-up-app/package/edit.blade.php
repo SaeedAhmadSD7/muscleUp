@@ -14,6 +14,9 @@
                 {{ Form::label('package_type', "PackageType:", ['class' => 'form-spacing-top']) }}
                 {{ Form::text('package_type', null, ['class' => 'form-control']) }}
 
+                {{ Form::label('package_price', "PackagePrice:", ['class' => 'form-spacing-top']) }}
+                {{ Form::text('package_price', null, ['class' => 'form-control']) }}
+
 
 
                 {{--<H1> {{$deal->dealType}}</H1>--}}
