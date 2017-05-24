@@ -11,6 +11,9 @@
 
                 <h1>Package Type:</h1>
                 <h3>{{$package->package_type}}</h3>
+
+                <h1>Package Price:</h1>
+                <h3>{{$package->package_price}}</h3>
             </div>
             <div class="col-md-4">
                 <div class="well">

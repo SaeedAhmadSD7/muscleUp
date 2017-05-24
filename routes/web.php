@@ -24,8 +24,8 @@ Route::get('/home/contact', ['as' => 'home.store', 'uses' => 'MuscleUpApp\Contac
 
 
 //deals
-Route::get('/create/deal',['as'=>'create-deal' , 'uses' =>'MuscleUpApp\DealController@create']);
 Route::get('/deal',['as'=>'deal' , 'uses' =>'MuscleUpApp\DealController@index']);
+Route::get('/create/deal',['as'=>'create-deal' , 'uses' =>'MuscleUpApp\DealController@create']);
 Route::post('/save/deal',['as'=>'save-deal','uses'=>'MuscleUpApp\DealController@store']);
 Route::get('/show/deal/{id}',['as'=>'show-deal','uses'=>'MuscleUpApp\DealController@show']);
 Route::delete('/deal/delete/{id}',['as'=>'delete' , 'uses' =>'MuscleUpApp\DealController@destroy']);
@@ -33,6 +33,7 @@ Route::resource('deals','MuscleUpApp\DealController');
 
 
 //package
+Route::get('/gym/package',['as'=>'gym-package' , 'uses' =>'MuscleUpApp\PackageController@gymPackage']);
 Route::get('/package',['as'=>'packages' , 'uses' =>'MuscleUpApp\PackageController@index']);
 Route::get('/create/package',['as'=>'create-package' , 'uses' =>'MuscleUpApp\PackageController@create']);
 Route::get('/show/package/{id}',['as'=>'show-package','uses'=>'MuscleUpApp\PackageController@show']);
@@ -95,3 +96,7 @@ Route::get('/elselink', ['as'=>'elselink',function () {
     ]);
 
 
+/*
+ Admin-panel
+*/
+Route::get('admin/panel',['as'=>'admin-panel','uses'=>'MuscleUpApp\AdminController@index']);

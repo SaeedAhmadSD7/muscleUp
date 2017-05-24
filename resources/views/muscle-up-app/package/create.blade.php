@@ -13,6 +13,9 @@
                 {!! Form::label('package_type', 'PackageType:') !!}
                 {!! Form ::text ('package_type',null ,array('class' => 'form-control')) !!}
 
+                {!! Form::label('package_price', 'PackagePrice:') !!}
+                {!! Form ::text ('package_price',null,array('class' => 'form-control')) !!}
+
                 {!! Form::submit('submit package' , array('class' => 'btn btn-success btn-lg ', 'style' =>'margin-top:20px')) !!}
 
             </form>

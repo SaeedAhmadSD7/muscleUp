@@ -7,6 +7,14 @@ use Illuminate\Routing\Controller;
 
 class PackageController extends Controller
 {
+
+    public function gymPackage()
+    {
+        return view('muscle-up-app.package.gym-package');
+
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,7 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $package= Package::all();
+            $package= Package::all();
         return view('muscle-up-app\package\index')->with('package',$package);
     }
 
@@ -47,6 +55,7 @@ class PackageController extends Controller
 
         $package->package_name= $request->package_name;
         $package->package_type= $request->package_type;
+        $package->package_price= $request->package_price;
         $package->save();
 
         //redirect to other page
@@ -103,6 +112,7 @@ class PackageController extends Controller
         $package =Package::find($id);
         $package->package_name=$request->input('package_name');
         $package->package_type=$request->input('package_type');
+        $package->package_type=$request->input('package_price');
         $package->save();
 
 //        Set flash data with success flash message
