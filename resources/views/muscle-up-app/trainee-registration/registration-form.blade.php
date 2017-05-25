@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="address-field">
-                            <textarea name="message" placeholder="Type Your Message Here"></textarea>
+                            <textarea name="message" placeholder="Type Your Address Here"></textarea>
                         </div>
 
                         <div class="text-right col-md-12"><button type="submit"><span class="fa fa-angle-right"></span> Send Message</button></div>
