@@ -3496,7 +3496,7 @@ Trainee Registration
 .trainee-reg .t-reg-form .reg-form input[type="number"],
 .trainee-reg .t-reg-form .reg-form input[type="password"]{
     position:relative;
-    border:none;
+    /*border:none;*/
     display:block;
     width:100%;
     line-height:24px;
@@ -3531,13 +3531,13 @@ Trainee Registration
     border:none;
     display:block;
     width:100%;
-    line-height:56px;
+    line-height:68px;
     padding:0px 15px;
     font-size:15px;
     background-color:transparent;
     background:url(/assets/images/icons/textarea-bg.png) left top repeat;
     resize:none;
-    height:168px;
+    height:70px;
 }
 
 .trainee-reg .t-reg-form .reg-form button[type="submit"],
