@@ -14,18 +14,9 @@ class CreateTraineesTable extends Migration
     public function up()
     {
         Schema::create('trainee', function (Blueprint $table) {
-            //  $table->integer('traineeId', true, true);
-            //    $table->integer('userId');
-            //   $table->integer('gymId');
-            $table->string('name');
-            //   $table->integer('dateOfBirth');
-            $table->string('email');
-            $table->string('password');
-            //    $table->string('sex');
-            //   $table->integer('Contact Number');
-            //   $table->string('Address');
-            //   $table->string('foodAlergies');
-            //   $table->string('medicalHistory');
+            $table->increments('id');
+            $table->integer('user_id')->index();
+            $table->integer('gym_id')->index();
         });
 
     }

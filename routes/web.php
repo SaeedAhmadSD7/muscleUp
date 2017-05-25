@@ -64,6 +64,11 @@ Route::get('register-trainee', function () {
     return view('muscle-up-app.trainee-registration.registration-form');
 });
 
+Route::get('register-gym', function () {
+    return view('muscle-up-app.gym-registration-request.registration-form');
+});
+
+Route::post('save-gym',['uses'=>'MuscleUpApp\GymController@save', 'as'=> 'save-gym']);
 /*
 login form
  */
