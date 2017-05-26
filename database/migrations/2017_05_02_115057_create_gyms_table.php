@@ -14,12 +14,14 @@ class CreateGymsTable extends Migration
     public function up()
     {
         Schema::create('gym', function (Blueprint $table) {
-            $table->increments('gymId');
+            $table->increments('id');
             $table->string('name');
-            $table->string('password',60);
-            $table->string('ownerEmailAddress');
-            $table->string('contactNumber');
-            $table->string('address');
+            $table->string('email');
+            $table->integer('number');
+            $table->string('country');
+            $table->string('city')->nullable();
+            $table->text('address');
+            $table->rememberToken();
             $table->timestamps();
         });
         //

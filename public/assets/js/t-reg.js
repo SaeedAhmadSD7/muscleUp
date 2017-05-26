@@ -15,12 +15,11 @@
         // initialCountry: "auto",
         // nationalMode: false,
         // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-       //  placeholderNumberType: "MOBILE",
+          placeholderNumberType: "MOBILE",
         // preferredCountries: ['cn', 'jp'],
          separateDialCode: true,
         utilsScript: "/assets/plugins/TelInput/js/utils.js"
     });
-
-     // $('.btn-date').dateSelect();
+      $('.btn-date').DateTimePicker();
  });
 

@@ -50,27 +50,25 @@ class DealController extends Controller
 
 //        dd($request);
 //      $deal->dealType= $values['gymId'];
-        $deal->dealType= $request->dealType;
-        $deal->duration= $request->duration;
+        $deal->dealType = $request->dealType;
+        $deal->duration = $request->duration;
         $deal->save();
 
-        //redirect to other page
+//        redirect to other page
 
         return redirect()->route('show-deal',$deal->id);
     }
 
-    /**
-     * Display the specified resource.
+
+    /*
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
+
+
     public function show($id)
     {
-
         $deal=Deal::find($id);
-
-        return view('muscle-up-app\deal\show')->with('deal',$deal);
+        return view('muscle-up-app.deal.show')->with('deal',$deal);
     }
 
     /**

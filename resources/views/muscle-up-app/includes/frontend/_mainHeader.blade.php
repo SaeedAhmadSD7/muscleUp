@@ -1,5 +1,5 @@
 <!-- Preloader -->
-<div class="preloader"></div>
+{{--<div class="preloader"></div>--}}
 
 
 <header class="main-header">
@@ -39,13 +39,12 @@
 
                         </ul>
                     </li>
-                    <li><a href="courses.html">Services</a></li>
                     <li class="dropdown"><a href="services.html">Services</a>
                         <ul class="submenu">
                             <li><a href="schedule.html">Our Schedule</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="register">Join Now</a>
+                    <li class="dropdown"><a href="{{route('request-gym')}}">Join Request</a>
 
                     </li>
 

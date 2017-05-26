@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password',
+        'email', 'password',"first_name","last_name","address","birth_date"
     ];
 
     /**
@@ -37,6 +37,10 @@ class User extends Authenticatable
             $response = ['success'=>false,'error'=>true, 'message' => '', 'Model' => $user];
         }
         return $response;
+    }
+
+    function Gym(){
+        return $this->belongsTo(Gym::class);
     }
 
 }

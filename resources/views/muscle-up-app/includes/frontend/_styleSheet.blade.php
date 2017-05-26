@@ -5,7 +5,7 @@
 <link href="{{url('assets/plugins/bootstrap-3.3.7/css/bootstrap.css')}}" rel="stylesheet">
 <link href="{{url('/assets/plugins/revolution-slider/css/revolution-slider.css')}}" rel="stylesheet">
 <link href="{{asset('assets/css/style-sheet.css')}}" rel="stylesheet">
-
+<link href="{{asset('assets/css/select2.min.css')}}" rel="stylesheet">
 
 <!-- Responsive -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

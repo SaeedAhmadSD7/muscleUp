@@ -3453,6 +3453,47 @@ Trainee Registration
     background:rgba(255,255,255,0.60);
 }
 
+.trainee-reg .t-reg-form .reg-form .btn,
+.trainee-reg .t-reg-form .reg-form .btn:active,
+.trainee-reg .t-reg-form .reg-form .btn.active{
+	border: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-o-box-shadow: none;
+	box-shadow: none;
+}
+
+.trainee-reg .t-reg-form .reg-form .btn:hover,
+.trainee-reg .t-reg-form .reg-form .btn:focus,
+.trainee-reg .t-reg-form .reg-form .btn.focus{
+	color: #fff;
+}
+
+
+
+label input[type="radio"] ~ i.fa.fa-circle-o{
+	color: #c8c8c8;    display: inline;
+}
+label input[type="radio"] ~ i.fa.fa-dot-circle-o{
+	display: none;
+}
+label input[type="radio"]:checked ~ i.fa.fa-circle-o{
+	display: none;
+}
+label input[type="radio"]:checked ~ i.fa.fa-dot-circle-o{
+	color: #7AA3CC;    display: inline;
+}
+label:hover input[type="radio"] ~ i.fa {
+	color: #7AA3CC;
+	background: none;
+}
+
+.trainee-reg .t-reg-form .reg-form .country_list option{
+	color: #747474;
+}
+
+
 .trainee-reg .t-reg-form .reg-form .text-field:after{
     content:'';
     position:absolute;
@@ -3467,6 +3508,12 @@ Trainee Registration
     position:relative;
     margin-bottom:20px;
     padding-right:15px;
+}
+
+
+.trainee-reg .t-reg-form .reg-form .sex{
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .trainee-reg .t-reg-form .reg-form .address-field:before{
@@ -3494,9 +3541,9 @@ Trainee Registration
 .trainee-reg .t-reg-form .reg-form input[type="url"],
 .trainee-reg .t-reg-form .reg-form input[type="tel"],
 .trainee-reg .t-reg-form .reg-form input[type="number"],
-.trainee-reg .t-reg-form .reg-form input[type="password"]{
+.trainee-reg .t-reg-form .reg-form input[type="password"],
+.trainee-reg .t-reg-form .reg-form select{
     position:relative;
-    border:none;
     display:block;
     width:100%;
     line-height:24px;
@@ -3508,13 +3555,13 @@ Trainee Registration
     z-index:1;
 }
 
-.trainee-reg .t-reg-form .reg-form input.error{
+.trainee-reg .t-reg-form .reg-form input.error,
+.trainee-reg .t-reg-form .reg-form select.error{
     border-color:#0c1f34;
 }
 
-.trainee-reg .reg-form .country-list{
-    color: #747474;
-}
+
+
 
 .trainee-reg .reg-form .btn-date-span{
     position: absolute!important;
@@ -3531,13 +3578,13 @@ Trainee Registration
     border:none;
     display:block;
     width:100%;
-    line-height:56px;
+    line-height:68px;
     padding:0px 15px;
     font-size:15px;
     background-color:transparent;
     background:url(/assets/images/icons/textarea-bg.png) left top repeat;
     resize:none;
-    height:168px;
+    height:70px;
 }
 
 .trainee-reg .t-reg-form .reg-form button[type="submit"],
@@ -3736,7 +3783,8 @@ Trainee Registration
 .contact-us .contact-area .contact-form input[type="url"],
 .contact-us .contact-area .contact-form input[type="tel"],
 .contact-us .contact-area .contact-form input[type="number"],
-.contact-us .contact-area .contact-form input[type="password"]{
+.contact-us .contact-area .contact-form input[type="password"],
+.contact-us .contact-area .contact-form select{
 	position:relative;
 	border:none;
 	display:block;

@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gym extends Model
 {
+    protected $fillable = [
+        'email', 'address'
+    ];
+
+    function  user(){
+        return $this->HasMany(User::class);
+    }
+
     function branches(){
         return $this-> hasMany(Branch :: class);
 
@@ -44,10 +52,5 @@ class Gym extends Model
     function services(){
         return $this-> hasMany(Service :: class);
 
-    }
-
-    function userType()
-    {
-        return $this->hasMany(userType :: class);
     }
 }

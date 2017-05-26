@@ -7,6 +7,7 @@
 <script src="{{url('/assets/plugins/wow-1.1.0/js/wow.min.js')}}"></script>
 <script src="{{url('/assets/plugins/jquery-knob-1.2.13/js/jquery.knob.js')}}"></script>
 <script src="{{url('/assets/plugins/jquery-validation-1.16.0/jquery.validate.js')}}"></script>
+<script src="{{url('/assets/js/select2.full.min.js')}}"></script>
 <script src="{{url('/assets/js/index-script.js')}}"></script>
 
 <!--[if lt IE 9]>
