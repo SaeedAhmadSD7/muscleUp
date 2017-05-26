@@ -33,7 +33,7 @@ Route::resource('deals','MuscleUpApp\DealController');
 
 
 //package
-Route::get('/package',['as'=>'packages' , 'uses' =>'MuscleUpApp\PackageController@index']);
+Route::get('/package',['as'=>'traineepackage' , 'uses' =>'MuscleUpApp\PackageController@index']);
 Route::get('/create/package',['as'=>'create-package' , 'uses' =>'MuscleUpApp\PackageController@create']);
 Route::get('/show/package/{id}',['as'=>'show-package','uses'=>'MuscleUpApp\PackageController@show']);
 //Route::delete('/package/delete/{id}',['as'=>'delete' , 'uses' =>'MuscleUpApp\packageController@destroy']);
@@ -41,7 +41,17 @@ Route::resource('package','MuscleUpApp\PackageController');
 
 
 //service
-Route::get('home/service',['as'=>'service','uses'=>'MuscleUpApp\ServiceController@store']);
+Route::get('services', ['as'=>'service-store','uses'=>'MuscleUpApp\ServiceController@index']);
+Route::get('/service',['as'=>'service','uses'=>'MuscleUpApp\ServiceController@create']);
+Route::post('/service',['as'=>'Save-service','uses'=>'MuscleUpApp\ServiceController@store']);
+Route::get('update/{service_id}',['as'=>'Update-service','uses'=>'MuscleUpApp\ServiceController@edit']);
+Route::put('update/{id}',['as'=>'Update.service','uses'=>'MuscleUpApp\ServiceController@update']);
+Route::delete('delete/{id}',['as'=>'delete','uses'=>'MuscleUpApp\ServiceController@destroy']);
+Route::get('show/{id}','MuscleUpApp\ServiceController@show')->name('services.show');
+
+//Route::get('delete',['as'=>'delete','uses'=>'MuscleUpApp\ServiceController@destroy']);
+//Route::put('update/{id}',['as'=>'Update-service','uses'=>'MuscleUpApp\ServiceController@update']);
+
 
 /**
  * Events Routes
@@ -63,35 +73,14 @@ Route::get('register-trainee', function () {
     return view('muscle-up-app.trainee-registration.registration-form');
 });
 
-/*
-login form
- */
 
-//Route::get('login-form', function () {
-//    return view('muscle-up-app.login_form.login');
-//});
+//TraineePackage
 
-
-
-Route::get('login', ['uses'=>'MuscleUpApp\LoginController@index','as'=>'login']);
-
-
-Route::post('check-login', ['uses'=>'MuscleUpApp\LoginController@login','as'=>'check-login']);
-
-Route::get('/trainee', ['as'=>'trainee',function () {
-    return ('trainee');}
-    ]);
-
-Route::get('/gym', ['as'=>'gym',function () {
-    return ('gym');}
-    ]);
-
-Route::get('/admin', ['as'=>'admin',function () {
-    return ('admin');}
-    ]);
-
-Route::get('/elselink', ['as'=>'elselink',function () {
-    return ('else');}
-    ]);
-
+//Route::get('traineepackage', ['as'=>'traineepackage','uses'=>'MuscleUpApp\TraineePackageController@traineepackage']);
+Route::get('/create/tpackage',['as'=>'create-tpackage','uses'=>'MuscleUpApp\TraineePackageController@create']);
+Route::post('/train/package',['as'=>'Save-tpackage','uses'=>'MuscleUpApp\TraineePackageController@store']);
+Route::get('show/trnpackage/{id}',['as'=>'show-trnpackage','uses'=>'MuscleUpApp\TraineePackageController@show']);
+Route::get('update-trpackage/{id}',['as'=>'update-trpackage','uses'=>'MuscleUpApp\TraineePackageController@edit']);
+Route::post('update-trpackage/{id}',['as'=>'update-trpackage','uses'=>'MuscleUpApp\TraineePackageController@update']);
+Route::get('delete-trnpackage/{id}',['as'=>'delete.package','uses'=>'MuscleUpApp\TraineePackageController@destroy']);
 

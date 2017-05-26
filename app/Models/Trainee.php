@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\TraineePackage;
 use Illuminate\Database\Eloquent\Model;
 
 class Trainee extends Model
@@ -57,5 +58,9 @@ class Trainee extends Model
     function measurements()
     {
         return $this->hasOne(Measurement:: class);
+    }
+    function TrainPackage()
+    {
+        return $this->hasOne(TrainPackage::class);
     }
 }

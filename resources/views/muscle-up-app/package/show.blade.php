@@ -28,9 +28,9 @@
                         <div class="col-sm-6">
                             {!! Html::linkRoute('package.edit', 'Edit', array($package->id), array('class' => 'btn btn-primary btn-block')) !!}
                         </div>
-                        <div class="col-sm-6">
-                            {!! Form::open(['route'=>['package.destroy',$package->id],'method'=>'DELETE']) !!}
+                           {!! Form::open(['route'=>['package.destroy',$package->id],'method'=>'DELETE']) !!}
 
+                            <div class="col-sm-6">
                             {!! Form::submit('Delete',['class'=>'btn btn-danger btn-block']) !!}
 
                             {!! Form::close() !!}

@@ -11,6 +11,5 @@ namespace App\Utils\Globals;
 
 class AppGlobal
 {
-    const RECORD_OFFSET = 0;
-    const RECORD_LIMIT = 100;
+   
 }

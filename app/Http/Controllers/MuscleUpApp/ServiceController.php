@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\MuscleUpApp;
+
 use Illuminate\Http\Request;
 use App\Models\Service;
 use Illuminate\Routing\Controller;
-
 class ServiceController extends Controller
 {
     /**
@@ -12,9 +12,15 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+//    public function getservices(){
+//        return view('muscle-up-app.services.services');
+//
+//    }
+
     public function index()
     {
-        //
+        return view('muscle-up-app.services.services');
     }
 
     /**
@@ -24,7 +30,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('muscle-up-app.services.services');
     }
 
     /**
@@ -35,27 +41,21 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $values =array(
+//        $values = array(
+//          '$service' =>'personaltrainning',
+//          '$serviceCharges'=>'4000'
+//    );
 
-            'serviceName' => 'dietplan',
-            'serviceCharges' => '1000'
 
-        );
-        //validate the data
-//        $this->validate($request,array(
-//            'serviceName'=>'required',
-//            'serviceCharges' => 'required'
-//        ));
-        //store data in database
         $service = new Service();
+        $service->serviceName = $request->input('serviceName');
+        $service->serviceCharges = $request->input('serviceCharges');
 
-        $service->servicename= $values['serviceName'];
-        $service->serviceCharges= $values['serviceCharges'];
         $service->save();
+        return view('muscle-up-app.services.services');
 
-        //redirect to other page
 
-        return redirect()->route('home-page',$service->id);
+
     }
 
     /**
@@ -66,7 +66,9 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        //
+        $service=Service::find($id);
+//        dd($service);
+        return view('muscle-up-app.services.show', compact('service'));
     }
 
     /**
@@ -77,7 +79,8 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $service = Service::find($id);
+        return view('muscle-up-app.services.update', compact('service'));
     }
 
     /**
@@ -89,7 +92,14 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $service=Service::find($id);
+        $service->serviceName = $request->input('serviceName');
+        $service->serviceCharges = $request->input('serviceCharges');
+
+        $service->save();
+
+        return view('muscle-up-app.services.services');
     }
 
     /**
@@ -100,6 +110,12 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $service=Service::find($id);
+        $service->delete();
+//        dd($service);
+        return view('muscle-up-app.services.services');
+
     }
+
+
 }
