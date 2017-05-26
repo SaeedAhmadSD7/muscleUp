@@ -20,9 +20,6 @@
          separateDialCode: true,
         utilsScript: "/assets/plugins/TelInput/js/utils.js"
     });
-
-    console.log(7);
-
       $('.btn-date').DateTimePicker();
  });
 

@@ -25,20 +25,19 @@ class LoginController extends Controller
 
             $user = User::where('email',$request->email)->first();
 
-            if ($user->trainee) {
+            if ($user['user-type'] == 'trainee') {
                 return redirect()->route('trainee');
             }
-            if ($user->gym) {
-                return redirect()->route('gym');
+            if ($user['user-type'] == 'gym') {
+                dd('gym');
             }
-            if ($user->admin) {
+            if ($user['user-type'] == 'admin') {
                 return redirect()->route('admin');
             }
-            if ($user->instructor) {
+            if ($user['user-type'] == 'instructor') {
                 return redirect()->route('instructor');
             }
         }
-
-        else return redirect()->route('elselink');
+        else return dd('no');
     }
 }

@@ -57,6 +57,11 @@ Route::get('delete-event/{event}',['as'=>'delete','uses'=>'MuscleUpApp\EventCont
 Route::resource('events','MuscleUpApp\EventController');
 
 
+Route::get('register-gym', function () {
+    return view('muscle-up-app.gym-registration-request.registration-form');
+});
+
+Route::post('save-gym',['uses'=>'MuscleUpApp\GymController@save', 'as'=> 'save-gym']);
 /*
 login form
  */
