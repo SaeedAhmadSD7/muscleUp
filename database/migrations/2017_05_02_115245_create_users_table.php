@@ -19,9 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table->string('password');
             $table->string('email');
-            $table->string('phone_no');
+            $table->string('phone_no')->unsigned();
             $table->date('birth_date');
-            $table->string('address');
+            $table->text('address');
+            $table->enum('gender',['male','female']);
+            $table->enum('user-type',['admin','gym','trainee','instructor']);
 
 //            $table->boolean('trainee')->default(false);
 //            $table->boolean('admin')->default(false);
