@@ -56,13 +56,6 @@ Route::post('update-event/{event}',['as'=>'update-event','uses'=>'MuscleUpApp\Ev
 Route::get('delete-event/{event}',['as'=>'delete','uses'=>'MuscleUpApp\EventController@destroy']);
 Route::resource('events','MuscleUpApp\EventController');
 
-/*
-Trainee Registration
- */
-
-Route::get('register-trainee', function () {
-    return view('muscle-up-app.trainee-registration.registration-form');
-});
 
 /**
  * Register Gym
@@ -104,6 +97,13 @@ Route::get('/elselink', ['as'=>'elselink',function () {
 
 
 /*
+Trainee Registration
+ */
+
+Route::get('register-trainee',['as'=>'register-trainee','uses'=>'MuscleUpApp\TraineeController@create']);
+Route::post('store-trainee', ['as' => 'store-trainee', 'uses' => 'MuscleUpApp\TraineeController@store']);
+
+/*
  Admin-panel
 */
-Route::get('admin/panel',['as'=>'admin-panel','uses'=>'MuscleUpApp\AdminController@index']);
+Route::get('/gym-panel',['as'=>'gym-panel','uses'=>'MuscleUpApp\AdminController@index']);

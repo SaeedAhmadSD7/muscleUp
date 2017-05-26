@@ -42,16 +42,16 @@
                 </li>
                 <li class='has_sub'>
                     <a href='javascript:void(0);'><i class='icon-feather'></i>
-                        <span>Roles</span> <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
+                        <span> registration of Trainee</span> <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
                     <ul>
-                        <li><a href='' class="{{ Request::is('role-index') ? 'active' : '' }}"><span>All Roles</span></a></li>
-                        <li><a href='buttons.html'><span>Buttons</span></a></li>
+                        <li><a href='register-trainee' class=""><span>Add Trainee</span></a></li>
+                        {{--<li><a href='buttons.html'><span>Buttons</span></a></li>--}}
                     </ul>
                 </li>
                 <li class='has_sub'>
                     <a href='javascript:void(0);'><i class='icon-pencil-3'></i><span>Resources</span> <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
                     <ul>
-                        <li><a href='' class="{{ Request::is('resource/index') ? 'active' : '' }}"><span>All System Resources</span></a></li>
+                        <li><a href='' class=""><span>All System Resources</span></a></li>
                         <li><a href='advanced-forms.html'><span>Advanced Forms</span></a></li>
                     </ul>
                 </li>
