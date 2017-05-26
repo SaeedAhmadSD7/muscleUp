@@ -94,7 +94,7 @@ Trainee Registration
  */
 
 Route::get('register-trainee',['as'=>'register-trainee','uses'=>'MuscleUpApp\TraineeController@create']);
-
+Route::post('store-trainee', ['as' => 'store-trainee', 'uses' => 'MuscleUpApp\TraineeController@store']);
 
 /*
  Admin-panel
