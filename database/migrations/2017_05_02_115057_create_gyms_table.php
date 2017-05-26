@@ -15,10 +15,13 @@ class CreateGymsTable extends Migration
     {
         Schema::create('gym', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->index();
-            $table->string('title');
-            $table->string('number');
-            $table->string('address');
+            $table->string('name');
+            $table->string('email');
+            $table->integer('number');
+            $table->string('country');
+            $table->string('city')->nullable();
+            $table->text('address');
+            $table->rememberToken();
             $table->timestamps();
         });
         //

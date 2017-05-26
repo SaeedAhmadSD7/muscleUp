@@ -39,4 +39,8 @@ class User extends Authenticatable
         return $response;
     }
 
+    function Gym(){
+        return $this->belongsTo(Gym::class);
+    }
+
 }
