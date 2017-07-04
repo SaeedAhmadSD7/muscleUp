@@ -1,11 +1,218 @@
-@extends('muscle-up-app.layouts.frontend-main')
+@extends('muscle-up-app.layouts.main')
 @section('title','MuscleUP')
+
+@section('style-sheet')
+    <link href="{{url('/assets/plugins/revolution-slider/css/revolution-slider.css')}}" rel="stylesheet">
+    <link href="{{url('/assets/plugins/owl-carousel-2.2.1/css/owl.carousel.css')}}" rel="stylesheet">
+    <link href="{{url('/assets/plugins/hover-2.1.1/css/hover.css')}}" rel="stylesheet">
+@stop
 
 @section('content')
 
     <!-- Main Slider -->
-    @include('muscle-up-app.includes.frontend._mainSlider')
+    <section id="main-slider" class="main-slider">
 
+        <div class="tp-banner-container">
+            <div class="tp-banner" >
+                <ul>
+
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="{{url('/assets/images/main-slider/bg-one.jpg')}}"  data-saveperformance="off"  data-title="We Serve Quality"> <!-- MAIN IMAGE -->
+                        <img src="{{url('/assets/images/main-slider/bg-one.jpg')}}"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+
+                        <div class="tp-caption lfb tp-resizeme"
+                             data-x="left" data-hoffset="500"
+                             data-y="center" data-voffset="-100"
+                             data-speed="1500"
+                             data-start="500"
+                             data-easing="easeOutExpo"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.01"
+                             data-endelementdelay="0.3"
+                             data-endspeed="1200"
+                             data-endeasing="Power4.easeIn">
+
+                            <div class="curved-layer light-blue">
+                                <h3>GET FIT IN LESS THAN 6 WEEKS</h3>
+                            </div>
+                        </div>
+
+                        <div class="tp-caption lfb tp-resizeme"
+                             data-x="left" data-hoffset="530"
+                             data-y="center" data-voffset="-20"
+                             data-speed="1500"
+                             data-start="1000"
+                             data-easing="easeOutExpo"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.01"
+                             data-endelementdelay="0.3"
+                             data-endspeed="1200"
+                             data-endeasing="Power4.easeIn">
+                            <div class="curved-layer dark-blue">
+                                <h2>ARE YOU READY TO CHANGE YOURSELVE?</h2>
+                            </div>
+                        </div>
+
+                        <div class="tp-caption lfb tp-resizeme"
+                             data-x="left" data-hoffset="470"
+                             data-y="center" data-voffset="60"
+                             data-speed="1500"
+                             data-start="1500"
+                             data-easing="easeOutExpo"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.01"
+                             data-endelementdelay="0.3"
+                             data-endspeed="1200"
+                             data-endeasing="Power4.easeIn">
+                            <div class="curved-layer light-blue">
+                                <a href="#">
+                                    <span class="fa fa-play-circle"></span>
+                                    &ensp; TRY OUT THIS PLAN FOR 30 DAYS AND TOTALLY FREE</a>
+                            </div>
+                        </div>
+
+
+                    </li>
+
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="{{url('/assets/images/main-slider/bg-two.jpg')}}"  data-saveperformance="off"  data-title="We Serve Quality">
+
+                        <!-- MAIN IMAGE -->
+                        <img src="{{url('/assets/images/main-slider/bg-two.jpg')}}"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                        <div class="tp-caption lfl tp-resizeme"
+                             data-x="center" data-hoffset="0"
+                             data-y="center" data-voffset="-100"
+                             data-speed="2000"
+                             data-start="500"
+                             data-easing="easeOutExpo"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.01"
+                             data-endelementdelay="0.3"
+                             data-endspeed="1200"
+                             data-endeasing="Power4.easeIn">
+                            <div class="curved-layer light-blue">
+                                <h3>GET FIT IN LESS THAN 6 WEEKS</h3>
+                            </div>
+                        </div>
+
+                        <div class="tp-caption stb tp-resizeme"
+                             data-x="center" data-hoffset="0"
+                             data-y="center" data-voffset="-20"
+                             data-speed="2500"
+                             data-start="1000"
+                             data-easing="easeOutExpo"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.01"
+                             data-endelementdelay="0.3"
+                             data-endspeed="1200"
+                             data-endeasing="Power4.easeIn">
+                            <div class="curved-layer dark-blue">
+                                <h2>CHANGE YOURSELVE AND TRY YOUR WORKPUT AT OUR GYM!</h2>
+                            </div>
+                        </div>
+
+                        <div class="tp-caption lfr tp-resizeme"
+                             data-x="center" data-hoffset="0"
+                             data-y="center" data-voffset="60"
+                             data-speed="2000"
+                             data-start="500"
+                             data-easing="easeOutExpo"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.01"
+                             data-endelementdelay="0.3"
+                             data-endspeed="1200"
+                             data-endeasing="Power4.easeIn">
+                            <div class="curved-layer light-blue">
+                                <a href="#">
+                                    <span class="fa fa-play-circle"></span>
+                                    &ensp; TRY OUT THIS PLAN FOR 30 DAYS AND TOTALLY FREE</a>
+                            </div>
+                        </div>
+
+                    </li>
+
+                    <li data-transition="slidedown" data-slotamount="1" data-masterspeed="1000" data-thumb="{{url('/assets/images/main-slider/bg-three.jpg')}}"  data-saveperformance="off"  data-title="We Serve Quality"> <!-- MAIN IMAGE -->
+                        <img src="{{url('/assets/images/main-slider/bg-three.jpg')}}"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+
+                        <div class="tp-caption lfb stb tp-resizeme"
+                             data-x="left" data-hoffset="242"
+                             data-y="center" data-voffset="-50"
+                             data-speed="2000"
+                             data-start="500"
+                             data-easing="easeOutExpo"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.01"
+                             data-endelementdelay="0.3"
+                             data-endspeed="1200"
+                             data-endeasing="Power4.easeIn">
+                            <div class="curved-layer light-pink">
+                                <h2>WORKOUT FOR WOMEN</h2>
+                            </div>
+                        </div>
+
+                        <div class="tp-caption lfb stb tp-resizeme"
+                             data-x="left" data-hoffset="144"
+                             data-y="center" data-voffset="30"
+                             data-speed="2500"
+                             data-start="1000"
+                             data-easing="easeOutExpo"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.01"
+                             data-endelementdelay="0.3"
+                             data-endspeed="1200"
+                             data-endeasing="Power4.easeIn">
+                            <div class="curved-layer dark-blue">
+                                <h3>TAKE A LOOK AT THE  FITNESS COURSES</h3>
+                            </div>
+                        </div>
+
+                        <div class="tp-caption lfr tp-resizeme"
+                             data-x="right" data-hoffset="-228"
+                             data-y="center" data-voffset="-20"
+                             data-speed="2000"
+                             data-start="1500"
+                             data-easing="easeOutExpo"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.01"
+                             data-endelementdelay="0.3"
+                             data-endspeed="1200"
+                             data-endeasing="Power4.easeIn">
+                            <div class="curved-layer light-blue">
+                                <h2>WORKOUT FOR MEN</h2>
+                            </div>
+                        </div>
+
+                        <div class="tp-caption lfr tp-resizeme"
+                             data-x="right" data-hoffset="-194"
+                             data-y="center" data-voffset="60"
+                             data-speed="2500"
+                             data-start="2000"
+                             data-easing="easeOutExpo"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.01"
+                             data-endelementdelay="0.3"
+                             data-endspeed="1200"
+                             data-endeasing="Power4.easeIn">
+                            <div class="curved-layer dark-blue">
+                                <h3>HECK OUT THE 6 WEEKS FITNESS PLAN</h3>
+                            </div>
+                        </div>
+
+                    </li>
+
+                </ul>
+                <div class="tp-bannertimer"></div>
+            </div>
+        </div>
+    </section>
     <section class="features-services">
         <div class="auto-container">
             <div class="row clearfix">
@@ -51,115 +258,6 @@
                         </div>
                     </div>
                 </article>
-
-
-            </div>
-        </div>
-    </section>
-
-    <!--Two Column-->
-    <section class="two-column">
-        <div class="auto-container">
-            <div class="row clearfix">
-
-                <!--Workout Sessions-->
-                <div class="col-md-7 col-sm-6 col-xs-12">
-
-                    <div class="workout-sessions">
-                        <div class="sec-title">
-                            <h3>THE BEST WORKOUTS FOR YOU</h3>
-                            <h2>TOP WORKOUTS SESSIONS</h2>
-                        </div>
-                        <div class="sec-text clearfix">
-                            <p>If you don’t want to commit to being a member you can still use all of our facilities but you will need to have an induction session before using the facilities to ensure that Health and Safety! </p>
-
-                            <div class="clearfix"></div>
-                            <a href="#" class="read-more"><span class="fa fa-angle-right"></span> SEE ALL WORKOUTS</a>
-                        </div>
-
-                        <div class="post wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="1s" data-wow-offset="0">
-                            <div class="small-title">
-                                <span class="med-text">STAY FIT</span><br>
-                                <span class="small-text">ONLY FOR MEN</span>
-                            </div>
-                            <div class="desc">
-                                <p><strong>6 weeks</strong> / 2 hours a day / workout plan / nutrition plan.</p>
-                                <a href="#" class="price">19,99$</a>
-                            </div>
-                            <div class="images clearfix">
-                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="{{url('/assets/images/resource/image-3.jpg')}}" alt="" title=""></div>
-                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="{{url('/assets/images/resource/image-4.jpg')}}" alt="" title=""></div>
-                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="{{url('/assets/images/resource/image-5.jpg')}}" alt="" title=""></div>
-                            </div>
-                        </div>
-
-                        <div class="post wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="1s" data-wow-offset="0">
-                            <div class="small-title">
-                                <span class="med-text">BEACH BODY</span><br>
-                                <span class="small-text">WOMEN PERFORMANCE</span>
-                            </div>
-                            <div class="desc">
-                                <p><strong>6 weeks</strong> / 2 hours a day / workout plan / nutrition plan.</p>
-                                <a href="#" class="price">19,99$</a>
-                            </div>
-                            <div class="images clearfix">
-                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="{{url('/assets/images/resource/image-6.jpg')}}" alt="" title=""></div>
-                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="{{url('/assets/images/resource/image-7.jpg')}}" alt="" title=""></div>
-                                <div class="col-md-4 col-sm-4 col-xs-12"><img src="{{url('/assets/images/resource/image-8.jpg')}}" alt="" title=""></div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!--Featured Courses-->
-                <div class="col-md-5 col-sm-6 col-xs-12">
-                    <div class="featured-courses">
-
-                        <div class="sec-title">
-                            <h3>OUR FEATURED</h3>
-                            <h2>COURSES &amp; TRAININGS</h2>
-                        </div>
-
-                        <div class="post wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
-                            <h3>Cardio Spinning &amp; Cycling</h3>
-                            <div class="desc">Every Monday 7 PM / 2 hours  / StayFit Cycling Room</div>
-                            <div class="info">
-                                Johnny Galecki - Fitness Coach <span class="icon flaticon-cycling"></span>
-                                <a href="#" class="join">Join</a>
-                            </div>
-                        </div>
-
-                        <div class="post wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
-                            <h3>Running Wild for Freaks</h3>
-                            <div class="desc">Every Tuesday 6 PM / 2 hours  / Outdoor</div>
-                            <div class="info">
-                                Marvin Jackson - Cardio Coach <span class="icon flaticon-sprint"></span>
-                                <a href="#" class="join">Join</a>
-                            </div>
-                        </div>
-
-                        <div class="post wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
-                            <h3>Body Challenge </h3>
-                            <div class="desc">Every Monday and Friday 6 PM / 1 hour  / Fitness Room</div>
-                            <div class="info">
-                                Marvin Jackson - Cardio Coach<span class="icon flaticon-sprint"></span>
-                                <a href="#" class="join">Join</a>
-                            </div>
-                        </div>
-
-                        <div class="post wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
-                            <h3>Fit with Water </h3>
-                            <div class="desc">Every Thursday 6 PM / 2 hours  / Swim Area</div>
-                            <div class="info">
-                                Janette Bomhilde - Fitness Coach<span class="icon flaticon-swimming18"></span>
-                                <a href="#" class="join">Join</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
 
 
             </div>
@@ -332,6 +430,139 @@
         </div>
     </section>
 
+
+
+    <section class="fact-counter" style="background-image:url(/assets/images/background/fact-counter-bg.jpg);">
+        <div class="auto-container">
+            <div class="sec-title">
+                <h3>WHAT YOU CAN REACH WITH US</h3>
+                <h2>OUR COMMUNITY STATISTICS</h2>
+            </div>
+
+            <div class="row clearfix">
+
+                <article class="col-md-3 col-sm-6 col-xs-12 block">
+                    <div class="round">
+                        <div class="circular-bar">
+                            <input type="text" class="dial" data-fgColor="#10bcf4" data-bgColor="rgba(0,0,0,0)" data-width="172" data-height="172"  data-linecap=round  value="76">
+                            <div class="circular-bar-content img-circle">
+                                <label></label>
+                            </div>
+                        </div>
+                    </div>
+                    <p>BODY CHALLENGES</p>
+                </article>
+
+                <article class="col-md-3 col-sm-6 col-xs-12 block">
+                    <div class="round">
+                        <div class="circular-bar">
+                            <input type="text" class="dial" data-fgColor="#10bcf4" data-bgColor="rgba(0,0,0,0)" data-width="172" data-height="172"  data-linecap=round  value="48" >
+                            <div class="circular-bar-content img-circle">
+                                <label></label>
+                            </div>
+                        </div>
+                    </div>
+                    <p>HAPPY CLIENTS</p>
+                </article>
+
+                <article class="col-md-3 col-sm-6 col-xs-12 block">
+                    <div class="round">
+                        <div class="circular-bar">
+                            <input type="text" class="dial" data-fgColor="#10bcf4" data-bgColor="rgba(0,0,0,0)" data-width="172" data-height="172"  data-linecap=round  value="88" >
+                            <div class="circular-bar-content img-circle">
+                                <label></label>
+                            </div>
+                        </div>
+                    </div>
+                    <p>OPENED GYMS</p>
+                </article>
+
+                <article class="col-md-3 col-sm-6 col-xs-12 block">
+                    <div class="round">
+                        <div class="circular-bar">
+                            <input type="text" class="dial" data-fgColor="#10bcf4" data-bgColor="rgba(0,0,0,0)" data-width="172" data-height="172" data-linecap=round  value="46" >
+                            <div class="circular-bar-content img-circle">
+                                <label></label>
+                            </div>
+                        </div>
+                    </div>
+                    <p>FEMALE COURSES</p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!--Two Column-->
+    <section class="two-column">
+        <div class="auto-container">
+            <div class="row clearfix">
+
+                <!--Who we are-->
+                <div class="col-md-7 col-sm-6 col-xs-12">
+
+                    <div class="who-we-are">
+                        <div class="sec-title">
+                            <h3>OUR PHILOSOPHY</h3>
+                            <h2>WHAT WE DO AND WHO WE ARE?</h2>
+                        </div>
+                        <div class="sec-text clearfix">
+                            <p>As a member you can also access our pool and tennis courts for free and have priority for booking any of the pre-book activities, classes or sessions that we run. If you don’t want to commit to being a member you can still use all of our facilities but you will need to have an induction session before using the facilities to ensure that Health and Safety requirements are met – you don’t want to injure yourself on your first visit and ruin all your good intentions!</p>
+                        </div>
+                        <img class="img-responsive" src="{{url('/assets/images/resource/image-14.jpg')}}" alt="" title="">
+
+                    </div>
+
+                </div>
+
+                <!--Featured Courses-->
+                <div class="col-md-5 col-sm-6 col-xs-12">
+                    <div class="featured-courses">
+
+                        <div class="sec-title">
+                            <h3>OUR FEATURED</h3>
+                            <h2>COURSES &amp; TRAININGS</h2>
+                        </div>
+
+                        <div class="post wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
+                            <h3>Cardio Spinning &amp; Cycling</h3>
+                            <div class="desc">Every Monday 7 PM / 2 hours  / StayFit Cycling Room</div>
+                            <div class="info">
+                                Johnny Galecki - Fitness Coach <span class="icon flaticon-cycling"></span>
+                                <a href="#" class="join">Join</a>
+                            </div>
+                        </div>
+
+                        <div class="post wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
+                            <h3>Running Wild for Freaks</h3>
+                            <div class="desc">Every Tuesday 6 PM / 2 hours  / Outdoor</div>
+                            <div class="info">
+                                Marvin Jackson - Cardio Coach <span class="icon flaticon-sprint"></span>
+                                <a href="#" class="join">Join</a>
+                            </div>
+                        </div>
+
+                        <div class="post wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
+                            <h3>Body Challenge </h3>
+                            <div class="desc">Every Monday and Friday 6 PM / 1 hour  / Fitness Room</div>
+                            <div class="info">
+                                Marvin Jackson - Cardio Coach<span class="icon flaticon-sprint"></span>
+                                <a href="#" class="join">Join</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+
     <!--Tweets Scroller-->
     <section class="tweets-scroller">
 
@@ -367,36 +598,14 @@
 
     </section>
 
-    <!--Products-->
-    <section class="products">
-        <div class="auto-container">
-            <div class="row clearfix">
 
-                <article class="col-md-6 col-sm-6 col-xs-12 product">
-                    <div class="title-box">
-                        <h3 class="dark-blue">SPORTS WEAR</h3><br>
-                        <h3 class="light-blue">LIVE FITNESS TRACKER</h3>
-                    </div>
-                    <div class="text">We are an independent gym that is committed to working with you to gain the results you want. Whether your aim is to loose weight, tone up, build bulk or gain weight we can put together a gym programme or recommend the right classes for you to attend in our studios.</div>
-                    <figure class="image">
-                        <div class="img-circle light-blue">$19<sup>99</sup></div>
-                        <img src="{{url('/assets/images/resource/image-9.jpg')}}" alt="" title="">
-                    </figure>
-                </article>
-
-                <article class="col-md-6 col-sm-6 col-xs-12 product">
-                    <div class="title-box">
-                        <h3 class="dark-blue">HEALTHY LIFE</h3><br>
-                        <h3 class="light-pink">Jawbone UP24</h3>
-                    </div>
-                    <div class="text">Our members benefit from a free gym programme and review every month, free studio classes and price reductions on our personal training sessions. As a member you can also access our pool and tennis courts for free and have priority for booking any of the pre-book activities, classes or sessions that we run.</div>
-                    <figure class="image">
-                        <div class="img-circle light-pink">$19<sup>99</sup></div>
-                        <img src="{{url('/assets/images/resource/image-10.jpg')}}" alt="" title="">
-                    </figure>
-                </article>
-
-            </div>
-        </div>
-    </section>
 @endsection
+
+@section('script')
+    <script src="{{url('/assets/plugins/revolution-slider/js/revolution.min.js')}}"></script>
+    <script src="{{url('/assets/plugins/bxslider-4.2.12/js/jquery.bxslider.js')}}"></script>
+    <script src="{{url('/assets/plugins/jquery-appear-0.1/js/jquery.appear.js')}}"></script>
+    <script src="{{url('/assets/plugins/jquery-knob-1.2.13/js/jquery.knob.js')}}"></script>
+    <script src="{{url('/assets/js/index-script.js')}}"></script>
+
+@stop

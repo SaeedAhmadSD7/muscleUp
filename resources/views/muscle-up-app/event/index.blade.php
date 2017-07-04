@@ -1,4 +1,4 @@
-@extends('muscle-up-app.layouts.frontend-main')
+@extends('muscle-up-app.layouts.main')
 @section('title','Events')
 {{--<div class="row">
     <h1>Deals</h1>
