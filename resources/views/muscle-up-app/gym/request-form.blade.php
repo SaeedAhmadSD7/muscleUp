@@ -42,6 +42,9 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
+                                    <input type="text" name="city" value="" placeholder="City...">
+                                </div>
                                 <div class="form-group col-md-1 col-sm-2 col-xs-2 dial-code-div">
                                     <input class="dial-code" type="text" name="dial-code" value="" placeholder="+1..." readonly>
                                 </div>
