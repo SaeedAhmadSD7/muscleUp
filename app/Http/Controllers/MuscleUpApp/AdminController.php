@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MuscleUpApp;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Models\GymRequest;
 
 
 class AdminController extends Controller
@@ -13,8 +14,7 @@ class AdminController extends Controller
         return view('muscle-up-app.admin.index');
     }
     public function inbox(){
-
-        return view('muscle-up-app.admin.inbox');
-    }
+        $Requests = GymRequest::all();
+        return view('muscle-up-app.admin.inbox')->with('Requests', $Requests);    }
 }
 

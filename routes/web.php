@@ -72,12 +72,11 @@ Route::resource('events','MuscleUpApp\EventController');
 
 
 /**
- * Register Gym
+ * Gym Request
  */
 
-
-Route::get('request/gym', ['uses'=>'MuscleUpApp\GymController@request', 'as'=>'request-gym']);
-Route::post('save-gym',['uses'=>'MuscleUpApp\GymController@store', 'as'=> 'save-gym']);
+Route::get('gym/request/join', ['uses'=>'MuscleUpApp\GymController@request', 'as'=>'gym-request']);
+Route::post('gym/request/save',['uses'=>'MuscleUpApp\GymController@request_save', 'as'=> 'save-request']);
 //Route::post('save-gym',['uses'=>'MuscleUpApp\GymController@save', 'as'=> 'save-gym']);
 /*
 login form

@@ -60,8 +60,8 @@
                                         </div>
                                 </div>
 
-                                <div class="form-group col-md-1 col-sm-2 col-xs-2 dial-code-div">
-                                    <input class="dial-code" type="text" name="dial-code" value="" placeholder="+1..." readonly>
+                                <div class="form-group col-md-1 col-sm-2 col-xs-2 dial_code-div">
+                                    <input class="dial_code" type="text" name="dial_code" value="" placeholder="+1..." readonly>
                                 </div>
                                 <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
                                     <input class="p-number" type="text" name="p-number" value="" placeholder="Phone Number...">

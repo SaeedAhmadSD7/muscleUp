@@ -17,7 +17,7 @@ class CreateCountriesTable extends Migration
             $table->increments('id');
             $table->string('code',2)->unique();
             $table->string('name',255);
-            $table->string('dial-code',4);
+            $table->string('dial_code',4);
             $table->string('flag',6);
             $table->timestamps();
         });

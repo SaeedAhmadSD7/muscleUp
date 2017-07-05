@@ -16,7 +16,7 @@ $(document).ready(function () {
 
     $('.country_list').on('change',function () {
         var dial_code = $(this).find('option:selected').attr('data-dialcode');
-        $('.dial-code').val(dial_code);
+        $('.dial_code').val(dial_code);
     });
 
 });
