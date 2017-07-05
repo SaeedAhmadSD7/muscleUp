@@ -1,20 +1,19 @@
 <?php
 
 namespace App\Http\Controllers\MuscleUpApp;
-use App\Models\Trainee;
-use App\Models\User;
+
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
-class TraineeController extends Controller
+class MedicalHistoryController extends Controller
 {
-   public function view_profile(){
-    return view('muscle-up-app\trainee\view-profile');
-   }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -24,7 +23,7 @@ class TraineeController extends Controller
      */
     public function create()
     {
-        return view('muscle-up-app.trainee.add-trainee');
+        //
     }
 
     /**
@@ -35,26 +34,8 @@ class TraineeController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->email);
-        $trainee = new User();
-        $trainee->first_name=$request->first_name;
-        $trainee->last_name=$request->last_name;
-        $trainee->email = $request->email;
-        $trainee->password=$request->password;
-        $trainee->phone_no=$request->phone_no;
-        $trainee->address=$request->address;
-        $trainee->birth_date=$request->birth_date;
-        $trainee->save();
-
-
-        return redirect()->route('gym-panel',$trainee->id);
+        //
     }
-
-    public function medical()
-    {
-        return view('muscle-up-app.trainee.medical-history');
-    }
-
 
     /**
      * Display the specified resource.
