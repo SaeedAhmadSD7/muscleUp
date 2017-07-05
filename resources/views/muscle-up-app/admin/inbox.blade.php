@@ -592,7 +592,7 @@
                                     <a href="New%20folder/index-alt.html" title="Alternate dashboard"><span>Alternate dashboard</span></a>
                                 </li>
                                 <li>
-                                    <a href="New%20folder/view-profile.html" title="View profile"><span>View profile</span></a>
+                                    <a href="../trainee/view-profile.blade.php" title="View profile"><span>View profile</span></a>
                                 </li>
                                 <li>
                                     <a href="New%20folder/faq-section.html" title="FAQ section"><span>FAQ section</span></a>
