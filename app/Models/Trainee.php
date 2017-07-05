@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\TraineePackage;
 use Illuminate\Database\Eloquent\Model;
 
 class Trainee extends Model
 {
     function gym(){
-        return $this-> belongsToMany( Gym:: class);
+        return $this-> belongsTo( Gym:: class);
     }
 
     function employee(){
@@ -22,7 +21,7 @@ class Trainee extends Model
 
     function deals()
     {
-        return $this->hasMany(Deal:: class);
+        return $this->hasOne(Deal:: class);
     }
 
     function services()
@@ -59,8 +58,5 @@ class Trainee extends Model
     {
         return $this->hasOne(Measurement:: class);
     }
-    function TrainPackage()
-    {
-        return $this->hasOne(TrainPackage::class);
-    }
+
 }

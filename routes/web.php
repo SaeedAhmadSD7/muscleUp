@@ -117,12 +117,17 @@ Route::post('update-trpackage/{id}',['as'=>'update-trpackage','uses'=>'MuscleUpA
 Route::get('delete-trnpackage/{id}',['as'=>'delete.package','uses'=>'MuscleUpApp\TraineePackageController@destroy']);
 
 /*
-Trainee Registration
+Trainee
  */
 Route::get('trainee/profile',['as'=>'trainee-profile','uses'=>'MuscleUpApp\TraineeController@view_profile']);
 Route::get('trainee/add',['as'=>'trainee-add','uses'=>'MuscleUpApp\TraineeController@create']);
 Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\TraineeController@store']);
+
+/*
+ Trainee Medical History
+ */
 Route::get('trainee/medical',['as'=>'trainee-medical','uses'=>'MuscleUpApp\TraineeController@medical']);
+Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'MuscleUpApp\MedicalHistoryController@store']);
 
 
 /*
