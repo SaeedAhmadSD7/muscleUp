@@ -1,4 +1,4 @@
-v<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -660,9 +660,6 @@ v<!DOCTYPE html>
                             </div>
                         </div>
 
-                        <div class="dropdown" id="cloud-btn">
-                            <a class="tooltip-button sb-toggle-right" data-placement="bottom" href="#" title="Statistics Sidebar"><i class="glyph-icon icon-linecons-cloud"></i></a>
-                        </div>
                     </div>
                 </div>
                 <div id="page-title">

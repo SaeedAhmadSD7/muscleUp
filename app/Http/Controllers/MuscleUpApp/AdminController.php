@@ -12,5 +12,9 @@ class AdminController extends Controller
 
         return view('muscle-up-app.admin.index');
     }
+    public function inbox(){
+
+        return view('muscle-up-app.admin.inbox');
+    }
 }
 
