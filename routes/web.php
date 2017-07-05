@@ -126,4 +126,5 @@ Route::post('store-trainee', ['as' => 'store-trainee', 'uses' => 'MuscleUpApp\Tr
 /*
  Admin-panel
 */
-Route::get('/gym-panel',['as'=>'gym-panel','uses'=>'MuscleUpApp\AdminController@index']);
+Route::get('/Admin/Dashboard',['as'=>'Admin-Dashboard','uses'=>'MuscleUpApp\AdminController@index']);
+Route::get('/Admin/Inbox',['as'=>'Admin-Inbox','uses'=>'MuscleUpApp\AdminController@inbox']);
