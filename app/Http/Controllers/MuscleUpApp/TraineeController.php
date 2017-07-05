@@ -35,15 +35,19 @@ class TraineeController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->email);
-        $trainee = new User();
+        $user = new User();
+        $trainee = new Trainee();
+        $user->email = $request->email;
+        $password = str_random(8);
+        $user->passowrd = $password;
+
         $trainee->first_name=$request->first_name;
         $trainee->last_name=$request->last_name;
-        $trainee->email = $request->email;
-        $trainee->password=$request->password;
-        $trainee->phone_no=$request->phone_no;
-        $trainee->address=$request->address;
+        $trainee->dial_code = '+27';
+        $trainee->phone_number=$request->phone_number;
         $trainee->birth_date=$request->birth_date;
+        $trainee->gender =$request->gender;
+        $trainee->address=$request->address;
         $trainee->save();
 
 

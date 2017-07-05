@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\MuscleUpApp;
-
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use App\Models\MedicalHistory;
 
 class MedicalHistoryController extends Controller
 {
@@ -34,7 +35,13 @@ class MedicalHistoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//         $medical = new MedicalHistory();
+
+         MedicalHistory::create($request->all());
+
+        return redirect()->route('home-page');
+
+
     }
 
     /**

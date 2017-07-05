@@ -4,8 +4,6 @@
 
 @section('style-sheet')
     <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
-    <link href="{{url('/assets/plugins/select2/css/select2-bootstrap.css')}}" rel="stylesheet">
-
 
 @stop
 @section('content')
@@ -27,44 +25,37 @@
                             {{csrf_field()}}
                             <div class="fields clearfix">
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="text" name="f-name" value="" placeholder="First Name ...">
+                                    <input type="text" name="first_name" value="" placeholder="First Name ...">
                                 </div>
 
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="text" name="name" value="" placeholder="Last Name...">
+                                    <input type="text" name="last_name" value="" placeholder="Last Name...">
                                 </div>
 
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="password" name="password" value="" placeholder="Password...">
-                                </div>
-
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input class="password-repeat" type="password" name="repeat-password" value="" placeholder="Repeat Password...">
-                                </div>
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                     <input type="email" name="email" value="" placeholder="Email Address...">
                                 </div>
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input class="birth-date" type="text" data-field="date" data-format="yyyy-MM-dd" name="birth-date" value="" placeholder="Date of Birth..." readonly>
+                                    <input class="birth-date" type="text" data-field="date" data-format="yyyy-MM-dd" name="birth_date" value="" placeholder="Date of Birth..." readonly>
                                     <div class="btn-date"></div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 Gender ">
-                                    <div class="col-md-2 col sm-3 col-xs-3 sex-title">
-                                        <p class="title">Sex : </p>
+                                    <div class="col-md-3 col sm-4 col-xs-4 gender-title">
+                                        <p class="title">Gender : </p>
                                     </div>
-                                        <div class="col-md-10 col-sm-9 col-xs-9">
+                                        <div class="col-md-9 col-sm-8 col-xs-8">
                                             <div class="btn-group" data-toggle="buttons">
-                                                <label class="btn"><input type="radio" name='sex' checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Male</span></label>
-                                                <label class="btn"><input type="radio" name='sex'><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Female</span></label>
+                                                <label class="btn"><input type="radio" name='gender' checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Male</span></label>
+                                                <label class="btn"><input type="radio" name='gender'><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Female</span></label>
                                             </div>
                                         </div>
                                 </div>
 
-                                <div class="form-group col-md-1 col-sm-2 col-xs-2 dial_code-div">
-                                    <input class="dial_code" type="text" name="dial_code" value="" placeholder="+1..." readonly>
+                                <div class="form-group col-md-1 col-sm-2 col-xs-2 dial-code-div">
+                                    <input class="dial-code" type="text" name="dial_code" value="" placeholder="+1..." readonly>
                                 </div>
                                 <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
-                                    <input class="p-number" type="text" name="p-number" value="" placeholder="Phone Number...">
+                                    <input class="phone_number" type="text" name="phone_number" value="" placeholder="Phone Number...">
                                 </div>
                             </div>
 
@@ -81,7 +72,8 @@
         </section>
     </div>
     @stop
-@section('scripts')
-    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}"></script>
-    <script src="{{url('/assets/js/request-gym.js')}}"></script>
-    @stop
+
+@section('script')
+    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/t-reg.js')}}" type="text/javascript"></script>
+@stop
