@@ -15,7 +15,7 @@ class CreateTraineesTable extends Migration
     {
         Schema::create('trainees', function (Blueprint $table) {
             $table->increments('id');
-//            $table->integer('user_id')->index();
+            $table->integer('user_id')->nullable()->index();
 //            $table->integer('gym_id')->index();
             $table->string('first_name');
             $table->string('last_name');
@@ -24,6 +24,7 @@ class CreateTraineesTable extends Migration
             $table->string('birth_date');
             $table->enum('gender',['male','female'])->default('male');
             $table->string('address');
+            $table->string('profile_img')->default('default.jpg');
             $table->timestamps();
         });
     }

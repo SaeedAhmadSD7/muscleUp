@@ -58,5 +58,7 @@ class Trainee extends Model
     {
         return $this->hasOne(Measurement:: class);
     }
-
+    function user(){
+        return $this->belongsTo(user::class);
+    }
 }
