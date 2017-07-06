@@ -127,3 +127,7 @@ Route::post('store-trainee', ['as' => 'store-trainee', 'uses' => 'MuscleUpApp\Tr
  Admin-panel
 */
 Route::get('/gym-panel',['as'=>'gym-panel','uses'=>'MuscleUpApp\AdminController@index']);
+
+
+//WorkoutPlan
+Route::get('/create/workoutplan',['as'=>'create/workoutplan','uses'=>'MuscleUpApp\WorkoutPlanController@create']);

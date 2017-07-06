@@ -13,10 +13,11 @@ class CreateWorkoutPlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('Workout_Plan', function (Blueprint $table) {
-            $table->integer('wPlanId', true,true);
+        Schema::create('Workout_Plans', function (Blueprint $table) {
+            $table->increments('wPlanId');
             $table->integer('GymId');
             $table->string('wPlanType');
+            $table->timestamps();
         });
 
     }
