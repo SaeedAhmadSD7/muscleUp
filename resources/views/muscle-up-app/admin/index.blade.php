@@ -431,7 +431,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="mailbox-single.html" title="Single message"><span>Single message</span></a>
+                                    <a href="message-detail.blade.php" title="Single message"><span>Single message</span></a>
                                 </li>
                             </ul>
                         </div>

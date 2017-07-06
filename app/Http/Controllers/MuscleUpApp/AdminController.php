@@ -15,6 +15,12 @@ class AdminController extends Controller
     }
     public function inbox(){
         $Requests = GymRequest::all();
-        return view('muscle-up-app.admin.inbox')->with('Requests', $Requests);    }
+        return view('muscle-up-app.admin.inbox')->with('Requests', $Requests);
+    }
+
+    public function message_detail(){
+        $Requests = GymRequest::all();
+        return view('muscle-up-app.admin.message-detail');
+    }
 }
 

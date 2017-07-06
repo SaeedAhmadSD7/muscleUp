@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gym extends Model
 {
-    protected $fillable = [
-        'email', 'address'
-    ];
-
     function  user(){
         return $this->HasMany(User::class);
     }

@@ -1296,7 +1296,7 @@
 
 
                                 <li>
-                                    <a href="../admin/New%20folder/mailbox-single.html" title=
+                                    <a href="../admin/message-detail.blade.php" title=
                                     "Single message"><span>Single message</span></a>
                                 </li>
                             </ul>

@@ -21,7 +21,6 @@ class CountriesSeeder extends Seeder
                 'code'=> $country['code'],
                 'name'=>$country['name'],
                 'dial_code'=>$country['dial-code'],
-                'flag'=>$country['flag'],
             ));
         }
 

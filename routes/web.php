@@ -136,3 +136,4 @@ Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'MuscleUpApp\Me
 */
 Route::get('/Admin/Dashboard',['as'=>'Admin-Dashboard','uses'=>'MuscleUpApp\AdminController@index']);
 Route::get('/Admin/Inbox',['as'=>'Admin-Inbox','uses'=>'MuscleUpApp\AdminController@inbox']);
+Route::get('/Admin/Inbox/Detail',['as'=>'Admin-Inbox-Detail','uses'=>'MuscleUpApp\AdminController@message_detail']);

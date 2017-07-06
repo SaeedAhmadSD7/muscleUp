@@ -107,6 +107,7 @@
 </head>
 <body>
 <div id="sb-site">
+
     <div class="sb-slidebar bg-black sb-left sb-style-overlay">
         <div class="scrollable-content scrollable-slim-sidebar">
             <div class="pad10A">
@@ -236,6 +237,7 @@
             </div>
         </div>
     </div>
+
     <div id="page-wrapper">
         <div id="mobile-navigation">
             <button class="collapsed" data-target="#page-sidebar" data-toggle="collapse" id="nav-toggle"><span></span>
@@ -269,7 +271,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="mailbox-single.html" title="Single message"><span>Single message</span></a>
+                                    <a href="message-detail.blade.php" title="Single message"><span>Single message</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -816,6 +818,8 @@
             </div>
         </div>
     </div>
+
+
     <script src="{{url('/admin-assets/js-core/jquery-core.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/js-core/jquery-ui-core.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/js-core/jquery-ui-widget.js')}}" type="text/javascript"></script>

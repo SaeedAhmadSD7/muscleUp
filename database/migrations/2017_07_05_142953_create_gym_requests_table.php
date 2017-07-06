@@ -15,13 +15,16 @@ class CreateGymRequestsTable extends Migration
     {
         Schema::create('gym_requests', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email');
+            $table->string('name')->unique();
+            $table->string('email')->unique();
+            $table->text('address');
+            $table->Integer('num_branches')->unsigned();
             $table->string('country');
             $table->string('city');
-            $table->Integer('dial_code')->unsgined();
+            $table->string('dial_code',4);
             $table->Integer('phone_number')->unsigned();
-            $table->text('address');
+            $table->double('latitude')->default(0.0);
+            $table->double('longitude')->default(0.0);
             $table->timestamps();
         });
     }
