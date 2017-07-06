@@ -45,8 +45,8 @@
                                     </div>
                                         <div class="col-md-9 col-sm-8 col-xs-8">
                                             <div class="btn-group" data-toggle="buttons">
-                                                <label class="btn"><input type="radio" name='gender' checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Male</span></label>
-                                                <label class="btn"><input type="radio" name='gender'><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Female</span></label>
+                                                <label class="btn"><input type="radio" name='gender' value="male" checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Male</span></label>
+                                                <label class="btn"><input type="radio" name='gender' value="female"><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Female</span></label>
                                             </div>
                                         </div>
                                 </div>
