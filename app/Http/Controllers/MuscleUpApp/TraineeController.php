@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\MuscleUpApp;
-use App\Models\Trainee;
 use App\Models\User;
+use App\Models\Trainee;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -36,11 +36,14 @@ class TraineeController extends Controller
     public function store(Request $request)
     {
         $user = new User();
-        $trainee = new Trainee();
         $user->email = $request->email;
         $password = str_random(8);
-        $user->passowrd = $password;
+        $user->password = bcrypt($password);
+        $user['user-type'] = 'trainee';
+        $user->save();
+        dd($password);
 
+        $trainee = new Trainee();
         $trainee->first_name=$request->first_name;
         $trainee->last_name=$request->last_name;
         $trainee->dial_code = '+27';
@@ -51,7 +54,7 @@ class TraineeController extends Controller
         $trainee->save();
 
 
-        return redirect()->route('gym-panel',$trainee->id);
+        return redirect()->route('/');
     }
 
     public function medical()
