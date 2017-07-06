@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="reg-form">
-                        <form id="contact-form" role="form" method="POST" action="{{route('save-gym')}}">
+                        <form id="contact-form" role="form" method="POST" action="{{route('save-request')}}">
                             {{csrf_field()}}
                             <div class="fields clearfix">
 
@@ -38,7 +38,7 @@
                                     <select class="country_list" name="country">
                                         <option></option>
                                         @foreach($countries as $country)
-                                             <option value= {{$country['code']}} data-dialcode={{$country['dial-code']}}>{{$country['name']}}</option>
+                                             <option value= "{{$country['code']}}" data-dialcode="{{$country['dial_code']}}">{{$country['name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -46,10 +46,10 @@
                                     <input type="text" name="city" value="" placeholder="City...">
                                 </div>
                                 <div class="form-group col-md-1 col-sm-2 col-xs-2 dial-code-div">
-                                    <input class="dial-code" type="text" name="dial-code" value="" placeholder="+1..." readonly>
+                                    <input class="dial_code" type="text" name="dial_code" value="" placeholder="+1..." readonly>
                                 </div>
                                 <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
-                                    <input class="p-number" type="text" name="p-number" value="" placeholder="Phone Number...">
+                                    <input class="phone_number" type="text" name="phone_number" value="" placeholder="Phone Number...">
                                 </div>
                             </div>
 

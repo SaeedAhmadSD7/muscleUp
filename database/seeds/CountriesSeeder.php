@@ -20,7 +20,7 @@ class CountriesSeeder extends Seeder
             DB::table('countries')->insert(array(
                 'code'=> $country['code'],
                 'name'=>$country['name'],
-                'dial-code'=>$country['dial-code'],
+                'dial_code'=>$country['dial-code'],
                 'flag'=>$country['flag'],
             ));
         }

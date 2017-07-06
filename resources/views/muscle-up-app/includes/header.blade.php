@@ -24,7 +24,7 @@
                     <li><a href="deal">Deals</a></li>
                     <li><a href="{{url('events')}}">Events</a></li>
                     <li><a href="services.html">Services</a></li>
-                    <li><a href="{{route('request-gym')}}">Join Request</a></li>
+                    <li><a href="{{route('gym-request')}}">Join Request</a></li>
                     <li><a href="{{route('login')}}">Login</a></li>
                 </ul>
                 <div class="clearfix"></div>
