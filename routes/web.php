@@ -72,12 +72,11 @@ Route::resource('events','MuscleUpApp\EventController');
 
 
 /**
- * Register Gym
+ * Gym Request
  */
 
-
-Route::get('request/gym', ['uses'=>'MuscleUpApp\GymController@request', 'as'=>'request-gym']);
-Route::post('save-gym',['uses'=>'MuscleUpApp\GymController@store', 'as'=> 'save-gym']);
+Route::get('gym/request/join', ['uses'=>'MuscleUpApp\GymController@request', 'as'=>'gym-request']);
+Route::post('gym/request/save',['uses'=>'MuscleUpApp\GymController@request_save', 'as'=> 'save-request']);
 //Route::post('save-gym',['uses'=>'MuscleUpApp\GymController@save', 'as'=> 'save-gym']);
 /*
 login form
@@ -117,16 +116,24 @@ Route::post('update-trpackage/{id}',['as'=>'update-trpackage','uses'=>'MuscleUpA
 Route::get('delete-trnpackage/{id}',['as'=>'delete.package','uses'=>'MuscleUpApp\TraineePackageController@destroy']);
 
 /*
-Trainee Registration
+Trainee
  */
+Route::get('trainee/profile',['as'=>'trainee-profile','uses'=>'MuscleUpApp\TraineeController@view_profile']);
+Route::get('trainee/add',['as'=>'trainee-add','uses'=>'MuscleUpApp\TraineeController@create']);
+Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\TraineeController@store']);
 
-Route::get('register-trainee',['as'=>'register-trainee','uses'=>'MuscleUpApp\TraineeController@create']);
-Route::post('store-trainee', ['as' => 'store-trainee', 'uses' => 'MuscleUpApp\TraineeController@store']);
+/*
+ Trainee Medical History
+ */
+Route::get('trainee/medical',['as'=>'trainee-medical','uses'=>'MuscleUpApp\TraineeController@medical']);
+Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'MuscleUpApp\MedicalHistoryController@store']);
+
 
 /*
  Admin-panel
 */
-Route::get('/gym-panel',['as'=>'gym-panel','uses'=>'MuscleUpApp\AdminController@index']);
+Route::get('/Admin/Dashboard',['as'=>'Admin-Dashboard','uses'=>'MuscleUpApp\AdminController@index']);
+Route::get('/Admin/Inbox',['as'=>'Admin-Inbox','uses'=>'MuscleUpApp\AdminController@inbox']);
 
 
 //WorkoutPlan

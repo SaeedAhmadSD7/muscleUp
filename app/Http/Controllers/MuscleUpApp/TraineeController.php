@@ -8,6 +8,9 @@ use Illuminate\Routing\Controller;
 
 class TraineeController extends Controller
 {
+   public function view_profile(){
+    return view('muscle-up-app\trainee\view-profile');
+   }
 
     public function index()
     {
@@ -21,7 +24,7 @@ class TraineeController extends Controller
      */
     public function create()
     {
-        return view('muscle-up-app\trainee-registration\registration-form');
+        return view('muscle-up-app.trainee.add-trainee');
     }
 
     /**
@@ -32,20 +35,30 @@ class TraineeController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->email);
-        $trainee = new User();
+        $user = new User();
+        $trainee = new Trainee();
+        $user->email = $request->email;
+        $password = str_random(8);
+        $user->passowrd = $password;
+
         $trainee->first_name=$request->first_name;
         $trainee->last_name=$request->last_name;
-        $trainee->email = $request->email;
-        $trainee->password=$request->password;
-        $trainee->phone_no=$request->phone_no;
-        $trainee->address=$request->address;
+        $trainee->dial_code = '+27';
+        $trainee->phone_number=$request->phone_number;
         $trainee->birth_date=$request->birth_date;
+        $trainee->gender =$request->gender;
+        $trainee->address=$request->address;
         $trainee->save();
 
 
         return redirect()->route('gym-panel',$trainee->id);
     }
+
+    public function medical()
+    {
+        return view('muscle-up-app.trainee.medical-history');
+    }
+
 
     /**
      * Display the specified resource.
