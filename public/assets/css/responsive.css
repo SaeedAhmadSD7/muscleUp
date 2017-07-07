@@ -303,6 +303,10 @@
 		padding: 5px 7px!important;
 	}
 
+	.geo-location{
+        margin-top: 0;
+    }
+
 
 	/**
 	Login Form

@@ -26,7 +26,7 @@
                                 </div>
 
                                 <div class="form-group col-md-6 col-md-offset-3 col-sm-12 col-xs-12 text-field">
-                                    <input type="text" name="password" value="" placeholder="Password...">
+                                    <input type="password" name="password" value="" placeholder="Password...">
                                 </div>
 
                                 <div class="form-group col-md-6 col-md-offset-3 col-sm-12 col-xs-12 text-field">

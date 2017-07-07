@@ -82,6 +82,17 @@ input.error, select.error {
     border-color: #0c172a;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+
 /*End*/
 
 textarea {
@@ -2021,7 +2032,7 @@ label:hover input[type="radio"] ~ i.fa {
 }
 
 
-button[type="submit"], input[type="submit"] {
+button, input[type="submit"],input[type="button"] {
     position: relative;
     display: inline-block;
     line-height: 24px;
@@ -2060,7 +2071,7 @@ label.error {
 }
 
 /***
-Gym Registration
+Gym Request form
 ***/
 
 .gym-req .reg-form .btn-date-span {
@@ -2104,6 +2115,11 @@ Gym Registration
     height: 100%;
     z-index: 5;
     min-height: 250px;
+}
+
+.note{
+    font-size: 12px;
+    font-weight: 300;
 }
 
 .dial-code-div:before {
@@ -2161,6 +2177,11 @@ Gym Registration
 .number-div input {
     padding: 5px 7px !important;
 }
+
+.geo-location{
+    margin-left :20px;
+}
+
 /*End*/
 
 

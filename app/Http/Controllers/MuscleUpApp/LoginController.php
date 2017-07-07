@@ -25,8 +25,10 @@ class LoginController extends Controller
 
             $user = User::where('email',$request->email)->first();
 
+            dd($user['user-type']);
+
             if ($user['user-type'] == 'trainee') {
-                return redirect()->route('trainee');
+                return redirect()->route('trainee-dashboard');
             }
             if ($user['user-type'] == 'gym') {
                 dd('gym');

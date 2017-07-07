@@ -5,14 +5,40 @@ use App\Models\User;
 use App\Models\Trainee;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Auth;
+use Intervention\Image\Facades\Image;
 
 class TraineeController extends Controller
 {
    public function view_profile(){
-    return view('muscle-up-app\trainee\view-profile');
+//     $trainee = Trainee::find(Auth::user->id)->first();
+       $user = Auth::user();
+       $trainee = $user->trainee;
+    return view('muscle-up-app\trainee\view-profile', compact('trainee'));
    }
+    public function upload_profile(Request $request){
+       dd($request);
 
-    public function index()
+        // Handle the user upload of avatar
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/trainees/profile_imgs/' . $filename ) );
+
+            $user = Auth::user();
+
+            $trainee= $user->trainee;
+//            dd($trainee);
+
+            $trainee->profile_img = $filename;
+            $trainee->save();
+            }
+        }
+
+
+
+
+        public function index()
     {
 
     }
@@ -41,7 +67,7 @@ class TraineeController extends Controller
         $user->password = bcrypt($password);
         $user['user-type'] = 'trainee';
         $user->save();
-        dd($password);
+          dd($password);
 
         $trainee = new Trainee();
         $trainee->first_name=$request->first_name;
