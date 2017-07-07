@@ -117,6 +117,7 @@ Trainee
  */
 Route::get('/trainee/dashboard', ['as'=>'trainee-dashboard',function () {return ('Trainee Dashboard Comes Here.'); }]);
 
+
 Route::get('trainee/profile',['as'=>'trainee-profile','uses'=>'MuscleUpApp\TraineeController@view_profile']);
 Route::post('trainee/profile/image',['as'=>'trainee-image','uses'=>'MuscleUpApp\TraineeController@upload_profile']);
 
@@ -128,7 +129,7 @@ Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\Tr
  Trainee Medical History
  */
 Route::get('trainee/medical',['as'=>'trainee-medical','uses'=>'MuscleUpApp\TraineeController@medical']);
-Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'MuscleUpApp\MedicalHistoryController@store']);
+Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'MuscleUpApp\TraineeController@medial_history']);
 
 
 /*
