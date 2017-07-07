@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Auth;
 use Intervention\Image\Facades\Image;
+use App\Models\MedicalHistory;
 
 class TraineeController extends Controller
 {
@@ -17,7 +18,7 @@ class TraineeController extends Controller
     return view('muscle-up-app\trainee\view-profile', compact('trainee'));
    }
     public function upload_profile(Request $request){
-       dd($request);
+//       dd($request);
 
         // Handle the user upload of avatar
         if($request->hasFile('avatar')){
@@ -33,10 +34,19 @@ class TraineeController extends Controller
             $trainee->profile_img = $filename;
             $trainee->save();
             }
+        return redirect()->route('trainee-profile');
         }
 
 
 
+
+      public  function  medial_history(Request $request){
+
+          MedicalHistory::create($request->all());
+
+          return redirect()->route('home-page');
+
+      }
 
         public function index()
     {
@@ -67,7 +77,8 @@ class TraineeController extends Controller
         $user->password = bcrypt($password);
         $user['user-type'] = 'trainee';
         $user->save();
-          dd($password);
+
+
 
         $trainee = new Trainee();
         $trainee->first_name=$request->first_name;
@@ -79,6 +90,7 @@ class TraineeController extends Controller
         $trainee->address=$request->address;
         $trainee->save();
 
+        dd($password);
 
         return redirect()->route('/');
     }

@@ -15,7 +15,7 @@ class CreateTraineesTable extends Migration
     {
         Schema::create('trainees', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->nullable()->index();
+            $table->integer('user_id')->nullable();
 //            $table->integer('gym_id')->index();
             $table->string('first_name');
             $table->string('last_name');

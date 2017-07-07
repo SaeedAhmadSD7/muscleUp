@@ -206,6 +206,111 @@
                                     </div>
 
                                 </section>
+
+
+                                <section>
+                                    <div class="form-group col-md-12-offset col-sm-12 col-xs-12 Gender ">
+                                        <div class="col-md-5 col-md-offset-2 col sm-7 col-xs-7 sex-title">
+                                            <p class="title">Do you Egg Allergies ? </p>
+                                        </div>
+                                        <div class="col-md-4 col-sm-5 col-xs-5">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn"><input type="radio" name='egg_allergies' value="1"><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Yes</span></label>
+                                                <label class="btn"><input type="radio" name='egg_allergies' value="0" checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> No</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12-offset col-sm-12 col-xs-12 Gender ">
+                                        <div class="col-md-5 col-md-offset-2 col sm-7 col-xs-7 sex-title">
+                                            <p class="title">Do you have Fish Allergies ? </p>
+                                        </div>
+                                        <div class="col-md-4 col-sm-5 col-xs-5">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn"><input type="radio" name='fish_allergies' value="1"><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Yes</span></label>
+                                                <label class="btn"><input type="radio" name='fish_allergies' value="0" checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> No</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12-offset col-sm-12 col-xs-12 Gender ">
+                                        <div class="col-md-5 col-md-offset-2 col sm-7 col-xs-7 sex-title">
+                                            <p class="title">Do you have Peanut Allergies ? </p>
+                                        </div>
+                                        <div class="col-md-4 col-sm-5 col-xs-5">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn"><input type="radio" name='peanut_allergies' value="1"><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Yes</span></label>
+                                                <label class="btn"><input type="radio" name='peanut_allergies' value="0" checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> No</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12-offset col-sm-12 col-xs-12 Gender ">
+                                        <div class="col-md-5 col-md-offset-2 col sm-7 col-xs-7 sex-title">
+                                            <p class="title">Do you have Tree nut Allergies ? </p>
+                                        </div>
+                                        <div class="col-md-4 col-sm-5 col-xs-5">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn"><input type="radio" name='treenut_allergies' value="1"><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Yes</span></label>
+                                                <label class="btn"><input type="radio" name='treenut_allergies' value="0" checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> No</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12-offset col-sm-12 col-xs-12 Gender ">
+                                        <div class="col-md-5 col-md-offset-2 col sm-7 col-xs-7 sex-title">
+                                            <p class="title">Do you have Shellfish Allergies? </p>
+                                        </div>
+                                        <div class="col-md-4 col-sm-5 col-xs-5">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn"><input type="radio" name='shellfish_allergies' value="1"><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Yes</span></label>
+                                                <label class="btn"><input type="radio" name='shellfish_allergies' value="0" checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> No</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12-offset col-sm-12 col-xs-12 Gender ">
+                                        <div class="col-md-5 col-md-offset-2 col sm-7 col-xs-7 sex-title">
+                                            <p class="title">Do you have Wheat Allergies? </p>
+                                        </div>
+                                        <div class="col-md-4 col-sm-5 col-xs-5">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn"><input type="radio" name='wheat_allergies' value="1"><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Yes</span></label>
+                                                <label class="btn"><input type="radio" name='wheat_allergies' value="0" checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> No</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12-offset col-sm-12 col-xs-12 Gender ">
+                                        <div class="col-md-5 col-md-offset-2 col sm-7 col-xs-7 sex-title">
+                                            <p class="title">Do you have Soy Allergies? </p>
+                                        </div>
+                                        <div class="col-md-4 col-sm-5 col-xs-5">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn"><input type="radio" name='soy_allergies' value="1"><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Yes</span></label>
+                                                <label class="btn"><input type="radio" name='soy_allergies' value="0" checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> No</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12-offset col-sm-12 col-xs-12 Gender ">
+                                        <div class="col-md-5 col-md-offset-2 col sm-7 col-xs-7 sex-title">
+                                            <p class="title">Do you have Meat Allergies? </p>
+                                        </div>
+                                        <div class="col-md-4 col-sm-5 col-xs-5">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn"><input type="radio" name='meat_allergies' value="1"><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Yes</span></label>
+                                                <label class="btn"><input type="radio" name='meat_allergies' value="0" checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> No</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12-offset col-sm-12 col-xs-12 Gender ">
+                                        <div class="col-md-5 col-md-offset-2 col sm-7 col-xs-7 sex-title">
+                                            <p class="title">Do you have Seed Allergies? </p>
+                                        </div>
+                                        <div class="col-md-4 col-sm-5 col-xs-5">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn"><input type="radio" name='seed_allergies' value="1"><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Yes</span></label>
+                                                <label class="btn"><input type="radio" name='seed_allergies' value="0" checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> No</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </section>
+
                             </div>
 
 
