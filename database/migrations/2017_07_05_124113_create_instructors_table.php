@@ -15,7 +15,13 @@ class CreateInstructorsTable extends Migration
     {
         Schema::create('instructors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->integer('dial_code')->default('1')->unsigned();
+            $table->integer('phone_number')->unsigned();
+            $table->string('experience');
+            $table->string('birth_date');
+            $table->enum('gender',['male','female'])->default('male');
             $table->string('address');
             $table->timestamps();
         });
