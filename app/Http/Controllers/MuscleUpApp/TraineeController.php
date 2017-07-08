@@ -14,9 +14,10 @@ class TraineeController extends Controller
    public function view_profile(){
 //     $trainee = Trainee::find(Auth::user->id)->first();
        $user = Auth::user();
-//       dd($user);
        $trainee = $user->trainee;
-    return view('muscle-up-app\trainee\view-profile', compact('trainee'));
+//       $trainee_his = MedicalHistory::find($trainee->id);
+       return view('muscle-up-app.trainee.view-profile')->with('trainee',$trainee);
+
    }
     public function upload_profile(Request $request){
 //       dd($request);
@@ -33,6 +34,7 @@ class TraineeController extends Controller
 //            dd($trainee);
 
             $trainee->profile_img = $filename;
+
             $trainee->save();
             }
         return redirect()->route('trainee-profile');
@@ -41,12 +43,19 @@ class TraineeController extends Controller
 
 
 
-      public  function  medial_history(Request $request){
+      public  function  medial_history(Request $request) {
 
           MedicalHistory::create($request->all());
 
           return redirect()->route('home-page');
 
+      }
+
+
+      public  function view_medical_history(){
+
+
+        return view('muscle-up-app.trainee.view-medical-history');
       }
 
         public function index()

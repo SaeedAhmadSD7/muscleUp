@@ -130,6 +130,7 @@ Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\Tr
  */
 Route::get('trainee/medical',['as'=>'trainee-medical','uses'=>'MuscleUpApp\TraineeController@medical']);
 Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'MuscleUpApp\TraineeController@medial_history']);
+Route::get('trainee/view/medical',['as'=>'trainee-view-medical','uses'=>'MuscleUpApp\TraineeController@view_medical_history']);
 
 
 /*
