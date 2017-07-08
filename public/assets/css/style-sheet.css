@@ -1896,6 +1896,18 @@ Pricing Page
 Trainee Registration
 */
 
+.medical-form section{
+    display: none;
+}
+
+
+
+
+
+
+
+
+
 .t-reg-form {
     position: relative;
     float: right;

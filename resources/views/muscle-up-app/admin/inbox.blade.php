@@ -801,7 +801,7 @@
                             <table class="table table-hover text-center">
                                 <tbody>
                                 @foreach($Requests as $Request)
-                                    <tr>
+                                    <tr id="{{$Request->id}}">
                                         <td><input class="custom-checkbox" id="mail-checkbox-1" type="checkbox"></td>
                                         <td><i class="glyph-icon icon-star"></i></td>
                                         <td class="email-title">{{$Request->name}}</td>
@@ -863,6 +863,7 @@
     <script src="{{url('/admin-assets/widgets/overlay/overlay.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/js-init/widgets-init.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/themes/admin/layout.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/admin-inbox.js')}}" type="text/javascript"></script>
 </div>
 </body>
 </html>

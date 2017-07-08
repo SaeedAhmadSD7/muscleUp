@@ -1,11 +1,11 @@
 $(document).ready(function () {
 
+    var geocoder = new google.maps.Geocoder;
+    var deferred = $.Deferred();
     var latitude;
     var longitude;
-    var geocoder = new google.maps.Geocoder;
     var country;
     var city;
-    var Zip_Code;
 
 
     function formatState(country) {
@@ -16,21 +16,6 @@ $(document).ready(function () {
         return $state;
     }
 
-    (function () {
-        $.ajax({
-            url: './Public/assets/packages/countries/countries.json',
-            method: 'GET',
-            success: function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    // if ( data.name === ){
-                    //
-                    // }
-                }
-            }
-        });
-    }());
-
-
     $('.country_list').select2({
         placeholder: "Country...",
         theme: "bootstrap",
@@ -39,7 +24,7 @@ $(document).ready(function () {
     });
 
     $('.country_list').on('change', function () {
-        var dial_code = $(this).find('option:selected').attr('data-dialcode');
+        var dial_code = $(this).find('option:selected').attr('data_dialcode');
         $('.dial_code').val(dial_code);
     });
 
@@ -47,17 +32,31 @@ $(document).ready(function () {
     $('.geo-location').on('click', function () {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition, showError);
-
         } else {
             alert('Unable to get your position.\nPlease try again.');
         }
     });
+
     function showPosition(position) {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
         $('.latitude').val(latitude);
         $('.longitude').val(longitude);
-        geocodeLatLng(geocoder);
+
+        $.when(geocodeLatLng(geocoder)).then(function () {
+            $.ajax({
+                url: '/assets/packages/countries/countries.json',
+                method: 'GET',
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        if ( data[i].name === country ){
+                            $('.dial_code').val(data[i].dial_code);
+                        }
+                    }
+                }
+            });
+        });
+
     }
 
     function showError(error) {
@@ -82,22 +81,23 @@ $(document).ready(function () {
         var latlng = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
         geocoder.geocode({'location': latlng}, function (results, status) {
             if (status === 'OK') {
-                if (results[1]) {
+                if (results[0]) {
                     for (var ac = 0; ac < results[0].address_components.length; ac++) {
                         var component = results[0].address_components[ac];
                         switch(component.types[0]) {
                             case 'locality':
-                                country = component.long_name;
-                                break;
-                            case 'administrative_area_level_1':
-                                Zip_Code = component.short_name;
+                                city = component.long_name;
                                 break;
                             case 'country':
-                                city = component.long_name;
+                                country = component.long_name;
                                 break;
                         }
                     }
-                    console.log(country,Zip_Code,city);
+                    deferred.resolve();
+                    $('.city').val(city);
+                    $('.address').val(results[0].formatted_address);
+                    $('.country_list').val(country).trigger('change');
+
                 } else {
                     alert('Unable get your current address.\nPlease try again.');
                 }
@@ -105,5 +105,7 @@ $(document).ready(function () {
                 alert('Address lookup failed due to : ' + status);
             }
         });
+        return deferred.promise();
+
     }
 });

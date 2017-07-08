@@ -809,19 +809,19 @@
 
                             <div class="pad15A clearfix mrg10B">
                                 <div class="float-left">
-                                    <b>John Doe</b> (john.doe@example.com) <i>to</i> <b>me</b>
+                                    <b>{{$Request->name}}</b> ({{$Request->email}}) <i>to</i> <b>me</b>
                                 </div>
 
 
                                 <div class="float-right opacity-80">
-                                    <i class="glyph-icon icon-clock-o mrg5R"></i> 17:55, 15.10.2014
+                                    <i class="glyph-icon icon-clock-o mrg5R"></i> {{$Request->updated_at}}
                                 </div>
                             </div>
 
 
                             <div class="mail-toolbar clearfix">
                                 <div class="float-left">
-                                    <h4 class="font-primary">This is a demo email title</h4>
+                                    <h4 class="font-primary">Request By {{$Request->name}} For Joining MuscleUp</h4>
                                 </div>
 
 

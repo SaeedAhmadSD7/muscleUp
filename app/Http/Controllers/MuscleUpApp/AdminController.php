@@ -18,9 +18,9 @@ class AdminController extends Controller
         return view('muscle-up-app.admin.inbox')->with('Requests', $Requests);
     }
 
-    public function message_detail(){
-        $Requests = GymRequest::all();
-        return view('muscle-up-app.admin.message-detail');
+    public function message_detail($id){
+        $Request= GymRequest::find($id);
+        return view('muscle-up-app.admin.message-detail')->with('Request',$Request);
     }
 }
 

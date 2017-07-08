@@ -131,12 +131,13 @@ Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\Tr
 Route::get('trainee/medical',['as'=>'trainee-medical','uses'=>'MuscleUpApp\TraineeController@medical']);
 Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'MuscleUpApp\TraineeController@medial_history']);
 
+
 /*
  Admin-panel
 */
 Route::get('/Admin/Dashboard',['as'=>'Admin-Dashboard','uses'=>'MuscleUpApp\AdminController@index']);
 Route::get('/Admin/Inbox',['as'=>'Admin-Inbox','uses'=>'MuscleUpApp\AdminController@inbox']);
-Route::get('/Admin/Inbox/Detail',['as'=>'Admin-Inbox-Detail','uses'=>'MuscleUpApp\AdminController@message_detail']);
+Route::get('/Admin/Inbox/Message/Detail/{id}',['as'=>'Admin-Message-Detail/{id}','uses'=>'MuscleUpApp\AdminController@message_detail']);
 
 
 //WorkoutPlan
