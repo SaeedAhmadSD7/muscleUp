@@ -14,6 +14,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CountriesSeeder::class);
         $this->command->info('CountriesSeeded!');
 
+        $this->call(WoutSeeder::class);
+
+
 
     }
 }

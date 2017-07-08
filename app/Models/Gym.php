@@ -35,6 +35,9 @@ class Gym extends Model
 
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     function feeInvoice(){
         return $this-> hasMany(FeeInvoice :: class);
 
@@ -48,5 +51,9 @@ class Gym extends Model
     function services(){
         return $this-> hasMany(Service :: class);
 
+    }
+
+    function instructor(){
+        return $this->hasMany(Instructor::class);
     }
 }
