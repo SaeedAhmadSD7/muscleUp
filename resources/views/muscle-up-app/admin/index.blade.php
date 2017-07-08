@@ -423,7 +423,7 @@
                         <div class="sidebar-submenu">
                             <ul>
                                 <li>
-                                    <a href="inbox.blade.php" title="Inbox"><span>Inbox</span></a>
+                                    <a href="{{route('Admin-Inbox')}}" title="Inbox"><span>Inbox</span></a>
                                 </li>
 
                                 <li>

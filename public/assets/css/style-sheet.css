@@ -2198,6 +2198,14 @@ Gym Request form
 
 
 /***
+Gym Request View
+ */
+
+.gym_request th{
+    font-weight: 600!important;
+}
+
+/***
 Shortcut Classes
  */
 .center {

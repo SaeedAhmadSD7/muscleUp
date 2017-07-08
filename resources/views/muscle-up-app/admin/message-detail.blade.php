@@ -4,6 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 
     <title>Mailbox single message</title>
@@ -832,33 +833,56 @@
 
 
                             <div class="email-body">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                <div class="example-box-wrapper">
+                                    <table border="0" cellpadding="0" cellspacing="0" class="table table-striped table-bordered gym_request" id="datatable-example">
+                                        <tr class="name">
+                                            <th>Gym Name</th>
+                                            <td>{{$Request->name}}</td>
+                                        </tr>
 
+                                        <tbody>
+                                        <tr class="email">
+                                            <th>Email Address</th>
+                                            <td>{{$Request->email}}</td>
+                                        </tr>
 
-                                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                                        <tr class="country">
+                                            <th>Country</th>
+                                            <td>{{$Request->country}}</td>
+                                        </tr>
 
+                                        <tr class="city">
+                                            <th>City</th>
+                                            <td>{{$Request->city}}</td>
+                                        </tr>
 
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+                                        <tr class="branches">
+                                            <th>Number of Branches</th>
+                                            <td class="center">{{$Request->num_branches}}</td>
+                                        </tr>
 
+                                        <tr class="contact">
+                                            <th>Contact Number</th>
+                                            <td>{{$Request->dial_code}}{{$Request->phone_number}}</td>
+                                        </tr>
 
-                                <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                                        <tr class="co-ordinates">
+                                            <th>Geological Co-ordinates</th>
+                                            <td>{{$Request->latitude}},{{$Request->longitude}}</td>
+                                        </tr>
 
-
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-
-
-                                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-
-
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-
-
-                                <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi</p>
+                                        <tr class="address">
+                                            <th>Address</th>
+                                            <td>{{$Request->address}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
 
                             <div class="button-pane">
-                                <a class="btn btn-blue-alt" href="#" title="Reply"><i class="glyph-icon icon-mail-reply"></i> Reply</a> <a class="btn btn-default" href="#" title="Reply">Forward <i class="glyph-icon icon-mail-forward"></i></a>
+                                <a class="btn btn-blue-alt accept_request" href="{{route('Admin-Message-Accept',$Request)}}" title="Accept Request"><i class="glyph-icon icon-mail-reply"></i> Accept Request</a> <a class="btn btn-default" href="#" title="Reply">Forward <i class="glyph-icon icon-mail-forward"></i></a>
                             </div>
                         </div>
                     </div>
@@ -888,6 +912,7 @@
     <script src="/admin-assets/widgets/overlay/overlay.js" type="text/javascript"></script>
     <script src="/admin-assets/js-init/widgets-init.js" type="text/javascript"></script>
     <script src="/admin-assets/themes/admin/layout.js" type="text/javascript"></script>
+    <script src="/assets/js/message_detail.js" type="text/javascript"></script>
 </div>
 </body>
 </html>

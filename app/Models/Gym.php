@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Gym extends Model
-{
+class Gym extends Model {
+    protected $table= 'gym';
+    protected $primaryKey = 'id';
+    protected $fillable = ['user_id','name','email','dial_code','phone_number','country','city','address'];
     function  user(){
-        return $this->HasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
     function branches(){
