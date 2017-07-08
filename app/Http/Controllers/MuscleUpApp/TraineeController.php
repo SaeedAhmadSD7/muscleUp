@@ -5,7 +5,7 @@ use App\Models\User;
 use App\Models\Trainee;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use App\Models\MedicalHistory;
 
@@ -14,6 +14,7 @@ class TraineeController extends Controller
    public function view_profile(){
 //     $trainee = Trainee::find(Auth::user->id)->first();
        $user = Auth::user();
+//       dd($user);
        $trainee = $user->trainee;
     return view('muscle-up-app\trainee\view-profile', compact('trainee'));
    }

@@ -1,6 +1,6 @@
 @extends('muscle-up-app.layouts.main')
 
-@section('title','Gym Request')
+@section('title',' Add Trainee ')
 
 @section('style-sheet')
     <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
