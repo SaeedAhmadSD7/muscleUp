@@ -1323,7 +1323,7 @@
 
 
                                 <li>
-                                    <a href="../admin/New%20folder/checklist.html" title=
+                                    <a href="view-medical-history.blade.php" title=
                                     "Checklist"><span>Checklist</span></a>
                                 </li>
                             </ul>

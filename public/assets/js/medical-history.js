@@ -1,4 +1,4 @@
-$(document).ready(function () {
+        $(document).ready(function () {
     console.log(5);
     $('.fields section:first-child').fadeIn('slow');
 
