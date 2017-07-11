@@ -19,7 +19,6 @@
                     <div class="t-reg-top">
                         <h2><span class="space"></span>Gym Request Form</h2>
                         <h3><span class="space"></span> Please fill in all the information and click Submit Request</h3>
-                        <p class="note"><span class="space"></span>Please correct your location if inaccurate.</p>
                     </div>
 
                     <div class="reg-form">
@@ -37,13 +36,7 @@
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                     <input class="num_branches" type="number" name="num_branches" value="" placeholder="Number of Branches...">
                                 </div>
-                                <div class="form-group col-md-6 col-md-offset-4 col-sm-12 col-xs-12">
-                                    <button class="geo-location" type="button"><span class="fa fa-angle-up"></span>Detect My Location</button>
-                                </div>
 
-                                <div class="form-group col-md-12 col-sm-12 col-xs-12 text-field">
-                                    <input type="text" class="address" name="address" placeholder="Address" maxlength="250">
-                                </div>
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                     <select class="country_list" name="country">
                                         <option></option>
@@ -61,13 +54,11 @@
                                 <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
                                     <input class="phone_number" type="text" name="phone_number" value="" placeholder="Phone Number...">
                                 </div>
-                                <input class="latitude" name="latitude" type="hidden" >
-                                <input class="longitude" name="longitude" type="hidden">
+                            </div>
+                            <div class="address-field">
+                                <textarea name="address" placeholder="Address" maxlength="250"></textarea>
                             </div>
 
-                            {{--<div class="address-field">--}}
-                                {{--<textarea class="address" name="address" placeholder="Address" maxlength="250"></textarea>--}}
-                            {{--</div>--}}
 
                             <div class="text-right col-md-12"><button type="submit"><span class="fa fa-angle-right"></span> Submit Request</button></div>
                         </form>
@@ -80,7 +71,6 @@
     @stop
 
 @section('script')
-    <script async defer src ="{{url('https://maps.googleapis.com/maps/api/js?key=AIzaSyCSqyKO68gVk7RCkuYKRJhM8ayeT_MznpI')}}"></script>
     <script src="{{url('/assets/plugins/select2/js/select2.full.js')}}"></script>
     <script src="{{url('/assets/js/request-gym.js')}}"></script>
 @stop

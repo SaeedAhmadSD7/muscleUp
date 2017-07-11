@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use App\Models\GymRequest;
 use App\Models\Gym;
 use App\Models\User;
+use App\Mail\AddGym;
 
 class AdminController extends Controller
 {
@@ -34,6 +35,8 @@ class AdminController extends Controller
         $user->password = bcrypt($password);
         $user['user-type'] = 'gym';
         $user->save();
+
+        \Mail::to($user)->send(new AddGym($user,$password));
 
         $gym = new Gym($Request_Accept);
         $gym->user_id = $user->id;
