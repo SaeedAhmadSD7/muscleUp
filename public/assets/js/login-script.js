@@ -58,10 +58,10 @@ $(document).ready(function () {
                 error.insertAfter( element );
             }
         },
-        highlight: function ( element, errorClass, validClass ) {
+        highlight: function ( element) {
             $( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass('text-field').children().addClass('error');
         },
-        unhighlight: function (element, errorClass, validClass) {
+        unhighlight: function (element) {
             $( element ).parents( ".form-group" ).addClass( 'text-field' ).removeClass( "has-error" ).children().removeClass('error');
         }
     });
