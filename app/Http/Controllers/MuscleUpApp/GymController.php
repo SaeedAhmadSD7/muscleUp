@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
+use App\Http\Requests\RequestGymRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -16,7 +17,7 @@ class GymController extends Controller
         return view('muscle-up-app.gym.request-form')->with('countries', $countries);
     }
 
-    public function request_save(Request $request)
+    public function request_save(RequestGymRequest $request)
     {
 
         $gym_request = new GymRequest($request->all());
