@@ -54,14 +54,14 @@
                                 <div class="form-group col-md-1 col-sm-2 col-xs-2 dial-code-div">
                                     <input class="dial-code" type="text" name="dial_code" value="" placeholder="+1..." readonly>
                                 </div>
-                                <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
+                                <div class="form-group col-md-5 col-sm-10 col-xs-10 text-field">
                                     <input class="phone_number" type="text" name="phone_number" value="" placeholder="Phone Number..." maxlength="15">
+                                </div>
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12 text-field">
+                                    <input name="address" placeholder="Address..." maxlength="250">
                                 </div>
                             </div>
 
-                            <div class="address-field">
-                                <textarea name="address" placeholder="Address" maxlength="250"></textarea>
-                            </div>
 
                             <div class="text-right col-md-12"><button type="submit"><span class="fa fa-angle-right"></span> Add Trainee</button></div>
                         </form>
