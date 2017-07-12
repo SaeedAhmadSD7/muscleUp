@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Session;
 use App\Models\MedicalHistory;
 
 class TraineeController extends Controller
@@ -47,16 +48,34 @@ class TraineeController extends Controller
 
           MedicalHistory::create($request->all());
 
-          return redirect()->route('home-page');
+          Session::flash('success','Your profile was successfully updated');
+
+          return redirect()->route('trainee-profile');
 
       }
 
 
-      public  function view_medical_history(){
+      public  function view_medical_history($id){
+
+        $medical_history = MedicalHistory::find($id);
 
 
-        return view('muscle-up-app.trainee.view-medical-history');
+        return view('muscle-up-app.trainee.view-medical-history')->with('med_his',$medical_history);
       }
+
+
+      public function inbox(){
+          $trainee = Trainee ::all();
+          return view('muscle-up-app.trainee.trainee-list')->with('trainee', $trainee);
+      }
+
+      public function trainee_detail($id){
+          $trainee= Trainee::find($id);
+
+          return view('muscle-up-app.trainee.trainee-list-detail')->with('trainee',$trainee);
+
+      }
+
 
         public function index()
     {
@@ -153,6 +172,9 @@ class TraineeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $trainee = Trainee::find($id);
+        $trainee->delete();
+
+        return redirect()->route('trainee-list');
     }
 }

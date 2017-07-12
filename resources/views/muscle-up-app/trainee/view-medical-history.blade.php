@@ -135,8 +135,11 @@
     </script>
 </head>
 
+
+
+
 <body>
-<div id="sb-site">
+   <div id="sb-site">
     <div class="sb-slidebar bg-black sb-left sb-style-overlay">
         <div class="scrollable-content scrollable-slim-sidebar">
             <div class="pad10A">
@@ -557,10 +560,7 @@
     </div>
 
 
-    <div id="loading">
-        <div class="svg-icon-loader"><img alt="" src="https://agileui.com/demo/delight/assets/images/svg-loaders/bars.svg" width="40">
-        </div>
-    </div>
+
 
 
     <div id="page-wrapper">
@@ -568,6 +568,7 @@
             <button class="collapsed" data-target="#page-sidebar" data-toggle="collapse" id="nav-toggle"><span></span></button>
         </div>
 
+        {{$med_his->asthma}}
 
         <div id="page-sidebar">
             <div class="logo-bg" id="header-logo">
@@ -1454,53 +1455,33 @@
                 </script>
 
                 <div id="page-title">
-                    <h2>Checklist</h2>
-
-
-                    <p>Create checklist components for your web applications.</p>
+                    <h2>Medical history</h2>
+                    {{--<p>Create checklist components for your web applications.</p>--}}
                 </div>
 
 
                 <div class="panel">
                     <div class="panel-body">
-                        <h3 class="title-hero">Basic</h3>
+                        <h3 class="title-hero">Medical History detail: </h3>
 
 
                         <div class="example-box-wrapper">
                             <ul class="todo-box">
                                 <li class="border-red">
-                                    <input id="todo-1" name="todo-1" type="checkbox"><label for="todo-1">This is an example task that i need to finish</label><span class="bs-label bg-red" title="">Overdue</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
+                                    <label for="todo-1">Do you have Asthma </label>
+                                    @if ($med_his->asthma == '0')<a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->asthma =='1')<a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">This is an example task that i need to finish</label>
+                                    @if ($med_his->diabetes == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->diabetes == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
                                 </li>
 
 
-                                <li class="border-orange">
-                                    <input id="todo-2" name="todo-2" type="checkbox"><label for="todo-2">Update server to a newer version</label><span class="bs-label bg-green" title="">2 Weeks</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
 
 
-                                <li class="border-blue">
-                                    <input id="todo-3" name="todo-3" type="checkbox"><label for="todo-3">Add more awesome template features</label><span class="bs-label bg-blue" title="">Tomorrow</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
 
-
-                                <li class="border-purple">
-                                    <input id="todo-4" name="todo-4" type="checkbox"><label for="todo-4">Never forget to buy milk</label><span class="bs-label bg-black" title="">Today</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
-
-
-                                <li class="border-azure">
-                                    <input id="todo-5" name="todo-5" type="checkbox"><label for="todo-5">Respond to all helpdesk questions</label><span class="bs-label bg-purple" title="">Label 2</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
-
-
-                                <li class="border-green">
-                                    <input id="todo-6" name="todo-6" type="checkbox"><label for="todo-6">Fix bugs for future releases</label><span class="bs-label bg-azure" title="">Label 2</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
-
-
-                                <li class="border-blue-alt">
-                                    <input id="todo-7" name="todo-7" type="checkbox"><label for="todo-7">Clean up the system directory</label><span class="bs-label bg-blue-alt" title="">Label 2</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -1589,6 +1570,13 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
 
 
 

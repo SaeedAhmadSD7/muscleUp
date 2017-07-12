@@ -116,21 +116,23 @@ Route::get('delete-trnpackage/{id}',['as'=>'delete.package','uses'=>'MuscleUpApp
 Trainee
  */
 Route::get('/trainee/dashboard', ['as'=>'trainee-dashboard',function () {return ('Trainee Dashboard Comes Here.'); }]);
+Route::get('trainee/add',['as'=>'trainee-add','uses'=>'MuscleUpApp\TraineeController@create']);
+Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\TraineeController@store']);
 
-
+Route::get('/trainee/list',['as'=>'trainee-list','uses'=>'MuscleUpApp\TraineeController@inbox']);
+Route::get('/trainee/list/detail/{id}',['as'=>'trainee-list-detail','uses'=>'MuscleUpApp\TraineeController@trainee_detail']);
+Route::get('/trainee/list/delete/{id}',['as'=>'trainee-list-delete','uses'=>'MuscleUpApp\TraineeController@destroy']);
 Route::get('trainee/profile',['as'=>'trainee-profile','uses'=>'MuscleUpApp\TraineeController@view_profile']);
 Route::post('trainee/profile/image',['as'=>'trainee-image','uses'=>'MuscleUpApp\TraineeController@upload_profile']);
 
 
-Route::get('trainee/add',['as'=>'trainee-add','uses'=>'MuscleUpApp\TraineeController@create']);
-Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\TraineeController@store']);
 
 /*
  Trainee Medical History
  */
 Route::get('trainee/medical',['as'=>'trainee-medical','uses'=>'MuscleUpApp\TraineeController@medical']);
 Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'MuscleUpApp\TraineeController@medial_history']);
-Route::get('trainee/view/medical',['as'=>'trainee-view-medical','uses'=>'MuscleUpApp\TraineeController@view_medical_history']);
+Route::get('trainee/view/medical/{id}',['as'=>'trainee-view-medical','uses'=>'MuscleUpApp\TraineeController@view_medical_history']);
 
 
 /*
@@ -148,7 +150,6 @@ Route::get('/create/workoutplan',['as'=>'create/workoutplan','uses'=>'MuscleUpAp
 
 
 //Instructor
-Route::get('instructor/add',['as'=>'instructor-add','uses'=>'MuscleUpApp\InstructorController@add']);
+Route::get('instructor/add',['as'=>'instructor-add','uses'=>'MuscleUpApp\InstrctorController@add']);
 Route::post('instructor/store',['as'=>'instructor-store','uses'=>'MuscleUpApp\InstructorController@store']);
-Route::get('/trainee/list',['as','trainee-list','uses'=>'MuscleUpApp\TraineeListController@traineelist']);
-Route::get('show/trainee/list/{id}',['as'=>'show-trainee-list','uses'=>'MuscleUpApp\TraineeListController@show']);
+Route::get('show/trainee/list/{id}',['as'=>'show-trainee-list','uses'=>'MuscleUpuApp\TraineeListController@show']);

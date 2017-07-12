@@ -19,6 +19,9 @@
                  minlength: 7,
                  maxlenght:15,
              },
+             dial_code: {
+                 required: true,
+             },
              address: {
                  required: true,
                  maxlenght:250,
@@ -32,7 +35,8 @@
              email: "Please enter a valid email address",
              birth_date:"please select your date of birth",
              phone_number:"please enter valid number ",
-             address:"please enter you address"
+             dial_code:"Required",
+             address:"please enter your address"
              //     agree: "Please accept our policy"
          },
          errorElement: "em",
@@ -53,6 +57,7 @@
              $( element ).parents( ".form-group" ).addClass( 'text-field' ).removeClass( "has-error" ).children().removeClass('error');
          }
      });
+
 
  });
 
