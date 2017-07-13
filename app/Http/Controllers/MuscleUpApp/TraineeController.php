@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\MuscleUpApp;
 use App\Models\User;
 use App\Models\Trainee;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 use App\Models\MedicalHistory;
+use App\Mail\AddTraineeRequest;
+use Illuminate\Support\Facades\Mail;
 
 class TraineeController extends Controller
 {
@@ -119,7 +121,9 @@ class TraineeController extends Controller
         $trainee->address=$request->address;
         $trainee->save();
 
-        dd($password);
+        Mail::to($user->email)->send(new AddTraineeRequest($user->email,$password));
+        Session::flash('success','Congratulations You have successfully registered. Your credentials have been mailed to you.');
+
 
         return redirect()->route('/');
     }

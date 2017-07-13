@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
+<link>
 
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -64,7 +64,8 @@
     <link href="/admin-assets/widgets/dropzone/dropzone.css" rel="stylesheet" type="text/css">
     <link href="/admin-assets/widgets/file-input/fileinput.css" rel="stylesheet" type="text/css">
     <link href="/admin-assets/widgets/input-switch/inputswitch.css" rel="stylesheet" type="text/css">
-    <link href="/admin-assets/widgets/input-switch/inputswitch-alt.css" rel="stylesheet" type="text/css">
+    <link href="/assets/plugins/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="/admin-assets/widgets/ionrangeslider/ionrangeslider.css" rel="stylesheet" type="text/css">
     <link href="/admin-assets/widgets/jcrop/jcrop.css" rel="stylesheet" type="text/css">
     <link href="/admin-assets/widgets/jgrowl-notifications/jgrowl.css" rel="stylesheet" type="text/css">
@@ -114,6 +115,8 @@
     <script src="/admin-assets/js-core/transition.js" type="text/javascript"></script>
     <script src="/admin-assets/js-core/modernizr.js" type="text/javascript"></script>
     <script src="/admin-assets/js-core/jquery-cookie.js" type="text/javascript"></script>
+<script src="/assets/plugins/bootstrap-3.3.7/js/bootstrap.js" type="text/javascript"></script>
+
 
 </head>
 
@@ -827,8 +830,15 @@
 
 
                                 <div class="float-right">
-                                    <a class="btn btn-primary" href="#" title="Reply">Reply <i class="glyph-icon icon-mail-reply"></i></a> <a class="btn btn-default" href="#" title="Print"><i class="glyph-icon icon-print"></i></a> <a class="btn btn-danger mrg10L" href="{{route('trainee-list-delete',$trainee->id)}}" title="Delete"><i class="glyph-icon icon-trash-o"></i></a>
+                                    {{--<a class="btn btn-primary" href="#" title="Reply">Reply <i class="glyph-icon icon-mail-reply"></i></a> <a class="btn btn-default" href="#" title="Print"><i class="glyph-icon icon-print"></i></a>--}}
+                                    {{--<a class="btn btn-danger mrg10L" href="{{route('trainee-list-delete',$trainee->id)}}" title="Delete"><i class="glyph-icon icon-trash-o"></i></a>--}}
+                                    {!! Form::open(['route' => ['trainee-list-delete',$trainee->id], 'method' => 'DELETE']) !!}
+                                    <button class="btn btn-danger mrg10L" type="button" data-modal="confirmDelete" data-toggle="modal" data-target="#confirmDelete" data-title="Delete trainee" data-message="Are you sure you want to Delete : {{$trainee->first_name}}">
+                                        DELETE</button>
+                                    {!! Form::close() !!}
+
                                 </div>
+                                @include('muscle-up-app.trainee.include.delete-modal')
                             </div>
 
 
@@ -837,7 +847,7 @@
                                     <table border="0" cellpadding="0" cellspacing="0" class="table table-striped table-bordered gym_request" id="datatable-example">
                                         <tr class="name">
                                             <th>Trainee Name</th>
-                                            <td>{{$trainee->first_name}}</td>
+                                            <td>{{$trainee->first_name}} {{$trainee->last_name }}</td>
                                         </tr>
 
                                         <tbody>
@@ -902,6 +912,7 @@
     <script src="/admin-assets/js-init/widgets-init.js" type="text/javascript"></script>
     <script src="/admin-assets/themes/admin/layout.js" type="text/javascript"></script>
     <script src="/assets/js/message_detail.js" type="text/javascript"></script>
+    <script src="/assets/js/delete-trainee.js" type="text/javascript"></script>
 </div>
 </body>
 </html>
