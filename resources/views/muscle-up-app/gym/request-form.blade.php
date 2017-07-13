@@ -84,7 +84,6 @@
 
 @section('script')
     <script src="{{url('/assets/plugins/select2/js/select2.full.js')}}"></script>
-    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}"
-            type="text/javascript"></script>
+    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/js/request-gym.js')}}"></script>
 @stop

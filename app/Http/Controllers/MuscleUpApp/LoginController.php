@@ -22,21 +22,21 @@ class LoginController extends Controller
 
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-
+            $request->session()->regenerate();
             $user = User::where('email',$request->email)->first();
 
             if ($user['user-type'] == 'trainee') {
                 return redirect()->route('trainee-dashboard');
             }
-//            else if ($user['user-type'] == 'gym') {
-//                dd('gym');
-//            }
-//            else if ($user['user-type'] == 'admin') {
-//                return redirect()->route('admin');
-//            }
-//            else if ($user['user-type'] == 'instructor') {
-//                return redirect()->route('instructor');
-//            }
+            else if ($user['user-type'] == 'gym') {
+                dd('gym');
+            }
+            else if ($user['user-type'] == 'admin') {
+                return redirect()->route('admin-dashboard');
+            }
+            else if ($user['user-type'] == 'instructor') {
+                return redirect()->route('instructor');
+            }
         }
         else return dd('no');
     }

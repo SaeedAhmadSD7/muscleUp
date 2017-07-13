@@ -2234,6 +2234,43 @@ Gym Request View
 }
 
 
+/***
+Gym Post Adding
+*/
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    line-height: 24px;
+    font-size: 14px;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: 8px 30px;
+    color: white;
+    background-color: #18263a;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: white;
+    color: #0c172a;
+}
+.inputfile + label {
+    cursor: pointer; /* "hand" cursor */
+}
+
+.inputfile:focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
 
 .user-login .bg-img {
     background-image: url(/assets/images/bg/login-bg.jpg);

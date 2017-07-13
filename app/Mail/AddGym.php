@@ -11,19 +11,18 @@ use App\Models\User;
 class AddGym extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $email;
-    protected $password;
+    protected $dial_code;
+    protected $phone_number;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($email, $password,$phone_number)
+    public function __construct($dial_code, $phone_number)
     {
-        $this->email = $email;
-        $this->password = $password;
         $this->phone_number = $phone_number;
+        $this->dial_code = $dial_code;
     }
 
     /**
@@ -34,6 +33,6 @@ class AddGym extends Mailable
 
     public function build()
     {
-         return $this->from('admin@muscleup.com')->markdown('muscle-up-app.gym.add-email')->with(['email'=>$this->email, 'password'=>$this->password,'phone_number'=>$this->phone_number]);
+         return $this->from('admin@muscleup.com')->markdown('muscle-up-app.gym.add-email')->with(['dial_code'=>$this->dial_code,'phone_number'=>$this->phone_number]);
     }
 }
