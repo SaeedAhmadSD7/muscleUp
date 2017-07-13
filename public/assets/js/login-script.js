@@ -31,10 +31,10 @@ $(document).ready(function () {
             }
         },
         highlight: function ( element) {
-            $( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass('text-field').children().addClass('error');
+            $(element).parent('.text-field').addClass('has-error').removeClass('text-field').children().addClass('error');
         },
         unhighlight: function (element) {
-            $( element ).parents( ".form-group" ).addClass( 'text-field' ).removeClass( "has-error" ).children().removeClass('error');
+            $(element).parent('.has-error').addClass('text-field').removeClass('has-error').children().removeClass('error');
         }
     });
 });

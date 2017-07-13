@@ -36,12 +36,13 @@ class AdminController extends Controller
         $user['user-type'] = 'gym';
         $user->save();
 
-        \Mail::to($user)->send(new AddGym($user,$password));
 
         $gym = new Gym($Request_Accept);
         $gym->user_id = $user->id;
         $gym->save();
         $Request->delete();
+
+        \Mail::to($user)->send(new AddGym($user->email,$password,$gym->phone_number));
     }
 }
 

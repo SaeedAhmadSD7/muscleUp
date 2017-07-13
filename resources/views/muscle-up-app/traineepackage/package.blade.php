@@ -53,5 +53,5 @@
 @section('scripts')
     <script src="{{url('/assets/plugins/TelInput/js/intlTelInput.js')}}"></script>
     <script src="{{url('/assets/plugins/dateselect/js/jquery.dateselect.js')}}"></script>
-    <script src="{{url('/assets/js/t-reg.js')}}"></script>
+    <script src="{{url('add-traineeadd-trainee.js></script>
 @stop

@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="reg-form">
-                        <form class="contact-form" role="form" method="POST" action="{{route('trainee-store')}}">
+                        <form class="add-trainee-form" role="form" method="POST" action="{{route('trainee-store')}}">
                             {{csrf_field()}}
                             <div class="fields clearfix">
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
@@ -54,11 +54,11 @@
                                 <div class="form-group col-md-1 col-sm-2 col-xs-2 dial-code-div">
                                     <input class="dial-code" type="text" name="dial_code" value="" placeholder="+1..." readonly>
                                 </div>
-                                <div class="form-group col-md-5 col-sm-10 col-xs-10 text-field">
+                                <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
                                     <input class="phone_number" type="text" name="phone_number" value="" placeholder="Phone Number..." maxlength="15">
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12 text-field">
-                                    <input name="address" placeholder="Address..." maxlength="250">
+                                    <input name="address" placeholder="Address..." maxlength="255">
                                 </div>
                             </div>
 
@@ -76,5 +76,5 @@
 @section('script')
     <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/t-reg.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/add-trainee.js')}}" type="text/javascript"></script>
 @stop

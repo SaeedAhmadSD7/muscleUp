@@ -1,15 +1,25 @@
 @component('mail::message')
-# Welcome to MuscleUP Family.
+    # Welcome to MuscleUP Family.
 
-Your Request have been approved by us, Here are your credentials for loggin in. Please change your password after loggin in.
+    Your Request have been approved by us, You are scheduled to be contacted on following date via the number you provided.
+    #Date: 2017-12-21
+    #Time: 19:17
+    #Your Contact Number: {{$phone_number}}
 
-<b>Email: </b> {{$email}} <br>
-<b>Password: </b> {{$password}}
 
-@component('mail::button', ['url' => './Login'])
-Login Now
+    Your Account Has been created and credentials are provided below please keep them in safe place.
+    #Email: {{$email}}
+    #Password: {{$password}}
+
+
+    It will be activated once we finish processing your data.
+
+
+    For any query please click on link below,
+    @component('mail::button', ['url' => './contactus'])
+        Contact Us
+    @endcomponent
+
+    {{ config('app.name') }} Family.
 @endcomponent
 
-Thank you for becoming a part of us,<br>
-{{ config('app.name') }}
-@endcomponent

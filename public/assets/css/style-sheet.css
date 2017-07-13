@@ -2170,7 +2170,8 @@ Gym Request form
     background: rgba(255, 255, 255, 0.60);
 }
 
-.dial-code-div {
+.dial-code-div,
+.dial-code-error{
     padding-right: 3px !important;
 }
 
@@ -2188,32 +2189,37 @@ Gym Request form
     padding: 5px 10px !important;
 }
 
-/*.number-div:before {*/
-    /*content: '';*/
-    /*position: absolute;*/
-    /*left: 3px;*/
-    /*bottom: 0;*/
-    /*width: 1px;*/
-    /*height: 8px;*/
-    /*background: rgba(255, 255, 255, 0.60);*/
-/*}*/
+.number-div:before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    bottom: 0;
+    width: 1px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.60);
+}
 
-.number-div {
+.number-div,
+.number-error {
     padding-left: 3px !important;
 }
 
-/*.number-div:after {*/
-    /*content: '';*/
-    /*position: absolute;*/
-    /*right: 15px;*/
-    /*bottom: 0;*/
-    /*width: 1px;*/
-    /*height: 8px;*/
-    /*background: rgba(255, 255, 255, 0.60);*/
-/*}*/
+.number-div:after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    width: 1px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.60);
+}
 
 .number-div input {
     padding: 5px 7px !important;
+}
+
+.has-error .select2-selection{
+    border-color: #000!important;
 }
 
 /*End*/
