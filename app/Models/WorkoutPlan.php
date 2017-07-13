@@ -20,4 +20,9 @@ class WorkoutPlan extends Model
     {
         return $this->belongsTo(WpAssign:: class);
     }
+
+    public  function instructor()
+    {
+        return $this->belongsTo(instructor::class);
+    }
 }

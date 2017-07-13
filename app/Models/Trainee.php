@@ -61,4 +61,9 @@ class Trainee extends Model
     function user(){
         return $this->belongsTo(user::class);
     }
+
+    public function instructor()
+    {
+        return $this->belongsTo('App\Models\Instructor');
+    }
 }

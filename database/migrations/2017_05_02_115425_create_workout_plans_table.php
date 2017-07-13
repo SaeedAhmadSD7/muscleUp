@@ -16,7 +16,10 @@ class CreateWorkoutPlansTable extends Migration
         Schema::create('Workout_Plans', function (Blueprint $table) {
             $table->increments('wPlanId');
             $table->integer('GymId');
-            $table->string('wPlanType');
+            $table->string('type');
+            $table->string('exerciseType');
+            $table->string('duration');
+            $table->string('hours');
             $table->timestamps();
         });
 

@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\MuscleUpApp;
 
 use Illuminate\Http\Request;
-use App\Models\WorkoutPlan;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 
 class WorkoutPlanController extends Controller
 {
@@ -13,9 +12,9 @@ class WorkoutPlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function workout()
     {
-        //
+        return view('muscle-up-app.instructor.workout');
     }
 
     /**
@@ -25,7 +24,7 @@ class WorkoutPlanController extends Controller
      */
     public function create()
     {
-        //
+        return view('muscle-up-app.instructor.workout');
     }
 
     /**
@@ -36,12 +35,14 @@ class WorkoutPlanController extends Controller
      */
     public function store(Request $request)
     {
-        $WorkoutPlan = new WorkoutPlan();
-        $WorkoutPlan->wPlanId = $request->input('wPlanId');
-        $WorkoutPlan->GymId = $request->input('GymId');
-        $WorkoutPlan->wPlanType = $request->input('wPlanType');
+        $workoutplan = new WorkoutPlan();
+        $workoutplan->type = $request->input('type');
+        $workoutplan->exerciseType = $request->input('exerciseType');
+        $workoutplan->duration = $request->input('duration');
+        $workoutplan->hours = $request->input('hours');
+        $workoutplan->save();
 
-        $WorkoutPlan->save();
+        return redirect()->route('workout');
     }
 
     /**

@@ -6,7 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Instructor extends Model
 {
-    function gym(){
+    public function gym(){
         return $this->belongsTo(gym::class);
+    }
+
+    public function trainees()
+    {
+        return $this->hasMany('App\Models\Trainee');
+    }
+
+    Public function workoutplan()
+    {
+        return $this->hasMany('workoutplan');
     }
 }
