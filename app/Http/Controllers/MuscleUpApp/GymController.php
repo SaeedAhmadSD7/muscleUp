@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
-use App\Models\Country;
-use App\Models\GymRequest;
+use App\Http\Requests\RequestGymRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use App\Models\Country;
+use App\Models\GymRequest;
 
 class GymController extends Controller
 {
@@ -15,10 +17,13 @@ class GymController extends Controller
         return view('muscle-up-app.gym.request-form')->with('countries', $countries);
     }
 
-    public function request_save(Request $request)
+    public function request_save(RequestGymRequest $request)
     {
+
         $gym_request = new GymRequest($request->all());
         $gym_request->save();
+        Session::flash('success','Request sucessfully submitted. You will be contacted for further processing.');
+        return redirect()->route('home-page');
     }
 
     public function request_get()

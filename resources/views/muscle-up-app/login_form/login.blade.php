@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="reg-form">
-                        <form id="contact-form" role="form" method="POST" action="{{route('check-login')}}">
+                        <form class="user_login" role="form" method="POST" action="{{route('check-login')}}">
                             {{csrf_field()}}
 
                             <div class="fields clearfix">
@@ -28,31 +28,27 @@
                                 <div class="form-group col-md-6 col-md-offset-3 col-sm-12 col-xs-12 text-field">
                                     <input type="password" name="password" value="" placeholder="Password...">
                                 </div>
+                                <div class="form-group col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
+                                    <label class="btn"><input class="remember-login" type="checkbox" name='remember-me'><i class="fa fa-square fa-x"></i><i class="fa fa-check-square fa-x"></i><span> Keep me logged in</span></label>
+                                </div>
 
-                                <div class="form-group col-md-6 col-md-offset-3 col-sm-12 col-xs-12 text-field">
-                                    <div class="col-md-1 col-md-offset-1 col-sm-2 col-xs-2">
-                                        <input class="form-radio" type="checkbox" name="password" value=""
-                                               placeholder="Password...">
-                                    </div>
-                                    <div class="col-md-10 col-sm-10 col-xs-10">
-                                        <text>Stay signed in</text>
-                                    </div>
+
+                                <div class="form-group col-md-6 col-md-offset-5">
+                                        <button class="btn_login" type="submit"><span class="fa fa-angle-right"></span> Sign In</button>
+                                </div>
+                                <div class="form-group col-md-6 col-md-offset-5 col-xs-12 col-sm-12">
+                                    <a class="reset_pass" href="#">Reset your password</a>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-md-offset-3">
-                                <div class="col-md-5 col-xs-7 col-sm-7">
-                                    <button type="submit"><span class="fa fa-angle-right"></span> Sign In</button>
-                                </div>
-                                <div class="col-md-5 col-xs-6 col-sm-6">
-                                    <text>Reset your password</text>
-                                </div>
-                            </div>
-
                         </form>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>
 @stop
+
+@section('script')
+    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/login-script.js')}}" type="text/javascript"></script>
+    @stop

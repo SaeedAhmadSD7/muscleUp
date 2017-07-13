@@ -116,27 +116,32 @@ Route::get('delete-trnpackage/{id}',['as'=>'delete.package','uses'=>'MuscleUpApp
 Trainee
  */
 Route::get('/trainee/dashboard', ['as'=>'trainee-dashboard',function () {return ('Trainee Dashboard Comes Here.'); }]);
+Route::get('trainee/add',['as'=>'trainee-add','uses'=>'MuscleUpApp\TraineeController@create']);
+Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\TraineeController@store']);
 
-
+Route::get('/trainee/list',['as'=>'trainee-list','uses'=>'MuscleUpApp\TraineeController@inbox']);
+Route::get('/trainee/list/detail/{id}',['as'=>'trainee-list-detail','uses'=>'MuscleUpApp\TraineeController@trainee_detail']);
+Route::delete('/trainee/list/delete/{id}',['as'=>'trainee-list-delete','uses'=>'MuscleUpApp\TraineeController@destroy']);
 Route::get('trainee/profile',['as'=>'trainee-profile','uses'=>'MuscleUpApp\TraineeController@view_profile']);
 Route::post('trainee/profile/image',['as'=>'trainee-image','uses'=>'MuscleUpApp\TraineeController@upload_profile']);
 
 
-Route::get('trainee/add',['as'=>'trainee-add','uses'=>'MuscleUpApp\TraineeController@create']);
-Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\TraineeController@store']);
 
 /*
  Trainee Medical History
  */
 Route::get('trainee/medical',['as'=>'trainee-medical','uses'=>'MuscleUpApp\TraineeController@medical']);
 Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'MuscleUpApp\TraineeController@medial_history']);
+Route::get('trainee/view/medical/{id}',['as'=>'trainee-view-medical','uses'=>'MuscleUpApp\TraineeController@view_medical_history']);
+
 
 /*
  Admin-panel
 */
 Route::get('/Admin/Dashboard',['as'=>'Admin-Dashboard','uses'=>'MuscleUpApp\AdminController@index']);
 Route::get('/Admin/Inbox',['as'=>'Admin-Inbox','uses'=>'MuscleUpApp\AdminController@inbox']);
-Route::get('/Admin/Inbox/Detail',['as'=>'Admin-Inbox-Detail','uses'=>'MuscleUpApp\AdminController@message_detail']);
+Route::get('/Admin/Inbox/Message/Detail/{id}',['as'=>'Admin-Message-Detail','uses'=>'MuscleUpApp\AdminController@message_detail']);
+Route::get('/Admin/Inbox/Message/Accept/{id}',['as'=>'Admin-Message-Accept','uses'=>'MuscleUpApp\AdminController@request_accept']);
 
 
 //WorkoutPlan

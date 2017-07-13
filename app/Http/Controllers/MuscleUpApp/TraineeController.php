@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\MuscleUpApp;
 use App\Models\User;
 use App\Models\Trainee;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 use App\Models\MedicalHistory;
+use App\Mail\AddTraineeRequest;
+use Illuminate\Support\Facades\Mail;
 
 class TraineeController extends Controller
 {
@@ -15,7 +18,9 @@ class TraineeController extends Controller
 //     $trainee = Trainee::find(Auth::user->id)->first();
        $user = Auth::user();
        $trainee = $user->trainee;
-    return view('muscle-up-app\trainee\view-profile', compact('trainee'));
+//       $trainee_his = MedicalHistory::find($trainee->id);
+       return view('muscle-up-app.trainee.view-profile')->with('trainee',$trainee);
+
    }
     public function upload_profile(Request $request){
 //       dd($request);
@@ -32,6 +37,7 @@ class TraineeController extends Controller
 //            dd($trainee);
 
             $trainee->profile_img = $filename;
+
             $trainee->save();
             }
         return redirect()->route('trainee-profile');
@@ -40,13 +46,38 @@ class TraineeController extends Controller
 
 
 
-      public  function  medial_history(Request $request){
+      public  function  medial_history(Request $request) {
 
           MedicalHistory::create($request->all());
 
-          return redirect()->route('home-page');
+          Session::flash('success','Your profile was successfully updated');
+
+          return redirect()->route('trainee-profile');
 
       }
+
+
+      public  function view_medical_history($id){
+
+        $medical_history = MedicalHistory::find($id);
+
+
+        return view('muscle-up-app.trainee.view-medical-history')->with('med_his',$medical_history);
+      }
+
+
+      public function inbox(){
+          $trainee = Trainee ::all();
+          return view('muscle-up-app.trainee.trainee-list')->with('trainee', $trainee);
+      }
+
+      public function trainee_detail($id){
+          $trainee= Trainee::find($id);
+
+          return view('muscle-up-app.trainee.trainee-list-detail')->with('trainee',$trainee);
+
+      }
+
 
         public function index()
     {
@@ -90,7 +121,9 @@ class TraineeController extends Controller
         $trainee->address=$request->address;
         $trainee->save();
 
-        dd($password);
+        Mail::to($user->email)->send(new AddTraineeRequest($user->email,$password));
+        Session::flash('success','Congratulations You have successfully registered. Your credentials have been mailed to you.');
+
 
         return redirect()->route('/');
     }
@@ -143,6 +176,9 @@ class TraineeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $trainee = Trainee::find($id);
+        $trainee->delete();
+
+        return redirect()->route('trainee-list');
     }
 }

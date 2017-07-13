@@ -1,6 +1,6 @@
 @extends('muscle-up-app.layouts.main')
 
-@section('title','Gym Request')
+@section('title',' Add Trainee ')
 
 @section('style-sheet')
     <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="reg-form">
-                        <form id="contact-form" role="form" method="POST" action="{{route('trainee-store')}}">
+                        <form class="add-trainee-form" role="form" method="POST" action="{{route('trainee-store')}}">
                             {{csrf_field()}}
                             <div class="fields clearfix">
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
@@ -55,13 +55,13 @@
                                     <input class="dial-code" type="text" name="dial_code" value="" placeholder="+1..." readonly>
                                 </div>
                                 <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
-                                    <input class="phone_number" type="text" name="phone_number" value="" placeholder="Phone Number...">
+                                    <input class="phone_number" type="text" name="phone_number" value="" placeholder="Phone Number..." maxlength="15">
+                                </div>
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12 text-field">
+                                    <input name="address" placeholder="Address..." maxlength="255">
                                 </div>
                             </div>
 
-                            <div class="address-field">
-                                <textarea name="address" placeholder="Address" maxlength="250"></textarea>
-                            </div>
 
                             <div class="text-right col-md-12"><button type="submit"><span class="fa fa-angle-right"></span> Add Trainee</button></div>
                         </form>
@@ -75,5 +75,6 @@
 
 @section('script')
     <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/t-reg.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/add-trainee.js')}}" type="text/javascript"></script>
 @stop

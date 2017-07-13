@@ -27,6 +27,6 @@ class CreateWorkoutPlansTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('Workout_Plan');
+        Schema::dropIfExists('Workout_Plans');
     }
 }

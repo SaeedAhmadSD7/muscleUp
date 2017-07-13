@@ -588,21 +588,11 @@
                                    title="Compose new mail">Compose new mail</a>
                             </div>
                             <div class="list-group">
-                                <a class="list-group-item" href="#" title=""><i
-                                            class="glyph-icon font-gray icon-inbox"></i> Inbox <span
-                                            class="badge bg-blue">83</span></a> <a class="list-group-item" href="#"
-                                                                                   title=""><i
-                                            class="glyph-icon font-gray icon-envelope-o"></i> Sent Mail <span
-                                            class="badge bg-azure">32</span></a> <a class="list-group-item" href="#"
-                                                                                    title=""><i
-                                            class="glyph-icon font-gray icon-certificate"></i> Important <span
-                                            class="badge bg-azure">32</span></a> <a class="list-group-item" href="#"
-                                                                                    title=""><i
-                                            class="glyph-icon font-gray icon-file-text-o"></i> Drafts <span
-                                            class="badge bg-azure">32</span></a> <a class="list-group-item" href="#"
-                                                                                    title=""><i
-                                            class="glyph-icon font-gray icon-trash-o"></i> Trash <span
-                                            class="badge bg-red">45</span></a>
+                                <a class="list-group-item" href="#" title=""><i class="glyph-icon font-gray icon-inbox"></i> Inbox <span class="badge bg-blue">83</span></a>
+                                <a class="list-group-item" href="#" title=""><i class="glyph-icon font-gray icon-envelope-o"></i> Sent Mail <span class="badge bg-azure">32</span></a>
+                                <a class="list-group-item" href="#" title=""><i class="glyph-icon font-gray icon-certificate"></i> Important <span class="badge bg-azure">32</span></a>
+                                <a class="list-group-item" href="#" title=""><i class="glyph-icon font-gray icon-file-text-o"></i> Drafts <span class="badge bg-azure">32</span></a>
+                                <a class="list-group-item" href="#" title=""><i class="glyph-icon font-gray icon-trash-o"></i> Trash <span class="badge bg-red">45</span></a>
                             </div>
                         </div>
                         <div class="content-box mrg15B">
@@ -671,8 +661,7 @@
                                 <small>(Available options)</small>
                             </h3>
                             <div class="font-size-11 float-right">
-                                <h3 class="content-box-header clearfix"><a href="#" title=""><i
-                                                class="glyph-icon mrg5R opacity-hover icon-plus"></i></a> <a href="#"
+                                <h3 class="content-box-header clearfix"><a href="#" title=""><i class="glyph-icon mrg5R opacity-hover icon-plus"></i></a> <a href="#"
                                                                                                              title=""><i
                                                 class="glyph-icon opacity-hover icon-cog"></i></a></h3>
                             </div>
@@ -801,7 +790,7 @@
                             <table class="table table-hover text-center">
                                 <tbody>
                                 @foreach($Requests as $Request)
-                                    <tr>
+                                    <tr id="{{$Request->id}}">
                                         <td><input class="custom-checkbox" id="mail-checkbox-1" type="checkbox"></td>
                                         <td><i class="glyph-icon icon-star"></i></td>
                                         <td class="email-title">{{$Request->name}}</td>
@@ -863,6 +852,7 @@
     <script src="{{url('/admin-assets/widgets/overlay/overlay.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/js-init/widgets-init.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/themes/admin/layout.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/admin-inbox.js')}}" type="text/javascript"></script>
 </div>
 </body>
 </html>
