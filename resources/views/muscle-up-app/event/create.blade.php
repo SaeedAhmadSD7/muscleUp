@@ -1,4 +1,4 @@
-@extends('muscle-up-app.layouts.main')
+@extends('muscle-up-app.layouts.frontend-main')
 @section('title','Create new Event')
 @section('content')
     <div class="row">
