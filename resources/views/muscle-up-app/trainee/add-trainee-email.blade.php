@@ -1,10 +1,9 @@
 @component('mail::message')
-# Introduction
+  Your email  : {{$email }}
+  <br>your Password  : {{$password}}
 
-The body of your message.
-
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => './contactus'])
+   Contact Us
 @endcomponent
 
 Thanks,<br>

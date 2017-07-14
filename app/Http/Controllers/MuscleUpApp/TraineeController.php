@@ -73,8 +73,8 @@ class TraineeController extends Controller
 
       public function trainee_detail($id){
           $trainee= Trainee::find($id);
-
-          return view('muscle-up-app.trainee.trainee-list-detail')->with('trainee',$trainee);
+          $user = User::find($trainee->user_id);
+          return view('muscle-up-app.trainee.trainee-list-detail')->with(['trainee'=>$trainee,'email'=>$user->email]);
 
       }
 
@@ -125,7 +125,7 @@ class TraineeController extends Controller
         Session::flash('success','Congratulations You have successfully registered. Your credentials have been mailed to you.');
 
 
-        return redirect()->route('/');
+        return redirect()->route('home-page');
     }
 
     public function medical()
@@ -142,7 +142,11 @@ class TraineeController extends Controller
      */
     public function show($id)
     {
-        //
+        $trainee= Trainee::find($id);
+        $user = User::find($trainee->user_id);
+
+        return view('muscle-up-app.trainee.trainee-personal-detail')->with(['trainee'=>$trainee,'email'=>$user->email]);
+
     }
 
     /**
@@ -153,7 +157,10 @@ class TraineeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $trainee= Trainee::find($id);
+        $user = User::find($trainee->user_id);
+
+        return view('muscle-up-app.trainee.edit-profile-detail')->with(['trainee'=>$trainee,'email'=>$user->email]);
     }
 
     /**
@@ -165,7 +172,28 @@ class TraineeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+//        $user =User::find($id);
+//        $user->email = $request->input('email');
+//        $user->save();
+
+        $trainee =Trainee::find($id);
+        $trainee->first_name=$request->input('first_name');
+        $trainee->last_name=$request->input('last_name');
+        $trainee->dial_code = '+27';
+        $trainee->phone_number=$request->input('phone_number');
+        $trainee->birth_date=$request->input('birth_date');
+        $trainee->gender =$request->input('gender');
+        $trainee->address=$request->input('address');
+        $trainee->save();
+
+
+
+        Session::flash('success','This Trainee was successfully saved.');
+
+
+//        Redirect with flash data to post.show
+        return redirect()->route('trainee-personal-detail',$trainee->id);
     }
 
     /**
