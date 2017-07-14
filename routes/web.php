@@ -77,6 +77,7 @@ Route::resource('events','MuscleUpApp\EventController');
 
 Route::get('gym/request/join', ['uses'=>'MuscleUpApp\GymController@request', 'as'=>'gym-request']);
 Route::post('gym/request/save',['uses'=>'MuscleUpApp\GymController@request_save', 'as'=> 'save-request']);
+Route::get('gym/request/process/{id}',['uses'=>'MuscleUpApp\GymController@request_process', 'as'=> 'process-request']);
 //Route::post('save-gym',['uses'=>'MuscleUpApp\GymController@save', 'as'=> 'save-gym']);
 /*
 login form
@@ -96,10 +97,6 @@ Route::post('check-login', ['uses'=>'MuscleUpApp\LoginController@login','as'=>'c
 
 Route::get('/gym', ['as'=>'gym',function () {
     return ('gym');}
-    ]);
-
-Route::get('/admin', ['as'=>'admin',function () {
-    return ('admin');}
     ]);
 
 //TraineePackage
@@ -138,7 +135,7 @@ Route::get('trainee/view/medical/{id}',['as'=>'trainee-view-medical','uses'=>'Mu
 /*
  Admin-panel
 */
-Route::get('/Admin/Dashboard',['as'=>'Admin-Dashboard','uses'=>'MuscleUpApp\AdminController@index']);
+Route::get('/admin/dashboard',['as'=>'admin-dashboard','uses'=>'MuscleUpApp\AdminController@index']);
 Route::get('/Admin/Inbox',['as'=>'Admin-Inbox','uses'=>'MuscleUpApp\AdminController@inbox']);
 Route::get('/Admin/Inbox/Message/Detail/{id}',['as'=>'Admin-Message-Detail','uses'=>'MuscleUpApp\AdminController@message_detail']);
 Route::get('/Admin/Inbox/Message/Accept/{id}',['as'=>'Admin-Message-Accept','uses'=>'MuscleUpApp\AdminController@request_accept']);

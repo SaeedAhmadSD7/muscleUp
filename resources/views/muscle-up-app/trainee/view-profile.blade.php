@@ -1370,10 +1370,10 @@
                                                                         "glyph-icon icon-linecons-lock"></i></a>
 
                         <div class="user-account-btn dropdown">
-                            <a class="user-profile clearfix" data-toggle="dropdown" href="#" title=
-                            "My Account"><img alt="Profile image" src=
-                                "/admin-assets/image-resources/gravatar.jpg" width="28"> <span>Michael
-								Lee</span> <i class="glyph-icon icon-angle-down"></i></a>
+                            <a class="user-profile clearfix" data-toggle="dropdown" href="#" title="My Account"><img alt="Profile image" src="/admin-assets/image-resources/gravatar.jpg" width="28">
+                                <span>MichaelLee</span>
+                                <i class="glyph-icon icon-angle-down"></i>
+                            </a>
 
                             <div class="dropdown-menu float-right">
                                 <div class="box-sm">
