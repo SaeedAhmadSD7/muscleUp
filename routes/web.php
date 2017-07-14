@@ -49,10 +49,10 @@ Route::resource('package','MuscleUpApp\PackageController');
 Route::get('services', ['as'=>'service-store','uses'=>'MuscleUpApp\ServiceController@index']);
 Route::get('/service',['as'=>'service','uses'=>'MuscleUpApp\ServiceController@create']);
 Route::post('/service',['as'=>'Save-service','uses'=>'MuscleUpApp\ServiceController@store']);
+Route::get('show/{id}','MuscleUpApp\ServiceController@show')->name('services.show');
+Route::delete('delete/{id}',['as'=>'delete','uses'=>'MuscleUpApp\ServiceController@destroy']);
 Route::get('update/{service_id}',['as'=>'Update-service','uses'=>'MuscleUpApp\ServiceController@edit']);
 Route::put('update/{id}',['as'=>'Update.service','uses'=>'MuscleUpApp\ServiceController@update']);
-Route::delete('delete/{id}',['as'=>'delete','uses'=>'MuscleUpApp\ServiceController@destroy']);
-Route::get('show/{id}','MuscleUpApp\ServiceController@show')->name('services.show');
 
 //Route::get('delete',['as'=>'delete','uses'=>'MuscleUpApp\ServiceController@destroy']);
 //Route::put('update/{id}',['as'=>'Update-service','uses'=>'MuscleUpApp\ServiceController@update']);
@@ -119,7 +119,11 @@ Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\Tr
 Route::get('/trainee/list',['as'=>'trainee-list','uses'=>'MuscleUpApp\TraineeController@inbox']);
 Route::get('/trainee/list/detail/{id}',['as'=>'trainee-list-detail','uses'=>'MuscleUpApp\TraineeController@trainee_detail']);
 Route::delete('/trainee/list/delete/{id}',['as'=>'trainee-list-delete','uses'=>'MuscleUpApp\TraineeController@destroy']);
-Route::get('trainee/profile',['as'=>'trainee-profile','uses'=>'MuscleUpApp\TraineeController@view_profile']);
+Route::get('trainee/profile/',['as'=>'trainee-profile','uses'=>'MuscleUpApp\TraineeController@view_profile']);
+Route::get('/trainee/personal/detail/{id}',['as'=>'trainee-personal-detail','uses'=>'MuscleUpApp\TraineeController@show']);
+Route::get('/trainee/personal/detail/edit/{id}',['as'=>'trainee-personal-detail-edit','uses'=>'MuscleUpApp\TraineeController@edit']);
+Route::post('/trainee/personal/detail/update/{id}',['as'=>'trainee-detail-update','uses'=>'MuscleUpApp\TraineeController@update']);
+
 Route::post('trainee/profile/image',['as'=>'trainee-image','uses'=>'MuscleUpApp\TraineeController@upload_profile']);
 
 

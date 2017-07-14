@@ -1940,9 +1940,8 @@
                         <div class="example-box-wrapper">
                             <ul class="list-group row list-group-icons">
                                 <li class="col-md-3 active">
-                                    <a class="list-group-item" data-toggle="tab" href=
-                                    "#tab-example-4"><i class="glyph-icon font-red icon-bullhorn"></i>
-                                        Personal Information</a>
+                                    <button class="list-group-item" data-toggle="tab" ><i class="glyph-icon font-red icon-bullhorn"></i>
+                                        Personal Information</button>
                                 </li>
 
 

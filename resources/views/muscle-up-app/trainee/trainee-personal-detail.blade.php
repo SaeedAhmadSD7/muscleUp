@@ -831,23 +831,26 @@
 
                                 <div class="float-right">
                                     {{--<a class="btn btn-primary" href="#" title="Reply">Reply <i class="glyph-icon icon-mail-reply"></i></a> <a class="btn btn-default" href="#" title="Print"><i class="glyph-icon icon-print"></i></a>--}}
-                                    {{--<a class="btn btn-danger mrg10L" href="{{route('trainee-list-delete',$trainee->id)}}" title="Delete"><i class="glyph-icon icon-trash-o"></i></a>--}}
-                                    {!! Form::open(['route' => ['trainee-list-delete',$trainee->id], 'method' => 'DELETE']) !!}
-                                    <button class="btn btn-danger mrg10L" type="button" data-modal="confirmDelete" data-toggle="modal" data-target="#confirmDelete" data-title="Delete trainee" data-message="Are you sure you want to Delete : {{$trainee->first_name}}">
-                                        DELETE</button>
-                                    {!! Form::close() !!}
+                                    <a class="btn btn-success " href="{{route('trainee-personal-detail-edit',$trainee->id)}}" title="Edit">Edit Detail </a>
+                                    {{--{!! Form::open(['route' => ['trainee-list-delete',$trainee->id], 'method' => 'DELETE']) !!}--}}
+                                    {{--<button class="btn btn-danger mrg10L" type="button" data-modal="confirmDelete" data-toggle="modal" data-target="#confirmDelete" data-title="Delete trainee" data-message="Are you sure you want to Delete : {{$trainee->first_name}}">--}}
+                                        {{--DELETE</button>--}}
+                                    {{--{!! Form::close() !!}--}}
 
                                 </div>
-                                @include('muscle-up-app.trainee.include.delete-modal')
+
                             </div>
 
 
                             <div class="email-body">
                                 <div class="example-box-wrapper">
                                     <table border="0" cellpadding="0" cellspacing="0" class="table table-striped table-bordered gym_request" id="datatable-example">
-                                        <tr class="name">
-                                            <th>Trainee Name</th>
-                                            <td>{{$trainee->first_name}} {{$trainee->last_name }}</td>
+                                        <tr class="first_name">
+                                            <th>First Name</th>
+                                            <td>{{$trainee->first_name}} </td>
+                                        </tr><tr class="last_name">
+                                            <th>Last Name</th>
+                                            <td>{{$trainee->last_name }}</td>
                                         </tr>
 
                                         <tbody>
@@ -889,6 +892,16 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
 
 
     <script src="/admin-assets/widgets/dropdown/dropdown.js" type="text/javascript"></script>
