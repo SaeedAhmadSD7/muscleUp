@@ -19,16 +19,19 @@
                         <h2><span class="space"></span>See Instructor</h2>
                         <h3><span class="space"></span> Please fill in all the information and then click Show Instructor.</h3>
                     </div>
-
+        @foreach($instructor as $instruct)
                     <div class="reg-form">
-                        <form id="contact-form" role="form" method="get" action="{{route('instructor-show')}}">
+                        <form id="contact-form" role="form" method="get" action="{{route('show-instructor')}}">
                             {{csrf_field()}}
                             <div class="fields clearfix">
+
+
 
                             </div>
                             <div class="text-right col-md-12"><button type="submit"><span class="fa fa-angle-right"></span> Add Instructor</button></div>
                         </form>
                     </div>
+            @endforeach
                 </div>
 
             </div>

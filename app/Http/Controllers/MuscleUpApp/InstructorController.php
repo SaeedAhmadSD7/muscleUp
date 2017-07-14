@@ -71,7 +71,7 @@ class InstructorController extends Controller
      */
     public function show($id)
     {
-         $instructor=Instructor::find($id);
+         $instructor=Instructor::all();
         return view('muscle-up-app.instructor.show')->with('Instructor',$instructor);
     }
 
