@@ -95,9 +95,8 @@ Route::get('login', ['uses'=>'MuscleUpApp\LoginController@index','as'=>'login'])
 Route::post('check-login', ['uses'=>'MuscleUpApp\LoginController@login','as'=>'check-login']);
 
 
-Route::get('/gym', ['as'=>'gym',function () {
-    return ('gym');}
-    ]);
+Route::get('/gym', ['as'=>'gym', 'uses'=>'MuscleUpApp\GymController@index']);
+Route::post('/gym/add', ['as'=>'add-gym', 'uses'=>'MuscleUpApp\GymController@add_gym']);
 
 //TraineePackage
 
@@ -112,7 +111,7 @@ Route::get('delete-trnpackage/{id}',['as'=>'delete.package','uses'=>'MuscleUpApp
 /*
 Trainee
  */
-Route::get('/trainee/dashboard', ['as'=>'trainee-dashboard',function () {return ('Trainee Dashboard Comes Here.'); }]);
+Route::get('/trainee/dashboard', ['as'=>'trainee-dashboard', 'uses'=> 'MuscleUpApp\TraineeController@index' ]);
 Route::get('trainee/add',['as'=>'trainee-add','uses'=>'MuscleUpApp\TraineeController@create']);
 Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\TraineeController@store']);
 

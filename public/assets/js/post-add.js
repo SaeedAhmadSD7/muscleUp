@@ -24,9 +24,73 @@ $(document).ready(function () {
         $(this).valid();
     });
 
-    $('.profile_pic').on('change',function () {
-       $('.prof_stat_text').html(' File Selected');
+    $('.fields-section section:first-child').fadeIn('slow');
+    console.log('5');
+
+    $('.fields-section .btn-next').on('click', function() {
+        var parent_section = $(this).parents('section');
+        parent_section.fadeOut(400, function() {
+            $(this).next().fadeIn();
+        });
     });
+
+    // previous step
+    $('.fields-section .btn-prev').on('click', function() {
+        $(this).parents('section').fadeOut(400, function() {
+            $(this).prev().fadeIn();
+        });
+    });
+
+
+    // $('.profile_pic').on('change',function () {
+    //    $('.prof_stat_text').html(' File Selected');
+    // });
+
+
+    var geocoder = new google.maps.Geocoder;
+    var latitude;
+    var longitude;
+    var country;
+    var city;
+
+
+
+
+
+
+    $('.geo-location').on('click', function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            alert('Unable to get your position.\nPlease try again.');
+        }
+    });
+
+    function showPosition(position) {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        $('.latitude').val(latitude);
+        $('.longitude').val(longitude);
+        console.log(latitude, longitude)
+    }
+
+    function showError(error) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                alert('You denied permission for request.\nPlease refresh and try again.');
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert('Unable to get your location.\nPlease try again.');
+                break;
+            case error.TIMEOUT:
+                alert('Location request timed out.\nPlease try again.');
+                break;
+            case error.UNKNOWN_ERROR:
+                alert('An unknown error occurred.');
+                break;
+        }
+    }
+
 
 
     $('.gym-reuqest-form').validate({

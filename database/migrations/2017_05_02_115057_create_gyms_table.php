@@ -23,6 +23,10 @@ class CreateGymsTable extends Migration
             $table->string('country');
             $table->string('city');
             $table->text('address');
+            $table->string('open_time');
+            $table->string('close_time');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->rememberToken();
             $table->timestamps();
         });
