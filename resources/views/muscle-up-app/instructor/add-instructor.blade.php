@@ -24,6 +24,13 @@
                         <form id="contact-form" role="form" method="POST" action="{{route('instructor-store')}}">
                             {{csrf_field()}}
                             <div class="fields clearfix">
+                                @if(Session::has('Success'))
+                                    <div class="alert alert-success" role="alert">
+                                        <strong>Success:</strong>{{Session::get('Success')}}
+                                    </div>
+
+                                 @endif
+
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                     <input type="text" name="first_name" value="" placeholder="First Name ...">
                                 </div>
@@ -76,5 +83,5 @@
 
 @section('script')
     <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('add-traineeadd-trainee.js type="text/javascript"></script>
+    <script src="{{url('/assets/js/add-trainee.js')}}" type="text/javascript"></script>
 @stop

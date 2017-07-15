@@ -101,7 +101,7 @@ Route::get('/gym', ['as'=>'gym',function () {
 
 //TraineePackage
 
-//Route::get('traineepackage', ['as'=>'traineepackage','uses'=>'MuscleUpApp\TraineePackageController@traineepackage']);
+Route::get('traineepackage', ['as'=>'traineepackage','uses'=>'MuscleUpApp\TraineePackageController@traineepackage']);
 Route::get('/create/tpackage',['as'=>'create-tpackage','uses'=>'MuscleUpApp\TraineePackageController@create']);
 Route::post('/train/package',['as'=>'Save-tpackage','uses'=>'MuscleUpApp\TraineePackageController@store']);
 Route::get('show/trnpackage/{id}',['as'=>'show-trnpackage','uses'=>'MuscleUpApp\TraineePackageController@show']);
@@ -151,14 +151,15 @@ Route::get('/create/workoutplan',['as'=>'create/workoutplan','uses'=>'MuscleUpAp
 
 
 //Instructor
+
 Route::get('instructor/add',['as'=>'instructor-add','uses'=>'MuscleUpApp\InstructorController@add']);
 Route::get('update-instructor/{id}',['as'=>'update-instructor','uses'=>'MuscleUpApp\InstructorController@edit']);
 Route::post('update-instructor/{id}',['as'=>'update-instructor','uses'=>'MuscleUpApp\InstructorController@update']);
-Route::get('instructor/add',['as'=>'instructor-add','uses'=>'MuscleUpApp\InstrctorController@add']);
 Route::post('instructor/store',['as'=>'instructor-store','uses'=>'MuscleUpApp\InstructorController@store']);
 Route::get('/workout',['as'=>'workout-store','uses'=>'MuscleUpApp\WorkoutPlanController@workout']);
 Route::get('/create/workout',['as'=>'create-workout','uses'=>'MuscleUpApp\WorkoutPlanController@create']);
-Route::get('show-instructor',['as'=>'instructor','uses'=>'MuscleUpApp\InstructorController@show']);
+Route::get('show-instructor',['as'=>'show-instructor','uses'=>'MuscleUpApp\InstructorController@show']);
+Route::get('delete-instructor/{id}',['as'=>'delete-instructor','uses'=>'MuscleUpApp\InstructorController@destroy']);
 
 
 

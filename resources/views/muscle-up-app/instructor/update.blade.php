@@ -79,5 +79,5 @@
 
 @section('script')
     <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/t-reg.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/add-trainee.js')}}" type="text/javascript"></script>
 @stop

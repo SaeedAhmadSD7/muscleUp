@@ -1,16 +1,14 @@
 <?php
-
-namespace App;
 namespace App\Models;
 
-use App\Trainee;
+use App\Models\Train;
 use Illuminate\Database\Eloquent\Model;
 
 class TrainPackage extends Model
 {
-    function trainee()
+    function train()
     {
-        return $this->belongsTo(Trainee::class);
+        return $this->belongsTo(train::class);
     }
 
 }

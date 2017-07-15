@@ -17,7 +17,6 @@ class CreateInstructorsTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email');
             $table->string('birth_date');
             $table->enum('gender',['male','female'])->default('male');
             $table->integer('dial_code')->default('1')->unsigned();

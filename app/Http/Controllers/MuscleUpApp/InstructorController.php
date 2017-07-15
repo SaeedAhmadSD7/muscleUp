@@ -5,6 +5,9 @@ use App\Models\Instructor;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Mail\AddInstructorRequest;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 class InstructorController extends Controller
 {
     /**
@@ -54,13 +57,12 @@ class InstructorController extends Controller
         $instructor->birth_date=$request->birth_date;
 //        $instructor->gender =$request->gender;
         $instructor->address=$request->address;
-        $instructor->email=$request->email;
-
-        dd($password);
-
         $instructor->save();
 
-        return redirect()->route('home-page');
+
+        Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
+        Session::flash('Success','Save Successfully');
+        return redirect()->route('instructor-add');
     }
 
     /**
@@ -69,10 +71,11 @@ class InstructorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-         $instructor=Instructor::all();
-        return view('muscle-up-app.instructor.show')->with('Instructor',$instructor);
+         $instructors=Instructor::all();
+
+        return view('muscle-up-app.instructor.show')->with('instructors',$instructors);
     }
 
     /**
@@ -83,8 +86,8 @@ class InstructorController extends Controller
      */
     public function edit($id)
     {
-//        $instructor=instructor::find($id);
-//        return view('muscle-up-app.instructor.update')->with('instructor',$instructor);
+        $instructor=instructor::find($id);
+        return view('muscle-up-app.instructor.update')->with('instructor',$instructor);
     }
 
     /**
@@ -96,20 +99,20 @@ class InstructorController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        $instructor = Instructor::find($id);
-//        $instructor->first_name=$request->first_name;
-//        $instructor->last_name=$request->last_name;
-//        $instructor->dial_code = '+45';
-//        $instructor->phone_number=$request->phone_number;
-//        $instructor->experience=$request->experience;
-//        $instructor->birth_date=$request->birth_date;
-////        $instructor->gender =$request->gender;
-//        $instructor->email = $request->email;
-//        $instructor->address=$request->address;
-//
-//
-//        $instructor->save();
-//        return redirect()->route('home-page');
+        $instructor = Instructor::find($id);
+        $instructor->first_name=$request->first_name;
+        $instructor->last_name=$request->last_name;
+        $instructor->dial_code = '+45';
+        $instructor->phone_number=$request->phone_number;
+        $instructor->experience=$request->experience;
+        $instructor->birth_date=$request->birth_date;
+//        $instructor->gender =$request->gender;
+        $instructor->address=$request->address;
+        $instructor->save();
+
+        Session::flash('Success','Update Successfully');
+
+        return redirect()->route('show-instructor');
     }
 
     /**
@@ -120,9 +123,10 @@ class InstructorController extends Controller
      */
     public function destroy($id)
     {
-//        $instructor=Instructor::find($id);
-//        $instructor->delete();
-////        dd($service);
-//        return redirect()->route('home-page');
+        $instructor=Instructor::find($id);
+        $instructor->delete();
+//        dd($service);
+//        Session::flash('Success','Delete Successfully');
+        return redirect()->route('show-instructor');
     }
 }

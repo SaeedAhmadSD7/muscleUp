@@ -4,7 +4,7 @@ namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
-use App\Models\TrainPackage;
+use App\Models\TrainPackages;
 use Illuminate\Routing\Controller;
 //use validator;
 class TraineePackageController extends Controller
@@ -14,10 +14,10 @@ class TraineePackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-//    public function package()
-//    {
-//        return view('muscle-up-app.traineepackage.package');
-//    }
+    public function package()
+    {
+        return view('muscle-up-app.traineepackage.package');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -26,6 +26,8 @@ class TraineePackageController extends Controller
      */
     public function create()
     {
+
+        return view('muscle-up-app.traineepackage.package');
 
         $services=Service::all();
 
@@ -48,10 +50,10 @@ class TraineePackageController extends Controller
 //        ])->validator();
 
 
-        $trainpackage = new TrainPackage();
+        $trainpackage = new TrainPackages();
         $trainpackage->fitness_plan = $request->input('fitness_plan');
         $trainpackage->personal_training = $request->input('personal_training');
-        $trainpackage->Duration = $request->input('Duration');
+        $trainpackage->duration = $request->input('duration');
 
         $trainpackage->save();
         return redirect()->route('create-tpackage',$trainpackage->id);

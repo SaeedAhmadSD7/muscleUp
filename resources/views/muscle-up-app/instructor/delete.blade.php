@@ -19,6 +19,12 @@
                         <h2><span class="space"></span>Delete Instructor</h2>
                         <h3><span class="space"></span> Please fill in all the information and then click Delete Instructor.</h3>
                     </div>
+                    {{--@if(Session::has('Success'))--}}
+                        {{--<div class="alert alert-success" role="alert">--}}
+                            {{--<strong>Success:</strong>{{Session::get('Success')}}--}}
+                        {{--</div>--}}
+
+                    {{--@endif--}}
 
                     <div class="reg-form">
                         <form id="contact-form" role="form" method="post" action="{{route('delete-instructor', $instructor->id)}}">

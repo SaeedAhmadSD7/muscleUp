@@ -19,6 +19,7 @@ class LoginController extends Controller
 
 
     public function login(Request $request) {
+        $request->session()->regenerate();
 
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
@@ -35,7 +36,7 @@ class LoginController extends Controller
                 return redirect()->route('admin-dashboard');
             }
             else if ($user['user-type'] == 'instructor') {
-                return redirect()->route('instructor');
+                return redirect()->route('show-instructor');
             }
         }
         else return dd('no');

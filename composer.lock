@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cc0550be2d0be33f4b5d2243114cb065",
+    "content-hash": "eac145410b500d50df3069b1fb434d6f",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -208,6 +208,57 @@
                 "zf2"
             ],
             "time": "2017-06-03T18:33:07+00:00"
+        },
+        {
+            "name": "gtk/flash-message",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gtkvn/flash-message.git",
+                "reference": "14108b82bc25faf376836ab02afcb9d2abdc9eeb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gtkvn/flash-message/zipball/14108b82bc25faf376836ab02afcb9d2abdc9eeb",
+                "reference": "14108b82bc25faf376836ab02afcb9d2abdc9eeb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gtk\\FlashMessage\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Giang Thai Cuong",
+                    "email": "thaicuong.giang@gmail.com"
+                }
+            ],
+            "description": "Flash Message for Laravel 5.",
+            "keywords": [
+                "flash message",
+                "laravel",
+                "notification",
+                "notifyjs",
+                "sweetalert"
+            ],
+            "time": "2016-09-18T01:09:16+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
