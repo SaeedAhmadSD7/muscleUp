@@ -29,7 +29,7 @@ class LoginController extends Controller
                 return redirect()->route('trainee-dashboard');
             }
             else if ($user['user-type'] == 'gym') {
-                dd('gym');
+                return redirect()->route('gym');
             }
             else if ($user['user-type'] == 'admin') {
                 return redirect()->route('admin-dashboard');

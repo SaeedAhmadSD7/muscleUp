@@ -8,7 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Models\User;
 
-class AddGym extends Mailable
+class RequestGymRequest extends Mailable
 {
     use Queueable, SerializesModels;
     protected $dial_code;

@@ -14,7 +14,6 @@
 <body>
 <div id="sb-site">
     <div id="page-wrapper">
-        @include('muscle-up-app.includes.frontend._header')
         @include('muscle-up-app.includes._message')
         @include('muscle-up-app.includes.backend._sidebar')
         @yield('content')

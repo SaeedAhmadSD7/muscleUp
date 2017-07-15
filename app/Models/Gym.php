@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Gym extends Model {
     protected $table= 'gym';
     protected $primaryKey = 'id';
-    protected $fillable = ['user_id','name','email','dial_code','phone_number','country','city','address'];
+    protected $fillable = ['user_id','name','email','dial_code','phone_number','country','city','address','open_time','close_time','latitude','longitude'];
     function  user(){
         return $this->belongsTo(User::class);
     }

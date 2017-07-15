@@ -4,10 +4,10 @@ namespace App\Http\Controllers\MuscleUpApp;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Mail\RequestGymRequest;
 use App\Models\GymRequest;
 use App\Models\Gym;
 use App\Models\User;
-use App\Mail\AddGym;
 
 class AdminController extends Controller
 {
@@ -43,7 +43,7 @@ class AdminController extends Controller
 //        $gym->save();
 //        $Request->delete();
 
-        \Mail::to($Request)->send(new AddGym($Request->dial_code,$Request->phone_number));
+        \Mail::to($Request)->send(new RequestGymRequest($Request->dial_code,$Request->phone_number));
         return redirect()->route('process-request',$Request->id);
     }
 }

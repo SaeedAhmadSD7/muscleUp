@@ -81,7 +81,7 @@ class TraineeController extends Controller
 
         public function index()
     {
-
+        return view('muscle-up-app.trainee.index');
     }
 
     /**
@@ -122,10 +122,10 @@ class TraineeController extends Controller
         $trainee->save();
 
         Mail::to($user->email)->send(new AddTraineeRequest($user->email,$password));
-        Session::flash('success','Congratulations You have successfully registered. Your credentials have been mailed to you.');
+        Session::flash('success','Congratulations Trainee have been added succesfully. Credentials have been mailed to entered email.');
 
 
-        return redirect()->route('home-page');
+        return redirect()->route('gym');
     }
 
     public function medical()

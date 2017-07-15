@@ -881,7 +881,7 @@
                             </div>
 
                             <div class="button-pane">
-                                <a class="btn btn-blue-alt accept_request" href="{{route('Admin-Message-Accept',$Request->id)}}" title="Accept Request"><i class="glyph-icon icon-mail-reply"></i> Accept Request</a> <a class="btn btn-default" href="#" title="Reply">Forward <i class="glyph-icon icon-mail-forward"></i></a>
+                                <a class="btn btn-blue-alt accept_request" href="{{route('Admin-Message-Accept',$Request->id)}}" title="Accept Request"><i class="glyph-icon icon-mail-reply"></i> Process Request</a> <a class="btn btn-default" href="#" title="Reply">Forward <i class="glyph-icon icon-mail-forward"></i></a>
                             </div>
                         </div>
                     </div>
