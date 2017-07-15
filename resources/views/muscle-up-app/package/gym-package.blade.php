@@ -1,4 +1,4 @@
-@extends('muscle-up-app.layouts.main')
+@extends('muscle-up-app.layouts.frontend-main')
 @section('title','|Gym Package')
 @section('content')
 

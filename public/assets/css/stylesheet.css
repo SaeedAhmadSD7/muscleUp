@@ -174,6 +174,34 @@ Bootstrap Settings
 /*End*/
 
 
+/***
+Back to top Button
+*/
+.back-to-top {
+    background: none;
+    margin: 0;
+    position: fixed;
+    bottom: 20px;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    z-index: 100;
+    display: none;
+    text-decoration: none;
+    background-color: #10BCF4;
+    text-align: center;
+    display: none;
+}
+
+.back-to-top i {
+    font-size: 30px;
+    color: #ffffff;
+    line-height: 30px;
+}
+
+/*
+End
+*/
 
 /***
 animate settings
@@ -1528,85 +1556,12 @@ Main Footer Style
     color: #ffffff;
 }
 
-.main-footer .upper {
-    position: relative;
-    padding: 30px 0;
-}
-
-.main-footer .upper h2 {
-    line-height: 40px;
-    font-size: 22px;
-    text-transform: uppercase;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 500;
-}
-
-.main-footer .upper h2 span {
-    font-weight: 300;
-}
-
-.main-footer .social-links {
-    position: relative;
-    float: left;
-    margin-left: 40px;
-}
-
-.main-footer .social-links .icon {
-    position: relative;
-    display: inline-block;
-    margin-right: 5px;
-    width: 40px;
-    height: 40px;
-    color: #ffffff;
-    font-size: 16px;
-    line-height: 40px;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.50);
-    background: rgba(255, 255, 255, 0.05);
-    transition: background 0.5s ease;
-    -webkit-transition: background 0.5s ease;
-    -ms-transition: background 0.5s ease;
-    -o-transition: background 0.5s ease;
-    -moz-transition: background 0.5s ease;
-}
-
-.main-footer .social-links .icon:hover {
-    color: rgba(255, 255, 255, 1);
-}
-
-.main-footer .social-links .fa-facebook-f:hover {
-    background: #3852d7;
-}
-
-.main-footer .social-links .fa-twitter:hover {
-    background: #69ecea;
-}
-
-.main-footer .social-links .fa-dribbble:hover {
-    background: #ef8ff0;
-}
-
-.main-footer .social-links .fa-google:hover {
-    background: #ee6545;
-}
-
-.main-footer .social-links .fa-pinterest:hover {
-    background: #f24343;
-}
-
-.main-footer .social-links .fa-instagram:hover {
-    background: #91b7cd;
-}
-
 .main-footer .lower {
     position: relative;
-    padding: 25px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.50);
 }
 
 .main-footer .footer-widget {
     position: relative;
-    margin-bottom: 20px;
 }
 
 .main-footer .footer-widget * {
@@ -1617,18 +1572,10 @@ Main Footer Style
     -moz-transition: all 0.5s ease;
 }
 
-.main-footer .footer-widget h2 {
-    position: relative;
-    text-transform: uppercase;
-    font-size: 18px;
-    line-height: 30px;
-    margin-bottom: 20px;
-}
-
-.main-footer .footer-widget a {
-    position: relative;
-    display: inline-block;
-}
+.main-footer .footer-widget p {
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 10px;}
 
 .main-footer .copyright {
     position: relative;
@@ -1636,31 +1583,7 @@ Main Footer Style
     font-size: 13px;
 }
 
-.main-footer .copyright a {
-    position: relative;
-    color: #007bbf;
-    display: inline-block;
-    padding: 2px 5px;
-    text-decoration: underline;
-}
 
-.main-footer .contact {
-    color: #48627e;
-}
-
-.main-footer .contact li strong {
-    display: block;
-    font-weight: 500;
-    width: 35%;
-    color: #ffffff;
-}
-
-.main-footer .contact li p {
-    display: block;
-    font-weight: 400;
-    width: 65%;
-    margin-bottom: 0;
-}
 /*End*/
 
 /***
