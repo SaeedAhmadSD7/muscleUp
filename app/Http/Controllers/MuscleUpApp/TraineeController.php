@@ -112,6 +112,7 @@ class TraineeController extends Controller
 
 
         $trainee = new Trainee();
+        $trainee->user_id = $user->id;
         $trainee->first_name=$request->first_name;
         $trainee->last_name=$request->last_name;
         $trainee->dial_code = '+27';
