@@ -1,6 +1,12 @@
 $(document).ready(function() {
     $('.btn-date').DateTimePicker();
 
+    $('.btn-add-exp').on('click',function () {
+        $('.exp_years').appendTo('.exp_field');
+        $('.exp_desc').appendTo('.exp_field');
+
+    });
+
     $('.add-instructor-form').validate({
         rules: {
             first_name: "required",

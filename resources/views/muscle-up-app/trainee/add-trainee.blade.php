@@ -40,10 +40,10 @@
                                     <div class="btn-date"></div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 Gender ">
-                                    <div class="col-md-3 col sm-4 col-xs-4 gender-title">
+                                    <div class="col-md-4 col sm-4 col-xs-4 gender-title">
                                         <p class="title">Gender : </p>
                                     </div>
-                                        <div class="col-md-9 col-sm-8 col-xs-8">
+                                        <div class="col-md-8 col-sm-8 col-xs-8">
                                             <div class="btn-group" data-toggle="buttons">
                                                 <label class="btn"><input type="radio" name='gender' value="male" checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Male</span></label>
                                                 <label class="btn"><input type="radio" name='gender' value="female"><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Female</span></label>
@@ -57,6 +57,7 @@
                                 <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
                                     <input class="phone_number" type="text" name="phone_number" value="" placeholder="Phone Number..." maxlength="15">
                                 </div>
+
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12 text-field">
                                     <input name="address" placeholder="Address..." maxlength="255">
                                 </div>

@@ -2145,6 +2145,62 @@ Gym Request form
     padding: 5px 7px !important;
 }
 
+.exp_years-div:before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    bottom: 0;
+    width: 1px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.60);
+}
+
+.exp_years-div,
+.exp_years-error{
+    padding-right: 3px !important;
+}
+
+.exp_years-div:after {
+    content: '';
+    position: absolute;
+    right: 3px;
+    bottom: 0;
+    width: 1px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.60);
+}
+
+.exp_years-div input {
+    padding: 5px 10px !important;
+}
+
+.exp_desc-div:before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    bottom: 0;
+    width: 1px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.60);
+}
+
+.exp_desc-div,
+.exp_desc-error {
+    padding-left: 3px !important;
+}
+
+.exp_desc-div:after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    width: 1px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.60);
+}
+
+
+
 .has-error .select2-selection{
     border-color: #000!important;
 }

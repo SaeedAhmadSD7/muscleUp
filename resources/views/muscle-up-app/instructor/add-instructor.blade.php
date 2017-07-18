@@ -23,18 +23,14 @@
                               action="{{route('instructor-store')}}">
                             {{csrf_field()}}
                             <div class="fields clearfix">
-                                @if(Session::has('Success'))
-                                    <div class="alert alert-success" role="alert">
-                                        <strong>Success:</strong>{{Session::get('Success')}}
-                                    </div>
-                                @endif
-
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                     <input type="text" name="first_name" value="" placeholder="First Name ...">
                                 </div>
+
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                     <input type="text" name="last_name" value="" placeholder="Last Name...">
                                 </div>
+
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                     <input type="email" name="email" value="" placeholder="Email Address...">
                                 </div>
@@ -42,21 +38,41 @@
                                     <input class="birth-date" type="text" data-field="date" data-format="yyyy-MM-dd" name="birth_date" value="" placeholder="Date of Birth..." readonly>
                                     <div class="btn-date"></div>
                                 </div>
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12 Gender ">
-                                    <div class="col-md-3 col sm-4 col-xs-4 gender-title"><p class="title">Gender : </p>
-                                    </div>
-                                    <div class="col-md-9 col-sm-8 col-xs-8">
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn"><input type="radio" name='gender' checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Male</span></label>
-                                            <label class="btn"><input type="radio" name='gender'><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Female</span></label>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="form-group col-md-1 col-sm-2 col-xs-2 dial-code-div">
                                     <input class="dial-code" type="text" name="dial_code" value="" placeholder="+1..." readonly>
                                 </div>
                                 <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
-                                    <input class="phone_number" type="text" name="phone_number" value="" placeholder="Phone Number...">
+                                    <input class="phone_number" type="text" name="phone_number" value=""
+                                           placeholder="Phone Number..." maxlength="15">
+                                </div>
+
+                                <div class="form-group col-md-6 col-sm-12 col-xs-12 Gender ">
+                                    <div class="col-md-4 col sm-4 col-xs-4 gender-title">
+                                        <p class="title">Gender : </p>
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-xs-8">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn"><input type="radio" name='gender' value="male" checked><i
+                                                        class="fa fa-circle-o fa-x"></i><i
+                                                        class="fa fa-dot-circle-o fa-x"></i><span> Male</span></label>
+                                            <label class="btn"><input type="radio" name='gender' value="female"><i
+                                                        class="fa fa-circle-o fa-x"></i><i
+                                                        class="fa fa-dot-circle-o fa-x"></i><span> Female</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="exp_field">
+                                    <div class="form-group col-md-3 col-sm-12 col-xs-12 exp_years-div">
+                                        <input type="number" class="exp_years" name="exp_years" value="" placeholder="Experience in Years...">
+                                    </div>
+                                    <div class="form-group col-md-9 col-sm-12 col-xs-12 exp_desc-div">
+                                        <input type="text" class="exp_desc" name="first_name" value="" placeholder="Experience Description...">
+                                    </div>
+                                </div>
+
+                                <div class="text-right col-md-4 col-sm-12 col-xs-12 col-md-offset-3">
+                                    <button type="button" class="btn-add-exp"><span class="fa fa-angle-up"></span> Add Experience</button>
                                 </div>
 
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12 text-field">
@@ -76,7 +92,8 @@
 @stop
 
 @section('script')
-    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}"
+            type="text/javascript"></script>
     <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/js/add-instructor.js')}}" type="text/javascript"></script>
 @stop

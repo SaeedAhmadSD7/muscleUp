@@ -3,6 +3,7 @@
 		margin-right: 220px;
 	}	
 }
+
 @media only screen and (min-width: 1169px) and (max-width: 1024px) {
 	.features-services .post.style-three .post-cont{
 		left:28%;
@@ -28,6 +29,23 @@
 		max-width:720px;
 		margin:0 auto 1px;
 		float:none;
+	}
+}
+
+@media only screen and (min-width: 950px) and (max-width : 1280px)  {
+	.dial-code-div {
+		width: 12%;
+	}
+	.number-div{
+		width: 38%;
+	}
+}
+@media only screen and (max-width : 1280px)  {
+	.exp_years-div {
+		width: 30%;
+	}
+	.exp_desc-div{
+		width: 70%;
 	}
 }
 
@@ -275,7 +293,9 @@
 
 
 	.dial-code-div:before,
-	.number-div:before{
+	.number-div:before,
+	.exp_years-div:before,
+	.exp_desc-div:before{
 		content:'';
 		position:absolute;
 		left:0px;
@@ -286,7 +306,9 @@
 	}
 
 	.dial-code-div:after,
-	.number-div:after{
+	.number-div:after,
+	.exp_years-div:after,
+	.exp_desc-div:after{
 		content:'';
 		position:absolute;
 		right:0px;
@@ -295,13 +317,17 @@
 		height:8px;
 		background:rgba(255,255,255,0.60);
 	}
-	.dial-code-div input{
+	.dial-code-div input,
+	.exp_years-div input{
 		padding: 5px 5px!important;
 	}
 
-	.number-div input{
+	.number-div input,
+	.exp_desc-div input{
 		padding: 5px 7px!important;
 	}
+
+
 
 	.geo-location{
         margin-top: 0;
