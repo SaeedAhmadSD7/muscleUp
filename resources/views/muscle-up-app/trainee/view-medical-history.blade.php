@@ -1453,12 +1453,69 @@
                         });
                     });
                 </script>
+                {{--{{dd($med_his)}}--}}
 
                 <div id="page-title">
-                    <h2>Medical history</h2>
-                    {{--<p>Create checklist components for your web applications.</p>--}}
+                    <h2>Medical Detail</h2>
+                    <a class="btn btn-success " href="{{route('edit-trainee-medical',$med_his->id)}}" title="Edit">Edit Detail </a>
                 </div>
 
+                <div class="panel">
+                    <div class="panel-body">
+                        <h3 class="title-hero">Food Allergies detail: </h3>
+
+
+                        <div class="example-box-wrapper">
+                            <ul class="todo-box">
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Egg allergie </label>
+                                    @if ($med_his->egg_allergies == '0')<a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->egg_allergies =='1')<a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Fish Allergie </label>
+                                    @if ($med_his->fish_allergies == '0')<a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->fish_allergies =='1')<a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Peanut Allergie  </label>
+                                    @if ($med_his->peanut_allergies == '0')<a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->peanut_allergies =='1')<a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Treenut Allergie  </label>
+                                    @if ($med_his->treenut_allergies == '0')<a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->treenut_allergies =='1')<a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Shellfish Allergie  </label>
+                                    @if ($med_his->shellfish_allergies == '0')<a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->shellfish_allergies =='1')<a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Wheat Allergie  </label>
+                                    @if ($med_his->wheat_allergies == '0')<a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->wheat_allergies =='1')<a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Soy Allergie  </label>
+                                    @if ($med_his->soy_allergies == '0')<a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->soy_allergies =='1')<a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Meat Allergie  </label>
+                                    @if ($med_his->meat_allergies == '0')<a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->meat_allergies =='1')<a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Seed Allergie </label>
+                                    @if ($med_his->seed_allergies == '0')<a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->seed_allergies =='1')<a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="panel">
                     <div class="panel-body">
@@ -1473,100 +1530,87 @@
                                     @elseif($med_his->asthma =='1')<a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
                                 </li>
                                 <li class="border-red">
-                                    <label for="todo-1">This is an example task that i need to finish</label>
+                                    <label for="todo-1">Do you have Diabetes</label>
                                     @if ($med_his->diabetes == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
                                     @elseif($med_his->diabetes == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
                                 </li>
-
-
-
-
-
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have blood Pressure</label>
+                                    @if ($med_his->blood_pressure == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->blood_pressure == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Cholesterol</label>
+                                    @if ($med_his->cholesterol == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->cholesterol == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Heart Murmur</label>
+                                    @if ($med_his->heart_murmur == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->heart_murmur == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have knee Problem</label>
+                                    @if ($med_his->knee_problems == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->knee_problems == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have arthritics</label>
+                                    @if ($med_his->arthritis == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->arthritis == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Dizziness</label>
+                                    @if ($med_his->dizziness == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->dizziness == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have back Pain </label>
+                                    @if ($med_his->back_pain == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->back_pain == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Neck pain</label>
+                                    @if ($med_his->neck_pain == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->neck_pain == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have kidney Condition</label>
+                                    @if ($med_his->kidney_condition == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->kidney_condition == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Liver condition</label>
+                                    @if ($med_his->liver_condition == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->liver_condition == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Heart palpitation</label>
+                                    @if ($med_his->heart_palpitation == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->heart_palpitation == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you have Glandular fever</label>
+                                    @if ($med_his->glandular_fever == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->glandular_fever == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you Smoke</label>
+                                    @if ($med_his->smoke == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->smoke == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
+                                <li class="border-red">
+                                    <label for="todo-1">Do you Drink</label>
+                                    @if ($med_his->drink == '0') <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a>
+                                    @elseif($med_his->drink == '1') <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>@endif
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
 
-                <div class="content-box mrg25B">
-                    <h3 class="content-box-header bg-blue text-left"><i class="glyph-icon icon-comments"></i> Sortable checklist</h3>
 
-
-                    <div class="content-box-wrapper">
-                        <div class="scrollable-content scrollable-nice scrollable-medium">
-                            <ul class="todo-box todo-sort">
-                                <li class="border-red">
-                                    <div class="glyph-icon sort-handle icon-ellipsis-v">
-                                    </div>
-                                    <input id="sec-todo-1" name="sec-todo-1" type="checkbox"><label for="sec-todo-1">This is an example task that i need to finish</label><span class="bs-label bg-red" title="">Overdue</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
-
-
-                                <li class="border-orange">
-                                    <div class="glyph-icon sort-handle icon-ellipsis-v">
-                                    </div>
-                                    <input id="sec-todo-2" name="sec-todo-2" type="checkbox"><label for="sec-todo-2">Update server to a newer version</label><span class="bs-label bg-green" title="">2 Weeks</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
-
-
-                                <li class="border-blue">
-                                    <div class="glyph-icon sort-handle icon-ellipsis-v">
-                                    </div>
-                                    <input id="sec-todo-3" name="sec-todo-3" type="checkbox"><label for="sec-todo-3">Add more awesome template features</label><span class="bs-label bg-blue" title="">Tomorrow</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
-
-
-                                <li class="border-purple">
-                                    <div class="glyph-icon sort-handle icon-ellipsis-v">
-                                    </div>
-                                    <input id="sec-todo-4" name="sec-todo-4" type="checkbox"><label for="sec-todo-4">Never forget to buy milk</label><span class="bs-label bg-black" title="">Today</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
-
-
-                                <li class="border-red">
-                                    <div class="glyph-icon sort-handle icon-ellipsis-v">
-                                    </div>
-                                    <input id="sec-todo-11" name="sec-todo-11" type="checkbox"><label for="sec-todo-11">This is an example task that i need to finish</label><span class="bs-label bg-red" title="">Overdue</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
-
-
-                                <li class="border-orange">
-                                    <div class="glyph-icon sort-handle icon-ellipsis-v">
-                                    </div>
-                                    <input id="sec-todo-22" name="sec-todo-22" type="checkbox"><label for="sec-todo-22">Update server to a newer version</label><span class="bs-label bg-green" title="">2 Weeks</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
-
-
-                                <li class="border-blue">
-                                    <div class="glyph-icon sort-handle icon-ellipsis-v">
-                                    </div>
-                                    <input id="sec-todo-33" name="sec-todo-33" type="checkbox"><label for="sec-todo-33">Add more awesome template features</label><span class="bs-label bg-blue" title="">Tomorrow</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
-
-
-                                <li class="border-azure">
-                                    <div class="glyph-icon sort-handle icon-ellipsis-v">
-                                    </div>
-                                    <input id="sec-todo-5" name="sec-todo-5" type="checkbox"><label for="sec-todo-5">Respond to all helpdesk questions</label><span class="bs-label bg-purple" title="">Label 2</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
-
-
-                                <li class="border-green">
-                                    <div class="glyph-icon sort-handle icon-ellipsis-v">
-                                    </div>
-                                    <input id="sec-todo-6" name="sec-todo-6" type="checkbox"><label for="sec-todo-6">Fix bugs for future releases</label><span class="bs-label bg-azure" title="">Label 2</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
-
-
-                                <li class="border-blue-alt">
-                                    <div class="glyph-icon sort-handle icon-ellipsis-v">
-                                    </div>
-                                    <input id="sec-todo-7" name="sec-todo-7" type="checkbox"><label for="sec-todo-7">Clean up the system directory</label><span class="bs-label bg-blue-alt" title="">Label 2</span> <a class="btn btn-xs btn-danger float-right" href="#" title=""><i class="glyph-icon icon-remove"></i></a> <a class="btn btn-xs btn-success float-right" href="#" title=""><i class="glyph-icon icon-check"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

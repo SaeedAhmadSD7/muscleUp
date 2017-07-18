@@ -46,9 +46,18 @@ class TraineeController extends Controller
 
 
 
-      public  function  medial_history(Request $request) {
+    public function medical()
+    {
+//        dd($userid= Auth::user()->id);
+//        $trainee = Trainee::find($userid);
+        return view('muscle-up-app.trainee.medical-history');
+    }
+
+
+    public  function  medial_history(Request $request) {
 
           MedicalHistory::create($request->all());
+
 
           Session::flash('success','Your profile was successfully updated');
 
@@ -57,29 +66,35 @@ class TraineeController extends Controller
       }
 
 
-      public  function view_medical_history($id){
+    public  function view_medical_history($id){
 
         $medical_history = MedicalHistory::find($id);
 
 
         return view('muscle-up-app.trainee.view-medical-history')->with('med_his',$medical_history);
       }
+    public function edit_medical_history($id){
+          $medical_history= MedicalHistory::find($id);
+
+          return view('muscle-up-app.trainee.edit-medical-history')->with('med_his',$medical_history);
+    }
 
 
-      public function inbox(){
+
+    public function inbox(){
           $trainee = Trainee ::all();
           return view('muscle-up-app.trainee.trainee-list')->with('trainee', $trainee);
       }
 
-      public function trainee_detail($id){
+
+    public function trainee_detail($id){
           $trainee= Trainee::find($id);
           $user = User::find($trainee->user_id);
           return view('muscle-up-app.trainee.trainee-list-detail')->with(['trainee'=>$trainee,'email'=>$user->email]);
 
       }
 
-
-        public function index()
+    public function index()
     {
         return view('muscle-up-app.trainee.index');
     }
@@ -127,11 +142,6 @@ class TraineeController extends Controller
 
 
         return redirect()->route('gym');
-    }
-
-    public function medical()
-    {
-        return view('muscle-up-app.trainee.medical-history');
     }
 
 

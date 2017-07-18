@@ -68,4 +68,8 @@ class Trainee extends Model
     {
         return $this->belongsTo('App\Models\Instructor');
     }
+    public function medicalhistory(){
+        return $this->hasOne(MedicalHistory::class);
+    }
+
 }

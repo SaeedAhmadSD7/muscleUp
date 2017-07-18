@@ -14,4 +14,8 @@ class MedicalHistory extends Model
 
 
     ];
+
+    public function trainee(){
+        return $this->belongsTo(Trainee::clas);
+    }
 }

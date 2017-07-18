@@ -15,6 +15,7 @@ class CreateMedicalHistoriesTable extends Migration
     {
         Schema::create('medical_histories', function (Blueprint $table) {
             $table->increments('id');
+//            $table->string('trainee_id');
             $table->boolean('asthma');
             $table->boolean('diabetes');
             $table->boolean('blood_pressure');
