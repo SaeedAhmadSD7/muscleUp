@@ -21,6 +21,7 @@ body {
     white-space: pre;
 
 }
+
 li:hover > a,
 .main-menu .navbar-nav > li.current > a,
 .main-menu .navbar-nav > li.current-menu-item > a,
@@ -32,7 +33,17 @@ li:hover > a,
 
 .menu-element{
     padding-top: 4px;
+    padding-bottom: 4px;
 }
+
+.menu-element > a {
+    margin: auto;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 
 .menu-element:after {
     content: '';
@@ -67,7 +78,6 @@ li > a:hover,
 li > a:active,
 li > a:focus {
     background: none;
-    color: #fb6648;
     opacity: 1;
 }
 
@@ -76,8 +86,14 @@ li > a:focus {
 }
 
 #page-header {
-    background: #fff;
+    background: #0C172A;
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05)
+}
+
+#page-shadow{
+    background: rgba(0, 0, 0, .22);
+    width: 100%;
+    height: 100%;
 }
 
 #header-logo {

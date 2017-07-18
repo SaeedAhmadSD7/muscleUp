@@ -64,7 +64,7 @@
         width: 32px;
         height: 32px;
         margin-right: 10px;
-        margin-left: 0
+        margin-left: 10px;
     }
     #header-logo .logo-content-small {
         display: block
@@ -146,10 +146,10 @@
         width: 32px;
         height: 32px;
         margin-right: 10px;
-        margin-left: 0
+        margin-left: 10px;
     }
     #header-logo, #page-sidebar.collapse, #theme-options {
-        display: block
+        display: block;
     }
 }
 
@@ -171,25 +171,25 @@
         z-index: 555
     }
     #page-content-wrapper {
-        padding-top: 0
+        padding-top: 0;
     }
     #page-header {
-        padding-left: 58px
+        padding-left: 0;
     }
     #page-content {
-        margin-left: 0
+        margin-left: 0;
     }
     #page-sidebar {
         width: 100%;
         position: relative;
-        display: none
+        display: none;
     }
     #page-sidebar #sidebar-menu>li .bs-label {
-        display: none
+        display: none;
     }
     #page-sidebar #sidebar-menu>li>a span {
         visibility: visible;
-        transition-delay: .2s
+        transition-delay: .2s;
     }
     #page-sidebar #sidebar-menu>li>a {
         line-height: 32px;

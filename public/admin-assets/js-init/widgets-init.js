@@ -3,22 +3,24 @@ $(function() {
     $('a[href="#"]').click(function(a) {
         a.preventDefault()
     })
-}), $(function() {
-    "use strict";
-    $(".todo-box li input").on("click", function() {
-        $(this).parent().toggleClass("todo-done")
-    })
-}), $(function() {
-    "use strict";
-    var a = 0;
-    $(".timeline-scroll .tl-row").each(function(b, c) {
-        var d = $(c);
-        a += d.outerWidth() + parseInt(d.css("margin-left"), 10) + parseInt(d.css("margin-right"), 10)
-    }), $(".timeline-horizontal", this).width(a)
-}), $(function() {
-    "use strict";
-    $(".input-switch-alt").simpleCheckbox()
-}), $(function() {
+}),
+//     $(function() {
+//     "use strict";
+//     $(".todo-box li input").on("click", function() {
+//         $(this).parent().toggleClass("todo-done")
+//     })
+// }), $(function() {
+//     "use strict";
+//     var a = 0;
+//     $(".timeline-scroll .tl-row").each(function(b, c) {
+//         var d = $(c);
+//         a += d.outerWidth() + parseInt(d.css("margin-left"), 10) + parseInt(d.css("margin-right"), 10)
+//     }), $(".timeline-horizontal", this).width(a)
+// }), $(function() {
+//     "use strict";
+//     $(".input-switch-alt").simpleCheckbox()
+// }),
+    $(function() {
     "use strict";
     $(".scrollable-slim").slimScroll({
         color: "#8da0aa",
@@ -69,9 +71,11 @@ $(function() {
     }).click(function(a) {
         a.preventDefault()
     })
-}), $(document).ready(function() {
-    $.material.init()
-}), $(function() {
+}),
+//     $(document).ready(function() {
+//     $.material.init()
+// }),
+    $(function() {
     "use strict";
     $(".popover-button-default").popover({
         container: "body",

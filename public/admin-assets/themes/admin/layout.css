@@ -68,7 +68,7 @@
 #header-nav-left .user-account-btn {
     height: 28px;
     line-height: 28px;
-    margin: 15px 0 0
+    margin: 15px 15px 0 0;
 }
 
 #header-nav-left .user-account-btn>a {
@@ -230,7 +230,7 @@
     width: 32px;
     height: 32px;
     margin-right: 10px;
-    margin-left: 0;
+    margin-left: 10px;
     border-radius: 3px;
     text-align: center;
     opacity: .3;

@@ -11,7 +11,7 @@
                 <ul id="sidebar-menu">
                     <li class="header"><span>Overview</span></li>
                     <li class="menu-element">
-                        <a class="col-md-10 col-md-offset-2"><i class="glyph-icon icon-linecons-tv"></i><span> @yield('user_type') Dashboard</span></a>
+                        <a href="@yield('dashboard_link')"><i class="glyph-icon icon-linecons-tv"></i><span> @yield('user_type') Dashboard</span></a>
                     </li>
                     @yield('sidebar_content')
                 </ul>
