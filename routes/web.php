@@ -134,6 +134,7 @@ Route::get('trainee/medical',['as'=>'trainee-medical','uses'=>'MuscleUpApp\Train
 Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'MuscleUpApp\TraineeController@medial_history']);
 Route::get('trainee/view/medical/{id}',['as'=>'trainee-view-medical','uses'=>'MuscleUpApp\TraineeController@view_medical_history']);
 Route::get('trainee/medical/edit/{id}',['as'=>'edit-trainee-medical','uses'=>'MuscleUpApp\TraineeController@edit_medical_history']);
+Route::post('trainee/medical/update/{id}',['as'=>'trainee-medical-update','uses'=>'MuscleUpApp\TraineeController@medical_history_update']);
 
 
 /*
@@ -146,7 +147,6 @@ Route::get('/Admin/Inbox/Message/Accept/{id}',['as'=>'Admin-Message-Accept','use
 
 
 //WorkoutPlan
-Route::get('/create/workoutplan',['as'=>'create/workoutplan','uses'=>'MuscleUpApp\WorkoutPlanController@create']);
 
 
 

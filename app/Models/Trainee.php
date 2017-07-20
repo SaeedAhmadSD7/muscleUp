@@ -8,68 +8,72 @@ class Trainee extends Model
 {
     protected $fillable = ["first_name","last_name","dial_code","phone_number","birth_date","gender","address"];
 
-    function gym(){
+    public function gym(){
         return $this-> belongsTo( Gym:: class);
     }
 
-    function employee(){
+    public function employee(){
         return $this->belongsTo(Employee:: class);
     }
 
-    function feeInvoice()
+    public function feeInvoice()
     {
         return $this->hasMany(FeeInvoice:: class);
     }
 
-    function deals()
+    public function deals()
     {
         return $this->hasOne(Deal:: class);
     }
 
-    function services()
+    public function services()
     {
         return $this->hasMany(Service:: class);
     }
 
-    function userType()
+    public function userType()
     {
         return $this->belongsTo(UserType:: class);
     }
 
-    function wpAssign()
+    public function wpAssign()
     {
         return $this->hasOne(WpAssign:: class);
     }
 
-    function wpDayDetail()
+    public function wpDayDetail()
     {
         return $this->hasMany(WpDayDetail:: class);
     }
 
-    function batches()
+    public function batches()
     {
         return $this->belongsToMany(Batch:: class);
     }
 
-    function bootCamp()
+    public function bootCamp()
     {
         return $this->belongsToMany(BootCamp:: class);
     }
 
-    function measurements()
+    public function measurements()
     {
         return $this->hasOne(Measurement:: class);
     }
-    function user(){
+    public function user(){
         return $this->belongsTo(user::class);
     }
 
     public function instructor()
     {
-        return $this->belongsTo('App\Models\Instructor');
+        return $this->belongsTo(Instructor::Class);
     }
+
     public function medicalhistory(){
         return $this->hasOne(MedicalHistory::class);
     }
+    public function workout(){
+        return $this->hasOne(Workout::class);
 
+    }
 }
