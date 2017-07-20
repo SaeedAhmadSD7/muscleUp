@@ -1941,14 +1941,13 @@
                             <ul class="list-group row list-group-icons">
                                 <li class="col-md-3 active">
                                     <a href="{{route('trainee-personal-detail', $trainee->user_id)}}" class="list-group-item" data-toggle="tab" ><i class="glyph-icon font-red icon-bullhorn"></i>
-                                        Personal Information</button>
+                                        Personal Information</a>
                                 </li>
 
 
                                 <li class="col-md-3">
-                                    <a class="list-group-item" data-toggle="tab" href=
-                                    "#tab-example-1"><i class="glyph-icon icon-dashboard"></i> Account
-                                        Settings</a>
+                                    <a href="{{route('trainee-view-medical',$trainee->id)}}" class="list-group-item" data-toggle="tab" href=
+                                    "#tab-example-1"><i class="glyph-icon icon-dashboard"></i> Medical Detail</a>
                                 </li>
 
 

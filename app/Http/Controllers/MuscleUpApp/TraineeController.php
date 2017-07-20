@@ -75,10 +75,17 @@ class TraineeController extends Controller
       }
     public function edit_medical_history($id){
           $medical_history= MedicalHistory::find($id);
-
           return view('muscle-up-app.trainee.edit-medical-history')->with('med_his',$medical_history);
     }
+    public function medical_history_update(Request $request,$id){
+        $medical_history= MedicalHistory::find($id);
 
+
+        $medical_history->update($request->toArray());
+        $medical_history->save();
+
+        return redirect()->route('trainee-view-medical',$medical_history->id);
+    }
 
 
     public function inbox(){
