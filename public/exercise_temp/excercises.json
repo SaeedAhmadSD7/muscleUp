@@ -1,0 +1,898 @@
+[{
+        "name":"3/4 Sit-Up",
+         "type":"Strength",
+         "main Muscle worked":" Abdominals",
+         "equipment":"Body Only",
+         "level":"Beginner"
+    },
+    {
+        "name":"90-Degree Jump Squat Twist",
+        "type":"Plyometrics",
+        "main Muscle worked":" Quadriceps",
+        "equipment":"Body Only",
+        "level":"Beginner"
+    },
+    {
+        "name":"90/90 Hamstring",
+        "type":"Stretching",
+        "main Muscle worked":" Hamstrings",
+        "equipment":"Body Only",
+        "level":"Beginner"
+    },
+    {
+        "name":"Ab Crunch Machine",
+        "type":"Strength",
+        "main Muscle worked":"  Abdominals",
+        "equipment":"Machine",
+        "level":" Intermediate"
+    },
+    {
+        "name":"Ab Roller",
+        "type":" Strength",
+        "main Muscle worked":"Abdominals",
+        "equipment":"Other",
+        "level":"  Intermediate"
+    },
+    {
+        "name":"Adductor",
+        "type":" Stretching",
+        "main Muscle worked":" Adductors",
+        "equipment":"Foam Roll",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Groin",
+        "type":" Stretching",
+        "main Muscle worked":"Adductors",
+        "equipment":"None",
+        "level":" Intermediate"
+    },
+    {
+        "name":"Advanced Kettlebell Windmill",
+        "type":" Strength",
+        "main Muscle worked":"Abdominals",
+        "equipment":" Kettlebells",
+        "level":" ntermediate"
+    },
+    {
+        "name":"Alien Squat",
+        "type":"Plyometrics",
+        "main Muscle worked":"Quadriceps",
+        "equipment":" Body Only",
+        "level":" Beginner"
+    },
+    {
+        "name":"All Fours Quad Stretch",
+        "type":"Stretching",
+        "main Muscle worked":" Quadriceps",
+        "equipment":" Body Only",
+        "level":"  Intermediate"
+    },
+    {
+        "name":"Alternate Hammer Curl",
+        "type":" Strength",
+        "main Muscle worked":" Biceps",
+        "equipment":"Dumbbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Alternate Heel Touchers",
+        "type":"Strength",
+        "main Muscle worked":"  Abdominals",
+        "equipment":"Body Only",
+        "level":"Beginner"
+    },
+    {
+        "name":"Alternate Incline Dumbbell Curl",
+        "type":"Strength",
+        "main Muscle worked":"Biceps",
+        "equipment":"Dumbbell",
+        "level":" Beginner"
+    },
+    {
+        "name":"Alternating Cable Shoulder Press",
+        "type":"Strength",
+        "main Muscle worked":"Shoulders",
+        "equipment":"Cable",
+        "level":"Beginner"
+    },
+    {
+        "name":"Alternating Deltoid Raise",
+        "type":"Strength",
+        "main Muscle worked":"Shoulders",
+        "equipment":"Dumbbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Alternating Floor Press",
+        "type":" Strength",
+        "main Muscle worked":"Chest",
+        "equipment":" Kettlebells",
+        "level":"Beginner"
+    },
+    {
+        "name":"Alternating Kettlebell Press",
+        "type":"  Strength",
+        "main Muscle worked":"Shoulders",
+        "equipment":"  Kettlebells",
+        "level":"  Intermediate"
+    },
+    {
+        "name":"Alternating Kettlebell Row",
+        "type":"  Strength",
+        "main Muscle worked":"Middle Back",
+        "equipment":"Kettlebells",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Alternating Leg Swing",
+        "type":"  Stretching",
+        "main Muscle worked":"Hamstrings",
+        "equipment":"Body Only",
+        "level":"Beginner"
+    },
+    {
+        "name":"Alternating Renegade Row",
+        "type":"Strength",
+        "main Muscle worked":"Middle Back",
+        "equipment":"Kettlebells",
+        "level":"Expert"
+    },
+    {
+        "name":"Ankle Circles",
+        "type":" Stretching",
+        "main Muscle worked":"Calves",
+        "equipment":" None",
+        "level":"Beginner"
+    },
+    {
+        "name":"Anterior Tibialis-SMR",
+        "type":"  Stretching",
+        "main Muscle worked":"Calves",
+        "equipment":" Other",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Anti-Gravity Press",
+        "type":"  Strength",
+        "main Muscle worked":"Shoulders",
+        "equipment":" Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Arm Circles",
+        "type":"   Stretching",
+        "main Muscle worked":"Shoulders",
+        "equipment":" None",
+        "level":"Beginner"
+    },
+
+    {
+        "name":"Arnold Dumbbell Press",
+        "type":"Strength",
+        "main Muscle worked":"Shoulders",
+        "equipment":" Dumbbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Around The World Pull-Up",
+        "type":"Strength",
+        "main Muscle worked":" Lats",
+        "equipment":"Other",
+        "level":" Expert"
+    },
+    {
+        "name":"Around The Worlds",
+        "type":"Strength",
+        "main Muscle worked":" Chest",
+        "equipment":"Dumbbell",
+        "level":"  Intermediate"
+    },
+    {
+        "name":"Assisted Chin-Up",
+        "type":"Strength",
+        "main Muscle worked":" Lats",
+        "equipment":"Bands",
+        "level":" Beginner"
+    },
+    {
+        "name":"Atlas Stone Trainer",
+        "type":"Strongman",
+        "main Muscle worked":" Lower Back",
+        "equipment":"Other",
+        "level":" Intermediate"
+    },
+    {
+        "name":"Atlas Stones",
+        "type":" Strongman",
+        "main Muscle worked":" Lower Back",
+        "equipment":"Other",
+        "level":" Expert"
+    },
+    {
+        "name":"Axle Clean And Press",
+        "type":" Strongman",
+        "main Muscle worked":"Shoulders",
+        "equipment":"Barbell",
+        "level":"  Expert"
+    },
+    {
+        "name":"Axle Deadlift",
+        "type":" Strongman",
+        "main Muscle worked":"Lower Back",
+        "equipment":"Other",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Back Flyes",
+        "type":"  Strength",
+        "main Muscle worked":"Shoulders",
+        "equipment":"Bands",
+        "level":"Beginner"
+    },
+    {
+        "name":"Backward Drag",
+        "type":"Strongman",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Other",
+        "level":"Beginner"
+    },
+    {
+        "name":"Backward Medicine Ball Throw",
+        "type":"Plyometrics",
+        "main Muscle worked":"Shoulders",
+        "equipment":" Medicine Ball",
+        "level":"Beginner"
+    },
+    {
+        "name":"Balance Board",
+        "type":" Strength",
+        "main Muscle worked":" Calves",
+        "equipment":" Other",
+        "level":"Beginner"
+    },
+    {
+        "name":"Ball Leg Curl",
+        "type":" Strength",
+        "main Muscle worked":"  Hamstrings",
+        "equipment":" Exercise Ball",
+        "level":"Beginner"
+    },
+    {
+        "name":"Band Assisted Pull-Up",
+        "type":" Strength",
+        "main Muscle worked":"  Lats",
+        "equipment":" Other",
+        "level":"Beginner"
+    },
+    {
+        "name":"Band Good Morning",
+        "type":" Powerlifting",
+        "main Muscle worked":"Hamstrings",
+        "equipment":" Bands",
+        "level":"Beginner"
+    },
+    {
+        "name":"Band Hip Adductions",
+        "type":"  Strength",
+        "main Muscle worked":"Adductors",
+        "equipment":" Bands",
+        "level":"Beginner"
+    },
+    {
+        "name":"Band Pull Apart",
+        "type":"  Strength",
+        "main Muscle worked":"Shoulders",
+        "equipment":" Bands",
+        "level":"Beginner"
+    },
+    {
+        "name":"Band Skull Crusher",
+        "type":"  Strength",
+        "main Muscle worked":" Triceps",
+        "equipment":" Bands",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bar Push-Up Smith Machine",
+        "type":"  Plyometrics",
+        "main Muscle worked":"  Chest",
+        "equipment":" Other",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bar Throw And Press",
+        "type":"Strength",
+        "main Muscle worked":"Chest",
+        "equipment":"  Machine",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Barbell Ab Rollout",
+        "type":"Strength",
+        "main Muscle worked":"Abdominals",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Barbell Ab Rollout On Knees",
+        "type":"Strength",
+        "main Muscle worked":"Abdominals",
+        "equipment":"Barbell",
+        "level":"Expert"
+    },
+    {
+        "name":"Barbell Bench Press Medium Grip",
+        "type":"Strength",
+        "main Muscle worked":"Abdominals",
+        "equipment":"Barbell",
+        "level":" Beginner"
+    },
+    {
+        "name":" Barbell Bench Press Wide Grip",
+        "type":"Strength",
+        "main Muscle worked":"Chest",
+        "equipment":"Barbell",
+        "level":" Beginner"
+    },
+    {
+        "name":"Barbell Curl",
+        "type":"Strength",
+        "main Muscle worked":" Biceps",
+        "equipment":"Barbell",
+        "level":" Beginner"
+    },
+    {
+        "name":"Barbell Curls Lying Against An Incline",
+        "type":"Strength",
+        "main Muscle worked":" Biceps",
+        "equipment":"Barbell",
+        "level":" Beginner"
+    },
+    {
+        "name":"Barbell Deadlift",
+        "type":"Strength",
+        "main Muscle worked":" Hamstrings",
+        "equipment":"Barbell",
+        "level":" Beginner"
+    },
+    {
+        "name":"Barbell Deadlift Bent Row Complex",
+        "type":"Strength",
+        "main Muscle worked":" Middle Back",
+        "equipment":"Barbell",
+        "level":"  Intermediate"
+    },
+    {
+        "name":"Barbell Front Raise",
+        "type":"Strength",
+        "main Muscle worked":"Shoulders",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Barbell Front-To-Back Squat",
+        "type":"Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Barbell Full Squat",
+        "type":"Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Barbell Glute Bridge",
+        "type":"Powerlifting",
+        "main Muscle worked":"Glutes",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Barbell Guillotine Bench Press",
+        "type":"Strength",
+        "main Muscle worked":"Chest",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Barbell Hack Squat",
+        "type":"Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Barbell Hip Thrust",
+        "type":"Powerlifting",
+        "main Muscle worked":" Glutes",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Barbell Incline Bench Press Medium Grip",
+        "type":" Strength",
+        "main Muscle worked":" Chest",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Barbell Incline Shoulder Raise",
+        "type":" Strength",
+        "main Muscle worked":" Shoulders",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Barbell Lunge",
+        "type":" Strength",
+        "main Muscle worked":" Quadriceps",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Barbell Rear Delt Row",
+        "type":" Strength",
+        "main Muscle worked":" Shoulders",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+
+    {
+        "name":"Barbell Reverse Lunge",
+        "type":" Strength",
+        "main Muscle worked":" Quadriceps",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Barbell Rollout from Bench",
+        "type":" Strength",
+        "main Muscle worked":" Abdominals",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Barbell Seated Calf Raise",
+        "type":" Strength",
+        "main Muscle worked":" Calves",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Barbell Shoulder Press",
+        "type":" Strength",
+        "main Muscle worked":"  Shoulders",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Barbell Shrug",
+        "type":" Strength",
+        "main Muscle worked":"  Traps",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Barbell Shrug Behind The Back",
+        "type":" Strength",
+        "main Muscle worked":"  Traps",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Barbell Side Bend",
+        "type":" Strength",
+        "main Muscle worked":"Abdominals",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Barbell Side Split Squat",
+        "type":" Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Barbell Squat",
+        "type":" Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Barbell Squat To A Bench",
+        "type":" Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Barbell",
+        "level":"Expert"
+    },
+    {
+        "name":"Barbell Squat To A Box",
+        "type":" Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Barbell Step Ups",
+        "type":" Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Barbell",
+        "level":" Intermediate"
+    },
+    {
+        "name":"Barbell Thruster",
+        "type":" Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Barbell",
+        "level":" Intermediate"
+    },
+    {
+        "name":"Barbell Walking Lunge",
+        "type":" Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+
+    {
+        "name":"Battling Ropes",
+        "type":" Strength",
+        "main Muscle worked":"Shoulders",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bear Crawl Shoulder Tap",
+        "type":"  Strength",
+        "main Muscle worked":"Shoulders",
+        "equipment":"Body Only",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Bear Crawl Sled Drags",
+        "type":"  Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Other",
+        "level":"Beginner"
+    },
+    {
+        "name":"Behind Head Chest Stretch",
+        "type":"  Strength",
+        "main Muscle worked":"Chest",
+        "equipment":"Other",
+        "level":"Expert"
+    },
+    {
+        "name":"Bench Dips",
+        "type":"  Strength",
+        "main Muscle worked":"Triceps",
+        "equipment":"Body Only",
+        "level":"Expert"
+    },
+    {
+        "name":"Bench Jump",
+        "type":"  Plyometrics",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Body Only",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Bench Press Powerlifting",
+        "type":"  Powerlifting",
+        "main Muscle worked":"Triceps",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Bench Press With Bands",
+        "type":"Strength",
+        "main Muscle worked":"Chest",
+        "equipment":"Bands",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bench Press with Chains",
+        "type":"Powerlifting",
+        "main Muscle worked":"Triceps",
+        "equipment":"Barbell",
+        "level":"Expert"
+    },
+    {
+        "name":"Bench Press With Short Bands",
+        "type":"Powerlifting",
+        "main Muscle worked":" Chest",
+        "equipment":" Bands",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Bench Sprint",
+        "type":"Plyometrics",
+        "main Muscle worked":" Quadriceps",
+        "equipment":" Other",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bent Over Barbell Row",
+        "type":"Strength",
+        "main Muscle worked":" Middle Back",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bent Over Dumbbell Rear Delt Raise With Head On Bench",
+        "type":"Strength",
+        "main Muscle worked":" Shoulders",
+        "equipment":" Dumbbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bent Over Low-Pulley Side Lateral",
+        "type":"Strength",
+        "main Muscle worked":" Shoulders",
+        "equipment":"  Cable",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bent Over One-Arm Long Bar Row",
+        "type":"Strength",
+        "main Muscle worked":" Middle Back",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bent Over Two-Arm Long Bar Row",
+        "type":"Strength",
+        "main Muscle worked":" Middle Back",
+        "equipment":"Barbell",
+        "level":" Intermediate"
+    },
+    {
+        "name":"Bent Over Two-Dumbbell Row",
+        "type":"Strength",
+        "main Muscle worked":" Middle Back",
+        "equipment":"Dumbbell",
+        "level":" Beginner"
+    },
+    {
+        "name":"Bent Press",
+        "type":"Strength",
+        "main Muscle worked":" Abdominals",
+        "equipment":"Kettlebells",
+        "level":"Expert"
+    },
+    {
+        "name":"Bent-Arm Barb",
+        "type":"Strength",
+        "main Muscle worked":"  Lats",
+        "equipment":"Barbell",
+        "level":"intermediate"
+    },
+
+    {
+        "name":"Bent-Arm Dumbbell Pullover",
+        "type":"Strength",
+        "main Muscle worked":"Chest",
+        "equipment":"Dumbbell",
+        "level":"intermediate"
+    },
+    {
+        "name":"Bent-Knee Hip Raise",
+        "type":"Strength",
+        "main Muscle worked":"Abdominals",
+        "equipment":"Body Only",
+        "level":"Beginner"
+    },
+    {
+        "name":"Biceps Curl To Shoulder Press",
+        "type":"Strength",
+        "main Muscle worked":"Biceps",
+        "equipment":"Dumbbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Bicycling",
+        "type":"Cardio",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Other",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bicycling, Stationary",
+        "type":"Cardio",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Machine",
+        "level":"Beginner"
+    },
+    {
+        "name":"Board Press",
+        "type":"Powerlifting",
+        "main Muscle worked":"Triceps",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Body Tricep Press",
+        "type":"Strength",
+        "main Muscle worked":"Triceps",
+        "equipment":"Body Only",
+        "level":"Beginner"
+    },
+    {
+        "name":"Body Triceps Press Using Flat Bench",
+        "type":"Strength",
+        "main Muscle worked":"Triceps",
+        "equipment":"Other",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Body-Up",
+        "type":"Strength",
+        "main Muscle worked":"Triceps",
+        "equipment":"Body Only",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Bodyweight Flyes",
+        "type":"Strength",
+        "main Muscle worked":"Chest",
+        "equipment":"E-Z Curl Bar",
+        "level":"Intermediate"
+    },
+
+    {
+        "name":"Bodyweight Lunge",
+        "type":"Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Body Only",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bodyweight Squat",
+        "type":"Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Body Only",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bodyweight Walking Lunge",
+        "type":"Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"None",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bosu Ball Cable Crunch With Side Bends",
+        "type":"Strength",
+        "main Muscle worked":" Abdominals",
+        "equipment":"Cable",
+        "level":"Beginner"
+    },
+
+    {
+        "name":"Bosu Ball Crunch",
+        "type":"Strength",
+        "main Muscle worked":" Abdominals",
+        "equipment":"Exercise Ball",
+        "level":"Beginner"
+    },
+    {
+        "name":"Bosu Ball Push-Up",
+        "type":"Strength",
+        "main Muscle worked":" Chest",
+        "equipment":"Exercise Ball",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Bosu Ball Squat",
+        "type":"Strength",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Exercise Ball",
+        "level":"Intermediate"
+    },
+
+    {
+        "name":"Bottoms Up",
+        "type":"Strength",
+        "main Muscle worked":" Abdominals",
+        "equipment":"Body Only",
+        "level":"Beginner"
+    },
+
+    {
+        "name":"Bottoms-Up Clean From The Hang Position",
+        "type":"Strength",
+        "main Muscle worked":" Forearms",
+        "equipment":" Kettlebells",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Box Jump",
+        "type":"Plyometrics",
+        "main Muscle worked":" Hamstrings",
+        "equipment":" Other",
+        "level":"Beginner"
+    },
+    {
+        "name":"Box Skip",
+        "type":"Plyometrics",
+        "main Muscle worked":" Hamstrings",
+        "equipment":" Other",
+        "level":"Beginner"
+    },
+    {
+        "name":"Box Squat",
+        "type":"Plyometrics",
+        "main Muscle worked":" Quadriceps",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Box Squat with Bands",
+        "type":"Plyometrics",
+        "main Muscle worked":" Quadriceps",
+        "equipment":"Barbell",
+        "level":"Expert"
+    },
+    {
+        "name":"Box Squat with Chains",
+        "type":"Strength",
+        "main Muscle worked":" Quadriceps",
+        "equipment":"Barbell",
+        "level":"Expert"
+    },
+    {
+        "name":"Brachialis-SMR",
+        "type":"Stretching",
+        "main Muscle worked":" Biceps",
+        "equipment":"Foam Roll",
+        "level":" Intermediate"
+    },
+    {
+        "name":"Bradford",
+        "type":"Strength",
+        "main Muscle worked":" Shoulders",
+        "equipment":"Barbell",
+        "level":"Beginner"
+    },
+    {
+        "name":"Breakdancer",
+        "type":"Strength",
+        "main Muscle worked":" Abdominals",
+        "equipment":"Body Only",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Burpee",
+        "type":"Cardio",
+        "main Muscle worked":" Quadriceps",
+        "equipment":"Body Only",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Burpee Box Jump",
+        "type":"Plyometrics",
+        "main Muscle worked":" Quadriceps",
+        "equipment":"Other",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Burpee Over Barbell",
+        "type":"Plyometrics",
+        "main Muscle worked":"Quadriceps",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+    {
+        "name":"Burpee Pull-Up",
+        "type":"Plyometrics",
+        "main Muscle worked":"Lats",
+        "equipment":"Barbell",
+        "level":"Intermediate"
+    },
+]
