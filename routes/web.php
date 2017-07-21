@@ -160,6 +160,7 @@ Route::post('instructor/store',['as'=>'instructor-store','uses'=>'MuscleUpApp\In
 Route::get('/workout',['as'=>'workout-store','uses'=>'MuscleUpApp\WorkoutPlanController@workout']);
 Route::get('/create/workout',['as'=>'create-workout','uses'=>'MuscleUpApp\WorkoutPlanController@create']);
 Route::get('delete-instructor/{id}',['as'=>'delete-instructor','uses'=>'MuscleUpApp\InstructorController@destroy']);
+//Route::get('/create',['as'=>'create','uses'=>'MuscleUpApp\ExerciseController@create']);
 
 
 

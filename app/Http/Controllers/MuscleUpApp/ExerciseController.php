@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Models\Exercise;
-
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
 class ExerciseController extends Controller
@@ -36,7 +36,18 @@ class ExerciseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $exercise = new Exercise();
+        $exercise->id=$request->id;
+        $exercise->name=$request->name;
+        $exercise->name_orignal=$request->name_orignal;
+        $exercise->category=$request->category;
+        $exercise->muscle=$request->muscle;
+        $exercise->muscles_secondary=$request->muscles_secondary;
+        $exercise->equipment=$request->equipment;
+        $exercise->description=$request->description;
+        $exercise->save();
+
+        return redirect()->route('/home');
     }
 
     /**
