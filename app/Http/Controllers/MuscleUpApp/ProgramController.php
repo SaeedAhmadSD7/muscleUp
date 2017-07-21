@@ -25,7 +25,7 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        //
+        return view('muscle-up-app.workout.workout-program');
     }
 
     /**

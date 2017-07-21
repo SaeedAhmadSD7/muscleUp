@@ -1,11 +1,6 @@
 <?php
 
 
-Route::get('test', function (){
-    $params = ['first_name' => 'Abc'];
-    \App\User::saveUser($params);
-});
-
 Auth::routes();
 
 
@@ -146,7 +141,8 @@ Route::get('/Admin/Inbox/Message/Detail/{id}',['as'=>'Admin-Message-Detail','use
 Route::get('/Admin/Inbox/Message/Accept/{id}',['as'=>'Admin-Message-Accept','uses'=>'MuscleUpApp\AdminController@request_accept']);
 
 
-//WorkoutPlan
+//Workout program
+Route::get('/program',['as'=>'program','uses'=>'MuscleUpApp\ProgramController@create']);
 
 
 
