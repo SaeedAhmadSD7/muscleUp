@@ -36,16 +36,22 @@ class ExerciseController extends Controller
      */
     public function store(Request $request)
     {
-        $exercise = new Exercise();
-        $exercise->id=$request->id;
-        $exercise->name=$request->name;
-        $exercise->name_orignal=$request->name_orignal;
-        $exercise->category=$request->category;
-        $exercise->muscle=$request->muscle;
-        $exercise->muscles_secondary=$request->muscles_secondary;
-        $exercise->equipment=$request->equipment;
-        $exercise->description=$request->description;
-        $exercise->save();
+
+        $exercise_Instance = new Exercise();
+        $exercise_list = $exercise_Instance->getList();
+        dd($exercise_list);
+
+
+//        $exercise = new Exercise();
+//        $exercise->id=$request->id;
+//        $exercise->name=$request->name;
+//        $exercise->name_original=$request->name_original;
+//        $exercise->category=$request->category;
+//        $exercise->muscles=$request->muscles;
+//        $exercise->muscles_secondary=$request->muscles_secondary;
+//        $exercise->equipment=$request->equipment;
+//        $exercise->description=$request->description;
+//        $exercise->save();
 
         return redirect()->route('/home');
     }

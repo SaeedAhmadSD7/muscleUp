@@ -1898,7 +1898,11 @@ transform: skewX(-25deg);
     font-size: 15px;
     margin-bottom: 10px;
 }
-
+.w-program-form .reg-form . h2{
+    position: relative;
+    font-size: 32px;
+    line-height: 1.6em;
+}
 .w-program-form .t-reg-top h2 {
     position: relative;
     font-size: 32px;

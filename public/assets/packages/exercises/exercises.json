@@ -1,8 +1,4 @@
-{
-  "count": 134,
-  "next": null,
-  "previous": null,
-  "results": [
+[
     {
       "id": 1,
       "license_author": "wger.de",
@@ -2690,4 +2686,3 @@
       ]
     }
   ]
-}
