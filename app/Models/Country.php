@@ -19,6 +19,7 @@ class Country extends Model
         //Get the countries from the JSON file
         if (sizeof($this->countries) == 0) {
             $this->countries = json_decode(file_get_contents('./Public/assets/packages/countries/countries.json'), true);
+
         }
 
         //Return the countries

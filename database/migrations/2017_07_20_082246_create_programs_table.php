@@ -17,8 +17,6 @@ class CreateProgramsTable extends Migration
             $table->increments('id');
             $table->integer('gym_id');
             $table->string('title',100);
-            $table->UnsignedInteger('duration');
-
             $table->timestamps();
         });
     }
