@@ -6,13 +6,10 @@
     <div class="container-fluid" style="margin: 0; padding: 0;">
         <div class="trainee-reg clearfix">
             <div class="inner">
-
                 <div class="bg-img"></div>
 
-
-                <div class="w-program-form">
-
-                    <div class="t-reg-top">
+                <div class="t-reg-form workout-form">
+                    <div class="t-reg-top workout-top">
                         <h2><span class="space"></span> Make Your Workout Program </h2>
                     </div>
 
