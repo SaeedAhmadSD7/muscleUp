@@ -28,8 +28,8 @@ $(document).ready(function () {
 
     });
 
-    // $('.day_fields section:first-child').fadeIn('slow');
-    //
+    $('.day_fields section:first-child').fadeIn('slow');
+    
     // $('.day_field .day_detail').on('click',function () {
     //     var parent_section = $(this).parent('section');
     //     parent_section.fadeOut(400, function () {
