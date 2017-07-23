@@ -7,11 +7,11 @@
     <title>@yield('title')</title>
     @include('muscle-up-app.includes.frontend._stylesheet')
     @yield('style-sheet')
+    @include('muscle-up-app.includes.frontend._header')
 </head>
 <body>
 
 <div class="page-wrapper">
-    @include('muscle-up-app.includes.frontend._header')
     @include('muscle-up-app.includes._message')
     @yield('content')
 </div>
