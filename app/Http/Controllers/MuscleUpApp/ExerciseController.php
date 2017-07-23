@@ -13,9 +13,9 @@ class ExerciseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function exercise()
     {
-        //
+        return view('muscle-up-app.instructor.exercise');
     }
 
     /**
@@ -64,7 +64,9 @@ class ExerciseController extends Controller
      */
     public function show(Exercise $exercise)
     {
-        //
+        $exercise=Exercise::all();
+
+        return view('muscle-up-app.instructor.exercise')->with('exercise',$exercise);
     }
 
     /**
@@ -73,9 +75,10 @@ class ExerciseController extends Controller
      * @param  \App\Models\Exercise  $exercise
      * @return \Illuminate\Http\Response
      */
-    public function edit(Exercise $exercise)
+    public function edit($id,Exercise $exercise)
     {
-        //
+        $exercise=exercise::find($id);
+        return view('muscle-up-app.instructor.eupdate')->with('exercise',$exercise);
     }
 
     /**
@@ -87,7 +90,18 @@ class ExerciseController extends Controller
      */
     public function update(Request $request, Exercise $exercise)
     {
-        //
+//        $exercise = new Exercise();
+//        $exercise->id=$request->id;
+//        $exercise->name=$request->name;
+//        $exercise->name_original=$request->name_original;
+//        $exercise->category=$request->category;
+//        $exercise->muscles=$request->muscles;
+//        $exercise->muscles_secondary=$request->muscles_secondary;
+//        $exercise->equipment=$request->equipment;
+//        $exercise->description=$request->description;
+//        $exercise->save();
+
+        return redirect()->route('show-exercise');
     }
 
     /**
@@ -96,8 +110,12 @@ class ExerciseController extends Controller
      * @param  \App\Models\Exercise  $exercise
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exercise $exercise)
+    public function destroy($id,Exercise $exercise)
     {
-        //
+        $exercise=Exercise::find($id);
+        $exercise->delete();
+//        dd($service);
+//        Session::flash('Success','Delete Successfully');
+        return redirect()->route('show-exercise');
     }
 }

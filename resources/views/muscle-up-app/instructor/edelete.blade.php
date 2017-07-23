@@ -1,6 +1,6 @@
 @extends('muscle-up-app.layouts.frontend-main')
 
-@section('title','Update Instructor')
+@section('title','Delete Instructor')
 
 @section('style-sheet')
     <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
@@ -16,42 +16,48 @@
 
                 <div class="t-reg-form">
                     <div class="t-reg-top">
-                        <h2><span class="space"></span>Update Instructor</h2>
-                        <h3><span class="space"></span> Please fill in all the information and then click update Instructor.</h3>
+                        <h2><span class="space"></span>Delete Instructor</h2>
+                        <h3><span class="space"></span> Please fill in all the information and then click Delete Instructor.</h3>
                     </div>
+                    {{--@if(Session::has('Success'))--}}
+                    {{--<div class="alert alert-success" role="alert">--}}
+                    {{--<strong>Success:</strong>{{Session::get('Success')}}--}}
+                    {{--</div>--}}
+
+                    {{--@endif--}}
 
                     <div class="reg-form">
-                        <form id="contact-form" role="form" method="post" action="{{route('update-instructor', $instructor->id)}}">
+                        <form id="contact-form" role="form" method="post" action="{{route('delete-exercise', $exercise->id)}}">
                             {{csrf_field()}}
-                            {{ method_field('POST') }}
                             <div class="fields clearfix">
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="text" name="first_name" value="{{ $instructor->first_name }}" placeholder="First Name ...">
+                                    <input type="text" name="first_name" value="{{ $exercise->id }}" placeholder="First id ...">
                                 </div>
 
-                           <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="text" name="last_name" value="{{ $instructor->last_name }}" placeholder="Last Name...">
+                                <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
+                                    <input type="text" name="last_name" value="{{ $exercise->name }}" placeholder="Name...">
                                 </div>
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="email" name="email" value="{{$instructor->email}}" placeholder="Email Address...">
+                                    <input type="text" name="last_name" value="{{ $exercise->name_original }}" placeholder="name_original...">
+                                </div><div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
+                                    <input type="text" name="last_name" value="{{ $exercise->category }}" placeholder="category...">
                                 </div>
+                            </div><div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
+                                <input type="text" name="last_name" value="{{ $exercise->muscles }}" placeholder="muscles...">
+                            </div>
+
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="experience" name="experience" value="{{$instructor->experience}}" placeholder="Total Experience...">
+                                    <input type="text" name="experience" value="{{$exercise->muscles_secondary}}" placeholder="muscles_secondary...">
                                 </div>
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input class="birth-date" type="text" data-field="date" data-format="yyyy-MM-dd" name="birth_date" value="{{$instructor->birth_date}}" placeholder="Date of Birth..." readonly>
-                                    <div class="btn-date"></div>
-                                </div>
-                                <div class="form-group col-md-1 col-sm-2 col-xs-2 dial-code-div">
-                                    <input class="dial-code" type="text" name="dial_code" value="{{$instructor->dial_code}}" placeholder="+1..." readonly>
+
                                 </div>
                                 <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
-                                    <input class="phone_number" type="text" name="phone_number" value="{{$instructor->phone_number}}" placeholder="Phone Number...">
+                                    <input class="phone_number" type="text" name="phone_number" value="{{$exercise->equipment}}" placeholder="equipment...">
                                 </div>
                             </div>
 
                             <div class="address-field">
-                                <input type="text" name="address" value="{{$instructor->address}}" placeholder="Give your Address....." maxlength="250"></input>
+                                <textarea name="address" value="{{$exercise->description}}" placeholder="Give your description....." maxlength="250"></textarea>
                             </div>
                             <div class="form-group col-md-6 col-sm-12 col-xs-12 Gender ">
                                 <div class="col-md-3 col sm-4 col-xs-4 gender-title">
@@ -65,7 +71,7 @@
                                 </div>
 
                             </div>
-                            <div class="text-right col-md-12"><button type="submit"><span class="fa fa-angle-right"></span> Update Instructor</button></div>
+                            <div class="text-right col-md-12"><button type="submit"><span class="fa fa-angle-right"></span> Delete Instructor</button></div>
 
                         </form>
                     </div>
@@ -78,5 +84,5 @@
 
 @section('script')
     <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/add-trainee.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/t-reg.js')}}" type="text/javascript"></script>
 @stop
