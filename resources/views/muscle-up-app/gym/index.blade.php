@@ -3,6 +3,8 @@
     Gym Dashboard
 @stop
 
+
+
 @section('user_type')
     Admin
 @stop
@@ -36,3 +38,5 @@
         </div>
     </li>
 @stop
+
+@section('content')
