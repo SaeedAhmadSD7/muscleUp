@@ -5,21 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>@yield('title')</title>
-    @include('muscle-up-app.includes.frontend._stylesheet')
+    @include('includes.frontend._stylesheet')
     @yield('style-sheet')
-    @include('muscle-up-app.includes.frontend._header')
+    @include('includes.frontend._header')
 </head>
 <body>
 
 <div class="page-wrapper">
-    @include('muscle-up-app.includes._message')
+    @include('includes._message')
     @yield('content')
 </div>
 </body>
 
 <footer class="main-footer">
-    @include('muscle-up-app.includes.frontend._footer')
-    @include('muscle-up-app.includes.frontend._script')
+    @include('includes.frontend._footer')
+    @include('includes.frontend._script')
     @yield('script')
 </footer>
 
