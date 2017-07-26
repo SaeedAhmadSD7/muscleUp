@@ -1,4 +1,4 @@
-@extends('muscle-up-app.layouts.frontend-main')
+@extends('layouts.frontend-main')
 
 @section('title','Exercise')
 
@@ -20,16 +20,16 @@
                     </div>
 
                     <div class="reg-form">
-                        <form class="gym-reuqest-form" role="form" method="POST" action="{{route('save-request')}}">
+                        <form class="gym-reuqest-form" role="form" method="POST" action="">
                             {{csrf_field()}}
                             <div class="fields clearfix">
 
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <select class="exercise_list" name="exercise" multiple="multiple">
+                                    <select class="exercise_list" name="exercise">
                                         <option></option>
                                         @foreach($exercises as $exercise)
                                             <option  value="{{$exercise['name']}}" >{{$exercise['name']}}</option>
-                                            {{--<option  value="" >{{$exercise['name']}}</option>--}}
+
                                         @endforeach
                                     </select>
                                 </div>
