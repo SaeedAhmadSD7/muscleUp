@@ -36,15 +36,15 @@
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                     <input type="text" name="category" value="{{$exercise->category}}" placeholder="Category...">
                                 </div>
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="text" name="muscles" value="{{$exercise->muscles}}" placeholder="Muscles...">
-                                </div>
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="text" name="muscles_secondary" value="{{$exercise->muscles_secondary}}" placeholder="Muscles_secondary...">
-                                </div>
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="text" name="equipment" value="{{$exercise->equipment}}" placeholder="Equipment...">
-                                </div>
+                                {{--<div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">--}}
+                                    {{--<input type="text" name="muscles" value="{{$exercise->muscles}}" placeholder="Muscles...">--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">--}}
+                                    {{--<input type="text" name="muscles_secondary" value="{{$exercise->muscles_secondary}}" placeholder="Muscles_secondary...">--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">--}}
+                                    {{--<input type="text" name="equipment" value="{{$exercise->equipment}}" placeholder="Equipment...">--}}
+                                {{--</div>--}}
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                     <input type="text" name="description" value="{{$exercise->description}}" placeholder="Description...">
                                 </div>

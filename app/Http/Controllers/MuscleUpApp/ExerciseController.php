@@ -88,18 +88,18 @@ class ExerciseController extends Controller
      * @param  \App\Models\Exercise  $exercise
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Exercise $exercise)
+    public function update($id,Request $request, Exercise $exercise)
     {
-//        $exercise = new Exercise();
+        $exercise = Exercise::find($id);
 //        $exercise->id=$request->id;
-//        $exercise->name=$request->name;
-//        $exercise->name_original=$request->name_original;
-//        $exercise->category=$request->category;
+        $exercise->name=$request->name;
+        $exercise->name_original=$request->name_original;
+        $exercise->category=$request->category;
 //        $exercise->muscles=$request->muscles;
 //        $exercise->muscles_secondary=$request->muscles_secondary;
 //        $exercise->equipment=$request->equipment;
-//        $exercise->description=$request->description;
-//        $exercise->save();
+        $exercise->description=$request->description;
+        $exercise->save();
 
         return redirect()->route('show-exercise');
     }

@@ -160,6 +160,8 @@ Route::get('show-exercise',['as'=>'show-exercise','uses'=>'MuscleUpApp\ExerciseC
 Route::get('update-exercise/{id}',['as'=>'update-exercise','uses'=>'MuscleUpApp\ExerciseController@edit']);
 Route::post('update-exercise/{id}',['as'=>'update-exercise','uses'=>'MuscleUpApp\ExerciseController@update']);
 Route::get('delete-exercise/{id}',['as'=>'delete-exercise','uses'=>'MuscleUpApp\ExerciseController@destroy']);
+Route::get('day',['as'=>'day-store','uses'=>'MuscleUpApp\DayController@day']);
+Route::get(' /create/day',['as'=>'create-day','uses'=>'MuscleUpApp\DayController@create']);
 
 
 

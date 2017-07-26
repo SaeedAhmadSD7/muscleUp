@@ -5,8 +5,6 @@ namespace App\Http\Controllers\MuscleUpApp;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\Day;
-
-
 class DayController extends Controller
 {
     /**
@@ -14,9 +12,9 @@ class DayController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function day()
     {
-        //
+        return view('muscle-up-app.instructor.day');
     }
 
     /**
@@ -26,7 +24,7 @@ class DayController extends Controller
      */
     public function create()
     {
-        //
+        return view('muscle-up-app.instructor.day');
     }
 
     /**
@@ -37,7 +35,13 @@ class DayController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $day = new Day();
+        $day->plan_id=$request->plan_id;
+        $day->number=$request->number;
+
+        $day->save();
+
+        return redirect()->route('day');
     }
 
     /**
