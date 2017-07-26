@@ -3,7 +3,6 @@
 @section('title','Workout program')
 
 @section('style-sheet')
-
     <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/widgets/modal/modal.css')}}" rel="stylesheet" type="text/css">
@@ -11,11 +10,6 @@
     <link href="{{url('/admin-assets/widgets/wizard/wizard.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/css/workout.css')}}" rel="stylesheet" type="text/css">
-
-
-    {{--<link href="{{url('/assets/elements/panel-box.css')}}" rel="stylesheet" type="text/css">--}}
-
-
 @stop
 
 @section('content')
@@ -65,24 +59,50 @@
                                                     <button class="btn btn-blue-alt phase_detail" type="button" disabled><span class="input-group-btn">Add Details</span></button>
                                                 </span>
                                             </div>
-                                            <div aria-hidden="true" aria-labelledby="myLargeModalLabel" class="modal fade bs-example-modal-lg" role="dialog" tabindex="-1">
-                                                <div class="modal-dialog modal-lg">
+                                            <div aria-hidden="true" class="modal fade phase_details_modal" role="dialog" tabindex="-1">
+                                                <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <button aria-hidden="true" class="close" type="button">&times;</button>
-
-                                                            <h4 class="modal-title">Modal title</h4>
+                                                            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+                                                            <h4 class="modal-title">Phase Name</h4>
                                                         </div>
 
 
                                                         <div class="modal-body">
-                                                            <p>Large modal content here ...</p>
+                                                            <div class="container-fluid">
+                                                                <div class="row">
+                                                                    <div class="form-group day">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="input-group">
+                                                                                <input class="form-control day_name" name="" value="" type="text" placeholder="Enter Day Name...">
+                                                                                <span class="input-group-btn">
+                                                                                    <button class="btn btn-blue-alt day_detail toggle" type="button" disabled><span>Add Details  </span><i class="glyph-icon icon-plus"></i></button>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group day_detail-div">
+                                                                        <div class="toggle-content">
+                                                                            <div class="form-group">
+                                                                                <div class="col-sm-6">
+                                                                                    <input class="form-control day_name" name="" value="" type="text" placeholder="Enter Day Name...">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-sm-6">
+                                                                            <button class="btn btn-alt btn-hover btn-primary add-day" type="button"><span>Add Day</span><i class="glyph-icon icon-arrow-up"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
 
 
                                                         <div class="modal-footer">
-                                                            <button class="btn btn-default modal_close" type="button">Close</button>
-                                                            <button class="btn btn-primary" type="button">Save changes</button>
+                                                            <button class="btn btn-default" data-dismiss="modal" type="button">Close</button> <button class="btn btn-primary" type="button">Save changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -141,5 +161,4 @@
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/modal/modal.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/js/program.js')}}"></script>
-
 @stop
