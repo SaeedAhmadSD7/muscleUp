@@ -13,6 +13,13 @@ class ExerciseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function exercise_list(){
+
+        $exercise = Exercise::all();
+        return view('muscle-up-app.workout.exercise')->with('exercises',$exercise);
+    }
     public function index()
     {
         //
