@@ -1,10 +1,10 @@
 $(document).ready(function() {
     $('.btn-date').DateTimePicker();
+    var counter = 1;
 
     $('.btn-add-exp').on('click',function () {
-        $('.exp_years').appendTo('.exp_field');
-        $('.exp_desc').appendTo('.exp_field');
-
+        $('.exp_years-div:last').clone().find('input').val('').end().appendTo('.exp_field');
+        $('.exp_desc-div:last').clone().find('input').val('').end().appendTo('.exp_field');
     });
 
     $('.add-instructor-form').validate({

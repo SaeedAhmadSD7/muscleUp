@@ -6,7 +6,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Mail\AddInstructorRequest;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 class InstructorController extends Controller
 {
@@ -40,27 +39,20 @@ class InstructorController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $user = new User();
         $user->email = $request->email;
         $password = str_random(9);
-        $user->password = bcrypt($password);
-        $user['user-type'] = 'Instructor';
-        $user->save();
-//        dd($request);
+//        $user->password = bcrypt($password);
+//        $user['user-type'] = 'Instructor';
+//        $user->save();
 
-        $instructor = new Instructor();
-        $instructor->first_name=$request->first_name;
-        $instructor->last_name=$request->last_name;
-        $instructor->dial_code = '+45';
-        $instructor->phone_number=$request->phone_number;
-        $instructor->experience=$request->experience;
-        $instructor->birth_date=$request->birth_date;
-//        $instructor->gender =$request->gender;
-        $instructor->address=$request->address;
+        $instructor = new Instructor($request->all());
+        $instructor->user_id = $user->id;
         $instructor->save();
 
 
-        Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
+//        \Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
         Session::flash('Success','Save Successfully');
         return redirect()->route('instructor-add');
     }

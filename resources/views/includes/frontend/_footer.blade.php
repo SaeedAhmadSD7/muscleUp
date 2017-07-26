@@ -15,6 +15,7 @@
         </div>
     </div>
 </div><!-- Back to top Button -->
+
 <a href="#" class="back-to-top">
     <i class="fa fa-angle-up"></i>
 </a>

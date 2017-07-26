@@ -148,6 +148,46 @@ textarea {
     margin-bottom: 0;
 }
 
+.toggle {
+    margin-bottom: 15px;
+}
+.toggle-title {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #5b6167;
+    cursor: pointer;
+    font-size: 14px !important;
+    font-weight: normal;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 !important;
+    padding: 0 0 0 15px;
+    position: relative;
+    background: #ededed;
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(47%,rgba(246,246,246,1)), color-stop(100%,rgba(237,237,237,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 );
+}
+
+.toggle-title .fa {
+    float: right;
+    margin-top: 12px;
+    margin-right: 10px;
+}
+
+.toggle-content {
+    padding: 10px;
+}
+
+.toggle-content a {
+    color: #5b6167;
+}
+
+
 
 /***
 Font Awesome
@@ -366,9 +406,9 @@ Main Header style
     left: 0;
     top: 0;
     width: 100%;
-    -webkit-box-shadow:inset 0 -3px 0 0 #007bbf;
-    -moz-box-shadow:inset 0 -3px 0 0#007bbf;
-    box-shadow:inset 0 -3px 0 0 #007bbf;
+    -webkit-box-shadow:inset 0 -5px 0 0 #007bbf;
+    -moz-box-shadow:inset 0 -5px 0 0#007bbf;
+    box-shadow:inset 0 -5px 0 0 #007bbf;
 }
 
 .main-header .logo {
@@ -1855,138 +1895,6 @@ workout program
     display: none;
 }
 
-.w-program-form {
-position: relative;
-float: right;
-width: 80%;
-padding: 10%;
-background: #007bbf;
-color: #ffffff;
-z-index: 10;
-transform: skewX(-25deg);
--webkit-transform: skewX(-25deg);
--ms-transform: skewX(-25deg);
--o-transform: skewX(-25deg);
--moz-transform: skewX(-25deg);
-}
-.w-program-form:after {
-    content: '';
-    position: absolute;
-    left: 99%;
-    top: 0;
-    width: 150px;
-    height: 100%;
-    background: #007bbf;
-}
-
-.w-program-form .t-reg-top {
-    position: relative;
-    margin-bottom: 30px;
-    transform: skewX(25deg);
-    -webkit-transform: skewX(25deg);
-    -ms-transform: skewX(25deg);
-    -o-transform: skewX(25deg);
-    -moz-transform: skewX(25deg);
-}
-
-.w-program-form .t-reg-top .space {
-    padding-left: 40px;
-}
-
-.w-program-form .t-reg-top h3 {
-    position: relative;
-    font-size: 15px;
-    margin-bottom: 10px;
-}
-.w-program-form .reg-form . h2{
-    position: relative;
-    font-size: 32px;
-    line-height: 1.6em;
-}
-.w-program-form .t-reg-top h2 {
-    position: relative;
-    font-size: 32px;
-    line-height: 1.6em;
-}
-
-.reg-form {
-    position: relative;
-    z-index: 11;
-    transform: skewX(25deg);
-    -webkit-transform: skewX(25deg);
-    -ms-transform: skewX(25deg);
-    -o-transform: skewX(25deg);
-    -moz-transform: skewX(25deg);
-}
-
-.w-program-form .reg-form .fields {
-    position: relative;
-    padding-left: 50px;
-}
-
-.w-program-form .reg-form .form-group {
-    position: relative;
-    padding: 0 15px;
-    margin-bottom: 30px;
-}
-
-.btn, .btn:active, .btn.active {
-    border: none;
-    outline: 0;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    -o-box-shadow: none;
-    box-shadow: none;
-}
-
-.btn:hover, .btn:focus, .btn.focus {
-    color: #fff;
-}
-button, input[type="submit"],input[type="button"] {
-    position: relative;
-    display: inline-block;
-    line-height: 24px;
-    padding: 8px 30px;
-    color: #ffffff;
-    font-size: 14px;
-    text-transform: uppercase;
-    background: #18263a;
-    margin-top: 20px;
-}
-
-button .fa {
-    padding-right: 10px;
-    color: #09b9e5;
-}
-
-button:hover {
-    color: #000000;
-    background: #ffffff;
-}
-
-button:hover .fa {
-    color: #000000;
-}
-
-label.error {
-    display: none !important;
-}
-
-.reg-form * {
-    transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -webkit-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-}
-
-
-
-
-
-
-
-
 /***
 trainee registration form
 */
@@ -2156,6 +2064,13 @@ button:hover {
     background: #ffffff;
 }
 
+button:disabled,
+button:disabled .fa{
+    color: #aeaeae;
+    background: #484848;
+}
+
+
 button:hover .fa {
     color: #000000;
 }
@@ -2171,6 +2086,30 @@ label.error {
     -ms-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
 }
+
+
+
+/***
+Workout
+ */
+
+
+.workout-form,
+.workout-form .t-reg-top,
+.workout-form .reg-form{
+    transform:skewX(0deg);
+    -webkit-transform:skewX(0deg);
+    -ms-transform:skewX(0deg);
+    -o-transform:skewX(0deg);
+    -moz-transform:skewX(0deg);
+}
+
+.workout-form{
+    width:100%;
+    height: 100%;
+    float:none;
+}
+
 
 /***
 Gym Request form

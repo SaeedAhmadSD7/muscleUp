@@ -1,4 +1,4 @@
-@extends('muscle-up-app.layouts.frontend-main')
+@extends('layouts.frontend-main')
 
 @section('title','Add Instructor')
 
@@ -40,11 +40,10 @@
                                 </div>
 
                                 <div class="form-group col-md-1 col-sm-2 col-xs-2 dial-code-div">
-                                    <input class="dial-code" type="text" name="dial_code" value="" placeholder="+1..." readonly>
+                                    <input class="dial-code" type="text" name="dial_code" value="1" placeholder="+1..." readonly>
                                 </div>
                                 <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
-                                    <input class="phone_number" type="text" name="phone_number" value=""
-                                           placeholder="Phone Number..." maxlength="15">
+                                    <input class="phone_number" type="text" name="phone_number" value="" placeholder="Phone Number..." maxlength="15">
                                 </div>
 
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 Gender ">
@@ -53,21 +52,17 @@
                                     </div>
                                     <div class="col-md-8 col-sm-8 col-xs-8">
                                         <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn"><input type="radio" name='gender' value="male" checked><i
-                                                        class="fa fa-circle-o fa-x"></i><i
-                                                        class="fa fa-dot-circle-o fa-x"></i><span> Male</span></label>
-                                            <label class="btn"><input type="radio" name='gender' value="female"><i
-                                                        class="fa fa-circle-o fa-x"></i><i
-                                                        class="fa fa-dot-circle-o fa-x"></i><span> Female</span></label>
+                                            <label class="btn"><input type="radio" name='gender' value="male" checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Male</span></label>
+                                            <label class="btn"><input type="radio" name='gender' value="female"><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Female</span></label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="exp_field">
                                     <div class="form-group col-md-3 col-sm-12 col-xs-12 exp_years-div">
-                                        <input type="number" class="exp_years" name="exp_years" value="" placeholder="Experience in Years...">
+                                        <input type="number" class="exp_years" name="exp_years[]" value="" placeholder="Experience in Years...">
                                     </div>
                                     <div class="form-group col-md-9 col-sm-12 col-xs-12 exp_desc-div">
-                                        <input type="text" class="exp_desc" name="first_name" value="" placeholder="Experience Description...">
+                                        <input type="text" class="exp_desc" name="exp_desc[]" value="" placeholder="Experience Description...">
                                     </div>
                                 </div>
 

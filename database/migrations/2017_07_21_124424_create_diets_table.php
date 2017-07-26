@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWbsDetailsTable extends Migration
+class CreateDietsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateWbsDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('wbs_details', function (Blueprint $table) {
+        Schema::create('diets', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('wbs_id');
-            $table->integer('exercise');
-            $table->unsignedInteger('set');
-            $table->unsignedInteger('rep');
-            $table->unsignedInteger('rest');
+            $table->integer('program_id');
+            $table->integer('day_id');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateWbsDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wbs_details');
+        Schema::dropIfExists('diets');
     }
 }

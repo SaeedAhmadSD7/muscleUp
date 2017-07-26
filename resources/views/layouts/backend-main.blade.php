@@ -8,14 +8,14 @@
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <title>@yield('title')</title>
 
-    @include('muscle-up-app.includes.backend._stylesheet')
+    @include('includes.backend._stylesheet')
     @yield('style-sheet')
 </head>
 <body>
 <div id="sb-site">
     <div id="page-wrapper">
-        @include('muscle-up-app.includes._message')
-        @include('muscle-up-app.includes.backend._sidebar')
+        @include('includes._message')
+        @include('includes.backend._sidebar')
         <div id="page-content-wrapper">
             <div id="page-content">
                 <div id="page-header">
@@ -153,7 +153,7 @@
 </body>
 
 <footer>
-    @include('muscle-up-app.includes.backend._script')
+    @include('includes.backend._script')
     @yield('script')
 </footer>
 
