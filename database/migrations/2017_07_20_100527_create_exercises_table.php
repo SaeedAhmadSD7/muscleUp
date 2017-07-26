@@ -14,14 +14,14 @@ class CreateExercisesTable extends Migration
     public function up()
     {
         Schema::create('exercises', function (Blueprint $table) {
-            $table->integer('id');
+            $table->increments('id');
             $table->string('name');
             $table->string('name_original');
             $table->string('category');
-            $table->string('muscles');
-            $table->string('muscles_secondary');
-            $table->string('equipment');
-            $table->string('description');
+            $table->string('muscles')->nullable();
+            $table->string('muscles_secondary')->nullable();
+            $table->string('equipment')->nullable();
+            $table->text('description');
             $table->timestamps();
         });
     }

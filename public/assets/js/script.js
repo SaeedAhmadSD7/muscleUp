@@ -8,6 +8,16 @@ $(function($) {
     }
 
     //Change Header Style
+    // function headerStyle() {
+    //     if($('.main-header').length){
+    //         var windowpos = $(window).scrollTop();
+    //         if (windowpos >= 1) {
+    //             $('.main-header').addClass('header-fixed');
+    //         } else {
+    //             $('.main-header').removeClass('header-fixed');
+    //         }
+    //     }
+    // }
     function headerStyle() {
         if($('.main-header').length){
             var windowpos = $(window).scrollTop();

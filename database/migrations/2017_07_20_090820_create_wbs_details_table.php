@@ -15,6 +15,11 @@ class CreateWbsDetailsTable extends Migration
     {
         Schema::create('wbs_details', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('wbs_id');
+            $table->integer('exercise');
+            $table->unsignedInteger('set');
+            $table->unsignedInteger('rep');
+            $table->unsignedInteger('rest');
             $table->timestamps();
         });
     }

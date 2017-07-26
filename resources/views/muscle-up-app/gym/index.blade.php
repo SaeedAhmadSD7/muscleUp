@@ -1,7 +1,9 @@
-@extends('muscle-up-app.layouts.backend-main')
+@extends('layouts.backend-main')
 @section('title')
     Gym Dashboard
 @stop
+
+
 
 @section('user_type')
     Admin
@@ -36,3 +38,5 @@
         </div>
     </li>
 @stop
+
+@section('content')

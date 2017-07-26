@@ -145,6 +145,13 @@ Route::get('/Admin/Inbox/Message/Accept/{id}',['as'=>'Admin-Message-Accept','use
 Route::get('/program',['as'=>'program','uses'=>'MuscleUpApp\ProgramController@create']);
 
 
+/*
+ Exercise
+ *  */
+Route::get('/exercise',['as'=>'exercise','uses'=>'MuscleUpApp\ExerciseController@exercise_list']);
+
+
+
 
 //Instructor
 
