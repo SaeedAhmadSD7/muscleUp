@@ -52,7 +52,9 @@ class ProgramController extends Controller
 
         $plan=new Plan();
         $plan->name = $request->name;
+        dd($plan);
         $plan->save();
+
         $program->plan()->save($plan);
 
         $plan_detail = new PlanDetail();

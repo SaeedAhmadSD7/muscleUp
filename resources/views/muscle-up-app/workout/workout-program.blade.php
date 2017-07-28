@@ -41,7 +41,7 @@
                                 <label class="col-sm-3 control-label">Phase Name</label>
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <input class="form-control phase_name" name="name" value="" type="text" placeholder="Enter Phase Name...">
+                                        <input class="form-control phase_name" name="name[]" value="" type="text" placeholder="Enter Phase Name...">
                                         <span class="input-group-btn">
                                             <button class="btn btn-blue-alt phase_detail" type="button" disabled><span class="input-group-btn">Add Details</span></button>
                                         </span>
