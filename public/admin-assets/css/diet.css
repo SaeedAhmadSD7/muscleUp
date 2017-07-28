@@ -1,5 +1,5 @@
 .first-group:before{
- padding-top: 20px;
+    padding-top: 20px;
 }
 
 .workout-program{
@@ -10,11 +10,7 @@
     border-bottom: #F7F7F7 solid 1px;
 }
 
-.day_detail-div{
- display: none;
-}
-
-.exercise_detail-div{
+.meal_name_detail-div{
     display: none;
 }
 
@@ -81,4 +77,3 @@ input{
     margin: 0 auto!important;
     padding-bottom: 20px!important;
 }
-

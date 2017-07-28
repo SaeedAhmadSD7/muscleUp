@@ -11,6 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(CountriesSeeder::class);
+        $this->command->info('ExerciseSeeded!');
+        $this->call(AdminSeeder::class);
+        $this->command->info('ExerciseSeeded!');
         $this->call(ExerciseSeeder::class);
         $this->command->info('ExerciseSeeded!');
 

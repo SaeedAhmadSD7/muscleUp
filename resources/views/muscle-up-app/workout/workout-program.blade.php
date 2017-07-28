@@ -6,7 +6,6 @@
     <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/widgets/modal/modal.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/wizard/wizard.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
@@ -26,14 +25,14 @@
         <div class="panel-body">
             <div class="example-box-wrapper">
                 <div class="form-wizard" id="form-wizard-3">
-                    <form class="workout-program form-horizontal bordered-row" method="POST" action="{{route('program-store')}}">
+                    <form class="workout-program form-horizontal bordered-row" method="POST" action="">
                         {{csrf_field()}}
                         <div class="tab-content">
                             <h3 class="content-box-header bg-default">Workout Program Form</h3>
                             <div class="form-group first-group">
                                 <label class="col-sm-3 control-label">Program Name</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="title" value="" placeholder="Enter Program Name...">
+                                    <input class="form-control" type="text" name="title" value="" placeholder="Program Name...">
                                 </div>
                             </div>
 
@@ -41,7 +40,7 @@
                                 <label class="col-sm-3 control-label">Phase Name</label>
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <input class="form-control phase_name" name="name" value="" type="text" placeholder="Enter Phase Name...">
+                                        <input class="form-control phase_name" name="name[]" value="" type="text" placeholder="Phase Name...">
                                         <span class="input-group-btn">
                                             <button class="btn btn-blue-alt phase_detail" type="button" disabled><span class="input-group-btn">Add Details</span></button>
                                         </span>
@@ -62,10 +61,10 @@
                                                                 <div class="form-group day_name-div">
                                                                     <div class="col-sm-12">
                                                                         <div class="input-group">
-                                                                            <input class="form-control day_name" name="day" value="" type="text" placeholder="Enter Day Name...">
+                                                                            <input class="form-control day_name" name="number[]" value="" type="text" placeholder="Day Name...">
                                                                             <span class="input-group-btn">
                                                                                     <button class="btn btn-blue-alt day_detail" type="button" disabled><span>Add Details  </span><i class="glyph-icon icon-plus"></i></button>
-                                                                                </span>
+                                                                            </span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -74,7 +73,7 @@
                                                                         <div class="exercise-div">
                                                                             <div class="col-md-8 col-md-offset-1 col-sm-10 col-xs-10 exercise_list-div">
                                                                                 <div class="form-group">
-                                                                                    <select class="exercise_list" name="exercise">
+                                                                                    <select class="exercise_list" name="exercise[]">
                                                                                         <option></option>
                                                                                         @foreach($exercises as $exercise)
                                                                                             <option  value="{{$exercise['name']}}" >{{$exercise['name']}}</option>
@@ -82,13 +81,13 @@
                                                                                     </select>
                                                                                 </div>
                                                                                 <div class="col-md-11 col-md-offset-1 form-group exercise_detail-div ">
-                                                                                    <input class="form-control exercise_detail-input" name="rep" placeholder="Reps..." type="number" value="">
+                                                                                    <input class="form-control exercise_detail-input" name="Rep[]" placeholder="Reps..." type="number" value="">
                                                                                 </div>
                                                                                 <div class="col-md-11 col-md-offset-1 form-group exercise_detail-div ">
-                                                                                    <input class="form-control exercise_detail-input" name="set" placeholder="Sets..." type="number" value="">
+                                                                                    <input class="form-control exercise_detail-input" name="Set[]" placeholder="Sets..." type="number" value="">
                                                                                 </div>
                                                                                 <div class="col-md-11 col-md-offset-1 form-group exercise_detail-div ">
-                                                                                    <input class="form-control exercise_detail-input" name="rest" placeholder="Rest in Minutes..." type="number" value="">
+                                                                                    <input class="form-control exercise_detail-input" name="Rest[]" placeholder="Rest in Minutes..." type="number" value="">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-3 col-sm-2 col-xs-2 exercise_detail-btn-div">
@@ -124,7 +123,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group submit-btn">
+                        <div class="form-group submit-btn-div">
                             <button class="btn ra-100 btn-default" type="submit">Submit</button>
                         </div>
                     </form>
@@ -136,12 +135,9 @@
 
 @section('script')
     <script src="{{url('/admin-assets/js-core/modernizr.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/wizard/wizard-demo.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/tabs/tabs.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/wizard/wizard.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/modal/modal.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/touchspin/touchspin.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/plugins/select2/js/select2.full.js')}}"></script>
-    <script src="{{url('/assets/js/program.js')}}"></script>
+    <script src="{{url('/admin-assets/js/program.js')}}"></script>
 @stop

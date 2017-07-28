@@ -28,7 +28,7 @@ $(document).ready(function () {
      * Select2 Instialization
      */
     $('.exercise_list').select2({
-        placeholder:'Select Exercise...',
+        placeholder:'Exercise...',
         theme: 'bootstrap'
     });
 
@@ -97,7 +97,7 @@ $(document).ready(function () {
      */
 
     $('.tab-content').on('click','.add-phase',function () {
-        cloned_phase.clone().insertAfter('.phase:last').find('.exercise_list').select2({placeholder:'Select Exercise...',theme: 'bootstrap'}).parent().siblings('.exercise_detail-div').find('.exercise_detail-input').TouchSpin({verticalbuttons: !0, verticalupclass: "glyph-icon icon-plus", verticaldownclass: "glyph-icon icon-minus"});
+        cloned_phase.clone().insertAfter('.phase:last').find('.exercise_list').select2({placeholder:'Exercise...',theme: 'bootstrap'}).parent().siblings('.exercise_detail-div').find('.exercise_detail-input').TouchSpin({min: 0, max: 100});
         // console.log($('exercise_list'))
     });
 
@@ -107,17 +107,17 @@ $(document).ready(function () {
      */
     $('.tab-content').on('click','.add-day',function () {
 
-        clone_day.clone().appendTo($(this).closest('.form-group').siblings('.day')).find('.exercise_list').select2({placeholder:'Select Exercise...',theme: 'bootstrap'}).parent().siblings('.exercise_detail-div').find('.exercise_detail-input').TouchSpin({verticalbuttons: !0, verticalupclass: "glyph-icon icon-plus", verticaldownclass: "glyph-icon icon-minus"})
+        clone_day.clone().appendTo($(this).closest('.form-group').siblings('.day')).find('.exercise_list').select2({placeholder:'Exercise...',theme: 'bootstrap'}).parent().siblings('.exercise_detail-div').find('.exercise_detail-input').TouchSpin({min: 0, max: 100})
     });
 
     $('.tab-content').on('click','.add-exercise',function () {
-        clone_exercise_list.clone().insertAfter($(this).parent().siblings('.exercise-div:last')).find('.exercise_list').select2({placeholder:'Select Exercise...',theme: 'bootstrap'}).parent().siblings('.exercise_detail-div').find('.exercise_detail-input').TouchSpin({verticalbuttons: !0, verticalupclass: "glyph-icon icon-plus", verticaldownclass: "glyph-icon icon-minus"})
+        clone_exercise_list.clone().insertAfter($(this).parent().siblings('.exercise-div:last')).find('.exercise_list').select2({placeholder:'Exercise...',theme: 'bootstrap'}).parent().siblings('.exercise_detail-div').find('.exercise_detail-input').TouchSpin({min: 0, max: 100})
     });
 
+
     $('.exercise_detail-input').TouchSpin({
-        verticalbuttons: !0,
-        verticalupclass: "glyph-icon icon-plus",
-        verticaldownclass: "glyph-icon icon-minus"
+        min: 0,
+        max: 100
     });
 
 

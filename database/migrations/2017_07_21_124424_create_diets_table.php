@@ -15,8 +15,8 @@ class CreateDietsTable extends Migration
     {
         Schema::create('diets', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('program_id');
-            $table->integer('day_id');
+            $table->integer('diet_programs_id');
+            $table->string('number');
             $table->timestamps();
         });
     }
