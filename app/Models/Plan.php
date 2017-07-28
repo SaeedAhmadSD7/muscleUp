@@ -8,7 +8,7 @@ class Plan extends Model
 {
     protected $table = 'plans';
     protected $primaryKey = 'id';
-    public $fillable = ['name'];
+    public $fillable = ['name','program_id'];
 
     public function program()
     {

@@ -50,7 +50,7 @@ class TraineeController extends Controller
     {
 //        dd($userid= Auth::user()->id);
 //        $trainee = Trainee::find($userid);
-        return view('muscle-up-app.trainee.medical-history');
+        return view('muscle-up-app.trainee.trainee-medical-history');
     }
 
 
@@ -73,7 +73,7 @@ class TraineeController extends Controller
 
         return view('muscle-up-app.trainee.view-medical-history')->with('med_his',$medical_history);
       }
-    public function edit_medical_history($id){
+        public function edit_medical_history($id){
           $medical_history= MedicalHistory::find($id);
           return view('muscle-up-app.trainee.edit-medical-history')->with('med_his',$medical_history);
     }
@@ -111,9 +111,16 @@ class TraineeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+//    public function create_trainee()
+//    {
+//        return view('muscle-up-app.trainee.add-trainee');
+//
+//    }
     public function create()
     {
-        return view('muscle-up-app.trainee.add-trainee');
+
+        return view('muscle-up-app.trainee.trainee-add');
     }
 
     /**
@@ -178,7 +185,7 @@ class TraineeController extends Controller
         $trainee= Trainee::find($id);
         $user = User::find($trainee->user_id);
 
-        return view('muscle-up-app.trainee.edit-profile-detail')->with(['trainee'=>$trainee,'email'=>$user->email]);
+        return view('muscle-up-app.trainee.profile-detail-edit')->with(['trainee'=>$trainee,'email'=>$user->email]);
     }
 
     /**

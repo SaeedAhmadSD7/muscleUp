@@ -15,7 +15,7 @@ class CreateWbsTable extends Migration
     {
         Schema::create('wbs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('plan_detail_id');
+            $table->integer('plan_detail_id')->nullable();
             $table->string('exercise');
             $table->timestamps();
         });

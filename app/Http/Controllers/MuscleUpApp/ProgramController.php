@@ -5,9 +5,18 @@ namespace App\Http\Controllers\MuscleUpApp;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\Program;
+use App\Models\Plan;
 use App\Models\Exercise;
+use App\Models\PlanDetail;
+use App\Models\Wbs;
+use App\Models\WbsDetail;
+
 class ProgramController extends Controller
 {
+
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +46,32 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $program = new Program();
+        $program->title = $request->title;
+        $program->save();
+
+        $plan=new Plan();
+        $plan->name = $request->name;
+        $plan->save();
+        $program->plan()->save($plan);
+
+        $plan_detail = new PlanDetail();
+        $plan_detail->day=$request->day;
+        $plan_detail->save();
+        $plan->plan_detail()->save($plan_detail);
+
+        $wbs =new Wbs();
+        $wbs->exercise=$request->exercise;
+        $wbs->save();
+        $plan_detail->wbs()->save($wbs);
+
+        $wbs_detail = new WbsDetail();
+        $wbs_detail->set=$request->set;
+        $wbs_detail->rep=$request->rep;
+        $wbs_detail->rest=$request->rest;
+        $wbs_detail->save();
+        $wbs->wbs_detail()->save($wbs_detail);
+
     }
 
     /**

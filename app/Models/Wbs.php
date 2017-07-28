@@ -8,7 +8,7 @@ class Wbs extends Model
 {
     protected $table= 'wbs';
     protected $primaryKey = 'id';
-    public $fillable = ['exercise'];
+    public $fillable = ['exercise','plan_detail_id'];
 
     public function plan_detail(){
         return $this->belongsTo(PlanDetail::class);

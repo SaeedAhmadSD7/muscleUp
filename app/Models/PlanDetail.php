@@ -8,7 +8,7 @@ class PlanDetail extends Model
 {
     protected $table= 'plan_details';
     protected $primaryKey = 'id';
-    public $fillable = ['day'];
+    public $fillable = ['day','plan_id'];
 
     public function plan(){
         return $this->belongsTo(Plan::class);
