@@ -26,7 +26,7 @@
         <div class="panel-body">
             <div class="example-box-wrapper">
                 <div class="form-wizard" id="form-wizard-3">
-                    <form class="workout-program form-horizontal bordered-row">
+                    <form class="workout-program form-horizontal bordered-row" method="POST" action="">
                         {{csrf_field()}}
                         <div class="tab-content">
                             <h3 class="content-box-header bg-default">Workout Program Form</h3>
@@ -41,7 +41,7 @@
                                 <label class="col-sm-3 control-label">Phase Name</label>
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <input class="form-control phase_name" name="name." value="" type="text" placeholder="Enter Phase Name...">
+                                        <input class="form-control phase_name" name="name[]" value="" type="text" placeholder="Enter Phase Name...">
                                         <span class="input-group-btn">
                                             <button class="btn btn-blue-alt phase_detail" type="button" disabled><span class="input-group-btn">Add Details</span></button>
                                         </span>
@@ -62,7 +62,7 @@
                                                                 <div class="form-group day_name-div">
                                                                     <div class="col-sm-12">
                                                                         <div class="input-group">
-                                                                            <input class="form-control day_name" name="number" value="" type="text" placeholder="Enter Day Name...">
+                                                                            <input class="form-control day_name" name="number[]" value="" type="text" placeholder="Enter Day Name...">
                                                                             <span class="input-group-btn">
                                                                                     <button class="btn btn-blue-alt day_detail" type="button" disabled><span>Add Details  </span><i class="glyph-icon icon-plus"></i></button>
                                                                                 </span>
@@ -74,7 +74,7 @@
                                                                         <div class="exercise-div">
                                                                             <div class="col-md-8 col-md-offset-1 col-sm-10 col-xs-10 exercise_list-div">
                                                                                 <div class="form-group">
-                                                                                    <select class="exercise_list" name="exercise">
+                                                                                    <select class="exercise_list" name="exercise[]">
                                                                                         <option></option>
                                                                                         @foreach($exercises as $exercise)
                                                                                             <option  value="{{$exercise['name']}}" >{{$exercise['name']}}</option>
@@ -82,13 +82,13 @@
                                                                                     </select>
                                                                                 </div>
                                                                                 <div class="col-md-11 col-md-offset-1 form-group exercise_detail-div ">
-                                                                                    <input class="form-control exercise_detail-input" name="Reps" placeholder="Reps..." type="number" value="">
+                                                                                    <input class="form-control exercise_detail-input" name="Rep[]" placeholder="Reps..." type="number" value="">
                                                                                 </div>
                                                                                 <div class="col-md-11 col-md-offset-1 form-group exercise_detail-div ">
-                                                                                    <input class="form-control exercise_detail-input" name="Sets" placeholder="Sets..." type="number" value="">
+                                                                                    <input class="form-control exercise_detail-input" name="Set[]" placeholder="Sets..." type="number" value="">
                                                                                 </div>
                                                                                 <div class="col-md-11 col-md-offset-1 form-group exercise_detail-div ">
-                                                                                    <input class="form-control exercise_detail-input" name="rest" placeholder="Rest in Minutes..." type="number" value="">
+                                                                                    <input class="form-control exercise_detail-input" name="Rest[]" placeholder="Rest in Minutes..." type="number" value="">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-3 col-sm-2 col-xs-2 exercise_detail-btn-div">
