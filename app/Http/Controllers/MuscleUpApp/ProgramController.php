@@ -5,7 +5,7 @@ namespace App\Http\Controllers\MuscleUpApp;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\Program;
-
+use App\Models\Exercise;
 class ProgramController extends Controller
 {
     /**
@@ -25,7 +25,8 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        return view('muscle-up-app.workout.workout-program');
+        $exercise = Exercise::all();
+        return view('muscle-up-app.workout.workout-program')->with('exercises',$exercise);
     }
 
     /**
