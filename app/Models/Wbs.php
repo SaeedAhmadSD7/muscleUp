@@ -8,11 +8,13 @@ class Wbs extends Model
 {
     protected $table= 'wbs';
     protected $primaryKey = 'id';
+    public $fillable = ['exercise'];
+
     public function plan_detail(){
         return $this->belongsTo(PlanDetail::class);
     }
 
     public  function wbs_detail(){
-        return $this->hasOne(WbsDetail::class);
+        return $this->hasMany(WbsDetail::class);
     }
 }

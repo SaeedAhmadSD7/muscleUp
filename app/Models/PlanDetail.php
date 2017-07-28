@@ -8,12 +8,10 @@ class PlanDetail extends Model
 {
     protected $table= 'plan_details';
     protected $primaryKey = 'id';
+    public $fillable = ['day'];
+
     public function plan(){
         return $this->belongsTo(Plan::class);
-    }
-
-    public function day(){
-        return $this->hasMany(Day::class);
     }
 
     public function wbs(){

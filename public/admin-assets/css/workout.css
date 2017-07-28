@@ -2,6 +2,14 @@
  padding-top: 20px;
 }
 
+.workout-program{
+    border: #F7F7F7 solid 1px;
+}
+
+.tab-content{
+    border-bottom: #F7F7F7 solid 1px;
+}
+
 .day_detail-div{
  display: none;
 }
@@ -67,3 +75,9 @@ input{
 .add_exercise-div{
     clear: both;
 }
+
+.submit-btn{
+    display: table;
+    margin: 0 auto!important;
+}
+

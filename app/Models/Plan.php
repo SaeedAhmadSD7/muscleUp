@@ -8,6 +8,7 @@ class Plan extends Model
 {
     protected $table = 'plans';
     protected $primaryKey = 'id';
+    public $fillable = ['name'];
 
     public function program()
     {
@@ -16,8 +17,6 @@ class Plan extends Model
 
     public function plan_detail()
     {
-        return $this->hasOne(PlanDetail::class);
+        return $this->hasMany(PlanDetail::class);
     }
-
-
 }

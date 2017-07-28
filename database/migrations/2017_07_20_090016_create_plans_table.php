@@ -17,7 +17,6 @@ class CreatePlansTable extends Migration
             $table->increments('id');
             $table->integer('program_id');
             $table->string('name');
-            $table->integer('number')->unsigned();
             $table->timestamps();
 
 
