@@ -3,7 +3,6 @@
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
-
 class UserSeeder extends Seeder
 {
     /**
@@ -11,8 +10,8 @@ class UserSeeder extends Seeder
      *
      * @return void
      */
-    public function run() {
-
+    public function run()
+    {
         DB::table('users')->insert([
             'email' => 'admin@example.com',
             'password' => bcrypt('badeo520'),
