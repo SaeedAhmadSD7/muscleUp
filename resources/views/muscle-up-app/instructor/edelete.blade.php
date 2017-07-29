@@ -1,4 +1,4 @@
-@extends('muscle-up-app.layouts.frontend-main')
+@extends('layouts.frontend-main')
 
 @section('title','Delete Instructor')
 
@@ -42,7 +42,8 @@
                                 </div><div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                     <input type="text" name="last_name" value="{{ $exercise->category }}" placeholder="category...">
                                 </div>
-                            </div><div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                 <input type="text" name="last_name" value="{{ $exercise->muscles }}" placeholder="muscles...">
                             </div>
 
@@ -76,7 +77,6 @@
                         </form>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>

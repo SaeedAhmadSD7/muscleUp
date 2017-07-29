@@ -788,22 +788,57 @@
                                 </div>
                             </div>
 
-
                             <table class="table table-hover text-center">
                                 <tbody>
-                                @foreach($exercise as $exercise)
-                                    <tr id="{{$exercise->id}}">
+                                {{--{{dd ($instructorDetail)}}--}}
+                                {{--@foreach($instructorDetail as $instructorDetails)--}}
+                                    {{--{{dd ($instructorDetails)--}}
+                                    <tr>
                                         {{--<td><input class="custom-checkbox" id="mail-checkbox-1" type="checkbox"></td>--}}
                                         <td><i class="glyph-icon icon-star"></i></td>
-                                        <td class="email-title">{{$exercise->id}}</td>
-                                        <td class="email-body">{{$exercise->name}}</td>
+                                <tr class="name">
+                                    <th>First Name</th>
+                                        <a href ="#"><td class="email-title">{{$instructorDetail->first_name}}</td></a>
+                                </tr>
+                                <tr class="name">
+                                    <th>Last Name</th>
+                                        <td class="email-title">{{$instructorDetail->last_name}}</td>
+                                </tr>
+                                <tr class="name">
+                                    <th>Email</th>
+                                        <td class="email-body">{{$instructorDetail->email}}</td>
+                                </tr>
+                                <tr class="name">
+                                    <th>Dial Code</th>
+                                        <td class="email-title">{{$instructorDetail->dial_code}}</td>
+                                </tr>
+                                <tr class="name">
+                                    <th>Phone Number</th>
+                                        <td class="email-title">{{$instructorDetail->phone_number}}</td>
+                                </tr>
+                                <tr class="name">
+                                    <th>Exp Years</th>
+                                        <td class="email-title">{{$instructorDetail->exp_years}}</td>
+                                </tr>
+                                <tr class="name">
+                                    <th>Exp Desc</th>
+                                        <td class="email-title">{{$instructorDetail->exp_desc}}</td>
+                                </tr>
+                                <tr class="name">
+                                    <th>Date of birth</th>
+                                        <td class="email-title">{{$instructorDetail->birth_date}}</td>
+                                </tr>
+                                <tr class="name">
+                                    <th>Address</th>
+                                        <td class="email-title">{{$instructorDetail->address}}</td>
+                                </tr>
                                         <td><i class="glyph-icon icon-paperclip"></i></td>
-                                        <td>{{$exercise->updated_at}}</td>
-                                        <td><a type="submit" href="{{URL::to('update-exercise',array('id'=>$exercise->id))}}"><span class="fa fa-angle-right"></span>Edit</a></td>
-                                        <td><a type="submit" href="{{URL::to('delete-exercise',array('id'=>$exercise->id))}}"><span class="fa fa-angle-right"></span>Delete</a></td>
+                                        <td>{{$instructorDetail->updated_at}}</td>
+                                        {{--<td><a type="submit" href="{{URL::to('update-instructor',array('id'=>$instructor->id))}}"><span class="fa fa-angle-right"></span>Edit</a></td>--}}
+                                        {{--<td><a type="submit" href="{{URL::to('delete-instructor',array('id'=>$instructor->id))}}"><span class="fa fa-angle-right"></span>Delete</a></td>--}}
 
-                                    </tr>
-                                @endforeach
+
+                                {{--@endforeach--}}
                                 </tbody>
                             </table>
                         </div>

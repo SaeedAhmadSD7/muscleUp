@@ -13,6 +13,11 @@ class ExerciseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function exercise_list(){
+
+    $exercise = Exercise::all();
+    return view('muscle-up-app.workout.exercise')->with('exercises',$exercise);
+}
     public function exercise()
     {
         return view('muscle-up-app.instructor.exercise');
@@ -114,8 +119,6 @@ class ExerciseController extends Controller
     {
         $exercise=Exercise::find($id);
         $exercise->delete();
-//        dd($service);
-//        Session::flash('Success','Delete Successfully');
         return redirect()->route('show-exercise');
     }
 }
