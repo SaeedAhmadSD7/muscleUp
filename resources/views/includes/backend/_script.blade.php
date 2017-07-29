@@ -6,7 +6,9 @@
 <script src="{{url('/admin-assets/widgets/dropdown/dropdown.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/widgets/content-box/contentbox.js')}}" type="text/javascript"></script>
 
-<link href="{{url('/admin-assets/snippets/user-profile.css')}}" rel="stylesheet" type="text/css">
 <script src="{{url('/admin-assets/widgets/tooltip/tooltip.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/widgets/popover/popover.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/js-init/widgets-init.js')}}" type="text/javascript"></script>
+
+
+<link href="{{url('/admin-assets/snippets/user-profile.css')}}" rel="stylesheet" type="text/css">

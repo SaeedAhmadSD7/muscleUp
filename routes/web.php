@@ -147,6 +147,13 @@ Route::get('/Admin/Inbox/Message/Accept/{id}',['as'=>'Admin-Message-Accept','use
 Route::get('/program',['as'=>'program','uses'=>'MuscleUpApp\ProgramController@create']);
 Route::post('/program/store', ['as' => 'program-store', 'uses' => 'MuscleUpApp\ProgramController@store']);
 
+/***
+ * Diet Plan
+ */
+Route::get('/diet',['as'=>'diet','uses'=>'MuscleUpApp\DietController@index']);
+Route::post('/diet/add',['as'=>'add-diet','uses'=>'MuscleUpApp\DietController@store']);
+
+
 
 /*
  Exercise

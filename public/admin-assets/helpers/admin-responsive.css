@@ -213,6 +213,11 @@
         margin-right: 10px;
         margin-left: 0
     }
+    .bootstrap-timepicker-widget {
+        width: auto!important;
+        left: 50px!important;
+    }
+
 }
 
 @media only screen and (max-width:630px) {

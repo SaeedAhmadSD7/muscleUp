@@ -15,7 +15,7 @@ class DietController extends Controller
      */
     public function index()
     {
-        //
+       return view('muscle-up-app.diet.diet-program');
     }
 
     /**
@@ -36,7 +36,12 @@ class DietController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $diet = new Diet();
+        $diet-> = $request->name;
+
+
+        dd($request);
+        return null;
     }
 
     /**
