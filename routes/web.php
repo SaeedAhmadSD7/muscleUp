@@ -106,6 +106,8 @@ Route::get('delete-trnpackage/{id}',['as'=>'delete.package','uses'=>'MuscleUpApp
 /*
 Trainee
  */
+//Route::get('trainee',['as'=>'trainee','uses'=>'MuscleUpApp\TraineeController@create_trainee']);
+
 Route::get('/trainee/dashboard', ['as'=>'trainee-dashboard', 'uses'=> 'MuscleUpApp\TraineeController@index' ]);
 Route::get('trainee/add',['as'=>'trainee-add','uses'=>'MuscleUpApp\TraineeController@create']);
 Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\TraineeController@store']);
@@ -143,6 +145,14 @@ Route::get('/Admin/Inbox/Message/Accept/{id}',['as'=>'Admin-Message-Accept','use
 
 //Workout program
 Route::get('/program',['as'=>'program','uses'=>'MuscleUpApp\ProgramController@create']);
+Route::post('/program/store', ['as' => 'program-store', 'uses' => 'MuscleUpApp\ProgramController@store']);
+
+/***
+ * Diet Plan
+ */
+Route::get('/diet',['as'=>'diet','uses'=>'MuscleUpApp\DietController@index']);
+Route::post('/diet/add',['as'=>'add-diet','uses'=>'MuscleUpApp\DietController@store']);
+
 
 
 /*

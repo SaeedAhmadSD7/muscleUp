@@ -15,9 +15,8 @@ class CreatePlanDetailsTable extends Migration
     {
         Schema::create('plan_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('plan_id')->unique();
-            $table->integer('wbs_id');
-            $table->integer('day_id');
+            $table->integer('plan_id')->nullable();
+            $table->string('day');
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ class CreateProgramsTable extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('gym_id');
+            $table->integer('gym_id')->default('0');
             $table->string('title',100);
             $table->timestamps();
         });

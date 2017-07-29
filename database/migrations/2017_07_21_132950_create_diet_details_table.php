@@ -16,8 +16,9 @@ class CreateDietDetailsTable extends Migration
         Schema::create('diet_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('diet_id');
+            $table->integer('content');
             $table->integer('calories');
-            $table->integer('meal');
+            $table->integer('taketime');
             $table->timestamps();
         });
     }

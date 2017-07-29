@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 class GymRequest extends Model {
     protected $table = 'gym_requests' ;
     protected $primaryKey = 'id';
-    protected $fillable = ['name','email','address','num_branches','country','city','dial_code','phone_number','latitude','longitude',];
+    protected $fillable = ['name','email','address','num_branches','country','city','dial_code','phone_number','latitude','longitude'];
 }
