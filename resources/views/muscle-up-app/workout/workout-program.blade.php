@@ -41,7 +41,7 @@
                                 <label class="col-sm-3 control-label">Phase Name</label>
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <input class="form-control phase_name" name="name[]" value="" type="text" placeholder="Enter Phase Name...">
+                                        <input class="form-control phase_name" name="name" value="" type="text" placeholder="Enter Phase Name...">
                                         <span class="input-group-btn">
                                             <button class="btn btn-blue-alt phase_detail" type="button" disabled><span class="input-group-btn">Add Details</span></button>
                                         </span>
@@ -143,5 +143,5 @@
     <script src="{{url('/admin-assets/widgets/modal/modal.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/touchspin/touchspin.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/plugins/select2/js/select2.full.js')}}"></script>
-    <script src="{{url('/assets/js/program.js')}}"></script>
+    <script src="{{url('/admin-assets/js/program.js')}}"></script>
 @stop

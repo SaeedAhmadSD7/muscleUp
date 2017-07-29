@@ -50,11 +50,24 @@ class ProgramController extends Controller
         $program->title = $request->title;
         $program->save();
 
-        $plan=new Plan();
-        $plan->name = $request->name;
-        dd($plan);
-        $plan->save();
 
+//
+//        $plans = $request->name;
+//        $newPlansArray = [];
+//        foreach ($plans as $plan)
+//        {
+//            $newPlansArray[] = ['name' => $plan];
+//        }
+//        $newPlans=Plan::insert($newPlansArray);
+//
+////        dd($plans);
+////        $plan->name = $request->name;
+//        dd($newPlans);
+////        $plan->save();
+
+
+        $plan= new Plan();
+        $plan->name=$request->name;
         $program->plan()->save($plan);
 
         $plan_detail = new PlanDetail();
