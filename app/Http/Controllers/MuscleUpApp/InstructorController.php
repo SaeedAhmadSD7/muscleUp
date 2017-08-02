@@ -52,9 +52,9 @@ class InstructorController extends Controller
         $user = new User();
         $user->email = $request->email;
         $password = str_random(9);
-//        $user->password = bcrypt($password);
-//        $user['user-type'] = 'Instructor';
-//        $user->save();
+        $user->password = bcrypt($password);
+        $user['user-type'] = 'Instructor';
+        $user->save();
 
         $instructor = new Instructor($request->all());
         $instructor->user_id = $user->id;
@@ -63,7 +63,7 @@ class InstructorController extends Controller
 
 //        \Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
         Session::flash('Success','Save Successfully');
-        return redirect()->route('instructor-add');
+        return redirect()->route('gym');
     }
 
     /**

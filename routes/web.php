@@ -150,8 +150,8 @@ Route::post('/program/store', ['as' => 'program-store', 'uses' => 'MuscleUpApp\P
 /***
  * Diet Plan
  */
-Route::get('/diet',['as'=>'diet','uses'=>'MuscleUpApp\DietController@index']);
-Route::post('/diet/add',['as'=>'add-diet','uses'=>'MuscleUpApp\DietController@store']);
+Route::get('/diet',['as'=>'diet','uses'=>'MuscleUpApp\DietProgramController@index']);
+Route::post('/diet/add',['as'=>'add-diet','uses'=>'MuscleUpApp\DietProgramController@store']);
 
 
 

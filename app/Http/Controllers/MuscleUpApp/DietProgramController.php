@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\MuscleUpApp;
 
-use App\DietProgram;
+use App\Models\DietProgram;
+use App\Models\Diet;
+use App\Models\DietDetail;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class DietProgramController extends Controller
 {
@@ -14,7 +17,7 @@ class DietProgramController extends Controller
      */
     public function index()
     {
-        //
+        return view('muscle-up-app.diet.diet-program');
     }
 
     /**
@@ -35,7 +38,34 @@ class DietProgramController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
+        $dietprogram = new DietProgram();
+        $diet = new Diet();
+        $diet_detail = new DietDetail();
+        $dietprogram->name = $request->name;
+        $dietprogram->save();
+
+
+        $meals = [];
+
+
+
+
+        foreach($request->input('number.*') as $meal_number){
+            $meals[] = ['number'=>$meal_number];
+//            dd($meal_number);
+//            foreach ($request->input() as $meal_details){
+//                $dietprogram->diet->dietdetail()->save($meal_details);
+//            }
+
+        }
+
+//        dd($request->input('number.*'));
+        $dietprogram->diet()->create($meals);
+
+
+        return null;
+
     }
 
     /**

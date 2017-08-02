@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
-use Illuminate\Routing\Controller;
+use App\Models\Phase;
 use Illuminate\Http\Request;
-use App\Models\Plan;
+use Illuminate\Routing\Controller;
 
-class PlanController extends Controller
+class PhaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +42,10 @@ class PlanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Plan  $plan
+     * @param  \App\Models\Phase  $phase
      * @return \Illuminate\Http\Response
      */
-    public function show(Plan $plan)
+    public function show(Phase $phase)
     {
         //
     }
@@ -53,10 +53,10 @@ class PlanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Plan  $plan
+     * @param  \App\Models\Phase  $phase
      * @return \Illuminate\Http\Response
      */
-    public function edit(Plan $plan)
+    public function edit(Phase $phase)
     {
         //
     }
@@ -65,10 +65,10 @@ class PlanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Plan  $plan
+     * @param  \App\Models\Phase  $phase
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Plan $plan)
+    public function update(Request $request, Phase $phase)
     {
         //
     }
@@ -76,10 +76,10 @@ class PlanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Plan  $plan
+     * @param  \App\Models\Phase  $phase
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Plan $plan)
+    public function destroy(Phase $phase)
     {
         //
     }

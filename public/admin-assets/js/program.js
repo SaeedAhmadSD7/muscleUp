@@ -35,18 +35,11 @@ $(document).ready(function () {
     /***
      * Enable Day Detail or Phase Detail When Phase Name or Day Name Entered
      */
-    $('.tab-content').on('keypress','.phase_name, .day_name',function () {
+    $('.tab-content').on('input','.phase_name, .day_name',function () {
         if($(this).val()) {
             $(this).siblings('.input-group-btn').children().prop('disabled',false);
         }
-    });
-
-    /***
-     * Disable Add Detail Button If Phase Name Deleted
-     */
-
-    $('.tab-content').on('focusout','.phase_name, .day_name',function () {
-        if($(this).val() === '') {
+        else{
             $(this).siblings('.input-group-btn').children().prop('disabled',true);
         }
     });

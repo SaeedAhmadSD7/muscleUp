@@ -10,9 +10,7 @@ class Program extends Model
     protected $primaryKey = 'id';
     public $fillable = ['title','gym_id'];
 
-    public function plan(){
-        return $this->hasMany(Plan::class);
+    public function program_detail(){
+        return $this->hasOne(ProgramDetail::class);
     }
-
-
 }

@@ -26,18 +26,11 @@ $(document).ready(function () {
     /***
      * Enable Meal Number or Meal Name If Entered
      */
-    $('.tab-content').on('keypress','.meal_number_input, .meal_name_input',function () {
+    $('.tab-content').on('input','.meal_number_input, .meal_name_input',function () {
         if($(this).val()) {
             $(this).siblings('.input-group-btn').children().prop('disabled',false);
         }
-    });
-
-    /***
-     * Disable Add Detail Button If Meal Number or Meal Name is Deleted
-     */
-
-    $('.tab-content').on('focusout','.meal_number_input, .meal_name_input',function () {
-        if($(this).val() === '') {
+        else{
             $(this).siblings('.input-group-btn').children().prop('disabled',true);
         }
     });
@@ -84,7 +77,7 @@ $(document).ready(function () {
      * Add Day Button
      */
     $('.tab-content').on('click','.add_meal_name',function () {
-        meal_content.clone().appendTo($('.meal_container')).find('.time_take_input').timepicker({minuteStep: 1,defaultTime: false, showMeridian: false}).parent().siblings('.calories-div').find('.calories').TouchSpin({min: 0, max: 100});
+        meal_content.clone().appendTo($(this).closest('.form-group').siblings('.meal_container')).find('.time_take_input').timepicker({minuteStep: 1,defaultTime: false, showMeridian: false}).parent().siblings('.calories-div').find('.calories').TouchSpin({min: 0, max: 100});
     });
 
     $('.calories').TouchSpin({
@@ -98,4 +91,7 @@ $(document).ready(function () {
         showMeridian: false,
     });
 
+    $('.submit-btn').on('submit',function() {
+        $('.diet-program').serialize() ;
+    });
 });

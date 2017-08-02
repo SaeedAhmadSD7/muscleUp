@@ -60,17 +60,17 @@
                                                         <div class="meal_container">
                                                             <div class="meal_content-div col-md-12 col-sm-12 col-xs-12">
                                                                 <div class="form-group input-group meal_name-div">
-                                                                    <input class="form-control meal_name_input" name="content[]" value="" type="text" placeholder="Meal Content...">
+                                                                    <input class="form-control meal_name_input" name="number[][content][]" value="" type="text" placeholder="Meal Content...">
                                                                     <span class="input-group-btn">
                                                                         <button class="btn btn-blue-alt meal_name_detail" type="button" disabled><span>Add Details  </span><i class="glyph-icon icon-plus"></i></button>
                                                                     </span>
                                                                 </div>
                                                                 <div class="form-group meal_name_detail-div">
                                                                     <div class="col-md-10 col-md-offset-1 form-group calories-div">
-                                                                        <input class="form-control calories" name="calories[]" placeholder="Calories..." type="number" value="">
+                                                                        <input class="form-control calories" name="number[][cotent][calories]" placeholder="Calories..." type="number" value="">
                                                                     </div>
                                                                     <div class="col-md-10 col-md-offset-1 form-group time_taken-div">
-                                                                        <input class="form-control time_take_input" name="taketime[]" placeholder="Time to take... (Optional)" type="text" readonly>
+                                                                        <input class="form-control time_take_input" name="number[][content][taketime]" placeholder="Time to take... (Optional)" type="text" readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <div class="form-group submit-btn-div">
-                            <button class="btn ra-100 btn-default" type="submit">Submit</button>
+                            <button class="btn ra-100 btn-default submit-btn" type="submit">Submit</button>
                         </div>
                     </form>
                 </div>
