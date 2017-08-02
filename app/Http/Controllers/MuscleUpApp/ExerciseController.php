@@ -13,16 +13,14 @@ class ExerciseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
     public function exercise_list(){
 
-        $exercise = Exercise::all();
-        return view('muscle-up-app.workout.exercise')->with('exercises',$exercise);
-    }
-    public function index()
+    $exercise = Exercise::all();
+    return view('muscle-up-app.workout.exercise')->with('exercises',$exercise);
+}
+    public function exercise()
     {
-        //
+        return view('muscle-up-app.instructor.exercise');
     }
 
     /**
@@ -71,7 +69,9 @@ class ExerciseController extends Controller
      */
     public function show(Exercise $exercise)
     {
-        //
+        $exercise=Exercise::all();
+
+        return view('muscle-up-app.instructor.exercise')->with('exercise',$exercise);
     }
 
     /**
@@ -80,9 +80,10 @@ class ExerciseController extends Controller
      * @param  \App\Models\Exercise  $exercise
      * @return \Illuminate\Http\Response
      */
-    public function edit(Exercise $exercise)
+    public function edit($id,Exercise $exercise)
     {
-        //
+        $exercise=exercise::find($id);
+        return view('muscle-up-app.instructor.eupdate')->with('exercise',$exercise);
     }
 
     /**
@@ -92,9 +93,20 @@ class ExerciseController extends Controller
      * @param  \App\Models\Exercise  $exercise
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Exercise $exercise)
+    public function update($id,Request $request, Exercise $exercise)
     {
-        //
+        $exercise = Exercise::find($id);
+//        $exercise->id=$request->id;
+        $exercise->name=$request->name;
+        $exercise->name_original=$request->name_original;
+        $exercise->category=$request->category;
+//        $exercise->muscles=$request->muscles;
+//        $exercise->muscles_secondary=$request->muscles_secondary;
+//        $exercise->equipment=$request->equipment;
+        $exercise->description=$request->description;
+        $exercise->save();
+
+        return redirect()->route('show-exercise');
     }
 
     /**
@@ -103,8 +115,10 @@ class ExerciseController extends Controller
      * @param  \App\Models\Exercise  $exercise
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exercise $exercise)
+    public function destroy($id,Exercise $exercise)
     {
-        //
+        $exercise=Exercise::find($id);
+        $exercise->delete();
+        return redirect()->route('show-exercise');
     }
 }

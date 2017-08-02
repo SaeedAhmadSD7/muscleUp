@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\MuscleUpApp;
+namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Models\DietProgram;
-use App\Models\Diet;
-use App\Models\DietDetail;
+use App\Models\PhaseDetail;
+use Illuminate\Http\Request;
 
-class DietController extends Controller
+class PhaseDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,6 +15,7 @@ class DietController extends Controller
      */
     public function index()
     {
+        //
     }
 
     /**
@@ -37,15 +36,16 @@ class DietController extends Controller
      */
     public function store(Request $request)
     {
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Diet  $diet
+     * @param  \App\Models\PhaseDetail  $phaseDetail
      * @return \Illuminate\Http\Response
      */
-    public function show(Diet $diet)
+    public function show(PhaseDetail $phaseDetail)
     {
         //
     }
@@ -53,10 +53,10 @@ class DietController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Diet  $diet
+     * @param  \App\Models\PhaseDetail  $phaseDetail
      * @return \Illuminate\Http\Response
      */
-    public function edit(Diet $diet)
+    public function edit(PhaseDetail $phaseDetail)
     {
         //
     }
@@ -65,10 +65,10 @@ class DietController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Diet  $diet
+     * @param  \App\Models\PhaseDetail  $phaseDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Diet $diet)
+    public function update(Request $request, PhaseDetail $phaseDetail)
     {
         //
     }
@@ -76,10 +76,10 @@ class DietController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Diet  $diet
+     * @param  \App\Models\PhaseDetail  $phaseDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Diet $diet)
+    public function destroy(PhaseDetail $phaseDetail)
     {
         //
     }

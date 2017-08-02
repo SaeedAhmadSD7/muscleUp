@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlansTable extends Migration
+class CreateDietProgramsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreatePlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('plans', function (Blueprint $table) {
+        Schema::create('diet_programs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('program_id')->unsigned()->index();
-//            $table->foreign('program_id')->refrences('id')->on('program');
-            $table->string('name');
+            $table->integer('program_id')->default('0');
+            $table->string('name')->default('Diet Program');
             $table->timestamps();
-
-
         });
     }
 
@@ -31,6 +28,6 @@ class CreatePlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plans');
+        Schema::dropIfExists('diet_programs');
     }
 }

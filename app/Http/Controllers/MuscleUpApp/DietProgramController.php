@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use App\Models\DietProgram;
 use App\Models\Diet;
 use App\Models\DietDetail;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
-class DietController extends Controller
+class DietProgramController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,6 +17,7 @@ class DietController extends Controller
      */
     public function index()
     {
+        return view('muscle-up-app.diet.diet-program');
     }
 
     /**
@@ -37,15 +38,43 @@ class DietController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
+        $dietprogram = new DietProgram();
+        $diet = new Diet();
+        $diet_detail = new DietDetail();
+        $dietprogram->name = $request->name;
+        $dietprogram->save();
+
+
+        $meals = [];
+
+
+
+
+        foreach($request->input('number.*') as $meal_number){
+            $meals[] = ['number'=>$meal_number];
+//            dd($meal_number);
+//            foreach ($request->input() as $meal_details){
+//                $dietprogram->diet->dietdetail()->save($meal_details);
+//            }
+
+        }
+
+//        dd($request->input('number.*'));
+        $dietprogram->diet()->create($meals);
+
+
+        return null;
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Diet  $diet
+     * @param  \App\DietProgram  $dietProgram
      * @return \Illuminate\Http\Response
      */
-    public function show(Diet $diet)
+    public function show(DietProgram $dietProgram)
     {
         //
     }
@@ -53,10 +82,10 @@ class DietController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Diet  $diet
+     * @param  \App\DietProgram  $dietProgram
      * @return \Illuminate\Http\Response
      */
-    public function edit(Diet $diet)
+    public function edit(DietProgram $dietProgram)
     {
         //
     }
@@ -65,10 +94,10 @@ class DietController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Diet  $diet
+     * @param  \App\DietProgram  $dietProgram
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Diet $diet)
+    public function update(Request $request, DietProgram $dietProgram)
     {
         //
     }
@@ -76,10 +105,10 @@ class DietController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Diet  $diet
+     * @param  \App\DietProgram  $dietProgram
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Diet $diet)
+    public function destroy(DietProgram $dietProgram)
     {
         //
     }

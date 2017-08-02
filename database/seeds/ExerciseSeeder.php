@@ -27,7 +27,6 @@ class ExerciseSeeder extends Seeder
 //                'muscles_secondary'=>(string)$exercise['muscles_secondary'].[],
 //                'equipment'=>(string)$exercise['equipment'].[],
                 'description'=>$exercise['description'],
-
             ));
         }
 
@@ -37,3 +36,4 @@ class ExerciseSeeder extends Seeder
 
 
 }
+

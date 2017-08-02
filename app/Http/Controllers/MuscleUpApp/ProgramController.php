@@ -5,9 +5,9 @@ namespace App\Http\Controllers\MuscleUpApp;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\Program;
-use App\Models\Plan;
+use App\Models\Phase;
 use App\Models\Exercise;
-use App\Models\PlanDetail;
+use App\Models\PhaseDetail;
 use App\Models\Wbs;
 use App\Models\WbsDetail;
 

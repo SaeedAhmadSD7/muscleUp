@@ -32,12 +32,14 @@
                            <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                     <input type="text" name="last_name" value="{{ $instructor->last_name }}" placeholder="Last Name...">
                                 </div>
-
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                     <input type="email" name="email" value="{{$instructor->email}}" placeholder="Email Address...">
                                 </div>
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="experience" name="experience" value="{{$instructor->experience}}" placeholder="Total Experience...">
+                                    <input type="text" name="exp_years" value="{{$instructor->exp_years}}" placeholder="Exp_years...">
+                                </div>
+                                <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
+                                    <input type="text" name="exp_desc" value="{{$instructor->exp_desc}}" placeholder="Exp_desc...">
                                 </div>
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
                                     <input class="birth-date" type="text" data-field="date" data-format="yyyy-MM-dd" name="birth_date" value="{{$instructor->birth_date}}" placeholder="Date of Birth..." readonly>
@@ -49,11 +51,6 @@
                                 <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
                                     <input class="phone_number" type="text" name="phone_number" value="{{$instructor->phone_number}}" placeholder="Phone Number...">
                                 </div>
-                            </div>
-
-                            <div class="address-field">
-                                <input type="text" name="address" value="{{$instructor->address}}" placeholder="Give your Address....." maxlength="250"></input>
-                            </div>
                             <div class="form-group col-md-6 col-sm-12 col-xs-12 Gender ">
                                 <div class="col-md-3 col sm-4 col-xs-4 gender-title">
                                     <p class="title">Gender : </p>
@@ -64,8 +61,12 @@
                                         <label class="btn"><input type="radio" name='gender'><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Female</span></label>
                                     </div>
                                 </div>
-
                             </div>
+                            </div>
+                            <div class="address-field">
+                                <input type="address" name="address" value="{{$instructor->address}}" placeholder="Give your Address....." maxlength="250"></input>
+                            </div>
+
                             <div class="text-right col-md-12"><button type="submit"><span class="fa fa-angle-right"></span> Update Instructor</button></div>
 
                         </form>

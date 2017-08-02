@@ -59,10 +59,10 @@
                                 </div>
                                 <div class="exp_field">
                                     <div class="form-group col-md-3 col-sm-12 col-xs-12 exp_years-div">
-                                        <input type="number" class="exp_years" name="exp_years[]" value="" placeholder="Experience in Years...">
+                                        <input type="number" class="exp_years" name="exp_years" value="" placeholder="Experience in Years...">
                                     </div>
                                     <div class="form-group col-md-9 col-sm-12 col-xs-12 exp_desc-div">
-                                        <input type="text" class="exp_desc" name="exp_desc[]" value="" placeholder="Experience Description...">
+                                        <input type="text" class="exp_desc" name="exp_desc" value="" placeholder="Experience Description...">
                                     </div>
                                 </div>
 

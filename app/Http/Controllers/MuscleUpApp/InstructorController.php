@@ -14,6 +14,15 @@ class InstructorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function instructor_detail($id)
+    {
+
+        $instructorDetail= Instructor::find($id);
+        return view('muscle-up-app.instructor.instructor-detail',compact('instructorDetail'));
+
+    }
+
     public function add()
     {
         return view('muscle-up-app.instructor.add-instructor');
@@ -39,13 +48,13 @@ class InstructorController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+//        dd($request);
         $user = new User();
         $user->email = $request->email;
         $password = str_random(9);
-//        $user->password = bcrypt($password);
-//        $user['user-type'] = 'Instructor';
-//        $user->save();
+        $user->password = bcrypt($password);
+        $user['user-type'] = 'Instructor';
+        $user->save();
 
         $instructor = new Instructor($request->all());
         $instructor->user_id = $user->id;
@@ -54,7 +63,7 @@ class InstructorController extends Controller
 
 //        \Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
         Session::flash('Success','Save Successfully');
-        return redirect()->route('instructor-add');
+        return redirect()->route('gym');
     }
 
     /**
@@ -91,12 +100,14 @@ class InstructorController extends Controller
      */
     public function update(Request $request, $id)
     {
+//        dd($request);
         $instructor = Instructor::find($id);
         $instructor->first_name=$request->first_name;
         $instructor->last_name=$request->last_name;
         $instructor->dial_code = '+45';
         $instructor->phone_number=$request->phone_number;
-        $instructor->experience=$request->experience;
+        $instructor->exp_years=$request->exp_years;
+        $instructor->exp_desc=$request->exp_desc;
         $instructor->birth_date=$request->birth_date;
 //        $instructor->gender =$request->gender;
         $instructor->address=$request->address;
