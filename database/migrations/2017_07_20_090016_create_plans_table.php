@@ -15,7 +15,8 @@ class CreatePlansTable extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('program_id')->nullable();
+            $table->integer('program_id')->unsigned()->index();
+//            $table->foreign('program_id')->refrences('id')->on('program');
             $table->string('name');
             $table->timestamps();
 
