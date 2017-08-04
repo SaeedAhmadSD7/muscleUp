@@ -15,9 +15,7 @@ class CreatePhasesTable extends Migration
     {
         Schema::create('phases', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('program_id')->unsigned()->index();
-//            $table->foreign('program_id')->refrences('id')->on('program');
-            $table->string('name');
+            $table->string('value3');
             $table->timestamps();
         });
     }

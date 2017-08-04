@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWbsTable extends Migration
+class CreatePhaseDayDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateWbsTable extends Migration
      */
     public function up()
     {
-        Schema::create('wbs', function (Blueprint $table) {
+        Schema::create('phase_day_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('phase_day_detail_id')->nullable();
-            $table->string('value6');
+            $table->integer('phase_id')->nullable();
+            $table->integer('day_id')->nullable();
+            $table->string('value5')->default('0');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateWbsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wbs');
+        Schema::dropIfExists('phase_day_details');
     }
 }

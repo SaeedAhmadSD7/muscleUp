@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePhaseDetailsTable extends Migration
+class CreateProgramPhasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreatePhaseDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('phase_details', function (Blueprint $table) {
+        Schema::create('program_phases', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('program_detail_id')->nullable();
             $table->integer('phase_id')->nullable();
-            $table->string('day');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreatePhaseDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phase_details');
+        Schema::dropIfExists('program_phases');
     }
 }

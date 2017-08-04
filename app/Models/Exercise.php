@@ -8,15 +8,13 @@ class Exercise extends Model
 {
     protected $table= 'exercises';
     protected $primaryKey = 'id';
-    public function wbs_detail(){
-        return $this->belongsToMany(WbsDetail::class);
+
+
+    public function wbs(){
+        return $this->belongsToMany(WbsDetail::class,'wbs_details','exercise_id','wbs_id');
     }
+
     protected $exercise;
-
-
-
-
-
     protected function getExercise()
     {
         if (sizeof($this->exercise) == 0) {

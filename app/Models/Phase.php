@@ -8,15 +8,22 @@ class Phase extends Model
 {
     protected $table = 'phases';
     protected $primaryKey = 'id';
-    public $fillable = ['name','program_details_id'];
+    public $fillable = [];
 
-    public function program()
+    public function program_detail()
     {
-        return $this->belongsTo(ProgramDetail::class);
+        return $this->belongsToMany(ProgramDetail::class,'program_phases','phase_id','program_detail_id');
     }
 
-    public function plan_detail()
+    public function day()
     {
-        return $this->hasMany(PhaseDetail::class);
+        return $this->belongsToMany(Day::class,'phase_day_details','phase_id','day_id');
     }
+
+    public function phase_day_detail()
+    {
+        return $this->hasOne(PhaseDayDetail::class);
+    }
+
+
 }

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Routing\Controller;
-use App\Models\PhaseDetail;
+use App\ProgramPhase;
 use Illuminate\Http\Request;
 
-class PhaseDetailController extends Controller
+class ProgramPhaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +41,10 @@ class PhaseDetailController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PhaseDetail  $phaseDetail
+     * @param  \App\ProgramPhase  $programPhase
      * @return \Illuminate\Http\Response
      */
-    public function show(PhaseDetail $phaseDetail)
+    public function show(ProgramPhase $programPhase)
     {
         //
     }
@@ -53,10 +52,10 @@ class PhaseDetailController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PhaseDetail  $phaseDetail
+     * @param  \App\ProgramPhase  $programPhase
      * @return \Illuminate\Http\Response
      */
-    public function edit(PhaseDetail $phaseDetail)
+    public function edit(ProgramPhase $programPhase)
     {
         //
     }
@@ -65,10 +64,10 @@ class PhaseDetailController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PhaseDetail  $phaseDetail
+     * @param  \App\ProgramPhase  $programPhase
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PhaseDetail $phaseDetail)
+    public function update(Request $request, ProgramPhase $programPhase)
     {
         //
     }
@@ -76,10 +75,10 @@ class PhaseDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PhaseDetail  $phaseDetail
+     * @param  \App\ProgramPhase  $programPhase
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PhaseDetail $phaseDetail)
+    public function destroy(ProgramPhase $programPhase)
     {
         //
     }

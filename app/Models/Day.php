@@ -8,10 +8,10 @@ class Day extends Model
 {
     protected $table= 'days';
     protected $primaryKey = 'id';
-    protected $fillable = ['plan_id','number'];
+    protected $fillable = [];
 
-    public function plan_detail(){
+    public function phase(){
 
-        return $this->belongsTo(PlanDetail::class);
+        return $this->belongsToMany(Phase::class,'phase_day_details','day_id','phase_id');
     }
 }

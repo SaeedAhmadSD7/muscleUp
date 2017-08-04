@@ -8,7 +8,7 @@ class Program extends Model
 {
     protected $table= 'programs';
     protected $primaryKey = 'id';
-    public $fillable = ['title','gym_id'];
+    public $fillable = [];
 
     public function program_detail(){
         return $this->hasOne(ProgramDetail::class);
