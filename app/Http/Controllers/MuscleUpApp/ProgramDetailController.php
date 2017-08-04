@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
-use Illuminate\Routing\Controller;
+use App\Models\ProgramDetail;
 use Illuminate\Http\Request;
-use App\Models\PlanDetail;
+use Illuminate\Routing\Controller;
 
-
-
-class PlanDetailController extends Controller
+class ProgramDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -44,10 +42,10 @@ class PlanDetailController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PlanDetail  $planDetail
+     * @param  \App\Models\ProgramDetail  $programDetail
      * @return \Illuminate\Http\Response
      */
-    public function show(PlanDetail $planDetail)
+    public function show(ProgramDetail $programDetail)
     {
         //
     }
@@ -55,10 +53,10 @@ class PlanDetailController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PlanDetail  $planDetail
+     * @param  \App\Models\ProgramDetail  $programDetail
      * @return \Illuminate\Http\Response
      */
-    public function edit(PlanDetail $planDetail)
+    public function edit(ProgramDetail $programDetail)
     {
         //
     }
@@ -67,10 +65,10 @@ class PlanDetailController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PlanDetail  $planDetail
+     * @param  \App\Models\ProgramDetail  $programDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PlanDetail $planDetail)
+    public function update(Request $request, ProgramDetail $programDetail)
     {
         //
     }
@@ -78,10 +76,10 @@ class PlanDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PlanDetail  $planDetail
+     * @param  \App\Models\ProgramDetail  $programDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PlanDetail $planDetail)
+    public function destroy(ProgramDetail $programDetail)
     {
         //
     }

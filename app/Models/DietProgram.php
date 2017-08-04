@@ -8,7 +8,7 @@ class DietProgram extends Model
 {
     protected $table='diet_programs';
     protected $primaryKey = 'id';
-    public $fillable = ['program_id','name'];
+    protected $fillable = ['program_id','name'];
 
     public function program(){
         return $this->belongsTo(Program::class);
