@@ -22,6 +22,32 @@ class InstructorController extends Controller
         return view('muscle-up-app.instructor.instructor-detail',compact('instructorDetail'));
 
     }
+    public function profile()
+    {
+        return view('muscle-up-app.instructor.instructor-profile');
+
+    }
+
+    public function panl()
+    {
+        return view('muscle-up-app.instructor.gym-panl');
+
+    }
+    public function dashboard()
+    {
+        return view('muscle-up-app.instructor.gym-dashboard');
+
+    }
+    public function panal()
+    {
+        return view('muscle-up-app.instructor.instructor-panal');
+
+    }
+    public function index()
+    {
+        return view('muscle-up-app.instructor.instructor-dashboard');
+
+    }
 
     public function add()
     {
@@ -57,13 +83,13 @@ class InstructorController extends Controller
 //        $user->save();
 
         $instructor = new Instructor($request->all());
-        $instructor->user_id = $user->id;
+//        $instructor->user_id = $user->id;
         $instructor->save();
 
 
 //        \Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
         Session::flash('Success','Save Successfully');
-        return redirect()->route('instructor-add');
+        return redirect()->route('show-instructor');
     }
 
     /**
@@ -77,6 +103,12 @@ class InstructorController extends Controller
          $instructors=Instructor::all();
 
         return view('muscle-up-app.instructor.show')->with('instructors',$instructors);
+    }
+    public function profileshow($id)
+    {
+        $instructor=Instructor::find($id);
+//        dd($instructors);
+        return view('muscle-up-app.instructor.instructor-profile')->with('instructor',$instructor);
     }
 
     /**
@@ -106,8 +138,8 @@ class InstructorController extends Controller
         $instructor->last_name=$request->last_name;
         $instructor->dial_code = '+45';
         $instructor->phone_number=$request->phone_number;
-        $instructor->exp_years=$request->exp_years;
-        $instructor->exp_desc=$request->exp_desc;
+//        $instructor->exp_years=$request->exp_years;
+//        $instructor->exp_desc=$request->exp_desc;
         $instructor->birth_date=$request->birth_date;
 //        $instructor->gender =$request->gender;
         $instructor->address=$request->address;

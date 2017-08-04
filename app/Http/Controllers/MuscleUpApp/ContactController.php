@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MuscleUpApp;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use Illuminate\Routing\Controller;
+use Mail;
 
 class ContactController extends Controller
 {
@@ -13,9 +14,11 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function contact()
     {
-        //
+        return view('muscle-up-app.instructor.contact-us');
+
     }
 
     /**
@@ -34,13 +37,26 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function postContact(Request $request)
+    {
+        $data = array(
+            'name' => $request->name,
+            'email' => $request->email,
+            'message' => $request->message
+        );
+        Mail::send('muscle-up-app.mail.message' , $data, function ($message) use ($data){
+            $message->from($data['email']);
+            $message->to('bs130201376@vu.edu.pk');
+            $message->subject('Contact with muscle up app');
+        });
+    }
     public function store(Request $request)
     {
-        $value =  array(
-            'name'=>'wajahat',
-            'email'=>'wajaht@gmail.com',
-            'body'=>'hello'
-        );
+//        $value =  array(
+//            'name'=>'wajahat',
+//            'email'=>'wajaht@gmail.com',
+//            'body'=>'hello'
+//        );
 
 
         //validate the data
@@ -50,10 +66,13 @@ class ContactController extends Controller
 //            'body' => 'required'
 //        ));
         //store data in database
+
+
+
         $contact = new Contact();
-        $contact->name= $value['name'];
-        $contact->email= $value['email'];
-        $contact->body= $value['body'];
+        $contact->name= $request['name'];
+        $contact->email= $request['email'];
+        $contact->body= $request['body'];
         $contact->save();
 
         //redirect to other page

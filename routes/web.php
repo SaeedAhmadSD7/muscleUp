@@ -164,7 +164,12 @@ Route::get('/exercise',['as'=>'exercise','uses'=>'MuscleUpApp\ExerciseController
 
 
 //Instructor
-
+Route::get('profile', ['as'=>'profile', 'uses'=> 'MuscleUpApp\InstructorController@profile' ]);
+Route::get('profileshow/{id}', ['as'=>'profile', 'uses'=> 'MuscleUpApp\InstructorController@profileshow' ]);
+Route::get('/gym/panl', ['as'=>'gym-panl', 'uses'=> 'MuscleUpApp\InstructorController@panl' ]);
+Route::get('/gym/dashboard', ['as'=>'gym-dashboard', 'uses'=> 'MuscleUpApp\InstructorController@dashboard' ]);
+Route::get('/instructor/panal', ['as'=>'instructor-panal', 'uses'=> 'MuscleUpApp\InstructorController@panal' ]);
+Route::get('/instructor/dashboard', ['as'=>'instructor-dashboard', 'uses'=> 'MuscleUpApp\InstructorController@index' ]);
 Route::get('show-instructor',['as'=>'show-instructor','uses'=>'MuscleUpApp\InstructorController@show']);
 Route::get('instructor/add',['as'=>'instructor-add','uses'=>'MuscleUpApp\InstructorController@add']);
 Route::get('update-instructor/{id}',['as'=>'update-instructor','uses'=>'MuscleUpApp\InstructorController@edit']);
@@ -186,6 +191,16 @@ Route::get('update-exercise/{id}',['as'=>'update-exercise','uses'=>'MuscleUpApp\
 Route::post('update-exercise/{id}',['as'=>'update-exercise','uses'=>'MuscleUpApp\ExerciseController@update']);
 Route::get('delete-exercise/{id}',['as'=>'delete-exercise','uses'=>'MuscleUpApp\ExerciseController@destroy']);
 
+//Contact us
+Route::get('contact', ['as'=>'contact', 'uses'=> 'MuscleUpApp\ContactController@contact' ]);
+Route::post('contact/store',['as'=>'contact-store','uses'=>'MuscleUpApp\ContactController@store']);
+
+
+
+
+Route::post('postcontact',['as'=>'postContact','uses'=>'MuscleUpApp\ContactController@postContact']);
+
+
 
 //Day
 //Route::get('day',['as'=>'day','uses'=>'MuscleUpApp\DayController@day']);
@@ -196,6 +211,15 @@ Route::get('delete-exercise/{id}',['as'=>'delete-exercise','uses'=>'MuscleUpApp\
 //Route::post('update-day/{id}',['as'=>'update-day','uses'=>'MuscleUpApp\DayController@update']);
 //Route::get('delete-day/{id}',['as'=>'delete-day','uses'=>'MuscleUpApp\DayController@destroy']);
 
+//BRANCH
+Route::get('branch', ['as'=>'branch', 'uses'=> 'MuscleUpApp\BranchController@branch' ]);
+Route::get('branch',['as'=>'branch','uses'=>'MuscleUpApp\BranchController@create']);
+Route::post('branch/store', ['as' => 'branch-store', 'uses' => 'MuscleUpApp\BranchController@store']);
+Route::get('show-branch',['as'=>'show-branch','uses'=>'MuscleUpApp\BranchController@show']);
+Route::get('delete-branch/{id}',['as'=>'delete-branch','uses'=>'MuscleUpApp\BranchController@destroy']);
+Route::get('update-branch/{id}',['as'=>'update-branch','uses'=>'MuscleUpApp\BranchController@edit']);
+Route::post('update-branch/{id}',['as'=>'update-branch','uses'=>'MuscleUpApp\BranchController@update']);
+Route::get('show-branch/detail/{id}',['as'=>'branch-detail','uses'=>'MuscleUpApp\BranchController@branch_detail']);
 
 
 

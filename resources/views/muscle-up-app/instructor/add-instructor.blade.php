@@ -57,19 +57,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="exp_field">
-                                    <div class="form-group col-md-3 col-sm-12 col-xs-12 exp_years-div">
-                                        <input type="number" class="exp_years" name="exp_years[]" value="" placeholder="Experience in Years...">
-                                    </div>
-                                    <div class="form-group col-md-9 col-sm-12 col-xs-12 exp_desc-div">
-                                        <input type="text" class="exp_desc" name="exp_desc[]" value="" placeholder="Experience Description...">
-                                    </div>
-                                </div>
-
-                                <div class="text-right col-md-4 col-sm-12 col-xs-12 col-md-offset-3">
-                                    <button type="button" class="btn-add-exp"><span class="fa fa-angle-up"></span> Add Experience</button>
-                                </div>
-
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12 text-field">
                                     <input name="address" placeholder="Address..." maxlength="255">
                                 </div>
