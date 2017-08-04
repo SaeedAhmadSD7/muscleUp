@@ -788,45 +788,23 @@
                                 </div>
                             </div>
 
+
                             <table class="table table-hover text-center">
                                 <tbody>
-                                {{--{{dd ($instructorDetail)}}--}}
-                                {{--@foreach($instructorDetail as $instructorDetails)--}}
-                                    {{--{{dd ($instructorDetails)--}}
-                                    <tr>
+                                @foreach($branch as $branch)
+                                    <tr id="{{$branch->id}}">
                                         {{--<td><input class="custom-checkbox" id="mail-checkbox-1" type="checkbox"></td>--}}
                                         <td><i class="glyph-icon icon-star"></i></td>
-                                <tr class="name">
-                                    <th>First Name</th>
-                                        <a href ="#"><td class="email-title">{{$instructorDetail->first_name}}</td></a>
-                                </tr>
-                                <tr class="name">
-                                    <th>Last Name</th>
-                                        <td class="email-title">{{$instructorDetail->last_name}}</td>
-                                </tr>
-                                <tr class="name">
-                                    <th>Email</th>
-                                        <td class="email-body">{{$instructorDetail->email}}</td>
-                                </tr>
-                                <tr class="name">
-                                    <th>Dial Code</th>
-                                        <td class="email-title">{{$instructorDetail->dial_code}}</td>
-                                </tr>
-                                <tr class="name">
-                                    <th>Phone Number</th>
-                                        <td class="email-title">{{$instructorDetail->phone_number}}</td>
-                                </tr>
-                                <tr class="name">
-                                    <th>Address</th>
-                                        <td class="email-title">{{$instructorDetail->address}}</td>
-                                </tr>
+                                        <a href="{{route('branch-detail',$branch->id)}}"></a>
+                                        <td class="email-title">{{$branch->branch_no}}</td>
+                                        <td class="email-body">{{$branch->email}}</td>
                                         <td><i class="glyph-icon icon-paperclip"></i></td>
-                                        <td>{{$instructorDetail->updated_at}}</td>
-                                        {{--<td><a type="submit" href="{{URL::to('update-instructor',array('id'=>$instructor->id))}}"><span class="fa fa-angle-right"></span>Edit</a></td>--}}
-                                        {{--<td><a type="submit" href="{{URL::to('delete-instructor',array('id'=>$instructor->id))}}"><span class="fa fa-angle-right"></span>Delete</a></td>--}}
+                                        <td>{{$branch->updated_at}}</td>
+                                        <td><a type="submit" href="{{URL::to('update-branch',array('id'=>$branch->id))}}"><span class="fa fa-angle-right"></span>Edit</a></td>
+                                        <td><a type="submit" href="{{URL::to('delete-branch',array('id'=>$branch->id))}}"><span class="fa fa-angle-right"></span>Delete</a></td>
 
-
-                                {{--@endforeach--}}
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

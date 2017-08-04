@@ -790,40 +790,40 @@
 
                             <table class="table table-hover text-center">
                                 <tbody>
-                                {{--{{dd ($instructorDetail)}}--}}
-                                {{--@foreach($instructorDetail as $instructorDetails)--}}
-                                    {{--{{dd ($instructorDetails)--}}
-                                    <tr>
-                                        {{--<td><input class="custom-checkbox" id="mail-checkbox-1" type="checkbox"></td>--}}
-                                        <td><i class="glyph-icon icon-star"></i></td>
+                                {{--{{dd ($branchDetail)}}--}}
+                                {{--@foreach($branchDetail as $branchDetail)--}}
+                                {{--{{dd ($instructorDetails)--}}
+                                <tr>
+                                    {{--<td><input class="custom-checkbox" id="mail-checkbox-1" type="checkbox"></td>--}}
+                                    <td><i class="glyph-icon icon-star"></i></td>
                                 <tr class="name">
-                                    <th>First Name</th>
-                                        <a href ="#"><td class="email-title">{{$instructorDetail->first_name}}</td></a>
-                                </tr>
-                                <tr class="name">
-                                    <th>Last Name</th>
-                                        <td class="email-title">{{$instructorDetail->last_name}}</td>
+                                    <th>Branch No</th>
+                                    <a href ="#"><td class="email-title">{{$branchDetail->branch_no}}</td></a>
                                 </tr>
                                 <tr class="name">
                                     <th>Email</th>
-                                        <td class="email-body">{{$instructorDetail->email}}</td>
+                                    <td class="email-body">{{$branchDetail->email}}</td>
                                 </tr>
                                 <tr class="name">
-                                    <th>Dial Code</th>
-                                        <td class="email-title">{{$instructorDetail->dial_code}}</td>
+                                    <th>Phone No</th>
+                                    <td class="email-title">{{$branchDetail->phone_no}}</td>
                                 </tr>
                                 <tr class="name">
-                                    <th>Phone Number</th>
-                                        <td class="email-title">{{$instructorDetail->phone_number}}</td>
+                                    <th>Opening Time</th>
+                                    <td class="email-title">{{$branchDetail->opening_time}}</td>
+                                </tr>
+                                <tr class="name">
+                                    <th>Clossing Time</th>
+                                    <td class="email-title">{{$branchDetail->clossing_time}}</td>
                                 </tr>
                                 <tr class="name">
                                     <th>Address</th>
-                                        <td class="email-title">{{$instructorDetail->address}}</td>
+                                    <td class="email-title">{{$branchDetail->address}}</td>
                                 </tr>
-                                        <td><i class="glyph-icon icon-paperclip"></i></td>
-                                        <td>{{$instructorDetail->updated_at}}</td>
-                                        {{--<td><a type="submit" href="{{URL::to('update-instructor',array('id'=>$instructor->id))}}"><span class="fa fa-angle-right"></span>Edit</a></td>--}}
-                                        {{--<td><a type="submit" href="{{URL::to('delete-instructor',array('id'=>$instructor->id))}}"><span class="fa fa-angle-right"></span>Delete</a></td>--}}
+                                <td><i class="glyph-icon icon-paperclip"></i></td>
+                                <td>{{$branchDetail->updated_at}}</td>
+                                {{--<td><a type="submit" href="{{URL::to('update-instructor',array('id'=>$instructor->id))}}"><span class="fa fa-angle-right"></span>Edit</a></td>--}}
+                                {{--<td><a type="submit" href="{{URL::to('delete-instructor',array('id'=>$instructor->id))}}"><span class="fa fa-angle-right"></span>Delete</a></td>--}}
 
 
                                 {{--@endforeach--}}
