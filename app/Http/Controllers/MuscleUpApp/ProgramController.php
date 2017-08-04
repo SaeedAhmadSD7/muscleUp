@@ -8,11 +8,6 @@ use App\Models\ProgramDetail;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\Program;
-use App\Models\Phase;
-use App\Models\Exercise;
-use App\Models\PhaseDetail;
-use App\Models\Wbs;
-use App\Models\WbsDetail;
 
 class ProgramController extends Controller
 {
@@ -35,10 +30,9 @@ class ProgramController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function program_add()
     {
-        $exercise = Exercise::all();
-        return view('muscle-up-app.workout.workout-program')->with('exercises',$exercise);
+        return view('muscle-up-app.workout.program-add');
     }
 
     /**
@@ -47,7 +41,7 @@ class ProgramController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function program_save(Request $request)
     {
          $value = array(
              'value' =>'beast mood',
@@ -61,7 +55,9 @@ class ProgramController extends Controller
 
         $program = new Program();
         $program->value = $value['value'];
+        $program = new Program($request->all());
         $program->save();
+        return redirect()->route('program-view',$program);
 
         $program_detail = new ProgramDetail();
         $program_detail->value2=$value['value2'];
@@ -129,6 +125,26 @@ class ProgramController extends Controller
 //        $wbs_detail->rest=$request->rest;
 //        $wbs_detail->save();
 //        $wbs->wbs_detail()->save($wbs_detail);
+//        $plan= new Plan();
+//        $plan->name=$request->name;
+//        $program->plan()->save($plan);
+//
+//        $plan_detail = new PlanDetail();
+//        $plan_detail->day=$request->day;
+//        $plan_detail->save();
+//        $plan->plan_detail()->save($plan_detail);
+//
+//        $wbs =new Wbs();
+//        $wbs->exercise=$request->exercise;
+//        $wbs->save();
+//        $plan_detail->wbs()->save($wbs);
+//
+//        $wbs_detail = new WbsDetail();
+//        $wbs_detail->set=$request->set;
+//        $wbs_detail->rep=$request->rep;
+//        $wbs_detail->rest=$request->rest;
+//        $wbs_detail->save();
+//        $wbs->wbs_detail()->save($wbs_detail);
 
     }
 
@@ -138,9 +154,12 @@ class ProgramController extends Controller
      * @param  \App\Program  $program
      * @return \Illuminate\Http\Response
      */
-    public function show(Program $program)
+
+
+    public function program_view(Program $program)
     {
-        //
+        $phases = ['number'=>1,'name'=>'Cutting Phase','num_exercise'=>15];
+        return view ('muscle-up-app.workout.program-view')->with(['program'=>$program,'phases'=>$phases]);
     }
 
     /**

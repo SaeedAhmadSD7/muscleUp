@@ -44,5 +44,4 @@
 
 @section('script')
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js/program.js')}}"></script>
 @stop
