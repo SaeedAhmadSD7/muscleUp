@@ -3,7 +3,7 @@
 @section('title','Contact Us')
 
 @section('style-sheet')
-    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
+
 
 @stop
 @section('content')
@@ -43,11 +43,4 @@
             </div>
         </section>
     </div>
-@stop
-
-@section('script')
-    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}"
-            type="text/javascript"></script>
-    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/add-instructor.js')}}" type="text/javascript"></script>
 @stop

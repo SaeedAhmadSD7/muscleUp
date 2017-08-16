@@ -2,10 +2,6 @@
 
 @section('title','Update Branch')
 
-@section('style-sheet')
-    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
-
-@stop
 @section('content')
     <div class="container-fluid" style="margin: 0; padding: 0;">
         <section class="instructor-reg clearfix">
@@ -42,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="address-field">
-                                <input type="address" name="address" value="{{$branch->address}}" placeholder="Give your Address....." maxlength="250"></input>
+                                <input type="address" name="address" value="{{$branch->address}}" placeholder="Give your Address....." maxlength="250">
                             </div>
 
                             <div class="text-right col-md-12"><button type="submit"><span class="fa fa-angle-right"></span> Update Branch</button></div>
@@ -54,9 +50,4 @@
             </div>
         </section>
     </div>
-@stop
-
-@section('script')
-    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/add-trainee.js')}}" type="text/javascript"></script>
 @stop

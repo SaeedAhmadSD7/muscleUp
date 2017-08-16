@@ -2,10 +2,6 @@
 
 @section('title','Delete Instructor')
 
-@section('style-sheet')
-    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
-
-@stop
 @section('content')
     <div class="container-fluid" style="margin: 0; padding: 0;">
         <section class="instructor-reg clearfix">
@@ -51,11 +47,11 @@
                                     <input type="text" name="experience" value="{{$exercise->muscles_secondary}}" placeholder="muscles_secondary...">
                                 </div>
 
-                                </div>
+
                                 <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
                                     <input class="phone_number" type="text" name="phone_number" value="{{$exercise->equipment}}" placeholder="equipment...">
                                 </div>
-                            </div>
+
 
                             <div class="address-field">
                                 <textarea name="address" value="{{$exercise->description}}" placeholder="Give your description....." maxlength="250"></textarea>
@@ -80,9 +76,4 @@
             </div>
         </section>
     </div>
-@stop
-
-@section('script')
-    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/t-reg.js')}}" type="text/javascript"></script>
 @stop

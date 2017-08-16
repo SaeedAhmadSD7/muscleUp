@@ -1,257 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <!--[if IE]>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-    <title>Inbox</title>
-    <meta content="" name="description">
-    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
-    <link href="{{url('/admin-assets/images/icons/apple-touch-icon-144-precomposed.png')}}" rel="apple-touch-icon-precomposed" sizes="144x144">
-    <link href="{{url('/admin-assets/images/icons/apple-touch-icon-114-precomposed.png')}}" rel="apple-touch-icon-precomposed" sizes="114x114">
-    <link href="{{url('/admin-assets/images/icons/apple-touch-icon-72-precomposed.png')}}" rel="apple-touch-icon-precomposed" sizes="72x72">
-    <link href="{{url('/admin-assets/images/icons/apple-touch-icon-57-precomposed.png')}}" rel="apple-touch-icon-precomposed">
-    <link href="{{url('/admin-assets/images/icons/favicon.png')}}" rel="shortcut icon">
-    <link href="{{url('/admin-assets/helpers/animate.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/boilerplate.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/grid.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/page-transitions.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/spacing.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/utils.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/colors.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/material/ripple.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/badges.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/content-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/dashboard-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/images.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/info-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/invoice.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/loading-indicators.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/menus.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/panel-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/response-messages.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/responsive-tables.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/ribbon.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/social-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/tile-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/timeline.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/icons/fontawesome/fontawesome.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/icons/linecons/linecons.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/icons/spinnericon/spinnericon.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/accordion-ui/accordion.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/calendar/calendar.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/carousel/carousel.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/charts/justgage/justgage.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/charts/morris/morris.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/charts/piegage/piegage.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/charts/xcharts/xcharts.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/chosen/chosen.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/colorpicker/colorpicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/datatable/datatable.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/datepicker/datepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/datepicker-ui/datepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/daterangepicker/daterangepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/dialog/dialog.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/dropdown/dropdown.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/dropzone/dropzone.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/file-input/fileinput.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/input-switch/inputswitch.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/input-switch/inputswitch-alt.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/ionrangeslider/ionrangeslider.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/jcrop/jcrop.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/jgrowl-notifications/jgrowl.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/loading-bar/loadingbar.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/maps/vector-maps/vectormaps.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/markdown/markdown.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/modal/modal.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/multi-select/multiselect.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/multi-upload/fileupload.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/nestable/nestable.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/noty-notifications/noty.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/popover/popover.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/pretty-photo/prettyphoto.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/progressbar/progressbar.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/range-slider/rangeslider.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/slidebars/slidebars.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/slider-ui/slider.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/summernote-wysiwyg/summernote-wysiwyg.css')}}" rel="stylesheet"
-          type="text/css">
-    <link href="{{url('/admin-assets/widgets/tabs-ui/tabs.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/timepicker/timepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/tocify/tocify.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/tooltip/tooltip.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/touchspin/touchspin.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/uniform/uniform.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/wizard/wizard.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/xeditable/xeditable.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/chat.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/files-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/login-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/notification-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/progress-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/todo.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/user-profile.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/mobile-navigation.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/applications/mailbox.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/themes/admin/layout.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/themes/admin/color-schemes/default.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/themes/components/default.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/responsive-elements.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/admin-responsive.css')}}" rel="stylesheet" type="text/css">
-</head>
-<body>
-<div id="sb-site">
+@extends('layouts.backend-main')
+@section('title')
+    Admin Dashboard
+@stop
 
-    <div class="sb-slidebar bg-black sb-left sb-style-overlay">
-        <div class="scrollable-content scrollable-slim-sidebar">
-            <div class="pad10A">
-                <div class="divider-header">
-                    Online
-                </div>
-                <ul class="chat-box">
-                    <li>
-                        <div class="status-badge">
-                            <img alt="" class="img-circle"
-                                 src="{{url('/admin-assets/image-resources/people/testimonial1.jpg')}}" width="40">
-                            <div class="small-badge bg-green"></div>
-                        </div>
-                        <b>Grace Padilla</b>
-                        <p>On the other hand, we denounce...</p><a class="btn btn-md no-border radius-all-100 btn-black"
-                                                                   href="#"><i
-                                    class="glyph-icon icon-comments-o"></i></a>
-                    </li>
-                    <li>
-                        <div class="status-badge">
-                            <img alt="" class="img-circle"
-                                 src="{{url('/admin-assets/image-resources/people/testimonial2.jpg')}}" width="40">
-                            <div class="small-badge bg-green"></div>
-                        </div>
-                        <b>Carl Gamble</b>
-                        <p>Dislike men who are so beguiled...</p><a
-                                class="btn btn-md no-border radius-all-100 btn-black" href="#"><i
-                                    class="glyph-icon icon-comments-o"></i></a>
-                    </li>
-                    <li>
-                        <div class="status-badge">
-                            <img alt="" class="img-circle"
-                                 src="{{url('/admin-assets/image-resources/people/testimonial3.jpg')}}" width="40">
-                            <div class="small-badge bg-green"></div>
-                        </div>
-                        <b>Michael Poole</b>
-                        <p>Of pleasure of the moment, so...</p><a class="btn btn-md no-border radius-all-100 btn-black"
-                                                                  href="#"><i
-                                    class="glyph-icon icon-comments-o"></i></a>
-                    </li>
-                    <li>
-                        <div class="status-badge">
-                            <img alt="" class="img-circle"
-                                 src="{{url('/admin-assets/image-resources/people/testimonial4.jpg')}}" width="40">
-                            <div class="small-badge bg-green"></div>
-                        </div>
-                        <b>Bill Green</b>
-                        <p>That they cannot foresee the...</p><a class="btn btn-md no-border radius-all-100 btn-black"
-                                                                 href="#"><i class="glyph-icon icon-comments-o"></i></a>
-                    </li>
-                    <li>
-                        <div class="status-badge">
-                            <img alt="" class="img-circle"
-                                 src="{{url('/admin-assets/image-resources/people/testimonial5.jpg')}}" width="40">
-                            <div class="small-badge bg-green"></div>
-                        </div>
-                        <b>Cheryl Soucy</b>
-                        <p>Pain and trouble that are bound...</p><a
-                                class="btn btn-md no-border radius-all-100 btn-black" href="#"><i
-                                    class="glyph-icon icon-comments-o"></i></a>
-                    </li>
-                </ul>
-                <div class="divider-header">
-                    Idle
-                </div>
-                <ul class="chat-box">
-                    <li>
-                        <div class="status-badge">
-                            <img alt="" class="img-circle"
-                                 src="{{url('/admin-assets/image-resources/people/testimonial6.jpg')}}" width="40">
-                            <div class="small-badge bg-orange"></div>
-                        </div>
-                        <b>Jose Kramer</b>
-                        <p>Equal blame belongs to those...</p><a class="btn btn-md no-border radius-all-100 btn-black"
-                                                                 href="#"><i class="glyph-icon icon-comments-o"></i></a>
-                    </li>
-                    <li>
-                        <div class="status-badge">
-                            <img alt="" class="img-circle"
-                                 src="{{url('/admin-assets/image-resources/people/testimonial7.jpg')}}" width="40">
-                            <div class="small-badge bg-orange"></div>
-                        </div>
-                        <b>Dan Garcia</b>
-                        <p>Weakness of will, which is same...</p><a
-                                class="btn btn-md no-border radius-all-100 btn-black" href="#"><i
-                                    class="glyph-icon icon-comments-o"></i></a>
-                    </li>
-                    <li>
-                        <div class="status-badge">
-                            <img alt="" class="img-circle"
-                                 src="{{url('/admin-assets/image-resources/people/testimonial8.jpg')}}" width="40">
-                            <div class="small-badge bg-orange"></div>
-                        </div>
-                        <b>Edward Bridges</b>
-                        <p>These cases are perfectly simple...</p><a
-                                class="btn btn-md no-border radius-all-100 btn-black" href="#"><i
-                                    class="glyph-icon icon-comments-o"></i></a>
-                    </li>
-                </ul>
-                <div class="divider-header">
-                    Offline
-                </div>
-                <ul class="chat-box">
-                    <li>
-                        <div class="status-badge">
-                            <img alt="" class="img-circle"
-                                 src="{{url('/admin-assets/image-resources/people/testimonial1.jpg')}}" width="40">
-                            <div class="small-badge bg-red"></div>
-                        </div>
-                        <b>Randy Herod</b>
-                        <p>In a free hour, when our power...</p><a class="btn btn-md no-border radius-all-100 btn-black"
-                                                                   href="#"><i
-                                    class="glyph-icon icon-comments-o"></i></a>
-                    </li>
-                    <li>
-                        <div class="status-badge">
-                            <img alt="" class="img-circle"
-                                 src="{{url('/admin-assets/image-resources/people/testimonial2.jpg')}}" width="40">
-                            <div class="small-badge bg-red"></div>
-                        </div>
-                        <b>Patricia Bagley</b>
-                        <p>when nothing prevents our being...</p><a
-                                class="btn btn-md no-border radius-all-100 btn-black" href="#"><i
-                                    class="glyph-icon icon-comments-o"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+@section('dashboard_link')
+    {{route('admin-dashboard')}}
+@stop
+@section('user_type')
+    Admin
+@stop
 
-    <div id="page-wrapper">
-        <div id="mobile-navigation">
-            <button class="collapsed" data-target="#page-sidebar" data-toggle="collapse" id="nav-toggle"><span></span>
-            </button>
-        </div>
-        <div id="page-sidebar">
-            <div class="logo-bg" id="header-logo">
-                <a class="logo-content-big" href="index-2.html" title="DelightUI">Admin Dashboard <i>UI</i>
-                    <span>Welcome Admin</span></a>
-                <a class="logo-content-small" href="index-2.html" title="DelightUI">Admin Dashboard <i>UI</i>
-                    <span>Welcome Admin</span></a>
-                <a href="#" id="close-sidebar" title="Close sidebar"><i class="glyph-icon icon-outdent"></i></a>
-            </div>
+@section('sidebar_content')
 
+@stop
+
+@section('content')
+    <div id="sb-site">
+        <div id="page-wrapper">
             <div class="scroll-sidebar">
                 <ul id="sidebar-menu">
                     <li class="header">
@@ -279,7 +44,6 @@
                 </ul>
             </div>
         </div>
-
         <div id="page-content-wrapper">
             <div id="page-content">
                 <div id="page-header">
@@ -835,52 +599,4 @@
             </div>
         </div>
     </div>
-
-
-    <script src="{{url('/admin-assets/js-core/jquery-core.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js-core/jquery-ui-core.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js-core/jquery-ui-widget.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js-core/jquery-ui-mouse.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js-core/jquery-ui-position.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js-core/transition.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js-core/modernizr.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js-core/jquery-cookie.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/uniform/uniform.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/uniform/uniform-demo.js')}}" type="text/javascript"></script>
-    <script>
-        $(function () {
-            $('body').addClass('closed-sidebar');
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(window).load(function () {
-            setTimeout(function () {
-                $('#loading').fadeOut(400, "linear");
-            }, 300);
-        });
-    </script>
-    <script src="{{url('/admin-assets/widgets/dropdown/dropdown.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/tooltip/tooltip.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/popover/popover.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/progressbar/progressbar.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/collapse/collapse.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/superclick/superclick.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/input-switch/inputswitch-alt.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/slimscroll/slimscroll.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/slidebars/slidebars.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/slidebars/slidebars-demo.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/charts/piegage/piegage.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/charts/piegage/piegage-demo.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/screenfull/screenfull.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/content-box/contentbox.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/material/material.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/material/ripples.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/overlay/overlay.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js-init/widgets-init.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/themes/admin/layout.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/trainee-inbox.js')}}" type="text/javascript"></script>
-</div>
-</body>
-</html>
+@stop

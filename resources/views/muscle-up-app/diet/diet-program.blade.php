@@ -2,20 +2,6 @@
 
 @section('title','Diet program')
 
-@section('style-sheet')
-    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/modal/modal.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/touchspin/touchspin.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/timepicker/timepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/dropdown/dropdown.css')}}" rel="stylesheet" type="text/css">
-
-    <link href="{{url('/admin-assets/css/diet.css')}}" rel="stylesheet" type="text/css">
-@stop
-
 @section('content')
     <div id="page-title">
         <h2>Diet Program</h2>
@@ -105,14 +91,4 @@
             </div>
         </div>
     </div>
-@stop
-
-@section('script')
-    <script src="{{url('/admin-assets/js-core/modernizr.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/modal/modal.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/touchspin/touchspin.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/dropdown/dropdown.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js/diet.js')}}"></script>
 @stop

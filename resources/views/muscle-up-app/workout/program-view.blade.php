@@ -2,19 +2,6 @@
 
 @section('title','Workout program')
 
-@section('style-sheet')
-    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/datatable/datatable.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/responsive-tables.css')}}" rel="stylesheet" type="text/css">
-
-    <link href="{{url('/admin-assets/css/workout.css')}}" rel="stylesheet" type="text/css">
-@stop
-
 @section('content')
     <div id="page-title">
         <h2>{{$program->title}}</h2>
@@ -60,11 +47,3 @@
     </div>
 @stop
 
-@section('script')
-    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/datatable/datatable.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/datatable/datatable-responsive.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/datatable/datatable-bootstrap.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js/program.js')}}" type="text/javascript"></script>
-
-@stop

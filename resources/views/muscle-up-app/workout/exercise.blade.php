@@ -2,10 +2,6 @@
 
 @section('title','Exercise')
 
-@section('style-sheet')
-    <link href="{{url('/assets/plugins/select2/css/select2.css')}}" rel="stylesheet">
-    <link href="{{url('/assets/plugins/select2/css/select2-bootstrap.css')}}" rel="stylesheet">
-@stop
 @section('content')
 
     <div class="container-fluid" style="margin: 0; padding: 0;">
@@ -41,9 +37,4 @@
             </div>
         </section>
     </div>
-@stop
-
-@section('script')
-    <script src="{{url('/assets/plugins/select2/js/select2.full.js')}}"></script>
-    <script src="{{url('/assets/js/exercise.js')}}"> </script>
 @stop

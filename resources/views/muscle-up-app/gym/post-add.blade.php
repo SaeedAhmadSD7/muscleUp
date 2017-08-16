@@ -2,12 +2,6 @@
 
 @section('title','Post Adding')
 
-@section('style-sheet')
-    <link href="{{url('/assets/plugins/select2/css/select2.css')}}" rel="stylesheet">
-    <link href="{{url('/assets/plugins/select2/css/select2-bootstrap.css')}}" rel="stylesheet">
-    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
-@stop
-
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger" role="alert">
@@ -137,11 +131,4 @@
 
     </div>
 
-@stop
-@section('script')
-    <script src="{{url('/assets/plugins/select2/js/select2.full.js')}}"></script>
-    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
-    <script async defer src ="{{url('https://maps.googleapis.com/maps/api/js?key=AIzaSyCSqyKO68gVk7RCkuYKRJhM8ayeT_MznpI')}}"></script>
-    <script src="{{url('/assets/js/post-add.js')}}"></script>
 @stop
