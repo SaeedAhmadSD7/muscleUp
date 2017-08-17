@@ -38,34 +38,48 @@ class DietProgramController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $dietprogram = new DietProgram();
         $diet = new Diet();
         $diet_detail = new DietDetail();
         $dietprogram->name = $request->name;
+        $dietprogram->program_id =1;
         $dietprogram->save();
+//        $meals = [];
+        foreach($request->input('Meal_number.*') as $meal_number){
+//            $meals[]=['number'=>$meal_number];
+            $diet->diet_programs_id=$dietprogram->id;
+            $diet->number=$meal_number;
+            $diet->save();
+//            dd($request->input('number.*'));
+                foreach($request->input('number.*') as $meal_detail){
+                    foreach($meal_detail as $deep){
+//                        dd($data);
+                        $diet_detail->diet_id=$diet->id;
+                            if(isset($deep['meal_name'])){
+                        $diet_detail->content=$deep['meal_name'];
+                          }
+                        if(isset($deep['calories'])) {
+                        $diet_detail->calories=$deep['calories'];
+                          }
+                      if(isset($deep['taketime'])){
+                        $diet_detail->taketime=2;
+                        }
+                    }
 
-
-        $meals = [];
-
-
-
-
-        foreach($request->input('number.*') as $meal_number){
-            $meals[] = ['number'=>$meal_number];
-//            dd($meal_number);
-//            foreach ($request->input() as $meal_details){
-//                $dietprogram->diet->dietdetail()->save($meal_details);
-//            }
-
+                }
+            $diet_detail->save();
         }
 
+//        foreach($request->input('number.*') as $meal_number){
+//            $meals[] = ['number'=>$meal_number];
+//            foreach ($request->input() as $meal_details){
+////                $dietprogram->diets->dietdetail()->save($meal_details);
+//            }
+//            dd($meal_details);
+//        }
 //        dd($request->input('number.*'));
-        $dietprogram->diet()->create($meals);
-
-
+//        $dietprogram->diet()->create($meals);
         return null;
-
     }
 
     /**
