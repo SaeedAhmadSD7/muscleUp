@@ -1868,7 +1868,6 @@
                         </div>
                     </div>
 
-
                     <img src="{{ asset('uploads/trainees/profile_imgs/') }}{{'/'.$trainee->profile_img }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
                     <form enctype="multipart/form-data" action="{{ route('trainee-image') }}" method="POST">
                         <label>Update Profile Image</label>
