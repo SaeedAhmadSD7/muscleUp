@@ -151,8 +151,8 @@ Route::get('/program/view/{program}', ['as' => 'program-view', 'uses' => 'Muscle
 /***
  * Diet Plan
  */
-Route::get('/diet',['as'=>'diet','uses'=>'MuscleUpApp\DietProgramController@index']);
-Route::get('/list',['as'=>'show','uses'=>'MuscleUpApp\DietProgramController@showPlans']);
+Route::get('/diet/editform',['as'=>'diet','uses'=>'MuscleUpApp\DietProgramController@index']);
+Route::get('/diet/list',['as'=>'show','uses'=>'MuscleUpApp\DietProgramController@showPlans']);
 Route::post('/diet/add',['as'=>'add-diet','uses'=>'MuscleUpApp\DietProgramController@store']);
 Route::get('/diet/edit/{id?}',['as'=>'edit-diet','uses'=>'MuscleUpApp\DietProgramController@edit']);
 Route::post('/diet/update',['as'=>'update-diet','uses'=>'MuscleUpApp\DietProgramController@update']);

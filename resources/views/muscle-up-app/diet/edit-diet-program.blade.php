@@ -230,9 +230,10 @@
                                 </thead>
                                 <tbody>
 
-
+                                        <?php $count=1;?>
                                         @foreach($dietPlanDetails as $dietPlanDetail)
                                             @include('muscle-up-app.diet.partials._diet-program')
+                                            <?php $count++; ?>
                                         @endforeach
                                 </tbody>
                                 <tfoot>

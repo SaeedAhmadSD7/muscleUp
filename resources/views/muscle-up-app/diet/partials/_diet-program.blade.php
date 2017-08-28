@@ -1,6 +1,6 @@
 <tr>
-    <td>
-        {{$dietPlanDetail->id}}
+    <td style="text-align: center">
+        <?php echo $count;?>
     </td>
     <td>
         <select class="form-control" name="meal_id[]" id="meal_no">

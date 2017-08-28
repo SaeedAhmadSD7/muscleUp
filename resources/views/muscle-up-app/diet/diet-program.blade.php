@@ -228,7 +228,41 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                <tr id="tmpRow" class="fieldR">
+                                    <td style='width:20px;text-align:center;'><span class="sr">1</span></td>
+                                    <td>
+                                        <select class="form-control" name="meal_id[]" id="meal_no">
+                                            <option value="0">Select Meal:</option>
+                                            @foreach($meals as $meal)
+                                                <option value="{{$meal->id}}">{{$meal->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-control food_name" id="food_name" name="food_id[]">
+                                            <option value="0">Select Food:</option>
+                                            @foreach($foods as $food)
+                                                <option data-calories="{{$food->calories}}" value="{{$food->id}}">{{$food->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td id="qtyRow">
+                                        <input class="form-control" type="number" id="quantity" name="quantity[]"
+                                               placeholder="Qrt:" style="width:60px;">
+                                    </td>
+                                    <td id="caloryRow">
+                                        <input class="form-control" type="text" id="calories" name="calories[]"
+                                               placeholder="Cal" style="width:60px;" readonly>
+                                    </td>
+                                    <td>
+                                        <input class="form-control time_take_input" type="text" name="duration[]"
+                                               placeholder="Time" style="width:60px" readonly>
+                                    </td>
+                                    <td>
+                                        <button class="remove_row btn btn-danger" type="button"><span
+                                                    class="glyphicon glyphicon-remove-sign"></span></button>
+                                    </td>
+                                </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>

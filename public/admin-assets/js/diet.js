@@ -105,7 +105,7 @@ $(document).ready(function () {
             console.log(formData.split('&'));
 
         });
-    var id=0;
+    var id= $('#assignedTable tbody tr').length;
     $("#assignedTable").on('click', '.remove_row', function () {
         $(this).closest('tr').remove();
         countTableRows();
@@ -113,10 +113,6 @@ $(document).ready(function () {
         console.log("Del row now id is "+id);
     });
     $(document).on('click', '#assign', function () {
-       if(id==1){
-           console.log(id);
-       }
-        else{
         id++;
         var tr = $('#tmpRow').clone().attr('id','row'+id).show().stop()
         //var tr = $('#tmpRow').clone().show().stop()
@@ -125,18 +121,18 @@ $(document).ready(function () {
         $('#row'+id+' span.sr').text(id);
         //$('#row'+id+'').child('td span.sr').text(id);
         //console.log("Add row now id is "+id);
-       }
+
        });
-    $(document).one('click', '#assign', function () {
-        id++;
-        var tr = $('#tmpRow').clone().attr('id','row'+id).show().stop()
-        //var tr = $('#tmpRow').clone().show().stop()
-            .appendTo('#assignedTable tbody');
-        //$('#assignedTable').first('td span .sr').text(id);
-        $('#row'+id+':eq(0) span.sr').text(id);
-        //$('#row'+id+'').child('td span.sr').text(id);
-        //console.log("Add row now id is "+id);
-    });
+    //$(document).one('click', '#assign', function () {
+    //    id++;
+    //    var tr = $('#tmpRow').clone().attr('id','row'+id).show().stop()
+    //    //var tr = $('#tmpRow').clone().show().stop()
+    //        .appendTo('#assignedTable tbody');
+    //    //$('#assignedTable').first('td span .sr').text(id);
+    //    $('#row'+id+':eq(0) span.sr').text(id);
+    //    //$('#row'+id+'').child('td span.sr').text(id);
+    //    //console.log("Add row now id is "+id);
+    //});
     function countTableRows() {
 //        var serialNumber = $("#assignedTable").find('tr').length;
         $("#assignedTable tr").each(function (i) {
