@@ -25,7 +25,6 @@ $(document).ready(function () {
     });
 
     $('.fields-section section:first-child').fadeIn('slow');
-    console.log('5');
 
     $('.fields-section .btn-next').on('click', function() {
         var parent_section = $(this).parents('section');

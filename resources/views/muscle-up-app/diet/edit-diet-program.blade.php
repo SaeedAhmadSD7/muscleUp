@@ -176,7 +176,7 @@
     <div class="panel">
         <div class="panel-body">
             <div class="example-box-wrapper">
-                <form class="form-group diet-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('add-diet')}}">
+                <form class="form-group diet-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('update-diet')}}">
                     {{csrf_field()}}
                     <div class="tab-content">
                         <div class="form-wizard" id="form-wizard-3">
@@ -184,7 +184,8 @@
                                 <label class="col-sm-3 control-label" for="name">Program Name</label>
 
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="name" value=""
+                                    <input name="id" value="{{$dietPlan->id}}" type="hidden">
+                                    <input class="form-control" type="text" name="name" value="{{$dietPlan->name}}"
                                            placeholder="Program Name... (Optional)">
                                 </div>
                             </div>
@@ -195,9 +196,9 @@
                                     <div class="input-group">
                                         <div id="radio">
                                             <label for="no">No</label>
-                                            <input id="no" type="radio" name="status" value="No">
+                                            <input id="no" type="radio" name="status" value="No" @if($dietPlan->status=='No') checked="checked" @endif>
                                             <label for="yes">Yes</label>
-                                            <input id="yes" type="radio" name="status" value="Yes"><br>
+                                            <input id="yes" type="radio" name="status" value="Yes" @if($dietPlan->status=='Yes') checked="checked" @endif><br>
                                         </div>
                                     </div>
                                 </div>
@@ -208,7 +209,7 @@
                                 <div class="col-sm-6">
                                     <div class="input-group">
                                         <textarea rows="5" cols="20" class="form-control" id="description"
-                                                  name="description"></textarea><br>
+                                                  name="description">{{$dietPlan->description}}</textarea><br>
                                     </div>
                                 </div>
                             </div>
@@ -229,6 +230,10 @@
                                 </thead>
                                 <tbody>
 
+
+                                        @foreach($dietPlanDetails as $dietPlanDetail)
+                                            @include('muscle-up-app.diet.partials._diet-program')
+                                        @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -241,7 +246,7 @@
                                 </tfoot>
                             </table>
                             <div style="float:right; margin-right: 300px;">
-                                <input type="submit" value="Submit" class="btn btn-success">
+                                <input type="submit" value="Update" class="btn btn-success">
                             </div>
                         </div>
                       </div>

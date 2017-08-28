@@ -1,10 +1,20 @@
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--}}
 <script src="{{url('assets/js/jquery-3.2.1.js')}}"></script>
+<script src="{{url('/admin-assets/js-core/jquery-ui-core.js')}}" type="text/javascript"></script>
+<script src="{{url('/admin-assets/js-core/jquery-ui-widget.js')}}" type="text/javascript"></script>
+<script src="{{url('/admin-assets/js-core/jquery-ui-mouse.js')}}" type="text/javascript"></script>
+<script src="{{url('/admin-assets/js-core/jquery-ui-position.js')}}" type="text/javascript"></script>
+<script src="{{url('/admin-assets/js-core/jquery-core.js')}}" type="text/javascript"></script>
+<script src="{{url('/admin-assets/js-core/jquery-cookie.js')}}" type="text/javascript"></script>
+<script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
+<script src="{{url('/assets/plugins/bxslider-4.2.12/js/jquery.bxslider.js')}}"></script>
+<script src="{{url('/assets/plugins/jquery-appear-0.1/js/jquery.appear.js')}}"></script>
+<script src="{{url('/assets/plugins/jquery-knob-1.2.13/js/jquery.knob.js')}}"></script>
 <script src="{{url('assets/plugins/bootstrap-3.3.7/js/bootstrap.js')}}"></script>
 <script src="{{url('/assets/plugins/wow-1.1.0/js/wow.min.js')}}"></script>
 <script src="{{url('/assets/js/script.js')}}"></script>
-<script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.js')}}"></script>
+{{--<script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.js')}}"></script>--}}
 <script src="{{url('/assets/js/respond-1.4.2.js')}}"></script>
-<script src="{{url('/admin-assets/js-core/jquery-core.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/widgets/collapse/collapse.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/widgets/superclick/superclick.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/widgets/slimscroll/slimscroll.js')}}" type="text/javascript"></script>
@@ -14,13 +24,9 @@
 <script src="{{url('/admin-assets/widgets/tooltip/tooltip.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/widgets/popover/popover.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/js-init/widgets-init.js')}}" type="text/javascript"></script>
-<script src="{{url('/admin-assets/js-core/jquery-ui-core.js')}}" type="text/javascript"></script>
-<script src="{{url('/admin-assets/js-core/jquery-ui-widget.js')}}" type="text/javascript"></script>
-<script src="{{url('/admin-assets/js-core/jquery-ui-mouse.js')}}" type="text/javascript"></script>
-<script src="{{url('/admin-assets/js-core/jquery-ui-position.js')}}" type="text/javascript"></script>
+
 <script src="{{url('/admin-assets/js-core/transition.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/js-core/modernizr.js')}}" type="text/javascript"></script>
-<script src="{{url('/admin-assets/js-core/jquery-cookie.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/widgets/uniform/uniform.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/widgets/uniform/uniform-demo.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/widgets/progressbar/progressbar.js')}}" type="text/javascript"></script>
@@ -52,18 +58,14 @@
 
 <script src="{{url('/admin-assets/widgets/input-switch/inputswitch.js')}}" type="text/javascript"></script>
 <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-<script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
 <script src="{{url('/assets/js/add-trainee.js')}}" type="text/javascript"></script>
 {{--<script src="{{url('/assets/js/t-reg.js')}}" type="text/javascript"></script>--}}
 <script src="{{url('/assets/js/add-instructor.js')}}" type="text/javascript"></script>
 <script src="{{url('/assets/plugins/revolution-slider/js/revolution.min.js')}}"></script>
-<script src="{{url('/assets/plugins/bxslider-4.2.12/js/jquery.bxslider.js')}}"></script>
-<script src="{{url('/assets/plugins/jquery-appear-0.1/js/jquery.appear.js')}}"></script>
-<script src="{{url('/assets/plugins/jquery-knob-1.2.13/js/jquery.knob.js')}}"></script>
 <script src="{{url('/assets/js/index-script.js')}}"></script>
 <script src="{{url('/assets/js/request-gym.js')}}"></script>
-<script async defer src ="{{url('https://maps.googleapis.com/maps/api/js?key=AIzaSyCSqyKO68gVk7RCkuYKRJhM8ayeT_MznpI')}}"></script>
-<script src="{{url('/assets/js/post-add.js')}}"></script>
+{{--<script async defer src ="{{url('https://maps.googleapis.com/maps/api/js?key=AIzaSyCSqyKO68gVk7RCkuYKRJhM8ayeT_MznpI')}}"></script>--}}
+{{--<script src="{{url('/assets/js/post-add.js')}}"></script>--}}
 <script src="{{url('/admin-assets/widgets/modal/modal.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/widgets/touchspin/touchspin.js')}}" type="text/javascript"></script>
 <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>

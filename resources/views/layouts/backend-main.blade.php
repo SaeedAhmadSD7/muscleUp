@@ -9,6 +9,7 @@
     <title>@yield('title')</title>
 
     @include('includes.backend._stylesheet')
+    @include('includes.backend._script')
     @yield('style-sheet')
 </head>
 <body>
@@ -153,7 +154,7 @@
 </body>
 
 <footer>
-    @include('includes.backend._script')
+
     @yield('script')
 </footer>
 
