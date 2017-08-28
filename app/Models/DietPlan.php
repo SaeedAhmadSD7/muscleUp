@@ -11,4 +11,10 @@ class DietPlan extends Model
     public function DietPlanDetail(){
         return $this->hasMany(DietPlanDetail::class);
     }
+
+    public static function showAll()
+    {
+        $plans = DietPlan::all();
+        return $plans;
+    }
 }

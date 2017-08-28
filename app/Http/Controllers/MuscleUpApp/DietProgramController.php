@@ -27,6 +27,11 @@ class DietProgramController extends Controller
         $meals=Meal::showAll();
         return view('muscle-up-app.diet.diet-program',compact('foods','meals'));
     }
+    public function showPlans()
+    {
+        $plans=DietPlan::showAll();
+        return view('muscle-up-app.diet.list-diet-program',compact('plans'));
+    }
 
     /**
      * Show the form for creating a new resource.
