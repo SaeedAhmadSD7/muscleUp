@@ -2,18 +2,6 @@
 
 @section('title','Medical history')
 
-@section('style-sheet')
-    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/wizard/wizard.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/input-switch/inputswitch.css')}}" rel="stylesheet" type="text/css">
-
-
-
-@stop
-
 @section('content')
     <div id="page-title">
         <h2>Trainee Medical History</h2>
@@ -227,26 +215,4 @@
             </div>
         </div>
     </div>
-@stop
-
-@section('script')
-    <script src="{{url('/admin-assets/widgets/wizard/wizard-demo.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/tabs/tabs.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/wizard/wizard.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
-    <script type="text/javascript">
-        /* Input switch */
-
-        $(function() { "use strict";
-            $('.input-switch').bootstrapSwitch();
-        });
-
-        $('.input-switch').on('focus', function () {
-            console.log($(this).val());
-        })
-
-    </script>
-    <script src="{{url('/admin-assets/widgets/input-switch/inputswitch.js')}}" type="text/javascript"></script>
-
-
 @stop

@@ -10,6 +10,10 @@
     Admin
 @stop
 
+@section('dashboard_link')
+    {{route('admin-dashboard')}}
+@stop
+
 @section('sidebar_content')
     <li class="header"><span>Request Box</span></li>
     <li class="menu-element">

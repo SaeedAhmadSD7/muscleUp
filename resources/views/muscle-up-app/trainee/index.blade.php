@@ -7,6 +7,10 @@
     Trainee
 @stop
 
+@section('dashboard_link')
+    {{route('trainee-dashboard')}}
+@stop
+
 @section('sidebar_content')
     <li class="header"><span>Profile Box</span></li>
     <li class="menu-element">

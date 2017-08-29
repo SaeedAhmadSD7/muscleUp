@@ -1,81 +1,80 @@
-@extends('layouts.frontend-main')
+@extends('layouts.backend-main')
 
 @section('title','Add Instructor')
 
-@section('style-sheet')
-    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
-
+@section('dashboard_link')
+    {{route('gym')}}
 @stop
+@section('user_type')
+    Gym
+@stop
+
 @section('content')
-    <div class="container-fluid" style="margin: 0; padding: 0;">
-        <section class="add-instructor clearfix">
-            <div class="inner">
-                <div class="bg-img"></div>
-                <div class="t-reg-form">
-                    <div class="t-reg-top">
-                        <h2><span class="space"></span>Add Instructor</h2>
-                        <h3>
-                            <span class="space"></span> Please fill in all the information and then click Add Instructor.
-                        </h3>
+    <div class="panel">
+        <div class="panel-body">
+            <h3 class="title-hero">Add Instructor</h3>
+            <h4>Please fill in all the information and then click Add Instructor.</h4>
+            <div class="example-box-wrapper">
+                <form class="form-horizontal bordered-row add-instructor-form" role="form" method="POST" action="{{route('instructor-store')}}">
+                    {{csrf_field()}}
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Enter First Name:</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" name="first_name" value="" placeholder="First Name ...">
+                        </div>
                     </div>
-                    <div class="reg-form">
-                        <form class="add-instructor-form" role="form" method="POST"
-                              action="{{route('instructor-store')}}">
-                            {{csrf_field()}}
-                            <div class="fields clearfix">
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="text" name="first_name" value="" placeholder="First Name ...">
-                                </div>
-
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="text" name="last_name" value="" placeholder="Last Name...">
-                                </div>
-
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="email" name="email" value="" placeholder="Email Address...">
-                                </div>
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input class="birth-date" type="text" data-field="date" data-format="yyyy-MM-dd" name="birth_date" value="" placeholder="Date of Birth..." readonly>
-                                    <div class="btn-date"></div>
-                                </div>
-
-                                <div class="form-group col-md-1 col-sm-2 col-xs-2 dial-code-div">
-                                    <input class="dial-code" type="text" name="dial_code" value="1" placeholder="+1..." readonly>
-                                </div>
-                                <div class="form-group col-md-5 col-sm-10 col-xs-10 number-div">
-                                    <input class="phone_number" type="text" name="phone_number" value="" placeholder="Phone Number..." maxlength="15">
-                                </div>
-
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12 Gender ">
-                                    <div class="col-md-4 col sm-4 col-xs-4 gender-title">
-                                        <p class="title">Gender : </p>
-                                    </div>
-                                    <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn"><input type="radio" name='gender' value="male" checked><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Male</span></label>
-                                            <label class="btn"><input type="radio" name='gender' value="female"><i class="fa fa-circle-o fa-x"></i><i class="fa fa-dot-circle-o fa-x"></i><span> Female</span></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12 col-sm-12 col-xs-12 text-field">
-                                    <input name="address" placeholder="Address..." maxlength="255">
-                                </div>
-                            </div>
-
-                            <div class="text-right col-md-12">
-                                <button type="submit"><span class="fa fa-angle-right"></span> Add Instructor</button>
-                            </div>
-                        </form>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Enter last Name:</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" name="last_name" value="" placeholder="Last Name...">
+                        </div>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Email Address:</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="email" name="email" value="" placeholder="Email Address...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Date of birth:</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="birth_date" value="" placeholder="Date of Birth..." readonly>
+                            <div class="btn-date"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Gender</label>
+                        <div class="col-sm-6">
+                            <label class="radio-inline">
+                                <input id="" name="gender" type="radio" value="male" checked> Male
+                            </label>
+                            <label class="radio-inline">
+                                <input id="" name="gender" type="radio" value="female"> Female
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Phone number:</label>
+                        <div class="col-sm-1">
+                            <input class="form-control dial-code" type="text" name="dial_code" value="1" placeholder="+1..." readonly>
+                        </div>
+                        <div class="col-sm-3">
+                            <input class="form-control phone_number" type="text" name="phone_number" value="" placeholder="Phone Number..." maxlength="15">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Address</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" name="address" placeholder="Address..." maxlength="255">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-6">
+                            <button type="submit" class="btn btn-primary"><span class="fa fa-angle-right"></span> Add Instructor</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </section>
+        </div>
     </div>
-@stop
-
-@section('script')
-    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}"
-            type="text/javascript"></script>
-    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/add-instructor.js')}}" type="text/javascript"></script>
 @stop

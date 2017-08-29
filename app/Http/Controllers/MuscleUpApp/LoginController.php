@@ -36,7 +36,7 @@ class LoginController extends Controller
                 return redirect()->route('admin-dashboard');
             }
             else if ($user['user-type'] == 'instructor') {
-                return redirect()->route('show-instructor');
+                return redirect()->route('instructor-dashboard');
             }
         }
         else return dd('no');

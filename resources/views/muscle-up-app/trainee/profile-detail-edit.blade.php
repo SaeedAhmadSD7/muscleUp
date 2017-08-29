@@ -2,12 +2,6 @@
 
 @section('title','Add trainee')
 
-@section('style-sheet')
-    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
-
-@stop
-
 @section('content')
     <div class="panel">
         <div class="panel-body">
@@ -83,11 +77,4 @@
             </div>
         </div>
     </div>
-@stop
-
-@section('script')
-    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/add-trainee.js')}}" type="text/javascript"></script>
-
-
 @stop

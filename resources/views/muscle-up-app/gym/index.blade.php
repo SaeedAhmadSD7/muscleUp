@@ -3,10 +3,8 @@
     Gym Dashboard
 @stop
 
-
-
 @section('user_type')
-    Admin
+    Gym
 @stop
 
 @section('sidebar_content')
@@ -32,7 +30,7 @@
                     <a href="{{route('instructor-add')}}" title="Inbox"><span>Add Instructor</span></a>
                 </li>
                 <li>
-                    <a href="{{route('trainee-list')}}" title="Inbox"><span>View Instructor List</span></a>
+                    <a href="{{route('show-instructor')}}" title="Inbox"><span>View Instructor List</span></a>
                 </li>
             </ul>
         </div>

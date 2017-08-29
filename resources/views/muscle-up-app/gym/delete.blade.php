@@ -2,10 +2,6 @@
 
 @section('title','Delete Branch')
 
-@section('style-sheet')
-    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
-
-@stop
 @section('content')
     <div class="container-fluid" style="margin: 0; padding: 0;">
         <section class="instructor-reg clearfix">
@@ -72,9 +68,4 @@
             </div>
         </section>
     </div>
-@stop
-
-@section('script')
-    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/t-reg.js')}}" type="text/javascript"></script>
 @stop
