@@ -17,10 +17,9 @@ class CreateWbsDetailsTable extends Migration
             $table->increments('id');
             $table->integer('wbs_id');
             $table->integer('exercise_id');
-//            $table->integer('wbs_id')->nullable();
-//            $table->unsignedInteger('set');
-//            $table->unsignedInteger('rep');
-//            $table->unsignedInteger('rest');
+            $table->smallInteger('set');
+            $table->smallInteger('rep');
+            $table->smallInteger('rest');
             $table->timestamps();
         });
     }

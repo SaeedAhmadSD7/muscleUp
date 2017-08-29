@@ -13,11 +13,11 @@ class CreatePhaseDayDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('phase_day_details', function (Blueprint $table) {
+        Schema::create('phase_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('phase_id')->nullable();
-            $table->integer('day_id')->nullable();
-            $table->string('value5')->default('0');
+            $table->integer('phase_id');
+            $table->integer('day_id');
+            $table->integer('wbs_id');
             $table->timestamps();
         });
     }

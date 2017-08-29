@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExercisesTable extends Migration
+class CreateExerciseDataTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateExercisesTable extends Migration
      */
     public function up()
     {
-        Schema::create('exercises', function (Blueprint $table) {
+        Schema::create('exercises_data', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('photo')->nullable();
-            $table->string('description',1024)->nullable();
+            $table->integer('exercise_id');
+            $table->string('file_name');
+            $table->tinyInteger('is_primary');
             $table->timestamps();
-        });
-    }
+        });    }
 
     /**
      * Reverse the migrations.
@@ -29,6 +28,6 @@ class CreateExercisesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exercises');
+        //
     }
 }
