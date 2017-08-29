@@ -16,7 +16,7 @@ class CreateDealsTable extends Migration
         Schema::create('deals', function (Blueprint $table) {
             $table->increments('id');
 //         $table->integer('gymId');
-            $table->string('dealType');
+            $table->string('deal_type');
             $table->string('duration');
             $table->timestamps();
         });

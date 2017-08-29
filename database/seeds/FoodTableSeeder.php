@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Food;
+
 class FoodTableSeeder extends Seeder
 {
     /**
@@ -18,5 +19,6 @@ class FoodTableSeeder extends Seeder
             ['name' => 'Pizza','unit' => 'Qty','unit_value' => '2','calories' => '455','deleted_at'=>date('Y-m-d'),'created_at'=>date('Y-m-d'),'updated_at'=>date('Y-m-d')],
             ['name' => 'Shawarma','unit' => 'Grams','unit_value' => '500','calories' => '124','deleted_at'=>date('Y-m-d'),'created_at'=>date('Y-m-d'),'updated_at'=>date('Y-m-d')],
         ]);
+
     }
 }

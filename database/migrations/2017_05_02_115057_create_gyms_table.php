@@ -13,21 +13,19 @@ class CreateGymsTable extends Migration
      */
     public function up()
     {
-        Schema::create('gym', function (Blueprint $table) {
+        Schema::create('gyms', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id')->index();
-            $table->string('name');
-            $table->string('email');
+            $table->string('title',60);
+            $table->string('email',40);
+            $table->string('country',60);
+            $table->string('city',60);
+            $table->string('address',1024);
             $table->string('dial_code',4);
             $table->UnsignedInteger('phone_number');
-            $table->string('country');
-            $table->string('city');
-            $table->text('address');
-            $table->string('open_time');
-            $table->string('close_time');
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->rememberToken();
+            $table->time('open_time');
+            $table->time('close_time');
+            $table->string('latitude',20);
+            $table->string('longitude',20);
             $table->timestamps();
         });
         //
@@ -40,6 +38,6 @@ class CreateGymsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gym');
+        Schema::dropIfExists('gyms');
     }
 }

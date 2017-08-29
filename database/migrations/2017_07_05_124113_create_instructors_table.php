@@ -15,18 +15,8 @@ class CreateInstructorsTable extends Migration
     {
         Schema::create('instructors', function (Blueprint $table) {
             $table->increments('id');
-//            $table->unsignedInteger('user_id')->index();
-//            $table->unsignedInteger('branch_id')->index();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
-            $table->string('birth_date');
-            $table->string('dial_code',4)->default('1');
-            $table->UnsignedInteger('phone_number');
-            $table->enum('gender',['male','female'])->default('male');
-//            $table->string('exp_years');
-//            $table->string('exp_desc');
-            $table->string('address');
+            $table->unsignedInteger('branch_id')->index();
+            $table->unsignedInteger('employee_id')->index();
             $table->rememberToken();
             $table->timestamps();
         });

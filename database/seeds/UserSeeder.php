@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'email' => 'admin@example.com',
             'password' => bcrypt('badeo520'),
-            'user-type'=>'admin',
+            'type'=>'admin',
             'remember_token'=>'0',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'email' => 'gym@example.com',
             'password' => bcrypt('asdf1234'),
-            'user-type'=>'gym',
+            'type'=>'gym',
             'remember_token'=>'0',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'email' => 'trainee@example.com',
             'password' => bcrypt('asdf1234'),
-            'user-type'=>'trainee',
+            'type'=>'trainee',
             'remember_token'=>'0',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'email' => 'instructor@example.com',
             'password' => bcrypt('asdf1234'),
-            'user-type'=>'instructor',
+            'type'=>'instructor',
             'remember_token'=>'0',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),

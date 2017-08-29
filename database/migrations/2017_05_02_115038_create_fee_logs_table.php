@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProgramDetailsTable extends Migration
+class CreateFeeLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateProgramDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('program_details', function (Blueprint $table) {
+        Schema::create('fee_logs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('program_id')->nullable();
-            $table->string('value2');
-            $table->timestamps();
+            $table->integer('gym_id');
+            $table->integer('trainee_id');
+            $table->enum('fee_type',['yearly','quaterly','monthly']);
+            $table->integer('amount');
+            $table->dateTime('payment_date');
         });
     }
 
@@ -28,6 +30,7 @@ class CreateProgramDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('program_details');
+        Schema::dropIfExists('fee_logs');
     }
 }
+

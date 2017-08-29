@@ -14,24 +14,21 @@ class CreateEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee', function (Blueprint $table) {
-            $table->integer('EmployeeId', true, true);
-            $table->integer('gymId');
-            $table->integer('branchId');
-            $table->string('Name');
-            $table->enum('employType',array_keys(EmployeeType::$types));
-            $table->string('password',60);
-            $table->integer('Contact Number');
-            $table->string('dateOfBirth');
-            $table->string('sex');
-            $table->string('email');
-            $table->string('Address');
+        Schema::create('employees', function (Blueprint $table) {
+            $table->integer('id', true, true);
+            $table->integer('user_id');
+            $table->dateTime('joining_date');
+            $table->dateTime('quit_date');
+            $table->dateTime('previous_salary');
+            $table->dateTime('joining_salary');
+            $table->smallInteger('exp_years');
+            $table->string('exp_description',1024);
         });
 
     }
 
     public function down()
     {
-        Schema::dropIfExists('employee');
+        Schema::dropIfExists('employees');
     }
 }

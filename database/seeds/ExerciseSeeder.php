@@ -20,9 +20,9 @@ class ExerciseSeeder extends Seeder
 
             DB::table('exercises')->insert(array(
 //                'id'=> $exercise['id'],
-                'name'=>$exercise['name'],
-                'name_original'=>$exercise['name_original'],
-                'category'=>$exercise['category'],
+                'title'=>$exercise['name'],
+//                'name_original'=>$exercise['name_original'],
+//                'category'=>$exercise['category'],
 //                'muscles'=>$exercise['muscles'],
 //                'muscles_secondary'=>(string)$exercise['muscles_secondary'].[],
 //                'equipment'=>(string)$exercise['equipment'].[],
