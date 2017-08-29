@@ -122,15 +122,13 @@ $(document).ready(function () {
     if ($('.empty').val()) {
         var table = $('.table-phase').DataTable({
             paging: false,
+            ordering: false,
+            info: false,
             responsive: true,
-            "autoWidth": false,
             columnDefs: [{
                 className: 'default-control',
-                orderable: false,
                 targets: 0
-            }],
-            order: [[1, 'asc']],
-            "info": false
+            }]
         });
     } else {
         $.extend(true, $.fn.dataTable.defaults, {
@@ -148,9 +146,9 @@ $(document).ready(function () {
                     '<thead>' +
                         '<tr>' +
                             '<th></th>' +
-                            '<th>Day Number</th>' +
+                            '<th>Day No.</th>' +
                             '<th>Day Name</th>' +
-                            '<th>Number of Exercises</th>' +
+                            '<th class="hideClass">No. of Exercises</th>' +
                         '</tr>' +
                     '</thead>' +
                     '<tbody>' +
@@ -158,7 +156,7 @@ $(document).ready(function () {
                             '<td class="details-control" style="text-align: center;"><img src="http://i.imgur.com/SD7Dz.png"></td>' +
                             '<td>Day 1</td>' +
                             '<td>Biceps Day</td>' +
-                            '<td>5</td>' +
+                            '<td class="hideClass">5</td>' +
                         '</tr>' +
                     '</tbody>' +
                 '</table>';

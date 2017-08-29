@@ -28,9 +28,9 @@
                     <thead>
                     <tr>
                         <th class="details-control">Details</th>
-                        <th>Phase Number</th>
-                        <th>Phase Name</th>
-                        <th>Number Of Days</th>
+                        <th>Phase No.</th>
+                        <th>Phase</th>
+                        <th class="hideClass">No. Of Days</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,7 +41,7 @@
                             <td class="details-control" style="text-align: center;"><img src="http://i.imgur.com/SD7Dz.png"></td>
                             <td>{{$phases['number']}}</td>
                             <td>{{$phases['name']}}</td>
-                            <td>{{$phases['num_exercise']}}</td>
+                            <td class="hideClass">{{$phases['num_exercise']}}</td>
                         </tr>
                         {{--@endforeach--}}
                         @else
