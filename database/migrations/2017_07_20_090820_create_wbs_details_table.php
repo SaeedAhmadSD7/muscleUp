@@ -19,7 +19,7 @@ class CreateWbsDetailsTable extends Migration
             $table->integer('exercise_id');
             $table->smallInteger('set');
             $table->smallInteger('rep');
-            $table->smallInteger('rest');
+            $table->time('rest');
             $table->timestamps();
         });
     }

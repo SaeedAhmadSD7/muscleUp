@@ -243,3 +243,12 @@ Route::get('show-branch/detail/{id}',['as'=>'branch-detail','uses'=>'MuscleUpApp
 
 
 Route::get('show/trainee/list/{id}',['as'=>'show-trainee-list','uses'=>'MuscleUpuApp\TraineeListController@show']);
+
+
+/***
+ * WBS
+ */
+Route::get('/wbs/list',['uses'=>'MuscleUpApp\WbsController@index','as'=>'wbs-list']);
+Route::get('/wbs/add',['uses'=>'MuscleUpApp\WbsController@create','as'=>'wbs-add']);
+Route::post('/wbs/store',['uses'=>'MuscleUpApp\WbsController@store','as'=>'wbs-store']);
+Route::get('/wbs/detail/{wbs}',['uses'=>'MuscleUpApp\WbsController@show','as'=>'wbs-detail']);

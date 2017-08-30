@@ -28,6 +28,6 @@ class CreateExerciseDataTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('exercises_data');
     }
 }
