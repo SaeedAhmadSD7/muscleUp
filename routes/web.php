@@ -159,6 +159,19 @@ Route::post('/diet/update',['as'=>'update-diet','uses'=>'MuscleUpApp\DietProgram
 Route::get('/diet/delete/{id?}',['as'=>'delete-diet','uses'=>'MuscleUpApp\DietProgramController@delete']);
 
 
+/**
+ * Phase
+ */
+Route::get('/phase',['as'=>'phase','uses'=>'MuscleUpApp\PhaseController@create']);
+Route::post('/phase/add',['as'=>'phase_store','uses'=>'MuscleUpApp\PhaseController@store']);
+Route::get('/phase/list',['as'=>'show-phase','uses'=>'MuscleUpApp\PhaseController@show']);
+Route::get('/phase/edit/{id?}',['as'=>'edit-phase','uses'=>'MuscleUpApp\PhaseController@edit']);
+Route::post('/phase/update',['as'=>'update-phase','uses'=>'MuscleUpApp\PhaseController@update']);
+Route::get('/phase/delete/{id?}',['as'=>'delete-phase','uses'=>'MuscleUpApp\PhaseController@destroy']);
+
+
+
+
 
 /*
  Exercise

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
+use App\Models\Day;
 use App\Models\Phase;
+use App\Models\PhaseDetail;
+use App\Models\Wbs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -25,7 +28,9 @@ class PhaseController extends Controller
      */
     public function create()
     {
-        //
+        $days= Day::showAll();
+        $Wbs= Wbs::showAll();
+        return view ('muscle-up-app.phase.create-phase',compact('days','Wbs'));
     }
 
     /**
@@ -36,7 +41,11 @@ class PhaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Phase::create_phase($request);
+        return redirect()->route('show-phase');
+
+
+
     }
 
     /**
@@ -45,9 +54,10 @@ class PhaseController extends Controller
      * @param  \App\Models\Phase  $phase
      * @return \Illuminate\Http\Response
      */
-    public function show(Phase $phase)
+    public function show()
     {
-        //
+        $phases=Phase::showAll();
+        return view('muscle-up-app.phase.list-phase',compact('phases'));
     }
 
     /**
@@ -56,9 +66,13 @@ class PhaseController extends Controller
      * @param  \App\Models\Phase  $phase
      * @return \Illuminate\Http\Response
      */
-    public function edit(Phase $phase)
+    public function edit($id)
     {
-        //
+        $phase = Phase::find($id);
+        $phaseDetails = PhaseDetail::where('phase_id', '=', $id)->get();
+        $days= Day::showAll();
+        $Wbs= Wbs::showAll();
+        return view('muscle-up-app.phase.edit-phase',compact('phase','phaseDetails','days','Wbs'));
     }
 
     /**
@@ -68,9 +82,10 @@ class PhaseController extends Controller
      * @param  \App\Models\Phase  $phase
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Phase $phase)
+    public function update(Request $request)
     {
-        //
+        Phase::update_phase($request);
+        return redirect()->route('show-phase');
     }
 
     /**
@@ -79,8 +94,9 @@ class PhaseController extends Controller
      * @param  \App\Models\Phase  $phase
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Phase $phase)
+    public function destroy($id)
     {
-        //
+        Phase::deletePhase($id);
+        return redirect()->route('show-phase');
     }
 }

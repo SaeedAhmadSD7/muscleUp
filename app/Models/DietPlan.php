@@ -54,9 +54,12 @@ class DietPlan extends Model
             $duration[]=$data_duration;
         }
         $list['duration']=$duration;
+
         for($i=0;$i<$count;$i++){
             $dietPlanDetail=new DietPlanDetail();
+
             $dietPlanDetail->diet_plan_id=$dietPlanId;
+
             $dietPlanDetail->meal_id=$list['meal'][$i];
             $dietPlanDetail->food_id=$list['food_id'][$i];
             $dietPlanDetail->quantity=$list['quantity'][$i];
