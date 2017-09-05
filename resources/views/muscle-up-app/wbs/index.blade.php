@@ -29,7 +29,7 @@
                           <th width="20px">No.</th>
                           <th style="text-align:center; width: 200px">WBS Title</th>
                           <th style="text-align:center;">Descritpion</th>
-                          <th width="20px">Detail</th>
+                          <th width="20px">Edit</th>
                           <th width="20px">Delete</th>
                       </tr>
                    </thead>
@@ -41,7 +41,7 @@
                                     <td width="140px" style="text-align:center;"><h5>{{$wbs->title}}</h5></td>
                                     <td><h5>{{$wbs->description}}</h5></td>
                                         <td width="20px">
-                                                <a class="btn btn-primary" href="{{route('wbs-detail',$wbs)}}" type="submit"><span class="glyphicon glyphicon-edit"></span></a>
+                                                <a class="btn btn-primary" href="{{route('wbs-edit',$wbs)}}" type="submit"><span class="glyphicon glyphicon-edit"></span></a>
                                         </td>
                                         <td width="20px">
                                             <form method="get" action="{{route('delete-diet',['id'=>$wbs->id])}}">

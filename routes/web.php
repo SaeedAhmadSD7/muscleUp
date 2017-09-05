@@ -251,4 +251,5 @@ Route::get('show/trainee/list/{id}',['as'=>'show-trainee-list','uses'=>'MuscleUp
 Route::get('/wbs/list',['uses'=>'MuscleUpApp\WbsController@index','as'=>'wbs-list']);
 Route::get('/wbs/add',['uses'=>'MuscleUpApp\WbsController@create','as'=>'wbs-add']);
 Route::post('/wbs/store',['uses'=>'MuscleUpApp\WbsController@store','as'=>'wbs-store']);
-Route::get('/wbs/detail/{wbs}',['uses'=>'MuscleUpApp\WbsController@show','as'=>'wbs-detail']);
+Route::get('/wbs/edit/{wbs}',['uses'=>'MuscleUpApp\WbsController@edit','as'=>'wbs-edit']);
+Route::post('/wbs/update/',['uses'=>'MuscleUpApp\WbsController@update','as'=>'wbs-update']);

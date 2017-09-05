@@ -10,18 +10,20 @@ class PhaseDetail extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['phase_id','day_id','wbs_id'];
 
-    public function phase()
-    {
+    public function phase() {
+
         return $this->belongsTo(Phase::class);
+    }
+
+    public function day() {
+
+        return $this->belongsTo(Day::class);
     }
 
     public function wbs()
     {
         return $this->belongsTo(Wbs::class);
     }
-    public function day()
-    {
-        return $this->belongsTo(Day::class);
-    }
+
 }
 

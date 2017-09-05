@@ -40,6 +40,7 @@ class WbsController extends Controller
      */
     public function store(Request $request) {
         Wbs::create_wbs($request);
+        return redirect()->route('wbs-list');
     }
 
     /**
@@ -48,10 +49,7 @@ class WbsController extends Controller
      * @param  \App\Models\Wbs  $wbs
      * @return \Illuminate\Http\Response
      */
-    public function show(Wbs $wbs)
-    {
-        $wbs_detail = WbsDetail::where('wbs_id','=', $wbs->id)->get();
-
+    public function show(Wbs $wbs) {
     }
 
     /**
@@ -62,7 +60,11 @@ class WbsController extends Controller
      */
     public function edit(Wbs $wbs)
     {
-        //
+        $wbs_details = WbsDetail::where('wbs_id','=', $wbs->id)->get();
+        $exercise_list= Exercise::all();
+
+        return view('muscle-up-app.wbs.edit')->with(['wbs'=>$wbs,'wbs_details'=>$wbs_details,'exercise_list'=>$exercise_list]);
+
     }
 
     /**
@@ -74,7 +76,9 @@ class WbsController extends Controller
      */
     public function update(Request $request, Wbs $wbs)
     {
-        //
+        Wbs::update_wbs($request);
+        return redirect()->route('wbs-list');
+
     }
 
     /**
