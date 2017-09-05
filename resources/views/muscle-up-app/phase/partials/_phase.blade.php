@@ -3,7 +3,7 @@
         <?php echo $count;?>
     </td>
     <td>
-        <select class="form-control day_name" id="" name="day_id[]">
+        <select class="form-control day_name"  name="day_id[]" id="">
             <option value="{{$phaseDetail->day_id}}">{{$phaseDetail->day->title}}</option>
             @foreach($days as $day)
                 <option  value="{{$day->id}}">{{$day->title}}</option>

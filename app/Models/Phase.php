@@ -64,6 +64,7 @@ class Phase extends Model
     }
     public static function update_phase($request)
     {
+//        dd($request);
         $phase = self::find($request->id);
         $phase->title = $request->title;
         $phase->description = $request->description;
@@ -84,16 +85,26 @@ class Phase extends Model
         }
         $list['wbs'] = $wbs;
 
-
+        $phaseDetail= PhaseDetail::where('phase_id', '=', $request->id)->get();
+        $row= ($phaseDetail)->count();
         for ($i = 0; $i < $count; $i++) {
-            $phaseDetail= PhaseDetail::where('phase_id', '=', $request->id);
-            foreach ($phaseDetail as $phaseDetails) {
-                $phaseDetails->phase_id= $phase_id;
-                $phaseDetails->day_id = $list['day'][$i];
-                $phaseDetails->wbs_id = $list['wbs'][$i];
-                $phaseDetails->sync();
+
+            if($i < $row) {
+                $phaseDetail[$i]->phase_id= $phase_id;
+                $phaseDetail[$i]->day_id = $list['day'][$i];
+                $phaseDetail[$i]->wbs_id = $list['wbs'][$i];
+                $phaseDetail[$i]->save();
+
+            }else{
+                $phaseDetail = new PhaseDetail();
+                $phaseDetail->phase_id= $phase_id;
+                $phaseDetail->day_id = $list['day'][$i];
+                $phaseDetail->wbs_id = $list['wbs'][$i];
+                $phaseDetail->save();
+
             }
         }
+
     }
     public static function deletePhase($id){
         $phase = self::find($id);

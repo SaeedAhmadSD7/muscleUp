@@ -170,8 +170,10 @@ Route::post('/phase/update',['as'=>'update-phase','uses'=>'MuscleUpApp\PhaseCont
 Route::get('/phase/delete/{id?}',['as'=>'delete-phase','uses'=>'MuscleUpApp\PhaseController@destroy']);
 
 
-
-
+/***
+ * program
+ */
+Route::get('/program',['as'=>'program','uses'=>'MuscleUpApp\ProgramController@create']);
 
 /*
  Exercise
