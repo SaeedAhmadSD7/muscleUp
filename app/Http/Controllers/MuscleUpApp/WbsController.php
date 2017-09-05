@@ -89,6 +89,8 @@ class WbsController extends Controller
      */
     public function destroy(Wbs $wbs)
     {
-        //
+        Wbs::delete_wbs($wbs);
+        return redirect()->route('wbs-list');
+
     }
 }

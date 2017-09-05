@@ -74,7 +74,6 @@
                                         <th>Set</th>
                                         <th>Rep</th>
                                         <th>Rest</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -96,7 +95,6 @@
                                         <td id="qtyRow"><input class="form-control" type="number" id="set" name="set[]" value="{{$wbs_detail->set}}" placeholder="Set" style="width:60px;"></td>
                                         <td id="caloryRow"><input class="form-control" type="number" id="rep" name="rep[]" value="{{$wbs_detail->rep}}" placeholder="Rep" style="width:60px;"></td>
                                         <td><input class="form-control time_take_input" type="text" name="rest[]" value="{{$wbs_detail->rest}}" placeholder="Rest Time" style="width:60px"></td>
-                                        <td><button class="remove_row btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-sign"></span></button></td>
                                     </tr>
                                     <?php $count++; ?>
                                 @endforeach
