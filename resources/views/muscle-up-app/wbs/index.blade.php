@@ -44,12 +44,7 @@
                                                 <a class="btn btn-primary" href="{{route('wbs-edit',$wbs)}}" type="submit"><span class="glyphicon glyphicon-edit"></span></a>
                                         </td>
                                         <td width="20px">
-                                            <form method="get" action="{{route('delete-diet',['id'=>$wbs->id])}}">
-                                                <button class="btn btn-danger" type="submit">
-                                                    <span class="glyphicon glyphicon-remove-sign">
-                                                    </span>
-                                                </button>
-                                            </form>
+                                                <a class="btn btn-danger" href="{{route('wbs-delete', $wbs)}}" type="submit"><span class="glyphicon glyphicon-remove-sign"></span></a>
                                         </td>
                                 </tr>
                                 <?php $count++; ?>

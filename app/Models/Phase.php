@@ -106,6 +106,7 @@ class Phase extends Model
         }
 
     }
+
     public static function deletePhase($id){
         $phase = self::find($id);
         $phase->delete();

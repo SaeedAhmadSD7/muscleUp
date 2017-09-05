@@ -127,6 +127,13 @@ class Wbs extends Model
             }
         }
     }
+
+    public static function delete_wbs($wbs){
+        $wbs = self::find($wbs->id);
+        $wbs->delete();
+        $wbs_detail = WbsDetail::where('wbs_id', '=', $wbs->id)->get();
+        $wbs_detail->delete();
+    }
 }
 
 
