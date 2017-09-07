@@ -66,7 +66,7 @@
                             <table id="assignedTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Serial</th>
+                                    <th width="40px">Serial</th>
                                     <th>Selected phase</th>
 
                                 </tr>

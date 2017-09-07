@@ -84,7 +84,7 @@
                                     <th>Serial</th>
                                     <th>Day Number</th>
                                     <th>Work BreakDown Title</th>
-                                    <th>Action</th>
+                                    <th width="20px">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
