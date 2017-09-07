@@ -15,7 +15,7 @@ class CreateProgramsTable extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('gym_id');
+            $table->integer('gym_id')->nullable();
             $table->string('title');
             $table->string('description',1024)->nullable();
             $table->softDeletes();
