@@ -24,6 +24,10 @@ class Phase extends Model
     {
         return $this->hasOne(PhaseDetail::class);
     }
+    public function programPhase()
+    {
+        return $this->hasMany(ProgramPhase::class);
+    }
 
     public static function showAll()
     {

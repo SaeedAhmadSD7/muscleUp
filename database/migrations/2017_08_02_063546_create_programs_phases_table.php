@@ -14,8 +14,11 @@ class CreateProgramsPhasesTable extends Migration
     public function up()
     {
         Schema::create('programs_phases', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('program_id');
-            $table->string('phase_id');
+            $table->integer('phase_id');
+            $table->timestamps();
+
         });
     }
 

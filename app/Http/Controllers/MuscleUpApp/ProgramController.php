@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Models\Phase;
+use App\Models\Program;
+use App\Models\ProgramPhase;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -37,7 +39,8 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Program::create_program($request);
+        return redirect()->route('show-program');
     }
 
     /**
@@ -46,9 +49,10 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $programs=Program::showAll();
+        return view('muscle-up-app.program.list-program',compact('programs'));
     }
 
     /**
@@ -59,8 +63,10 @@ class ProgramController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        $program = Program::find($id);
+        $programPhases = ProgramPhase::where('program_id', '=', $id)->get();
+        $phases= Phase::showAll();
+        return view('muscle-up-app.program.edit-program',compact('program','programPhases','phases'));    }
 
     /**
      * Update the specified resource in storage.
@@ -69,9 +75,11 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        Program::updateProgram($request);
+        return redirect()->route('show-program');
+
     }
 
     /**
@@ -82,6 +90,7 @@ class ProgramController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Program::deleteProgram($id);
+        return redirect()->route('show-program');
     }
 }
