@@ -1,17 +1,18 @@
 @extends('layouts.backend-main')
 @section('title','Make Program')
+
 @section('style-sheet')
-    <style>
-        /*.fieldR{*/
-        /*display: none;*/
-        /*}*/
+    <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/widgets/timepicker/timepicker.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/css/diet.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/icons/typicons/typicons.css')}}" rel="stylesheet" type="text/css">
+@stop
 
-        .create {
-            float: right;
-        }
-
-    </style>
-@show
 @section('content')
 
     <table id="templete">
@@ -27,20 +28,16 @@
                         @endforeach
                     </select>
                 </td>
-
                 <td>
-                    <button class="remove_row btn btn-danger" type="button"><span
-                                class="glyphicon glyphicon-remove-sign"></span></button>
+                    <button class="remove_row btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-sign"></span></button>
                 </td>
             </tr>
         </div>
         </tfoot>
-
     </table>
 
     <div id="page-title">
         <h2>Add Program</h2>
-
         <p>Create Program</p>
     </div>
 
@@ -53,10 +50,8 @@
                         <div class="form-wizard" id="form-wizard-3">
                             <div class="form-group first-group">
                                 <label class="col-sm-3 control-label" for="name">Program Title</label>
-
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="title" value=""
-                                           placeholder="Program Title... ">
+                                    <input class="form-control" type="text" name="title" value="" placeholder="Program Title... ">
                                 </div>
                             </div>
 
@@ -65,20 +60,18 @@
 
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <textarea rows="5" cols="20" class="form-control" id="description"
-                                                  name="description"></textarea><br>
+                                        <textarea rows="5" cols="20" class="form-control" id="description" name="description"></textarea><br>
                                     </div>
                                 </div>
                             </div>
                             <hr>
-                            <h2>Phase Details:</h2>
-                            <table id="assignedTable" cellpadding="0" cellspacing="0" border="0"
-                                   class="table table-bordered">
+                            <h2>Program Details:</h2>
+                            <table id="assignedTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th style="width: 20px;">Serial </th>
-                                    <th style="width: 20px;">Phase Number</th>
-
+                                    <th>Serial </th>
+                                    <th>Phase Number</th>
+                                    <th width="20px">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -94,8 +87,7 @@
                                     </td>
 
                                     <td>
-                                        <button class="remove_row btn btn-danger" type="button"><span
-                                                    class="glyphicon glyphicon-remove-sign"></span></button>
+                                        <button class="remove_row btn btn-danger" type="button"><span class="glyphicon icon-typicons-cancel"></span></button>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -103,7 +95,7 @@
                                 <tr>
                                     <th colspan="7">
                                         <div class="create">
-                                            <button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon glyphicon-plus"></span></button>
+                                            <button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon icon-typicons-plus"></span></button>
                                         </div>
                                     </th>
                                 </tr>
