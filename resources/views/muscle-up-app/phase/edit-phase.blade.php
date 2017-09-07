@@ -75,14 +75,12 @@
                             </div>
                             <hr>
                             <h2>Phase Details:</h2>
-                            <table id="assignedTable" cellpadding="0" cellspacing="0" border="0"
-                                   class="table table-bordered">
+                            <table id="assignedTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered">
                                 <thead>
                                 <tr>
                                     <th style="width: 20px;">Serial</th>
                                     <th>Selected Day</th>
                                     <th>Selected Work Break Down</th>
-
                                 </tr>
                                 </thead>
                                 <tbody>

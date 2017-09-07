@@ -29,7 +29,7 @@
                     </select>
                 </td>
                 <td>
-                    <button class="remove_row btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-sign"></span></button>
+                    <button class="remove_row btn btn-danger" type="button"><span class="glyphicon icon-typicons-cancel"></span></button>
                 </td>
             </tr>
         </div>
@@ -110,5 +110,10 @@
             </div>
         </div>
     </div>
+@stop
 
+@section('script')
+    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
+    <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
+    <script src="{{url('/admin-assets/js/diet.js')}}"></script>
 @stop
