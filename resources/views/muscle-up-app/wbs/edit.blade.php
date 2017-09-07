@@ -1,12 +1,16 @@
 @extends('layouts.backend-main')
 @section('title','Edit WBS')
 @section('style-sheet')
-    <style>
-        .create {
-            float: right;
-        }
-    </style>
-@show
+    <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/widgets/timepicker/timepicker.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/css/diet.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/icons/typicons/typicons.css')}}" rel="stylesheet" type="text/css">
+@stop
 
 @section('content')
 
@@ -69,7 +73,7 @@
                             <table id="assignedTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th style="width: 55px;">Serial #</th>
+                                        <th style="width: 55px;">Serial</th>
                                         <th>Exercise</th>
                                         <th>Set</th>
                                         <th>Rep</th>
@@ -103,7 +107,7 @@
                                 <tr>
                                     <th colspan="7">
                                         <div class="create">
-                                            <button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon glyphicon-plus"></span></button>
+                                            <button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon icon-typicons-plus"></span></button>
                                         </div>
                                     </th>
                                 </tr>
@@ -118,5 +122,10 @@
             </div>
         </div>
     </div>
+@stop
 
+@section('script')
+    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
+    <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
+    <script src="{{url('/admin-assets/js/diet.js')}}"></script>
 @stop

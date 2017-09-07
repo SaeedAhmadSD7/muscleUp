@@ -19,19 +19,15 @@
         </select>
     </td>
     <td>
-        <input class="form-control" type="number" id="quantity" name="quantity[]"
-               placeholder="Qrt:" style="width:60px;" value="{{$dietPlanDetail->quantity}}">
+        <input class="form-control" type="number" id="quantity" name="quantity[]" placeholder="Qrt:" style="width:60px;" value="{{$dietPlanDetail->quantity}}">
     </td>
     <td>
-        <input class="form-control" type="text" id="calories" name="calories[]"
-               placeholder="Cal" style="width:60px;" value="{{$dietPlanDetail->calories}}" readonly>
+        <input class="form-control" type="text" id="calories" name="calories[]" placeholder="Cal" style="width:60px;" value="{{$dietPlanDetail->calories}}" readonly>
     </td>
     <td>
-        <input class="form-control time_take_input" type="text" name="duration[]"
-               placeholder="Time" style="width:60px" value="{{$dietPlanDetail->duration}}" readonly>
+        <input class="form-control time_take_input" type="text" name="duration[]" placeholder="Time" style="width:60px" value="{{$dietPlanDetail->duration}}" readonly>
     </td>
     <td>
-        <button class="remove_row btn btn-danger" type="button"><span
-                    class="glyphicon glyphicon-remove-sign"></span></button>
+        <button class="remove_row btn btn-danger" type="button"><span class="glyphicon icon-typicons-cancel"></span></button>
     </td>
 </tr>

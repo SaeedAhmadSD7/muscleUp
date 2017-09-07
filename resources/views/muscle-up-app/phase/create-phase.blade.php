@@ -1,24 +1,24 @@
 @extends('layouts.backend-main')
 @section('title','Add Phase')
 @section('style-sheet')
-    <style>
-        /*.fieldR{*/
-        /*display: none;*/
-        /*}*/
+    <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/widgets/timepicker/timepicker.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/css/diet.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/icons/typicons/typicons.css')}}" rel="stylesheet" type="text/css">
+@stop
 
-        .create {
-            float: right;
-        }
-
-    </style>
-@show
 @section('content')
 
     <table id="templete">
         <tfoot>
         <div class="tab-content">
-            <tr style="display: none;"  id="tmpRow" class="fieldR">
-                <td style='width:20px;text-align:center;'><span class="sr"></span></td>
+            <tr style="display: none;" id="tmpRow" class="fieldR">
+                <td><span class="sr"></span></td>
                 <td>
                     <select class="form-control" name="day_id[]" id="">
                         <option value="0">Select Day:</option>
@@ -36,8 +36,7 @@
                     </select>
                 </td>
                 <td>
-                    <button class="remove_row btn btn-danger" type="button"><span
-                                class="glyphicon glyphicon-remove-sign"></span></button>
+                    <button class="remove_row btn btn-danger" type="button"><span class="glyph-icon icon-typicons-cancel"></span></button>
                 </td>
             </tr>
         </div>
@@ -72,20 +71,19 @@
 
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <textarea rows="5" cols="20" class="form-control" id="description"
-                                                  name="description"></textarea><br>
+                                        <textarea rows="5" cols="20" class="form-control" id="description" name="description"></textarea><br>
                                     </div>
                                 </div>
                             </div>
                             <hr>
                             <h2>Phase Details:</h2>
-                            <table id="assignedTable" cellpadding="0" cellspacing="0" border="0"
-                                   class="table table-bordered">
+                            <table id="assignedTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th style="width: 20px;">Serial </th>
-                                    <th style="width: 20px;">Day Number</th>
+                                    <th>Serial</th>
+                                    <th>Day Number</th>
                                     <th>Work BreakDown Title</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -108,16 +106,16 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <button class="remove_row btn btn-danger" type="button"><span
-                                                    class="glyphicon glyphicon-remove-sign"></span></button>
+                                        <button class="remove_row btn btn-danger" type="button"><span class="glyph-icon icon-typicons-cancel"></span></button>
                                     </td>
                                 </tr>
                                 </tbody>
+
                                 <tfoot>
                                 <tr>
                                     <th colspan="7">
                                         <div class="create">
-                                            <button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon glyphicon-plus"></span></button>
+                                            <button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon icon-typicons-plus"></span></button>
                                         </div>
                                     </th>
                                 </tr>
@@ -132,5 +130,11 @@
             </div>
         </div>
     </div>
+@stop
 
+
+@section('script')
+    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
+    <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
+    <script src="{{url('/admin-assets/js/diet.js')}}"></script>
 @stop
