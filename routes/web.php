@@ -143,11 +143,6 @@ Route::get('/Admin/Inbox/Message/Detail/{id}',['as'=>'Admin-Message-Detail','use
 Route::get('/Admin/Inbox/Message/Accept/{id}',['as'=>'Admin-Message-Accept','uses'=>'MuscleUpApp\AdminController@request_accept']);
 
 
-//Workout program
-Route::get('/program/add',['as'=>'program-add','uses'=>'MuscleUpApp\ProgramController@program_add']);
-Route::post('/program/store', ['as' => 'program-store', 'uses' => 'MuscleUpApp\ProgramController@program_save']);
-Route::get('/program/view/{program}', ['as' => 'program-view', 'uses' => 'MuscleUpApp\ProgramController@program_view']);
-
 /***
  * Diet Plan
  */
