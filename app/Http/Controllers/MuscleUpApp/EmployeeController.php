@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Mail\AddInstructorRequest;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+
 class EmployeeController extends Controller
 {
     /**
@@ -95,7 +97,7 @@ class EmployeeController extends Controller
         $instructor->exp_description=$request->exp_description;
         $instructor->save();
 
-//        Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
+        Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
         Session::flash('Success','Save Successfully');
         return redirect()->route('instructor-add');
     }
