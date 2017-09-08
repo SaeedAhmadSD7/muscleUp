@@ -2,12 +2,10 @@
 
 @section('title','Add trainee')
 
-@section('user_type')
-    Gym
-@stop
+@section('style-sheet')
+    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
 
-@section('dashboard_link')
-    {{route('gym')}}
 @stop
 
 @section('content')
@@ -39,7 +37,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Date of birth:</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="birth_date" value="" placeholder="Date of Birth..." readonly>
+                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="dob" value="" placeholder="Date of Birth..." readonly>
                             <div class="btn-date"></div>
 
                         </div>
@@ -68,7 +66,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Address</label>
                         <div class="col-sm-4">
-                            <textarea class="form-control" name="address" placeholder="Address..." maxlength="255"></textarea>
+                            <textarea class="form-control " placeholder="Address..." maxlength="255"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -83,4 +81,12 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('script')
+    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/add-trainee.js')}}" type="text/javascript"></script>
+
+
 @stop

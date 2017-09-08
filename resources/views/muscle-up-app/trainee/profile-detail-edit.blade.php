@@ -1,6 +1,12 @@
 @extends('layouts.backend-main')
 
-@section('title','Add trainee')
+@section('title','Edit personal detail')
+
+@section('style-sheet')
+    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
+
+@stop
 
 @section('content')
     <div class="panel">
@@ -31,7 +37,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Date of birth:</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="birth_date" value="{{$trainee->birth_date}}" placeholder="Date of Birth..." readonly>
+                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="dob" value="{{$trainee->dob}}" placeholder="Date of Birth..." readonly>
                             <div class="btn-date"></div>
 
                         </div>
@@ -57,12 +63,12 @@
                             <input class="form-control phone_number" type="text" name="phone_number" value="{{$trainee->phone_number}}" placeholder="Phone Number..." maxlength="15">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Address</label>
-                        <div class="col-sm-4">
-                            <input class="form-control " name="address" value="{{$trainee->address}}" placeholder="Address..." maxlength="255">
-                        </div>
-                    </div>
+                    {{--<div class="form-group">--}}
+                        {{--<label class="col-sm-3 control-label">Address</label>--}}
+                        {{--<div class="col-sm-4">--}}
+                            {{--<input class="form-control " name="address" value="{{$trainee->address}}" placeholder="Address..." maxlength="255">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="form-group">
 
 
@@ -77,4 +83,11 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('script')
+    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/add-trainee.js')}}" type="text/javascript"></script>
+
+
 @stop

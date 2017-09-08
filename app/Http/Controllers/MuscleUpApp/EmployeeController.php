@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\MuscleUpApp;
+use App\Models\Employee;
 use App\Models\Instructor;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Mail\AddInstructorRequest;
 use Illuminate\Support\Facades\Session;
-class InstructorController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -74,22 +75,34 @@ class InstructorController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request);
+
         $user = new User();
         $user->email = $request->email;
-        $password = str_random(9);
-//        $user->password = bcrypt($password);
-//        $user['user-type'] = 'Instructor';
-//        $user->save();
+        $password = str_random(8);
+        $user->password = bcrypt($password);
+        $user['type'] = 'instructor';
+//        $user->user_id = $user->id;
+        $user->first_name=$request->first_name;
+        $user->last_name=$request->last_name;
+        $user->dial_code = '+27';
+        $user->phone_number=$request->phone_number;
+        $user->dob=$request->dob;
+        $user->gender =$request->gender;
+//        $user->address=$request->address;
+        $user->save();
 
-        $instructor = new Instructor($request->all());
-//        $instructor->user_id = $user->id;
+        $instructor = new  Employee();
+        $instructor->joining_date=$request->joining_date;
+        $instructor->quit_date=$request->quit_date;
+        $instructor->previous_salary=$request->previous_salary;
+        $instructor->joining_salary=$request->joining_salary;
+        $instructor->exp_years=$request->exp_years;
+        $instructor->exp_description=$request->exp_description;
         $instructor->save();
 
-
-//        \Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
+//        Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
         Session::flash('Success','Save Successfully');
-        return redirect()->route('show-instructor');
+        return redirect()->route('instructor-add');
     }
 
     /**
@@ -132,8 +145,8 @@ class InstructorController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        dd($request);
-        $instructor = Instructor::find($id);
+
+        $instructor = Employee::find($id);
         $instructor->first_name=$request->first_name;
         $instructor->last_name=$request->last_name;
         $instructor->dial_code = '+45';

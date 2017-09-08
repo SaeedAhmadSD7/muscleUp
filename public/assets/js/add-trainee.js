@@ -14,9 +14,6 @@
              birth_date: {
                  required: true
              },
-             dial_code:{
-               required: true
-             },
              phone_number: {
                  required: true,
                  minlength: 7,
@@ -32,7 +29,6 @@
              last_name: "Please enter your last name",
              email: "Please enter a valid email address",
              birth_date:"Please select your date of birth",
-             dial_code:"",
              phone_number:"Please enter valid number ",
              address:"Please enter you address"
          },
@@ -58,6 +54,11 @@
              $(element).parent('.dial-code-error').addClass('dial-code-div').removeClass('dial-code-error').children().removeClass('error');
          }
      });
+
+     // $('.add-trainee').on('click',function () {
+     //     console.log('7');
+     // })
+
 
  });
 

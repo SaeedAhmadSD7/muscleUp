@@ -146,9 +146,7 @@
 
                     </div>
                 </div>
-                <div class="row">
-                    @yield('content')
-                </div>
+                @yield('content')
             </div>
         </div>
 

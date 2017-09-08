@@ -89,15 +89,15 @@ class TraineeController extends Controller
 
 
     public function inbox(){
-          $trainee = Trainee ::all();
-          return view('muscle-up-app.trainee.trainee-list')->with('trainee', $trainee);
+          $trainee = User ::all();
+          return view('muscle-up-app.gym.trainee.trainee-list')->with('trainee', $trainee);
       }
 
 
     public function trainee_detail($id){
-          $trainee= Trainee::find($id);
-          $user = User::find($trainee->user_id);
-          return view('muscle-up-app.trainee.trainee-list-detail')->with(['trainee'=>$trainee,'email'=>$user->email]);
+          $trainee= User::find($id);
+//          $user = User::find($trainee->user_id);
+          return view('muscle-up-app.gym.trainee.trainee-list-detail')->with(['trainee'=>$trainee]);
 
       }
 
@@ -120,7 +120,7 @@ class TraineeController extends Controller
     public function create()
     {
 
-        return view('muscle-up-app.trainee.trainee-add');
+        return view('muscle-up-app.gym.trainee.trainee-add');
     }
 
     /**
@@ -135,21 +135,16 @@ class TraineeController extends Controller
         $user->email = $request->email;
         $password = str_random(8);
         $user->password = bcrypt($password);
-        $user['user-type'] = 'trainee';
+        $user['type'] = 'trainee';
+//        $user->user_id = $user->id;
+        $user->first_name=$request->first_name;
+        $user->last_name=$request->last_name;
+        $user->dial_code = '+27';
+        $user->phone_number=$request->phone_number;
+        $user->dob=$request->dob;
+        $user->gender =$request->gender;
+//        $user->address=$request->address;
         $user->save();
-
-
-
-        $trainee = new Trainee();
-        $trainee->user_id = $user->id;
-        $trainee->first_name=$request->first_name;
-        $trainee->last_name=$request->last_name;
-        $trainee->dial_code = '+27';
-        $trainee->phone_number=$request->phone_number;
-        $trainee->birth_date=$request->birth_date;
-        $trainee->gender =$request->gender;
-        $trainee->address=$request->address;
-        $trainee->save();
 
         Mail::to($user->email)->send(new AddTraineeRequest($user->email,$password));
         Session::flash('success','Congratulations Trainee have been added succesfully. Credentials have been mailed to entered email.');
@@ -167,10 +162,10 @@ class TraineeController extends Controller
      */
     public function show($id)
     {
-        $trainee= Trainee::find($id);
-        $user = User::find($trainee->user_id);
+        $trainee= User::find($id);
+//        $user = User::find($trainee->user_id);
 
-        return view('muscle-up-app.trainee.trainee-personal-detail')->with(['trainee'=>$trainee,'email'=>$user->email]);
+        return view('muscle-up-app.trainee.trainee-personal-detail')->with(['trainee'=>$trainee]);
 
     }
 
@@ -182,10 +177,10 @@ class TraineeController extends Controller
      */
     public function edit($id)
     {
-        $trainee= Trainee::find($id);
-        $user = User::find($trainee->user_id);
+        $trainee= User::find($id);
+//        $user = User::find($trainee->user_id);
 
-        return view('muscle-up-app.trainee.profile-detail-edit')->with(['trainee'=>$trainee,'email'=>$user->email]);
+        return view('muscle-up-app.trainee.profile-detail-edit')->with(['trainee'=>$trainee]);
     }
 
     /**
@@ -202,14 +197,14 @@ class TraineeController extends Controller
 //        $user->email = $request->input('email');
 //        $user->save();
 
-        $trainee =Trainee::find($id);
+        $trainee =User::find($id);
         $trainee->first_name=$request->input('first_name');
         $trainee->last_name=$request->input('last_name');
         $trainee->dial_code = '+27';
         $trainee->phone_number=$request->input('phone_number');
-        $trainee->birth_date=$request->input('birth_date');
+        $trainee->dob=$request->input('dob');
         $trainee->gender =$request->input('gender');
-        $trainee->address=$request->input('address');
+//        $trainee->address=$request->input('address');
         $trainee->save();
 
 
@@ -229,7 +224,7 @@ class TraineeController extends Controller
      */
     public function destroy($id)
     {
-        $trainee = Trainee::find($id);
+        $trainee = User::find($id);
         $trainee->delete();
 
         return redirect()->route('trainee-list');

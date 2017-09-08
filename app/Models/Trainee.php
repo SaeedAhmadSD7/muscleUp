@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Trainee extends Model
 {
-    protected $fillable = ["first_name","last_name","dial_code","phone_number","birth_date","gender","address"];
+    protected $fillable = [];
 
     public function gym(){
         return $this-> belongsTo( Gym:: class);

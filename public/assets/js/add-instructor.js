@@ -17,10 +17,7 @@ $(document).ready(function() {
                 required: true,
                 email: true
             },
-            birth_date: {
-                required: true
-            },
-            dial_code:{
+            dob: {
                 required: true
             },
             phone_number: {
@@ -28,19 +25,41 @@ $(document).ready(function() {
                 minlength: 7,
                 maxlength:15
             },
-            address: {
+            joining_date: {
                 required: true,
-                maxlenght:250
-            }
+                },
+            quit_date: {
+                required: true,
+                },
+            previous_salary: {
+                required: true,
+            },
+            joining_salary: {
+                required: true,
+            },
+            exp_years: {
+                required: true,
+            },
+            exp_description: {
+                required: true,
+            },
+
+
         },
         messages: {
             first_name: "Please enter your first name",
             last_name: "Please enter your last name",
             email: "Please enter a valid email address",
-            birth_date:"Please select your date of birth",
+            dob:"Please select your date of birth",
             dial_code:"",
             phone_number:"Please enter valid number ",
-            address:"Please enter you address"
+            joining_date:"Please enter Joining Date",
+            quit_date:"Please select you Quit date",
+            previous_salary: "Please enter your previous salary",
+            joining_salary:"Please enter your joining salary",
+            exp_years:"Please enter your experience year",
+            exp_description:"Please enter your experience description"
+
         },
         errorElement: "em",
         errorPlacement: function ( error, element ) {

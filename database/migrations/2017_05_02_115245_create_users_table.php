@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->integer('branch_id')->nullable();
             $table->enum('type',['admin','gym','trainee','employee','instructor']);
             $table->string('email',40)->unique();
-            $table->string('password',20);
+            $table->string('password',256);
             $table->string('first_name',35);
             $table->string('last_name',35);
             $table->dateTime('dob');

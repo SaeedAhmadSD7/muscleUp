@@ -7,60 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
 
-    function branches()
-    {
-        return $this->belongsToMany(Branch:: class);
+    protected $table= 'employees';
+    protected $primaryKey = 'id';
+    protected $fillable = ['user_id','joining_date','quit_date','previous_salary','joining_salary','exp_years','exp_description'];
 
+    public function gym(){
+        return $this->belongsTo(gym::class);
     }
-
-    function trainee(){
-        return $this-> hasMany( Trainee:: class);
-
-    }
-
-    function batches(){
-        return $this->belongsToMany(Batch:: class);
-
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
 
-    function bootCamp()
-    {
-        return $this->belongsToMany(BootCamp:: class);
 
-    }
 
-    function services(){
-        return $this->belongsToMany(Service :: class);
-
-    }
-
-    function userType()
-    {
-        return $this->belongsTo(UserType :: class);
-
-    }
-
-    function workoutPlan()
-    {
-        return $this->hasMany(WorkoutPlan :: class);
-
-    }
-
-    function wpDayDetail()
-    {
-        return $this->hasMany(WpDayDetail :: class);
-
-    }
-
-    function wpAssign()
-    {
-        return $this->hasMany(WpAssign :: class);
-
-    }
-
-    function measurements()
-    {
-        return $this->hasOne(Measurement:: class);
-    }
 }

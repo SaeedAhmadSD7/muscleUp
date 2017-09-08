@@ -7,14 +7,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ["email", "password"];
+    protected $fillable = ["email", "password","first_name","last_name","dial_code","phone_number","dob","gender"];
+
+    use Notifiable;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -42,5 +42,8 @@ class User extends Authenticatable
     }
     function trainee(){
         return $this->hasOne(trainee::class);
+    }
+    function employee(){
+        return$this->hasMany(Employee::class);
     }
 }
