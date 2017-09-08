@@ -50,11 +50,6 @@ class EmployeeController extends Controller
 
     }
 
-    public function add()
-    {
-        return view('muscle-up-app.instructor.add-instructor');
-
-    }
 
     /**
      * Show the form for creating a new resource.
