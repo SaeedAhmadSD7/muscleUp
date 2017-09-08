@@ -10,6 +10,7 @@ class DaySeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
         Day::truncate();
@@ -21,6 +22,5 @@ class DaySeeder extends Seeder
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ));
         }
-
     }
 }

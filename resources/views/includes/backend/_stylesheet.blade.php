@@ -19,7 +19,6 @@
 <link href="{{url('/admin-assets/helpers/responsive-elements.css')}}" rel="stylesheet" type="text/css">
 <link href="{{url('/admin-assets/helpers/admin-responsive.css')}}" rel="stylesheet" type="text/css">
 
-<link href="{{url('/admin-assets/icons/linecons/linecons.css')}}" rel="stylesheet" type="text/css">
 <link href="{{url('/admin-assets/widgets/popover/popover.css')}}" rel="stylesheet" type="text/css">
 <link href="{{url('/admin-assets/helpers/spacing.css')}}" rel="stylesheet" type="text/css">
 <link href="{{url('/admin-assets/widgets/tooltip/tooltip.css')}}" rel="stylesheet" type="text/css">

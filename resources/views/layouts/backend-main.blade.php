@@ -9,7 +9,6 @@
     <title>@yield('title')</title>
 
     @include('includes.backend._stylesheet')
-    @include('includes.backend._script')
     @yield('style-sheet')
 </head>
 <body>
@@ -19,6 +18,10 @@
         @include('includes.backend._sidebar')
         <div id="page-content-wrapper">
             <div id="page-content">
+                <div id="page-title">
+                    @yield('page-heading')
+                </div>
+
                 <div id="page-header">
                     <div id="page-shadow">
                         <div id="header-nav-left">
@@ -154,7 +157,7 @@
 </body>
 
 <footer>
-
+    @include('includes.backend._script')
     @yield('script')
 </footer>
 
