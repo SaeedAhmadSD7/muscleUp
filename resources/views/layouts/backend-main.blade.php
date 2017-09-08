@@ -39,7 +39,7 @@
                                         </div>
                                         <div class="divider"></div>
                                         <div class="button-pane button-pane-alt pad5L pad5R text-center">
-                                            <a class="btn btn-flat display-block font-normal btn-danger" href="#"><i class="glyph-icon icon-power-off"></i> Logout</a>
+                                            <a class="btn btn-flat display-block font-normal btn-danger" href="{{route('logout')}}"><i class="glyph-icon icon-power-off"></i> Logout</a>
                                         </div>
                                     </div>
                                 </div>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\MuscleUpApp;
+
 use App\Models\Employee;
 use App\Models\Instructor;
 use Illuminate\Routing\Controller;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 
 class EmployeeController extends Controller
+
 {
     /**
      * Display a listing of the resource.

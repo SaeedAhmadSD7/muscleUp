@@ -14,6 +14,11 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->truncate();
         DB::table('users')->insert([
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'dob'=>'2017-09-02',
+            'dial_code'=>'+92',
+            'phone_number'=>'1234567',
             'email' => 'admin@example.com',
             'password' => bcrypt('badeo520'),
             'type'=>'admin',
@@ -23,6 +28,11 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
+            'first_name' => 'Gym',
+            'last_name' => 'Gym',
+            'dob'=>'2017-09-02',
+            'dial_code'=>'+92',
+            'phone_number'=>'1234567',
             'email' => 'gym@example.com',
             'password' => bcrypt('asdf1234'),
             'type'=>'gym',
@@ -32,6 +42,11 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
+            'first_name' => 'Trainee',
+            'last_name' => 'Trainee',
+            'dob'=>'2017-09-02',
+            'dial_code'=>'+92',
+            'phone_number'=>'1234567',
             'email' => 'trainee@example.com',
             'password' => bcrypt('asdf1234'),
             'type'=>'trainee',
@@ -41,6 +56,11 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
+            'first_name' => 'Instructor',
+            'last_name' => 'Instructor',
+            'dob'=>'2017-09-02',
+            'dial_code'=>'+92',
+            'phone_number'=>'1234567',
             'email' => 'instructor@example.com',
             'password' => bcrypt('asdf1234'),
             'type'=>'instructor',

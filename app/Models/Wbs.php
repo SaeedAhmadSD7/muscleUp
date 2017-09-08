@@ -95,7 +95,11 @@ class Wbs extends Model
         $list['set'] = $sets;
 
         foreach ($request->input('rep') as $rep) {
-            $reps[] = $rep;
+            $reps[] = $rep;if (\Auth::user()->user_type == 'Admin')
+        {
+            return $next($request);
+        }
+        return redirect()->guest('/');
         }
         $list['rep'] = $reps;
 

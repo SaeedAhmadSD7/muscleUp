@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="reg-form">
-                        <form class="user_login" role="form" method="POST" action="{{route('check-login')}}">
+                        <form class="user_login" role="form" method="POST" action="{{route('login')}}">
                             {{csrf_field()}}
 
                             <div class="fields clearfix">

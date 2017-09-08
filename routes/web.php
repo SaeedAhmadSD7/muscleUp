@@ -1,8 +1,24 @@
 <?php
 
-
 Auth::routes();
 
+Route::get('/logout', ['uses'=>'\App\Http\Controllers\Auth\LoginController@logout','as'=>'logout']);
+
+Route::group(['prefix'=>'gym','middleware' => 'usertype'],function () {
+    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
+});
+
+Route::group(['prefix'=>'admin','middleware' => 'usertype'],function () {
+    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
+});
+
+Route::group(['prefix'=>'trainee','middleware' => 'usertype'],function () {
+    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
+});
+
+Route::group(['prefix'=>'employee','middleware' => 'usertype','employee'],function () {
+    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
+});
 
 
 Route::get('/admin', 'Auth\AdminController@index');
@@ -74,20 +90,13 @@ Route::get('gym/request/join', ['uses'=>'MuscleUpApp\GymController@request', 'as
 Route::post('gym/request/save',['uses'=>'MuscleUpApp\GymController@request_save', 'as'=> 'save-request']);
 Route::get('gym/request/process/{id}',['uses'=>'MuscleUpApp\GymController@request_process', 'as'=> 'process-request']);
 //Route::post('save-gym',['uses'=>'MuscleUpApp\GymController@save', 'as'=> 'save-gym']);
+
 /*
 login form
  */
 
-//Route::get('login-form', function () {
-//    return view('muscle-up-app.login_form.login');
-//});
-
-
-
-Route::get('login', ['uses'=>'MuscleUpApp\LoginController@index','as'=>'login']);
-
-
-Route::post('check-login', ['uses'=>'MuscleUpApp\LoginController@login','as'=>'check-login']);
+//Route::get('login', ['uses'=>'MuscleUpApp\LoginController@index','as'=>'login']);
+//Route::post('check-login', ['uses'=>'MuscleUpApp\LoginController@login','as'=>'check-login']);
 
 
 Route::get('/gym', ['as'=>'gym', 'uses'=>'MuscleUpApp\GymController@index']);
@@ -201,8 +210,6 @@ Route::get('/gym/panl', ['as'=>'gym-panl', 'uses'=> 'MuscleUpApp\EmployeeControl
 Route::get('/gym/dashboard', ['as'=>'gym-dashboard', 'uses'=> 'MuscleUpApp\EmployeeController@dashboard' ]);
 Route::get('/instructor/panal', ['as'=>'instructor-panal', 'uses'=> 'MuscleUpApp\EmployeeController@panal' ]);
 Route::get('show-instructor/detail/{id}',['as'=>'instructor-detail','uses'=>'MuscleUpApp\EmployeeController@instructor_detail']);
-
-
 
 //Workout
 Route::get('/workout',['as'=>'workout-store','uses'=>'MuscleUpApp\WorkoutPlanController@workout']);
