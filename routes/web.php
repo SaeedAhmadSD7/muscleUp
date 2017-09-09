@@ -36,55 +36,6 @@ Route::get('/', ['as' => 'home-page', 'uses' => 'MuscleUpApp\HomeController@inde
 Route::get('/home/contact', ['as' => 'home.store', 'uses' => 'MuscleUpApp\ContactController@store']);
 
 
-
-//deals
-Route::get('/deal',['as'=>'deal' , 'uses' =>'MuscleUpApp\DealController@index']);
-Route::get('/create/deal',['as'=>'create-deal' , 'uses' =>'MuscleUpApp\DealController@create']);
-Route::post('/save/deal',['as'=>'save-deal','uses'=>'MuscleUpApp\DealController@store']);
-Route::get('/show/deal/{id}',['as'=>'show-deal','uses'=>'MuscleUpApp\DealController@show']);
-Route::delete('/deal/delete/{id}',['as'=>'delete' , 'uses' =>'MuscleUpApp\DealController@destroy']);
-Route::resource('deals','MuscleUpApp\DealController');
-
-
-//package
-
-Route::get('/package',['as'=>'traineepackage' , 'uses' =>'MuscleUpApp\PackageController@index']);
-
-Route::get('/gym/package',['as'=>'gym-package' , 'uses' =>'MuscleUpApp\PackageController@gymPackage']);
-Route::get('/package',['as'=>'packages' , 'uses' =>'MuscleUpApp\PackageController@index']);
-
-Route::get('/create/package',['as'=>'create-package' , 'uses' =>'MuscleUpApp\PackageController@create']);
-Route::get('/show/package/{id}',['as'=>'show-package','uses'=>'MuscleUpApp\PackageController@show']);
-//Route::delete('/package/delete/{id}',['as'=>'delete' , 'uses' =>'MuscleUpApp\packageController@destroy']);
-Route::resource('package','MuscleUpApp\PackageController');
-
-
-//service
-Route::get('services', ['as'=>'service-store','uses'=>'MuscleUpApp\ServiceController@index']);
-Route::get('/service',['as'=>'service','uses'=>'MuscleUpApp\ServiceController@create']);
-Route::post('/service',['as'=>'Save-service','uses'=>'MuscleUpApp\ServiceController@store']);
-Route::get('show/{id}','MuscleUpApp\ServiceController@show')->name('services.show');
-Route::delete('delete/{id}',['as'=>'delete','uses'=>'MuscleUpApp\ServiceController@destroy']);
-Route::get('update/{service_id}',['as'=>'Update-service','uses'=>'MuscleUpApp\ServiceController@edit']);
-Route::put('update/{id}',['as'=>'Update.service','uses'=>'MuscleUpApp\ServiceController@update']);
-
-//Route::get('delete',['as'=>'delete','uses'=>'MuscleUpApp\ServiceController@destroy']);
-//Route::put('update/{id}',['as'=>'Update-service','uses'=>'MuscleUpApp\ServiceController@update']);
-
-
-/**
- * Events Routes
- */
-
-Route::get('create-event',['as'=>'create-event','uses' => 'MuscleUpApp\EventController@create']);
-Route::post('save-event/',['as'=>'save-event','uses'=>'MuscleUpApp\EventController@save']);
-Route::get('show-event/{event}',['as'=>'show-event','uses'=>'MuscleUpApp\EventController@retrieve']);
-Route::get('edit-event/{event}',['as'=>'edit-event','uses'=>'MuscleUpApp\EventController@edit']);
-Route::post('update-event/{event}',['as'=>'update-event','uses'=>'MuscleUpApp\EventController@update']);
-Route::get('delete-event/{event}',['as'=>'delete','uses'=>'MuscleUpApp\EventController@destroy']);
-Route::resource('events','MuscleUpApp\EventController');
-
-
 /**
  * Gym Request
  */
@@ -104,16 +55,6 @@ login form
 
 Route::get('/gym', ['as'=>'gym', 'uses'=>'MuscleUpApp\GymController@index']);
 Route::post('/gym/add', ['as'=>'add-gym', 'uses'=>'MuscleUpApp\GymController@add_gym']);
-
-//TraineePackage
-
-Route::get('traineepackage', ['as'=>'traineepackage','uses'=>'MuscleUpApp\TraineePackageController@traineepackage']);
-Route::get('/create/tpackage',['as'=>'create-tpackage','uses'=>'MuscleUpApp\TraineePackageController@create']);
-Route::post('/train/package',['as'=>'Save-tpackage','uses'=>'MuscleUpApp\TraineePackageController@store']);
-Route::get('show/trnpackage/{id}',['as'=>'show-trnpackage','uses'=>'MuscleUpApp\TraineePackageController@show']);
-Route::get('update-trpackage/{id}',['as'=>'update-trpackage','uses'=>'MuscleUpApp\TraineePackageController@edit']);
-Route::post('update-trpackage/{id}',['as'=>'update-trpackage','uses'=>'MuscleUpApp\TraineePackageController@update']);
-Route::get('delete-trnpackage/{id}',['as'=>'delete.package','uses'=>'MuscleUpApp\TraineePackageController@destroy']);
 
 /*
 Trainee
@@ -197,7 +138,8 @@ Route::get('/exercise',['as'=>'exercise','uses'=>'MuscleUpApp\ExerciseController
 
 
 
-/**** Employee
+/****
+ * Employee
  **/
 
 Route::get('instructor/add',['as'=>'instructor-add','uses'=>'MuscleUpApp\EmployeeController@create']);
