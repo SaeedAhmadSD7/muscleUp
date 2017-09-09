@@ -4,25 +4,28 @@ Auth::routes();
 
 Route::get('/logout', ['uses'=>'\App\Http\Controllers\Auth\LoginController@logout','as'=>'logout']);
 
-Route::group(['prefix'=>'gym','middleware' => 'usertype'],function () {
-    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
-});
-
-Route::group(['prefix'=>'admin','middleware' => 'usertype'],function () {
-    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
-});
-
-Route::group(['prefix'=>'trainee','middleware' => 'usertype'],function () {
-    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
-});
-
-Route::group(['prefix'=>'employee','middleware' => 'usertype','employee'],function () {
-    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
-});
+Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
 
 
-Route::get('/admin', 'Auth\AdminController@index');
-Route::get('/home', 'HomeController@index');
+//Route::group(['prefix'=>'gym','middleware' => 'usertype'],function () {
+//    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
+//});
+//
+//Route::group(['prefix'=>'admin','middleware' => 'usertype'],function () {
+//    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
+//});
+//
+//Route::group(['prefix'=>'trainee','middleware' => 'usertype'],function () {
+//    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
+//});
+//
+//Route::group(['prefix'=>'employee','middleware' => 'usertype','employee'],function () {
+//    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
+//});
+
+
+//Route::get('/admin', 'Auth\AdminController@index');
+//Route::get('/home', 'HomeController@index');
 
 
 

@@ -26,26 +26,25 @@ class AdminController extends Controller
     }
 
     public function request_accept($id){
+
         $Request =  GymRequest::find($id);
-        $Request_Accept = $Request->toArray();
+//        $Request_Accept = $Request->toArray();
+//
+//        $user = new User();
+//        $user->email = $Request_Accept['email'];
+//        $password = str_random(8);
+//        $user->password = bcrypt($password);
+//        $user['user-type'] = 'gym';
+//        $user->save();
 
-        $user = new User();
-        $user->email = $Request_Accept['email'];
-        $password = str_random(8);
-        $user->password = bcrypt($password);
-        $user['user-type'] = 'gym';
-        $user->save();
 
+//        $gym = new Gym($Request_Accept);
+//        $gym->user_id = $user->id;
+//        $gym->save();
+//        $Request->delete();
 
-        $gym = new Gym($Request_Accept);
-        $gym->user_id = $user->id;
-        $gym->open_time=10;
-        $gym->close_time=10;
-        $gym->save();
-        $Request->delete();
-
-        \Mail::to($Request)->send(new RequestGymRequest($Request->dial_code,$Request->email,$Request->phone_number,$password));
-        return redirect()->route('admin-dashboard');
+        \Mail::to($Request)->send(new RequestGymRequest($Request->dial_code,$Request->phone_number));
+        return redirect()->route('process-request',$Request->id);
     }
 }
 

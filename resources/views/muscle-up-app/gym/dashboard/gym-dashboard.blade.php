@@ -4,9 +4,9 @@
     Gym Dashboard
 @stop
 
-@section('user_type')
-    Gym
-@stop
+{{--@section('user_type')--}}
+    {{--Gym--}}
+{{--@stop--}}
 
 @section('sidebar_content')
     <li class="header"><span>Members Area</span></li>
@@ -55,4 +55,24 @@
             </ul>
         </div>
     </li>
+    <li class="menu-element">
+        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Diet Program</span></a>
+        <div class="sidebar-submenu">
+            <ul>
+                <li><a href="{{route('diet')}}" title="Inbox"><span>Add Diet Program</span></a></li>
+                <li><a href="{{route('show')}}" title="Inbox"><span>View Diet Program List</span></a></li>
+            </ul>
+        </div>
+    </li>
+    <li class="menu-element">
+        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Requests</span></a>
+        <div class="sidebar-submenu">
+            <ul>
+                <li>
+                    <a href="{{route('Admin-Inbox')}}" title="Inbox"><span>Inbox</span></a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
 @stop

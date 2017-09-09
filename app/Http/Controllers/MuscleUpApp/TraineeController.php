@@ -89,7 +89,7 @@ class TraineeController extends Controller
 
 
     public function inbox(){
-          $trainee = User ::all();
+          $trainee = User::where('type' ,'trainee')->get();
           return view('muscle-up-app.gym.trainee.trainee-list')->with('trainee', $trainee);
       }
 

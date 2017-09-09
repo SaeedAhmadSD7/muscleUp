@@ -2,6 +2,10 @@
 
 @section('title','Gym Request')
 
+@section('style-sheet')
+    <link href="{{url('/assets/plugins/select2/css/select2.css')}}" rel="stylesheet">
+    <link href="{{url('/assets/plugins/select2/css/select2-bootstrap.css')}}" rel="stylesheet">
+@stop
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger" role="alert">
@@ -76,4 +80,10 @@
             </div>
         </section>
     </div>
+@stop
+
+@section('script')
+    <script src="{{url('/assets/plugins/select2/js/select2.full.js')}}"></script>
+    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/request-gym.js')}}"></script>
 @stop

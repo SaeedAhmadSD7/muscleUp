@@ -1,18 +1,4 @@
-@extends('layouts.backend-main')
-@section('title')
-    Admin Inbox
-@stop
-
-@section('dashboard_link')
-    {{route('admin-dashboard')}}
-@stop
-@section('user_type')
-    Admin
-@stop
-
-@section('sidebar_content')
-
-@stop
+@extends('muscle-up-app.gym.dashboard.gym-dashboard')
 
 @section('content')
     <div class="row mailbox-wrapper">
@@ -231,7 +217,7 @@
                                     </tr>
                                 @endforeach
                                 </tbody>
-                            </table>
+                </table>
             </div>
         </div>
     </div>

@@ -24,7 +24,7 @@ class RequestGymRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|max:128|unique:gym_requests|unique:gym',
+//            'name'=>'required|max:128|unique:gym_requests|unique:gym',
             'email'=>'required|email|unique:gym_requests|unique:users',
             'num_branches'=>'integer|max:100',
             'country'=>'required',
