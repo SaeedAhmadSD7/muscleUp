@@ -24,7 +24,7 @@
         <div class="sidebar-submenu">
             <ul>
                 <li><a href="{{route('instructor-add')}}" title="Inbox"><span>Add Instructor</span></a></li>
-                <li><a href="{{route('show-instructor')}}" title="Inbox"><span>View Instructor List</span></a></li>
+                <li><a href="{{route('instructor-show')}}" title="Inbox"><span>View Instructor List</span></a></li>
             </ul>
         </div>
     </li>
