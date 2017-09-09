@@ -704,8 +704,8 @@
     <script src="{{url('/admin-assets/widgets/progressbar/progressbar.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/input-switch/inputswitch-alt.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/slidebars/slidebars.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/slidebars/slidebars-demo.js')}}" type="text/javascript"></script>
+    {{--<script src="{{url('/admin-assets/widgets/slidebars/slidebars.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{url('/admin-assets/widgets/slidebars/slidebars-demo.js')}}" type="text/javascript"></script>--}}
     <script src="{{url('/admin-assets/widgets/charts/piegage/piegage.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/charts/piegage/piegage-demo.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/screenfull/screenfull.js')}}" type="text/javascript"></script>
