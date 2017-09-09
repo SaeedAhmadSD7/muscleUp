@@ -10,7 +10,8 @@
     <link href="{{url('/admin-assets/images/icons/apple-touch-icon-144-precomposed.png')}}" rel="apple-touch-icon-precomposed" sizes="144x144">
     <link href="{{url('/admin-assets/images/icons/apple-touch-icon-114-precomposed.png')}}" rel="apple-touch-icon-precomposed" sizes="114x114">
     <link href="{{url('/admin-assets/images/icons/apple-touch-icon-72-precomposed.png')}}" rel="apple-touch-icon-precomposed" sizes="72x72">
-    <link href="{{url('/admin-assets/images/icons/apple-touch-icon-57-precomposed.png')}}" rel="apple-touch-icon-precomposed">
+    <link href="{{url('/admin-assets/images/icons/apple-touch-i
+    con-57-precomposed.png')}}" rel="apple-touch-icon-precomposed">
     <link href="{{url('/admin-assets/images/icons/favicon.png')}}" rel="shortcut icon">
     <link href="{{url('/admin-assets/helpers/animate.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/helpers/boilerplate.css')}}" rel="stylesheet" type="text/css">

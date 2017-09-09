@@ -112,9 +112,9 @@ class EmployeeController extends Controller
      */
     public function show()
     {
-         $instructors=Instructor::all();
+         $instructors=User::where('type','instructor')->get();
 
-        return view('muscle-up-app.instructor.show')->with('instructors',$instructors);
+        return view('muscle-up-app.instructor.instructor-list')->with('instructors',$instructors);
     }
     public function profileshow($id)
     {
