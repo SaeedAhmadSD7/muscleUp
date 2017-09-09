@@ -19,12 +19,10 @@ class RequestGymRequest extends Mailable
      *
      * @return void
      */
-    public function __construct($dial_code, $phone_number,$password,$email)
+    public function __construct($dial_code, $phone_number)
     {
         $this->phone_number = $phone_number;
         $this->dial_code = $dial_code;
-        $this->email = $email;
-        $this->password = $password;
     }
 
     /**
@@ -35,6 +33,6 @@ class RequestGymRequest extends Mailable
 
     public function build()
     {
-         return $this->from('admin@muscleup.com')->markdown('muscle-up-app.gym.add-email')->with(['dial_code'=>$this->dial_code,'phone_number'=>$this->phone_number,'email'=>$this->email,'password'=>$this->password]);
+         return $this->from('admin@muscleup.com')->markdown('muscle-up-app.gym.add-email')->with(['dial_code'=>$this->dial_code,'phone_number'=>$this->phone_number]);
     }
 }

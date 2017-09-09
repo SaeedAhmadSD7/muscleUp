@@ -36,22 +36,22 @@ class GymController extends Controller
     public function request_process($id)
     {
         $request =  GymRequest::find($id);
+        dd($request);
         $countries = Country::all();
         return view ('muscle-up-app.gym.post-add')->with(['countries'=>$countries,'GymData'=>$request]);
     }
 
     public function add_gym(Request $request){
-        GymRequest::where('email', $request->email)->delete();
-        dd($request);
-        $user= new User();
-        $user->email = $request->email;
-        $password = str_random(8);
-        $user->password = bcrypt($password);
-        $user['user-type'] = 'gym';
-        $user->save();
-        $gym = new Gym($request->all());
-        $gym->user_id = $user->id;
-        $gym->save();
+//        GymRequest::where('email', $request->email)->delete();
+//        $user= new User();
+//        $user->email = $request->email;
+//        $password = str_random(8);
+//        $user->password = bcrypt($password);
+//        $user['user-type'] = 'gym';
+//        $user->save();
+//        $gym = new Gym($request->all());
+//        $gym->user_id = $user->id;
+//        $gym->save();
 
 //        Mail::send(['text'=> $template_path ], $data, function($message) {
 //            // Set the receiver and subject of the mail.
@@ -60,8 +60,8 @@ class GymController extends Controller
 //            $message->from('hqayyum47@gmail.com','Our Code World');
 //        });
 //        Mail::to($user)->send(new Welcome);
-        Mail::to($user)->send(new AddGymRequest($user->email,$password));
-        Session::flash('success','Account Succesfully created and credentials have been mailed to the email you entered.');
-        return redirect()->route('admin-dashboard');
+//        Mail::to($user)->send(new AddGymRequest($user->email,$password));
+//        Session::flash('success','Account Succesfully created and credentials have been mailed to the email you entered.');
+//        return redirect()->route('admin-dashboard');
     }
 }
