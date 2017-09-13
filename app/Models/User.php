@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Faker\Provider\bn_BD\Utils;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -11,17 +12,7 @@ class User extends Authenticatable
 
     protected $table = 'users';
     protected $primaryKey = 'id';
-
-
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = ["email", "password","first_name","last_name","dial_code","phone_number","dob","gender"];
-
-    use Notifiable;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -31,6 +22,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    use Notifiable;
+
+    public static function showAll()
+    {
+        $users = User::all();
+        return $users;
+    }
+
 
     public static function saveUser($params){
 

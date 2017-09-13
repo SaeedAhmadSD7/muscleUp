@@ -129,6 +129,15 @@ Route::post('/program/update',['as'=>'update-program','uses'=>'MuscleUpApp\Progr
 Route::get('/program/delete/{id?}',['as'=>'delete-program','uses'=>'MuscleUpApp\ProgramController@destroy']);
 
 
+/****
+ Allocation of workout program to trainee
+ *
+ */
+Route::get('allocation',['as'=>'allocation','uses'=>'MuscleUpApp\AllocationController@create']);
+
+
+
+
 
 /*
  Exercise
