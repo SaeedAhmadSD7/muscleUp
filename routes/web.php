@@ -203,9 +203,13 @@ Route::get('/exercise',['as'=>'exercise','uses'=>'MuscleUpApp\ExerciseController
 Route::get('instructor/add',['as'=>'instructor-add','uses'=>'MuscleUpApp\EmployeeController@create']);
 Route::post('instructor/store',['as'=>'instructor-store','uses'=>'MuscleUpApp\EmployeeController@store']);
 Route::get('instructor/list',['as'=>'instructor-show','uses'=>'MuscleUpApp\EmployeeController@show']);
-Route::get('update-instructor/{id}',['as'=>'update-instructor','uses'=>'MuscleUpApp\EmployeeController@edit']);
-Route::post('update-instructor/{id}',['as'=>'update-instructor','uses'=>'MuscleUpApp\EmployeeController@update']);
-Route::get('delete-instructor/{id}',['as'=>'delete-instructor','uses'=>'MuscleUpApp\EmployeeController@destroy']);
+Route::get('instructor/edit/{id}',['as'=>'instructor-edit','uses'=>'MuscleUpApp\EmployeeController@edit']);
+Route::post('instructor/update/{id}',['as'=>'instructor-update','uses'=>'MuscleUpApp\EmployeeController@update']);
+Route::get('instructor/delete/{id}',['as'=>'instructor-delete','uses'=>'MuscleUpApp\EmployeeController@destroy']);
+
+
+
+
 Route::get('/instructor/dashboard', ['as'=>'instructor-dashboard', 'uses'=> 'MuscleUpApp\EmployeeController@index' ]);
 Route::get('profile', ['as'=>'profile', 'uses'=> 'MuscleUpApp\EmployeeController@profile' ]);
 Route::get('profileshow/{id}', ['as'=>'profile', 'uses'=> 'MuscleUpApp\EmployeeController@profileshow' ]);

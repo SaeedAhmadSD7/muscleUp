@@ -18,6 +18,12 @@ class Employee extends Model
         return $this->belongsTo(User::class);
     }
 
+    public static function showAll()
+    {
+        $employee = Employee::all();
+        return $employee;
+    }
+
 
 
 
