@@ -78,9 +78,31 @@
                                             @endforeach
                                         </select>
                                     </td>
+
                                 </tr>
                                 </tbody>
                             </table>
+
+                            <table id="assignedTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Select Start Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr id="tmpRow" class="fieldR">
+                                    <td>
+                                        <select class="form-control" name="" id="">
+
+                                        </select>
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+
+
+
                             <div style="float:right; margin-right: 300px;">
                                 <input type="submit" value="Submit" class="btn btn-success">
                             </div>
