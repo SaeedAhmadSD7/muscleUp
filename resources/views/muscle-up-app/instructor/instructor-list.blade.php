@@ -234,8 +234,12 @@
                             <td class="email-body">{{$instructor->email}}</td>
                             <td><i class="glyph-icon icon-paperclip"></i></td>
                             <td>{{$instructor->updated_at}}</td>
-                            <td><a type="submit" href="{{URL::to('update-instructor',array('id'=>$instructor->id))}}"><span class="fa fa-angle-right"></span>Edit</a></td>
-                            <td><a type="submit" href="{{URL::to('delete-instructor',array('id'=>$instructor->id))}}"><span class="fa fa-angle-right"></span>Delete</a></td>
+                            <td><a type="submit" href="{{route('instructor-edit',['id'=>$instructor->id])}}"><span class="fa fa-angle-right"></span>Edit</a></td>
+                            <td><a type="submit" href="{{route('instructor-delete',['id'=>$instructor->id])}}"><span class="fa fa-angle-right"></span>Delete</a></td>
+
+
+
+
 
                         </tr>
                     @endforeach

@@ -706,8 +706,6 @@
 
 
                                 <div class="float-right">
-                                    {{--<a class="btn btn-primary" href="#" title="Reply">Reply <i class="glyph-icon icon-mail-reply"></i></a> <a class="btn btn-default" href="#" title="Print"><i class="glyph-icon icon-print"></i></a>--}}
-                                    {{--<a class="btn btn-danger mrg10L" href="{{route('trainee-list-delete',$trainee->id)}}" title="Delete"><i class="glyph-icon icon-trash-o"></i></a>--}}
                                     {!! Form::open(['route' => ['trainee-list-delete',$trainee->id], 'method' => 'DELETE']) !!}
                                     <button class="btn btn-danger mrg10L" type="button" data-modal="confirmDelete" data-toggle="modal" data-target="#confirmDelete" data-title="Delete trainee" data-message="Are you sure you want to Delete : {{$trainee->first_name}}">
                                         DELETE</button>

@@ -51,6 +51,6 @@ class User extends Authenticatable
         return $this->hasOne(trainee::class);
     }
     function employee(){
-        return$this->hasMany(Employee::class);
+        return $this->hasMany(Employee::class);
     }
 }

@@ -80,17 +80,16 @@ class EmployeeController extends Controller
         $password = str_random(8);
         $user->password = bcrypt($password);
         $user['type'] = 'instructor';
-//        $user->user_id = $user->id;
         $user->first_name=$request->first_name;
         $user->last_name=$request->last_name;
         $user->dial_code = '+27';
         $user->phone_number=$request->phone_number;
         $user->dob=$request->dob;
         $user->gender =$request->gender;
-//        $user->address=$request->address;
         $user->save();
 
         $instructor = new  Employee();
+        $instructor->user_id=$user->id;
         $instructor->joining_date=$request->joining_date;
         $instructor->quit_date=$request->quit_date;
         $instructor->previous_salary=$request->previous_salary;
@@ -101,7 +100,7 @@ class EmployeeController extends Controller
 
         Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
         Session::flash('Success','Save Successfully');
-        return redirect()->route('instructor-add');
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -131,8 +130,11 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $instructor=instructor::find($id);
-        return view('muscle-up-app.instructor.update')->with('instructor',$instructor);
+        $instructor = User::find($id);
+        $employee= Employee::where('user_id','=',$id)->first();
+//        dd($employee);
+
+        return view('muscle-up-app.instructor.edit-instructor-info', compact('instructor','employee'));
     }
 
     /**
@@ -145,21 +147,29 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
 
-        $instructor = Employee::find($id);
-        $instructor->first_name=$request->first_name;
-        $instructor->last_name=$request->last_name;
-        $instructor->dial_code = '+45';
-        $instructor->phone_number=$request->phone_number;
-//        $instructor->exp_years=$request->exp_years;
-//        $instructor->exp_desc=$request->exp_desc;
-        $instructor->birth_date=$request->birth_date;
-//        $instructor->gender =$request->gender;
-        $instructor->address=$request->address;
+        $user = User::find($id);
+        $user->first_name=$request->input('first_name');
+        $user->last_name=$request->input('last_name');
+        $user->dial_code = '+45';
+        $user->phone_number=$request->input('phone_number');
+        $user->dob=$request->input('dob');
+        $user->gender =$request->input('gender');
+        $user->save();
+
+        $instructor= Employee::where('user_id','=',$id)->first();
+
+        $instructor->joining_date=$request->input('joining_date');
+        $instructor->quit_date=$request->input('quit_date');
+        $instructor->previous_salary=$request->input('previous_salary');
+        $instructor->joining_salary=$request->input('joining_salary');
+        $instructor->exp_years=$request->input('exp_years');
+        $instructor->exp_description=$request->input('exp_description');
         $instructor->save();
+
 
         Session::flash('Success','Update Successfully');
 
-        return redirect()->route('show-instructor');
+        return redirect()->route('instructor-show');
     }
 
     /**
@@ -170,10 +180,10 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $instructor=Instructor::find($id);
+        $instructor=User::find($id);
         $instructor->delete();
-//        dd($service);
-//        Session::flash('Success','Delete Successfully');
-        return redirect()->route('show-instructor');
+        $employee = Employee::where('user_id', '=', $id);
+        $employee->delete();
+        return redirect()->route('instructor-show');
     }
 }
