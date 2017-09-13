@@ -28,7 +28,7 @@ class CreateTraineeActivitiesTable extends Migration
 
             $table->smallInteger('set');
             $table->smallInteger('rep');
-            $table->integer('rep');
+            $table->time('rest');
 
             $table->integer('quantity');
             $table->text('calories');

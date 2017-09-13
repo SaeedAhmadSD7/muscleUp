@@ -115,9 +115,10 @@ Route::get('update-trpackage/{id}',['as'=>'update-trpackage','uses'=>'MuscleUpAp
 Route::post('update-trpackage/{id}',['as'=>'update-trpackage','uses'=>'MuscleUpApp\TraineePackageController@update']);
 Route::get('delete-trnpackage/{id}',['as'=>'delete.package','uses'=>'MuscleUpApp\TraineePackageController@destroy']);
 
-/*
+/***
 Trainee
  */
+
 //Route::get('trainee',['as'=>'trainee','uses'=>'MuscleUpApp\TraineeController@create_trainee']);
 
 Route::get('/trainee/dashboard', ['as'=>'trainee-dashboard', 'uses'=> 'MuscleUpApp\TraineeController@index' ]);
@@ -136,7 +137,7 @@ Route::post('trainee/profile/image',['as'=>'trainee-image','uses'=>'MuscleUpApp\
 
 
 
-/*
+/***
  Trainee Medical History
  */
 Route::get('trainee/medical',['as'=>'trainee-medical','uses'=>'MuscleUpApp\TraineeController@medical']);
@@ -146,7 +147,7 @@ Route::get('trainee/medical/edit/{id}',['as'=>'edit-trainee-medical','uses'=>'Mu
 Route::post('trainee/medical/update/{id}',['as'=>'trainee-medical-update','uses'=>'MuscleUpApp\TraineeController@medical_history_update']);
 
 
-/*
+/***
  Admin-panel
 */
 Route::get('/admin/dashboard',['as'=>'admin-dashboard','uses'=>'MuscleUpApp\AdminController@index']);
@@ -186,6 +187,15 @@ Route::get('/program/list',['as'=>'show-program','uses'=>'MuscleUpApp\ProgramCon
 Route::get('/program/edit/{id?}',['as'=>'edit-program','uses'=>'MuscleUpApp\ProgramController@edit']);
 Route::post('/program/update',['as'=>'update-program','uses'=>'MuscleUpApp\ProgramController@update']);
 Route::get('/program/delete/{id?}',['as'=>'delete-program','uses'=>'MuscleUpApp\ProgramController@destroy']);
+
+
+/****
+ Allocation of workout program to trainee
+ *
+ */
+Route::get('allocation',['as'=>'allocation','uses'=>'MuscleUpApp\AllocationController@create']);
+
+
 
 
 
