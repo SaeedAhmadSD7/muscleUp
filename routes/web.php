@@ -225,3 +225,10 @@ Route::post('/wbs/store',['uses'=>'MuscleUpApp\WbsController@store','as'=>'wbs-s
 Route::get('/wbs/edit/{wbs}',['uses'=>'MuscleUpApp\WbsController@edit','as'=>'wbs-edit']);
 Route::post('/wbs/update/',['uses'=>'MuscleUpApp\WbsController@update','as'=>'wbs-update']);
 Route::get('/wbs/delete/{wbs}',['uses'=>'MuscleUpApp\WbsController@destroy','as'=>'wbs-delete']);
+
+
+/***
+ * Trainee Activities
+ */
+
+Route::get('/trainee/activities',['uses'=>'MuscleUpApp\TraineeActivityController@index','as'=>'trainee-activities']);

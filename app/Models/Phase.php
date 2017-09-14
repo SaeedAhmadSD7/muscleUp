@@ -10,23 +10,18 @@ class Phase extends Model
     protected $primaryKey = 'id';
     public $fillable = ['title','description'];
 
-    public function program_detail()
-    {
-        return $this->belongsToMany(ProgramDetail::class,'program_phases','phase_id','program_detail_id');
+    public function program(){
+        return $this->belongsToMany(Program::class,'programs_phases','phase_id','program_id');
     }
 
-    public function day()
-    {
-        return $this->belongsToMany(Day::class,'phase_details','phase_id','day_id');
+
+    public function day(){
+        return $this->belongsToMany(Day::class,'programs_phases','phase_id','program_id');
     }
 
     public function phase_detail()
     {
         return $this->hasOne(PhaseDetail::class);
-    }
-    public function programPhase()
-    {
-        return $this->hasMany(ProgramPhase::class);
     }
 
     public static function showAll()

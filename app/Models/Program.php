@@ -10,9 +10,11 @@ class Program extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['title','description'];
 
-    public function program_phase(){
-        return $this->hasMany(ProgramPhase::class);
+
+    public function phase() {
+        return $this->belongsToMany(Phase::class,'programs_phases','program_id','phase_id');
     }
+
 
     public static function showAll()
     {
