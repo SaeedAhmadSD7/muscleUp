@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
+use App\Models\Allocation;
 use App\Models\DietPlan;
 use App\Models\Phase;
 use App\Models\Program;
@@ -42,6 +43,10 @@ class AllocationController extends Controller
      */
     public function store(Request $request)
     {
+        Allocation::create($request->all());
+
+        return redirect()->route('show-allocation');
+
     }
 
     /**
@@ -50,9 +55,15 @@ class AllocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $allocations = Allocation::showAll();
+//        $user = User::where('type','=','trainee')->first();
+//        dd($user);
+        $program = Program::showAll();
+        return view('muscle-up-app.allocation.show-allocation-list',compact('allocations','program'));
+
+
     }
 
     /**

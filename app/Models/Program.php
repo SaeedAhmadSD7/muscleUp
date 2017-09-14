@@ -14,6 +14,10 @@ class Program extends Model
         return $this->hasMany(ProgramPhase::class);
     }
 
+    public function allocation(){
+        return $this->hasMany(Allocation::class);
+    }
+
     public static function showAll()
     {
         $programs = Program::all();

@@ -7,7 +7,7 @@
     <link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/timepicker/timepicker.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
     <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/css/diet.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/icons/typicons/typicons.css')}}" rel="stylesheet" type="text/css">
@@ -25,7 +25,7 @@
     <div class="panel">
         <div class="panel-body">
             <div class="example-box-wrapper">
-                <form class="form-group diet-program form-horizontal bordered-row" id="form-field" method="post" action="">
+                <form class="form-group diet-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('allocation_store')}}">
                     {{csrf_field()}}
                     <div class="tab-content">
                         <div class="form-wizard" id="form-wizard-3">
@@ -41,7 +41,7 @@
                                 <tbody>
                                 <tr id="tmpRow" class="fieldR">
                                     <td>
-                                        <select class="form-control" name="" id="">
+                                        <select class="form-control" name="trainee_id" id="">
                                             <option value="0">Select Trainee:</option>
                                             @foreach($users as $user)
                                                 <option value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
@@ -49,7 +49,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select class="form-control" name="" id="">
+                                        <select class="form-control" name="program_id" id="">
                                             <option value="0">Select Program:</option>
                                             @foreach($programs as $program)
                                                 <option value="{{$program->id}}">{{$program->title}}</option>
@@ -71,7 +71,7 @@
                                 <tbody>
                                 <tr id="tmpRow" class="fieldR">
                                     <td>
-                                        <select class="form-control" name="" id="">
+                                        <select class="form-control" name="diet_plans_id" id="">
                                             <option value="0">Diet Plan:</option>
                                             @foreach($diets as $diet)
                                                 <option value="{{$diet->id}}">{{$diet->name}}</option>
@@ -86,15 +86,15 @@
                             <table id="assignedTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Select Start Date</th>
+                                    <th>Enter Start Date</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr id="tmpRow" class="fieldR">
                                     <td>
-                                        <select class="form-control" name="" id="">
+                                        <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="start_date" value="" placeholder="Enter start date" readonly>
+                                        <div class="btn-date"></div>
 
-                                        </select>
                                     </td>
 
                                 </tr>
@@ -117,5 +117,7 @@
 
 @section('script')
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/allocation.js')}}" type="text/javascript"></script>
+
 @stop

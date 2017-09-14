@@ -53,4 +53,9 @@ class User extends Authenticatable
     function employee(){
         return $this->hasMany(Employee::class);
     }
+    public function allocation()
+    {
+        return $this->hasOne(Allocation::class);
+    }
+
 }
