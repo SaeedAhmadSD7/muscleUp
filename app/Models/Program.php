@@ -12,7 +12,7 @@ class Program extends Model
 
 
     public function phase() {
-        return $this->belongsToMany(Phase::class,'programs_phases','program_id','phase_id');
+        return $this->belongsToMany(Phase::class,'programs_phases','program_id','phase_id')->withTimestamps();
     }
 
 
@@ -22,30 +22,18 @@ class Program extends Model
         return $programs;
     }
 
-    public static function create_program($request){
+    public static function create_program($request)
+    {
 
-        $program=new Program();
-        $program->title = $request->title;
-        $program->description = $request->description;
+        $program = new Program($request->all());
         $program->save();
-        $program_id = $program->id;
-        $list=array();
-        $phase=array();
-
-
-        $count=0;
-        foreach($request->input('phase_id') as $phase_id){
-            $phase[]=$phase_id;
-            $count++;
+        $phase = array();
+        foreach ($request->phase_id as $program_phase) {
+            $phase['program_id'] = $program->id;
+            $phase['phase_id'] = $program_phase;
         }
-        $list['phase']=$phase;
 
-        for($i=0;$i<$count;$i++){
-            $programPhase=new ProgramPhase();
-            $programPhase->program_id= $program_id;
-            $programPhase->phase_id = $list['phase'][$i];
-            $programPhase->save();
-        }
+        $program->phase()->attach($phase);
     }
 
     public static function updateProgram($request)
@@ -53,39 +41,22 @@ class Program extends Model
         $program = self::find($request->id);
         $program->title = $request->title;
         $program->description = $request->description;
-        $program->update();
-        $program_id = $program->id;
-        $list=array();
-        $phase=array();
+        $program->save();
 
-
-        $count = 0;
-        foreach ($request->input('phase_id') as $phase_id) {
-            $phase[] = $phase_id;
-            $count++;
+        $phase = array();
+        foreach ($request->phase_id as $program_phase) {
+            $phase['program_id'] = $program->id;
+            $phase['phase_id'] = $program_phase;
         }
-        $list['phase'] = $phase;
+        $program->phase()->sync($phase);
+//        $program_id = $program->id;
 
 
-        $programPhase= ProgramPhase::where('program_id', '=', $request->id)->get();
-        $row= ($programPhase)->count();
-        for ($i = 0; $i < $count; $i++) {
-
-            if($i < $row) {
-                $programPhase[$i]->program_id= $program_id;
-                $programPhase[$i]->phase_id = $list['phase'][$i];
-                $programPhase[$i]->save();
-
-            }else{
-                $programPhase = new ProgramPhase();
-                $programPhase->program_id= $program_id;
-                $programPhase->phase_id = $list['phase'][$i];
-                $programPhase->save();
-
-            }
-        }
-
+//        $list=array();
+//        $phase=array();
     }
+
+
     public static function deleteProgram($id){
         $program = self::find($id);
         $program->delete();

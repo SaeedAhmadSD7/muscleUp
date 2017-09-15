@@ -16,9 +16,10 @@ class TraineeActivityController extends Controller
      */
     public function index()
     {
-        $trainee = Auth::user();
-        $program = Phase::with('day');
-//        dd($program->phase);
+//        $trainee = Trainee::find('1');
+//        Allocation::where('')
+        $program = Program::with('Phase')->find('1');
+        dd($program->phase);
 
     }
 

@@ -64,9 +64,12 @@ class ProgramController extends Controller
     public function edit($id)
     {
         $program = Program::find($id);
-        $programPhases = ProgramPhase::where('program_id', '=', $id)->get();
+//        $program->phase();
+        dd($program->phase);
+//        $programPhases = ProgramPhase::where('program_id', '=', $id)->get();
         $phases= Phase::showAll();
-        return view('muscle-up-app.program.edit-program',compact('program','programPhases','phases'));    }
+        return view('muscle-up-app.program.edit-program')->with(['program'=>$program,'phases'=>$phases]);
+    }
 
     /**
      * Update the specified resource in storage.

@@ -11,12 +11,12 @@ class Phase extends Model
     public $fillable = ['title','description'];
 
     public function program(){
-        return $this->belongsToMany(Program::class,'programs_phases','phase_id','program_id');
+        return $this->belongsToMany(Program::class,'programs_phases','phase_id','program_id')->withTimestamps();
     }
 
 
     public function day(){
-        return $this->belongsToMany(Day::class,'programs_phases','phase_id','program_id');
+        return $this->belongsToMany(Day::class,'programs_phases','phase_id','program_id')->withTimestamps();
     }
 
     public function phase_detail()
