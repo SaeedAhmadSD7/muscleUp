@@ -18,7 +18,7 @@ class CreateAllocationsTable extends Migration
             $table->integer('trainee_id');
             $table->integer('instructor_id')->nullable();
             $table->integer('program_id');
-            $table->integer('diet_plans_id');
+            $table->integer('diet_plan_id');
             $table->date('start_date');
             $table->softDeletes();
             $table->timestamps();

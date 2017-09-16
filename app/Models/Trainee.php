@@ -6,7 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Trainee extends Model
 {
-    protected $fillable = [];
+    protected $table = 'trainees';
+    protected $primaryKey = 'id';
+    protected $fillable = ["branch_id", "user_id","weight","height","bmi","bfp"];
+
+    public function user(){
+        return $this->belongsTo(user::class);
+    }
+
 
     public function gym(){
         return $this-> belongsTo( Gym:: class);
@@ -21,49 +28,6 @@ class Trainee extends Model
         return $this->hasMany(FeeInvoice:: class);
     }
 
-    public function deals()
-    {
-        return $this->hasOne(Deal:: class);
-    }
-
-    public function services()
-    {
-        return $this->hasMany(Service:: class);
-    }
-
-    public function userType()
-    {
-        return $this->belongsTo(UserType:: class);
-    }
-
-    public function wpAssign()
-    {
-        return $this->hasOne(WpAssign:: class);
-    }
-
-    public function wpDayDetail()
-    {
-        return $this->hasMany(WpDayDetail:: class);
-    }
-
-    public function batches()
-    {
-        return $this->belongsToMany(Batch:: class);
-    }
-
-    public function bootCamp()
-    {
-        return $this->belongsToMany(BootCamp:: class);
-    }
-
-    public function measurements()
-    {
-        return $this->hasOne(Measurement:: class);
-    }
-    public function user(){
-        return $this->belongsTo(user::class);
-    }
-
     public function instructor()
     {
         return $this->belongsTo(Instructor::Class);
@@ -75,5 +39,9 @@ class Trainee extends Model
     public function workout(){
         return $this->hasOne(Workout::class);
 
+    }
+    public function allocation()
+    {
+        return $this->hasOne(Allocation::class);
     }
 }

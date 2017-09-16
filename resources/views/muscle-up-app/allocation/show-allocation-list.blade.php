@@ -31,30 +31,38 @@
                         <th width="20px">No.</th>
                         <th style="text-align:center;" width="140px">Trainee Name</th>
                         <th style="text-align:center;">Program</th>
+                        <th style="text-align:center;">Diet Plan</th>
                         <th width="20px">Edit</th>
                         <th width="20px">Delete</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php $count = 1 ; ?>
-                    @foreach($allocations as $allocation)
-                        <tr>
-                            <td width="20px" style="text-align:center;"><h5> <?php echo $count; ?> </h5></td>
-                            <td width="140px" style="text-align:center;"><h5>{{$allocation->trainee_id}}</h5></td>
-                            <td><h5>{{$allocation->program_id}}</h5></td>
-                            <td width="20px">
+                    @for($i = 0 ; $i < count($programs); $i++ )
+                    <tr>
+                        <td width="20px" style="text-align:center;"><h5> <?php echo $count; ?> </h5>
+                        </td>
+                        <td width="140px" style="text-align:center;"><h5>{{$trainees[$i]->user->first_name}} {{$trainees[$i]->user->last_name}}</h5>
+                        </td>
+                        <td>
+                                <h5>{{$programs[$i]->program->title}}</h5>
+                        </td>
+                        <td>
+                            <h5>{{$diets[$i]->diet_plan->name}}</h5>
+                        </td>
+                        <td width="20px">
                                 <form method="get" action="">
                                     <button class="btn btn-primary" type="submit"><span class="glyphicon icon-elusive-pencil"></span></button>
                                 </form>
-                            </td>
-                            <td width="20px">
+                        </td>
+                        <td width="20px">
                                 <form method="get" action="">
                                     <button class="btn btn-danger" type="submit"><span class="glyphicon icon-typicons-cancel"></span></button>
                                 </form>
-                            </td>
+                        </td>
                         </tr>
-                        <?php $count++; ?>
-                    @endforeach
+                    <?php $count++; ?>
+                        @endfor
                     </tbody>
                 </table>
             </div>

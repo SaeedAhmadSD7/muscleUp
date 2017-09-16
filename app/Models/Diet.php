@@ -17,4 +17,6 @@ class Diet extends Model
     public function diet_detail(){
         $this->hasMany(DietDetail::class);
     }
+
+
 }

@@ -6,6 +6,7 @@ use App\Models\Allocation;
 use App\Models\DietPlan;
 use App\Models\Phase;
 use App\Models\Program;
+use App\Models\Trainee;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -57,11 +58,14 @@ class AllocationController extends Controller
      */
     public function show()
     {
-        $allocations = Allocation::showAll();
-//        $user = User::where('type','=','trainee')->first();
-//        dd($user);
-        $program = Program::showAll();
-        return view('muscle-up-app.allocation.show-allocation-list',compact('allocations','program'));
+        $trainees = Trainee::with('allocation')->get();
+        $trainees->load('user');
+        $programs=Allocation::with('program')->get();
+        $diets= Allocation::with('diet_plan')->get();
+//        $diets->load('dietPlan');
+//         dd($diets[0]->diet_plan);
+//        dd($diets);
+        return view('muscle-up-app.allocation.show-allocation-list',compact('trainees','programs','diets'));
 
 
     }
