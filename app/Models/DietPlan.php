@@ -6,12 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class DietPlan extends Model
 {
+    protected $table= 'diet_plans';
+    protected $primaryKey = 'id';
     protected $fillable = ['name','status','description'];
 
     public function DietPlanDetail(){
         return $this->hasMany(DietPlanDetail::class);
     }
 
+    public function allocation(){
+        return $this->hasMany(Allocation::class);
+    }
     public static function showAll()
     {
         $plans = DietPlan::all();

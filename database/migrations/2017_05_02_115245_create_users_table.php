@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password',256);
             $table->string('first_name',35);
             $table->string('last_name',35);
-            $table->dateTime('dob');
+            $table->date('dob');
             $table->enum('gender',['male','female']);
             $table->integer('dial_code')->default('1')->unsigned();
             $table->integer('phone_number')->unsigned();

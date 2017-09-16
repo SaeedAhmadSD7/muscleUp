@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Trainee extends Model
 {
-    protected $fillable = [];
+    protected $table = 'trainees';
+    protected $primaryKey = 'id';
+    protected $fillable = ["branch_id", "user_id","weight","height","bmi","bfp"];
 
-
-    public function trainee_activities() {
-        return $this->hasOne(TraineeActivity::class);
+    public function user(){
+        return $this->belongsTo(user::class);
     }
+
 
     public function gym(){
         return $this-> belongsTo( Gym:: class);
@@ -26,22 +28,20 @@ class Trainee extends Model
         return $this->hasMany(FeeInvoice:: class);
     }
 
-    public function user()
+    public function instructor()
     {
-        return $this->belongsTo(User:: class);
-    }
-
-    public function measurements()
-    {
-        return $this->hasOne(Measurement:: class);
+        return $this->belongsTo(Instructor::Class);
     }
 
     public function medicalhistory(){
         return $this->hasOne(MedicalHistory::class);
     }
-
     public function workout(){
         return $this->hasOne(Workout::class);
 
+    }
+    public function allocation()
+    {
+        return $this->hasOne(Allocation::class);
     }
 }

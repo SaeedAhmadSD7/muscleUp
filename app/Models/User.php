@@ -47,10 +47,14 @@ class User extends Authenticatable
     function Gym(){
         return $this->belongsTo(Gym::class);
     }
+
     function trainee(){
-        return $this->hasOne(trainee::class);
+        return $this->hasOne(Trainee::class);
     }
+
     function employee(){
-        return $this->hasMany(Employee::class);
+        return $this->hasOne(Employee::class);
     }
+
+
 }

@@ -1,5 +1,5 @@
 @extends('layouts.backend-main')
-@section('title','Phase of program')
+@section('title','List of allocated program')
 @section('style-sheet')
     <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
@@ -16,12 +16,12 @@
 @section('content')
 
     <div id="page-title">
-        <h2>Phase Program List</h2>
+        <h2>Allocate program to trainee </h2>
     </div>
 
     <div class="panel">
-        <form method="get" action="{{route('phase')}}">
-            <button class="btn btn-success" type="submit">New Phase<span class="glyphicon glyphicon-plus"></span></button>
+        <form method="get" action="{{route('allocation')}}">
+            <button class="btn btn-success" type="submit">Allocation<span class="glyphicon glyphicon-plus"></span></button>
         </form>
         <div class="panel-body">
             <div class="example-box-wrapper">
@@ -29,32 +29,40 @@
                     <thead>
                     <tr>
                         <th width="20px">No.</th>
-                        <th style="text-align:center;" width="140px">Phase Name</th>
-                        <th style="text-align:center;">Description</th>
+                        <th style="text-align:center;" width="140px">Trainee Name</th>
+                        <th style="text-align:center;">Program</th>
+                        <th style="text-align:center;">Diet Plan</th>
                         <th width="20px">Edit</th>
                         <th width="20px">Delete</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php $count = 1 ; ?>
-                    @foreach($phases as $phase)
-                        <tr>
-                            <td width="20px" style="text-align:center;"><h5> <?php echo $count; ?> </h5></td>
-                            <td width="140px" style="text-align:center;"><h5>{{$phase->title}}</h5></td>
-                            <td><h5>{{$phase->description}}</h5></td>
-                            <td width="20px">
-                                <form method="get" action="{{route('edit-phase',['id'=>$phase->id])}}">
+                    @for($i = 0 ; $i < count($programs); $i++ )
+                    <tr>
+                        <td width="20px" style="text-align:center;"><h5> <?php echo $count; ?> </h5>
+                        </td>
+                        <td width="140px" style="text-align:center;"><h5>{{$trainees[$i]->user->first_name}} {{$trainees[$i]->user->last_name}}</h5>
+                        </td>
+                        <td>
+                                <h5>{{$programs[$i]->program->title}}</h5>
+                        </td>
+                        <td>
+                            <h5>{{$diets[$i]->diet_plan->name}}</h5>
+                        </td>
+                        <td width="20px">
+                                <form method="get" action="">
                                     <button class="btn btn-primary" type="submit"><span class="glyphicon icon-elusive-pencil"></span></button>
                                 </form>
-                            </td>
-                            <td width="20px">
-                                <form method="get" action="{{route('delete-phase',['id'=>$phase->id])}}">
+                        </td>
+                        <td width="20px">
+                                <form method="get" action="">
                                     <button class="btn btn-danger" type="submit"><span class="glyphicon icon-typicons-cancel"></span></button>
                                 </form>
-                            </td>
+                        </td>
                         </tr>
-                        <?php $count++; ?>
-                    @endforeach
+                    <?php $count++; ?>
+                        @endfor
                     </tbody>
                 </table>
             </div>
