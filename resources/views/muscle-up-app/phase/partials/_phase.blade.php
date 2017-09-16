@@ -4,7 +4,7 @@
     </td>
     <td>
         <select class="form-control day_name"  name="day_id[]" id="">
-            <option value="{{$phaseDetail->day_id}}">{{$phaseDetail->day->title}}</option>
+            <option value="{{$day->day_id}}">{{$day->title}}</option>
             @foreach($days as $day)
                 <option  value="{{$day->id}}">{{$day->title}}</option>
             @endforeach
@@ -12,9 +12,9 @@
     </td>
     <td>
         <select class="form-control" name="wbs_id[]" id="">
-            <option value="{{$phaseDetail->wbs_id}}">{{$phaseDetail->wbs->title}}</option>
-            @foreach($Wbs as $wbs)
-                <option value="{{$wbs->id}}">{{$wbs->title}}</option>
+            <option value="{{$day->wbs_id}}">{{$day->title}}</option>
+            @foreach($wbs as $wbs_list)
+                <option value="{{$wbs_list->id}}">{{$wbs_list->title}}</option>
             @endforeach
         </select>
     </td>

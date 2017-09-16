@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Program extends Model
-{
+class Program extends Model {
+
     protected $table= 'programs';
     protected $primaryKey = 'id';
     protected $fillable = ['title','description'];
@@ -22,46 +22,25 @@ class Program extends Model
         return $programs;
     }
 
-    public static function create_program($request)
+    public static function createUpdateProgram($formData)
     {
-
-        $program = new Program($request->all());
-        $program->save();
-        $phase = array();
-        foreach ($request->phase_id as $program_phase) {
-            $phase['program_id'] = $program->id;
-            $phase['phase_id'] = $program_phase;
+        if(array_key_exists('id',$formData)) {
+            $program = Program::find($formData['id']);
+        } else {
+            $program = new Program();
         }
 
-        $program->phase()->attach($phase);
-    }
-
-    public static function updateProgram($request)
-    {
-        $program = self::find($request->id);
-        $program->title = $request->title;
-        $program->description = $request->description;
+        $program->title = $formData['title'];
+        $program->description = $formData['description'];
         $program->save();
-
-        $phase = array();
-        foreach ($request->phase_id as $program_phase) {
-            $phase['program_id'] = $program->id;
-            $phase['phase_id'] = $program_phase;
-        }
-        $program->phase()->sync($phase);
-//        $program_id = $program->id;
-
-
-//        $list=array();
-//        $phase=array();
+        $program->phase()->sync($formData['phase_id']);
     }
+
 
 
     public static function deleteProgram($id){
         $program = self::find($id);
+        $program->phase()->detach();
         $program->delete();
-        $programPhase = ProgramPhase::where('program_id', '=', $id);
-        $programPhase->delete();
     }
-
 }

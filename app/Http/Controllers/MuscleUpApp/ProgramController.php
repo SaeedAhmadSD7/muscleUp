@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
-use App\Models\Phase;
-use App\Models\Program;
-use App\Models\ProgramPhase;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Models\Program;
+use App\Models\Phase;
 
 class ProgramController extends Controller
 {
@@ -39,9 +38,11 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
-        Program::create_program($request);
+        $formData = $request->all();
+        Program::createUpdateProgram($formData);
         return redirect()->route('show-program');
     }
+
 
     /**
      * Display the specified resource.
@@ -52,8 +53,9 @@ class ProgramController extends Controller
     public function show()
     {
         $programs=Program::showAll();
-        return view('muscle-up-app.program.list-program',compact('programs'));
+        return view('muscle-up-app.program.list-program')->with('programs',$programs);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -64,12 +66,11 @@ class ProgramController extends Controller
     public function edit($id)
     {
         $program = Program::find($id);
-//        $program->phase();
-        dd($program->phase);
-//        $programPhases = ProgramPhase::where('program_id', '=', $id)->get();
+        $program->phase;
         $phases= Phase::showAll();
         return view('muscle-up-app.program.edit-program')->with(['program'=>$program,'phases'=>$phases]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -80,7 +81,8 @@ class ProgramController extends Controller
      */
     public function update(Request $request)
     {
-        Program::updateProgram($request);
+        $formData = $request->all();
+        Program::createUpdateProgram($formData);
         return redirect()->route('show-program');
 
     }

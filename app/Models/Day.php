@@ -10,9 +10,9 @@ class Day extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['title'];
 
-    public function phase(){
 
-        return $this->belongsTo(Phase::class);
+    public function day() {
+        return $this->belongsToMany(Day::class,'phase_details','day_id','phase_id')->withPivot('wbs_id')->withTimestamps();
     }
 
     public static function showAll()
@@ -20,9 +20,4 @@ class Day extends Model
         $days = Day::all();
         return $days;
     }
-    public function phaseDetails()
-    {
-        return $this->hasMany(PhaseDetail::class);
-    }
-
 }

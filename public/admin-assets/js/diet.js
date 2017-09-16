@@ -52,4 +52,10 @@ $(document).ready(function () {
         var newCal = cal * qty;
         $(this).parent().siblings('#caloryRow').find('#calories').val(newCal);
     });
+
+    // console.log();
+    //
+    $('.day_name').each( function () {
+       $(this).val($(this).attr('data-value'));
+    });
 });

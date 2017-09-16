@@ -32,8 +32,8 @@
                 <td>
                     <select class="form-control food_name" id="" name="day_id[]">
                         <option value="0">Select Work BreakDown:</option>
-                        @foreach($Wbs as $wbs)
-                            <option value="{{$wbs->id}}">{{$wbs->title}}</option>
+                        @foreach($wbs as $wbs_list)
+                            <option value="{{$wbs_list->id}}">{{$wbs_list->title}}</option>
                         @endforeach
                     </select>
                 </td>
@@ -86,7 +86,7 @@
                                 <tbody>
 
                                 <?php $count = 1;?>
-                                @foreach($phaseDetails as $phaseDetail)
+                                @foreach($phase->day as $day)
                                     @include('muscle-up-app.phase.partials._phase')
                                     <?php $count++; ?>
                                 @endforeach

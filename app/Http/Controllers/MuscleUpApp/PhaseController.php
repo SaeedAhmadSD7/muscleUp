@@ -41,7 +41,8 @@ class PhaseController extends Controller
      */
     public function store(Request $request)
     {
-        Phase::create_phase($request);
+        $formData = $request->all();
+        Phase::createUpdatePhase($formData);
         return redirect()->route('show-phase');
 
 
@@ -69,10 +70,11 @@ class PhaseController extends Controller
     public function edit($id)
     {
         $phase = Phase::find($id);
-        $phaseDetails = PhaseDetail::where('phase_id', '=', $id)->get();
+        $phase->day;
         $days= Day::showAll();
-        $Wbs= Wbs::showAll();
-        return view('muscle-up-app.phase.edit-phase',compact('phase','phaseDetails','days','Wbs'));
+        $wbs= Wbs::showAll();
+
+        return view('muscle-up-app.phase.edit-phase')->with(['phase'=>$phase,'days'=>$days,'wbs'=>$wbs]);
     }
 
     /**
@@ -84,7 +86,7 @@ class PhaseController extends Controller
      */
     public function update(Request $request)
     {
-        Phase::update_phase($request);
+        Phase::createUpdatePhase($request);
         return redirect()->route('show-phase');
     }
 
