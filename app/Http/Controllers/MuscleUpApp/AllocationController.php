@@ -58,13 +58,12 @@ class AllocationController extends Controller
      */
     public function show()
     {
+
         $trainees = Trainee::with('allocation')->get();
         $trainees->load('user');
         $programs=Allocation::with('program')->get();
         $diets= Allocation::with('diet_plan')->get();
-//        $diets->load('dietPlan');
-//         dd($diets[0]->diet_plan);
-//        dd($diets);
+
         return view('muscle-up-app.allocation.show-allocation-list',compact('trainees','programs','diets'));
 
 
@@ -78,7 +77,12 @@ class AllocationController extends Controller
      */
     public function edit($id)
     {
-        //
+
+//        $allocation = Allocation::find($id);
+        $users = User::where('type','=','trainee')->get();
+        $programs = Program::showAll();
+        $diets = DietPlan::showAll();
+        return view('muscle-up-app.allocation.edit-allocation',compact('allocation','users','programs','diets'));
     }
 
     /**

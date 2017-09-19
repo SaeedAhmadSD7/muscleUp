@@ -39,30 +39,31 @@
                     <tbody>
                     <?php $count = 1 ; ?>
                     @for($i = 0 ; $i < count($programs); $i++ )
-                    <tr>
-                        <td width="20px" style="text-align:center;"><h5> <?php echo $count; ?> </h5>
-                        </td>
-                        <td width="140px" style="text-align:center;"><h5>{{$trainees[$i]->user->first_name}} {{$trainees[$i]->user->last_name}}</h5>
-                        </td>
-                        <td>
+                        <tr>
+                            <td width="20px" style="text-align:center;"><h5> <?php echo $count; ?> </h5>
+                            </td>
+                            <td width="140px" style="text-align:center;"><h5>{{$trainees[$i]->user->first_name}} {{$trainees[$i]->user->last_name}}</h5>
+                            </td>
+                            <td>
                                 <h5>{{$programs[$i]->program->title}}</h5>
-                        </td>
-                        <td>
-                            <h5>{{$diets[$i]->diet_plan->name}}</h5>
-                        </td>
-                        <td width="20px">
-                                <form method="get" action="">
+                            </td>
+                            <td>
+                                <h5>{{$diets[$i]->diet_plan->name}}</h5>
+                            </td>
+                            <td width="20px">
+                                {{--{{dd($allocation)}}--}}
+                                <form method="get" action="{{route('edit-allocation',$trainees[$i]->id)}}">
                                     <button class="btn btn-primary" type="submit"><span class="glyphicon icon-elusive-pencil"></span></button>
                                 </form>
-                        </td>
-                        <td width="20px">
+                            </td>
+                            <td width="20px">
                                 <form method="get" action="">
                                     <button class="btn btn-danger" type="submit"><span class="glyphicon icon-typicons-cancel"></span></button>
                                 </form>
-                        </td>
+                            </td>
                         </tr>
-                    <?php $count++; ?>
-                        @endfor
+                        <?php $count++; ?>
+                    @endfor
                     </tbody>
                 </table>
             </div>
