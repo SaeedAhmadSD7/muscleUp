@@ -39,7 +39,8 @@ class WbsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        Wbs::create_wbs($request);
+        $formData = $request->all();
+        Wbs::createUpdateWbs($formData);
         return redirect()->route('wbs-list');
     }
 
@@ -60,10 +61,11 @@ class WbsController extends Controller
      */
     public function edit(Wbs $wbs)
     {
-        $wbs_details = WbsDetail::where('wbs_id','=', $wbs->id)->get();
+        $wbs = Wbs::find($wbs->id);
+        $wbs->exercise;
         $exercise_list= Exercise::all();
 
-        return view('muscle-up-app.wbs.edit')->with(['wbs'=>$wbs,'wbs_details'=>$wbs_details,'exercise_list'=>$exercise_list]);
+        return view('muscle-up-app.wbs.edit')->with(['wbs'=>$wbs,'exercise_list'=>$exercise_list]);
 
     }
 
@@ -76,7 +78,8 @@ class WbsController extends Controller
      */
     public function update(Request $request, Wbs $wbs)
     {
-        Wbs::update_wbs($request);
+        $formData = $request->all();
+        Wbs::createUpdateWbs($formData);
         return redirect()->route('wbs-list');
 
     }
@@ -89,7 +92,7 @@ class WbsController extends Controller
      */
     public function destroy(Wbs $wbs)
     {
-        Wbs::delete_wbs($wbs);
+        Wbs::deleteWbs($wbs->id);
         return redirect()->route('wbs-list');
 
     }

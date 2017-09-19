@@ -11,7 +11,7 @@ class Exercise extends Model
 
 
     public function wbs(){
-        return $this->belongsToMany(WbsDetail::class,'wbs_details','exercise_id','wbs_id');
+        return $this->belongsToMany(Wbs::class,'wbs_details','exercise_id','wbs_id')->withPivot('set','rep','rest')->withTimestamps();
     }
 
     protected $exercise;

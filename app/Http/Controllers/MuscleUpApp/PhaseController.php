@@ -86,7 +86,8 @@ class PhaseController extends Controller
      */
     public function update(Request $request)
     {
-        Phase::createUpdatePhase($request);
+        $formData = $request->all();
+        Phase::createUpdatePhase($formData);
         return redirect()->route('show-phase');
     }
 

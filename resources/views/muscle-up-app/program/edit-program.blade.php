@@ -74,6 +74,7 @@
                                 <tbody>
 
                                 <?php $count=1;?>
+                                {{--{{dd($program)}}--}}
                                 @foreach($program->phase as $phase)
                                     @include('muscle-up-app.program.partials._program')
                                     <?php $count ++; ?>

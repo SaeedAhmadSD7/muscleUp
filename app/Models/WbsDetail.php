@@ -10,15 +10,15 @@ class WbsDetail extends Model
     protected $primaryKey = 'id';
     public $fillable = ['wbs_id','exercise_id','set','rep','rest'];
 
-    public function wbs() {
-
-        return $this->belongsTo(Wbs::class);
-    }
-
-    public function exercise() {
-
-        return $this->belongsTo(Exercise::class);
-    }
+//    public function wbs() {
+//
+//        return $this->belongsTo(Wbs::class);
+//    }
+//
+//    public function exercise() {
+//
+//        return $this->belongsTo(Exercise::class);
+//    }
 
 
 }

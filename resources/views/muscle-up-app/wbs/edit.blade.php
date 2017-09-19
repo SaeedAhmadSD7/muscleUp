@@ -83,22 +83,23 @@
                                 <tbody>
 
                                 <?php $count=1;?>
-                                @foreach($wbs_details as $wbs_detail)
+                                {{--{{dd($wbs->exercise)}}--}}
+                                @foreach($wbs->exercise as $exercise_S)
+                                    {{--{{dd($exercise->pivot->set)}}--}}
                                     <tr>
                                         <td style="text-align: center">
                                             <?php echo $count;?>
                                         </td>
                                         <td>
-                                            <select class="form-control exercise" id="" name="exercise_id[]">
-                                                <option value="{{$wbs_detail->exercise_id}}">{{$wbs_detail->exercise->title}}</option>
+                                            <select class="form-control exercise day_name" id="" name="exercise_id[]" data-value="{{$exercise_S->pivot->exercise_id}}">
                                                 @foreach($exercise_list as $exercise)
                                                     <option  value="{{$exercise->id}}">{{$exercise->title}}</option>
                                                 @endforeach
                                             </select>
                                         </td>
-                                        <td id="qtyRow"><input class="form-control" type="number" id="set" name="set[]" value="{{$wbs_detail->set}}" placeholder="Set" style="width:60px;"></td>
-                                        <td id="caloryRow"><input class="form-control" type="number" id="rep" name="rep[]" value="{{$wbs_detail->rep}}" placeholder="Rep" style="width:60px;"></td>
-                                        <td><input class="form-control time_take_input" type="text" name="rest[]" value="{{$wbs_detail->rest}}" placeholder="Rest Time" style="width:60px"></td>
+                                        <td id="qtyRow"><input class="form-control" type="number" id="set" name="set[]" value="{{$exercise_S->pivot->set}}" placeholder="Set" style="width:60px;"></td>
+                                        <td id="caloryRow"><input class="form-control" type="number" id="rep" name="rep[]" value="{{$exercise_S->pivot->rep}}" placeholder="Rep" style="width:60px;"></td>
+                                        <td><input class="form-control time_take_input" type="text" name="rest[]" value="{{$exercise_S->pivot->rest}}" placeholder="Rest Time" style="width:60px"></td>
                                     </tr>
                                     <?php $count++; ?>
                                 @endforeach

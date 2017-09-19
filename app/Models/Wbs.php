@@ -11,12 +11,7 @@ class Wbs extends Model
     public $fillable = ['gym_id','title','description'];
 
     public function exercise(){
-        return $this->belongsToMany(Exercise::class,'wbs_details','wbs_id','exercise_id');
-    }
-
-    public function phaseDetails() {
-
-        return $this->hasMany(PhaseDetail::class);
+        return $this->belongsToMany(Exercise::class,'wbs_details','wbs_id','exercise_id')->withPivot('set','rep','rest')->withTimestamps();
     }
 
     public static function showAll() {
@@ -25,121 +20,167 @@ class Wbs extends Model
         return $Wbs;
     }
 
-    public static function create_wbs($request) {
-
-        $wbs=new Wbs();
-        $wbs->title = $request->title;
-        $wbs->description = $request->description;
-        $wbs->save();
-        $wbs_id= $wbs->id;
-        $exercise=array();
-        $sets=array();
-        $reps=array();
-        $rest_t=array();
-        $count=0;
-        foreach($request->input('exercise_id') as $exercise_id) {
-            $exercise[]=$exercise_id;
-            $count++;
-        }
-        $list['exercise']=$exercise;
-
-        foreach($request->input('set') as $set) {
-            $sets[]=$set;
-        }
-        $list['set']=$sets;
-
-        foreach($request->input('rep') as $rep) {
-            $reps[]=$rep;
-        }
-        $list['rep']=$reps;
-
-        foreach($request->input('rest') as $rest) {
-            $rest_t[]=$rest;
-        }
-        $list['rest']=$rest_t;
-
-        for($i=0;$i<$count;$i++) {
-            $wbsDetail=new WbsDetail();
-            $wbsDetail->wbs_id= $wbs_id;
-            $wbsDetail->exercise_id = $list['exercise'][$i];
-            $wbsDetail->set = $list['set'][$i];
-            $wbsDetail->rep = $list['rep'][$i];
-            $wbsDetail->rest = $list['rest'][$i];
-            $wbsDetail->save();
-        }
-    }
-
-    public static function update_wbs($request)
+    public static function createUpdateWbs($formData)
     {
-        $wbs = self::find($request->id);
-        $wbs->title = $request->title;
-        $wbs->description = $request->description;
-        $wbs->update();
-
-        $wbs_id = $wbs->id;
-        $exercise = array();
-        $sets = array();
-        $reps = array();
-        $rest_t = array();
-
-        $count = 0;
-        foreach ($request->input('exercise_id') as $exercise_id) {
-            $exercise[] = $exercise_id;
-            $count++;
+        if(array_key_exists('id',$formData)) {
+            $Wbs = Wbs::find($formData['id']);
+        } else {
+            $Wbs = new Wbs();
         }
-        $list['exercise'] = $exercise;
 
-        foreach ($request->input('set') as $set) {
-            $sets[] = $set;
+        $wbs_data = array();
+        for($i = 0; $i < count($formData['exercise_id']) ; $i++) {
+            $wbs_data[$i]['exercise_id'] = $formData['exercise_id'][$i];
+            $wbs_data[$i]['set'] = $formData['set'][$i];
+            $wbs_data[$i]['rep'] = $formData['rep'][$i];
+            $wbs_data[$i]['rest'] = $formData['rest'][$i];
         }
-        $list['set'] = $sets;
 
-        foreach ($request->input('rep') as $rep) {
-            $reps[] = $rep;if (\Auth::user()->user_type == 'Admin')
-        {
-            return $next($request);
-        }
-        return redirect()->guest('/');
-        }
-        $list['rep'] = $reps;
-
-        foreach ($request->input('rest') as $rest) {
-            $rest_t[] = $rest;
-        }
-        $list['rest'] = $rest_t;
-
-        $wbsDetails = WbsDetail::where('wbs_id', '=', $request->id)->get();
-        $rows = ($wbsDetails)->count();
-
-        for ($i = 0; $i < $count; $i++) {
-            if ($i < $rows) {
-                $wbsDetails[$i]->wbs_id = $wbs_id;
-                $wbsDetails[$i]->exercise_id = $list['exercise'][$i];
-                $wbsDetails[$i]->set = $list['set'][$i];
-                $wbsDetails[$i]->rep = $list['rep'][$i];
-                $wbsDetails[$i]->rest = $list['rest'][$i];
-                $wbsDetails[$i]->save();
-            }
-            else {
-                $wbsDetail = new WbsDetail();
-                $wbsDetail->wbs_id = $wbs_id;
-                $wbsDetail->exercise_id = $list['exercise'][$i];
-                $wbsDetail->set = $list['set'][$i];
-                $wbsDetail->rep = $list['rep'][$i];
-                $wbsDetail->rest = $list['rest'][$i];
-                $wbsDetail->save();
-            }
-        }
+        $Wbs->title = $formData['title'];
+        $Wbs->description = $formData['description'];
+        $Wbs->save();
+        $Wbs->exercise()->detach();
+        $Wbs->exercise()->attach($wbs_data);
     }
 
-    public static function delete_wbs($wbs){
-        $wbs = self::find($wbs->id);
-        $wbs->delete();
-        $wbs_detail = WbsDetail::where('wbs_id', '=', $wbs->id)->get();
-        $wbs_detail->delete();
+    public static function deleteWbs($id){
+        $Wbs = Wbs::find($id);
+        $Wbs->exercise()->detach();
+        $Wbs->delete();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    public static function create_wbs($request) {
+//
+//        $wbs=new Wbs();
+//        $wbs->title = $request->title;
+//        $wbs->description = $request->description;
+//        $wbs->save();
+//
+//        $wbs_id= $wbs->id;
+//        $exercise=array();
+//        $sets=array();
+//        $reps=array();
+//        $rest_t=array();
+//        $count=0;
+//        foreach($request->input('exercise_id') as $exercise_id) {
+//            $exercise[]=$exercise_id;
+//            $count++;
+//        }
+//        $list['exercise']=$exercise;
+//
+//        foreach($request->input('set') as $set) {
+//            $sets[]=$set;
+//        }
+//        $list['set']=$sets;
+//
+//        foreach($request->input('rep') as $rep) {
+//            $reps[]=$rep;
+//        }
+//        $list['rep']=$reps;
+//
+//        foreach($request->input('rest') as $rest) {
+//            $rest_t[]=$rest;
+//        }
+//        $list['rest']=$rest_t;
+//
+//        for($i=0;$i<$count;$i++) {
+//            $wbsDetail=new WbsDetail();
+//            $wbsDetail->wbs_id= $wbs_id;
+//            $wbsDetail->exercise_id = $list['exercise'][$i];
+//            $wbsDetail->set = $list['set'][$i];
+//            $wbsDetail->rep = $list['rep'][$i];
+//            $wbsDetail->rest = $list['rest'][$i];
+//            $wbsDetail->save();
+//        }
+//    }
+//
+//    public static function update_wbs($request)
+//    {
+//        $wbs = self::find($request->id);
+//        $wbs->title = $request->title;
+//        $wbs->description = $request->description;
+//        $wbs->update();
+//
+//        $wbs_id = $wbs->id;
+//        $exercise = array();
+//        $sets = array();
+//        $reps = array();
+//        $rest_t = array();
+//
+//        $count = 0;
+//        foreach ($request->input('exercise_id') as $exercise_id) {
+//            $exercise[] = $exercise_id;
+//            $count++;
+//        }
+//        $list['exercise'] = $exercise;
+//
+//        foreach ($request->input('set') as $set) {
+//            $sets[] = $set;
+//        }
+//        $list['set'] = $sets;
+//
+//        foreach ($request->input('rep') as $rep) {
+//            $reps[] = $rep;if (\Auth::user()->user_type == 'Admin')
+//        {
+//            return $next($request);
+//        }
+//        return redirect()->guest('/');
+//        }
+//        $list['rep'] = $reps;
+//
+//        foreach ($request->input('rest') as $rest) {
+//            $rest_t[] = $rest;
+//        }
+//        $list['rest'] = $rest_t;
+//
+//        $wbsDetails = WbsDetail::where('wbs_id', '=', $request->id)->get();
+//        $rows = ($wbsDetails)->count();
+//
+//        for ($i = 0; $i < $count; $i++) {
+//            if ($i < $rows) {
+//                $wbsDetails[$i]->wbs_id = $wbs_id;
+//                $wbsDetails[$i]->exercise_id = $list['exercise'][$i];
+//                $wbsDetails[$i]->set = $list['set'][$i];
+//                $wbsDetails[$i]->rep = $list['rep'][$i];
+//                $wbsDetails[$i]->rest = $list['rest'][$i];
+//                $wbsDetails[$i]->save();
+//            }
+//            else {
+//                $wbsDetail = new WbsDetail();
+//                $wbsDetail->wbs_id = $wbs_id;
+//                $wbsDetail->exercise_id = $list['exercise'][$i];
+//                $wbsDetail->set = $list['set'][$i];
+//                $wbsDetail->rep = $list['rep'][$i];
+//                $wbsDetail->rest = $list['rest'][$i];
+//                $wbsDetail->save();
+//            }
+//        }
+//    }
+//
+//    public static function delete_wbs($wbs){
+//        $wbs = self::find($wbs->id);
+//        $wbs->delete();
+//        $wbs_detail = WbsDetail::where('wbs_id', '=', $wbs->id)->get();
+//        $wbs_detail->delete();
+//    }
 }
-
-
-
-//}

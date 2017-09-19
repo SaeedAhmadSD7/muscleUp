@@ -33,7 +33,8 @@ class Program extends Model {
         $program->title = $formData['title'];
         $program->description = $formData['description'];
         $program->save();
-        $program->phase()->sync($formData['phase_id']);
+        $program->phase()->detach();
+        $program->phase()->attach($formData['phase_id']);
     }
 
 
