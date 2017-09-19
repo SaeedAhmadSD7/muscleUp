@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
-use App\Models\WbsDetail;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\Wbs;

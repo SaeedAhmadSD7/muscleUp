@@ -83,9 +83,7 @@
                                 <tbody>
 
                                 <?php $count=1;?>
-                                {{--{{dd($wbs->exercise)}}--}}
                                 @foreach($wbs->exercise as $exercise_S)
-                                    {{--{{dd($exercise->pivot->set)}}--}}
                                     <tr>
                                         <td style="text-align: center">
                                             <?php echo $count;?>

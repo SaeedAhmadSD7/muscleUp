@@ -16,14 +16,14 @@ class Program extends Model {
     }
 
 
-    public static function showAll()
-    {
+    public static function showAll() {
+
         $programs = Program::all();
         return $programs;
     }
 
-    public static function createUpdateProgram($formData)
-    {
+    public static function createUpdateProgram($formData) {
+
         if(array_key_exists('id',$formData)) {
             $program = Program::find($formData['id']);
         } else {
@@ -37,9 +37,8 @@ class Program extends Model {
         $program->phase()->attach($formData['phase_id']);
     }
 
+    public static function deleteProgram($id) {
 
-
-    public static function deleteProgram($id){
         $program = self::find($id);
         $program->phase()->detach();
         $program->delete();

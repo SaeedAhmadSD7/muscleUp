@@ -222,6 +222,20 @@ class TraineeController extends Controller
         return redirect()->route('trainee-personal-detail',$trainee->id);
     }
 
+
+
+    public function Activity() {
+       $trainee = Trainee::find('1');
+       $trainee->allocation->program->phase->wbs->exercise;
+    }
+
+
+
+
+
+
+
+
     /**
      * Remove the specified resource from storage.
      *

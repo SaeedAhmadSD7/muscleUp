@@ -44,4 +44,8 @@ class Trainee extends Model
     {
         return $this->hasOne(Allocation::class);
     }
+
+    public function traineeActivity(){
+        return $this->hasOne(TraineeActivity::class);
+    }
 }
