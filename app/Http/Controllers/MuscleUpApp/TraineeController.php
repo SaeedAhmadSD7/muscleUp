@@ -214,11 +214,12 @@ class TraineeController extends Controller
         return redirect()->route('trainee-personal-detail',$trainee->id);
     }
 
+    public function Activity($id) {
+        $trainee = Trainee::find($id);
+        $trainee->allocation->program->phase;
+        $trainee->allocation->diet_plan;
 
-
-    public function Activity() {
-       $trainee = Trainee::find('1');
-       $trainee->allocation->program->phase->wbs->exercise;
+        return view('muscle-up-app.activity.activity')->with('trainee',$trainee);
     }
 
 

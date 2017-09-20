@@ -16,13 +16,15 @@ class Allocation extends Model
         return $allocations;
     }
 
-    public function program(){
-        return $this->belongsTo(Program::class);
-    }
-    public function trainee(){
+    public function trainee() {
         return $this->belongsTo(Trainee::class);
     }
-    public function diet_plan(){
+
+    public function program() {
+        return $this->belongsTo(Program::class);
+    }
+
+    public function diet_plan() {
         return $this->belongsTo(DietPlan::class);
     }
 }

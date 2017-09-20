@@ -14,6 +14,11 @@ class Wbs extends Model
         return $this->belongsToMany(Exercise::class,'wbs_details','wbs_id','exercise_id')->withPivot('set','rep','rest')->withTimestamps();
     }
 
+    public function day() {
+        return $this->belongsToMany(Day::class,'phase_details','wbs_id','day_id')->withPivot('phase_id')->withTimestamps();
+    }
+
+
     public static function showAll() {
 
         $Wbs = Wbs::all();

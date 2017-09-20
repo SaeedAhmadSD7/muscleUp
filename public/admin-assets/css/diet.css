@@ -88,3 +88,6 @@ hr {
 .create {
     float: right;
 }
+.toggle-content{
+    display: none;
+}

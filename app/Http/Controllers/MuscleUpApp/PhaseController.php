@@ -4,7 +4,6 @@ namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Models\Day;
 use App\Models\Phase;
-use App\Models\PhaseDetail;
 use App\Models\Wbs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -90,6 +89,23 @@ class PhaseController extends Controller
         Phase::createUpdatePhase($formData);
         return redirect()->route('show-phase');
     }
+
+
+
+    public function getPhaseDetails($phase) {
+       return (Phase::find($phase)->day()->get());
+    }
+
+    public function getDayDetails($phase, $day) {
+       return (Phase::find($phase)->day()->where('day_id',$day)->first()->wbs()->get());
+
+    }
+
+    public function getWbsDetails($phase, $day) {
+       return (Phase::find($phase)->day()->where('day_id',$day)->first()->wbs()->where('day_id',$day)->first()->exercise()->get());
+
+    }
+
 
     /**
      * Remove the specified resource from storage.

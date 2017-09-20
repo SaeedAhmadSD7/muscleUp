@@ -238,3 +238,14 @@ Route::get('/wbs/delete/{wbs}',['uses'=>'MuscleUpApp\WbsController@destroy','as'
  */
 
 Route::get('/trainee/activities',['uses'=>'MuscleUpApp\TraineeActivityController@index','as'=>'trainee-activities']);
+
+
+
+
+/***
+ * Trainee Activity
+ */
+Route::get('/trainee/{id}/activity',['uses'=>'MuscleUpApp\TraineeController@activity','as'=>'trainee-activity']);
+Route::get('/trainee/{id}/activity/phase/{phase}','MuscleUpApp\PhaseController@getPhaseDetails');
+Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}','MuscleUpApp\PhaseController@getDayDetails');
+Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}/wbs/{wbs}','MuscleUpApp\PhaseController@getWbsDetails');

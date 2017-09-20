@@ -13,5 +13,4 @@ class TraineeActivity extends Model
     public function trainee() {
         return $this->belongsTo(Trainee::class);
     }
-
 }

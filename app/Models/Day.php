@@ -11,8 +11,12 @@ class Day extends Model
     protected $fillable = ['title'];
 
 
-    public function day() {
-        return $this->belongsToMany(Day::class,'phase_details','day_id','phase_id')->withPivot('wbs_id')->withTimestamps();
+    public function phase() {
+        return $this->belongsToMany(Phase::class,'phase_details','day_id','phase_id')->withPivot('wbs_id')->withTimestamps();
+    }
+
+    public function wbs() {
+        return $this->belongsToMany(Wbs::class,'phase_details','day_id','wbs_id')->withPivot('phase_id')->withTimestamps();
     }
 
     public static function showAll()
