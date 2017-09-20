@@ -25,7 +25,8 @@
     <div class="panel">
         <div class="panel-body">
             <div class="example-box-wrapper">
-                <form class="form-group diet-program form-horizontal bordered-row" id="form-field" method="post" action="">
+
+                <form class="form-group diet-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('update-allocation', $allocation->id)}}">
                     {{csrf_field()}}
                     <div class="tab-content">
                         <div class="form-wizard" id="form-wizard-3">
@@ -33,7 +34,7 @@
                             <table id="assignedTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Select trainee</th>
+
                                     <th>Select Program</th>
 
                                 </tr>
@@ -41,16 +42,8 @@
                                 <tbody>
                                 <tr id="tmpRow" class="fieldR">
                                     <td>
-                                        <select class="form-control" name="trainee_id" id="" data-value="">
-                                            <option value="0">Select Trainee:</option>
-                                            @foreach($users as $user)
-                                                <option value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select class="form-control" name="program_id" id="">
-                                            <option value=""></option>
+                                        {{--{{dd($allocation)}}--}}
+                                        <select class="form-control data_value" name="program_id" data-value="{{$allocation->program_id}}">
                                             @foreach($programs as $program)
                                                 <option value="{{$program->id}}">{{$program->title}}</option>
                                             @endforeach
@@ -71,8 +64,8 @@
                                 <tbody>
                                 <tr id="tmpRow" class="fieldR">
                                     <td>
-                                        <select class="form-control" name="diet_plan_id" id="">
-                                            <option value="0">Diet Plan:</option>
+                                        <select class="form-control data_value" name="diet_plan_id" id="" data-value="{{$allocation->diet_plan_id}}">
+
                                             @foreach($diets as $diet)
                                                 <option value="{{$diet->id}}">{{$diet->name}}</option>
                                             @endforeach
@@ -92,9 +85,7 @@
                                 <tbody>
                                 <tr id="tmpRow" class="fieldR">
                                     <td>
-                                        <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="start_date" value="" placeholder="Enter start date" readonly>
-                                        <div class="btn-date"></div>
-
+                                        <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="start_date" value="{{$allocation->start_date}}" placeholder="Enter start date" readonly><div class="btn-date"></div>
                                     </td>
 
                                 </tr>
@@ -104,7 +95,7 @@
 
 
                             <div style="float:right; margin-right: 300px;">
-                                <input type="submit" value="Submit" class="btn btn-success">
+                                <input type="submit" value="Update" class="btn btn-success">
                             </div>
                         </div>
                     </div>
@@ -119,5 +110,4 @@
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/js/allocation.js')}}" type="text/javascript"></script>
-
 @stop

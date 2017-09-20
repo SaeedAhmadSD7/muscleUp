@@ -134,18 +134,10 @@ class TraineeController extends Controller
 
 
         $user = new User($request->all());
-//        $user->email = $request->email;
         $password = str_random(8);
         $user->password = bcrypt($password);
         $user['type'] = 'trainee';
-////        $user->user_id = $user->id;
-//        $user->first_name=$request->first_name;
-//        $user->last_name=$request->last_name;
         $user->dial_code = '+27';
-//        $user->phone_number=$request->phone_number;
-//        $user->dob=$request->dob;
-//        $user->gender =$request->gender;
-//        $user->address=$request->address;
         $user->save();
         $trainee = new Trainee($request->all());
         $trainee['user_id'] = $user->id;
@@ -228,11 +220,6 @@ class TraineeController extends Controller
        $trainee = Trainee::find('1');
        $trainee->allocation->program->phase->wbs->exercise;
     }
-
-
-
-
-
 
 
 

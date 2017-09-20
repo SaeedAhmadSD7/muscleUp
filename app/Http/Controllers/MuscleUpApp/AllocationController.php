@@ -4,12 +4,11 @@ namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Models\Allocation;
 use App\Models\DietPlan;
-use App\Models\Phase;
 use App\Models\Program;
 use App\Models\Trainee;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 
 class AllocationController extends Controller
 {
@@ -30,10 +29,11 @@ class AllocationController extends Controller
      */
     public function create()
     {
-        $users = User::where('type','=','trainee')->get();
+        $trainees = Trainee::all();
+        $trainees->load('user');
         $programs = Program::showAll();
         $diets = DietPlan::showAll();
-        return view('muscle-up-app.allocation.create-allocation',compact('users','programs','diets'));
+        return view('muscle-up-app.allocation.create-allocation',compact('trainees','programs','diets'));
     }
 
     /**
@@ -42,10 +42,8 @@ class AllocationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(request $request) {
         Allocation::create($request->all());
-
         return redirect()->route('show-allocation');
 
     }
@@ -58,13 +56,9 @@ class AllocationController extends Controller
      */
     public function show()
     {
+        $allocations = Allocation::with('trainee','trainee.user','diet_plan', 'program')->get();
 
-        $trainees = Trainee::with('allocation')->get();
-        $trainees->load('user');
-        $programs=Allocation::with('program')->get();
-        $diets= Allocation::with('diet_plan')->get();
-
-        return view('muscle-up-app.allocation.show-allocation-list',compact('trainees','programs','diets'));
+        return view('muscle-up-app.allocation.show-allocation-list',compact('allocations'));
 
 
     }
@@ -77,12 +71,10 @@ class AllocationController extends Controller
      */
     public function edit($id)
     {
-
-//        $allocation = Allocation::find($id);
-        $users = User::where('type','=','trainee')->get();
+        $allocation = Allocation::find($id);
         $programs = Program::showAll();
         $diets = DietPlan::showAll();
-        return view('muscle-up-app.allocation.edit-allocation',compact('allocation','users','programs','diets'));
+        return view('muscle-up-app.allocation.edit-allocation',compact('allocation','programs','diets','allocations'));
     }
 
     /**
@@ -94,7 +86,15 @@ class AllocationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $allocation = Allocation::find($id);
+        $allocation->program_id= $request->input('program_id');
+        $allocation->diet_plan_id= $request->input('diet_plan_id');
+        $allocation->start_date= $request->input('start_date');
+        $allocation->save();
+
+
+
+        return redirect()->route('show-allocation');
     }
 
     /**
@@ -105,6 +105,9 @@ class AllocationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $allocation =Allocation::find($id);
+        $allocation->delete();
+        return redirect()->route('show-allocation');
+
     }
 }

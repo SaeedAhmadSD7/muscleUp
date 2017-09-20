@@ -43,8 +43,8 @@
                                     <td>
                                         <select class="form-control" name="trainee_id" id="">
                                             <option value="0">Select Trainee:</option>
-                                            @foreach($users as $user)
-                                                <option value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
+                                        @foreach($trainees as $trainee)
+                                                <option value="{{$trainee->id}}">{{$trainee->user->first_name}} {{$trainee->user->last_name}}</option>
                                             @endforeach
                                         </select>
                                     </td>

@@ -32,38 +32,43 @@
                         <th style="text-align:center;" width="140px">Trainee Name</th>
                         <th style="text-align:center;">Program</th>
                         <th style="text-align:center;">Diet Plan</th>
+                        <th style="text-align:center;">Allocation Date:</th>
                         <th width="20px">Edit</th>
                         <th width="20px">Delete</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php $count = 1 ; ?>
-                    @for($i = 0 ; $i < count($programs); $i++ )
+                    @foreach($allocations as $allocation)
                         <tr>
+                            {{--{{dd($allocation)}}--}}
                             <td width="20px" style="text-align:center;"><h5> <?php echo $count; ?> </h5>
                             </td>
-                            <td width="140px" style="text-align:center;"><h5>{{$trainees[$i]->user->first_name}} {{$trainees[$i]->user->last_name}}</h5>
+                            <td width="140px" style="text-align:center;"><h5>{{$allocation->trainee->user->first_name}} {{$allocation->trainee->user->last_name}}</h5>
                             </td>
                             <td>
-                                <h5>{{$programs[$i]->program->title}}</h5>
+                                <h5>{{$allocation->program->title}}</h5>
                             </td>
                             <td>
-                                <h5>{{$diets[$i]->diet_plan->name}}</h5>
+                                <h5>{{$allocation->diet_plan->name}}</h5>
                             </td>
+                            <td>
+                                <h5>{{$allocation->start_date}}</h5>
+                            </td>
+                            {{--{{dd($trainees[$i]->allocation->id)}}--}}
                             <td width="20px">
-                                {{--{{dd($allocation)}}--}}
-                                <form method="get" action="{{route('edit-allocation',$trainees[$i]->id)}}">
+                                <form method="get" action="{{route('edit-allocation',$allocation->id)}}">
                                     <button class="btn btn-primary" type="submit"><span class="glyphicon icon-elusive-pencil"></span></button>
                                 </form>
                             </td>
                             <td width="20px">
-                                <form method="get" action="">
+                                <form method="get" action="{{route('delete-allocation',$allocation->id)}}">
                                     <button class="btn btn-danger" type="submit"><span class="glyphicon icon-typicons-cancel"></span></button>
                                 </form>
                             </td>
                         </tr>
                         <?php $count++; ?>
-                    @endfor
+                    @endforeach
                     </tbody>
                 </table>
             </div>

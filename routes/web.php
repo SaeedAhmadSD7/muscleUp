@@ -136,8 +136,11 @@ Route::get('/program/delete/{id?}',['as'=>'delete-program','uses'=>'MuscleUpApp\
 
 Route::get('allocation',['as'=>'allocation','uses'=>'MuscleUpApp\AllocationController@create']);
 Route::post('allocation/store',['as'=>'allocation_store','uses'=>'MuscleUpApp\AllocationController@store']);
-Route::get('/allocation/list/{id?}',['as'=>'show-allocation','uses'=>'MuscleUpApp\AllocationController@show']);
-Route::get('/allocation/edit/{id?}',['as'=>'edit-allocation','uses'=>'MuscleUpApp\AllocationController@edit']);
+Route::get('/allocation/list/',['as'=>'show-allocation','uses'=>'MuscleUpApp\AllocationController@show']);
+Route::get('/allocation/edit/{id}',['as'=>'edit-allocation','uses'=>'MuscleUpApp\AllocationController@edit']);
+Route::post('/allocation/update/{id}',['as'=>'update-allocation','uses'=>'MuscleUpApp\AllocationController@update']);
+Route::get('/allocation/delete/{id}',['as'=>'delete-allocation','uses'=>'MuscleUpApp\AllocationController@destroy']);
+
 
 
 
