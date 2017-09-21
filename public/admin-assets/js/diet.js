@@ -4,23 +4,17 @@ $(document).ready(function () {
         $('.time_take_input').timepicker({minuteStep: 1, defaultTime: false, showMeridian: false})
     });
 
-    $('.time_take_input').timepicker({
-        minuteStep: 1,
-        defaultTime: false,
-        showMeridian: false,
-    });
-
-    $('.submit-btn').on('submit', function (e) {
-        e.preventDefault();
-        var formData = $('.diet-program').serialize();
-        console.log(formData);
-    });
-
-    $('.df').on('submit', function () {
-        var formData = $('.diet-program').serialize();
-        console.log(formData.split('&'));
-
-    });
+    // $('.submit-btn').on('submit', function (e) {
+    //     e.preventDefault();
+    //     var formData = $('.diet-program').serialize();
+    //     console.log(formData);
+    // });
+    //
+    // $('.df').on('submit', function () {
+    //     var formData = $('.diet-program').serialize();
+    //     console.log(formData.split('&'));
+    //
+    // });
 
     var id = $('#assignedTable tbody tr').length;
 
@@ -46,14 +40,20 @@ $(document).ready(function () {
         });
     }
 
-    $("#assignedTable").delegate(".food_name", "change", function () {
+    $('#assignedTable').on('change','.food_name', function () {
         var cal = $(this).find(':selected').data('calories');
         var qty = $(this).parent().siblings('#qtyRow').find('#quantity').val();
         var newCal = cal * qty;
         $(this).parent().siblings('#caloryRow').find('#calories').val(newCal);
     });
 
-    // console.log();
+    $('#assignedTable').on('input','.quantity', function () {
+        var qty = $(this).val();
+        var cal = $(this).parent().siblings('.foodRow').find('.food_name option:selected').data('calories');
+        var newCal = cal * qty;
+        $(this).parent().siblings('#caloryRow').find('#calories').val(newCal);
+    });
+
     //
     $('.day_name').each( function () {
        $(this).val($(this).attr('data-value'));

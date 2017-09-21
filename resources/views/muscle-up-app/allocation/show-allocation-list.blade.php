@@ -50,7 +50,7 @@
                                 <h5>{{$allocation->program->title}}</h5>
                             </td>
                             <td>
-                                <h5>{{$allocation->diet_plan->name}}</h5>
+                                <h5>{{$allocation->diet_program->title}}</h5>
                             </td>
                             <td>
                                 <h5>{{$allocation->start_date}}</h5>

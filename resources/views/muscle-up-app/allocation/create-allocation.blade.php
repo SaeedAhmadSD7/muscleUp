@@ -71,10 +71,10 @@
                                 <tbody>
                                 <tr id="tmpRow" class="fieldR">
                                     <td>
-                                        <select class="form-control" name="diet_plan_id" id="">
+                                        <select class="form-control" name="diet_program_id" id="">
                                             <option value="0">Diet Plan:</option>
                                             @foreach($diets as $diet)
-                                                <option value="{{$diet->id}}">{{$diet->name}}</option>
+                                                <option value="{{$diet->id}}">{{$diet->title}}</option>
                                             @endforeach
                                         </select>
                                     </td>

@@ -36,6 +36,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-3 control-label">Diet Program Name</label>
+                                <div class="col-sm-6">
+                                    <span class="form-control">{{$trainee->allocation->diet_program->title}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label">Phase Name</label>
                                 <div class="col-sm-6">
                                     <select class="phase_list" name="">
@@ -71,18 +77,25 @@
                                 <div class="toggle-content wbs_content">
                                 </div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Diet Program Name</label>
-                            <div class="col-sm-6">
-                                <span class="form-control">{{$trainee->allocation->diet_plan->name}}</span>
+                            <hr>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Meal Name</label>
+                                <div class="col-sm-6">
+                                    <select class="meal_list" name="">
+                                        @foreach($trainee->allocation->diet_program->meal as $meal)
+                                            <option value="{{$meal->id}}">{{$meal->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Day Name</label>
-                            <div class="col-sm-6">
-                                <span class="form-control">{{$trainee->allocation->diet_plan->name}}</span>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <span class="input-group-btn"><button class="btn btn-blue-alt wbs_detail toggle" type="button" disabled><span>Show Details </span><i class="glyph-icon icon-plus"></i></button></span>
+                                </div>
+                            </div>
+                            <div class="form-group meal_detail-div">
+                                <div class="toggle-content meal_content">
+                                </div>
                             </div>
                         </div>
 

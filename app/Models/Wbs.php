@@ -49,7 +49,6 @@ class Wbs extends Model
     }
 
     public static function deleteWbs($id) {
-
         $Wbs = Wbs::find($id);
         $Wbs->exercise()->detach();
         $Wbs->delete();

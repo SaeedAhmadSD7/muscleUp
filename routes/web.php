@@ -99,12 +99,12 @@ Route::get('/Admin/Inbox/Message/Accept/{id}',['as'=>'Admin-Message-Accept','use
 /***
  * Diet Plan
  */
-Route::get('/diet/editform',['as'=>'diet','uses'=>'MuscleUpApp\DietProgramController@index']);
-Route::get('/diet/list',['as'=>'show','uses'=>'MuscleUpApp\DietProgramController@showPlans']);
+Route::get('/diet/create',['as'=>'diet-create','uses'=>'MuscleUpApp\DietProgramController@create']);
 Route::post('/diet/add',['as'=>'add-diet','uses'=>'MuscleUpApp\DietProgramController@store']);
-Route::get('/diet/edit/{id?}',['as'=>'edit-diet','uses'=>'MuscleUpApp\DietProgramController@edit']);
+Route::get('/diet/list',['as'=>'diet-list','uses'=>'MuscleUpApp\DietProgramController@index']);
+Route::get('/diet/edit/{id}',['as'=>'edit-diet','uses'=>'MuscleUpApp\DietProgramController@edit']);
 Route::post('/diet/update',['as'=>'update-diet','uses'=>'MuscleUpApp\DietProgramController@update']);
-Route::get('/diet/delete/{id?}',['as'=>'delete-diet','uses'=>'MuscleUpApp\DietProgramController@delete']);
+Route::get('/diet/delete/{id}',['as'=>'delete-diet','uses'=>'MuscleUpApp\DietProgramController@delete']);
 
 
 /**

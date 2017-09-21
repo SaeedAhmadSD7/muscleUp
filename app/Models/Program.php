@@ -15,6 +15,11 @@ class Program extends Model {
         return $this->belongsToMany(Phase::class,'programs_phases','program_id','phase_id')->withTimestamps();
     }
 
+    public function exercise() {
+        return $this->hasManyThrough('Program', 'Exercise');
+    }
+
+
 
     public static function showAll() {
 

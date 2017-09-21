@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Models\Allocation;
-use App\Models\DietPlan;
+use App\Models\DietProgram;
 use App\Models\Program;
 use App\Models\Trainee;
 use Illuminate\Http\Request;
@@ -32,7 +32,7 @@ class AllocationController extends Controller
         $trainees = Trainee::all();
         $trainees->load('user');
         $programs = Program::showAll();
-        $diets = DietPlan::showAll();
+        $diets = DietProgram::showAll();
         return view('muscle-up-app.allocation.create-allocation',compact('trainees','programs','diets'));
     }
 
@@ -56,7 +56,7 @@ class AllocationController extends Controller
      */
     public function show()
     {
-        $allocations = Allocation::with('trainee','trainee.user','diet_plan', 'program')->get();
+        $allocations = Allocation::with('trainee','trainee.user','diet_program', 'program')->get();
 
         return view('muscle-up-app.allocation.show-allocation-list',compact('allocations'));
 
@@ -88,7 +88,7 @@ class AllocationController extends Controller
     {
         $allocation = Allocation::find($id);
         $allocation->program_id= $request->input('program_id');
-        $allocation->diet_plan_id= $request->input('diet_plan_id');
+        $allocation->diet_program_id= $request->input('diet_program_id');
         $allocation->start_date= $request->input('start_date');
         $allocation->save();
 

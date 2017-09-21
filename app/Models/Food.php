@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Food extends Model
 {
-    protected $fillable = ['name','unit','unit_value','calories','deleted_at','created_at','updated_at'];
+    protected $table = 'foods';
+    protected $primaryKey = 'id';
+    protected $fillable = ['name','unit','unit_value','calories'];
 
-    public function dietPlanDetail(){
-        return $this->belongsThasManyo(DietPlanDetail::class);
+    public function dietProgram(){
+        return $this->belongsToMany(DietProgram::class,'diet_meal','food_id','diet_program_id')->withPivot('meal_id','quantity','calories','taketime')->withTimestamps();
     }
+
 
     public static function showAll()
     {

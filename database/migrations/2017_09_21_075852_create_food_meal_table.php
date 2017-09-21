@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAllocationsTable extends Migration
+class CreateFoodMealTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateAllocationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('allocations', function (Blueprint $table) {
+        Schema::create('food_meal',function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('trainee_id');
-            $table->integer('instructor_id')->nullable();
-            $table->integer('program_id');
-            $table->integer('diet_program_id');
-            $table->date('start_date');
-            $table->softDeletes();
+            $table->integer('food_id');
+            $table->integer('meal_id');
             $table->timestamps();
         });
-}
+    }
 
     /**
      * Reverse the migrations.
@@ -32,6 +28,6 @@ class CreateAllocationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('allocations');
+        Schema::dropIfExists('food_meal');
     }
 }

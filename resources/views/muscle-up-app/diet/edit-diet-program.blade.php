@@ -18,41 +18,40 @@
 @section('content')
 <table id="templete">
     <tfoot>
-        <div class="tab-content">
-            <tr style="display: none;"  id="tmpRow" class="fieldR">
-                <td style='width:20px;text-align:center;'><span class="sr"></span></td>
-                <td>
-                    <select class="form-control" name="meal_id[]" id="meal_no">
-                        <option value="0">Select Meal:</option>
-                        @foreach($meals as $meal)
-                            <option value="{{$meal->id}}">{{$meal->name}}</option>
-                        @endforeach
-                    </select>
-                </td>
-                <td>
-                    <select class="form-control food_name" id="food_name" name="food_id[]">
-                        <option value="0">Select Food:</option>
-                        @foreach($foods as $food)
-                            <option data-calories="{{$food->calories}}" value="{{$food->id}}">{{$food->name}}</option>
-                        @endforeach
-                    </select>
-                </td>
-                <td id="qtyRow">
-                    <input class="form-control" type="number" id="quantity" name="quantity[]" placeholder="Qrt:" style="width:60px;">
-                </td>
-                <td id="caloryRow">
-                    <input class="form-control" type="text" id="calories" name="calories[]" placeholder="Cal" style="width:60px;" readonly>
-                </td>
-                <td>
-                    <input class="form-control time_take_input" type="text" name="duration[]" placeholder="Time" style="width:60px" readonly>
-                </td>
-                <td>
-                    <button class="remove_row btn btn-danger" type="button"><span class="glyphicon icon-typicons-cancel"></span></button>
-                </td>
-            </tr>
-        </div>
+    <div class="tab-content">
+        <tr style="display: none;" id="tmpRow" class="fieldR">
+            <td style='width:20px;text-align:center;'><span class="sr"></span></td>
+            <td>
+                <select class="form-control" name="meal_id[]" id="meal_no">
+                    <option value="0">Select Meal:</option>
+                    @foreach($meals as $meal)
+                        <option value="{{$meal->id}}">{{$meal->title}}</option>
+                    @endforeach
+                </select>
+            </td>
+            <td class="foodRow">
+                <select class="form-control food_name" id="food_name" name="food_id[]">
+                    <option value="0">Select Food:</option>
+                    @foreach($foods as $food)
+                        <option data-calories="{{$food->calories}}" value="{{$food->id}}">{{$food->title}}</option>
+                    @endforeach
+                </select>
+            </td>
+            <td id="qtyRow">
+                <input class="form-control quantity" type="number" id="quantity" name="quantity[]" placeholder="Qrt:" style="width:60px;">
+            </td>
+            <td id="caloryRow">
+                <input class="form-control" type="text" id="calories" name="calories[]" placeholder="Cal" style="width:60px;" readonly>
+            </td>
+            <td>
+                <input class="form-control time_take_input" type="text" name="taketime[]" placeholder="Time" style="width:60px" readonly>
+            </td>
+            <td>
+                <button class="remove_row btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-sign"></span></button>
+            </td>
+        </tr>
+    </div>
     </tfoot>
-
 </table>
 
     <div id="page-title">
@@ -68,23 +67,11 @@
                     <div class="tab-content">
                         <div class="form-wizard" id="form-wizard-3">
                             <div class="form-group first-group">
-                                <label class="col-sm-3 control-label" for="name">Program Name</label>
+                                <label class="col-sm-3 control-label" for="title">Program Name</label>
 
                                 <div class="col-sm-6">
-                                    <input name="id" value="{{$dietPlan->id}}" type="hidden">
-                                    <input class="form-control" type="text" name="name" value="{{$dietPlan->name}}" placeholder="Program Name...">
-                                </div>
-                            </div>
-                            <div class="form-group meal_number">
-                                <label class="col-sm-3 control-label" for="radio">Status:</label>
-
-                                <div class="col-sm-6">
-                                    <div class="input-group">
-                                        <div id="radio">
-                                            <label for="no">No</label><input id="no" type="radio" name="status" value="No" @if($dietPlan->status=='No') checked="checked" @endif>
-                                            <label for="yes">Yes</label><input id="yes" type="radio" name="status" value="Yes" @if($dietPlan->status=='Yes') checked="checked" @endif><br>
-                                        </div>
-                                    </div>
+                                    <input name="id" value="{{$dietProgram->id}}" type="hidden">
+                                    <input class="form-control" type="text" name="title" value="{{$dietProgram->title}}" placeholder="Program Name...">
                                 </div>
                             </div>
                             <div class="form-group meal_number">
@@ -92,7 +79,7 @@
 
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <textarea rows="5" cols="20" class="form-control" id="description" name="description">{{$dietPlan->description}}</textarea><br>
+                                        <textarea rows="5" cols="20" class="form-control" id="description" name="description">{{$dietProgram->description}}</textarea><br>
                                     </div>
                                 </div>
                             </div>
@@ -112,8 +99,38 @@
                                 </thead>
                                 <tbody>
                                 <?php $count=1;?>
-                                @foreach($dietPlanDetails as $dietPlanDetail)
-                                    @include('muscle-up-app.diet.partials._diet-program')
+                                @foreach($dietProgram->meal as $dietList)
+                                    <tr>
+                                        <td style="text-align: center">
+                                            <?php echo $count;?>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" name="meal_id[]" id="meal_no" data-value="{{$dietList->pivot->meal_id}}">
+                                                @foreach($meals as $meal)
+                                                    <option value="{{$meal->id}}">{{$meal->title}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td class="foodRow">
+                                            <select class="form-control day_name food_name" id="food_name" name="food_id[]" data-value="{{$dietList->pivot->food_id}}">
+                                                @foreach($foods as $food)
+                                                    <option data-calories="{{$food->calories}}" value="{{$food->id}}">{{$food->title}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td id="qtyRow">
+                                            <input class="form-control quantity" type="number" id="quantity" name="quantity[]" placeholder="Qrt:" style="width:60px;" value="{{$dietList->pivot->quantity}}">
+                                        </td>
+                                        <td id="caloryRow">
+                                            <input class="form-control" type="text" id="calories" name="calories[]" placeholder="Cal" style="width:60px;" value="{{$dietList->pivot->calories}}" readonly>
+                                        </td>
+                                        <td>
+                                            <input class="form-control time_take_input" type="text" name="taketime[]" placeholder="Time" style="width:60px" value="{{$dietList->pivot->taketime}}" readonly>
+                                        </td>
+                                        <td>
+                                            <button class="remove_row btn btn-danger" type="button"><span class="glyphicon icon-typicons-cancel"></span></button>
+                                        </td>
+                                    </tr>
                                     <?php $count++; ?>
                                 @endforeach
                                 </tbody>

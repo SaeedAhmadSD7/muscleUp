@@ -50,8 +50,8 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
-    {
+    public function show() {
+
         $programs=Program::showAll();
         return view('muscle-up-app.program.list-program')->with('programs',$programs);
     }

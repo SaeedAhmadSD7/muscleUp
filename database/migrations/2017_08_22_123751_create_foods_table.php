@@ -15,7 +15,7 @@ class CreateFoodsTable extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',40);
+            $table->string('title',40);
             $table->enum('unit',['Grams','Oz','Qty']);
             $table->integer('unit_value');
             $table->integer('calories');

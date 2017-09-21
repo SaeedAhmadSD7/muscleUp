@@ -217,7 +217,7 @@ class TraineeController extends Controller
     public function Activity($id) {
         $trainee = Trainee::find($id);
         $trainee->allocation->program->phase;
-        $trainee->allocation->diet_plan;
+        $trainee->allocation->diet_program->meal;
 
         return view('muscle-up-app.activity.activity')->with('trainee',$trainee);
     }

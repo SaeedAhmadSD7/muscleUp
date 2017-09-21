@@ -100,5 +100,28 @@ $(document).ready(function () {
     });
 
 
+    $('.meal_list').select2({
+        placeholder: 'Meal List...',
+        theme: 'bootstrap'
+    }).on("select2:select", function (e) {
+        var selected_element = $(e.currentTarget);
+        var id = selected_element.val();
+        day_url = '/day/' + id;
+        console.log(phase_url+day_url);
+        $.ajax({
+            method: 'GET',
+            url: phase_url+day_url,
+            type: 'json',
+            success: function (data) {
+                $('.wbs_list').html('');
+                $.each(data, function (i) {
+                    $('.wbs_list').append('<option></option><option value='+data[i].id+'>'+data[i].title+'</option>');
+                });
+            }
+        })
+    });
+
+
+
 
 });

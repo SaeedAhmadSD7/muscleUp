@@ -8,7 +8,7 @@ class Allocation extends Model
 {
     protected $table = 'allocations';
     protected $primaryKey = 'id';
-    public $fillable = ['trainee_id','instructor_id','program_id','diet_plan_id','start_date'];
+    public $fillable = ['trainee_id','instructor_id','program_id','diet_program_id','start_date'];
 
     public static function showAll()
     {
@@ -24,7 +24,7 @@ class Allocation extends Model
         return $this->belongsTo(Program::class);
     }
 
-    public function diet_plan() {
-        return $this->belongsTo(DietPlan::class);
+    public function diet_program() {
+        return $this->belongsTo(DietProgram::class);
     }
 }
