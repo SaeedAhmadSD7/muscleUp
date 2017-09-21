@@ -10,8 +10,8 @@ class Food extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['name','unit','unit_value','calories'];
 
-    public function dietProgram(){
-        return $this->belongsToMany(DietProgram::class,'diet_meal','food_id','diet_program_id')->withPivot('meal_id','quantity','calories','taketime')->withTimestamps();
+    public function meal(){
+        return $this->belongsToMany(Meal::class,'food_meal','food_id','meal_id')->withPivot('quantity','calories','taketime')->withTimestamps();
     }
 
 

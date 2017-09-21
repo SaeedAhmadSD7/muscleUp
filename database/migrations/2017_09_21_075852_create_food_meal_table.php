@@ -17,6 +17,9 @@ class CreateFoodMealTable extends Migration
             $table->increments('id');
             $table->integer('food_id');
             $table->integer('meal_id');
+            $table->smallInteger('quantity');
+            $table->text('calories');
+            $table->string('taketime');
             $table->timestamps();
         });
     }
