@@ -61,22 +61,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Wbs Name</label>
-                                <div class="col-sm-6">
-                                    <select class="wbs_list" name="">
-                                        <option></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <span class="input-group-btn"><button class="btn btn-blue-alt wbs_detail toggle" type="button" disabled><span>Show Details </span><i class="glyph-icon icon-plus"></i></button></span>
-                                </div>
-                            </div>
-                            <div class="form-group exercise_detail-div">
-                                <div class="toggle-content wbs_content">
-                                </div>
+                            <div class="form-group wbs_container">
                             </div>
                             <hr>
                             <div class="form-group">
@@ -116,7 +101,7 @@
 
 
                         <div class="form-group submit-btn-div">
-                            <button class="btn ra-100 btn-secondary" type="button">Calculate Progress</button>
+                            <button class="btn ra-100 btn-secondary calculate_progress" type="button">Calculate Progress</button>
                             <button class="btn ra-100 btn-default" type="submit">Save Progress</button>
                         </div>
                     </form>
