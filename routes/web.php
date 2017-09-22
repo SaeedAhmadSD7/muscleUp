@@ -6,6 +6,10 @@ Route::get('/logout', ['uses'=>'\App\Http\Controllers\Auth\LoginController@logou
 
 Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
 
+Route::get('/trainee/dashboard', ['as'=>'trainee-dashboard', 'uses'=> 'MuscleUpApp\TraineeController@index' ]);
+
+Route::get('/instructor/dashboard', ['as'=>'instructor-dashboard', 'uses'=> 'MuscleUpApp\EmployeeController@index' ]);
+
 
 //Route::group(['prefix'=>'gym','middleware' => 'usertype'],function () {
 //    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
@@ -56,12 +60,11 @@ login form
 Route::get('/gym', ['as'=>'gym', 'uses'=>'MuscleUpApp\GymController@index']);
 Route::post('/gym/add', ['as'=>'add-gym', 'uses'=>'MuscleUpApp\GymController@add_gym']);
 
-/*
+/***
 Trainee
- */
-//Route::get('trainee',['as'=>'trainee','uses'=>'MuscleUpApp\TraineeController@create_trainee']);
+ ****/
 
-Route::get('/trainee/dashboard', ['as'=>'trainee-dashboard', 'uses'=> 'MuscleUpApp\TraineeController@index' ]);
+
 Route::get('trainee/add',['as'=>'trainee-add','uses'=>'MuscleUpApp\TraineeController@create']);
 Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\TraineeController@store']);
 
@@ -79,7 +82,8 @@ Route::post('trainee/profile/image',['as'=>'trainee-image','uses'=>'MuscleUpApp\
 
 /*
  Trainee Medical History
- */
+ **/
+
 Route::get('trainee/medical',['as'=>'trainee-medical','uses'=>'MuscleUpApp\TraineeController@medical']);
 Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'MuscleUpApp\TraineeController@medial_history']);
 Route::get('trainee/view/medical/{id}',['as'=>'trainee-view-medical','uses'=>'MuscleUpApp\TraineeController@view_medical_history']);
@@ -142,17 +146,6 @@ Route::post('/allocation/update/{id}',['as'=>'update-allocation','uses'=>'Muscle
 Route::get('/allocation/delete/{id}',['as'=>'delete-allocation','uses'=>'MuscleUpApp\AllocationController@destroy']);
 
 
-
-
-
-/*
- Exercise
- *  */
-Route::get('/exercise',['as'=>'exercise','uses'=>'MuscleUpApp\ExerciseController@exercise_list']);
-
-
-
-
 /****
  * Employee
  **/
@@ -164,20 +157,6 @@ Route::get('instructor/edit/{id}',['as'=>'instructor-edit','uses'=>'MuscleUpApp\
 Route::post('instructor/update/{id}',['as'=>'instructor-update','uses'=>'MuscleUpApp\EmployeeController@update']);
 Route::get('instructor/delete/{id}',['as'=>'instructor-delete','uses'=>'MuscleUpApp\EmployeeController@destroy']);
 
-
-
-
-Route::get('/instructor/dashboard', ['as'=>'instructor-dashboard', 'uses'=> 'MuscleUpApp\EmployeeController@index' ]);
-Route::get('profile', ['as'=>'profile', 'uses'=> 'MuscleUpApp\EmployeeController@profile' ]);
-Route::get('profileshow/{id}', ['as'=>'profile', 'uses'=> 'MuscleUpApp\EmployeeController@profileshow' ]);
-Route::get('/gym/panl', ['as'=>'gym-panl', 'uses'=> 'MuscleUpApp\EmployeeController@panl' ]);
-Route::get('/gym/dashboard', ['as'=>'gym-dashboard', 'uses'=> 'MuscleUpApp\EmployeeController@dashboard' ]);
-Route::get('/instructor/panal', ['as'=>'instructor-panal', 'uses'=> 'MuscleUpApp\EmployeeController@panal' ]);
-Route::get('show-instructor/detail/{id}',['as'=>'instructor-detail','uses'=>'MuscleUpApp\EmployeeController@instructor_detail']);
-
-//Workout
-Route::get('/workout',['as'=>'workout-store','uses'=>'MuscleUpApp\WorkoutPlanController@workout']);
-Route::get('/create/workout',['as'=>'create-workout','uses'=>'MuscleUpApp\WorkoutPlanController@create']);
 
 
 //Exercise

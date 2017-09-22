@@ -1,19 +1,8 @@
+@extends('muscle-up-app.gym.dashboard.gym-dashboard')
 
-@extends('layouts.backend-main')
-@section('title')
-    Instructor Detail List
-@stop
+@section('title','Instructor list')
 
-@section('dashboard_link')
-    {{route('gym')}}
-@stop
-@section('user_type')
-    Gym
-@stop
 
-@section('sidebar_content')
-
-@stop
 
 @section('content')
     <div class="row mailbox-wrapper">

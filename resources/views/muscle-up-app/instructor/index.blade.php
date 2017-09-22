@@ -1,4 +1,4 @@
-@extends('muscle-up-app.trainee.dashboard.trainee-dashboard')
+@extends('muscle-up-app.instructor.dashboard.instructor-dashboard')
 
 @section('style-sheet')
     <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">

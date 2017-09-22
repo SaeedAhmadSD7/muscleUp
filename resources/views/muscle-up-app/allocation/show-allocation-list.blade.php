@@ -1,4 +1,4 @@
-@extends('layouts.backend-main')
+@extends('muscle-up-app.instructor.dashboard.instructor-dashboard')
 @section('title','List of allocated program')
 @section('style-sheet')
     <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">

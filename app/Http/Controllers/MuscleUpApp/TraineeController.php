@@ -231,9 +231,9 @@ class TraineeController extends Controller
      */
     public function destroy($id)
     {
-        $trainee = User::find($id);
-        $trainee->delete();
-
+        $user = User::find($id);
+        $user->trainee()->delete();
+        $user->delete();
         return redirect()->route('trainee-list');
     }
 }

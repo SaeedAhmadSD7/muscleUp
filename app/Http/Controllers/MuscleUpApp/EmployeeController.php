@@ -20,37 +20,10 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function instructor_detail($id)
-    {
 
-        $instructorDetail= Instructor::find($id);
-        return view('muscle-up-app.instructor.instructor-detail',compact('instructorDetail'));
-
-    }
-    public function profile()
-    {
-        return view('muscle-up-app.instructor.instructor-profile');
-
-    }
-
-    public function panl()
-    {
-        return view('muscle-up-app.instructor.gym-panl');
-
-    }
-    public function dashboard()
-    {
-        return view('muscle-up-app.instructor.gym-dashboard');
-
-    }
-    public function panal()
-    {
-        return view('muscle-up-app.instructor.instructor-panal');
-
-    }
     public function index()
     {
-        return view('muscle-up-app.instructor.instructor-dashboard');
+        return view('muscle-up-app.instructor.index');
 
     }
 
