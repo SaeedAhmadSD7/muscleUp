@@ -17,10 +17,6 @@ class CreateDietMealTable extends Migration
             $table->increments('id');
             $table->integer('diet_program_id');
             $table->integer('meal_id');
-            $table->integer('food_id');
-            $table->smallInteger('quantity');
-            $table->text('calories');
-            $table->string('taketime');
             $table->timestamps();
         });
     }

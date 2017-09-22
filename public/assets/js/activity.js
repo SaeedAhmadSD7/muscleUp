@@ -13,6 +13,11 @@ $(document).ready(function () {
         $(this).closest('.form-group').siblings('.exercise_detail-div').find('.toggle-content').slideToggle();
     });
 
+    $('.meal_detail').on('click', function () {
+        $(this).find('i').toggleClass('icon-plus icon-minus');
+        $(this).closest('.form-group').siblings('.meal_detail-div').find('.toggle-content').slideToggle();
+    });
+
 
         $('.phase_list').select2({
         placeholder: 'Select Phase...',
@@ -107,19 +112,9 @@ $(document).ready(function () {
         var selected_element = $(e.currentTarget);
         var id = selected_element.val();
         day_url = '/day/' + id;
-        console.log(phase_url+day_url);
-        $.ajax({
-            method: 'GET',
-            url: phase_url+day_url,
-            type: 'json',
-            success: function (data) {
-                $('.wbs_list').html('');
-                $.each(data, function (i) {
-                    $('.wbs_list').append('<option></option><option value='+data[i].id+'>'+data[i].title+'</option>');
-                });
-            }
-        })
+
     });
+    console.log(trainee);
 
 
 
