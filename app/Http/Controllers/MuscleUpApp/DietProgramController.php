@@ -72,6 +72,10 @@ class DietProgramController extends Controller
 
     }
 
+    public function foodList($slug, $dietProgram, $meal) {
+        return (DietProgram::find($dietProgram)->food()->where('meal_id',$meal)->get());
+    }
+
     /**
      * @param $id
      */

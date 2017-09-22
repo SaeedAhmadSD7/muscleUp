@@ -73,18 +73,18 @@ $(document).ready(function () {
             url: phase_url+day_url+wbs_url,
             type: 'json',
             success: function (data) {
+                $('.wbs_detail').prop('disabled', false);
                 $('.wbs_content').html('');
                 $.each(data, function (i) {
-                    $('.wbs_detail').prop('disabled', false);
                     $('.wbs_content').append('' +
                         '<div class="form-group col-md-offset-3 col-md-6" >\n' +
                         '    <span class="form-control"><strong>Exercise Name: </strong>'+data[i].title+'</span>\n' +
                         '</div>\n'+
                         '<div class="form-group col-md-offset-3 col-md-2" >\n' +
-                        '    <span class="form-control"><strong>Reps: </strong>'+data[i].pivot.set+'</span>\n' +
+                        '    <span class="form-control set"><strong>Set: </strong>'+data[i].pivot.set+'</span>\n' +
                         '</div>\n'+
                         '<div class="form-group col-md-2" >\n' +
-                        '    <span class="form-control"><strong>Rest: </strong>'+data[i].pivot.rep+'</span>\n' +
+                        '    <span class="form-control"><strong>Rep: </strong>'+data[i].pivot.rep+'</span>\n' +
                         '</div>\n'+
                         '<div class="form-group col-md-2" >\n' +
                         '     <span class="form-control"><strong>Rest: </strong>'+data[i].pivot.rest+'</span>\n' +
@@ -106,15 +106,48 @@ $(document).ready(function () {
 
 
     $('.meal_list').select2({
-        placeholder: 'Meal List...',
+        placeholder: 'Select Meal...',
         theme: 'bootstrap'
     }).on("select2:select", function (e) {
         var selected_element = $(e.currentTarget);
+        var diet_program_id = $('.diet_program_id').val();
         var id = selected_element.val();
-        day_url = '/day/' + id;
-
+        var url = 'activity/dietProgram/' + diet_program_id + '/meal/' + id;
+        $.ajax({
+            method: 'GET',
+            url: url,
+            type: 'json',
+            success: function (data) {
+                $('.meal_detail').prop('disabled', false);
+                $('.meal_content').html('');
+                $.each(data, function (i) {
+                    $('.meal_content').append('' +
+                        '<div class="form-group col-md-offset-3 col-md-6" >\n' +
+                        '    <span class="form-control"><strong>Food Name: </strong>'+data[i].title+'</span>\n' +
+                        '</div>\n'+
+                        '<div class="form-group col-md-offset-3 col-md-2" >\n' +
+                        '    <span class="form-control"><strong>Quantity: </strong>'+data[i].pivot.quantity+'</span>\n' +
+                        '</div>\n'+
+                        '<div class="form-group col-md-2" >\n' +
+                        '    <span class="form-control"><strong>Calories: </strong>'+data[i].pivot.calories+'</span>\n' +
+                        '</div>\n'+
+                        '<div class="form-group col-md-2" >\n' +
+                        '     <span class="form-control"><strong>Take Time: </strong>'+data[i].pivot.taketime+'</span>\n' +
+                        '</div>\n'+
+                        '<div class="form-group col-md-offset-3 col-md-2" >\n' +
+                        '    <input class="form-control" type="number" placeholder="Quantity Taken...">\n' +
+                        '</div>\n'+
+                        '<div class="form-group col-md-2" >\n' +
+                        '    <input class="form-control" type="number" placeholder="Calories Estimated...">\n' +
+                        '</div>\n'+
+                        '<div class="form-group col-md-2" >\n' +
+                        '     <input class="form-control" type="number" placeholder="Time Taken...">\n' +
+                        '</div>\n'+
+                        '');
+                });
+            }
+        })
     });
-    console.log(trainee);
 
 
 

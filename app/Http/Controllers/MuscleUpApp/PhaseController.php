@@ -92,17 +92,17 @@ class PhaseController extends Controller
 
 
 
-    public function getPhaseDetails($phase) {
+    public function getPhaseDetails($slug, $phase) {
        return (Phase::find($phase)->day()->get());
     }
 
-    public function getDayDetails($phase, $day) {
+    public function getDayDetails($slug, $phase, $day) {
        return (Phase::find($phase)->day()->where('day_id',$day)->first()->wbs()->get());
 
     }
 
-    public function getWbsDetails($phase, $day) {
-       return (Phase::find($phase)->day()->where('day_id',$day)->first()->wbs()->where('day_id',$day)->first()->exercise()->get());
+    public function getWbsDetails($slug ,$phase, $day, $wbs) {
+       return (Phase::find($phase)->day()->where('day_id',$day)->first()->wbs()->where('wbs_id',$wbs)->first()->exercise()->get());
 
     }
 

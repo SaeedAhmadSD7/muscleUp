@@ -99,13 +99,14 @@
                                 </thead>
                                 <tbody>
                                 <?php $count=1;?>
-                                @foreach($dietProgram->meal as $dietList)
+                                {{--{{dd($dietProgram->food)}}--}}
+                                @foreach($dietProgram->food as $dietList)
                                     <tr>
                                         <td style="text-align: center">
                                             <?php echo $count;?>
                                         </td>
                                         <td>
-                                            <select class="form-control" name="meal_id[]" id="meal_no" data-value="{{$dietList->pivot->meal_id}}">
+                                            <select class="form-control day_name" name="meal_id[]" id="meal_no" data-value="{{$dietList->pivot->meal_id}}">
                                                 @foreach($meals as $meal)
                                                     <option value="{{$meal->id}}">{{$meal->title}}</option>
                                                 @endforeach

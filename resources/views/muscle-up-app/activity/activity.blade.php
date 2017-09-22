@@ -38,6 +38,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Diet Program Name</label>
                                 <div class="col-sm-6">
+                                    <input class="diet_program_id" type="hidden" value="{{$trainee->allocation->diet_program->id}}">
                                     <span class="form-control">{{$trainee->allocation->diet_program->title}}</span>
                                 </div>
                             </div>
@@ -82,6 +83,7 @@
                                 <label class="col-sm-3 control-label">Meal Name</label>
                                 <div class="col-sm-6">
                                     <select class="meal_list" name="">
+                                        <option></option>
                                         @foreach($trainee->allocation->diet_program->meal as $meal)
                                             <option value="{{$meal->id}}">{{$meal->title}}</option>
                                         @endforeach
@@ -90,38 +92,31 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <span class="input-group-btn"><button class="btn btn-blue-alt meal_detail toggle" type="button"><span>Show Details </span><i class="glyph-icon icon-plus"></i></button></span>
+                                    <span class="input-group-btn"><button class="btn btn-blue-alt meal_detail toggle" type="button" disabled><span>Show Details </span><i class="glyph-icon icon-plus" disabled></i></button></span>
                                 </div>
                             </div>
                             <div class="form-group meal_detail-div">
                                 <div class="toggle-content meal_content">
-                                    <div class="form-group col-md-offset-3 col-md-6" >
-                                        <span class="form-control"><strong>Food Name: </strong></span>
-                                    </div>
-                                    <div class="form-group col-md-offset-3 col-md-2" >
-                                        <span class="form-control"><strong>Quantity: </strong></span>
-                                    </div>
-                                    <div class="form-group col-md-2" >
-                                        <span class="form-control"><strong>Calories: </strong></span>
-                                    </div>
-                                    <div class="form-group col-md-2" >
-                                        <span class="form-control"><strong>Time: </strong></span>
-                                    </div>
-                                    <div class="form-group col-md-offset-3 col-md-2" >
-                                        <input class="form-control" type="number" placeholder="Quantity Taken...">
-                                    </div>
-                                    <div class="form-group col-md-2" >
-                                        <input class="form-control" type="number" placeholder="Calories Estimated...">
-                                    </div>
-                                    <div class="form-group col-md-2" >
-                                        <input class="form-control" type="number" placeholder="Time Taken...">
-                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group Program-Progress">
+                            <label class="col-sm-3 control-label">Workout Program Progress</label>
+                            <div class="col-md-6">
+                                <span class="form-control"></span>
+                            </div>
+
+                        </div>
+                        <div class="form-group Diet-Progress">
+                            <label class="col-sm-3 control-label">Diet Program Progress</label>
+                            <div class="col-md-6">
+                                <span class="form-control"></span>
                             </div>
                         </div>
 
 
                         <div class="form-group submit-btn-div">
+                            <button class="btn ra-100 btn-secondary" type="button">Calculate Progress</button>
                             <button class="btn ra-100 btn-default" type="submit">Save Progress</button>
                         </div>
                     </form>
@@ -133,7 +128,6 @@
 
 
 @section('script')
-    <script>{{$trainee->allocation->diet_program->meal}}</script>
     <script src="{{url('/assets/plugins/select2/js/select2.full.js')}}"></script>
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/js/activity.js')}}" type="text/javascript"></script>

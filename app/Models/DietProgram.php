@@ -14,6 +14,10 @@ class DietProgram extends Model
         return $this->belongsToMany(Meal::class,'diet_meal','diet_program_id','meal_id')->withTimestamps();
     }
 
+    public function food(){
+        return $this->belongsToMany(Food::class,'diet_food','diet_program_id','food_id')->withPivot('meal_id','quantity','calories','taketime')->withTimestamps();
+    }
+
     public static function showAll() {
         $dietProgram = DietProgram::all();
         return $dietProgram;
@@ -28,11 +32,10 @@ class DietProgram extends Model
             $dietProgram = new DietProgram();
         }
 
-        $dietProgram_data = array();
         $meal_data = array();
 
         for ($i = 0 ; $i < count($formData['meal_id']); $i++){
-            $dietProgram_data[$i]['meal_id'] = $formData['meal_id'][$i];
+            $meal_data[$i]['meal_id'] = $formData['meal_id'][$i];
             $meal_data[$i]['food_id'] = $formData['food_id'][$i];
             $meal_data[$i]['quantity'] = $formData['quantity'][$i];
             $meal_data[$i]['calories'] = $formData['calories'][$i];
@@ -43,28 +46,16 @@ class DietProgram extends Model
         $dietProgram->description = $formData['description'];
         $dietProgram->save();
 
-
-
-        $dietProgram->meal();
-        foreach($dietProgram->meal()->get() as $meal){
-            $meal->food()->detach();
-        }
         $dietProgram->meal()->detach();
-
-        $dietProgram->meal()->attach($dietProgram_data);
-
-
-
-
-        dd('7');
-
-
-
+        $dietProgram->food()->detach();
+        $dietProgram->meal()->sync($formData['meal_id']);
+        $dietProgram->food()->sync($meal_data);
     }
 
     public static function deleteDietProgram($id) {
         $dietProgram = DietProgram::find($id);
         $dietProgram->meal()->detach();
+        $dietProgram->food()->detach();
         $dietProgram->delete();
     }
 

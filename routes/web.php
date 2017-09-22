@@ -249,3 +249,4 @@ Route::get('/trainee/{id}/activity',['uses'=>'MuscleUpApp\TraineeController@acti
 Route::get('/trainee/{id}/activity/phase/{phase}','MuscleUpApp\PhaseController@getPhaseDetails');
 Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}','MuscleUpApp\PhaseController@getDayDetails');
 Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}/wbs/{wbs}','MuscleUpApp\PhaseController@getWbsDetails');
+Route::get('/trainee/{id}/activity/dietProgram/{dietProgram}/meal/{meal}','MuscleUpApp\DietProgramController@foodList');
