@@ -13,6 +13,11 @@ class Meal extends Model {
         return $this->belongsToMany(DietProgram::class,'diet_meal','meal_id','diet_program_id')->withPivot('food_id','quantity','calories','taketime')->withTimestamps();
     }
 
+    public function food(){
+        return $this->belongsToMany(Food::class,'diet_food','meal_id','food_id')->withPivot('diet_program_id','quantity','calories','taketime')->withTimestamps();
+    }
+
+
 
 
     public static function showAll()

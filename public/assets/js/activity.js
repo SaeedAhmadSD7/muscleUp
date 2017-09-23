@@ -19,21 +19,29 @@ $(document).ready(function () {
     });
 
 
-        $('.phase_list').select2({
+    $('.phase_list').select2({
         placeholder: 'Select Phase...',
         theme: 'bootstrap'
     }).on("select2:select", function (e) {
         var selected_element = $(e.currentTarget);
         var id = selected_element.val();
-         phase_url = 'activity/phase/' + id;
+        phase_url = 'activity/phase/' + id;
         $.ajax({
             method: 'GET',
             url: phase_url,
             type: 'json',
             success: function (data) {
+                var arr = [], dayArray = [];
+                $.each(data, function (index, value) {
+                    if ($.inArray(value.id, arr) == -1) {
+                        arr.push(value.id);
+                        dayArray.push(value);
+                    }
+                });
+                dayArray.sort();
                 $('.day_list').html('');
-                $.each(data, function (i) {
-                    $('.day_list').append('<option></option><option value='+data[i].id+'>'+data[i].title+'</option>');
+                $.each(dayArray, function (i) {
+                    $('.day_list').append('<option></option><option value='+dayArray[i].id+'>'+dayArray[i].title+'</option>');
                 });
             }
         })
@@ -188,6 +196,8 @@ $(document).ready(function () {
 
         workout_progress = (workout/divider) * 100;
         workout_progress = (Math.round(workout_progress*100)/100).toFixed(2);
+
+        $('.program-progress').find('.progress-span').html(workout_progress+'%');
 
 
 

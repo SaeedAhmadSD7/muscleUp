@@ -64,31 +64,52 @@
                             <div class="form-group wbs_container">
                             </div>
                             <hr>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Meal Name</label>
-                                <div class="col-sm-6">
-                                    <select class="meal_list" name="">
-                                        <option></option>
-                                        @foreach($trainee->allocation->diet_program->meal as $meal)
-                                            <option value="{{$meal->id}}">{{$meal->title}}</option>
+                            @foreach($trainee->allocation->diet_program->meal as $meal)
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Meal Name</label>
+                                    <div class="col-sm-6">
+                                        <span class="form-control" value="{{$meal->id}}">{{$meal->title}}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <span class="input-group-btn"><button class="btn btn-blue-alt meal_detail toggle" type="button"><span>Show Details </span><i class="glyph-icon icon-plus" disabled></i></button></span>
+                                    </div>
+                                </div>
+                                <div class="form-group meal_detail-div">
+                                    <div class="toggle-content meal_content">
+                                        @foreach($meal->food as $food)
+                                            <div class="form-group col-md-offset-3 col-md-6" >
+                                                <span class="form-control"><strong>Food Name: </strong>{{$food->title}}</span>
+                                            </div>
+                                            <div class="form-group col-md-offset-3 col-md-2" >
+                                                <span class="form-control"><strong>Quantity: </strong>{{$food->pivot->quantity}}</span>
+                                            </div>
+                                            <div class="form-group col-md-2" >
+                                                <span class="form-control"><strong>Calories: </strong>{{$food->pivot->calories}}</span>
+                                            </div>
+                                            <div class="form-group col-md-2" >
+                                                <span class="form-control"><strong>Take Time: </strong>{{$food->pivot->taketime}}</span>
+                                            </div>
+                                            <div class="form-group col-md-offset-3 col-md-2" >
+                                                <input class="form-control" type="number" placeholder="Quantity Taken...">
+                                            </div>
+                                            <div class="form-group col-md-2" >
+                                                <input class="form-control" type="number" placeholder="Calories Estimated...">
+                                            </div>
+                                            <div class="form-group col-md-2" >
+                                                <input class="form-control" type="number" placeholder="Time Taken...">
+                                            </div>
                                         @endforeach
-                                    </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <span class="input-group-btn"><button class="btn btn-blue-alt meal_detail toggle" type="button" disabled><span>Show Details </span><i class="glyph-icon icon-plus" disabled></i></button></span>
-                                </div>
-                            </div>
-                            <div class="form-group meal_detail-div">
-                                <div class="toggle-content meal_content">
-                                </div>
-                            </div>
+                            @endforeach
+
                         </div>
-                        <div class="form-group Program-Progress">
+                        <div class="form-group program-progress">
                             <label class="col-sm-3 control-label">Workout Program Progress</label>
                             <div class="col-md-6">
-                                <span class="form-control"></span>
+                                <span class="form-control progress-span"></span>
                             </div>
 
                         </div>

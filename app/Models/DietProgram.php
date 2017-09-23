@@ -14,10 +14,6 @@ class DietProgram extends Model
         return $this->belongsToMany(Meal::class,'diet_meal','diet_program_id','meal_id')->withTimestamps();
     }
 
-    public function food(){
-        return $this->belongsToMany(Food::class,'diet_food','diet_program_id','food_id')->withPivot('meal_id','quantity','calories','taketime')->withTimestamps();
-    }
-
     public static function showAll() {
         $dietProgram = DietProgram::all();
         return $dietProgram;
