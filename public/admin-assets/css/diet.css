@@ -91,3 +91,9 @@ hr {
 .toggle-content{
     display: none;
 }
+
+.workout-progress .progress-label
+,.workout-progress .progressbar-value{
+    line-height: 34px;
+    height: 35px;
+}

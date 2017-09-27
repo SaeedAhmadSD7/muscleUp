@@ -15,6 +15,8 @@ class Food extends Model
     }
 
 
+
+
     public static function showAll()
     {
         $foods = Food::all();

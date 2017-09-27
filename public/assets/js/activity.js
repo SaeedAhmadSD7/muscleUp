@@ -10,12 +10,12 @@ $(document).ready(function () {
 
     $('.tab-content').on('click','.wbs_detail', function () {
         $(this).find('i').toggleClass('icon-plus icon-minus');
-        $(this).closest('.form-group').siblings('.wbs_content').slideToggle();
+        $(this).closest('.form-group').siblings('.wbs_content').eq(0).slideToggle();
     });
 
     $('.meal_detail').on('click', function () {
         $(this).find('i').toggleClass('icon-plus icon-minus');
-        $(this).closest('.form-group').siblings('.meal_detail-div').find('.toggle-content').slideToggle();
+        $(this).closest('.form-group').siblings('.meal_detail-div').eq(0).find('.toggle-content').slideToggle();
     });
 
 
@@ -59,53 +59,55 @@ $(document).ready(function () {
             url: phase_url+day_url,
             type: 'json',
             success: function (data) {
-                $('.wbs_container').html('');
+                var counter = 0;
+                $('.wbs').html('');
                 $.each(data, function (i, val) {
-                    $('.wbs_container').append('' +
-                        '<div class="form-group">\n' +
-                        '     <label class="col-sm-3 control-label">Wbs Name</label>\n' +
-                        '     <div class="col-sm-6">\n' +
-                        '          <span class="form-control">'+val.title+'</span>\n' +
-                        '     </div>\n' +
+                    $('.wbs').append('' +
+                        '<div class="wbs_container">\n'+
+                        '     <div class="form-group">\n' +
+                        '         <label class="col-sm-3 control-label">Wbs Name</label>\n' +
+                        '               <div class="col-sm-6">\n' +
+                        '                   <span class="form-control">'+val.title+'</span>\n' +
+                        '               </div>\n' +
+                        '    </div>\n'+
+                        '    <div class="form-group">\n' +
+                        '          <div class="col-md-6 col-md-offset-3">\n' +
+                        '              <span class="input-group-btn"><button class="btn btn-blue-alt wbs_detail toggle" type="button"><span>Show Details </span><i class="glyph-icon icon-plus"></i></button></span>\n' +
+                        '          </div>\n' +
+                        '   </div>\n' +
+                        '   <div class="form-group toggle-content wbs_content"></div>\n' +
                         '</div>\n'+
-                        '<div class="form-group">\n' +
-                        '     <div class="col-md-6 col-md-offset-3">\n' +
-                        '          <span class="input-group-btn"><button class="btn btn-blue-alt wbs_detail toggle" type="button"><span>Show Details </span><i class="glyph-icon icon-plus"></i></button></span>\n' +
-                        '     </div>\n' +
-                        '</div>\n' +
                         '');
-                    $.each(val.exercise, function (i) {
-                        console.log(val.exercise);
-                        $('.wbs_container').append('' +
-                            '<div class="form-group toggle-content wbs_content">\n'+
-                            '    <div class="form-group col-md-offset-3 col-md-6" >\n' +
-                            '       <span class="form-control"><strong>Exercise Name: </strong>'+val.exercise[i].title+'</span>\n' +
-                            '       <input type="hidden" class="exercise" value="'+val.exercise[i].id+'">'+
-                            '    </div>\n'+
-                            '    <div class="form-group col-md-offset-3 col-md-2 set-actual-div" >\n' +
-                            '         <span class="form-control"><strong>Set: </strong>'+val.exercise[i].pivot.set+'</span>\n' +
-                            '         <input type="hidden" class="set" value="'+val.exercise[i].pivot.set+'">'+
-                            '    </div>\n'+
-                            '    <div class="form-group col-md-2 rep-actual-div" >\n' +
-                            '        <span class="form-control"><strong>Rep: </strong>'+val.exercise[i].pivot.rep+'</span>\n' +
-                            '        <input type="hidden" class="rep" value="'+val.exercise[i].pivot.rep+'">'+
-                            '    </div>\n'+
-                            '    <div class="form-group col-md-2" >\n' +
-                            '         <span class="form-control"><strong>Rest: </strong>'+val.exercise[i].pivot.rest+'</span>\n' +
-                            '         <input type="hidden" class="rest" value="'+val.exercise[i].pivot.rest+'">'+
-                            '    </div>\n'+
-                            '    <div class="form-group col-md-offset-3 col-md-2 set-done-div" >\n' +
-                            '          <input class="form-control sets_done" type="number" placeholder="Sets Done...">\n' +
-                            '    </div>\n'+
-                            '    <div class="form-group col-md-2 rep-done-div" >\n' +
-                            '         <input class="form-control reps_done" type="number" placeholder="Reps Done...">\n' +
-                            '    </div>\n'+
-                            '    <div class="form-group col-md-2" >\n' +
-                            '         <input class="form-control rest_taken" type="number" placeholder="Rest Taken...">\n' +
-                            '    </div>\n'+
-                            '')
-                    })
 
+                    $.each(val.exercise, function (i) {
+                        $('.wbs_container:last').find('.wbs_content').append('' +
+                            '<div class="form-group col-md-offset-3 col-md-6" >\n' +
+                            '    <span class="form-control"><strong>Exercise Name: </strong>'+val.exercise[i].title+'</span>\n' +
+                            '    <input type="hidden" class="exercise" value="'+val.exercise[i].id+'">'+
+                            '</div>\n'+
+                            '<div class="form-group col-md-offset-3 col-md-2 set-actual-div" >\n' +
+                            '     <span class="form-control"><strong>Set: </strong>'+val.exercise[i].pivot.set+'</span>\n' +
+                            '     <input type="hidden" class="set" value="'+val.exercise[i].pivot.set+'">'+
+                            '</div>\n'+
+                            '<div class="form-group col-md-2 rep-actual-div" >\n' +
+                            '    <span class="form-control"><strong>Rep: </strong>'+val.exercise[i].pivot.rep+'</span>\n' +
+                            '    <input type="hidden" class="rep" value="'+val.exercise[i].pivot.rep+'">'+
+                            '</div>\n'+
+                            '<div class="form-group col-md-2" >\n' +
+                            '    <span class="form-control"><strong>Rest: </strong>'+val.exercise[i].pivot.rest+'</span>\n' +
+                            '    <input type="hidden" class="rest" value="'+val.exercise[i].pivot.rest+'">'+
+                            '</div>\n'+
+                            '<div class="form-group col-md-offset-3 col-md-2 set-done-div" >\n' +
+                            '    <input class="form-control sets_done" type="number" placeholder="Sets Done...">\n' +
+                            '</div>\n'+
+                            '<div class="form-group col-md-2 rep-done-div" >\n' +
+                            '   <input class="form-control reps_done" type="number" placeholder="Reps Done...">\n' +
+                            '</div>\n'+
+                            '<div class="form-group col-md-2" >\n' +
+                            '   <input class="form-control rest_taken" type="number" placeholder="Rest Taken...">\n' +
+                            '</div>\n'+
+                            '');
+                    })
                 });
             }
         })

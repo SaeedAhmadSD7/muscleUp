@@ -99,7 +99,6 @@
                                 </thead>
                                 <tbody>
                                 <?php $count=1;?>
-                                {{--{{dd($dietProgram->food)}}--}}
                                 @foreach($dietProgram->food as $dietList)
                                     <tr>
                                         <td style="text-align: center">

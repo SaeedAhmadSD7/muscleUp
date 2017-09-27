@@ -17,9 +17,9 @@ class CreateTraineeActivitiesTable extends Migration
             $table->increments('id');
 
             $table->integer('trainee_id');
+            $table->integer('diet_program_id');
             $table->date('phase_id');
             $table->integer('day_id');
-            $table->integer('diet_program_id');
             $table->date('wbs_id');
             $table->integer('exercise_id');
             $table->integer('meal_id');

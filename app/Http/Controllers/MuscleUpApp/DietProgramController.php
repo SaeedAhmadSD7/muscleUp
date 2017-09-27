@@ -55,6 +55,7 @@ class DietProgramController extends Controller
 
         $dietProgram = DietProgram::find($id);
         $dietProgram->meal;
+        $dietProgram->food;
 //        dd($dietProgram);
         $foods=Food::showAll();
         $meals=Meal::showAll();
