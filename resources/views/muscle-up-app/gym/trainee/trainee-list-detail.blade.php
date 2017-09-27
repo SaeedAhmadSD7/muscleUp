@@ -11,19 +11,19 @@
 
     <div class="pad15A clearfix mrg10B">
         <div class="float-left">
-            <b>{{$trainee->first_name}}</b> ({{$trainee->first_name}})
+            <b>{{$trainee->user->first_name}}</b> ({{$trainee->user->first_name}})
         </div>
 
 
         <div class="float-right opacity-80">
-            <i class="glyph-icon icon-clock-o mrg5R"></i> {{$trainee->updated_at}}
+            <i class="glyph-icon icon-clock-o mrg5R"></i> {{$trainee->user->updated_at}}
         </div>
     </div>
 
 
     <div class="mail-toolbar clearfix">
         <div class="float-left">
-            <h4 class="font-primary">Account Detail of trainee {{$trainee->first_name}} {{$trainee->last_name}} </h4>
+            <h4 class="font-primary">Account Detail of trainee {{$trainee->user->first_name}} {{$trainee->user->last_name}} </h4>
         </div>
 
 
@@ -43,27 +43,27 @@
             <table border="0" cellpadding="0" cellspacing="0" class="table table-striped table-bordered gym_request" id="datatable-example">
                 <tr class="name">
                     <th>Trainee Name</th>
-                    <td>{{$trainee->first_name}} {{$trainee->last_name }}</td>
+                    <td>{{$trainee->user->first_name}} {{$trainee->user->last_name }}</td>
                 </tr>
 
                 <tbody>
                 <tr class="email">
                     <th>Email Address</th>
-                    <td>{{$trainee->email}}</td>
+                    <td>{{$trainee->user->email}}</td>
                 </tr>
                 <tr class="birth-date">
                     <th>Birth date</th>
-                    <td class="center">{{$trainee->dob}}</td>
+                    <td class="center">{{$trainee->user->dob}}</td>
                 </tr>
 
                 <tr class="contact">
                     <th>Contact Number</th>
-                    <td>{{$trainee->dial_code}}{{$trainee->phone_number}}</td>
+                    <td>{{$trainee->user->dial_code}}{{$trainee->user->phone_number}}</td>
                 </tr>
 
                 <tr class="gender">
                     <th>Gender</th>
-                    <td>{{$trainee->gender}}</td>
+                    <td>{{$trainee->user->gender}}</td>
                 </tr>
 
                 {{--<tr class="address">--}}

@@ -75,8 +75,6 @@
                             <button type="submit" class="btn btn-primary">Add Trainee</button>
                         </div>
                     </div>
-
-
                 </form>
             </div>
         </div>
@@ -87,6 +85,4 @@
     <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/js/add-trainee.js')}}" type="text/javascript"></script>
-
-
 @stop

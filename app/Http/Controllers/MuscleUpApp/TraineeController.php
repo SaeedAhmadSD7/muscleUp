@@ -89,14 +89,14 @@ class TraineeController extends Controller
 
 
     public function inbox(){
-          $trainee = User::where('type' ,'trainee')->get();
+          $trainee =  Trainee::with('user')->get();
           return view('muscle-up-app.gym.trainee.trainee-list')->with('trainee', $trainee);
       }
 
 
     public function trainee_detail($id){
-          $trainee= User::find($id);
-//          $user = User::find($trainee->user_id);
+          $trainee= Trainee::find($id);
+          $trainee->user;
           return view('muscle-up-app.gym.trainee.trainee-list-detail')->with(['trainee'=>$trainee]);
 
       }
@@ -232,9 +232,10 @@ class TraineeController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->trainee()->delete();
-        $user->delete();
+        $trainee = Trainee::find($id);
+        $trainee->allocation()->delete();
+        $trainee->user()->delete();
+        $trainee->delete();
         return redirect()->route('trainee-list');
     }
 }

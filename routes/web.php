@@ -66,7 +66,7 @@ Trainee
 
 
 Route::get('trainee/add',['as'=>'trainee-add','uses'=>'MuscleUpApp\TraineeController@create']);
-Route::post('trainee/store', ['as' => 'trainee-store', 'uses' => 'MuscleUpApp\TraineeController@store']);
+Route::post('trainee/store/',['uses'=>'MuscleUpApp\TraineeController@store','as'=>'trainee-store']);
 
 Route::get('/trainee/list',['as'=>'trainee-list','uses'=>'MuscleUpApp\TraineeController@inbox']);
 Route::get('/trainee/list/detail/{id}',['as'=>'trainee-list-detail','uses'=>'MuscleUpApp\TraineeController@trainee_detail']);
@@ -229,3 +229,11 @@ Route::get('/trainee/{id}/activity/phase/{phase}','MuscleUpApp\PhaseController@g
 Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}','MuscleUpApp\PhaseController@getDayDetails');
 Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}/wbs/{wbs}','MuscleUpApp\PhaseController@getWbsDetails');
 Route::get('/trainee/{id}/activity/dietProgram/{dietProgram}/meal/{meal}','MuscleUpApp\DietProgramController@foodList');
+
+
+
+/********
+Trainee ALLocation TO Instructor
+ **/
+Route::get('trainee/allocation',['as'=>'trainee-allocation','uses'=>'MuscleUpApp\TraineeAllocationController@create']);
+Route::post('trainee/store',['as'=>'trainee_allocation_store','uses'=>'MuscleUpApp\TraineeAllocationController@store']);

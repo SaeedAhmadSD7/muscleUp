@@ -95,10 +95,10 @@
                     <tr id="{{$trainee->id}}">
                         <td><input class="custom-checkbox" id="mail-checkbox-1" type="checkbox"></td>
                         <td><i class="glyph-icon icon-star"></i></td>
-                        <td class="email-title">{{$trainee->first_name}}</td>
-                        <td class="email-body">{{$trainee->email}}</td>
+                        <td class="email-title">{{$trainee->user->first_name}}</td>
+                        <td class="email-body">{{$trainee->user->email}}</td>
                         <td><i class="glyph-icon icon-paperclip"></i></td>
-                        <td>{{$trainee->updated_at}}</td>
+                        <td>{{$trainee->user->updated_at}}</td>
                     </tr>
                 @endforeach
                 </tbody>
