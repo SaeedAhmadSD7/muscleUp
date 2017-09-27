@@ -236,4 +236,4 @@ Route::get('/trainee/{id}/activity/dietProgram/{dietProgram}/meal/{meal}','Muscl
 Trainee ALLocation TO Instructor
  **/
 Route::get('trainee/allocation',['as'=>'trainee-allocation','uses'=>'MuscleUpApp\TraineeAllocationController@create']);
-Route::post('trainee/store',['as'=>'trainee_allocation_store','uses'=>'MuscleUpApp\TraineeAllocationController@store']);
+Route::post('trainee/allocation/store',['as'=>'trainee_allocation_store','uses'=>'MuscleUpApp\TraineeAllocationController@store']);
