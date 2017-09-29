@@ -219,7 +219,7 @@
                         <tr id="{{$instructor->id}}">
                             {{--<td><input class="custom-checkbox" id="mail-checkbox-1" type="checkbox"></td>--}}
                             <td><i class="glyph-icon icon-star"></i></td>
-                            <a href="{{route('instructor-detail',$instructor->id)}}"></a><td class="email-title">{{$instructor->first_name}}</td>
+                            <a></a><td class="email-title">{{$instructor->first_name}}</td>
                             <td class="email-body">{{$instructor->email}}</td>
                             <td><i class="glyph-icon icon-paperclip"></i></td>
                             <td>{{$instructor->updated_at}}</td>

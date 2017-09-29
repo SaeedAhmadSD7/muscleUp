@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MuscleUpApp;
 use App\Models\User;
 use App\Models\Trainee;
+use App\Models\Employee;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
@@ -48,8 +49,6 @@ class TraineeController extends Controller
 
     public function medical()
     {
-//        dd($userid= Auth::user()->id);
-//        $trainee = Trainee::find($userid);
         return view('muscle-up-app.trainee.trainee-medical-history');
     }
 
@@ -111,12 +110,58 @@ class TraineeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     /******
+     Trainee To Instructor Allocation
 
-//    public function create_trainee()
-//    {
-//        return view('muscle-up-app.trainee.add-trainee');
-//
-//    }
+      *****/
+    public function create_allocation()
+    {
+        $instructors = Employee::all();
+        $instructors->load('user');
+        $trainees = Trainee::all();
+        $trainees->load('user');
+        return view('muscle-up-app.trainee_allocation.create-allocation',compact('instructors','trainees'));
+    }
+    public function store_allocation(Request $request)
+    {
+        $trainee = Trainee::find($request->trainee_id);
+        $trainee->employee()->associate($request->employee_id);
+        $trainee->save();
+
+        return redirect()->route('show-trainee-allocation');
+    }
+    public function show_allocation()
+    {
+        $trainees = Trainee::with('user','employee','employee.user')->whereNotNull('employee_id')->get();
+        return view('muscle-up-app.trainee_allocation.show-allocation-list',compact('trainees'));
+
+    }
+    public function edit_allocation($id)
+    {
+        $trainee = Trainee::find($id);
+        $trainee->load('user');
+        $employees = Employee::all();
+        $employees->load('user');
+        return view('muscle-up-app.trainee_allocation.edit-allocation',compact('trainee','employees'));
+    }
+
+    public function update_allocation(Request $request, $id)
+    {
+        $trainee = Trainee::find($id);
+        $trainee->employee_id= $request->input('employee_id');
+        $trainee->save();
+
+        return redirect()->route('show-trainee-allocation');
+    }
+    public function destroy_allocation($id)
+    {
+//        $trainee = Trainee::find($id);
+//        $trainee->employee()->delete();
+
+        return redirect()->route('show-trainee-allocation');
+
+    }
+
     public function create()
     {
 

@@ -1,4 +1,4 @@
-@extends('muscle-up-app.instructor.dashboard.instructor-dashboard')
+@extends('muscle-up-app.gym.dashboard.gym-dashboard')
 @section('title','Trainee Allocation')
 
 @section('style-sheet')
@@ -40,7 +40,7 @@
                                 <tbody>
                                 <tr id="tmpRow" class="fieldR">
                                     <td>
-                                        <select class="form-control" name="instructor_id" id="">
+                                        <select class="form-control" name="employee_id" id="">
                                             <option value="0">Select Instructor:</option>
                                         @foreach($instructors as $instructor)
                                                 <option value="{{$instructor->id}}">{{$instructor->user->first_name}} {{$instructor->user->last_name}}</option>

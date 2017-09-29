@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Models\Allocation;
 use App\Models\DietProgram;
+use App\Models\Employee;
 use App\Models\Program;
 use App\Models\Trainee;
 use Illuminate\Http\Request;
@@ -29,11 +30,18 @@ class AllocationController extends Controller
      */
     public function create()
     {
-        $trainees = Trainee::all();
+        /***
+         * Auth Instructor to be passed in create argument
+         */
+//        $instructor = Employee::first();
+
+//        $trainees = Allocation::where('instructor_id',$instructor->id)->whereNull('program_id')->get();
+//        dd($trainees);
+        $trainees=Trainee::all();
         $trainees->load('user');
         $programs = Program::showAll();
         $diets = DietProgram::showAll();
-        return view('muscle-up-app.allocation.create-allocation',compact('trainees','programs','diets'));
+        return view('muscle-up-app.allocation.create-allocation',compact('trainees','programs','diets','instructor'));
     }
 
     /**
@@ -56,8 +64,7 @@ class AllocationController extends Controller
      */
     public function show()
     {
-        $allocations = Allocation::with('trainee','trainee.user','diet_program', 'program')->get();
-
+        $allocations = Allocation::with('trainee','trainee.user','diet_program', 'program')->whereNotNull('program_id')->get();
         return view('muscle-up-app.allocation.show-allocation-list',compact('allocations'));
 
 
@@ -73,7 +80,7 @@ class AllocationController extends Controller
     {
         $allocation = Allocation::find($id);
         $programs = Program::showAll();
-        $diets = DietPlan::showAll();
+        $diets = DietProgram::showAll();
         return view('muscle-up-app.allocation.edit-allocation',compact('allocation','programs','diets','allocations'));
     }
 

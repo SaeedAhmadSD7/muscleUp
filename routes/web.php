@@ -138,7 +138,7 @@ Route::get('/program/delete/{id?}',['as'=>'delete-program','uses'=>'MuscleUpApp\
  *
  */
 
-Route::get('allocation',['as'=>'allocation','uses'=>'MuscleUpApp\AllocationController@create']);
+Route::get('allocation/',['as'=>'allocation','uses'=>'MuscleUpApp\AllocationController@create']);
 Route::post('allocation/store',['as'=>'allocation_store','uses'=>'MuscleUpApp\AllocationController@store']);
 Route::get('/allocation/list/',['as'=>'show-allocation','uses'=>'MuscleUpApp\AllocationController@show']);
 Route::get('/allocation/edit/{id}',['as'=>'edit-allocation','uses'=>'MuscleUpApp\AllocationController@edit']);
@@ -233,7 +233,11 @@ Route::get('/trainee/{id}/activity/dietProgram/{dietProgram}/meal/{meal}','Muscl
 
 
 /********
-Trainee ALLocation TO Instructor
+Instructor ALLocation TO Trainee
  **/
-Route::get('trainee/allocation',['as'=>'trainee-allocation','uses'=>'MuscleUpApp\TraineeAllocationController@create']);
-Route::post('trainee/allocation/store',['as'=>'trainee_allocation_store','uses'=>'MuscleUpApp\TraineeAllocationController@store']);
+Route::get('trainee/allocation',['as'=>'trainee-allocation','uses'=>'MuscleUpApp\TraineeController@create_allocation']);
+Route::post('trainee/allocation/store',['as'=>'trainee_allocation_store','uses'=>'MuscleUpApp\TraineeController@store_allocation']);
+Route::get('trainee/allocation/list',['as'=>'show-trainee-allocation','uses'=>'MuscleUpApp\TraineeController@show_allocation']);
+Route::get('trainee/allocation/edit/{id}',['as'=>'edit-trainee-allocation','uses'=>'MuscleUpApp\TraineeController@edit_allocation']);
+Route::post('trainee/allocation/update/{id}',['as'=>'update-trainee-allocation','uses'=>'MuscleUpApp\TraineeController@update_allocation']);
+Route::get('trainee/allocation/delete/{id}',['as'=>'delete-trainee-allocation','uses'=>'MuscleUpApp\TraineeController@destroy_allocation']);

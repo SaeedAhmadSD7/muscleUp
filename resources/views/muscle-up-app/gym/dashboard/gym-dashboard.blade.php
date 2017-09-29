@@ -29,6 +29,15 @@
         </div>
     </li>
     <li class="menu-element">
+        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Allocate Trainee</span></a>
+        <div class="sidebar-submenu">
+            <ul>
+                <li><a href="{{route('trainee-allocation')}}" title="Inbox"><span>Allocation</span></a></li>
+                <li><a href="{{route('show-trainee-allocation')}}" title="Inbox"><span>View Allocation List</span></a></li>
+            </ul>
+        </div>
+    </li>
+    <li class="menu-element">
         <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Requests</span></a>
         <div class="sidebar-submenu">
             <ul>

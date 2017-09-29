@@ -15,11 +15,10 @@ class CreateAllocationsTable extends Migration
     {
         Schema::create('allocations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('trainee_id')->unique();
-            $table->integer('instructor_id');
-            $table->integer('program_id')->nullable();
-            $table->integer('diet_program_id')->nullable();
-            $table->date('start_date')->nullable();
+            $table->integer('trainee_id');
+            $table->integer('program_id');
+            $table->integer('diet_program_id');
+            $table->date('start_date');
             $table->softDeletes();
             $table->timestamps();
         });
