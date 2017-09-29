@@ -73,7 +73,7 @@ class AllocationController extends Controller
     {
         $allocation = Allocation::find($id);
         $programs = Program::showAll();
-        $diets = DietPlan::showAll();
+        $diets = DietProgram::showAll();
         return view('muscle-up-app.allocation.edit-allocation',compact('allocation','programs','diets','allocations'));
     }
 

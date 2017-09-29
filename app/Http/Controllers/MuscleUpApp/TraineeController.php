@@ -216,6 +216,13 @@ class TraineeController extends Controller
 
     public function Activity($id) {
         $trainee = Trainee::find($id);
+        $days = array();
+
+        foreach($trainee->allocation->program->phase()->get() as $phase){
+            $days[] = $phase->day();
+        }
+        dd($trainee->allocation()->program()->phase());
+
         $trainee->allocation->program->phase;
         $trainee->allocation->diet_program->meal;
         $trainee->allocation->diet_program->food;

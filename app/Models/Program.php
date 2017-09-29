@@ -19,6 +19,10 @@ class Program extends Model {
         return $this->hasManyThrough('Program', 'Exercise');
     }
 
+    public function allocation() {
+        return $this->hasOne(Allocation::class);
+    }
+
 
 
     public static function showAll() {
