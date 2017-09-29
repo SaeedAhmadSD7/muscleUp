@@ -37,13 +37,11 @@ class Phase extends Model {
                 $phase_data[$i]['day_id'] = $formData['day_id'][$i];
                 $phase_data[$i]['wbs_id'] = $formData['wbs_id'][$i];
         }
-
         $phase->title = $formData['title'];
         $phase->description = $formData['description'];
         $phase->save();
         $phase->day()->detach();
-        $phase->day()->sync($phase_data);
-        dd(7);
+        $phase->day()->attach($phase_data);
     }
 
     public static function deletePhase($id){
