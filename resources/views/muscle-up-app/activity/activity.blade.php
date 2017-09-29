@@ -47,9 +47,9 @@
                                 <div class="col-sm-6">
                                     <select class="phase_list" name="">
                                         <option></option>
-                                        @foreach($trainee->allocation->program->phase as $phase)
-                                            <option  value="{{$phase->id}}" >{{$phase->title}}</option>
-                                        @endforeach
+                                        @for($i = 0; $i < count($trainee->allocation->program->phase); $i++)
+                                            <option  value="{{$trainee->allocation->program->phase[$i]->id}}" data-value="{{$phase_daycount[$i]}}" data-order="{{$i}}">{{$trainee->allocation->program->phase[$i]->title}}</option>
+                                        @endfor
                                     </select>
                                 </div>
                             </div>

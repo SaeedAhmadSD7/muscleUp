@@ -59,6 +59,11 @@ $(document).ready(function () {
         var id = $(this).val();
 
         var date = new Date($('.start_date').val());
+        var i;
+        while(i <= '0'){
+            $('.phase_list:selected').before().attr('data-order');
+            date.setDate(date.getDate() + (parseInt(i)-1));
+        }
         date.setDate(date.getDate() + (parseInt(id)-1));
         $('.date-span').html(date.toDateString());
         var date_save = date.toISOString().split('T');
