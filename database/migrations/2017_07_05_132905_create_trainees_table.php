@@ -17,6 +17,7 @@ class CreateTraineesTable extends Migration
         Schema::create('trainees', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('branch_id')->nullable();
+            $table->integer('employee_id')->nullable();
             $table->integer('user_id');
             $table->float('weight')->nullable(); //weight in lbs
             $table->float('height')->nullable(); //height in cm

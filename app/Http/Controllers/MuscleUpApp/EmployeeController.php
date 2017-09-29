@@ -69,7 +69,7 @@ class EmployeeController extends Controller
         $instructor->joining_salary=$request->joining_salary;
         $instructor->exp_years=$request->exp_years;
         $instructor->exp_description=$request->exp_description;
-        $instructor->save();
+        $user->employee()->save($instructor);
 
         Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
         Session::flash('Success','Save Successfully');

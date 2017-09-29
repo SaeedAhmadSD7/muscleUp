@@ -1,5 +1,5 @@
 @extends('muscle-up-app.gym.dashboard.gym-dashboard')
-@section('title','Trainee Allocation')
+@section('title','Edit Trainee Allocation')
 
 @section('style-sheet')
     <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
@@ -17,15 +17,14 @@
 
 
     <div id="page-title">
-        <h2> Allocate Trainee To Instructor </h2>
-
-        <p> Create Allocation</p>
+        <h2> Edit Trainee Allocation </h2>
     </div>
 
     <div class="panel">
         <div class="panel-body">
             <div class="example-box-wrapper">
-                <form class="form-group diet-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('trainee_allocation_store')}}">
+
+                <form class="form-group diet-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('update-trainee-allocation',$trainee->id)}}">
                     {{csrf_field()}}
                     <div class="tab-content">
                         <div class="form-wizard" id="form-wizard-3">
@@ -33,52 +32,50 @@
                             <table id="assignedTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Select Instructor</th>
+
+                                    <th>Selected Trainee</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr id="tmpRow" class="fieldR">
                                     <td>
-                                        <select class="form-control" name="employee_id" id="">
-                                            <option value="0">Select Instructor:</option>
-                                        @foreach($instructors as $instructor)
-                                                <option value="{{$instructor->id}}">{{$instructor->user->first_name}} {{$instructor->user->last_name}}</option>
-                                            @endforeach
-                                        </select>
+                                        {{--{{dd($allocation)}}--}}
+                                            <option value="{{$trainee->id}}">{{$trainee->user->first_name}} {{$trainee->user->last_name}}</option>
+
+
                                     </td>
 
                                 </tr>
                                 </tbody>
                             </table>
-
 
 
                             <table id="assignedTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Select Trainee</th>
+                                    <th>Select Instructor</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr id="tmpRow" class="fieldR">
-
                                     <td>
-                                        <select class="form-control" name="trainee_id" id="">
-                                            <option value="0">Select Trainee:</option>
-                                            @foreach($trainees as $trainee)
-                                                <option value="{{$trainee->id}}">{{$trainee->user->first_name}} {{$trainee->user->last_name}}</option>
+                                        <select class="form-control data_value" name="employee_id" id="" data-value="{{$trainee->employee_id}}">
+
+                                            @foreach($employees as $employee)
+                                                <option value="{{$employee->id}}">{{$employee->user->first_name}} {{$employee->user->last_name}}</option>
                                             @endforeach
                                         </select>
                                     </td>
+
                                 </tr>
                                 </tbody>
                             </table>
 
-
+                            </table>
 
                             <div style="float:right; margin-right: 300px;">
-                                <input type="submit" value="Submit" class="btn btn-success">
+                                <input type="submit" value="Update" class="btn btn-success">
                             </div>
                         </div>
                     </div>
@@ -92,6 +89,5 @@
 @section('script')
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/allocation.js')}}" type="text/javascript"></script>
-
+    <script src="{{url('/assets/js/trainee-allocation.js')}}" type="text/javascript"></script>
 @stop

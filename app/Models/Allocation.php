@@ -19,6 +19,9 @@ class Allocation extends Model
     public function trainee() {
         return $this->belongsTo(Trainee::class);
     }
+    public function employee() {
+        return $this->belongsTo(Employee::class);
+    }
 
     public function program() {
         return $this->belongsTo(Program::class);

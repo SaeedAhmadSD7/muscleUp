@@ -8,7 +8,7 @@ class Trainee extends Model
 {
     protected $table = 'trainees';
     protected $primaryKey = 'id';
-    protected $fillable = ["branch_id", "user_id","weight","height","bmi","bfp"];
+    protected $fillable = ["branch_id","instructor_id" ,"user_id","weight","height","bmi","bfp"];
 
     public function user(){
         return $this->belongsTo(user::class);
@@ -26,11 +26,6 @@ class Trainee extends Model
     public function feeInvoice()
     {
         return $this->hasMany(FeeInvoice:: class);
-    }
-
-    public function instructor()
-    {
-        return $this->belongsTo(Instructor::Class);
     }
 
     public function medicalhistory(){
