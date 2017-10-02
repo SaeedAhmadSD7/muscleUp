@@ -31,7 +31,24 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+
+    protected function authenticated($user,$request)
+    {
+        if($request->type=== 'admin') {
+            return redirect()->intended('/admin/dashboard');
+        }
+        else if($request->type=== 'gym') {
+            return redirect()->intended('/gym/dashboard');
+        }
+        else if($request->type=== 'trainee') {
+            return redirect()->intended('/trainee/dashboard');
+        }
+        else if($request->type=== 'employee') {
+            return redirect()->intended('/employee/dashboard');
+        }
+    }
+
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
