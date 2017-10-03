@@ -4,17 +4,17 @@ $(document).ready(function () {
         $('.time_take_input').timepicker({minuteStep: 1, defaultTime: false, showMeridian: false})
     });
 
-    // $('.submit-btn').on('submit', function (e) {
-    //     e.preventDefault();
-    //     var formData = $('.diet-program').serialize();
-    //     console.log(formData);
-    // });
-    //
-    // $('.df').on('submit', function () {
-    //     var formData = $('.diet-program').serialize();
-    //     console.log(formData.split('&'));
-    //
-    // });
+    $('.submit-btn').on('submit', function (e) {
+        e.preventDefault();
+        var formData = $('.diet-program').serialize();
+        console.log(formData);
+    });
+
+    $('.df').on('submit', function () {
+        var formData = $('.diet-program').serialize();
+        console.log(formData.split('&'));
+
+    });
 
     var id = $('#assignedTable tbody tr').length;
 

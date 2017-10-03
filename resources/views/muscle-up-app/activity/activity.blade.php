@@ -47,9 +47,9 @@
                                 <div class="col-sm-6">
                                     <select class="phase_list" name="">
                                         <option></option>
-                                        @foreach($trainee->allocation->program->phase as $phase)
-                                            <option  value="{{$phase->id}}" >{{$phase->title}}</option>
-                                        @endforeach
+                                        @for($i = 0; $i < count($trainee->allocation->program->phase); $i++)
+                                            <option  value="{{$trainee->allocation->program->phase[$i]->id}}" data-value="{{$phase_daycount[$i]}}" data-order="{{$i}}">{{$trainee->allocation->program->phase[$i]->title}}</option>
+                                        @endfor
                                     </select>
                                 </div>
                             </div>
@@ -61,78 +61,96 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group date-div">
+                                <label class="col-sm-3 control-label">Date</label>
+                                <div class="col-sm-6">
+                                    <input type="hidden" class="start_date" value="{{$trainee->allocation->start_date}}">
+                                    <input class="calc_date" type="hidden" value="">
+                                    <span class="form-control date-span"></span>
+                                </div>
+                            </div>
                             <div class="form-group wbs"></div>
-                            <hr>
                             @foreach($trainee->allocation->diet_program->meal as $meal)
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Meal Name</label>
-                                    <div class="col-sm-6">
-                                        <span class="form-control" value="{{$meal->id}}">{{$meal->title}}</span>
-                                    </div>
-                                </div>
-                                <div class="meal_cotainer">
-                                    <div class="form-group">
-                                        <div class="col-md-6 col-md-offset-3">
-                                            <span class="input-group-btn"><button class="btn btn-blue-alt meal_detail toggle" type="button"><span>Show Details </span><i class="glyph-icon icon-plus" disabled></i></button></span>
+                                <h3 class="content-box-header bg-default">Meal Name: {{$meal->title}}</h3>
+                                <fieldset>
+                                    <input type="hidden" value="{{$meal->id}}">
+                                    <div class="meal_cotainer">
+                                        <div class="first-group form-group">
+                                            <div class="col-md-6 col-md-offset-3">
+                                                <span class="input-group-btn"><button class="btn btn-blue-alt meal_detail toggle" type="button"><span>Show Details </span><i class="glyph-icon icon-plus" disabled></i></button></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group meal_detail-div">
+                                            <div class="toggle-content meal_content">
+                                                @foreach($trainee->allocation->diet_program->food as $food)
+                                                    <div class="food-container">
+                                                        @if($food->pivot->meal_id === $meal->pivot->meal_id)
+                                                            <div class="form-group col-md-offset-3 col-md-6" >
+                                                                <span class="form-control"><strong>Food Name: </strong>{{$food->title}}</span>
+                                                            </div>
+                                                            <div class="form-group col-md-offset-3 col-md-2 quantity-actual-div">
+                                                                <span class="form-control"><strong>Quantity: </strong>{{$food->pivot->quantity}}</span>
+                                                                <input type="hidden" value="{{$food->pivot->quantity}}">
+                                                            </div>
+                                                            <div class="form-group col-md-2 calories-actual-div">
+                                                                <span class="form-control"><strong>Calories: </strong>{{$food->pivot->calories}}</span>
+                                                                <input type="hidden" value="{{$food->pivot->calories}}">
+                                                            </div>
+                                                            <div class="form-group col-md-2">
+                                                                <span class="form-control"><strong>Take Time: </strong>{{$food->pivot->taketime}}</span>
+                                                            </div>
+                                                            <div class="form-group col-md-offset-3 col-md-2 quantity-taken-div">
+                                                                <input class="form-control" type="number" placeholder="Quantity Taken...">
+                                                            </div>
+                                                            <div class="form-group col-md-2 calories-estimated-div">
+                                                                <input class="form-control" type="number" placeholder="Calories Estimated..." disabled>
+                                                            </div>
+                                                            <div class="form-group col-md-2" >
+                                                                <input class="form-control" type="number" placeholder="Time Taken...">
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group meal_detail-div">
-                                        <div class="toggle-content meal_content">
-                                            @foreach($trainee->allocation->diet_program->food as $food)
-                                                @if($food->pivot->meal_id === $meal->pivot->meal_id)
-                                                    <div class="form-group col-md-offset-3 col-md-6" >
-                                                        <span class="form-control"><strong>Food Name: </strong>{{$food->title}}</span>
-                                                    </div>
-                                                    <div class="form-group col-md-offset-3 col-md-2" >
-                                                        <span class="form-control"><strong>Quantity: </strong>{{$food->pivot->quantity}}</span>
-                                                    </div>
-                                                    <div class="form-group col-md-2" >
-                                                        <span class="form-control"><strong>Calories: </strong>{{$food->pivot->calories}}</span>
-                                                    </div>
-                                                    <div class="form-group col-md-2" >
-                                                        <span class="form-control"><strong>Take Time: </strong>{{$food->pivot->taketime}}</span>
-                                                    </div>
-                                                    <div class="form-group col-md-offset-3 col-md-2" >
-                                                        <input class="form-control" type="number" placeholder="Quantity Taken...">
-                                                    </div>
-                                                    <div class="form-group col-md-2" >
-                                                        <input class="form-control" type="number" placeholder="Calories Estimated...">
-                                                    </div>
-                                                    <div class="form-group col-md-2" >
-                                                        <input class="form-control" type="number" placeholder="Time Taken...">
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
+                                </fieldset>
                             @endforeach
-
                         </div>
-                        <div class="form-group program-progress">
-                            <label class="col-sm-3 control-label">Workout Program Progress</label>
-                            <div class="col-md-6">
-                                <div class="progressbar workout-progress" data-value="45">
-                                    <div class="progressbar-value bg-green">
-                                        <div class="progress-label">
-                                            45%
+
+                        <h3 class="content-box-header bg-default">Progress</h3>
+                        <fieldset>
+                            <div class="form-group first-group program-progress">
+                                <label class="col-sm-3 control-label">Workout Program Progress</label>
+                                <div class="col-md-6">
+                                    <div class="progressbar workout-progress" data-value="">
+                                        <div class="progressbar-value">
+                                            <div class="progress-label"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group Diet-Progress">
-                            <label class="col-sm-3 control-label">Diet Program Progress</label>
-                            <div class="col-md-6">
-                                <span class="form-control"></span>
+
+                            <div class="form-group diet-program-progress">
+                                <label class="col-sm-3 control-label">Diet Program Progress</label>
+                                <div class="col-md-6">
+                                    <div class="progressbar diet-progress" data-value="">
+                                        <div class="progressbar-value">
+                                            <div class="progress-label"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-
-                        <div class="form-group submit-btn-div">
-                            <button class="btn ra-100 btn-secondary calculate_progress" type="button">Calculate Progress</button>
-                            <button class="btn ra-100 btn-default" type="submit">Save Progress</button>
-                        </div>
+                            <div class="form-group submit-btn-div">
+                                <div class="col-md-6">
+                                    <button class="btn ra-100 btn-secondary calculate_progress" type="button" disabled>Calculate Progress</button>
+                                </div>
+                                <div div class="col-md-6">
+                                    <button class="btn ra-100 btn-default" type="submit">Save Progress</button>
+                                </div>
+                            </div>
+                        </fieldset>
                     </form>
                 </div>
             </div>

@@ -17,16 +17,16 @@ class UserType
     public function handle($request, Closure $next)
     {
         if (Auth::user() && Auth::user()->type == 'gym') {
-            return $next($request);
+            return 'gym';
         }
         else if (Auth::user() && Auth::user()->type == 'admin') {
             return $next($request);
         }
         else if (Auth::user() && Auth::user()->type == 'trainee') {
-            return $next($request);
+            return 'trainee';
         }
         else if (Auth::user() && Auth::user()->type == 'employee') {
-            return $next($request);
+            return true;
         }
         return redirect('/');
     }

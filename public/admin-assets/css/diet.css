@@ -92,8 +92,7 @@ hr {
     display: none;
 }
 
-.workout-progress .progress-label
-,.workout-progress .progressbar-value{
+.progressbar,.workout-progress .progress-label,.workout-progress .progressbar-value,.diet-progress .progress-label,.diet-progress .progressbar-value{
     line-height: 34px;
     height: 35px;
 }

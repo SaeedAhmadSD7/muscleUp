@@ -34,10 +34,9 @@ class Phase extends Model {
 
         $phase_data = array();
         for($i = 0; $i < count($formData['day_id']) ; $i++) {
-            $phase_data[$i]['day_id'] = $formData['day_id'][$i];
-            $phase_data[$i]['wbs_id'] = $formData['wbs_id'][$i];
+                $phase_data[$i]['day_id'] = $formData['day_id'][$i];
+                $phase_data[$i]['wbs_id'] = $formData['wbs_id'][$i];
         }
-
         $phase->title = $formData['title'];
         $phase->description = $formData['description'];
         $phase->save();

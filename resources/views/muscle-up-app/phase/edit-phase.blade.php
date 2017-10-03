@@ -22,7 +22,7 @@
             <tr style="display: none;" id="tmpRow" class="fieldR">
                 <td style='width:20px;text-align:center;'><span class="sr"></span></td>
                 <td>
-                    <select class="form-control" name="wbs_id[]" id="">
+                    <select class="form-control" name="day_id[]" id="">
                         <option value="0">Select Day:</option>
 
                         @foreach($days as $day)
@@ -31,7 +31,7 @@
                     </select>
                 </td>
                 <td>
-                    <select class="form-control food_name" id="" name="day_id[]">
+                    <select class="form-control food_name" id="" name="wbs_id[]">
                         <option value="0">Select Work BreakDown:</option>
                         @foreach($wbs as $wbs_list)
                             <option value="{{$wbs_list->id}}">{{$wbs_list->title}}</option>
