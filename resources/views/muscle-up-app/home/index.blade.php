@@ -1,6 +1,12 @@
 @extends('layouts.frontend-main')
 @section('title','MuscleUP')
 
+@section('style-sheet')
+    <link href="{{url('/assets/plugins/revolution-slider/css/revolution-slider.css')}}" rel="stylesheet">
+    <link href="{{url('/assets/plugins/owl-carousel-2.2.1/css/owl.carousel.css')}}" rel="stylesheet">
+    <link href="{{url('/assets/plugins/hover-2.1.1/css/hover.css')}}" rel="stylesheet">
+@stop
+
 @section('content')
 
     <!-- Main Slider -->
@@ -594,3 +600,12 @@
 
 
 @endsection
+
+@section('script')
+    <script src="{{url('/assets/plugins/revolution-slider/js/revolution.min.js')}}"></script>
+    <script src="{{url('/assets/plugins/bxslider-4.2.12/js/jquery.bxslider.js')}}"></script>
+    <script src="{{url('/assets/plugins/jquery-appear-0.1/js/jquery.appear.js')}}"></script>
+    <script src="{{url('/assets/plugins/jquery-knob-1.2.13/js/jquery.knob.js')}}"></script>
+    <script src="{{url('/assets/js/index-script.js')}}"></script>
+
+@stop

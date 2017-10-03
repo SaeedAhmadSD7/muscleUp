@@ -14,20 +14,18 @@ class UserType
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next,$type)
     {
-        if (Auth::user() && Auth::user()->type == 'gym') {
-            return 'gym';
+        if (Auth::user()) {
+            if (Auth::user()->type === $type) {
+                return $next($request);
+            }
+            else{
+                return redirect()->route('denied');
+            }
         }
-        else if (Auth::user() && Auth::user()->type == 'admin') {
-            return $next($request);
+        else {
+            return redirect()->route('login');
         }
-        else if (Auth::user() && Auth::user()->type == 'trainee') {
-            return 'trainee';
-        }
-        else if (Auth::user() && Auth::user()->type == 'employee') {
-            return true;
-        }
-        return redirect('/');
     }
 }
