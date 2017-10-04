@@ -4,7 +4,7 @@
 @stop
 
 @section('dashboard_link')
-    {{route('instructor-dashboard')}}
+    {{route('dashboard')}}
 @stop
 @section('user_type')
     Instructor

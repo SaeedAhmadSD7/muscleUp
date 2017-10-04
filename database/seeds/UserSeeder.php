@@ -56,14 +56,14 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'first_name' => 'Instructor',
-            'last_name' => 'Instructor',
+            'first_name' => 'Employee',
+            'last_name' => 'Employee',
             'dob'=>'2017-09-02',
             'dial_code'=>'+92',
             'phone_number'=>'1234567',
-            'email' => 'instructor@example.com',
+            'email' => 'employee@example.com',
             'password' => bcrypt('asdf1234'),
-            'type'=>'instructor',
+            'type'=>'employee',
             'remember_token'=>'0',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
