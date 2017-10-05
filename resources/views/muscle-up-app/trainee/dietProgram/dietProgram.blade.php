@@ -65,11 +65,9 @@
                                                             </div>
                                                             <div class="form-group col-md-offset-3 col-md-2 quantity-actual-div">
                                                                 <span class="form-control"><strong>Quantity: </strong>{{$food->pivot->quantity}}</span>
-                                                                <input type="hidden" value="{{$food->pivot->quantity}}">
                                                             </div>
                                                             <div class="form-group col-md-2 calories-actual-div">
                                                                 <span class="form-control"><strong>Calories: </strong>{{$food->pivot->calories}}</span>
-                                                                <input type="hidden" value="{{$food->pivot->calories}}">
                                                             </div>
                                                             <div class="form-group col-md-2">
                                                                 <span class="form-control"><strong>Take Time: </strong>{{$food->pivot->taketime}}</span>

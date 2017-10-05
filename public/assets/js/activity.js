@@ -129,53 +129,6 @@ $(document).ready(function () {
         })
     });
 
-
-
-    $('.meal_list').select2({
-        placeholder: 'Select Meal...',
-        theme: 'bootstrap'
-    }).on("select2:select", function (e) {
-        var selected_element = $(e.currentTarget);
-        var diet_program_id = $('.diet_program_id').val();
-        var id = selected_element.val();
-        var url = 'activity/dietProgram/' + diet_program_id + '/meal/' + id;
-        $.ajax({
-            method: 'GET',
-            url: url,
-            type: 'json',
-            success: function (data) {
-                $('.meal_detail').prop('disabled', false);
-                $('.meal_content').html('');
-                $.each(data, function (i) {
-                    $('.meal_content').append('' +
-                        '<div class="meal_detail_container">\n'+
-                        '     <div class="form-group col-md-offset-3 col-md-6" >\n' +
-                        '     <span class="form-control"><strong>Food Name: </strong>'+data[i].title+'</span>\n' +
-                        '     </div>\n'+
-                        '     <div class="form-group col-md-offset-3 col-md-2" >\n' +
-                        '         <span class="form-control"><strong>Quantity: </strong>'+data[i].pivot.quantity+'</span>\n' +
-                        '     </div>\n'+
-                        '     <div class="form-group col-md-2" >\n' +
-                        '        <span class="form-control"><strong>Calories: </strong>'+data[i].pivot.calories+'</span>\n' +
-                        '     </div>\n'+
-                        '     <div class="form-group col-md-2" >\n' +
-                        '         <span class="form-control"><strong>Take Time: </strong>'+data[i].pivot.taketime+'</span>\n' +
-                        '     </div>\n'+
-                        '     <div class="form-group col-md-offset-3 col-md-2" >\n' +
-                        '         <input class="form-control" type="number" placeholder="Quantity Taken...">\n' +
-                        '     </div>\n'+
-                        '     <div class="form-group col-md-2" >\n' +
-                        '         <input class="form-control" type="number" placeholder="Calories Estimated...">\n' +
-                        '     </div>\n'+
-                        '     <div class="form-group col-md-2" >\n' +
-                        '         <input class="form-control" type="number" placeholder="Time Taken...">\n' +
-                        '     </div>\n'+
-                        '</div>'+
-                        '');
-                });
-            }
-        })
-    });
     $('.calculate_progress').on('click',function () {
         var workout_progress;
         var diet_progress;

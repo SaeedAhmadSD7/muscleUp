@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\RequestGymRequest;
-use App\Mail\AddGymRequest;
 use App\Models\Country;
 use App\Models\GymRequest;
 use App\Models\User;

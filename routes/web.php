@@ -214,7 +214,7 @@ Route::group(['prefix'=>'trainee','middleware' => ['auth','usertype:trainee']],f
     /***
      * Workout Program View
      */
-    Route::get('show/trainee/list/{id}',['as'=>'show-trainee-list','uses'=>'MuscleUpApp\TraineeListController@show']);
+    Route::get('workoutProgram',['as'=>'workoutprogram-view','uses'=>'MuscleUpApp\TraineeController@workoutProgram']);
 
 
 
