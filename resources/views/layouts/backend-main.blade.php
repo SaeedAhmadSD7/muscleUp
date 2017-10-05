@@ -30,7 +30,9 @@
                     <div id="page-shadow">
                         <div id="header-nav-left">
                             <div class="user-account-btn dropdown">
-                                <a class="user-profile clearfix" data-toggle="dropdown" href="#" title="My Account"><img alt="Profile image" src="{{url('/admin-assets/image-resources/gravatar.jpg')}}" width="28"> <span>Michael Lee</span> <i class="glyph-icon icon-angle-down"></i></a>
+                                <a class="user-profile clearfix" data-toggle="dropdown" href="#" title="My Account">
+                                    <img alt="Profile image" src="{{url('/admin-assets/image-resources/gravatar.jpg')}}" width="28">
+                                    <span>@yield('user-name')</span> <i class="glyph-icon icon-angle-down"></i></a>
                                 <div class="dropdown-menu float-right">
                                     <div class="box-sm">
                                         <div class="login-box clearfix">
@@ -38,7 +40,7 @@
                                                 <img alt="" src="{{url('/admin-assets/image-resources/gravatar.jpg')}}">
                                             </div>
                                             <div class="user-info">
-                                                <span>Michael Lee <i>UX/UI developer</i></span> <a href="#" title="Edit profile">Edit profile</a>
+                                                <span>@yield('user-name')</span> <a href="#" title="Edit profile">Edit profile</a>
                                             </div>
                                         </div>
                                         <div class="divider"></div>

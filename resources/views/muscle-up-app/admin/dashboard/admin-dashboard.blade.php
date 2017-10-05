@@ -3,6 +3,10 @@
     Admin Dashboard
 @stop
 
+@section('user-name')
+    {{\Auth::user()->first_name}}
+@stop
+
 @section('dashboard_link')
     {{route('admin-dashboard')}}
 @stop
