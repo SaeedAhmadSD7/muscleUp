@@ -63,12 +63,12 @@
                             <input class="form-control phone_number" type="text" name="phone_number" value="{{$trainee->phone_number}}" placeholder="Phone Number..." maxlength="15">
                         </div>
                     </div>
-                    {{--<div class="form-group">--}}
-                        {{--<label class="col-sm-3 control-label">Address</label>--}}
-                        {{--<div class="col-sm-4">--}}
-                            {{--<input class="form-control " name="address" value="{{$trainee->address}}" placeholder="Address..." maxlength="255">--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Address</label>
+                        <div class="col-sm-4">
+                            <input class="form-control " name="address" value="{{$trainee->address}}" placeholder="Address..." maxlength="255">
+                        </div>
+                    </div>
                     <div class="form-group">
 
 

@@ -9,10 +9,13 @@
 @stop
 
 @section('content')
+    <div id="page-title">
+        <h2 class="title-hero">ADD Instructor</h2>
+        <p>Please fill in all the information and then click Add Instructor.</p>
+
+    </div>
     <div class="panel">
         <div class="panel-body">
-            <h3 class="title-hero">ADD Instructor</h3>
-            <h4>Please fill in all the information and then click Add Instructor.</h4>
             <div class="example-box-wrapper">
                 <form class="form-horizontal bordered-row add-instructor-form" role="form" method="POST" action="{{route('instructor-store')}}">
                     {{csrf_field()}}
@@ -103,12 +106,13 @@
                             <textarea class="form-control" name="exp_description" placeholder="Experience Description..." maxlength="255"></textarea>
                         </div>
                     </div>
-                    {{--<div class="form-group">--}}
-                        {{--<label class="col-sm-3 control-label">Address</label>--}}
-                        {{--<div class="col-sm-4">--}}
-                            {{--<textarea class="form-control"  placeholder="Address..." maxlength="255"></textarea>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Address</label>
+                        <div class="col-sm-4">
+                            <input class="form-control " placeholder="Address..." name="address" maxlength="255">
+                        </div>
+                    </div>
 
                     <div class="form-group">
 

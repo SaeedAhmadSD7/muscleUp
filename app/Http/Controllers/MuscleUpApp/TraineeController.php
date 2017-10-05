@@ -47,44 +47,44 @@ class TraineeController extends Controller
 
 
 
-    public function medical()
-    {
-        return view('muscle-up-app.trainee.trainee-medical-history');
-    }
-
-
-    public  function  medial_history(Request $request) {
-
-          MedicalHistory::create($request->all());
-
-
-          Session::flash('success','Your profile was successfully updated');
-
-          return redirect()->route('trainee-profile');
-
-      }
-
-
-    public  function view_medical_history($id){
-
-        $medical_history = MedicalHistory::find($id);
-
-
-        return view('muscle-up-app.trainee.view-medical-history')->with('med_his',$medical_history);
-      }
-        public function edit_medical_history($id){
-          $medical_history= MedicalHistory::find($id);
-          return view('muscle-up-app.trainee.edit-medical-history')->with('med_his',$medical_history);
-    }
-    public function medical_history_update(Request $request,$id){
-        $medical_history= MedicalHistory::find($id);
-
-
-        $medical_history->update($request->toArray());
-        $medical_history->save();
-
-        return redirect()->route('trainee-view-medical',$medical_history->id);
-    }
+//    public function medical()
+//    {
+//        return view('muscle-up-app.trainee.trainee-medical-history');
+//    }
+//
+//
+//    public  function  medial_history(Request $request) {
+//
+//          MedicalHistory::create($request->all());
+//
+//
+//          Session::flash('success','Your profile was successfully updated');
+//
+//          return redirect()->route('trainee-profile');
+//
+//      }
+//
+//
+//    public  function view_medical_history($id){
+//
+//        $medical_history = MedicalHistory::find($id);
+//
+//
+//        return view('muscle-up-app.trainee.view-medical-history')->with('med_his',$medical_history);
+//      }
+//        public function edit_medical_history($id){
+//          $medical_history= MedicalHistory::find($id);
+//          return view('muscle-up-app.trainee.edit-medical-history')->with('med_his',$medical_history);
+//    }
+//    public function medical_history_update(Request $request,$id){
+//        $medical_history= MedicalHistory::find($id);
+//
+//
+//        $medical_history->update($request->toArray());
+//        $medical_history->save();
+//
+//        return redirect()->route('trainee-view-medical',$medical_history->id);
+//    }
 
 
     public function inbox(){
@@ -118,18 +118,26 @@ class TraineeController extends Controller
     {
         $instructors = Employee::all();
         $instructors->load('user');
-        $trainees = Trainee::all();
+        $trainees = Trainee::whereNull('employee_id')->get();
         $trainees->load('user');
         return view('muscle-up-app.trainee_allocation.create-allocation',compact('instructors','trainees'));
     }
     public function store_allocation(Request $request)
     {
         $trainee = Trainee::find($request->trainee_id);
-        $trainee->employee()->associate($request->employee_id);
-        $trainee->save();
+
+        for($i = 0; $i < count($trainee) ; $i++) {
+            $trainee[$i]->employee_id = $request->employee_id;
+            $trainee[$i]->save();
+        }
+
+        Session::flash('Success','Congratulations Trainee have been added allocated. ');
 
         return redirect()->route('show-trainee-allocation');
     }
+
+
+
     public function show_allocation()
     {
         $trainees = Trainee::with('user','employee','employee.user')->whereNotNull('employee_id')->get();
@@ -155,8 +163,9 @@ class TraineeController extends Controller
     }
     public function destroy_allocation($id)
     {
-//        $trainee = Trainee::find($id);
-//        $trainee->employee()->delete();
+        $trainee = Trainee::find($id);
+        $trainee->employee_id = NULL;
+        $trainee->save();
 
         return redirect()->route('show-trainee-allocation');
 
@@ -182,6 +191,7 @@ class TraineeController extends Controller
         $password = str_random(8);
         $user->password = bcrypt($password);
         $user['type'] = 'trainee';
+        $user->address=$request->address;
         $user->dial_code = '+27';
         $user->save();
         $trainee = new Trainee($request->all());
@@ -190,10 +200,10 @@ class TraineeController extends Controller
 
 
         Mail::to($user->email)->send(new AddTraineeRequest($user->email,$password));
-        Session::flash('success','Congratulations Trainee have been added succesfully. Credentials have been mailed to entered email.');
+        session()->flash('success','Congratulations Trainee have been added succesfully. Credentials have been mailed to entered email.');
 
 
-        return redirect()->route('gym');
+        return redirect()->route('trainee-list');
     }
 
 
@@ -236,10 +246,6 @@ class TraineeController extends Controller
     public function update(Request $request, $id)
     {
 
-//        $user =User::find($id);
-//        $user->email = $request->input('email');
-//        $user->save();
-
         $trainee =User::find($id);
         $trainee->first_name=$request->input('first_name');
         $trainee->last_name=$request->input('last_name');
@@ -247,12 +253,12 @@ class TraineeController extends Controller
         $trainee->phone_number=$request->input('phone_number');
         $trainee->dob=$request->input('dob');
         $trainee->gender =$request->input('gender');
-//        $trainee->address=$request->input('address');
+        $trainee->address=$request->input('address');
         $trainee->save();
 
 
 
-        Session::flash('success','This Trainee was successfully saved.');
+        Session::flash('success','This Trainee was information successfully update.');
 
 
 //        Redirect with flash data to post.show

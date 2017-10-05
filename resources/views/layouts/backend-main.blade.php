@@ -14,11 +14,11 @@
 <body>
 <div id="sb-site">
     <div id="page-wrapper">
-        @include('includes._message')
         @include('includes.backend._sidebar')
         <div id="page-content-wrapper">
             <div id="page-content">
                 <div id="page-title">
+                    @include('includes._message')
                     @yield('page-heading')
                 </div>
 

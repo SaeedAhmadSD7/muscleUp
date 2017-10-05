@@ -25,7 +25,7 @@
     <div class="panel">
         <div class="panel-body">
             <div class="example-box-wrapper">
-                <form class="form-group diet-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('allocation_store')}}">
+                <form class="form-group allocate-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('allocation_store')}}">
                     {{csrf_field()}}
                     <div class="tab-content">
                         <div class="form-wizard" id="form-wizard-3">
@@ -43,6 +43,7 @@
                                     <td>
                                         <select class="form-control" name="trainee_id" id="">
                                             <option value="0">Select Trainee:</option>
+
                                         @foreach($trainees as $trainee)
                                                 <option value="{{$trainee->id}}">{{$trainee->user->first_name}} {{$trainee->user->last_name}}</option>
                                             @endforeach
@@ -104,7 +105,7 @@
 
 
                             <div style="float:right; margin-right: 300px;">
-                                <input type="submit" value="Submit" class="btn btn-success">
+                                <input type="submit" value="Allocate" class="btn btn-success">
                             </div>
                         </div>
                     </div>
@@ -119,5 +120,6 @@
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/js/allocation.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
 
 @stop

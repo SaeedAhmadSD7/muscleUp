@@ -1,6 +1,6 @@
 @extends('muscle-up-app.gym.dashboard.gym-dashboard')
 
-@section('title','Add trainee')
+@section('title','Branch User')
 
 @section('style-sheet')
     <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
@@ -9,11 +9,6 @@
 @stop
 
 @section('content')
-    <div id="page-title">
-
-        <h2>ADD Trainee</h2>
-        <p>Please fill in all the information and then click Add Trainee.</p>
-    </div>
 
     <div class="panel">
         <div class="panel-body">
@@ -67,16 +62,17 @@
                             <input class="form-control phone_number" type="text" name="phone_number" value="" placeholder="Phone Number..." maxlength="15">
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Address</label>
                         <div class="col-sm-4">
-                            <input class="form-control " placeholder="Address..." name="address" maxlength="255">
+                            <textarea class="form-control " placeholder="Address..." name="address" maxlength="255"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
 
                         <div class="col-sm-offset-6">
-                            <button type="submit" class="btn btn-primary">Add Trainee</button>
+                            <button type="submit" class="btn btn-primary">Add User</button>
                         </div>
                     </div>
                 </form>
@@ -88,5 +84,6 @@
 @section('script')
     <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/add-trainee.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/branch.js')}}" type="text/javascript"></script>
+
 @stop

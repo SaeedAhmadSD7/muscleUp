@@ -8,8 +8,9 @@ use App\Models\Employee;
 use App\Models\Program;
 use App\Models\Trainee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 
 class AllocationController extends Controller
 {
@@ -33,11 +34,8 @@ class AllocationController extends Controller
         /***
          * Auth Instructor to be passed in create argument
          */
-//        $instructor = Employee::first();
-
-//        $trainees = Allocation::where('instructor_id',$instructor->id)->whereNull('program_id')->get();
-//        dd($trainees);
-        $trainees=Trainee::all();
+        $employee = Auth::user()->employee;
+        $trainees=Trainee::where('employee_id',$employee->id)->get();
         $trainees->load('user');
         $programs = Program::showAll();
         $diets = DietProgram::showAll();
@@ -65,6 +63,9 @@ class AllocationController extends Controller
     public function show()
     {
         $allocations = Allocation::with('trainee','trainee.user','diet_program', 'program')->whereNotNull('program_id')->get();
+
+        Session::flash('Success','Congratulations Work out and diet have been added allocated. ');
+
         return view('muscle-up-app.allocation.show-allocation-list',compact('allocations'));
 
 

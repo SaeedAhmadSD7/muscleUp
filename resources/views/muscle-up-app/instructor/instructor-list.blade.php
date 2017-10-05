@@ -5,6 +5,15 @@
 
 
 @section('content')
+    {{--@if(session()->has('success'))--}}
+        {{--<div class ="row">--}}
+            {{--<div class="alert alert-success">--}}
+                {{--<button type="button" class="close" data-dismiss="alert" aria-hidden="">--}}
+
+                {{--</button>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--@endif--}}
     <div class="row mailbox-wrapper">
         <div class="col-md-3" style="display: none;">
             <div class="content-box nav-list mrg15B">

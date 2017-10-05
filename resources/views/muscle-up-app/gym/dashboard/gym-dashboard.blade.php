@@ -38,11 +38,11 @@
         </div>
     </li>
     <li class="menu-element">
-        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Requests</span></a>
+        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Add Branch</span></a>
         <div class="sidebar-submenu">
             <ul>
                 <li>
-                    <a href="{{route('Admin-Inbox')}}" title="Inbox"><span>Inbox</span></a>
+                    <a href="{{route('branch')}}" title="Inbox"><span>Make Branch</span></a>
                 </li>
             </ul>
         </div>

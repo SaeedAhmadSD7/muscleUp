@@ -11,7 +11,7 @@ class Trainee extends Model
     protected $fillable = ["branch_id","instructor_id" ,"user_id","weight","height","bmi","bfp"];
 
     public function user(){
-        return $this->belongsTo(user::class);
+        return $this->belongsTo(User::class);
     }
 
 

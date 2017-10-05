@@ -12,7 +12,7 @@ class User extends Authenticatable
 
     protected $table = 'users';
     protected $primaryKey = 'id';
-    protected $fillable = ["email", "password","first_name","last_name","dial_code","phone_number","dob","gender"];
+    protected $fillable = ["email", "password","first_name","last_name" ,"address","dial_code","phone_number","dob","gender"];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -32,19 +32,8 @@ class User extends Authenticatable
     }
 
 
-    public static function saveUser($params){
 
-        $isValid = true;
-        $response = null;
-        $user = null;
-        if($isValid){
-            $user = self::save($params);
-            $response = ['success'=>false,'error'=>true, 'message' => '', 'Model' => $user];
-        }
-        return $response;
-    }
-
-    function Gym(){
+    function gym(){
         return $this->belongsTo(Gym::class);
     }
 

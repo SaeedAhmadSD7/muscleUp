@@ -49,7 +49,7 @@
         </div>
     </li>
 <li class="menu-element">
-        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Allocation</span></a>
+        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Programs Allocation</span></a>
         <div class="sidebar-submenu">
             <ul>
                 <li><a href="{{route('allocation')}}" title="Inbox"><span>Allocate Plan</span></a></li>

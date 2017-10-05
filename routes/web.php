@@ -48,9 +48,9 @@ Route::group(['prefix'=>'gym','middleware' => ['auth','usertype:gym']],function 
      */
     Route::get('trainee/add',['as'=>'trainee-add','uses'=>'MuscleUpApp\TraineeController@create']);
     Route::post('trainee/store/',['uses'=>'MuscleUpApp\TraineeController@store','as'=>'trainee-store']);
-    Route::get('/trainee/list',['as'=>'trainee-list','uses'=>'MuscleUpApp\TraineeController@inbox']);
-    Route::get('/trainee/list/detail/{id}',['as'=>'trainee-list-detail','uses'=>'MuscleUpApp\TraineeController@trainee_detail']);
-    Route::delete('/trainee/list/delete/{id}',['as'=>'trainee-list-delete','uses'=>'MuscleUpApp\TraineeController@destroy']);
+    Route::get('trainee/list',['as'=>'trainee-list','uses'=>'MuscleUpApp\TraineeController@inbox']);
+    Route::get('trainee/list/detail/{id}',['as'=>'trainee-list-detail','uses'=>'MuscleUpApp\TraineeController@trainee_detail']);
+    Route::delete('trainee/list/delete/{id}',['as'=>'trainee-list-delete','uses'=>'MuscleUpApp\TraineeController@destroy']);
 
 
 
@@ -74,6 +74,16 @@ Route::group(['prefix'=>'gym','middleware' => ['auth','usertype:gym']],function 
     Route::get('trainee/allocation/edit/{id}',['as'=>'edit-trainee-allocation','uses'=>'MuscleUpApp\TraineeController@edit_allocation']);
     Route::post('trainee/allocation/update/{id}',['as'=>'update-trainee-allocation','uses'=>'MuscleUpApp\TraineeController@update_allocation']);
     Route::get('trainee/allocation/delete/{id}',['as'=>'delete-trainee-allocation','uses'=>'MuscleUpApp\TraineeController@destroy_allocation']);
+
+
+    /*****
+    Branch
+     ***/
+    Route::get('/branch',['as'=>'branch','uses'=>'MuscleUpApp\GymController@create_branch']);
+    Route::get('/branch/user',['as'=>'branch-user','uses'=>'MuscleUpApp\GymController@create_branch_user']);
+
+
+
 });
 
 
@@ -209,8 +219,6 @@ Route::group(['prefix'=>'employee','middleware' => ['auth','usertype:employee']]
 
 
 
-
-
 Route::get('/', ['as' => 'home-page', 'uses' => 'MuscleUpApp\HomeController@index']);
 
 
@@ -228,28 +236,6 @@ Route::get('gym/request/process/{id}',['uses'=>'MuscleUpApp\GymController@reques
 
 //Route::post('save-gym',['uses'=>'MuscleUpApp\GymController@save', 'as'=> 'save-gym']);
 Route::post('/gym/add', ['as'=>'add-gym', 'uses'=>'MuscleUpApp\GymController@add_gym']);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -66,10 +66,10 @@
                     <td>{{$trainee->user->gender}}</td>
                 </tr>
 
-                {{--<tr class="address">--}}
-                {{--<th>Address</th>--}}
-                {{--<td>{{$trainee->address}}</td>--}}
-                {{--</tr>--}}
+                <tr class="address">
+                <th>Address</th>
+                <td>{{$trainee->user->address}}</td>
+                </tr>
                 </tbody>
             </table>
         </div>

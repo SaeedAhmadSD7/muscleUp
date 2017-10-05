@@ -14,24 +14,24 @@
             <h3 class="title-hero">Edit Instructor info</h3>
             <h4>Please fill in all the information and then click Add Instructor.</h4>
             <div class="example-box-wrapper">
-                <form class="form-horizontal bordered-row add-instructor-form" role="form" method="POST" action="{{route('instructor-update',$instructor->id)}}">
+                <form class="form-horizontal bordered-row add-instructor-form" role="form" method="POST" action="{{route('instructor-update',$user->id)}}">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Enter First Name:</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" name="first_name" value="{{$instructor->first_name}}" placeholder="First Name ...">
+                            <input class="form-control" type="text" name="first_name" value="{{$user->first_name}}" placeholder="First Name ...">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Enter last Name:</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" name="last_name" value="{{$instructor->last_name}}" placeholder="Last Name...">
+                            <input class="form-control" type="text" name="last_name" value="{{$user->last_name}}" placeholder="Last Name...">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Date of birth:</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="dob" value="{{$instructor->dob}}" placeholder="Date of Birth..." readonly>
+                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="dob" value="{{$user->dob}}" placeholder="Date of Birth..." readonly>
                             <div class="btn-date"></div>
                         </div>
                     </div>
@@ -50,10 +50,10 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Phone number:</label>
                         <div class="col-sm-1">
-                            <input class="form-control dial-code" type="text" name="dial_code" value="{{$instructor->dial_code}}" placeholder="+1..." readonly>
+                            <input class="form-control dial-code" type="text" name="dial_code" value="{{$user->dial_code}}" placeholder="+1..." readonly>
                         </div>
                         <div class="col-sm-3">
-                            <input class="form-control phone_number" type="text" name="phone_number" value="{{$instructor->phone_number}}" placeholder="Phone Number..." maxlength="15">
+                            <input class="form-control phone_number" type="text" name="phone_number" value="{{$user->phone_number}}" placeholder="Phone Number..." maxlength="15">
                         </div>
                     </div>
                     <div class="form-group">
@@ -97,12 +97,12 @@
                             <input class="form-control" name="exp_description" value="{{$employee->exp_description}}" placeholder="Experience Description..." maxlength="255">
                         </div>
                     </div>
-                    {{--<div class="form-group">--}}
-                    {{--<label class="col-sm-3 control-label">Address</label>--}}
-                    {{--<div class="col-sm-4">--}}
-                    {{--<textarea class="form-control"  placeholder="Address..." maxlength="255"></textarea>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Address</label>
+                        <div class="col-sm-4">
+                            <textarea class="form-control" name="address">{{$user->address}}</textarea>
+                        </div>
+                    </div>
 
                     <div class="form-group">
 

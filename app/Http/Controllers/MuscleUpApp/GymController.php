@@ -64,4 +64,16 @@ class GymController extends Controller
 //        Session::flash('success','Account Succesfully created and credentials have been mailed to the email you entered.');
 //        return redirect()->route('admin-dashboard');
     }
+
+
+    public function create_branch(){
+
+        return view('muscle-up-app.branch.create-branch');
+    }
+
+
+    public function create_branch_user(){
+
+        return view('muscle-up-app.branch.create-branch-user');
+    }
 }
