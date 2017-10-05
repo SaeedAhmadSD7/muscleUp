@@ -88,8 +88,8 @@ class TraineeController extends Controller
 
 
     public function inbox(){
-          $trainee =  Trainee::with('user')->get();
-          return view('muscle-up-app.gym.trainee.trainee-list')->with('trainee', $trainee);
+          $trainees =  Trainee::with('user')->get();
+          return view('muscle-up-app.gym.trainee.trainee-list')->with('trainees', $trainees);
       }
 
 

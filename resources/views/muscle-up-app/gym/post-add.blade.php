@@ -1,4 +1,4 @@
-@extends('layouts.backend-main')
+@extends('muscle-up-app.admin.dashboard.admin-dashboard')
 
 @section('title','Add Gym')
 

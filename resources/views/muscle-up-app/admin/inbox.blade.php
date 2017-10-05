@@ -1,6 +1,8 @@
 @extends('muscle-up-app.admin.dashboard.admin-dashboard')
 
 @section('style-sheet')
+    <link href="{{url('/admin-assets/applications/mailbox.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/icons/iconic/iconic.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/assets/css/inbox.css')}}" rel="stylesheet" type="text/css">
 @stop
@@ -24,11 +26,11 @@
                     <thead>
                     <tr>
                         <th class="email-title">Serial</th>
-                        <th class="email-title">Email</th>
                         <th class="email-body">Name</th>
+                        <th class="email-title">Email</th>
                         <th>Date</th>
                         <th>Detail</th>
-                        <th>Delete</th>
+                        {{--<th>Delete</th>--}}
                     </tr>
                     </thead>
                     <tbody>
@@ -36,7 +38,7 @@
                     @foreach($Requests as $Request)
                         <tr id="{{$Request->id}}">
                             <td sty>{{$counter}}</td>
-                            <td class="email-title">{{$Request->name}}</td>
+                            <td class="email-title">{{$Request->title}}</td>
                             <td class="email-body">{{$Request->email}}</td>
                             <td class="date">{{$Request->updated_at}}</td>
                             <td><a href="{{route('message-detail',$Request->id)}}" class="glyph-icon icon-iconic-right-circle"></a></td>
@@ -52,5 +54,6 @@
 @stop
 
 @section('script')
+    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/js/inbox.js')}}" type="text/javascript"></script>
 @stop

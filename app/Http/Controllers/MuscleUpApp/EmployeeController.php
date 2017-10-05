@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Models\Employee;
-use App\Models\Instructor;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -85,10 +84,8 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
-    {
-         $instructors=User::where('type','employee')->get();
-
+    public function show() {
+         $instructors=Employee::with('user')->get();
         return view('muscle-up-app.instructor.instructor-list')->with('instructors',$instructors);
     }
     public function profileshow($id)
@@ -106,11 +103,10 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $user= User::find($id);
-        $employee= Employee::where('user_id','=',$id)->first();
-//        dd($instructor);
+        $employee= Employee::find($id);
+        $employee->user;
 
-        return view('muscle-up-app.instructor.edit-instructor-info', compact('user','employee'));
+        return view('muscle-up-app.instructor.edit-instructor-info', compact('employee'));
     }
 
     /**
@@ -157,9 +153,8 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $instructor=User::find($id);
-        $instructor->delete();
-        $employee = Employee::where('user_id', '=', $id);
+        $employee = Employee::find($id);
+        $employee->user()->delete();
         $employee->delete();
         return redirect()->route('instructor-show');
     }

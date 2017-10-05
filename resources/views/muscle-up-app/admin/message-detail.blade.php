@@ -5,6 +5,16 @@
     <p>Request for Registration</p>
 @stop
 
+@section('style-sheet')
+    <link href="{{url('/admin-assets/applications/mailbox.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/icons/iconic/iconic.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('/assets/css/inbox.css')}}" rel="stylesheet" type="text/css">
+@stop
+
+
 @section('content')
     <div class="row mailbox-wrapper">
         <div class="col-md-12">
@@ -64,11 +74,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="button-pane">
+                        <a class="btn ra-100 btn-secondary accept_request" href="{{route('process-request',$Request->id)}}"><i class="glyph-icon icon-mail-reply"></i> Process Request</a>
+                    </div>
                 </div>
 
-                <div class="button-pane">
-                    <a class="btn ra-100 btn-secondary accept_request" href="{{route('process-request',$Request->id)}}"><i class="glyph-icon icon-mail-reply"></i> Process Request</a>
-                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
 use Carbon\Carbon;
 
 class UserSeeder extends Seeder
@@ -12,7 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->truncate();
+        User::truncate();
 
         /***
          * Admin
@@ -52,8 +53,8 @@ class UserSeeder extends Seeder
         ]);
         DB::table('gyms')->insert([
             'user_id' => '2',
-            'title' => 'Gym',
-            'email' => 'shapes@gmail.com',
+            'title' => 'Crossfit',
+            'email' => 'crossfit@example.com',
             'country'=>'pakistan',
             'city'=>'lahore',
             'dial_code'=>'+92',
