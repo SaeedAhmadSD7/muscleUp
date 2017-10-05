@@ -80,6 +80,7 @@ $(function($) {
      ========================================================================== */
 
     $(document).ready(function() {
+        handlePreloader();
         headerStyle();
         backToTop();
     });
@@ -92,14 +93,5 @@ $(function($) {
         headerStyle();
         ScrollToActiveMenu();
     });
-
-    /* ==========================================================================
-     When document is loading, do
-     ========================================================================== */
-
-    $(window).on('load', function() {
-    	handlePreloader();
-    });
-
 
 });

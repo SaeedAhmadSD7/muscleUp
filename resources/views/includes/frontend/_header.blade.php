@@ -1,5 +1,5 @@
 <!-- Preloader -->
-{{--<div class="preloader"></div>--}}
+<div class="preloader"><div class="svg-icon-loader"><img alt="" src="{{url('/assets/preloader/bars.svg')}}" width="40"></div></div>
 
 
 <header class="main-header">

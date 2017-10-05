@@ -215,7 +215,6 @@ $(document).ready(function () {
         diet_progress = (Math.round(diet_progress*100)/100).toFixed(2);
         var diet_width  = Math.min(Math.max(parseInt(diet_progress * (parseInt($('.diet-progress').css('width')))/100), 1), parseInt($('.diet-progress').css('width')));
 
-        console.log(diet_progress);
 
 
         if(parseInt(workout_progress) < 25){

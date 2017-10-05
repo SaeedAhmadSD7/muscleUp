@@ -1,6 +1,8 @@
 <?php
 
 Auth::routes();
+
+Route::get('/', ['as' => 'home-page', 'uses' => 'MuscleUpApp\HomeController@index']);
 Route::get('/logout', ['uses'=>'\App\Http\Controllers\Auth\LoginController@logout','as'=>'logout']);
 
 /***
@@ -204,19 +206,35 @@ Route::group(['prefix'=>'trainee','middleware' => ['auth','usertype:trainee']],f
 
 
     /***
-     * Trainee Activities
+     * Diet Program View
      */
-    Route::get('/trainee/activities',['uses'=>'MuscleUpApp\TraineeActivityController@index','as'=>'trainee-activities']);
+    Route::get('dietProgram',['as'=>'dietprogram-view','uses'=>'MuscleUpApp\TraineeController@dietProgram']);
+
+
+    /***
+     * Workout Program View
+     */
+    Route::get('show/trainee/list/{id}',['as'=>'show-trainee-list','uses'=>'MuscleUpApp\TraineeListController@show']);
+
+
+
+    /***
+     * Progress
+     */
+    Route::get('activity',['uses'=>'MuscleUpApp\TraineeController@activity','as'=>'trainee-activity']);
+
+
 
 
     /***
      * Ajax Requests
      */
-    Route::get('/trainee/{id}/activity',['uses'=>'MuscleUpApp\TraineeController@activity','as'=>'trainee-activity']);
     Route::get('/trainee/{id}/activity/phase/{phase}','MuscleUpApp\PhaseController@getPhaseDetails');
     Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}','MuscleUpApp\PhaseController@getDayDetails');
     Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}/wbs/{wbs}','MuscleUpApp\PhaseController@getWbsDetails');
     Route::get('/trainee/{id}/activity/dietProgram/{dietProgram}/meal/{meal}','MuscleUpApp\DietProgramController@foodList');
+
+
 });
 
 
@@ -234,16 +252,12 @@ Route::group(['prefix'=>'trainee','middleware' => ['auth','usertype:trainee']],f
 
 
 
-Route::get('/', ['as' => 'home-page', 'uses' => 'MuscleUpApp\HomeController@index']);
 
 
 //contactUs
 Route::get('/home/contact', ['as' => 'home.store', 'uses' => 'MuscleUpApp\ContactController@store']);
 
 
-/***
- * Gym Request
- */
 
 
 
@@ -268,7 +282,6 @@ Route::post('contact/store',['as'=>'contact-store','uses'=>'MuscleUpApp\ContactC
 Route::post('postcontact',['as'=>'postContact','uses'=>'MuscleUpApp\ContactController@postContact']);
 
 
-Route::get('show/trainee/list/{id}',['as'=>'show-trainee-list','uses'=>'MuscleUpuApp\TraineeListController@show']);
 
 
 //Route::get('/admin', 'Auth\AdminController@index');

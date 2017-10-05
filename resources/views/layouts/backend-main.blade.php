@@ -8,10 +8,14 @@
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <title>@yield('title')</title>
 
+    <style>#loading .svg-icon-loader {position: absolute;top: 50%;left: 50%;margin: -50px 0 0 -50px;}</style>
     @include('includes.backend._stylesheet')
     @yield('style-sheet')
 </head>
 <body>
+<div id="loading">
+    <div class="svg-icon-loader"><img alt="" src="{{url('/assets/preloader/bars.svg')}}" width="40"></div>
+</div>
 <div id="sb-site">
     <div id="page-wrapper">
         @include('includes.backend._sidebar')
@@ -57,6 +61,7 @@
 
 <footer>
     @include('includes.backend._script')
+    <script type="text/javascript">$(window).load(function(){setTimeout(function() {$('#loading').fadeOut( 400, "linear" );}, 300);});</script>
     @yield('script')
 </footer>
 

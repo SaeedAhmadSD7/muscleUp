@@ -265,23 +265,61 @@ class TraineeController extends Controller
         return redirect()->route('trainee-personal-detail',$trainee->id);
     }
 
-    public function Activity($id) {
-        $trainee = Trainee::find($id);
+    /***
+     * Diet Program
+     * @return \Illuminate\Http\Response
+     */
+
+    public function dietProgram() {
+        $trainee = Trainee::where('user_id',Auth::user()->id)->first();
+
+        if($trainee->allocation){
+            $trainee->allocation->diet_program->meal;
+            $trainee->allocation->diet_program->food;
+            $dietProgram = 1;
+        }
+        else {
+            $dietProgram = 0;
+        }
+
+        return view('muscle-up-app.trainee.activity.activity')->with(['trainee'=>$trainee,'dietProgram'=>$dietProgram]);
+    }
+
+
+
+
+
+
+
+
+
+    /***
+     * Acitivity Markup
+     * @return \Illuminate\Http\Response
+     */
+    public function activity() {
+        $trainee = Trainee::where('user_id',Auth::user()->id)->first();
 
         $days = array();
         $phase_daycount = array();
 
-        foreach($trainee->allocation->program->phase as $phase){
-            $days[] = $phase->day()->get();
+        if($trainee->allocation){
+            foreach($trainee->allocation->program->phase as $phase){
+                $days[] = $phase->day()->get();
+            }
+
+            foreach ($days as $phase_day){
+                $phase_daycount[] =count($phase_day->unique()->toArray());
+            }
+            $trainee->allocation->program->phase;
+            $trainee->allocation->diet_program->meal;
+            $trainee->allocation->diet_program->food;
+        }
+        else {
+            $phase_daycount = 0;
         }
 
-        foreach ($days as $phase_day){
-            $phase_daycount[] =count($phase_day->unique()->toArray());
-        }
-        $trainee->allocation->program->phase;
-        $trainee->allocation->diet_program->meal;
-        $trainee->allocation->diet_program->food;
-        return view('muscle-up-app.activity.activity')->with(['trainee'=>$trainee,'phase_daycount'=>$phase_daycount]);
+        return view('muscle-up-app.trainee.activity.activity')->with(['trainee'=>$trainee,'phase_daycount'=>$phase_daycount]);
     }
 
 

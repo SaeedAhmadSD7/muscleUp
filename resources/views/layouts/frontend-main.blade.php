@@ -10,7 +10,6 @@
     @include('includes.frontend._header')
 </head>
 <body>
-
 <div class="page-wrapper">
     @include('includes._message')
     @yield('content')

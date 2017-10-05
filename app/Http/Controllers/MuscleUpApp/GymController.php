@@ -19,7 +19,7 @@ class GymController extends Controller
     public function index() {
         return view('muscle-up-app.gym.index');
     }
-    public function request()
+    public function joinRequest()
     {
         $countries = Country::all();
         return view('muscle-up-app.gym.request-form')->with('countries', $countries);

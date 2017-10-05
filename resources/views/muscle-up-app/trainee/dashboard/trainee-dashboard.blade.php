@@ -12,10 +12,8 @@
 @stop
 
 @section('sidebar_content')
-    <li class="header"><span>Profile Box</span></li>
-    <li class="menu-element">
-        <a class="col-md-10 col-md-offset-2" href="{{route('trainee-profile')}}"><i class="glyph-icon icon-linecons-tv"></i><span>View Profile</span></a>
-    </li>
-
-
+    <li class="header"><span>Memebers Area</span></li>
+    <li class="menu-element"><a href="{{route('dietprogram-view')}}"><i class="glyph-icon icon-linecons-tv"></i><span>Diet Program</span></a></li>
+    <li class="menu-element"><a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Workout Program</span></a></li>
+    <li class="menu-element"><a href="{{route('trainee-activity')}}"><i class="glyph-icon icon-linecons-tv"></i><span>Progress</span></a></li>
 @stop
