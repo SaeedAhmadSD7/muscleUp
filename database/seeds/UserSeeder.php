@@ -13,6 +13,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->truncate();
+
+        /***
+         * Admin
+         */
+
         DB::table('users')->insert([
             'first_name' => 'Admin',
             'last_name' => 'Admin',
@@ -20,7 +25,7 @@ class UserSeeder extends Seeder
             'dial_code'=>'+92',
             'phone_number'=>'1234567',
             'email' => 'admin@example.com',
-            'password' => bcrypt('badeo520'),
+            'password' => bcrypt('admin123'),
             'type'=>'admin',
             'address'=>'addressed',
             'remember_token'=>'0',
@@ -28,6 +33,9 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
+        /***
+         * Gym
+         */
         DB::table('users')->insert([
             'first_name' => 'Gym',
             'last_name' => 'Gym',
@@ -42,7 +50,44 @@ class UserSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
+        DB::table('gyms')->insert([
+            'user_id' => '2',
+            'title' => 'Gym',
+            'address'=>'addressed',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
 
+
+        /***
+         * Employee
+         */
+        DB::table('users')->insert([
+            'first_name' => 'Employee',
+            'last_name' => 'Employee',
+            'dob'=>'2017-09-02',
+            'dial_code'=>'+92',
+            'phone_number'=>'1234567',
+            'email' => 'employee@example.com',
+            'password' => bcrypt('asdf1234'),
+            'type'=>'employee',
+            'address'=>'addressed',
+            'remember_token'=>'0',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('employees')->insert([
+            'user_id' => '2',
+            'title' => 'Gym',
+            'address'=>'addressed',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+
+        /***
+         * Trainee
+         */
         DB::table('users')->insert([
             'first_name' => 'Trainee',
             'last_name' => 'Trainee',
@@ -57,18 +102,9 @@ class UserSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
-
-        DB::table('users')->insert([
-            'first_name' => 'Employee',
-            'last_name' => 'Employee',
-            'dob'=>'2017-09-02',
-            'dial_code'=>'+92',
-            'phone_number'=>'1234567',
-            'email' => 'employee@example.com',
-            'password' => bcrypt('asdf1234'),
-            'type'=>'employee',
+        DB::table('trainees')->insert([
+            'user_id' => '4',
             'address'=>'addressed',
-            'remember_token'=>'0',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);

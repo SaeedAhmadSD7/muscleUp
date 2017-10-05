@@ -24,7 +24,6 @@ class CreateUsersTable extends Migration
             $table->enum('gender',['male','female']);
             $table->integer('dial_code')->default('1')->unsigned();
             $table->integer('phone_number')->unsigned();
-            $table->string('address',1024);
             $table->string('profile_img')->default('default.jpg');
             $table->string('address',1024);
             $table->rememberToken();
