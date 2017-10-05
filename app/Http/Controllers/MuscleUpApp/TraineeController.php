@@ -296,6 +296,10 @@ class TraineeController extends Controller
             foreach($trainee->allocation->program->phase as $phase){
                 $days[] = $phase->day()->get();
             }
+            foreach ($days as $phase_day){
+                $phase_daycount[] =count($phase_day->unique()->toArray());
+            }
+
         }
         else {
             $phase_daycount = 0;

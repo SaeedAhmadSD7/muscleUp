@@ -50,13 +50,22 @@ class UserSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
-//        DB::table('gyms')->insert([
-//            'user_id' => '2',
-//            'title' => 'Gym',
-//            'address'=>'addressed',
-//            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-//            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-//        ]);
+        DB::table('gyms')->insert([
+            'user_id' => '2',
+            'title' => 'Gym',
+            'email' => 'shapes@gmail.com',
+            'country'=>'pakistan',
+            'city'=>'lahore',
+            'dial_code'=>'+92',
+            'phone_number'=>'1234567',
+            'open_time'=> 2017-01-01,
+            'close_time'=> 2017-01-01,
+            'latitude'=>'1.00',
+            'longitude'=>'1.00',
+            'address'=>'addressed',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
 
 
         /***
@@ -76,11 +85,17 @@ class UserSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
-//        DB::table('employees')->insert([
-//            'user_id' => '3',
-//            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-//            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-//        ]);
+        DB::table('employees')->insert([
+            'user_id' => '3',
+            'joining_date' => '2017:09:02',
+            'quit_date' => '2017:09:03',
+            'previous_salary' => '2000',
+            'joining_salary' => '255000',
+            'exp_years' => 3,
+            'exp_description' => 'work ',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
 
 
         /***
@@ -102,6 +117,10 @@ class UserSeeder extends Seeder
         ]);
         DB::table('trainees')->insert([
             'user_id' => '4',
+            'weight' => '50.0',
+            'height' => '5.7',
+            'bmi' => '5',
+            'bfp' => '5.00',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);

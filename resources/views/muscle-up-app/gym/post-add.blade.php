@@ -1,6 +1,6 @@
 @extends('layouts.backend-main')
 
-@section('title','Add trainee')
+@section('title','Add Gym')
 
 @section('style-sheet')
     <link href="{{url('/assets/plugins/select2/css/select2.css')}}" rel="stylesheet">
@@ -45,7 +45,7 @@
                                         <div class="form-group first-group">
                                             <label class="col-sm-3 control-label">Gym Title:</label>
                                             <div class="col-sm-6">
-                                                <input class="form-control" type="text" name="title" value="{{$gymdata['name']}}" placeholder="Gym Name...">
+                                                <input class="form-control" type="text" name="title" value="{{$gymdata['title']}}" placeholder="Gym Name...">
                                             </div>
                                         </div>
                                         <div class="form-group">

@@ -17,7 +17,7 @@ class CreateGymRequestsTable extends Migration
             $table->increments('id');
             $table->string('title',60)->unique();
             $table->string('email',40)->unique();
-            $table->unsignedSmallInteger('branch');
+            $table->unsignedSmallInteger('num_branches');
             $table->string('country');
             $table->string('city');
             $table->string('dial_code',4);

@@ -1,5 +1,6 @@
 @extends('muscle-up-app.trainee.dashboard.trainee-dashboard')
-@section('title','Acitivity Markdown')
+
+@section('title','Progress')
 
 @section('style-sheet')
     <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
@@ -27,8 +28,9 @@
             <div class="example-box-wrapper">
                 <div class="form-wizard" id="form-wizard-3">
                     @if($phase_daycount)
-                        <div class="tab-content">
-                            <h3 class="content-box-header bg-default">Acitvity Mark Progress</h3>
+                        <form class="workout-program form-horizontal bordered-row" action="">
+                            <div class="tab-content">
+                            <h3 class="content-box-header bg-default">Activity Mark Progress</h3>
                             <div class="form-group first-group">
                                 <label class="col-sm-3 control-label">Program Name</label>
                                 <div class="col-sm-6">
@@ -64,7 +66,7 @@
                             </div>
                             <div class="form-group wbs"></div>
                         </div>
-
+                        </form>
                     @else
                         <div class="tab-content">
                             <h3 class="content-box-header bg-default">Workout Program</h3>

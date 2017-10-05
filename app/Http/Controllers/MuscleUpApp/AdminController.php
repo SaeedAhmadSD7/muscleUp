@@ -75,9 +75,18 @@ class AdminController extends Controller
 
     }
 
+    public function gymList(){
+        $gyms=Gym::showAll();
+        return view('muscle-up-app.admin.gym-list')->with('gyms',$gyms);
+    }
 
 
-
-
+    public function destroy($id)
+    {
+        $gym =Gym::find($id);
+        $gym->user()->delete();
+        $gym->delete();
+        return redirect()->route('gym-list');
+    }
 }
 

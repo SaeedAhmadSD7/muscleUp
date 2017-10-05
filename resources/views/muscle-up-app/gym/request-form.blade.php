@@ -36,7 +36,7 @@
                             <div class="fields clearfix">
 
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">
-                                    <input type="text" name="name" value="{{old('name')}}" placeholder="Gym Name...">
+                                    <input type="text" name="title" value="{{old('title')}}" placeholder="Gym Name...">
                                 </div>
 
                                 <div class="form-group col-md-6 col-sm-12 col-xs-12 text-field">

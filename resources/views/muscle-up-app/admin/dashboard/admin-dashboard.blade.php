@@ -30,6 +30,15 @@
             </ul>
         </div>
     </li>
-
+    <li class="menu-element">
+        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>GYM'S</span></a>
+        <div class="sidebar-submenu">
+            <ul>
+                <li>
+                    <a href="{{route('gym-list')}}" title="Inbox"><span>view List</span></a>
+                </li>
+            </ul>
+        </div>
+    </li>
 
 @stop

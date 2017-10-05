@@ -58,4 +58,10 @@ class Gym extends Model {
     function instructor(){
         return $this->hasMany(Instructor::class);
     }
+
+    public static function showAll() {
+
+        $gym = Gym::all();
+        return $gym;
+    }
 }

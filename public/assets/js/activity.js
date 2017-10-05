@@ -74,7 +74,6 @@ $(document).ready(function () {
         $.ajax({
             method: 'GET',
             url: phase_url+day_url,
-            type: 'json',
             success: function (data) {
                 $('.wbs').html('');
                 $.each(data, function (i, val) {

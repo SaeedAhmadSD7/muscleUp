@@ -36,11 +36,11 @@ Route::group(['prefix'=>'admin','middleware' => ['usertype:admin']],function () 
     Route::get('inbox/message/detail/{id}',['uses'=>'MuscleUpApp\AdminController@messageDetail','as'=>'message-detail']);
     Route::get('/request/process/{id}',['uses'=>'MuscleUpApp\AdminController@requestProcess', 'as'=> 'process-request']);
     Route::post('/add/gym',['uses'=>'MuscleUpApp\AdminController@addGym', 'as'=> 'add-gym']);
+    Route::get('gym/list',['as'=>'gym-list','uses'=>'MuscleUpApp\AdminController@gymList']);
+    Route::get('gym/list/delete/{id}',['as'=>'gym-list-delete','uses'=>'MuscleUpApp\AdminController@destroy']);
 
 
 });
-
-
 
 
 
@@ -65,7 +65,7 @@ Route::group(['prefix'=>'gym','middleware' => ['auth','usertype:gym']],function 
     Route::post('trainee/store/',['uses'=>'MuscleUpApp\TraineeController@store','as'=>'trainee-store']);
     Route::get('trainee/list',['as'=>'trainee-list','uses'=>'MuscleUpApp\TraineeController@inbox']);
     Route::get('trainee/list/detail/{id}',['as'=>'trainee-list-detail','uses'=>'MuscleUpApp\TraineeController@trainee_detail']);
-    Route::delete('trainee/list/delete/{id}',['as'=>'trainee-list-delete','uses'=>'MuscleUpApp\TraineeController@destroy']);
+    Route::get('trainee/list/delete/{id}',['as'=>'trainee-list-delete','uses'=>'MuscleUpApp\TraineeController@destroy']);
 
 
 
@@ -229,10 +229,10 @@ Route::group(['prefix'=>'trainee','middleware' => ['auth','usertype:trainee']],f
     /***
      * Ajax Requests
      */
-    Route::get('/trainee/{id}/activity/phase/{phase}','MuscleUpApp\PhaseController@getPhaseDetails');
-    Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}','MuscleUpApp\PhaseController@getDayDetails');
-    Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}/wbs/{wbs}','MuscleUpApp\PhaseController@getWbsDetails');
-    Route::get('/trainee/{id}/activity/dietProgram/{dietProgram}/meal/{meal}','MuscleUpApp\DietProgramController@foodList');
+    Route::get('activity/phase/{phase}','MuscleUpApp\PhaseController@getPhaseDetails');
+    Route::get('activity/phase/{phase}/day/{day}','MuscleUpApp\PhaseController@getDayDetails');
+    Route::get('activity/phase/{phase}/day/{day}/wbs/{wbs}','MuscleUpApp\PhaseController@getWbsDetails');
+    Route::get('activity/dietProgram/{dietProgram}/meal/{meal}','MuscleUpApp\DietProgramController@foodList');
 
 
 });

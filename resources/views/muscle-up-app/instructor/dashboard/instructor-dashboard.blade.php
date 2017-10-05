@@ -9,7 +9,7 @@
 
 
 @section('dashboard_link')
-    {{route('dashboard')}}
+    {{route('employee-dashboard')}}
 @stop
 @section('user_type')
     Instructor
