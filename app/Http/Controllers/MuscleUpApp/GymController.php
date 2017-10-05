@@ -25,7 +25,7 @@ class GymController extends Controller
         return view('muscle-up-app.gym.request-form')->with('countries', $countries);
     }
 
-    public function request_save(RequestGymRequest $request)
+    public function requestSubmit(RequestGymRequest $request)
     {
         $gym_request = new GymRequest($request->all());
         $gym_request->save();
