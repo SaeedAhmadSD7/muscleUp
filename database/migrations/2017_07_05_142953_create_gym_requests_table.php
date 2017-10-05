@@ -15,14 +15,14 @@ class CreateGymRequestsTable extends Migration
     {
         Schema::create('gym_requests', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
-            $table->string('email')->unique();
-            $table->Integer('num_branches')->unsigned();
+            $table->string('title',60)->unique();
+            $table->string('email',40)->unique();
+            $table->unsignedSmallInteger('branch');
             $table->string('country');
             $table->string('city');
             $table->string('dial_code',4);
-            $table->Integer('phone_number')->unsigned();
-            $table->text('address');
+            $table->unsignedInteger('phone_number');
+            $table->string('address',1024);
             $table->double('latitude')->default(0.0);
             $table->double('longitude')->default(0.0);
             $table->timestamps();

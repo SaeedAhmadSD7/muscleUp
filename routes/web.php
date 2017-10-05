@@ -2,7 +2,18 @@
 
 Auth::routes();
 Route::get('/logout', ['uses'=>'\App\Http\Controllers\Auth\LoginController@logout','as'=>'logout']);
+
+/***
+ * Permission Denied
+ */
 Route::get('/denied', function (){return view('muscle-up-app.errors.permission-denied');})->name('denied');
+
+
+/***
+ * Join Request
+ */
+Route::get('gym/request/join', ['uses'=>'MuscleUpApp\GymController@joinRequest', 'as'=>'gym-request']);
+Route::post('gym/request/save',['uses'=>'MuscleUpApp\GymController@requestSubmit', 'as'=> 'save-request']);
 
 
 
@@ -19,10 +30,12 @@ Route::group(['prefix'=>'admin','middleware' => ['usertype:admin']],function () 
     /***
      * Requests
      */
-    Route::get('Inbox',['as'=>'Admin-Inbox','uses'=>'MuscleUpApp\AdminController@inbox']);
-    Route::get('inbox/message/detail/{id}',['as'=>'message-detail','uses'=>'MuscleUpApp\AdminController@message_detail']);
-    Route::get('inbox/message/delete/{id}',['as'=>'message-delete','uses'=>'MuscleUpApp\AdminController@message_detail']);
-    Route::get('inbox/message/accept/{id}',['as'=>'message-accept','uses'=>'MuscleUpApp\AdminController@request_accept']);
+    Route::get('inbox',['as'=>'Admin-Inbox','uses'=>'MuscleUpApp\AdminController@inbox']);
+    Route::get('inbox/message/detail/{id}',['uses'=>'MuscleUpApp\AdminController@messageDetail','as'=>'message-detail']);
+    Route::get('/request/process/{id}',['uses'=>'MuscleUpApp\AdminController@requestProcess', 'as'=> 'process-request']);
+    Route::post('/add/gym',['uses'=>'MuscleUpApp\AdminController@addGym', 'as'=> 'add-gym']);
+
+
 });
 
 
@@ -39,7 +52,7 @@ Route::group(['prefix'=>'gym','middleware' => ['auth','usertype:gym']],function 
     /***
      * Dashboard
      */
-    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'dashboard']);
+    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'gym-dashboard']);
 
 
 
@@ -89,51 +102,6 @@ Route::group(['prefix'=>'gym','middleware' => ['auth','usertype:gym']],function 
 
 
 
-
-
-/***
- * Trainee Routes
- */
-Route::group(['prefix'=>'trainee','middleware' => ['auth','usertype:trainee']],function () {
-
-    /***
-     * Dashboard
-     */
-    Route::get('dashboard',['uses'=>'MuscleUpApp\TraineeController@index','as'=>'dashboard']);
-
-
-
-    /***
-     * Medical History
-     */
-    Route::get('trainee/medical',['as'=>'trainee-medical','uses'=>'MuscleUpApp\TraineeController@medical']);
-    Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'MuscleUpApp\TraineeController@medial_history']);
-    Route::get('trainee/view/medical/{id}',['as'=>'trainee-view-medical','uses'=>'MuscleUpApp\TraineeController@view_medical_history']);
-    Route::get('trainee/medical/edit/{id}',['as'=>'edit-trainee-medical','uses'=>'MuscleUpApp\TraineeController@edit_medical_history']);
-    Route::post('trainee/medical/update/{id}',['as'=>'trainee-medical-update','uses'=>'MuscleUpApp\TraineeController@medical_history_update']);
-
-
-    /***
-     * Trainee Activities
-     */
-    Route::get('/trainee/activities',['uses'=>'MuscleUpApp\TraineeActivityController@index','as'=>'trainee-activities']);
-
-
-    /***
-     * Ajax Requests
-     */
-    Route::get('/trainee/{id}/activity',['uses'=>'MuscleUpApp\TraineeController@activity','as'=>'trainee-activity']);
-    Route::get('/trainee/{id}/activity/phase/{phase}','MuscleUpApp\PhaseController@getPhaseDetails');
-    Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}','MuscleUpApp\PhaseController@getDayDetails');
-    Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}/wbs/{wbs}','MuscleUpApp\PhaseController@getWbsDetails');
-    Route::get('/trainee/{id}/activity/dietProgram/{dietProgram}/meal/{meal}','MuscleUpApp\DietProgramController@foodList');
-});
-
-
-
-
-
-
 /***
  * Employee Routes
  */
@@ -142,7 +110,7 @@ Route::group(['prefix'=>'employee','middleware' => ['auth','usertype:employee']]
     /***
      * Dashboard
      */
-    Route::get('dashboard',['uses'=>'MuscleUpApp\EmployeeController@index','as'=>'dashboard']);
+    Route::get('dashboard',['uses'=>'MuscleUpApp\EmployeeController@index','as'=>'employee-dashboard']);
 
 
 
@@ -213,6 +181,53 @@ Route::group(['prefix'=>'employee','middleware' => ['auth','usertype:employee']]
 
 
 
+/***
+ * Trainee Routes
+ */
+Route::group(['prefix'=>'trainee','middleware' => ['auth','usertype:trainee']],function () {
+
+    /***
+     * Dashboard
+     */
+    Route::get('dashboard',['uses'=>'MuscleUpApp\TraineeController@index','as'=>'trainee-dashboard']);
+
+
+
+    /***
+     * Medical History
+     */
+    Route::get('trainee/medical',['as'=>'trainee-medical','uses'=>'MuscleUpApp\TraineeController@medical']);
+    Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'MuscleUpApp\TraineeController@medial_history']);
+    Route::get('trainee/view/medical/{id}',['as'=>'trainee-view-medical','uses'=>'MuscleUpApp\TraineeController@view_medical_history']);
+    Route::get('trainee/medical/edit/{id}',['as'=>'edit-trainee-medical','uses'=>'MuscleUpApp\TraineeController@edit_medical_history']);
+    Route::post('trainee/medical/update/{id}',['as'=>'trainee-medical-update','uses'=>'MuscleUpApp\TraineeController@medical_history_update']);
+
+
+    /***
+     * Trainee Activities
+     */
+    Route::get('/trainee/activities',['uses'=>'MuscleUpApp\TraineeActivityController@index','as'=>'trainee-activities']);
+
+
+    /***
+     * Ajax Requests
+     */
+    Route::get('/trainee/{id}/activity',['uses'=>'MuscleUpApp\TraineeController@activity','as'=>'trainee-activity']);
+    Route::get('/trainee/{id}/activity/phase/{phase}','MuscleUpApp\PhaseController@getPhaseDetails');
+    Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}','MuscleUpApp\PhaseController@getDayDetails');
+    Route::get('/trainee/{id}/activity/phase/{phase}/day/{day}/wbs/{wbs}','MuscleUpApp\PhaseController@getWbsDetails');
+    Route::get('/trainee/{id}/activity/dietProgram/{dietProgram}/meal/{meal}','MuscleUpApp\DietProgramController@foodList');
+});
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -230,12 +245,6 @@ Route::get('/home/contact', ['as' => 'home.store', 'uses' => 'MuscleUpApp\Contac
  * Gym Request
  */
 
-Route::get('gym/request/join', ['uses'=>'MuscleUpApp\GymController@request', 'as'=>'gym-request']);
-Route::post('gym/request/save',['uses'=>'MuscleUpApp\GymController@request_save', 'as'=> 'save-request']);
-Route::get('gym/request/process/{id}',['uses'=>'MuscleUpApp\GymController@request_process', 'as'=> 'process-request']);
-
-//Route::post('save-gym',['uses'=>'MuscleUpApp\GymController@save', 'as'=> 'save-gym']);
-Route::post('/gym/add', ['as'=>'add-gym', 'uses'=>'MuscleUpApp\GymController@add_gym']);
 
 
 

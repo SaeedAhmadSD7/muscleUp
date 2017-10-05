@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Gym extends Model {
-    protected $table= 'gym';
+    protected $table= 'gyms';
     protected $primaryKey = 'id';
-    protected $fillable = ['user_id','name','email','dial_code','phone_number','country','city','address','open_time','close_time','latitude','longitude'];
+    protected $fillable = ['user_id','name','email','dial_code','phone_number','country','city','open_time','close_time','latitude','longitude','address'];
     function  user(){
         return $this->belongsTo(User::class);
     }

@@ -40,7 +40,7 @@
                             <td class="email-body">{{$Request->email}}</td>
                             <td class="date">{{$Request->updated_at}}</td>
                             <td><a href="{{route('message-detail',$Request->id)}}" class="glyph-icon icon-iconic-right-circle"></a></td>
-                            <td><a href="{{route('message-delete',$Request->id)}}" class="glyph-icon icon-iconic-cancel-circle"></a></td>
+                            {{--<td><a href="{{route('message-delete',$Request->id)}}" class="glyph-icon icon-iconic-cancel-circle"></a></td>--}}
                         </tr>
                         <?php $counter++ ?>
                     @endforeach

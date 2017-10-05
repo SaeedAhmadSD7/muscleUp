@@ -1,6 +1,7 @@
 $(document).ready(function () {
-    $('.btn-open-time').DateTimePicker();
-    $('.btn-close-time').DateTimePicker();
+    $('.btn-date').DateTimePicker();
+    $('.open-time').timepicker({minuteStep: 1, defaultTime: false, showMeridian: false})
+    $('.close-time').timepicker({minuteStep: 1, defaultTime: false, showMeridian: false})
 
     function formatState(country) {
         if (!country.id) {
@@ -45,16 +46,11 @@ $(document).ready(function () {
     //    $('.prof_stat_text').html(' File Selected');
     // });
 
-
     var geocoder = new google.maps.Geocoder;
     var latitude;
     var longitude;
     var country;
     var city;
-
-
-
-
 
 
     $('.geo-location').on('click', function () {
@@ -92,7 +88,7 @@ $(document).ready(function () {
 
 
 
-    $('.gym-reuqest-form').validate({
+    $('.add-gym-form').validate({
         ignore: null,
         rules: {
             name: 'required',

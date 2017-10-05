@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="button-pane">
-                    <a class="btn ra-100 btn-secondary accept_request" href="{{route('message-accept',$Request->id)}}"><i class="glyph-icon icon-mail-reply"></i> Process Request</a>
+                    <a class="btn ra-100 btn-secondary accept_request" href="{{route('process-request',$Request->id)}}"><i class="glyph-icon icon-mail-reply"></i> Process Request</a>
                 </div>
             </div>
         </div>

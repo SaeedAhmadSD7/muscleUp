@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->integer('phone_number')->unsigned();
             $table->string('address',1024);
             $table->string('profile_img')->default('default.jpg');
+            $table->string('address',1024);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -15,17 +15,18 @@ class CreateGymsTable extends Migration
     {
         Schema::create('gyms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title',60);
-            $table->string('email',40);
+            $table->integer('user_id');
+            $table->string('title',60)->unique();
+            $table->string('email',40)->unique();
             $table->string('country',60);
             $table->string('city',60);
-            $table->string('address',1024);
             $table->string('dial_code',4);
             $table->UnsignedInteger('phone_number');
             $table->time('open_time');
             $table->time('close_time');
             $table->string('latitude',20);
             $table->string('longitude',20);
+            $table->string('address',1024);
             $table->timestamps();
         });
         //
