@@ -120,7 +120,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Latitude: </label>
                                             <div class="col-sm-6">
-                                                <input class="form-control longitude" name="longitude" type="number" value="{{old('longitude')}}" placeholder="Lonitude..." readonly>
+                                                <input class="form-control longitude" name="longitude" type="number" value="{{old('longitude')}}" placeholder="Lonitude...">
                                             </div>
                                         </div>
                                     </div>
