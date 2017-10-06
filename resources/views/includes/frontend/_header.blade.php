@@ -6,7 +6,7 @@
     <div class="auto-container clearfix">
 
         <!-- Logo -->
-        <div class="logo"><a href="/"><img src="{{url('assets/images/logo.png')}}" alt="Logo" title="MuscleUP"></a></div>
+        <div class="logo"><a href="{{route('home-page')}}"><img src="{{url('assets/images/logo.png')}}" alt="Logo" title="MuscleUP"></a></div>
 
         <!-- Main Menu -->
         <nav class="main-menu">
