@@ -97,30 +97,14 @@
                                             <label class="col-sm-3 control-label">Open Time: </label>
                                             <div class="col-sm-6">
                                                 <input class="form-control open-time" type="text" name="open_time" value="{{old('open_time')}}" placeholder="Opening Time..." readonly>
+                                                <input type="hidden" name="latitude" value="0.0">
+                                                <input type="hidden" name="longitude" value="0.0">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Closing Time: </label>
                                             <div class="col-sm-6">
                                                 <input class="form-control close-time" type="text" name="close_time" value="{{old('close_time')}}" placeholder="Closing Time..." readonly>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Location: </label>
-                                            <div class="col-sm-offset-4">
-                                                <button class="btn ra-100 btn-default geo-location" type="button"><span class="fa fa-angle-up"></span>Detect my location</button>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Latitude: </label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control latitude" name="latitude" type="number" value="{{old('latitude')}}" placeholder="Latitude..." readonly>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Latitude: </label>
-                                            <div class="col-sm-6">
-                                                <input class="form-control longitude" name="longitude" type="number" value="{{old('longitude')}}" placeholder="Lonitude...">
                                             </div>
                                         </div>
                                     </div>

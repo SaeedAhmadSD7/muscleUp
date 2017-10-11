@@ -7,9 +7,9 @@
     <title>@yield('title')</title>
     @include('includes.frontend._stylesheet')
     @yield('style-sheet')
-    @include('includes.frontend._header')
 </head>
 <body>
+@include('includes.frontend._header')
 <div class="page-wrapper">
     @include('includes._message')
     @yield('content')
