@@ -199,7 +199,7 @@ class TraineeController extends Controller
         $user->trainee()->save($trainee);
 
 
-        Mail::to($user->email)->send(new AddTraineeRequest($user->email,$password));
+//        Mail::to($user->email)->send(new AddTraineeRequest($user->email,$password));
         session()->flash('success','Congratulations Trainee have been added succesfully. Credentials have been mailed to entered email.');
 
 

@@ -18,7 +18,7 @@
     <div class="panel">
         <div class="panel-body">
             <div class="example-box-wrapper">
-                <form class="form-horizontal bordered-row add-trainee-form" role="form" method="POST" action="">
+                <form class="form-horizontal bordered-row add-trainee-form" role="form" method="POST" action="{{route('save-request')}}">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Enter Title:</label>
