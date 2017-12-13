@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MuscleUpApp;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Mail\AddGymRequest;
+use App\Http\Requests\CompanyCreateRequest;
 use App\Models\GymRequest;
 use App\Models\User;
 use App\Models\Branch;
@@ -41,7 +42,7 @@ class AdminController extends Controller
         return view('muscle-up-app.company.create');
     }
 
-    public function companyCreatePost(Request $request){
+    public function companyCreatePost(CompanyCreateRequest $request){
 //        dd($request->all());
 
         $user = new User();

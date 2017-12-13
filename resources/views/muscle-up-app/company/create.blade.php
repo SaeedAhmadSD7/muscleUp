@@ -1,6 +1,6 @@
 @extends('muscle-up-app.admin.dashboard.admin-dashboard')
 
-@section('title','Add Branch')
+@section('title','Add Company')
 
 @section('style-sheet')
     <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
@@ -14,7 +14,18 @@
         <h2>ADD New Company</h2>
         <p>Please fill in all the information and then click on Add Company.</p>
     </div>
-
+    <div id="errors">
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
     <div class="panel">
         <div class="panel-body">
             <div class="example-box-wrapper">
