@@ -40,5 +40,15 @@
             </ul>
         </div>
     </li>
+    <li class="menu-element">
+        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Company</span></a>
+        <div class="sidebar-submenu">
+            <ul>
+                <li>
+                    <a href="{{route('company-create')}}" title="Create a New Company"><span>Create</span></a>
+                </li>
+            </ul>
+        </div>
+    </li>
 
 @stop

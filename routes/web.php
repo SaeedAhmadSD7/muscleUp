@@ -38,6 +38,8 @@ Route::group(['prefix'=>'admin','middleware' => ['usertype:admin']],function () 
     Route::post('/add/gym',['uses'=>'MuscleUpApp\AdminController@addGym', 'as'=> 'add-gym']);
     Route::get('gym/list',['as'=>'gym-list','uses'=>'MuscleUpApp\AdminController@gymList']);
     Route::get('gym/list/delete/{id}',['as'=>'gym-list-delete','uses'=>'MuscleUpApp\AdminController@destroy']);
+    Route::get('company/create',['as'=>'company-create','uses'=>'MuscleUpApp\AdminController@companyCreate']);
+    Route::post('company/create-post',['as'=>'company-create-post','uses'=>'MuscleUpApp\AdminController@companyCreatePost']);
 
 
 });
