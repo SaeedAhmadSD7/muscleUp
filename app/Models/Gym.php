@@ -8,8 +8,8 @@ class Gym extends Model {
     protected $table= 'gyms';
     protected $primaryKey = 'id';
     protected $fillable = ['user_id','name','email','dial_code','phone_number','country','city','open_time','close_time','latitude','longitude','address'];
-    function  user(){
-        return $this->belongsTo(User::class);
+    function  users(){
+        return $this->hasMany(User::class);
     }
 
     function branches(){

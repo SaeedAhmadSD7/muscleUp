@@ -40,15 +40,18 @@
             </ul>
         </div>
     </li>
-    <li class="menu-element">
+
+    @if (isset(Auth::user()->gym))
+        <li class="menu-element">
         <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Add Branch</span></a>
         <div class="sidebar-submenu">
             <ul>
                 <li>
-                    <a href="{{route('branch')}}" title="Inbox"><span>Make Branch</span></a>
+{{--                    <a href="{{route('branch')}}" title="Inbox"><span>Make Branch</span></a>--}}
+                    <a href="{{route('branch-create')}}" title="Inbox"><span>Create</span></a>
                 </li>
             </ul>
         </div>
-    </li>
-
+        </li>
+    @endif
 @stop

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
-class CompanyCreateRequest extends FormRequest
+class BranchCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,11 +20,9 @@ class CompanyCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'company_name' => 'required | max:60',
             'branch_name' => 'required | max:60',
             'admin_name' => 'required | max:60',
             'admin_email' => 'required | max:60 | unique:users,email',
-
         ];
     }
     /**
@@ -33,7 +31,6 @@ class CompanyCreateRequest extends FormRequest
     public function messages()
     {
         return [
-            'company_name.required' => 'Please enter "Company Name"',
             'branch_name.required' => 'Please enter "Branch Name"',
             'admin_name.required' => 'Please enter "Admin Name"',
             'admin_email.required' => 'Please enter "the Email to login"',

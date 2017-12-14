@@ -17,7 +17,7 @@ class CreateBranchesTable extends Migration
             $table->increments('id');
             $table->integer('gym_id');
             $table->string('title');
-            $table->integer('phone_no')->unsigned()->nullable();
+            $table->string('phone_no',20)->nullable();
             $table->integer('opening_time')->nullable();
             $table->integer('clossing_time')->nullable();
             $table->string('address',1024)->nullable();

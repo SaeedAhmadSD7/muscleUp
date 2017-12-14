@@ -96,6 +96,9 @@ Route::group(['prefix'=>'gym','middleware' => ['auth','usertype:gym']],function 
     /*****
     Branch
      ***/
+    Route::get('branch/create',['as'=>'branch-create','uses'=>'MuscleUpApp\GymController@branchCreate']);
+    Route::post('branch/create-post',['as'=>'branch-create-post','uses'=>'MuscleUpApp\GymController@branchCreatePost']);
+
     Route::get('/branch',['as'=>'branch','uses'=>'MuscleUpApp\GymController@create_branch']);
     Route::get('/branch/user',['as'=>'branch-user','uses'=>'MuscleUpApp\GymController@create_branch_user']);
 

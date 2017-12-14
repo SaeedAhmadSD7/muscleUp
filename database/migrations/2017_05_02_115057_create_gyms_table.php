@@ -23,7 +23,7 @@ class CreateGymsTable extends Migration
             $table->string('country',60)->nullable();
             $table->string('city',60)->nullable();
             $table->string('dial_code',4)->nullable();
-            $table->UnsignedInteger('phone_number')->nullable();
+            $table->string('phone_number',20)->nullable();
             $table->time('open_time')->nullable();
             $table->time('close_time')->nullable();
             $table->string('latitude',20)->nullable();

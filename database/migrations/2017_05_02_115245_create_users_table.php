@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->date('dob')->nullable();
             $table->enum('gender',['male','female'])->nullable();
             $table->integer('dial_code')->default('1')->unsigned()->nullable();
-            $table->integer('phone_number')->unsigned()->nullable();
+            $table->string('phone_number',20)->nullable();
             $table->string('profile_img')->default('default.jpg');
             $table->string('address',1024)->nullable();
             $table->rememberToken();
