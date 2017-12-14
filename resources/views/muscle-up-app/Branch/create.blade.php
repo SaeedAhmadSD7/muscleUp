@@ -29,7 +29,8 @@
     <div class="panel">
         <div class="panel-body">
             <div class="example-box-wrapper">
-                <form class="form-horizontal bordered-row add-trainee-form" role="form" method="POST" action="{{route('branch-create-post')}}">
+
+                <form class="form-horizontal bordered-row add-trainee-form" role="form" method="POST" @if($branch == "") action="{{route('branch.store')}}" @else action="{{route('branch.update',['id'=>$post->id])}}" @endif>
                     {{csrf_field()}}
 
                     <div class="tab-pane active" id="tab2">

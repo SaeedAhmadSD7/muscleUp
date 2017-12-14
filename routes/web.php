@@ -1,4 +1,5 @@
 <?php
+use \App\Http\Controllers\MuscleUpApp\GymController;
 
 Auth::routes();
 
@@ -38,9 +39,8 @@ Route::group(['prefix'=>'admin','middleware' => ['usertype:admin']],function () 
     Route::post('/add/gym',['uses'=>'MuscleUpApp\AdminController@addGym', 'as'=> 'add-gym']);
     Route::get('gym/list',['as'=>'gym-list','uses'=>'MuscleUpApp\AdminController@gymList']);
     Route::get('gym/list/delete/{id}',['as'=>'gym-list-delete','uses'=>'MuscleUpApp\AdminController@destroy']);
-    Route::get('company/create',['as'=>'company-create','uses'=>'MuscleUpApp\AdminController@companyCreate']);
-    Route::post('company/create-post',['as'=>'company-create-post','uses'=>'MuscleUpApp\AdminController@companyCreatePost']);
 
+    Route::resource('company',"MuscleUpApp\GymController");
 
 });
 
@@ -96,8 +96,7 @@ Route::group(['prefix'=>'gym','middleware' => ['auth','usertype:gym']],function 
     /*****
     Branch
      ***/
-    Route::get('branch/create',['as'=>'branch-create','uses'=>'MuscleUpApp\GymController@branchCreate']);
-    Route::post('branch/create-post',['as'=>'branch-create-post','uses'=>'MuscleUpApp\GymController@branchCreatePost']);
+    Route::resource('branch',"MuscleUpApp\BranchController");
 
     Route::get('/branch',['as'=>'branch','uses'=>'MuscleUpApp\GymController@create_branch']);
     Route::get('/branch/user',['as'=>'branch-user','uses'=>'MuscleUpApp\GymController@create_branch_user']);

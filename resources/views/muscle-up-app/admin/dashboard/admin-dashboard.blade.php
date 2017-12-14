@@ -45,7 +45,7 @@
         <div class="sidebar-submenu">
             <ul>
                 <li>
-                    <a href="{{route('company-create')}}" title="Create a New Company"><span>Create</span></a>
+                    <a href="{{route('company.create')}}" title="Create a New Company"><span>Create</span></a>
                 </li>
             </ul>
         </div>

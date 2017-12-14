@@ -48,7 +48,7 @@
             <ul>
                 <li>
 {{--                    <a href="{{route('branch')}}" title="Inbox"><span>Make Branch</span></a>--}}
-                    <a href="{{route('branch-create')}}" title="Inbox"><span>Create</span></a>
+                    <a href="{{route('branch.create')}}" title="Inbox"><span>Create</span></a>
                 </li>
             </ul>
         </div>

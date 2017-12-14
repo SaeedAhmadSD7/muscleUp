@@ -36,7 +36,7 @@ class CompanyCreateRequest extends FormRequest
             'company_name.required' => 'Please enter "Company Name"',
             'branch_name.required' => 'Please enter "Branch Name"',
             'admin_name.required' => 'Please enter "Admin Name"',
-            'admin_email.required' => 'Please enter "the Email to login"',
+            'admin_email.required' => 'Please enter Admin "Email" to login',
         ];
     }
 }

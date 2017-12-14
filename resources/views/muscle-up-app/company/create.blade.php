@@ -29,7 +29,9 @@
     <div class="panel">
         <div class="panel-body">
             <div class="example-box-wrapper">
-                <form class="form-horizontal bordered-row add-trainee-form" role="form" method="POST" action="{{route('company-create-post')}}">
+                {{--{{dd($company)}}--}}
+
+                <form class="form-horizontal bordered-row add-trainee-form" role="form" method="POST" @if($company == "") action="{{route('company.store')}}" @else action="{{route('company.update',['id'=>$post->id])}}" @endif >
                     {{csrf_field()}}
 
                     <div class="tab-pane active" id="tab2">
