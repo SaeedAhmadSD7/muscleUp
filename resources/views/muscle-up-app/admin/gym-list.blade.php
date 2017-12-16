@@ -3,10 +3,7 @@
 @section('title','Gym list')
 
 @section('style-sheet')
-    <link href="{{url('/admin-assets/applications/mailbox.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/icons/iconic/iconic.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/assets/css/inbox.css')}}" rel="stylesheet" type="text/css">
+
 @stop
 
 
@@ -54,6 +51,5 @@
 @stop
 
 @section('script')
-    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/inbox.js')}}" type="text/javascript"></script>
+
 @stop

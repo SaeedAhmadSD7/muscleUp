@@ -307,3 +307,93 @@ Route::post('postcontact',['as'=>'postContact','uses'=>'MuscleUpApp\ContactContr
 //Route::get('/trainee/dashboard', ['as'=>'trainee-dashboard', 'uses'=> 'MuscleUpApp\TraineeController@index' ]);
 //
 //Route::get('/instructor/dashboard', ['as'=>'instructor-dashboard', 'uses'=> 'MuscleUpApp\EmployeeController@index' ]);
+
+Route::group(['Resources'],function () {
+    /**
+     * Images Route
+     */
+    Route::get('/resources/app/images/{filename}', function ($filename) {
+        $path = resource_path('/assets/common/images/' . $filename);
+        if (!File::exists($path)) {
+            return response()->json(['message' => 'Image not found.'], 404);
+        }
+        $file = File::get($path);
+        $type = File::mimeType($path);
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+        return $response;
+    });
+
+    /**
+     * Some Js Files
+     */
+    Route::get('/resources/app/js/{filename}', function ($filename) {
+
+        //only js files allow
+        switch ($filename){
+            case 'html5-shiv.js';
+            case 'respond-1.4.2.js';
+               break;
+            default :
+                return response()->json(['message' => 'JS File not found.'], 404);
+        }
+
+
+        $path = resource_path('/assets/js/' . $filename);
+        if (!File::exists($path)) {
+            return response()->json(['message' => 'JS File not found.'], 404);
+        }
+        $file = File::get($path);
+
+//        $type = File::mimeType($path);
+        $type = "application/javascript";
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+        return $response;
+    });
+
+
+    /**
+     * Some Js Files For Specific Pages Views
+     */
+    Route::get('/resources/app/pages/js/{filename}', function ($filename) {
+
+        $path = resource_path('/assets/common/js/pages/' . $filename);
+        if (!File::exists($path)) {
+            return response()->json(['message' => 'JS File not found.'], 404);
+        }
+        $file = File::get($path);
+        $type = "application/javascript";
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+        return $response;
+    });
+
+    /**
+     * Font Files For Backend
+     */
+    Route::get('/resources/app/fonts/{filename}', function ($filename) {
+//    Route::get('/common/fonts/{filename}', function ($filename) {
+
+        $path = resource_path('/assets/common/fonts/' . $filename);
+        if (!File::exists($path)) {
+            return response()->json(['message' => 'JS File not found.'], 404);
+        }
+        $file = File::get($path);
+        $response = Response::make($file, 200);
+        $type = File::mimeType($path);
+//        dd($type);
+        switch (strtolower($type)){
+            case 'text/plain':
+                $ext = File::extension($path);
+                switch(strtolower($ext)){
+                    case 'svg':
+                        $type = "image/svg+xml";
+                        break;
+                }
+                break;
+        }
+        $response->header("Content-Type", $type);
+        return $response;
+    });
+});

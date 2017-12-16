@@ -23,7 +23,7 @@
                                                                             "glyph-icon icon-linecons-lock"></i></a>
 
                             <div class="user-account-btn dropdown">
-                                <a class="user-profile clearfix" data-toggle="dropdown" href="#" title="My Account"><img alt="Profile image" src="/admin-assets/image-resources/gravatar.jpg" width="28">
+                                <a class="user-profile clearfix" data-toggle="dropdown" href="#" title="My Account"><img alt="Profile image" src="/resources/app/images/gravatar.jpg" width="28">
                                     <span>MichaelLee</span>
                                     <i class="glyph-icon icon-angle-down"></i>
                                 </a>
@@ -33,7 +33,7 @@
                                         <div class="login-box clearfix">
                                             <div class="user-img"><a class="change-img" href="#" title="">Change
                                                     photo</a> <img alt="" src=
-                                                "/admin-assets/image-resources/gravatar.jpg"></div>
+                                                "/resources/app/images/gravatar.jpg"></div>
 
 
                                             <div class="user-info">

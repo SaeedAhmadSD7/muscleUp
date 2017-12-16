@@ -23,7 +23,7 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('muscle-up-app.login_form.login');
+        return view('auth.login.showLogin');
     }
 
     /**
