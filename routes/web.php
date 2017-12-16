@@ -1,4 +1,5 @@
 <?php
+use \App\Http\Controllers\MuscleUpApp\GymController;
 
 Auth::routes();
 
@@ -39,6 +40,7 @@ Route::group(['prefix'=>'admin','middleware' => ['usertype:admin']],function () 
     Route::get('gym/list',['as'=>'gym-list','uses'=>'MuscleUpApp\AdminController@gymList']);
     Route::get('gym/list/delete/{id}',['as'=>'gym-list-delete','uses'=>'MuscleUpApp\AdminController@destroy']);
 
+    Route::resource('company',"MuscleUpApp\GymController");
 
 });
 
@@ -94,6 +96,8 @@ Route::group(['prefix'=>'gym','middleware' => ['auth','usertype:gym']],function 
     /*****
     Branch
      ***/
+    Route::resource('branch',"MuscleUpApp\BranchController");
+
     Route::get('/branch',['as'=>'branch','uses'=>'MuscleUpApp\GymController@create_branch']);
     Route::get('/branch/user',['as'=>'branch-user','uses'=>'MuscleUpApp\GymController@create_branch_user']);
 

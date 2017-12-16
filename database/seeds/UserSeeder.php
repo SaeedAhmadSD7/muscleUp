@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'dial_code'=>'+92',
             'phone_number'=>'1234567',
             'email' => 'admin@example.com',
-            'password' => bcrypt('admin123'),
+            'password' => bcrypt('asdf1234'),
             'type'=>'admin',
             'address'=>'addressed',
             'remember_token'=>'0',

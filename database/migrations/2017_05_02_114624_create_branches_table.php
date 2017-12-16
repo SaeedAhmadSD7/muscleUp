@@ -15,11 +15,12 @@ class CreateBranchesTable extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('title');
-            $table->integer('phone_no');
-            $table->integer('opening_time');
-            $table->integer('clossing_time');
-            $table->string('address');
+            $table->integer('gym_id');
+            $table->string('title');
+            $table->string('phone_no',20)->nullable();
+            $table->integer('opening_time')->nullable();
+            $table->integer('clossing_time')->nullable();
+            $table->string('address',1024)->nullable();
             $table->timestamps();
         });
     }

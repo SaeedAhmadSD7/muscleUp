@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use App\Mail\AddGymRequest;
 use App\Models\GymRequest;
 use App\Models\User;
+use App\Models\Branch;
 use App\Models\Gym;
 use App\Models\Country;
 use Illuminate\Support\Facades\Session;
@@ -34,6 +35,8 @@ class AdminController extends Controller
         $countries = Country::all();
         return view ('muscle-up-app.gym.post-add')->with(['countries'=>$countries,'gymdata'=>$request->toArray()]);
     }
+
+
 
     public function addGym(Request $request) {
         $user= new User();

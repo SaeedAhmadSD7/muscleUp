@@ -15,17 +15,17 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('type',['admin','gym','trainee','employee','instructor']);
-            $table->string('email',40)->unique();
-            $table->string('password',256);
-            $table->string('first_name',35);
-            $table->string('last_name',35);
-            $table->date('dob');
-            $table->enum('gender',['male','female']);
-            $table->integer('dial_code')->default('1')->unsigned();
-            $table->integer('phone_number')->unsigned();
+            $table->enum('type',['trainee','admin','gym','employee','instructor']);
+            $table->string('email',60)->unique();
+            $table->string('password',64);
+            $table->string('first_name',40);
+            $table->string('last_name',40)->nullable();
+            $table->date('dob')->nullable();
+            $table->enum('gender',['male','female'])->nullable();
+            $table->integer('dial_code')->default('1')->unsigned()->nullable();
+            $table->string('phone_number',20)->nullable();
             $table->string('profile_img')->default('default.jpg');
-            $table->string('address',1024);
+            $table->string('address',1024)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
