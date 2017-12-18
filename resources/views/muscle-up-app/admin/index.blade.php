@@ -630,7 +630,7 @@
 
 
 @section('script')
-    <script src="{{ elixir('assets/js/backend-chart-app.js') }}"></script>
+    <script src="{{ elixir('dist/js/backend-chart-app.js') }}"></script>
     <script type="text/javascript">
         // Datatables basic
 

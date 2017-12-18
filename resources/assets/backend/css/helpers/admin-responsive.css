@@ -109,7 +109,7 @@
         font-size: 20px
     }
     .closed-sidebar #page-header {
-        padding-left: 100px
+        /*padding-left: 100px*/
     }
     .closed-sidebar #page-sidebar #sidebar-menu>li .bs-label {
         display: none

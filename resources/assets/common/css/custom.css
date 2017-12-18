@@ -27,3 +27,16 @@ Margin Styles
 
 .mT0i{margin-top: 0px !important;}
 .mB0i{margin-bottom: 0px !important;}
+
+/*
+======================================
+Text Align Styles
+======================================
+*/
+.taR{text-align: right;}
+.taL{text-align: left;}
+.taC{text-align: center;}
+
+.taRi{text-align: right !important;}
+.taLi{text-align: left !important;}
+.taCi{text-align: center !important;}

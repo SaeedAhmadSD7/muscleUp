@@ -33,7 +33,7 @@
                 <form class="form-horizontal bordered-row add-trainee-form" role="form" method="POST" @if($branch == "") action="{{route('branch.store')}}" @else action="{{route('branch.update',['id'=>$post->id])}}" @endif>
                     {{csrf_field()}}
 
-                    <div class="tab-pane active" id="tab2">
+                    <div class="tab-pane active" id="tab2"  >
 
                         <div class="content-box">
                             <h3 class="content-box-header bg-white-opacity">Branch Info</h3>

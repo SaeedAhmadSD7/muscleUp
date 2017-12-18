@@ -35,6 +35,7 @@ elixir(function(mix) {
         "/assets/frontend/plugins/select2/css/select2.css",
         "/assets/frontend/plugins/select2/css/select2-bootstrap.css",
         //***Common-Styles
+        "/assets/common/plugins/datetimepicker/css/DateTimePicker.css",
         "/assets/common/css/custom.css",
         ],
         'public/dist/css/frontend-app.css','resources')
@@ -142,9 +143,11 @@ elixir(function(mix) {
             "/assets/backend/css/mailbox.css",
             "/assets/backend/plugins/themes/css/default.css",
             "/assets/backend/plugins/owlcarousel/owlcarousel.css",
+            "/assets/backend/plugins/krajee-file-input/fileinput.css",
         //***********************************************************************
 
         //***Common-Styles
+        "/assets/common/plugins/datetimepicker/css/DateTimePicker.css",
         "/assets/common/css/custom.css",
 
         ],
@@ -159,7 +162,6 @@ elixir(function(mix) {
     * */
     mix.scripts([
         "assets/frontend/js/jquery-3.2.1.js",
-        "/assets/frontend/js/jquery.validate.js",
         "assets/frontend/js/bootstrap.js",
         "assets/frontend/js/wow.min.js",
         "assets/frontend/js/script.js",
@@ -170,6 +172,8 @@ elixir(function(mix) {
         "/assets/frontend/js/index-script.js",
         "/assets/frontend/plugins/select2/js/select2.full.js",
         //***Common-JS
+        "/assets/frontend/js/jquery.validate.js",
+        "/assets/common/plugins/datetimepicker/js/DateTimePicker.js",
         "/assets/common/js/custom.js",
     ],
         'public/dist/js/frontend-app.js',
@@ -222,8 +226,11 @@ elixir(function(mix) {
         "/assets/backend/js/material.js",
         "/assets/backend/js/ripples.js",
         "/assets/backend/js/overlay.js",
+        "/assets/backend/plugins/krajee-file-input/fileinput.js",
         //*******************************************************************************************
             //***Common-JS
+            "/assets/frontend/js/jquery.validate.js",
+            "/assets/common/plugins/datetimepicker/js/DateTimePicker.js",
             "/assets/common/js/custom.js",
         ],
         'public/dist/js/backend-app.js',

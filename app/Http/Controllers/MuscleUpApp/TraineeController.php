@@ -217,9 +217,7 @@ class TraineeController extends Controller
     {
         $trainee= User::find($id);
 //        $user = User::find($trainee->user_id);
-
         return view('muscle-up-app.trainee.trainee-personal-detail')->with(['trainee'=>$trainee]);
-
     }
 
     /**

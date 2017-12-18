@@ -10253,1580 +10253,6 @@ return jQuery;
 } );
 
 /*!
- * jQuery Validation Plugin v1.16.0
- *
- * http://jqueryvalidation.org/
- *
- * Copyright (c) 2016 Jörn Zaefferer
- * Released under the MIT license
- */
-(function( factory ) {
-	if ( typeof define === "function" && define.amd ) {
-		define( ["jquery"], factory );
-	} else if (typeof module === "object" && module.exports) {
-		module.exports = factory( require( "jquery" ) );
-	} else {
-		factory( jQuery );
-	}
-}(function( $ ) {
-
-$.extend( $.fn, {
-
-	// http://jqueryvalidation.org/validate/
-	validate: function( options ) {
-
-		// If nothing is selected, return nothing; can't chain anyway
-		if ( !this.length ) {
-			if ( options && options.debug && window.console ) {
-				console.warn( "Nothing selected, can't validate, returning nothing." );
-			}
-			return;
-		}
-
-		// Check if a validator for this form was already created
-		var validator = $.data( this[ 0 ], "validator" );
-		if ( validator ) {
-			return validator;
-		}
-
-		// Add novalidate tag if HTML5.
-		this.attr( "novalidate", "novalidate" );
-
-		validator = new $.validator( options, this[ 0 ] );
-		$.data( this[ 0 ], "validator", validator );
-
-		if ( validator.settings.onsubmit ) {
-
-			this.on( "click.validate", ":submit", function( event ) {
-				if ( validator.settings.submitHandler ) {
-					validator.submitButton = event.target;
-				}
-
-				// Allow suppressing validation by adding a cancel class to the submit button
-				if ( $( this ).hasClass( "cancel" ) ) {
-					validator.cancelSubmit = true;
-				}
-
-				// Allow suppressing validation by adding the html5 formnovalidate attribute to the submit button
-				if ( $( this ).attr( "formnovalidate" ) !== undefined ) {
-					validator.cancelSubmit = true;
-				}
-			} );
-
-			// Validate the form on submit
-			this.on( "submit.validate", function( event ) {
-				if ( validator.settings.debug ) {
-
-					// Prevent form submit to be able to see console output
-					event.preventDefault();
-				}
-				function handle() {
-					var hidden, result;
-					if ( validator.settings.submitHandler ) {
-						if ( validator.submitButton ) {
-
-							// Insert a hidden input as a replacement for the missing submit button
-							hidden = $( "<input type='hidden'/>" )
-								.attr( "name", validator.submitButton.name )
-								.val( $( validator.submitButton ).val() )
-								.appendTo( validator.currentForm );
-						}
-						result = validator.settings.submitHandler.call( validator, validator.currentForm, event );
-						if ( validator.submitButton ) {
-
-							// And clean up afterwards; thanks to no-block-scope, hidden can be referenced
-							hidden.remove();
-						}
-						if ( result !== undefined ) {
-							return result;
-						}
-						return false;
-					}
-					return true;
-				}
-
-				// Prevent submit for invalid forms or custom submit handlers
-				if ( validator.cancelSubmit ) {
-					validator.cancelSubmit = false;
-					return handle();
-				}
-				if ( validator.form() ) {
-					if ( validator.pendingRequest ) {
-						validator.formSubmitted = true;
-						return false;
-					}
-					return handle();
-				} else {
-					validator.focusInvalid();
-					return false;
-				}
-			} );
-		}
-
-		return validator;
-	},
-
-	// http://jqueryvalidation.org/valid/
-	valid: function() {
-		var valid, validator, errorList;
-
-		if ( $( this[ 0 ] ).is( "form" ) ) {
-			valid = this.validate().form();
-		} else {
-			errorList = [];
-			valid = true;
-			validator = $( this[ 0 ].form ).validate();
-			this.each( function() {
-				valid = validator.element( this ) && valid;
-				if ( !valid ) {
-					errorList = errorList.concat( validator.errorList );
-				}
-			} );
-			validator.errorList = errorList;
-		}
-		return valid;
-	},
-
-	// http://jqueryvalidation.org/rules/
-	rules: function( command, argument ) {
-		var element = this[ 0 ],
-			settings, staticRules, existingRules, data, param, filtered;
-
-		// If nothing is selected, return empty object; can't chain anyway
-		if ( element == null || element.form == null ) {
-			return;
-		}
-
-		if ( command ) {
-			settings = $.data( element.form, "validator" ).settings;
-			staticRules = settings.rules;
-			existingRules = $.validator.staticRules( element );
-			switch ( command ) {
-			case "add":
-				$.extend( existingRules, $.validator.normalizeRule( argument ) );
-
-				// Remove messages from rules, but allow them to be set separately
-				delete existingRules.messages;
-				staticRules[ element.name ] = existingRules;
-				if ( argument.messages ) {
-					settings.messages[ element.name ] = $.extend( settings.messages[ element.name ], argument.messages );
-				}
-				break;
-			case "remove":
-				if ( !argument ) {
-					delete staticRules[ element.name ];
-					return existingRules;
-				}
-				filtered = {};
-				$.each( argument.split( /\s/ ), function( index, method ) {
-					filtered[ method ] = existingRules[ method ];
-					delete existingRules[ method ];
-					if ( method === "required" ) {
-						$( element ).removeAttr( "aria-required" );
-					}
-				} );
-				return filtered;
-			}
-		}
-
-		data = $.validator.normalizeRules(
-		$.extend(
-			{},
-			$.validator.classRules( element ),
-			$.validator.attributeRules( element ),
-			$.validator.dataRules( element ),
-			$.validator.staticRules( element )
-		), element );
-
-		// Make sure required is at front
-		if ( data.required ) {
-			param = data.required;
-			delete data.required;
-			data = $.extend( { required: param }, data );
-			$( element ).attr( "aria-required", "true" );
-		}
-
-		// Make sure remote is at back
-		if ( data.remote ) {
-			param = data.remote;
-			delete data.remote;
-			data = $.extend( data, { remote: param } );
-		}
-
-		return data;
-	}
-} );
-
-// Custom selectors
-$.extend( $.expr.pseudos || $.expr[ ":" ], {		// '|| $.expr[ ":" ]' here enables backwards compatibility to jQuery 1.7. Can be removed when dropping jQ 1.7.x support
-
-	// http://jqueryvalidation.org/blank-selector/
-	blank: function( a ) {
-		return !$.trim( "" + $( a ).val() );
-	},
-
-	// http://jqueryvalidation.org/filled-selector/
-	filled: function( a ) {
-		var val = $( a ).val();
-		return val !== null && !!$.trim( "" + val );
-	},
-
-	// http://jqueryvalidation.org/unchecked-selector/
-	unchecked: function( a ) {
-		return !$( a ).prop( "checked" );
-	}
-} );
-
-// Constructor for validator
-$.validator = function( options, form ) {
-	this.settings = $.extend( true, {}, $.validator.defaults, options );
-	this.currentForm = form;
-	this.init();
-};
-
-// http://jqueryvalidation.org/jQuery.validator.format/
-$.validator.format = function( source, params ) {
-	if ( arguments.length === 1 ) {
-		return function() {
-			var args = $.makeArray( arguments );
-			args.unshift( source );
-			return $.validator.format.apply( this, args );
-		};
-	}
-	if ( params === undefined ) {
-		return source;
-	}
-	if ( arguments.length > 2 && params.constructor !== Array  ) {
-		params = $.makeArray( arguments ).slice( 1 );
-	}
-	if ( params.constructor !== Array ) {
-		params = [ params ];
-	}
-	$.each( params, function( i, n ) {
-		source = source.replace( new RegExp( "\\{" + i + "\\}", "g" ), function() {
-			return n;
-		} );
-	} );
-	return source;
-};
-
-$.extend( $.validator, {
-
-	defaults: {
-		messages: {},
-		groups: {},
-		rules: {},
-		errorClass: "error",
-		pendingClass: "pending",
-		validClass: "valid",
-		errorElement: "label",
-		focusCleanup: false,
-		focusInvalid: true,
-		errorContainer: $( [] ),
-		errorLabelContainer: $( [] ),
-		onsubmit: true,
-		ignore: ":hidden",
-		ignoreTitle: false,
-		onfocusin: function( element ) {
-			this.lastActive = element;
-
-			// Hide error label and remove error class on focus if enabled
-			if ( this.settings.focusCleanup ) {
-				if ( this.settings.unhighlight ) {
-					this.settings.unhighlight.call( this, element, this.settings.errorClass, this.settings.validClass );
-				}
-				this.hideThese( this.errorsFor( element ) );
-			}
-		},
-		onfocusout: function( element ) {
-			if ( !this.checkable( element ) && ( element.name in this.submitted || !this.optional( element ) ) ) {
-				this.element( element );
-			}
-		},
-		onkeyup: function( element, event ) {
-
-			// Avoid revalidate the field when pressing one of the following keys
-			// Shift       => 16
-			// Ctrl        => 17
-			// Alt         => 18
-			// Caps lock   => 20
-			// End         => 35
-			// Home        => 36
-			// Left arrow  => 37
-			// Up arrow    => 38
-			// Right arrow => 39
-			// Down arrow  => 40
-			// Insert      => 45
-			// Num lock    => 144
-			// AltGr key   => 225
-			var excludedKeys = [
-				16, 17, 18, 20, 35, 36, 37,
-				38, 39, 40, 45, 144, 225
-			];
-
-			if ( event.which === 9 && this.elementValue( element ) === "" || $.inArray( event.keyCode, excludedKeys ) !== -1 ) {
-				return;
-			} else if ( element.name in this.submitted || element.name in this.invalid ) {
-				this.element( element );
-			}
-		},
-		onclick: function( element ) {
-
-			// Click on selects, radiobuttons and checkboxes
-			if ( element.name in this.submitted ) {
-				this.element( element );
-
-			// Or option elements, check parent select in that case
-			} else if ( element.parentNode.name in this.submitted ) {
-				this.element( element.parentNode );
-			}
-		},
-		highlight: function( element, errorClass, validClass ) {
-			if ( element.type === "radio" ) {
-				this.findByName( element.name ).addClass( errorClass ).removeClass( validClass );
-			} else {
-				$( element ).addClass( errorClass ).removeClass( validClass );
-			}
-		},
-		unhighlight: function( element, errorClass, validClass ) {
-			if ( element.type === "radio" ) {
-				this.findByName( element.name ).removeClass( errorClass ).addClass( validClass );
-			} else {
-				$( element ).removeClass( errorClass ).addClass( validClass );
-			}
-		}
-	},
-
-	// http://jqueryvalidation.org/jQuery.validator.setDefaults/
-	setDefaults: function( settings ) {
-		$.extend( $.validator.defaults, settings );
-	},
-
-	messages: {
-		required: "This field is required.",
-		remote: "Please fix this field.",
-		email: "Please enter a valid email address.",
-		url: "Please enter a valid URL.",
-		date: "Please enter a valid date.",
-		dateISO: "Please enter a valid date (ISO).",
-		number: "Please enter a valid number.",
-		digits: "Please enter only digits.",
-		equalTo: "Please enter the same value again.",
-		maxlength: $.validator.format( "Please enter no more than {0} characters." ),
-		minlength: $.validator.format( "Please enter at least {0} characters." ),
-		rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
-		range: $.validator.format( "Please enter a value between {0} and {1}." ),
-		max: $.validator.format( "Please enter a value less than or equal to {0}." ),
-		min: $.validator.format( "Please enter a value greater than or equal to {0}." ),
-		step: $.validator.format( "Please enter a multiple of {0}." )
-	},
-
-	autoCreateRanges: false,
-
-	prototype: {
-
-		init: function() {
-			this.labelContainer = $( this.settings.errorLabelContainer );
-			this.errorContext = this.labelContainer.length && this.labelContainer || $( this.currentForm );
-			this.containers = $( this.settings.errorContainer ).add( this.settings.errorLabelContainer );
-			this.submitted = {};
-			this.valueCache = {};
-			this.pendingRequest = 0;
-			this.pending = {};
-			this.invalid = {};
-			this.reset();
-
-			var groups = ( this.groups = {} ),
-				rules;
-			$.each( this.settings.groups, function( key, value ) {
-				if ( typeof value === "string" ) {
-					value = value.split( /\s/ );
-				}
-				$.each( value, function( index, name ) {
-					groups[ name ] = key;
-				} );
-			} );
-			rules = this.settings.rules;
-			$.each( rules, function( key, value ) {
-				rules[ key ] = $.validator.normalizeRule( value );
-			} );
-
-			function delegate( event ) {
-
-				// Set form expando on contenteditable
-				if ( !this.form && this.hasAttribute( "contenteditable" ) ) {
-					this.form = $( this ).closest( "form" )[ 0 ];
-				}
-
-				var validator = $.data( this.form, "validator" ),
-					eventType = "on" + event.type.replace( /^validate/, "" ),
-					settings = validator.settings;
-				if ( settings[ eventType ] && !$( this ).is( settings.ignore ) ) {
-					settings[ eventType ].call( validator, this, event );
-				}
-			}
-
-			$( this.currentForm )
-				.on( "focusin.validate focusout.validate keyup.validate",
-					":text, [type='password'], [type='file'], select, textarea, [type='number'], [type='search'], " +
-					"[type='tel'], [type='url'], [type='email'], [type='datetime'], [type='date'], [type='month'], " +
-					"[type='week'], [type='time'], [type='datetime-local'], [type='range'], [type='color'], " +
-					"[type='radio'], [type='checkbox'], [contenteditable], [type='button']", delegate )
-
-				// Support: Chrome, oldIE
-				// "select" is provided as event.target when clicking a option
-				.on( "click.validate", "select, option, [type='radio'], [type='checkbox']", delegate );
-
-			if ( this.settings.invalidHandler ) {
-				$( this.currentForm ).on( "invalid-form.validate", this.settings.invalidHandler );
-			}
-
-			// Add aria-required to any Static/Data/Class required fields before first validation
-			// Screen readers require this attribute to be present before the initial submission http://www.w3.org/TR/WCAG-TECHS/ARIA2.html
-			$( this.currentForm ).find( "[required], [data-rule-required], .required" ).attr( "aria-required", "true" );
-		},
-
-		// http://jqueryvalidation.org/Validator.form/
-		form: function() {
-			this.checkForm();
-			$.extend( this.submitted, this.errorMap );
-			this.invalid = $.extend( {}, this.errorMap );
-			if ( !this.valid() ) {
-				$( this.currentForm ).triggerHandler( "invalid-form", [ this ] );
-			}
-			this.showErrors();
-			return this.valid();
-		},
-
-		checkForm: function() {
-			this.prepareForm();
-			for ( var i = 0, elements = ( this.currentElements = this.elements() ); elements[ i ]; i++ ) {
-				this.check( elements[ i ] );
-			}
-			return this.valid();
-		},
-
-		// http://jqueryvalidation.org/Validator.element/
-		element: function( element ) {
-			var cleanElement = this.clean( element ),
-				checkElement = this.validationTargetFor( cleanElement ),
-				v = this,
-				result = true,
-				rs, group;
-
-			if ( checkElement === undefined ) {
-				delete this.invalid[ cleanElement.name ];
-			} else {
-				this.prepareElement( checkElement );
-				this.currentElements = $( checkElement );
-
-				// If this element is grouped, then validate all group elements already
-				// containing a value
-				group = this.groups[ checkElement.name ];
-				if ( group ) {
-					$.each( this.groups, function( name, testgroup ) {
-						if ( testgroup === group && name !== checkElement.name ) {
-							cleanElement = v.validationTargetFor( v.clean( v.findByName( name ) ) );
-							if ( cleanElement && cleanElement.name in v.invalid ) {
-								v.currentElements.push( cleanElement );
-								result = v.check( cleanElement ) && result;
-							}
-						}
-					} );
-				}
-
-				rs = this.check( checkElement ) !== false;
-				result = result && rs;
-				if ( rs ) {
-					this.invalid[ checkElement.name ] = false;
-				} else {
-					this.invalid[ checkElement.name ] = true;
-				}
-
-				if ( !this.numberOfInvalids() ) {
-
-					// Hide error containers on last error
-					this.toHide = this.toHide.add( this.containers );
-				}
-				this.showErrors();
-
-				// Add aria-invalid status for screen readers
-				$( element ).attr( "aria-invalid", !rs );
-			}
-
-			return result;
-		},
-
-		// http://jqueryvalidation.org/Validator.showErrors/
-		showErrors: function( errors ) {
-			if ( errors ) {
-				var validator = this;
-
-				// Add items to error list and map
-				$.extend( this.errorMap, errors );
-				this.errorList = $.map( this.errorMap, function( message, name ) {
-					return {
-						message: message,
-						element: validator.findByName( name )[ 0 ]
-					};
-				} );
-
-				// Remove items from success list
-				this.successList = $.grep( this.successList, function( element ) {
-					return !( element.name in errors );
-				} );
-			}
-			if ( this.settings.showErrors ) {
-				this.settings.showErrors.call( this, this.errorMap, this.errorList );
-			} else {
-				this.defaultShowErrors();
-			}
-		},
-
-		// http://jqueryvalidation.org/Validator.resetForm/
-		resetForm: function() {
-			if ( $.fn.resetForm ) {
-				$( this.currentForm ).resetForm();
-			}
-			this.invalid = {};
-			this.submitted = {};
-			this.prepareForm();
-			this.hideErrors();
-			var elements = this.elements()
-				.removeData( "previousValue" )
-				.removeAttr( "aria-invalid" );
-
-			this.resetElements( elements );
-		},
-
-		resetElements: function( elements ) {
-			var i;
-
-			if ( this.settings.unhighlight ) {
-				for ( i = 0; elements[ i ]; i++ ) {
-					this.settings.unhighlight.call( this, elements[ i ],
-						this.settings.errorClass, "" );
-					this.findByName( elements[ i ].name ).removeClass( this.settings.validClass );
-				}
-			} else {
-				elements
-					.removeClass( this.settings.errorClass )
-					.removeClass( this.settings.validClass );
-			}
-		},
-
-		numberOfInvalids: function() {
-			return this.objectLength( this.invalid );
-		},
-
-		objectLength: function( obj ) {
-			/* jshint unused: false */
-			var count = 0,
-				i;
-			for ( i in obj ) {
-				if ( obj[ i ] ) {
-					count++;
-				}
-			}
-			return count;
-		},
-
-		hideErrors: function() {
-			this.hideThese( this.toHide );
-		},
-
-		hideThese: function( errors ) {
-			errors.not( this.containers ).text( "" );
-			this.addWrapper( errors ).hide();
-		},
-
-		valid: function() {
-			return this.size() === 0;
-		},
-
-		size: function() {
-			return this.errorList.length;
-		},
-
-		focusInvalid: function() {
-			if ( this.settings.focusInvalid ) {
-				try {
-					$( this.findLastActive() || this.errorList.length && this.errorList[ 0 ].element || [] )
-					.filter( ":visible" )
-					.focus()
-
-					// Manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
-					.trigger( "focusin" );
-				} catch ( e ) {
-
-					// Ignore IE throwing errors when focusing hidden elements
-				}
-			}
-		},
-
-		findLastActive: function() {
-			var lastActive = this.lastActive;
-			return lastActive && $.grep( this.errorList, function( n ) {
-				return n.element.name === lastActive.name;
-			} ).length === 1 && lastActive;
-		},
-
-		elements: function() {
-			var validator = this,
-				rulesCache = {};
-
-			// Select all valid inputs inside the form (no submit or reset buttons)
-			return $( this.currentForm )
-			.find( "input, select, textarea, [contenteditable]" )
-			.not( ":submit, :reset, :image, :disabled" )
-			.not( this.settings.ignore )
-			.filter( function() {
-				var name = this.name || $( this ).attr( "name" ); // For contenteditable
-				if ( !name && validator.settings.debug && window.console ) {
-					console.error( "%o has no name assigned", this );
-				}
-
-				// Set form expando on contenteditable
-				if ( this.hasAttribute( "contenteditable" ) ) {
-					this.form = $( this ).closest( "form" )[ 0 ];
-				}
-
-				// Select only the first element for each name, and only those with rules specified
-				if ( name in rulesCache || !validator.objectLength( $( this ).rules() ) ) {
-					return false;
-				}
-
-				rulesCache[ name ] = true;
-				return true;
-			} );
-		},
-
-		clean: function( selector ) {
-			return $( selector )[ 0 ];
-		},
-
-		errors: function() {
-			var errorClass = this.settings.errorClass.split( " " ).join( "." );
-			return $( this.settings.errorElement + "." + errorClass, this.errorContext );
-		},
-
-		resetInternals: function() {
-			this.successList = [];
-			this.errorList = [];
-			this.errorMap = {};
-			this.toShow = $( [] );
-			this.toHide = $( [] );
-		},
-
-		reset: function() {
-			this.resetInternals();
-			this.currentElements = $( [] );
-		},
-
-		prepareForm: function() {
-			this.reset();
-			this.toHide = this.errors().add( this.containers );
-		},
-
-		prepareElement: function( element ) {
-			this.reset();
-			this.toHide = this.errorsFor( element );
-		},
-
-		elementValue: function( element ) {
-			var $element = $( element ),
-				type = element.type,
-				val, idx;
-
-			if ( type === "radio" || type === "checkbox" ) {
-				return this.findByName( element.name ).filter( ":checked" ).val();
-			} else if ( type === "number" && typeof element.validity !== "undefined" ) {
-				return element.validity.badInput ? "NaN" : $element.val();
-			}
-
-			if ( element.hasAttribute( "contenteditable" ) ) {
-				val = $element.text();
-			} else {
-				val = $element.val();
-			}
-
-			if ( type === "file" ) {
-
-				// Modern browser (chrome & safari)
-				if ( val.substr( 0, 12 ) === "C:\\fakepath\\" ) {
-					return val.substr( 12 );
-				}
-
-				// Legacy browsers
-				// Unix-based path
-				idx = val.lastIndexOf( "/" );
-				if ( idx >= 0 ) {
-					return val.substr( idx + 1 );
-				}
-
-				// Windows-based path
-				idx = val.lastIndexOf( "\\" );
-				if ( idx >= 0 ) {
-					return val.substr( idx + 1 );
-				}
-
-				// Just the file name
-				return val;
-			}
-
-			if ( typeof val === "string" ) {
-				return val.replace( /\r/g, "" );
-			}
-			return val;
-		},
-
-		check: function( element ) {
-			element = this.validationTargetFor( this.clean( element ) );
-
-			var rules = $( element ).rules(),
-				rulesCount = $.map( rules, function( n, i ) {
-					return i;
-				} ).length,
-				dependencyMismatch = false,
-				val = this.elementValue( element ),
-				result, method, rule;
-
-			// If a normalizer is defined for this element, then
-			// call it to retreive the changed value instead
-			// of using the real one.
-			// Note that `this` in the normalizer is `element`.
-			if ( typeof rules.normalizer === "function" ) {
-				val = rules.normalizer.call( element, val );
-
-				if ( typeof val !== "string" ) {
-					throw new TypeError( "The normalizer should return a string value." );
-				}
-
-				// Delete the normalizer from rules to avoid treating
-				// it as a pre-defined method.
-				delete rules.normalizer;
-			}
-
-			for ( method in rules ) {
-				rule = { method: method, parameters: rules[ method ] };
-				try {
-					result = $.validator.methods[ method ].call( this, val, element, rule.parameters );
-
-					// If a method indicates that the field is optional and therefore valid,
-					// don't mark it as valid when there are no other rules
-					if ( result === "dependency-mismatch" && rulesCount === 1 ) {
-						dependencyMismatch = true;
-						continue;
-					}
-					dependencyMismatch = false;
-
-					if ( result === "pending" ) {
-						this.toHide = this.toHide.not( this.errorsFor( element ) );
-						return;
-					}
-
-					if ( !result ) {
-						this.formatAndAdd( element, rule );
-						return false;
-					}
-				} catch ( e ) {
-					if ( this.settings.debug && window.console ) {
-						console.log( "Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.", e );
-					}
-					if ( e instanceof TypeError ) {
-						e.message += ".  Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.";
-					}
-
-					throw e;
-				}
-			}
-			if ( dependencyMismatch ) {
-				return;
-			}
-			if ( this.objectLength( rules ) ) {
-				this.successList.push( element );
-			}
-			return true;
-		},
-
-		// Return the custom message for the given element and validation method
-		// specified in the element's HTML5 data attribute
-		// return the generic message if present and no method specific message is present
-		customDataMessage: function( element, method ) {
-			return $( element ).data( "msg" + method.charAt( 0 ).toUpperCase() +
-				method.substring( 1 ).toLowerCase() ) || $( element ).data( "msg" );
-		},
-
-		// Return the custom message for the given element name and validation method
-		customMessage: function( name, method ) {
-			var m = this.settings.messages[ name ];
-			return m && ( m.constructor === String ? m : m[ method ] );
-		},
-
-		// Return the first defined argument, allowing empty strings
-		findDefined: function() {
-			for ( var i = 0; i < arguments.length; i++ ) {
-				if ( arguments[ i ] !== undefined ) {
-					return arguments[ i ];
-				}
-			}
-			return undefined;
-		},
-
-		// The second parameter 'rule' used to be a string, and extended to an object literal
-		// of the following form:
-		// rule = {
-		//     method: "method name",
-		//     parameters: "the given method parameters"
-		// }
-		//
-		// The old behavior still supported, kept to maintain backward compatibility with
-		// old code, and will be removed in the next major release.
-		defaultMessage: function( element, rule ) {
-			if ( typeof rule === "string" ) {
-				rule = { method: rule };
-			}
-
-			var message = this.findDefined(
-					this.customMessage( element.name, rule.method ),
-					this.customDataMessage( element, rule.method ),
-
-					// 'title' is never undefined, so handle empty string as undefined
-					!this.settings.ignoreTitle && element.title || undefined,
-					$.validator.messages[ rule.method ],
-					"<strong>Warning: No message defined for " + element.name + "</strong>"
-				),
-				theregex = /\$?\{(\d+)\}/g;
-			if ( typeof message === "function" ) {
-				message = message.call( this, rule.parameters, element );
-			} else if ( theregex.test( message ) ) {
-				message = $.validator.format( message.replace( theregex, "{$1}" ), rule.parameters );
-			}
-
-			return message;
-		},
-
-		formatAndAdd: function( element, rule ) {
-			var message = this.defaultMessage( element, rule );
-
-			this.errorList.push( {
-				message: message,
-				element: element,
-				method: rule.method
-			} );
-
-			this.errorMap[ element.name ] = message;
-			this.submitted[ element.name ] = message;
-		},
-
-		addWrapper: function( toToggle ) {
-			if ( this.settings.wrapper ) {
-				toToggle = toToggle.add( toToggle.parent( this.settings.wrapper ) );
-			}
-			return toToggle;
-		},
-
-		defaultShowErrors: function() {
-			var i, elements, error;
-			for ( i = 0; this.errorList[ i ]; i++ ) {
-				error = this.errorList[ i ];
-				if ( this.settings.highlight ) {
-					this.settings.highlight.call( this, error.element, this.settings.errorClass, this.settings.validClass );
-				}
-				this.showLabel( error.element, error.message );
-			}
-			if ( this.errorList.length ) {
-				this.toShow = this.toShow.add( this.containers );
-			}
-			if ( this.settings.success ) {
-				for ( i = 0; this.successList[ i ]; i++ ) {
-					this.showLabel( this.successList[ i ] );
-				}
-			}
-			if ( this.settings.unhighlight ) {
-				for ( i = 0, elements = this.validElements(); elements[ i ]; i++ ) {
-					this.settings.unhighlight.call( this, elements[ i ], this.settings.errorClass, this.settings.validClass );
-				}
-			}
-			this.toHide = this.toHide.not( this.toShow );
-			this.hideErrors();
-			this.addWrapper( this.toShow ).show();
-		},
-
-		validElements: function() {
-			return this.currentElements.not( this.invalidElements() );
-		},
-
-		invalidElements: function() {
-			return $( this.errorList ).map( function() {
-				return this.element;
-			} );
-		},
-
-		showLabel: function( element, message ) {
-			var place, group, errorID, v,
-				error = this.errorsFor( element ),
-				elementID = this.idOrName( element ),
-				describedBy = $( element ).attr( "aria-describedby" );
-
-			if ( error.length ) {
-
-				// Refresh error/success class
-				error.removeClass( this.settings.validClass ).addClass( this.settings.errorClass );
-
-				// Replace message on existing label
-				error.html( message );
-			} else {
-
-				// Create error element
-				error = $( "<" + this.settings.errorElement + ">" )
-					.attr( "id", elementID + "-error" )
-					.addClass( this.settings.errorClass )
-					.html( message || "" );
-
-				// Maintain reference to the element to be placed into the DOM
-				place = error;
-				if ( this.settings.wrapper ) {
-
-					// Make sure the element is visible, even in IE
-					// actually showing the wrapped element is handled elsewhere
-					place = error.hide().show().wrap( "<" + this.settings.wrapper + "/>" ).parent();
-				}
-				if ( this.labelContainer.length ) {
-					this.labelContainer.append( place );
-				} else if ( this.settings.errorPlacement ) {
-					this.settings.errorPlacement.call( this, place, $( element ) );
-				} else {
-					place.insertAfter( element );
-				}
-
-				// Link error back to the element
-				if ( error.is( "label" ) ) {
-
-					// If the error is a label, then associate using 'for'
-					error.attr( "for", elementID );
-
-					// If the element is not a child of an associated label, then it's necessary
-					// to explicitly apply aria-describedby
-				} else if ( error.parents( "label[for='" + this.escapeCssMeta( elementID ) + "']" ).length === 0 ) {
-					errorID = error.attr( "id" );
-
-					// Respect existing non-error aria-describedby
-					if ( !describedBy ) {
-						describedBy = errorID;
-					} else if ( !describedBy.match( new RegExp( "\\b" + this.escapeCssMeta( errorID ) + "\\b" ) ) ) {
-
-						// Add to end of list if not already present
-						describedBy += " " + errorID;
-					}
-					$( element ).attr( "aria-describedby", describedBy );
-
-					// If this element is grouped, then assign to all elements in the same group
-					group = this.groups[ element.name ];
-					if ( group ) {
-						v = this;
-						$.each( v.groups, function( name, testgroup ) {
-							if ( testgroup === group ) {
-								$( "[name='" + v.escapeCssMeta( name ) + "']", v.currentForm )
-									.attr( "aria-describedby", error.attr( "id" ) );
-							}
-						} );
-					}
-				}
-			}
-			if ( !message && this.settings.success ) {
-				error.text( "" );
-				if ( typeof this.settings.success === "string" ) {
-					error.addClass( this.settings.success );
-				} else {
-					this.settings.success( error, element );
-				}
-			}
-			this.toShow = this.toShow.add( error );
-		},
-
-		errorsFor: function( element ) {
-			var name = this.escapeCssMeta( this.idOrName( element ) ),
-				describer = $( element ).attr( "aria-describedby" ),
-				selector = "label[for='" + name + "'], label[for='" + name + "'] *";
-
-			// 'aria-describedby' should directly reference the error element
-			if ( describer ) {
-				selector = selector + ", #" + this.escapeCssMeta( describer )
-					.replace( /\s+/g, ", #" );
-			}
-
-			return this
-				.errors()
-				.filter( selector );
-		},
-
-		// See https://api.jquery.com/category/selectors/, for CSS
-		// meta-characters that should be escaped in order to be used with JQuery
-		// as a literal part of a name/id or any selector.
-		escapeCssMeta: function( string ) {
-			return string.replace( /([\\!"#$%&'()*+,./:;<=>?@\[\]^`{|}~])/g, "\\$1" );
-		},
-
-		idOrName: function( element ) {
-			return this.groups[ element.name ] || ( this.checkable( element ) ? element.name : element.id || element.name );
-		},
-
-		validationTargetFor: function( element ) {
-
-			// If radio/checkbox, validate first element in group instead
-			if ( this.checkable( element ) ) {
-				element = this.findByName( element.name );
-			}
-
-			// Always apply ignore filter
-			return $( element ).not( this.settings.ignore )[ 0 ];
-		},
-
-		checkable: function( element ) {
-			return ( /radio|checkbox/i ).test( element.type );
-		},
-
-		findByName: function( name ) {
-			return $( this.currentForm ).find( "[name='" + this.escapeCssMeta( name ) + "']" );
-		},
-
-		getLength: function( value, element ) {
-			switch ( element.nodeName.toLowerCase() ) {
-			case "select":
-				return $( "option:selected", element ).length;
-			case "input":
-				if ( this.checkable( element ) ) {
-					return this.findByName( element.name ).filter( ":checked" ).length;
-				}
-			}
-			return value.length;
-		},
-
-		depend: function( param, element ) {
-			return this.dependTypes[ typeof param ] ? this.dependTypes[ typeof param ]( param, element ) : true;
-		},
-
-		dependTypes: {
-			"boolean": function( param ) {
-				return param;
-			},
-			"string": function( param, element ) {
-				return !!$( param, element.form ).length;
-			},
-			"function": function( param, element ) {
-				return param( element );
-			}
-		},
-
-		optional: function( element ) {
-			var val = this.elementValue( element );
-			return !$.validator.methods.required.call( this, val, element ) && "dependency-mismatch";
-		},
-
-		startRequest: function( element ) {
-			if ( !this.pending[ element.name ] ) {
-				this.pendingRequest++;
-				$( element ).addClass( this.settings.pendingClass );
-				this.pending[ element.name ] = true;
-			}
-		},
-
-		stopRequest: function( element, valid ) {
-			this.pendingRequest--;
-
-			// Sometimes synchronization fails, make sure pendingRequest is never < 0
-			if ( this.pendingRequest < 0 ) {
-				this.pendingRequest = 0;
-			}
-			delete this.pending[ element.name ];
-			$( element ).removeClass( this.settings.pendingClass );
-			if ( valid && this.pendingRequest === 0 && this.formSubmitted && this.form() ) {
-				$( this.currentForm ).submit();
-				this.formSubmitted = false;
-			} else if ( !valid && this.pendingRequest === 0 && this.formSubmitted ) {
-				$( this.currentForm ).triggerHandler( "invalid-form", [ this ] );
-				this.formSubmitted = false;
-			}
-		},
-
-		previousValue: function( element, method ) {
-			method = typeof method === "string" && method || "remote";
-
-			return $.data( element, "previousValue" ) || $.data( element, "previousValue", {
-				old: null,
-				valid: true,
-				message: this.defaultMessage( element, { method: method } )
-			} );
-		},
-
-		// Cleans up all forms and elements, removes validator-specific events
-		destroy: function() {
-			this.resetForm();
-
-			$( this.currentForm )
-				.off( ".validate" )
-				.removeData( "validator" )
-				.find( ".validate-equalTo-blur" )
-					.off( ".validate-equalTo" )
-					.removeClass( "validate-equalTo-blur" );
-		}
-
-	},
-
-	classRuleSettings: {
-		required: { required: true },
-		email: { email: true },
-		url: { url: true },
-		date: { date: true },
-		dateISO: { dateISO: true },
-		number: { number: true },
-		digits: { digits: true },
-		creditcard: { creditcard: true }
-	},
-
-	addClassRules: function( className, rules ) {
-		if ( className.constructor === String ) {
-			this.classRuleSettings[ className ] = rules;
-		} else {
-			$.extend( this.classRuleSettings, className );
-		}
-	},
-
-	classRules: function( element ) {
-		var rules = {},
-			classes = $( element ).attr( "class" );
-
-		if ( classes ) {
-			$.each( classes.split( " " ), function() {
-				if ( this in $.validator.classRuleSettings ) {
-					$.extend( rules, $.validator.classRuleSettings[ this ] );
-				}
-			} );
-		}
-		return rules;
-	},
-
-	normalizeAttributeRule: function( rules, type, method, value ) {
-
-		// Convert the value to a number for number inputs, and for text for backwards compability
-		// allows type="date" and others to be compared as strings
-		if ( /min|max|step/.test( method ) && ( type === null || /number|range|text/.test( type ) ) ) {
-			value = Number( value );
-
-			// Support Opera Mini, which returns NaN for undefined minlength
-			if ( isNaN( value ) ) {
-				value = undefined;
-			}
-		}
-
-		if ( value || value === 0 ) {
-			rules[ method ] = value;
-		} else if ( type === method && type !== "range" ) {
-
-			// Exception: the jquery validate 'range' method
-			// does not test for the html5 'range' type
-			rules[ method ] = true;
-		}
-	},
-
-	attributeRules: function( element ) {
-		var rules = {},
-			$element = $( element ),
-			type = element.getAttribute( "type" ),
-			method, value;
-
-		for ( method in $.validator.methods ) {
-
-			// Support for <input required> in both html5 and older browsers
-			if ( method === "required" ) {
-				value = element.getAttribute( method );
-
-				// Some browsers return an empty string for the required attribute
-				// and non-HTML5 browsers might have required="" markup
-				if ( value === "" ) {
-					value = true;
-				}
-
-				// Force non-HTML5 browsers to return bool
-				value = !!value;
-			} else {
-				value = $element.attr( method );
-			}
-
-			this.normalizeAttributeRule( rules, type, method, value );
-		}
-
-		// 'maxlength' may be returned as -1, 2147483647 ( IE ) and 524288 ( safari ) for text inputs
-		if ( rules.maxlength && /-1|2147483647|524288/.test( rules.maxlength ) ) {
-			delete rules.maxlength;
-		}
-
-		return rules;
-	},
-
-	dataRules: function( element ) {
-		var rules = {},
-			$element = $( element ),
-			type = element.getAttribute( "type" ),
-			method, value;
-
-		for ( method in $.validator.methods ) {
-			value = $element.data( "rule" + method.charAt( 0 ).toUpperCase() + method.substring( 1 ).toLowerCase() );
-			this.normalizeAttributeRule( rules, type, method, value );
-		}
-		return rules;
-	},
-
-	staticRules: function( element ) {
-		var rules = {},
-			validator = $.data( element.form, "validator" );
-
-		if ( validator.settings.rules ) {
-			rules = $.validator.normalizeRule( validator.settings.rules[ element.name ] ) || {};
-		}
-		return rules;
-	},
-
-	normalizeRules: function( rules, element ) {
-
-		// Handle dependency check
-		$.each( rules, function( prop, val ) {
-
-			// Ignore rule when param is explicitly false, eg. required:false
-			if ( val === false ) {
-				delete rules[ prop ];
-				return;
-			}
-			if ( val.param || val.depends ) {
-				var keepRule = true;
-				switch ( typeof val.depends ) {
-				case "string":
-					keepRule = !!$( val.depends, element.form ).length;
-					break;
-				case "function":
-					keepRule = val.depends.call( element, element );
-					break;
-				}
-				if ( keepRule ) {
-					rules[ prop ] = val.param !== undefined ? val.param : true;
-				} else {
-					$.data( element.form, "validator" ).resetElements( $( element ) );
-					delete rules[ prop ];
-				}
-			}
-		} );
-
-		// Evaluate parameters
-		$.each( rules, function( rule, parameter ) {
-			rules[ rule ] = $.isFunction( parameter ) && rule !== "normalizer" ? parameter( element ) : parameter;
-		} );
-
-		// Clean number parameters
-		$.each( [ "minlength", "maxlength" ], function() {
-			if ( rules[ this ] ) {
-				rules[ this ] = Number( rules[ this ] );
-			}
-		} );
-		$.each( [ "rangelength", "range" ], function() {
-			var parts;
-			if ( rules[ this ] ) {
-				if ( $.isArray( rules[ this ] ) ) {
-					rules[ this ] = [ Number( rules[ this ][ 0 ] ), Number( rules[ this ][ 1 ] ) ];
-				} else if ( typeof rules[ this ] === "string" ) {
-					parts = rules[ this ].replace( /[\[\]]/g, "" ).split( /[\s,]+/ );
-					rules[ this ] = [ Number( parts[ 0 ] ), Number( parts[ 1 ] ) ];
-				}
-			}
-		} );
-
-		if ( $.validator.autoCreateRanges ) {
-
-			// Auto-create ranges
-			if ( rules.min != null && rules.max != null ) {
-				rules.range = [ rules.min, rules.max ];
-				delete rules.min;
-				delete rules.max;
-			}
-			if ( rules.minlength != null && rules.maxlength != null ) {
-				rules.rangelength = [ rules.minlength, rules.maxlength ];
-				delete rules.minlength;
-				delete rules.maxlength;
-			}
-		}
-
-		return rules;
-	},
-
-	// Converts a simple string to a {string: true} rule, e.g., "required" to {required:true}
-	normalizeRule: function( data ) {
-		if ( typeof data === "string" ) {
-			var transformed = {};
-			$.each( data.split( /\s/ ), function() {
-				transformed[ this ] = true;
-			} );
-			data = transformed;
-		}
-		return data;
-	},
-
-	// http://jqueryvalidation.org/jQuery.validator.addMethod/
-	addMethod: function( name, method, message ) {
-		$.validator.methods[ name ] = method;
-		$.validator.messages[ name ] = message !== undefined ? message : $.validator.messages[ name ];
-		if ( method.length < 3 ) {
-			$.validator.addClassRules( name, $.validator.normalizeRule( name ) );
-		}
-	},
-
-	// http://jqueryvalidation.org/jQuery.validator.methods/
-	methods: {
-
-		// http://jqueryvalidation.org/required-method/
-		required: function( value, element, param ) {
-
-			// Check if dependency is met
-			if ( !this.depend( param, element ) ) {
-				return "dependency-mismatch";
-			}
-			if ( element.nodeName.toLowerCase() === "select" ) {
-
-				// Could be an array for select-multiple or a string, both are fine this way
-				var val = $( element ).val();
-				return val && val.length > 0;
-			}
-			if ( this.checkable( element ) ) {
-				return this.getLength( value, element ) > 0;
-			}
-			return value.length > 0;
-		},
-
-		// http://jqueryvalidation.org/email-method/
-		email: function( value, element ) {
-
-			// From https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address
-			// Retrieved 2014-01-14
-			// If you have a problem with this implementation, report a bug against the above spec
-			// Or use custom methods to implement your own email validation
-			return this.optional( element ) || /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( value );
-		},
-
-		// http://jqueryvalidation.org/url-method/
-		url: function( value, element ) {
-
-			// Copyright (c) 2010-2013 Diego Perini, MIT licensed
-			// https://gist.github.com/dperini/729294
-			// see also https://mathiasbynens.be/demo/url-regex
-			// modified to allow protocol-relative URLs
-			return this.optional( element ) || /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test( value );
-		},
-
-		// http://jqueryvalidation.org/date-method/
-		date: function( value, element ) {
-			return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
-		},
-
-		// http://jqueryvalidation.org/dateISO-method/
-		dateISO: function( value, element ) {
-			return this.optional( element ) || /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test( value );
-		},
-
-		// http://jqueryvalidation.org/number-method/
-		number: function( value, element ) {
-			return this.optional( element ) || /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test( value );
-		},
-
-		// http://jqueryvalidation.org/digits-method/
-		digits: function( value, element ) {
-			return this.optional( element ) || /^\d+$/.test( value );
-		},
-
-		// http://jqueryvalidation.org/minlength-method/
-		minlength: function( value, element, param ) {
-			var length = $.isArray( value ) ? value.length : this.getLength( value, element );
-			return this.optional( element ) || length >= param;
-		},
-
-		// http://jqueryvalidation.org/maxlength-method/
-		maxlength: function( value, element, param ) {
-			var length = $.isArray( value ) ? value.length : this.getLength( value, element );
-			return this.optional( element ) || length <= param;
-		},
-
-		// http://jqueryvalidation.org/rangelength-method/
-		rangelength: function( value, element, param ) {
-			var length = $.isArray( value ) ? value.length : this.getLength( value, element );
-			return this.optional( element ) || ( length >= param[ 0 ] && length <= param[ 1 ] );
-		},
-
-		// http://jqueryvalidation.org/min-method/
-		min: function( value, element, param ) {
-			return this.optional( element ) || value >= param;
-		},
-
-		// http://jqueryvalidation.org/max-method/
-		max: function( value, element, param ) {
-			return this.optional( element ) || value <= param;
-		},
-
-		// http://jqueryvalidation.org/range-method/
-		range: function( value, element, param ) {
-			return this.optional( element ) || ( value >= param[ 0 ] && value <= param[ 1 ] );
-		},
-
-		// http://jqueryvalidation.org/step-method/
-		step: function( value, element, param ) {
-			var type = $( element ).attr( "type" ),
-				errorMessage = "Step attribute on input type " + type + " is not supported.",
-				supportedTypes = [ "text", "number", "range" ],
-				re = new RegExp( "\\b" + type + "\\b" ),
-				notSupported = type && !re.test( supportedTypes.join() ),
-				decimalPlaces = function( num ) {
-					var match = ( "" + num ).match( /(?:\.(\d+))?$/ );
-					if ( !match ) {
-						return 0;
-					}
-
-					// Number of digits right of decimal point.
-					return match[ 1 ] ? match[ 1 ].length : 0;
-				},
-				toInt = function( num ) {
-					return Math.round( num * Math.pow( 10, decimals ) );
-				},
-				valid = true,
-				decimals;
-
-			// Works only for text, number and range input types
-			// TODO find a way to support input types date, datetime, datetime-local, month, time and week
-			if ( notSupported ) {
-				throw new Error( errorMessage );
-			}
-
-			decimals = decimalPlaces( param );
-
-			// Value can't have too many decimals
-			if ( decimalPlaces( value ) > decimals || toInt( value ) % toInt( param ) !== 0 ) {
-				valid = false;
-			}
-
-			return this.optional( element ) || valid;
-		},
-
-		// http://jqueryvalidation.org/equalTo-method/
-		equalTo: function( value, element, param ) {
-
-			// Bind to the blur event of the target in order to revalidate whenever the target field is updated
-			var target = $( param );
-			if ( this.settings.onfocusout && target.not( ".validate-equalTo-blur" ).length ) {
-				target.addClass( "validate-equalTo-blur" ).on( "blur.validate-equalTo", function() {
-					$( element ).valid();
-				} );
-			}
-			return value === target.val();
-		},
-
-		// http://jqueryvalidation.org/remote-method/
-		remote: function( value, element, param, method ) {
-			if ( this.optional( element ) ) {
-				return "dependency-mismatch";
-			}
-
-			method = typeof method === "string" && method || "remote";
-
-			var previous = this.previousValue( element, method ),
-				validator, data, optionDataString;
-
-			if ( !this.settings.messages[ element.name ] ) {
-				this.settings.messages[ element.name ] = {};
-			}
-			previous.originalMessage = previous.originalMessage || this.settings.messages[ element.name ][ method ];
-			this.settings.messages[ element.name ][ method ] = previous.message;
-
-			param = typeof param === "string" && { url: param } || param;
-			optionDataString = $.param( $.extend( { data: value }, param.data ) );
-			if ( previous.old === optionDataString ) {
-				return previous.valid;
-			}
-
-			previous.old = optionDataString;
-			validator = this;
-			this.startRequest( element );
-			data = {};
-			data[ element.name ] = value;
-			$.ajax( $.extend( true, {
-				mode: "abort",
-				port: "validate" + element.name,
-				dataType: "json",
-				data: data,
-				context: validator.currentForm,
-				success: function( response ) {
-					var valid = response === true || response === "true",
-						errors, message, submitted;
-
-					validator.settings.messages[ element.name ][ method ] = previous.originalMessage;
-					if ( valid ) {
-						submitted = validator.formSubmitted;
-						validator.resetInternals();
-						validator.toHide = validator.errorsFor( element );
-						validator.formSubmitted = submitted;
-						validator.successList.push( element );
-						validator.invalid[ element.name ] = false;
-						validator.showErrors();
-					} else {
-						errors = {};
-						message = response || validator.defaultMessage( element, { method: method, parameters: value } );
-						errors[ element.name ] = previous.message = message;
-						validator.invalid[ element.name ] = true;
-						validator.showErrors( errors );
-					}
-					previous.valid = valid;
-					validator.stopRequest( element, valid );
-				}
-			}, param ) );
-			return "pending";
-		}
-	}
-
-} );
-
-// Ajax mode: abort
-// usage: $.ajax({ mode: "abort"[, port: "uniqueport"]});
-// if mode:"abort" is used, the previous request on that port (port can be undefined) is aborted via XMLHttpRequest.abort()
-
-var pendingRequests = {},
-	ajax;
-
-// Use a prefilter if available (1.5+)
-if ( $.ajaxPrefilter ) {
-	$.ajaxPrefilter( function( settings, _, xhr ) {
-		var port = settings.port;
-		if ( settings.mode === "abort" ) {
-			if ( pendingRequests[ port ] ) {
-				pendingRequests[ port ].abort();
-			}
-			pendingRequests[ port ] = xhr;
-		}
-	} );
-} else {
-
-	// Proxy ajax
-	ajax = $.ajax;
-	$.ajax = function( settings ) {
-		var mode = ( "mode" in settings ? settings : $.ajaxSettings ).mode,
-			port = ( "port" in settings ? settings : $.ajaxSettings ).port;
-		if ( mode === "abort" ) {
-			if ( pendingRequests[ port ] ) {
-				pendingRequests[ port ].abort();
-			}
-			pendingRequests[ port ] = ajax.apply( this, arguments );
-			return pendingRequests[ port ];
-		}
-		return ajax.apply( this, arguments );
-	};
-}
-return $;
-}));
-/*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under the MIT license
@@ -23528,6 +21954,4587 @@ S2.define('jquery.select2',[
   // Return the Select2 instance for anyone who is importing it.
   return select2;
 }));
+
+/*!
+ * jQuery Validation Plugin v1.16.0
+ *
+ * http://jqueryvalidation.org/
+ *
+ * Copyright (c) 2016 Jörn Zaefferer
+ * Released under the MIT license
+ */
+(function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+		define( ["jquery"], factory );
+	} else if (typeof module === "object" && module.exports) {
+		module.exports = factory( require( "jquery" ) );
+	} else {
+		factory( jQuery );
+	}
+}(function( $ ) {
+
+$.extend( $.fn, {
+
+	// http://jqueryvalidation.org/validate/
+	validate: function( options ) {
+
+		// If nothing is selected, return nothing; can't chain anyway
+		if ( !this.length ) {
+			if ( options && options.debug && window.console ) {
+				console.warn( "Nothing selected, can't validate, returning nothing." );
+			}
+			return;
+		}
+
+		// Check if a validator for this form was already created
+		var validator = $.data( this[ 0 ], "validator" );
+		if ( validator ) {
+			return validator;
+		}
+
+		// Add novalidate tag if HTML5.
+		this.attr( "novalidate", "novalidate" );
+
+		validator = new $.validator( options, this[ 0 ] );
+		$.data( this[ 0 ], "validator", validator );
+
+		if ( validator.settings.onsubmit ) {
+
+			this.on( "click.validate", ":submit", function( event ) {
+				if ( validator.settings.submitHandler ) {
+					validator.submitButton = event.target;
+				}
+
+				// Allow suppressing validation by adding a cancel class to the submit button
+				if ( $( this ).hasClass( "cancel" ) ) {
+					validator.cancelSubmit = true;
+				}
+
+				// Allow suppressing validation by adding the html5 formnovalidate attribute to the submit button
+				if ( $( this ).attr( "formnovalidate" ) !== undefined ) {
+					validator.cancelSubmit = true;
+				}
+			} );
+
+			// Validate the form on submit
+			this.on( "submit.validate", function( event ) {
+				if ( validator.settings.debug ) {
+
+					// Prevent form submit to be able to see console output
+					event.preventDefault();
+				}
+				function handle() {
+					var hidden, result;
+					if ( validator.settings.submitHandler ) {
+						if ( validator.submitButton ) {
+
+							// Insert a hidden input as a replacement for the missing submit button
+							hidden = $( "<input type='hidden'/>" )
+								.attr( "name", validator.submitButton.name )
+								.val( $( validator.submitButton ).val() )
+								.appendTo( validator.currentForm );
+						}
+						result = validator.settings.submitHandler.call( validator, validator.currentForm, event );
+						if ( validator.submitButton ) {
+
+							// And clean up afterwards; thanks to no-block-scope, hidden can be referenced
+							hidden.remove();
+						}
+						if ( result !== undefined ) {
+							return result;
+						}
+						return false;
+					}
+					return true;
+				}
+
+				// Prevent submit for invalid forms or custom submit handlers
+				if ( validator.cancelSubmit ) {
+					validator.cancelSubmit = false;
+					return handle();
+				}
+				if ( validator.form() ) {
+					if ( validator.pendingRequest ) {
+						validator.formSubmitted = true;
+						return false;
+					}
+					return handle();
+				} else {
+					validator.focusInvalid();
+					return false;
+				}
+			} );
+		}
+
+		return validator;
+	},
+
+	// http://jqueryvalidation.org/valid/
+	valid: function() {
+		var valid, validator, errorList;
+
+		if ( $( this[ 0 ] ).is( "form" ) ) {
+			valid = this.validate().form();
+		} else {
+			errorList = [];
+			valid = true;
+			validator = $( this[ 0 ].form ).validate();
+			this.each( function() {
+				valid = validator.element( this ) && valid;
+				if ( !valid ) {
+					errorList = errorList.concat( validator.errorList );
+				}
+			} );
+			validator.errorList = errorList;
+		}
+		return valid;
+	},
+
+	// http://jqueryvalidation.org/rules/
+	rules: function( command, argument ) {
+		var element = this[ 0 ],
+			settings, staticRules, existingRules, data, param, filtered;
+
+		// If nothing is selected, return empty object; can't chain anyway
+		if ( element == null || element.form == null ) {
+			return;
+		}
+
+		if ( command ) {
+			settings = $.data( element.form, "validator" ).settings;
+			staticRules = settings.rules;
+			existingRules = $.validator.staticRules( element );
+			switch ( command ) {
+			case "add":
+				$.extend( existingRules, $.validator.normalizeRule( argument ) );
+
+				// Remove messages from rules, but allow them to be set separately
+				delete existingRules.messages;
+				staticRules[ element.name ] = existingRules;
+				if ( argument.messages ) {
+					settings.messages[ element.name ] = $.extend( settings.messages[ element.name ], argument.messages );
+				}
+				break;
+			case "remove":
+				if ( !argument ) {
+					delete staticRules[ element.name ];
+					return existingRules;
+				}
+				filtered = {};
+				$.each( argument.split( /\s/ ), function( index, method ) {
+					filtered[ method ] = existingRules[ method ];
+					delete existingRules[ method ];
+					if ( method === "required" ) {
+						$( element ).removeAttr( "aria-required" );
+					}
+				} );
+				return filtered;
+			}
+		}
+
+		data = $.validator.normalizeRules(
+		$.extend(
+			{},
+			$.validator.classRules( element ),
+			$.validator.attributeRules( element ),
+			$.validator.dataRules( element ),
+			$.validator.staticRules( element )
+		), element );
+
+		// Make sure required is at front
+		if ( data.required ) {
+			param = data.required;
+			delete data.required;
+			data = $.extend( { required: param }, data );
+			$( element ).attr( "aria-required", "true" );
+		}
+
+		// Make sure remote is at back
+		if ( data.remote ) {
+			param = data.remote;
+			delete data.remote;
+			data = $.extend( data, { remote: param } );
+		}
+
+		return data;
+	}
+} );
+
+// Custom selectors
+$.extend( $.expr.pseudos || $.expr[ ":" ], {		// '|| $.expr[ ":" ]' here enables backwards compatibility to jQuery 1.7. Can be removed when dropping jQ 1.7.x support
+
+	// http://jqueryvalidation.org/blank-selector/
+	blank: function( a ) {
+		return !$.trim( "" + $( a ).val() );
+	},
+
+	// http://jqueryvalidation.org/filled-selector/
+	filled: function( a ) {
+		var val = $( a ).val();
+		return val !== null && !!$.trim( "" + val );
+	},
+
+	// http://jqueryvalidation.org/unchecked-selector/
+	unchecked: function( a ) {
+		return !$( a ).prop( "checked" );
+	}
+} );
+
+// Constructor for validator
+$.validator = function( options, form ) {
+	this.settings = $.extend( true, {}, $.validator.defaults, options );
+	this.currentForm = form;
+	this.init();
+};
+
+// http://jqueryvalidation.org/jQuery.validator.format/
+$.validator.format = function( source, params ) {
+	if ( arguments.length === 1 ) {
+		return function() {
+			var args = $.makeArray( arguments );
+			args.unshift( source );
+			return $.validator.format.apply( this, args );
+		};
+	}
+	if ( params === undefined ) {
+		return source;
+	}
+	if ( arguments.length > 2 && params.constructor !== Array  ) {
+		params = $.makeArray( arguments ).slice( 1 );
+	}
+	if ( params.constructor !== Array ) {
+		params = [ params ];
+	}
+	$.each( params, function( i, n ) {
+		source = source.replace( new RegExp( "\\{" + i + "\\}", "g" ), function() {
+			return n;
+		} );
+	} );
+	return source;
+};
+
+$.extend( $.validator, {
+
+	defaults: {
+		messages: {},
+		groups: {},
+		rules: {},
+		errorClass: "error",
+		pendingClass: "pending",
+		validClass: "valid",
+		errorElement: "label",
+		focusCleanup: false,
+		focusInvalid: true,
+		errorContainer: $( [] ),
+		errorLabelContainer: $( [] ),
+		onsubmit: true,
+		ignore: ":hidden",
+		ignoreTitle: false,
+		onfocusin: function( element ) {
+			this.lastActive = element;
+
+			// Hide error label and remove error class on focus if enabled
+			if ( this.settings.focusCleanup ) {
+				if ( this.settings.unhighlight ) {
+					this.settings.unhighlight.call( this, element, this.settings.errorClass, this.settings.validClass );
+				}
+				this.hideThese( this.errorsFor( element ) );
+			}
+		},
+		onfocusout: function( element ) {
+			if ( !this.checkable( element ) && ( element.name in this.submitted || !this.optional( element ) ) ) {
+				this.element( element );
+			}
+		},
+		onkeyup: function( element, event ) {
+
+			// Avoid revalidate the field when pressing one of the following keys
+			// Shift       => 16
+			// Ctrl        => 17
+			// Alt         => 18
+			// Caps lock   => 20
+			// End         => 35
+			// Home        => 36
+			// Left arrow  => 37
+			// Up arrow    => 38
+			// Right arrow => 39
+			// Down arrow  => 40
+			// Insert      => 45
+			// Num lock    => 144
+			// AltGr key   => 225
+			var excludedKeys = [
+				16, 17, 18, 20, 35, 36, 37,
+				38, 39, 40, 45, 144, 225
+			];
+
+			if ( event.which === 9 && this.elementValue( element ) === "" || $.inArray( event.keyCode, excludedKeys ) !== -1 ) {
+				return;
+			} else if ( element.name in this.submitted || element.name in this.invalid ) {
+				this.element( element );
+			}
+		},
+		onclick: function( element ) {
+
+			// Click on selects, radiobuttons and checkboxes
+			if ( element.name in this.submitted ) {
+				this.element( element );
+
+			// Or option elements, check parent select in that case
+			} else if ( element.parentNode.name in this.submitted ) {
+				this.element( element.parentNode );
+			}
+		},
+		highlight: function( element, errorClass, validClass ) {
+			if ( element.type === "radio" ) {
+				this.findByName( element.name ).addClass( errorClass ).removeClass( validClass );
+			} else {
+				$( element ).addClass( errorClass ).removeClass( validClass );
+			}
+		},
+		unhighlight: function( element, errorClass, validClass ) {
+			if ( element.type === "radio" ) {
+				this.findByName( element.name ).removeClass( errorClass ).addClass( validClass );
+			} else {
+				$( element ).removeClass( errorClass ).addClass( validClass );
+			}
+		}
+	},
+
+	// http://jqueryvalidation.org/jQuery.validator.setDefaults/
+	setDefaults: function( settings ) {
+		$.extend( $.validator.defaults, settings );
+	},
+
+	messages: {
+		required: "This field is required.",
+		remote: "Please fix this field.",
+		email: "Please enter a valid email address.",
+		url: "Please enter a valid URL.",
+		date: "Please enter a valid date.",
+		dateISO: "Please enter a valid date (ISO).",
+		number: "Please enter a valid number.",
+		digits: "Please enter only digits.",
+		equalTo: "Please enter the same value again.",
+		maxlength: $.validator.format( "Please enter no more than {0} characters." ),
+		minlength: $.validator.format( "Please enter at least {0} characters." ),
+		rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
+		range: $.validator.format( "Please enter a value between {0} and {1}." ),
+		max: $.validator.format( "Please enter a value less than or equal to {0}." ),
+		min: $.validator.format( "Please enter a value greater than or equal to {0}." ),
+		step: $.validator.format( "Please enter a multiple of {0}." )
+	},
+
+	autoCreateRanges: false,
+
+	prototype: {
+
+		init: function() {
+			this.labelContainer = $( this.settings.errorLabelContainer );
+			this.errorContext = this.labelContainer.length && this.labelContainer || $( this.currentForm );
+			this.containers = $( this.settings.errorContainer ).add( this.settings.errorLabelContainer );
+			this.submitted = {};
+			this.valueCache = {};
+			this.pendingRequest = 0;
+			this.pending = {};
+			this.invalid = {};
+			this.reset();
+
+			var groups = ( this.groups = {} ),
+				rules;
+			$.each( this.settings.groups, function( key, value ) {
+				if ( typeof value === "string" ) {
+					value = value.split( /\s/ );
+				}
+				$.each( value, function( index, name ) {
+					groups[ name ] = key;
+				} );
+			} );
+			rules = this.settings.rules;
+			$.each( rules, function( key, value ) {
+				rules[ key ] = $.validator.normalizeRule( value );
+			} );
+
+			function delegate( event ) {
+
+				// Set form expando on contenteditable
+				if ( !this.form && this.hasAttribute( "contenteditable" ) ) {
+					this.form = $( this ).closest( "form" )[ 0 ];
+				}
+
+				var validator = $.data( this.form, "validator" ),
+					eventType = "on" + event.type.replace( /^validate/, "" ),
+					settings = validator.settings;
+				if ( settings[ eventType ] && !$( this ).is( settings.ignore ) ) {
+					settings[ eventType ].call( validator, this, event );
+				}
+			}
+
+			$( this.currentForm )
+				.on( "focusin.validate focusout.validate keyup.validate",
+					":text, [type='password'], [type='file'], select, textarea, [type='number'], [type='search'], " +
+					"[type='tel'], [type='url'], [type='email'], [type='datetime'], [type='date'], [type='month'], " +
+					"[type='week'], [type='time'], [type='datetime-local'], [type='range'], [type='color'], " +
+					"[type='radio'], [type='checkbox'], [contenteditable], [type='button']", delegate )
+
+				// Support: Chrome, oldIE
+				// "select" is provided as event.target when clicking a option
+				.on( "click.validate", "select, option, [type='radio'], [type='checkbox']", delegate );
+
+			if ( this.settings.invalidHandler ) {
+				$( this.currentForm ).on( "invalid-form.validate", this.settings.invalidHandler );
+			}
+
+			// Add aria-required to any Static/Data/Class required fields before first validation
+			// Screen readers require this attribute to be present before the initial submission http://www.w3.org/TR/WCAG-TECHS/ARIA2.html
+			$( this.currentForm ).find( "[required], [data-rule-required], .required" ).attr( "aria-required", "true" );
+		},
+
+		// http://jqueryvalidation.org/Validator.form/
+		form: function() {
+			this.checkForm();
+			$.extend( this.submitted, this.errorMap );
+			this.invalid = $.extend( {}, this.errorMap );
+			if ( !this.valid() ) {
+				$( this.currentForm ).triggerHandler( "invalid-form", [ this ] );
+			}
+			this.showErrors();
+			return this.valid();
+		},
+
+		checkForm: function() {
+			this.prepareForm();
+			for ( var i = 0, elements = ( this.currentElements = this.elements() ); elements[ i ]; i++ ) {
+				this.check( elements[ i ] );
+			}
+			return this.valid();
+		},
+
+		// http://jqueryvalidation.org/Validator.element/
+		element: function( element ) {
+			var cleanElement = this.clean( element ),
+				checkElement = this.validationTargetFor( cleanElement ),
+				v = this,
+				result = true,
+				rs, group;
+
+			if ( checkElement === undefined ) {
+				delete this.invalid[ cleanElement.name ];
+			} else {
+				this.prepareElement( checkElement );
+				this.currentElements = $( checkElement );
+
+				// If this element is grouped, then validate all group elements already
+				// containing a value
+				group = this.groups[ checkElement.name ];
+				if ( group ) {
+					$.each( this.groups, function( name, testgroup ) {
+						if ( testgroup === group && name !== checkElement.name ) {
+							cleanElement = v.validationTargetFor( v.clean( v.findByName( name ) ) );
+							if ( cleanElement && cleanElement.name in v.invalid ) {
+								v.currentElements.push( cleanElement );
+								result = v.check( cleanElement ) && result;
+							}
+						}
+					} );
+				}
+
+				rs = this.check( checkElement ) !== false;
+				result = result && rs;
+				if ( rs ) {
+					this.invalid[ checkElement.name ] = false;
+				} else {
+					this.invalid[ checkElement.name ] = true;
+				}
+
+				if ( !this.numberOfInvalids() ) {
+
+					// Hide error containers on last error
+					this.toHide = this.toHide.add( this.containers );
+				}
+				this.showErrors();
+
+				// Add aria-invalid status for screen readers
+				$( element ).attr( "aria-invalid", !rs );
+			}
+
+			return result;
+		},
+
+		// http://jqueryvalidation.org/Validator.showErrors/
+		showErrors: function( errors ) {
+			if ( errors ) {
+				var validator = this;
+
+				// Add items to error list and map
+				$.extend( this.errorMap, errors );
+				this.errorList = $.map( this.errorMap, function( message, name ) {
+					return {
+						message: message,
+						element: validator.findByName( name )[ 0 ]
+					};
+				} );
+
+				// Remove items from success list
+				this.successList = $.grep( this.successList, function( element ) {
+					return !( element.name in errors );
+				} );
+			}
+			if ( this.settings.showErrors ) {
+				this.settings.showErrors.call( this, this.errorMap, this.errorList );
+			} else {
+				this.defaultShowErrors();
+			}
+		},
+
+		// http://jqueryvalidation.org/Validator.resetForm/
+		resetForm: function() {
+			if ( $.fn.resetForm ) {
+				$( this.currentForm ).resetForm();
+			}
+			this.invalid = {};
+			this.submitted = {};
+			this.prepareForm();
+			this.hideErrors();
+			var elements = this.elements()
+				.removeData( "previousValue" )
+				.removeAttr( "aria-invalid" );
+
+			this.resetElements( elements );
+		},
+
+		resetElements: function( elements ) {
+			var i;
+
+			if ( this.settings.unhighlight ) {
+				for ( i = 0; elements[ i ]; i++ ) {
+					this.settings.unhighlight.call( this, elements[ i ],
+						this.settings.errorClass, "" );
+					this.findByName( elements[ i ].name ).removeClass( this.settings.validClass );
+				}
+			} else {
+				elements
+					.removeClass( this.settings.errorClass )
+					.removeClass( this.settings.validClass );
+			}
+		},
+
+		numberOfInvalids: function() {
+			return this.objectLength( this.invalid );
+		},
+
+		objectLength: function( obj ) {
+			/* jshint unused: false */
+			var count = 0,
+				i;
+			for ( i in obj ) {
+				if ( obj[ i ] ) {
+					count++;
+				}
+			}
+			return count;
+		},
+
+		hideErrors: function() {
+			this.hideThese( this.toHide );
+		},
+
+		hideThese: function( errors ) {
+			errors.not( this.containers ).text( "" );
+			this.addWrapper( errors ).hide();
+		},
+
+		valid: function() {
+			return this.size() === 0;
+		},
+
+		size: function() {
+			return this.errorList.length;
+		},
+
+		focusInvalid: function() {
+			if ( this.settings.focusInvalid ) {
+				try {
+					$( this.findLastActive() || this.errorList.length && this.errorList[ 0 ].element || [] )
+					.filter( ":visible" )
+					.focus()
+
+					// Manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
+					.trigger( "focusin" );
+				} catch ( e ) {
+
+					// Ignore IE throwing errors when focusing hidden elements
+				}
+			}
+		},
+
+		findLastActive: function() {
+			var lastActive = this.lastActive;
+			return lastActive && $.grep( this.errorList, function( n ) {
+				return n.element.name === lastActive.name;
+			} ).length === 1 && lastActive;
+		},
+
+		elements: function() {
+			var validator = this,
+				rulesCache = {};
+
+			// Select all valid inputs inside the form (no submit or reset buttons)
+			return $( this.currentForm )
+			.find( "input, select, textarea, [contenteditable]" )
+			.not( ":submit, :reset, :image, :disabled" )
+			.not( this.settings.ignore )
+			.filter( function() {
+				var name = this.name || $( this ).attr( "name" ); // For contenteditable
+				if ( !name && validator.settings.debug && window.console ) {
+					console.error( "%o has no name assigned", this );
+				}
+
+				// Set form expando on contenteditable
+				if ( this.hasAttribute( "contenteditable" ) ) {
+					this.form = $( this ).closest( "form" )[ 0 ];
+				}
+
+				// Select only the first element for each name, and only those with rules specified
+				if ( name in rulesCache || !validator.objectLength( $( this ).rules() ) ) {
+					return false;
+				}
+
+				rulesCache[ name ] = true;
+				return true;
+			} );
+		},
+
+		clean: function( selector ) {
+			return $( selector )[ 0 ];
+		},
+
+		errors: function() {
+			var errorClass = this.settings.errorClass.split( " " ).join( "." );
+			return $( this.settings.errorElement + "." + errorClass, this.errorContext );
+		},
+
+		resetInternals: function() {
+			this.successList = [];
+			this.errorList = [];
+			this.errorMap = {};
+			this.toShow = $( [] );
+			this.toHide = $( [] );
+		},
+
+		reset: function() {
+			this.resetInternals();
+			this.currentElements = $( [] );
+		},
+
+		prepareForm: function() {
+			this.reset();
+			this.toHide = this.errors().add( this.containers );
+		},
+
+		prepareElement: function( element ) {
+			this.reset();
+			this.toHide = this.errorsFor( element );
+		},
+
+		elementValue: function( element ) {
+			var $element = $( element ),
+				type = element.type,
+				val, idx;
+
+			if ( type === "radio" || type === "checkbox" ) {
+				return this.findByName( element.name ).filter( ":checked" ).val();
+			} else if ( type === "number" && typeof element.validity !== "undefined" ) {
+				return element.validity.badInput ? "NaN" : $element.val();
+			}
+
+			if ( element.hasAttribute( "contenteditable" ) ) {
+				val = $element.text();
+			} else {
+				val = $element.val();
+			}
+
+			if ( type === "file" ) {
+
+				// Modern browser (chrome & safari)
+				if ( val.substr( 0, 12 ) === "C:\\fakepath\\" ) {
+					return val.substr( 12 );
+				}
+
+				// Legacy browsers
+				// Unix-based path
+				idx = val.lastIndexOf( "/" );
+				if ( idx >= 0 ) {
+					return val.substr( idx + 1 );
+				}
+
+				// Windows-based path
+				idx = val.lastIndexOf( "\\" );
+				if ( idx >= 0 ) {
+					return val.substr( idx + 1 );
+				}
+
+				// Just the file name
+				return val;
+			}
+
+			if ( typeof val === "string" ) {
+				return val.replace( /\r/g, "" );
+			}
+			return val;
+		},
+
+		check: function( element ) {
+			element = this.validationTargetFor( this.clean( element ) );
+
+			var rules = $( element ).rules(),
+				rulesCount = $.map( rules, function( n, i ) {
+					return i;
+				} ).length,
+				dependencyMismatch = false,
+				val = this.elementValue( element ),
+				result, method, rule;
+
+			// If a normalizer is defined for this element, then
+			// call it to retreive the changed value instead
+			// of using the real one.
+			// Note that `this` in the normalizer is `element`.
+			if ( typeof rules.normalizer === "function" ) {
+				val = rules.normalizer.call( element, val );
+
+				if ( typeof val !== "string" ) {
+					throw new TypeError( "The normalizer should return a string value." );
+				}
+
+				// Delete the normalizer from rules to avoid treating
+				// it as a pre-defined method.
+				delete rules.normalizer;
+			}
+
+			for ( method in rules ) {
+				rule = { method: method, parameters: rules[ method ] };
+				try {
+					result = $.validator.methods[ method ].call( this, val, element, rule.parameters );
+
+					// If a method indicates that the field is optional and therefore valid,
+					// don't mark it as valid when there are no other rules
+					if ( result === "dependency-mismatch" && rulesCount === 1 ) {
+						dependencyMismatch = true;
+						continue;
+					}
+					dependencyMismatch = false;
+
+					if ( result === "pending" ) {
+						this.toHide = this.toHide.not( this.errorsFor( element ) );
+						return;
+					}
+
+					if ( !result ) {
+						this.formatAndAdd( element, rule );
+						return false;
+					}
+				} catch ( e ) {
+					if ( this.settings.debug && window.console ) {
+						console.log( "Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.", e );
+					}
+					if ( e instanceof TypeError ) {
+						e.message += ".  Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.";
+					}
+
+					throw e;
+				}
+			}
+			if ( dependencyMismatch ) {
+				return;
+			}
+			if ( this.objectLength( rules ) ) {
+				this.successList.push( element );
+			}
+			return true;
+		},
+
+		// Return the custom message for the given element and validation method
+		// specified in the element's HTML5 data attribute
+		// return the generic message if present and no method specific message is present
+		customDataMessage: function( element, method ) {
+			return $( element ).data( "msg" + method.charAt( 0 ).toUpperCase() +
+				method.substring( 1 ).toLowerCase() ) || $( element ).data( "msg" );
+		},
+
+		// Return the custom message for the given element name and validation method
+		customMessage: function( name, method ) {
+			var m = this.settings.messages[ name ];
+			return m && ( m.constructor === String ? m : m[ method ] );
+		},
+
+		// Return the first defined argument, allowing empty strings
+		findDefined: function() {
+			for ( var i = 0; i < arguments.length; i++ ) {
+				if ( arguments[ i ] !== undefined ) {
+					return arguments[ i ];
+				}
+			}
+			return undefined;
+		},
+
+		// The second parameter 'rule' used to be a string, and extended to an object literal
+		// of the following form:
+		// rule = {
+		//     method: "method name",
+		//     parameters: "the given method parameters"
+		// }
+		//
+		// The old behavior still supported, kept to maintain backward compatibility with
+		// old code, and will be removed in the next major release.
+		defaultMessage: function( element, rule ) {
+			if ( typeof rule === "string" ) {
+				rule = { method: rule };
+			}
+
+			var message = this.findDefined(
+					this.customMessage( element.name, rule.method ),
+					this.customDataMessage( element, rule.method ),
+
+					// 'title' is never undefined, so handle empty string as undefined
+					!this.settings.ignoreTitle && element.title || undefined,
+					$.validator.messages[ rule.method ],
+					"<strong>Warning: No message defined for " + element.name + "</strong>"
+				),
+				theregex = /\$?\{(\d+)\}/g;
+			if ( typeof message === "function" ) {
+				message = message.call( this, rule.parameters, element );
+			} else if ( theregex.test( message ) ) {
+				message = $.validator.format( message.replace( theregex, "{$1}" ), rule.parameters );
+			}
+
+			return message;
+		},
+
+		formatAndAdd: function( element, rule ) {
+			var message = this.defaultMessage( element, rule );
+
+			this.errorList.push( {
+				message: message,
+				element: element,
+				method: rule.method
+			} );
+
+			this.errorMap[ element.name ] = message;
+			this.submitted[ element.name ] = message;
+		},
+
+		addWrapper: function( toToggle ) {
+			if ( this.settings.wrapper ) {
+				toToggle = toToggle.add( toToggle.parent( this.settings.wrapper ) );
+			}
+			return toToggle;
+		},
+
+		defaultShowErrors: function() {
+			var i, elements, error;
+			for ( i = 0; this.errorList[ i ]; i++ ) {
+				error = this.errorList[ i ];
+				if ( this.settings.highlight ) {
+					this.settings.highlight.call( this, error.element, this.settings.errorClass, this.settings.validClass );
+				}
+				this.showLabel( error.element, error.message );
+			}
+			if ( this.errorList.length ) {
+				this.toShow = this.toShow.add( this.containers );
+			}
+			if ( this.settings.success ) {
+				for ( i = 0; this.successList[ i ]; i++ ) {
+					this.showLabel( this.successList[ i ] );
+				}
+			}
+			if ( this.settings.unhighlight ) {
+				for ( i = 0, elements = this.validElements(); elements[ i ]; i++ ) {
+					this.settings.unhighlight.call( this, elements[ i ], this.settings.errorClass, this.settings.validClass );
+				}
+			}
+			this.toHide = this.toHide.not( this.toShow );
+			this.hideErrors();
+			this.addWrapper( this.toShow ).show();
+		},
+
+		validElements: function() {
+			return this.currentElements.not( this.invalidElements() );
+		},
+
+		invalidElements: function() {
+			return $( this.errorList ).map( function() {
+				return this.element;
+			} );
+		},
+
+		showLabel: function( element, message ) {
+			var place, group, errorID, v,
+				error = this.errorsFor( element ),
+				elementID = this.idOrName( element ),
+				describedBy = $( element ).attr( "aria-describedby" );
+
+			if ( error.length ) {
+
+				// Refresh error/success class
+				error.removeClass( this.settings.validClass ).addClass( this.settings.errorClass );
+
+				// Replace message on existing label
+				error.html( message );
+			} else {
+
+				// Create error element
+				error = $( "<" + this.settings.errorElement + ">" )
+					.attr( "id", elementID + "-error" )
+					.addClass( this.settings.errorClass )
+					.html( message || "" );
+
+				// Maintain reference to the element to be placed into the DOM
+				place = error;
+				if ( this.settings.wrapper ) {
+
+					// Make sure the element is visible, even in IE
+					// actually showing the wrapped element is handled elsewhere
+					place = error.hide().show().wrap( "<" + this.settings.wrapper + "/>" ).parent();
+				}
+				if ( this.labelContainer.length ) {
+					this.labelContainer.append( place );
+				} else if ( this.settings.errorPlacement ) {
+					this.settings.errorPlacement.call( this, place, $( element ) );
+				} else {
+					place.insertAfter( element );
+				}
+
+				// Link error back to the element
+				if ( error.is( "label" ) ) {
+
+					// If the error is a label, then associate using 'for'
+					error.attr( "for", elementID );
+
+					// If the element is not a child of an associated label, then it's necessary
+					// to explicitly apply aria-describedby
+				} else if ( error.parents( "label[for='" + this.escapeCssMeta( elementID ) + "']" ).length === 0 ) {
+					errorID = error.attr( "id" );
+
+					// Respect existing non-error aria-describedby
+					if ( !describedBy ) {
+						describedBy = errorID;
+					} else if ( !describedBy.match( new RegExp( "\\b" + this.escapeCssMeta( errorID ) + "\\b" ) ) ) {
+
+						// Add to end of list if not already present
+						describedBy += " " + errorID;
+					}
+					$( element ).attr( "aria-describedby", describedBy );
+
+					// If this element is grouped, then assign to all elements in the same group
+					group = this.groups[ element.name ];
+					if ( group ) {
+						v = this;
+						$.each( v.groups, function( name, testgroup ) {
+							if ( testgroup === group ) {
+								$( "[name='" + v.escapeCssMeta( name ) + "']", v.currentForm )
+									.attr( "aria-describedby", error.attr( "id" ) );
+							}
+						} );
+					}
+				}
+			}
+			if ( !message && this.settings.success ) {
+				error.text( "" );
+				if ( typeof this.settings.success === "string" ) {
+					error.addClass( this.settings.success );
+				} else {
+					this.settings.success( error, element );
+				}
+			}
+			this.toShow = this.toShow.add( error );
+		},
+
+		errorsFor: function( element ) {
+			var name = this.escapeCssMeta( this.idOrName( element ) ),
+				describer = $( element ).attr( "aria-describedby" ),
+				selector = "label[for='" + name + "'], label[for='" + name + "'] *";
+
+			// 'aria-describedby' should directly reference the error element
+			if ( describer ) {
+				selector = selector + ", #" + this.escapeCssMeta( describer )
+					.replace( /\s+/g, ", #" );
+			}
+
+			return this
+				.errors()
+				.filter( selector );
+		},
+
+		// See https://api.jquery.com/category/selectors/, for CSS
+		// meta-characters that should be escaped in order to be used with JQuery
+		// as a literal part of a name/id or any selector.
+		escapeCssMeta: function( string ) {
+			return string.replace( /([\\!"#$%&'()*+,./:;<=>?@\[\]^`{|}~])/g, "\\$1" );
+		},
+
+		idOrName: function( element ) {
+			return this.groups[ element.name ] || ( this.checkable( element ) ? element.name : element.id || element.name );
+		},
+
+		validationTargetFor: function( element ) {
+
+			// If radio/checkbox, validate first element in group instead
+			if ( this.checkable( element ) ) {
+				element = this.findByName( element.name );
+			}
+
+			// Always apply ignore filter
+			return $( element ).not( this.settings.ignore )[ 0 ];
+		},
+
+		checkable: function( element ) {
+			return ( /radio|checkbox/i ).test( element.type );
+		},
+
+		findByName: function( name ) {
+			return $( this.currentForm ).find( "[name='" + this.escapeCssMeta( name ) + "']" );
+		},
+
+		getLength: function( value, element ) {
+			switch ( element.nodeName.toLowerCase() ) {
+			case "select":
+				return $( "option:selected", element ).length;
+			case "input":
+				if ( this.checkable( element ) ) {
+					return this.findByName( element.name ).filter( ":checked" ).length;
+				}
+			}
+			return value.length;
+		},
+
+		depend: function( param, element ) {
+			return this.dependTypes[ typeof param ] ? this.dependTypes[ typeof param ]( param, element ) : true;
+		},
+
+		dependTypes: {
+			"boolean": function( param ) {
+				return param;
+			},
+			"string": function( param, element ) {
+				return !!$( param, element.form ).length;
+			},
+			"function": function( param, element ) {
+				return param( element );
+			}
+		},
+
+		optional: function( element ) {
+			var val = this.elementValue( element );
+			return !$.validator.methods.required.call( this, val, element ) && "dependency-mismatch";
+		},
+
+		startRequest: function( element ) {
+			if ( !this.pending[ element.name ] ) {
+				this.pendingRequest++;
+				$( element ).addClass( this.settings.pendingClass );
+				this.pending[ element.name ] = true;
+			}
+		},
+
+		stopRequest: function( element, valid ) {
+			this.pendingRequest--;
+
+			// Sometimes synchronization fails, make sure pendingRequest is never < 0
+			if ( this.pendingRequest < 0 ) {
+				this.pendingRequest = 0;
+			}
+			delete this.pending[ element.name ];
+			$( element ).removeClass( this.settings.pendingClass );
+			if ( valid && this.pendingRequest === 0 && this.formSubmitted && this.form() ) {
+				$( this.currentForm ).submit();
+				this.formSubmitted = false;
+			} else if ( !valid && this.pendingRequest === 0 && this.formSubmitted ) {
+				$( this.currentForm ).triggerHandler( "invalid-form", [ this ] );
+				this.formSubmitted = false;
+			}
+		},
+
+		previousValue: function( element, method ) {
+			method = typeof method === "string" && method || "remote";
+
+			return $.data( element, "previousValue" ) || $.data( element, "previousValue", {
+				old: null,
+				valid: true,
+				message: this.defaultMessage( element, { method: method } )
+			} );
+		},
+
+		// Cleans up all forms and elements, removes validator-specific events
+		destroy: function() {
+			this.resetForm();
+
+			$( this.currentForm )
+				.off( ".validate" )
+				.removeData( "validator" )
+				.find( ".validate-equalTo-blur" )
+					.off( ".validate-equalTo" )
+					.removeClass( "validate-equalTo-blur" );
+		}
+
+	},
+
+	classRuleSettings: {
+		required: { required: true },
+		email: { email: true },
+		url: { url: true },
+		date: { date: true },
+		dateISO: { dateISO: true },
+		number: { number: true },
+		digits: { digits: true },
+		creditcard: { creditcard: true }
+	},
+
+	addClassRules: function( className, rules ) {
+		if ( className.constructor === String ) {
+			this.classRuleSettings[ className ] = rules;
+		} else {
+			$.extend( this.classRuleSettings, className );
+		}
+	},
+
+	classRules: function( element ) {
+		var rules = {},
+			classes = $( element ).attr( "class" );
+
+		if ( classes ) {
+			$.each( classes.split( " " ), function() {
+				if ( this in $.validator.classRuleSettings ) {
+					$.extend( rules, $.validator.classRuleSettings[ this ] );
+				}
+			} );
+		}
+		return rules;
+	},
+
+	normalizeAttributeRule: function( rules, type, method, value ) {
+
+		// Convert the value to a number for number inputs, and for text for backwards compability
+		// allows type="date" and others to be compared as strings
+		if ( /min|max|step/.test( method ) && ( type === null || /number|range|text/.test( type ) ) ) {
+			value = Number( value );
+
+			// Support Opera Mini, which returns NaN for undefined minlength
+			if ( isNaN( value ) ) {
+				value = undefined;
+			}
+		}
+
+		if ( value || value === 0 ) {
+			rules[ method ] = value;
+		} else if ( type === method && type !== "range" ) {
+
+			// Exception: the jquery validate 'range' method
+			// does not test for the html5 'range' type
+			rules[ method ] = true;
+		}
+	},
+
+	attributeRules: function( element ) {
+		var rules = {},
+			$element = $( element ),
+			type = element.getAttribute( "type" ),
+			method, value;
+
+		for ( method in $.validator.methods ) {
+
+			// Support for <input required> in both html5 and older browsers
+			if ( method === "required" ) {
+				value = element.getAttribute( method );
+
+				// Some browsers return an empty string for the required attribute
+				// and non-HTML5 browsers might have required="" markup
+				if ( value === "" ) {
+					value = true;
+				}
+
+				// Force non-HTML5 browsers to return bool
+				value = !!value;
+			} else {
+				value = $element.attr( method );
+			}
+
+			this.normalizeAttributeRule( rules, type, method, value );
+		}
+
+		// 'maxlength' may be returned as -1, 2147483647 ( IE ) and 524288 ( safari ) for text inputs
+		if ( rules.maxlength && /-1|2147483647|524288/.test( rules.maxlength ) ) {
+			delete rules.maxlength;
+		}
+
+		return rules;
+	},
+
+	dataRules: function( element ) {
+		var rules = {},
+			$element = $( element ),
+			type = element.getAttribute( "type" ),
+			method, value;
+
+		for ( method in $.validator.methods ) {
+			value = $element.data( "rule" + method.charAt( 0 ).toUpperCase() + method.substring( 1 ).toLowerCase() );
+			this.normalizeAttributeRule( rules, type, method, value );
+		}
+		return rules;
+	},
+
+	staticRules: function( element ) {
+		var rules = {},
+			validator = $.data( element.form, "validator" );
+
+		if ( validator.settings.rules ) {
+			rules = $.validator.normalizeRule( validator.settings.rules[ element.name ] ) || {};
+		}
+		return rules;
+	},
+
+	normalizeRules: function( rules, element ) {
+
+		// Handle dependency check
+		$.each( rules, function( prop, val ) {
+
+			// Ignore rule when param is explicitly false, eg. required:false
+			if ( val === false ) {
+				delete rules[ prop ];
+				return;
+			}
+			if ( val.param || val.depends ) {
+				var keepRule = true;
+				switch ( typeof val.depends ) {
+				case "string":
+					keepRule = !!$( val.depends, element.form ).length;
+					break;
+				case "function":
+					keepRule = val.depends.call( element, element );
+					break;
+				}
+				if ( keepRule ) {
+					rules[ prop ] = val.param !== undefined ? val.param : true;
+				} else {
+					$.data( element.form, "validator" ).resetElements( $( element ) );
+					delete rules[ prop ];
+				}
+			}
+		} );
+
+		// Evaluate parameters
+		$.each( rules, function( rule, parameter ) {
+			rules[ rule ] = $.isFunction( parameter ) && rule !== "normalizer" ? parameter( element ) : parameter;
+		} );
+
+		// Clean number parameters
+		$.each( [ "minlength", "maxlength" ], function() {
+			if ( rules[ this ] ) {
+				rules[ this ] = Number( rules[ this ] );
+			}
+		} );
+		$.each( [ "rangelength", "range" ], function() {
+			var parts;
+			if ( rules[ this ] ) {
+				if ( $.isArray( rules[ this ] ) ) {
+					rules[ this ] = [ Number( rules[ this ][ 0 ] ), Number( rules[ this ][ 1 ] ) ];
+				} else if ( typeof rules[ this ] === "string" ) {
+					parts = rules[ this ].replace( /[\[\]]/g, "" ).split( /[\s,]+/ );
+					rules[ this ] = [ Number( parts[ 0 ] ), Number( parts[ 1 ] ) ];
+				}
+			}
+		} );
+
+		if ( $.validator.autoCreateRanges ) {
+
+			// Auto-create ranges
+			if ( rules.min != null && rules.max != null ) {
+				rules.range = [ rules.min, rules.max ];
+				delete rules.min;
+				delete rules.max;
+			}
+			if ( rules.minlength != null && rules.maxlength != null ) {
+				rules.rangelength = [ rules.minlength, rules.maxlength ];
+				delete rules.minlength;
+				delete rules.maxlength;
+			}
+		}
+
+		return rules;
+	},
+
+	// Converts a simple string to a {string: true} rule, e.g., "required" to {required:true}
+	normalizeRule: function( data ) {
+		if ( typeof data === "string" ) {
+			var transformed = {};
+			$.each( data.split( /\s/ ), function() {
+				transformed[ this ] = true;
+			} );
+			data = transformed;
+		}
+		return data;
+	},
+
+	// http://jqueryvalidation.org/jQuery.validator.addMethod/
+	addMethod: function( name, method, message ) {
+		$.validator.methods[ name ] = method;
+		$.validator.messages[ name ] = message !== undefined ? message : $.validator.messages[ name ];
+		if ( method.length < 3 ) {
+			$.validator.addClassRules( name, $.validator.normalizeRule( name ) );
+		}
+	},
+
+	// http://jqueryvalidation.org/jQuery.validator.methods/
+	methods: {
+
+		// http://jqueryvalidation.org/required-method/
+		required: function( value, element, param ) {
+
+			// Check if dependency is met
+			if ( !this.depend( param, element ) ) {
+				return "dependency-mismatch";
+			}
+			if ( element.nodeName.toLowerCase() === "select" ) {
+
+				// Could be an array for select-multiple or a string, both are fine this way
+				var val = $( element ).val();
+				return val && val.length > 0;
+			}
+			if ( this.checkable( element ) ) {
+				return this.getLength( value, element ) > 0;
+			}
+			return value.length > 0;
+		},
+
+		// http://jqueryvalidation.org/email-method/
+		email: function( value, element ) {
+
+			// From https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address
+			// Retrieved 2014-01-14
+			// If you have a problem with this implementation, report a bug against the above spec
+			// Or use custom methods to implement your own email validation
+			return this.optional( element ) || /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( value );
+		},
+
+		// http://jqueryvalidation.org/url-method/
+		url: function( value, element ) {
+
+			// Copyright (c) 2010-2013 Diego Perini, MIT licensed
+			// https://gist.github.com/dperini/729294
+			// see also https://mathiasbynens.be/demo/url-regex
+			// modified to allow protocol-relative URLs
+			return this.optional( element ) || /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test( value );
+		},
+
+		// http://jqueryvalidation.org/date-method/
+		date: function( value, element ) {
+			return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
+		},
+
+		// http://jqueryvalidation.org/dateISO-method/
+		dateISO: function( value, element ) {
+			return this.optional( element ) || /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test( value );
+		},
+
+		// http://jqueryvalidation.org/number-method/
+		number: function( value, element ) {
+			return this.optional( element ) || /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test( value );
+		},
+
+		// http://jqueryvalidation.org/digits-method/
+		digits: function( value, element ) {
+			return this.optional( element ) || /^\d+$/.test( value );
+		},
+
+		// http://jqueryvalidation.org/minlength-method/
+		minlength: function( value, element, param ) {
+			var length = $.isArray( value ) ? value.length : this.getLength( value, element );
+			return this.optional( element ) || length >= param;
+		},
+
+		// http://jqueryvalidation.org/maxlength-method/
+		maxlength: function( value, element, param ) {
+			var length = $.isArray( value ) ? value.length : this.getLength( value, element );
+			return this.optional( element ) || length <= param;
+		},
+
+		// http://jqueryvalidation.org/rangelength-method/
+		rangelength: function( value, element, param ) {
+			var length = $.isArray( value ) ? value.length : this.getLength( value, element );
+			return this.optional( element ) || ( length >= param[ 0 ] && length <= param[ 1 ] );
+		},
+
+		// http://jqueryvalidation.org/min-method/
+		min: function( value, element, param ) {
+			return this.optional( element ) || value >= param;
+		},
+
+		// http://jqueryvalidation.org/max-method/
+		max: function( value, element, param ) {
+			return this.optional( element ) || value <= param;
+		},
+
+		// http://jqueryvalidation.org/range-method/
+		range: function( value, element, param ) {
+			return this.optional( element ) || ( value >= param[ 0 ] && value <= param[ 1 ] );
+		},
+
+		// http://jqueryvalidation.org/step-method/
+		step: function( value, element, param ) {
+			var type = $( element ).attr( "type" ),
+				errorMessage = "Step attribute on input type " + type + " is not supported.",
+				supportedTypes = [ "text", "number", "range" ],
+				re = new RegExp( "\\b" + type + "\\b" ),
+				notSupported = type && !re.test( supportedTypes.join() ),
+				decimalPlaces = function( num ) {
+					var match = ( "" + num ).match( /(?:\.(\d+))?$/ );
+					if ( !match ) {
+						return 0;
+					}
+
+					// Number of digits right of decimal point.
+					return match[ 1 ] ? match[ 1 ].length : 0;
+				},
+				toInt = function( num ) {
+					return Math.round( num * Math.pow( 10, decimals ) );
+				},
+				valid = true,
+				decimals;
+
+			// Works only for text, number and range input types
+			// TODO find a way to support input types date, datetime, datetime-local, month, time and week
+			if ( notSupported ) {
+				throw new Error( errorMessage );
+			}
+
+			decimals = decimalPlaces( param );
+
+			// Value can't have too many decimals
+			if ( decimalPlaces( value ) > decimals || toInt( value ) % toInt( param ) !== 0 ) {
+				valid = false;
+			}
+
+			return this.optional( element ) || valid;
+		},
+
+		// http://jqueryvalidation.org/equalTo-method/
+		equalTo: function( value, element, param ) {
+
+			// Bind to the blur event of the target in order to revalidate whenever the target field is updated
+			var target = $( param );
+			if ( this.settings.onfocusout && target.not( ".validate-equalTo-blur" ).length ) {
+				target.addClass( "validate-equalTo-blur" ).on( "blur.validate-equalTo", function() {
+					$( element ).valid();
+				} );
+			}
+			return value === target.val();
+		},
+
+		// http://jqueryvalidation.org/remote-method/
+		remote: function( value, element, param, method ) {
+			if ( this.optional( element ) ) {
+				return "dependency-mismatch";
+			}
+
+			method = typeof method === "string" && method || "remote";
+
+			var previous = this.previousValue( element, method ),
+				validator, data, optionDataString;
+
+			if ( !this.settings.messages[ element.name ] ) {
+				this.settings.messages[ element.name ] = {};
+			}
+			previous.originalMessage = previous.originalMessage || this.settings.messages[ element.name ][ method ];
+			this.settings.messages[ element.name ][ method ] = previous.message;
+
+			param = typeof param === "string" && { url: param } || param;
+			optionDataString = $.param( $.extend( { data: value }, param.data ) );
+			if ( previous.old === optionDataString ) {
+				return previous.valid;
+			}
+
+			previous.old = optionDataString;
+			validator = this;
+			this.startRequest( element );
+			data = {};
+			data[ element.name ] = value;
+			$.ajax( $.extend( true, {
+				mode: "abort",
+				port: "validate" + element.name,
+				dataType: "json",
+				data: data,
+				context: validator.currentForm,
+				success: function( response ) {
+					var valid = response === true || response === "true",
+						errors, message, submitted;
+
+					validator.settings.messages[ element.name ][ method ] = previous.originalMessage;
+					if ( valid ) {
+						submitted = validator.formSubmitted;
+						validator.resetInternals();
+						validator.toHide = validator.errorsFor( element );
+						validator.formSubmitted = submitted;
+						validator.successList.push( element );
+						validator.invalid[ element.name ] = false;
+						validator.showErrors();
+					} else {
+						errors = {};
+						message = response || validator.defaultMessage( element, { method: method, parameters: value } );
+						errors[ element.name ] = previous.message = message;
+						validator.invalid[ element.name ] = true;
+						validator.showErrors( errors );
+					}
+					previous.valid = valid;
+					validator.stopRequest( element, valid );
+				}
+			}, param ) );
+			return "pending";
+		}
+	}
+
+} );
+
+// Ajax mode: abort
+// usage: $.ajax({ mode: "abort"[, port: "uniqueport"]});
+// if mode:"abort" is used, the previous request on that port (port can be undefined) is aborted via XMLHttpRequest.abort()
+
+var pendingRequests = {},
+	ajax;
+
+// Use a prefilter if available (1.5+)
+if ( $.ajaxPrefilter ) {
+	$.ajaxPrefilter( function( settings, _, xhr ) {
+		var port = settings.port;
+		if ( settings.mode === "abort" ) {
+			if ( pendingRequests[ port ] ) {
+				pendingRequests[ port ].abort();
+			}
+			pendingRequests[ port ] = xhr;
+		}
+	} );
+} else {
+
+	// Proxy ajax
+	ajax = $.ajax;
+	$.ajax = function( settings ) {
+		var mode = ( "mode" in settings ? settings : $.ajaxSettings ).mode,
+			port = ( "port" in settings ? settings : $.ajaxSettings ).port;
+		if ( mode === "abort" ) {
+			if ( pendingRequests[ port ] ) {
+				pendingRequests[ port ].abort();
+			}
+			pendingRequests[ port ] = ajax.apply( this, arguments );
+			return pendingRequests[ port ];
+		}
+		return ajax.apply( this, arguments );
+	};
+}
+return $;
+}));
+/* ----------------------------------------------------------------------------- 
+
+  jQuery DateTimePicker - Responsive flat design jQuery DateTime Picker plugin for Web & Mobile
+  Version 0.1.37
+  Copyright (c)2016 Curious Solutions LLP and Neha Kadam
+  http://curioussolutions.github.io/DateTimePicker
+  https://github.com/CuriousSolutions/DateTimePicker
+
+ ----------------------------------------------------------------------------- */
+
+/* Support Object.keys in IE8 */
+if(!Object.keys) 
+{
+    Object.keys = function(obj) 
+    {
+        var keys = [];
+
+        for (var i in obj) 
+        {
+            if (obj.hasOwnProperty(i)) 
+            {
+                keys.push(i);
+            }
+        }
+
+        return keys;
+    };
+}
+
+$.DateTimePicker = $.DateTimePicker || {
+
+	name: "DateTimePicker",
+
+	i18n: {}, // Internationalization Objects
+
+	defaults:  //Plugin Defaults
+	{
+		mode: "date",
+		defaultDate: null,
+	
+		dateSeparator: "-",
+		timeSeparator: ":",
+		timeMeridiemSeparator: " ",
+		dateTimeSeparator: " ",
+		monthYearSeparator: " ",
+	
+		dateTimeFormat: "dd-MM-yyyy HH:mm",
+		dateFormat: "dd-MM-yyyy",
+		timeFormat: "HH:mm",
+	
+		maxDate: null,
+		minDate:  null,
+	
+		maxTime: null,
+		minTime: null,
+	
+		maxDateTime: null,
+		minDateTime: null,
+	
+		shortDayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+		fullDayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+		shortMonthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+		fullMonthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+		labels: null, /*{"year": "Year", "month": "Month", "day": "Day", "hour": "Hour", "minutes": "Minutes", "seconds": "Seconds", "meridiem": "Meridiem"}*/
+
+		minuteInterval: 1,
+		roundOffMinutes: true,
+
+		secondsInterval: 1,
+		roundOffSeconds: true,
+	
+		showHeader: true,
+		titleContentDate: "Set Date",
+		titleContentTime: "Set Time",
+		titleContentDateTime: "Set Date & Time",
+	
+		buttonsToDisplay: ["HeaderCloseButton", "SetButton", "ClearButton"],
+		setButtonContent: "Set",
+		clearButtonContent: "Clear",
+    	incrementButtonContent: "+",
+    	decrementButtonContent: "-",
+		setValueInTextboxOnEveryClick: false,
+		readonlyInputs: false,
+	
+		animationDuration: 400,
+
+		touchHoldInterval: 300, // in Milliseconds
+		captureTouchHold: false, // capture Touch Hold Event
+
+		mouseHoldInterval: 50, // in Milliseconds
+		captureMouseHold: false, // capture Mouse Hold Event
+	
+		isPopup: true,
+		parentElement: "body",
+
+		isInline: false,
+		inputElement: null,
+
+		language: "",
+	
+		init: null, // init(oDateTimePicker)
+		addEventHandlers: null,  // addEventHandlers(oDateTimePicker)
+		beforeShow: null,  // beforeShow(oInputElement)
+		afterShow: null,  // afterShow(oInputElement)
+		beforeHide: null,  // beforeHide(oInputElement)
+		afterHide: null,  // afterHide(oInputElement)
+		buttonClicked: null,  // buttonClicked(sButtonType, oInputElement) where sButtonType = "SET"|"CLEAR"|"CANCEL"|"TAB"
+		settingValueOfElement: null, // settingValueOfElement(sValue, dDateTime, oInputElement)
+		formatHumanDate: null,  // formatHumanDate(oDateTime, sMode, sFormat)
+	
+		parseDateTimeString: null, // parseDateTimeString(sDateTime, sMode, sFormat, oInputField)
+		formatDateTimeString: null // formatDateTimeString(oDateTime, sMode, sFormat, oInputField)
+	},
+
+	dataObject: // Temporary Variables For Calculation Specific to DateTimePicker Instance
+	{
+	
+		dCurrentDate: new Date(),
+		iCurrentDay: 0,
+		iCurrentMonth: 0,
+		iCurrentYear: 0,
+		iCurrentHour: 0,
+		iCurrentMinutes: 0,
+		iCurrentSeconds: 0,
+		sCurrentMeridiem: "",
+		iMaxNumberOfDays: 0,
+	
+		sDateFormat: "",
+		sTimeFormat: "",
+		sDateTimeFormat: "",
+	
+		dMinValue: null,
+		dMaxValue: null,
+	
+		sArrInputDateFormats: [],
+		sArrInputTimeFormats: [],
+		sArrInputDateTimeFormats: [],
+
+		bArrMatchFormat: [],
+		bDateMode: false,
+		bTimeMode: false,
+		bDateTimeMode: false,
+	
+		oInputElement: null,
+
+		iTabIndex: 0,
+		bElemFocused: false,
+	
+		bIs12Hour: false,
+
+		sTouchButton: null,
+		iTouchStart: null,
+		oTimeInterval: null,
+		bIsTouchDevice: "ontouchstart" in document.documentElement
+	}
+
+};
+
+$.cf = {
+
+	_isValid: function(sValue)
+	{
+		return (sValue !== undefined && sValue !== null && sValue !== "");
+	},
+
+	_compare: function(sString1, sString2)
+	{
+		var bString1 = (sString1 !== undefined && sString1 !== null),
+		bString2 = (sString2 !== undefined && sString2 !== null);
+		if(bString1 && bString2)
+		{
+			if(sString1.toLowerCase() === sString2.toLowerCase())
+				return true;
+			else
+				return false;
+		}
+		else
+			return false;			
+	}
+
+};
+
+(function (factory) 
+{
+    if(typeof define === "function" && define.amd) 
+    {
+        // AMD. Register as an anonymous module.
+        define(["jquery"], factory);
+    }
+    else if(typeof exports === "object") 
+    {
+        // Node/CommonJS
+        module.exports = factory(require("jquery"));
+    }
+    else 
+    {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) 
+{
+	"use strict";
+
+	function DateTimePicker(element, options)
+	{
+		this.element = element;
+
+		var sLanguage = "";
+		sLanguage = ($.cf._isValid(options) && $.cf._isValid(options.language)) ? options.language : $.DateTimePicker.defaults.language;
+		this.settings = $.extend({}, $.DateTimePicker.defaults, $.DateTimePicker.i18n[sLanguage], options);
+		this.options = options;
+
+		this.oData = $.extend({}, $.DateTimePicker.dataObject);
+		this._defaults = $.DateTimePicker.defaults;
+		this._name = $.DateTimePicker.name;
+
+		this.init();
+	}
+
+	$.fn.DateTimePicker = function (options)
+	{
+		var oDTP = $(this).data(),
+		sArrDataKeys = oDTP ? Object.keys(oDTP) : [],
+		iKey, sKey;
+
+		if(typeof options === "string")
+		{			
+			if($.cf._isValid(oDTP))
+			{
+				if(options === "destroy")
+				{
+					if(sArrDataKeys.length > 0)
+					{
+						for(iKey in sArrDataKeys)
+						{
+							sKey = sArrDataKeys[iKey];
+							if(sKey.search("plugin_DateTimePicker") !== -1)
+							{
+								$(document).unbind("click.DateTimePicker keydown.DateTimePicker keyup.DateTimePicker");
+							
+								$(this).children().remove();
+								$(this).removeData();
+								$(this).unbind();
+								$(this).removeClass("dtpicker-overlay dtpicker-mobile dtpicker-inline");
+
+								oDTP = oDTP[sKey];
+							
+								console.log("Destroyed DateTimePicker Object");
+								console.log(oDTP);
+							
+								break;
+							}
+						}
+					}
+					else
+					{
+						console.log("No DateTimePicker Object Defined For This Element");
+					}
+				}
+				else if(options === "object")
+				{
+					if(sArrDataKeys.length > 0)
+					{
+						for(iKey in sArrDataKeys)
+						{
+							sKey = sArrDataKeys[iKey];
+							if(sKey.search("plugin_DateTimePicker") !== -1)
+							{
+								return oDTP[sKey];
+							}
+						}
+					}
+					else
+					{
+						console.log("No DateTimePicker Object Defined For This Element");
+					}
+				}
+			}
+		}
+		else
+		{
+			return this.each(function() 
+			{
+				$.removeData(this, "plugin_DateTimePicker");
+				if(!$.data(this, "plugin_DateTimePicker"))
+					$.data(this, "plugin_DateTimePicker", new DateTimePicker(this, options));
+			});
+		}
+	};
+
+	DateTimePicker.prototype = {
+	
+		// Public Method
+		init: function () 
+		{
+			var oDTP = this;					
+		
+			oDTP._setDateFormatArray(); // Set DateFormatArray
+			oDTP._setTimeFormatArray(); // Set TimeFormatArray
+			oDTP._setDateTimeFormatArray(); // Set DateTimeFormatArray
+
+			console.log($(oDTP.element).data('parentelement') + " " + $(oDTP.element).attr('data-parentelement'));
+			if($(oDTP.element).data('parentelement') !== undefined)
+	        {
+	           	oDTP.settings.parentElement = $(oDTP.element).data('parentelement');
+	        }
+		
+			if(oDTP.settings.isPopup && !oDTP.settings.isInline)
+			{
+				oDTP._createPicker();
+				$(oDTP.element).addClass("dtpicker-mobile");
+			}
+
+			if(oDTP.settings.isInline)
+			{
+				oDTP._createPicker();
+				oDTP._showPicker(oDTP.settings.inputElement);
+			}
+
+			if(oDTP.settings.init)
+				oDTP.settings.init.call(oDTP);
+
+			oDTP._addEventHandlersForInput();
+		},
+	
+		_setDateFormatArray: function()
+		{
+			var oDTP = this;
+		
+			oDTP.oData.sArrInputDateFormats = [];		
+			var sDate = "";
+		
+			//  0 - "dd-MM-yyyy"
+			sDate = "dd" + oDTP.settings.dateSeparator + "MM" + oDTP.settings.dateSeparator + "yyyy";
+			oDTP.oData.sArrInputDateFormats.push(sDate);
+		
+			//  1 - "MM-dd-yyyy"
+			sDate = "MM" + oDTP.settings.dateSeparator + "dd" + oDTP.settings.dateSeparator + "yyyy";
+			oDTP.oData.sArrInputDateFormats.push(sDate);
+		
+			//  2 - "yyyy-MM-dd"
+			sDate = "yyyy" + oDTP.settings.dateSeparator + "MM" + oDTP.settings.dateSeparator + "dd";
+			oDTP.oData.sArrInputDateFormats.push(sDate);
+		
+			//  3 - "dd-MMM-yyyy"
+			sDate = "dd" + oDTP.settings.dateSeparator + "MMM" + oDTP.settings.dateSeparator + "yyyy";
+			oDTP.oData.sArrInputDateFormats.push(sDate);
+
+			//  4 - "MM yyyy"
+			sDate = "MM" + oDTP.settings.monthYearSeparator + "yyyy";
+			oDTP.oData.sArrInputDateFormats.push(sDate);
+
+			//  5 - "MMM yyyy"
+			sDate = "MMM" + oDTP.settings.monthYearSeparator + "yyyy";
+			oDTP.oData.sArrInputDateFormats.push(sDate);
+
+			//  6 - "MMM yyyy"
+			sDate = "MMMM" + oDTP.settings.monthYearSeparator + "yyyy";
+			oDTP.oData.sArrInputDateFormats.push(sDate);
+
+			//  7 - "yyyy MM"
+			sDate = "yyyy" + oDTP.settings.monthYearSeparator + "MM";
+			oDTP.oData.sArrInputDateFormats.push(sDate);
+		},
+	
+		_setTimeFormatArray: function()
+		{
+			var oDTP = this;
+		
+			oDTP.oData.sArrInputTimeFormats = [];
+			var sTime = "";
+
+			//  0 - "hh:mm:ss AA"
+			sTime = "hh" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeSeparator + "ss" + oDTP.settings.timeMeridiemSeparator + "AA";
+			oDTP.oData.sArrInputTimeFormats.push(sTime);
+		
+			//  1 - "HH:mm:ss"
+			sTime = "HH" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeSeparator + "ss";
+			oDTP.oData.sArrInputTimeFormats.push(sTime);
+		
+			//  2 - "hh:mm AA"
+			sTime = "hh" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeMeridiemSeparator + "AA";
+			oDTP.oData.sArrInputTimeFormats.push(sTime);
+		
+			//  3 - "HH:mm"
+			sTime = "HH" + oDTP.settings.timeSeparator + "mm";
+			oDTP.oData.sArrInputTimeFormats.push(sTime);
+		},
+	
+		_setDateTimeFormatArray: function()
+		{
+			var oDTP = this;
+		
+			oDTP.oData.sArrInputDateTimeFormats = [];
+			var sDate = "", sTime = "", sDateTime = "";
+
+			//  0 - "dd-MM-yyyy HH:mm:ss"
+			sDate = "dd" + oDTP.settings.dateSeparator + "MM" + oDTP.settings.dateSeparator + "yyyy";
+			sTime = "HH" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeSeparator + "ss";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+		
+			//  1 - "dd-MM-yyyy hh:mm:ss AA"
+			sDate = "dd" + oDTP.settings.dateSeparator + "MM" + oDTP.settings.dateSeparator + "yyyy";
+			sTime = "hh" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeSeparator + "ss" + oDTP.settings.timeMeridiemSeparator + "AA";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+		
+			//  2 - "MM-dd-yyyy HH:mm:ss"
+			sDate = "MM" + oDTP.settings.dateSeparator + "dd" + oDTP.settings.dateSeparator + "yyyy";
+			sTime = "HH" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeSeparator + "ss";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+		
+			//  3 - "MM-dd-yyyy hh:mm:ss AA"
+			sDate = "MM" + oDTP.settings.dateSeparator + "dd" + oDTP.settings.dateSeparator + "yyyy";
+			sTime = "hh" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeSeparator + "ss" + oDTP.settings.timeMeridiemSeparator + "AA";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+		
+			//  4 - "yyyy-MM-dd HH:mm:ss"
+			sDate = "yyyy" + oDTP.settings.dateSeparator + "MM" + oDTP.settings.dateSeparator + "dd";
+			sTime = "HH" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeSeparator + "ss";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+		
+			//  5 - "yyyy-MM-dd hh:mm:ss AA"
+			sDate = "yyyy" + oDTP.settings.dateSeparator + "MM" + oDTP.settings.dateSeparator + "dd";
+			sTime = "hh" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeSeparator + "ss" + oDTP.settings.timeMeridiemSeparator + "AA";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+			
+			//  6 - "dd-MMM-yyyy hh:mm:ss"
+			sDate = "dd" + oDTP.settings.dateSeparator + "MMM" + oDTP.settings.dateSeparator + "yyyy";
+			sTime = "hh" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeSeparator + "ss";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+			
+			//  7 - "dd-MMM-yyyy hh:mm:ss AA"
+			sDate = "dd" + oDTP.settings.dateSeparator + "MMM" + oDTP.settings.dateSeparator + "yyyy";
+			sTime = "hh" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeSeparator + "ss" + oDTP.settings.timeMeridiemSeparator + "AA";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+
+			//--------------
+		
+			//  8 - "dd-MM-yyyy HH:mm"
+			sDate = "dd" + oDTP.settings.dateSeparator + "MM" + oDTP.settings.dateSeparator + "yyyy";
+			sTime = "HH" + oDTP.settings.timeSeparator + "mm";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+		
+			//  9 - "dd-MM-yyyy hh:mm AA"
+			sDate = "dd" + oDTP.settings.dateSeparator + "MM" + oDTP.settings.dateSeparator + "yyyy";
+			sTime = "hh" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeMeridiemSeparator + "AA";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+		
+			//  10 - "MM-dd-yyyy HH:mm"
+			sDate = "MM" + oDTP.settings.dateSeparator + "dd" + oDTP.settings.dateSeparator + "yyyy";
+			sTime = "HH" + oDTP.settings.timeSeparator + "mm";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+		
+			//  11 - "MM-dd-yyyy hh:mm AA"
+			sDate = "MM" + oDTP.settings.dateSeparator + "dd" + oDTP.settings.dateSeparator + "yyyy";
+			sTime = "hh" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeMeridiemSeparator + "AA";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+		
+			//  12 - "yyyy-MM-dd HH:mm"
+			sDate = "yyyy" + oDTP.settings.dateSeparator + "MM" + oDTP.settings.dateSeparator + "dd";
+			sTime = "HH" + oDTP.settings.timeSeparator + "mm";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+		
+			//  13 - "yyyy-MM-dd hh:mm AA"
+			sDate = "yyyy" + oDTP.settings.dateSeparator + "MM" + oDTP.settings.dateSeparator + "dd";
+			sTime = "hh" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeMeridiemSeparator + "AA";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+			
+			//  14 - "dd-MMM-yyyy hh:mm"
+			sDate = "dd" + oDTP.settings.dateSeparator + "MMM" + oDTP.settings.dateSeparator + "yyyy";
+			sTime = "hh" + oDTP.settings.timeSeparator + "mm";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+			
+			//  15 - "dd-MMM-yyyy hh:mm AA"
+			sDate = "dd" + oDTP.settings.dateSeparator + "MMM" + oDTP.settings.dateSeparator + "yyyy";
+			sTime = "hh" + oDTP.settings.timeSeparator + "mm" + oDTP.settings.timeMeridiemSeparator + "AA";
+			sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+			oDTP.oData.sArrInputDateTimeFormats.push(sDateTime);
+		},
+
+		_matchFormat: function(sMode, sFormat)
+		{
+			var oDTP = this;
+
+			oDTP.oData.bArrMatchFormat = [];
+			oDTP.oData.bDateMode = false;
+			oDTP.oData.bTimeMode = false;
+			oDTP.oData.bDateTimeMode = false;
+			var oArrInput = [], iTempIndex;
+
+			sMode = $.cf._isValid(sMode) ? sMode : oDTP.settings.mode;
+			if($.cf._compare(sMode, "date"))
+			{
+				sFormat = $.cf._isValid(sFormat) ? sFormat : oDTP.oData.sDateFormat;
+				oDTP.oData.bDateMode = true;
+				oArrInput = oDTP.oData.sArrInputDateFormats;
+			}
+			else if($.cf._compare(sMode, "time"))
+			{
+				sFormat = $.cf._isValid(sFormat) ? sFormat : oDTP.oData.sTimeFormat;
+				oDTP.oData.bTimeMode = true;
+				oArrInput = oDTP.oData.sArrInputTimeFormats;
+			}
+			else if($.cf._compare(sMode, "datetime"))
+			{
+				sFormat = $.cf._isValid(sFormat) ? sFormat : oDTP.oData.sDateTimeFormat;
+				oDTP.oData.bDateTimeMode = true;
+				oArrInput = oDTP.oData.sArrInputDateTimeFormats;
+			}
+
+			for(iTempIndex = 0; iTempIndex < oArrInput.length; iTempIndex++)
+			{
+				oDTP.oData.bArrMatchFormat.push(
+					$.cf._compare(sFormat, oArrInput[iTempIndex])
+				);
+			}
+		},
+	
+		_setMatchFormat: function(iArgsLength, sMode, sFormat)
+		{
+			var oDTP = this;
+
+			if(iArgsLength > 0)
+				oDTP._matchFormat(sMode, sFormat);
+		},
+
+		_createPicker: function()
+		{
+			var oDTP = this;
+		
+			if(oDTP.settings.isInline)
+			{
+				$(oDTP.element).addClass("dtpicker-inline");
+			}
+			else
+			{
+				$(oDTP.element).addClass("dtpicker-overlay");
+				$(".dtpicker-overlay").click(function(e)
+				{
+					oDTP._hidePicker("");
+				});
+			}
+		
+			var sTempStr = "";	
+			sTempStr += "<div class='dtpicker-bg'>";
+			sTempStr += "<div class='dtpicker-cont'>";
+			sTempStr += "<div class='dtpicker-content'>";
+			sTempStr += "<div class='dtpicker-subcontent'>";
+			sTempStr += "</div>";
+			sTempStr += "</div>";
+			sTempStr += "</div>";
+			sTempStr += "</div>";
+			$(oDTP.element).html(sTempStr);
+		},
+	
+		_addEventHandlersForInput: function()
+		{
+			var oDTP = this;
+		
+			if(!oDTP.settings.isInline)
+			{
+				oDTP.oData.oInputElement = null;
+
+				$(oDTP.settings.parentElement).find("input[type='date'], input[type='time'], input[type='datetime']").each(function()
+				{
+					$(this).attr("data-field", $(this).attr("type"));
+					$(this).attr("type", "text");
+				});	
+	        
+				var sel = "[data-field='date'], [data-field='time'], [data-field='datetime']";
+				$(oDTP.settings.parentElement).off("focus", sel, oDTP._inputFieldFocus)
+											  .on ("focus", sel, {"obj": oDTP}, oDTP._inputFieldFocus)
+											  
+				$(oDTP.settings.parentElement).off("click", sel, oDTP._inputFieldClick)
+											  .on ("click", sel, {"obj": oDTP}, oDTP._inputFieldClick);
+			}
+
+			if(oDTP.settings.addEventHandlers)
+				oDTP.settings.addEventHandlers.call(oDTP);
+		},
+	
+		_inputFieldFocus: function(e)
+		{
+			var oDTP = e.data.obj;
+			oDTP.showDateTimePicker(this);
+			oDTP.oData.bMouseDown = false;
+		},
+
+		_inputFieldClick: function(e)
+		{
+          	var oDTP = e.data.obj;
+			if(!$.cf._compare($(this).prop("tagName"), "input"))
+			{
+				oDTP.showDateTimePicker(this);
+			}
+			e.stopPropagation();
+		},
+
+		// Public Method
+		getDateObjectForInputField: function(oInputField)
+		{
+			var oDTP = this;
+
+			if($.cf._isValid(oInputField))
+			{
+				var sDateTime = oDTP._getValueOfElement(oInputField),
+				sMode = $(oInputField).data("field"),
+				sFormat = "",
+				dInput;
+
+				if(!$.cf._isValid(sMode))
+		    		sMode = oDTP.settings.mode;
+		    	if(! oDTP.settings.formatDateTimeString)
+		    	{
+		    		sFormat = $(oInputField).data("format");
+			    	if(!$.cf._isValid(sFormat))
+			    	{
+				    	if($.cf._compare(sMode, "date"))
+				    		sFormat = oDTP.settings.dateFormat;
+				    	else if($.cf._compare(sMode, "time"))
+				        	sFormat = oDTP.settings.timeFormat;
+				        else if($.cf._compare(sMode, "datetime"))
+				        	sFormat = oDTP.settings.dateTimeFormat;
+				    }
+
+				    oDTP._matchFormat(sMode, sFormat);
+
+			    	if($.cf._compare(sMode, "date"))
+			    		dInput = oDTP._parseDate(sDateTime);
+			    	else if($.cf._compare(sMode, "time"))
+			        	dInput = oDTP._parseTime(sDateTime);
+			        else if($.cf._compare(sMode, "datetime"))
+			        	dInput = oDTP._parseDateTime(sDateTime);
+
+				}
+				else
+				{
+					dInput = oDTP.settings.parseDateTimeString.call(oDTP, sDateTime, sMode, sFormat, $(oInputField));
+				}
+
+		        return dInput;
+			}
+		},
+
+		// Public Method
+		setDateTimeStringInInputField: function(oInputField, dInput)
+		{
+			var oDTP = this;
+
+			dInput = dInput || oDTP.oData.dCurrentDate;
+		
+			var oArrElements;
+			if($.cf._isValid(oInputField))
+			{
+				oArrElements = [];
+				if(typeof oInputField === "string")
+					oArrElements.push(oInputField);
+				else if(typeof oInputField === "object")
+					oArrElements = oInputField;
+			}
+			else
+			{
+				if($.cf._isValid(oDTP.settings.parentElement))
+				{
+					oArrElements = $(oDTP.settings.parentElement).find("[data-field='date'], [data-field='time'], [data-field='datetime']");
+				}
+				else
+				{
+					oArrElements = $("[data-field='date'], [data-field='time'], [data-field='datetime']");
+				}
+			}
+		
+			oArrElements.each(function()
+			{
+				var oElement = this,
+				sMode, sFormat, bIs12Hour, sOutput;
+			
+		        sMode = $(oElement).data("field");
+		        if(!$.cf._isValid(sMode))
+		    		sMode = oDTP.settings.mode;
+		    
+		    	sFormat = "Custom";
+		    	bIs12Hour = false;
+		    	if(! oDTP.settings.formatDateTimeString)
+		    	{
+			    	sFormat = $(oElement).data("format");
+			    	if(!$.cf._isValid(sFormat))
+			    	{
+				    	if($.cf._compare(sMode, "date"))
+				    		sFormat = oDTP.settings.dateFormat;
+				    	else if($.cf._compare(sMode, "time"))
+				        	sFormat = oDTP.settings.timeFormat;
+				        else if($.cf._compare(sMode, "datetime"))
+				        	sFormat = oDTP.settings.dateTimeFormat;
+				    }
+
+				    bIs12Hour = oDTP.getIs12Hour(sMode, sFormat);
+				}
+
+				sOutput = oDTP._setOutput(sMode, sFormat, bIs12Hour, dInput, oElement);
+				oDTP._setValueOfElement(sOutput, $(oElement));
+			});
+		},
+
+		// Public Method
+		getDateTimeStringInFormat: function(sMode, sFormat, dInput)
+		{
+			var oDTP = this;
+			return oDTP._setOutput(sMode, sFormat, oDTP.getIs12Hour(sMode, sFormat), dInput);
+		},
+	
+		// Public Method
+		showDateTimePicker: function(oElement)
+		{
+			var oDTP = this;
+			
+			if(oDTP.oData.oInputElement !== null)
+			{
+				if(!oDTP.settings.isInline)
+					oDTP._hidePicker(0, oElement);
+			}
+			else
+				oDTP._showPicker(oElement);
+		},
+	
+		_setButtonAction: function(bFromTab)
+		{
+			var oDTP = this;
+		
+			if(oDTP.oData.oInputElement !== null)
+			{
+				oDTP._setValueOfElement(oDTP._setOutput());
+				
+				if(bFromTab)
+				{
+					if(oDTP.settings.buttonClicked)
+						oDTP.settings.buttonClicked.call(oDTP, "TAB", oDTP.oData.oInputElement);
+					if(!oDTP.settings.isInline)
+						oDTP._hidePicker(0);
+				}
+				else
+				{
+					if(!oDTP.settings.isInline)
+						oDTP._hidePicker("");
+				}
+			}
+		},
+
+		_setOutput: function(sMode, sFormat, bIs12Hour, dCurrentDate, oElement)
+		{
+			var oDTP = this;
+		
+			dCurrentDate = $.cf._isValid(dCurrentDate) ? dCurrentDate : oDTP.oData.dCurrentDate;
+			bIs12Hour = bIs12Hour || oDTP.oData.bIs12Hour;
+		
+			var oDTV = oDTP._setVariablesForDate(dCurrentDate, true, true);
+		
+			var sOutput = "",
+			oFDate = oDTP._formatDate(oDTV),
+			oFTime = oDTP._formatTime(oDTV),
+			oFDT = $.extend({}, oFDate, oFTime),
+		
+			sDateStr = "", sTimeStr = "",
+			iArgsLength = Function.length,
+			bAddSeconds;
+
+			if(oDTP.settings.formatDateTimeString)
+			{
+				sOutput = oDTP.settings.formatDateTimeString.call(oDTP, oFDT, sMode, sFormat, oElement);
+			}
+			else
+			{
+				// Set bDate, bTime, bDateTime & bArrMatchFormat based on arguments of this function 
+				oDTP._setMatchFormat(iArgsLength, sMode, sFormat);
+
+				if(oDTP.oData.bDateMode)
+				{
+					if(oDTP.oData.bArrMatchFormat[0])
+					{
+						sOutput = oFDT.dd + oDTP.settings.dateSeparator + oFDT.MM + oDTP.settings.dateSeparator + oFDT.yyyy;
+					}
+					else if(oDTP.oData.bArrMatchFormat[1])
+					{
+						sOutput = oFDT.MM + oDTP.settings.dateSeparator + oFDT.dd + oDTP.settings.dateSeparator + oFDT.yyyy;
+					}
+					else if(oDTP.oData.bArrMatchFormat[2])
+					{
+						sOutput = oFDT.yyyy + oDTP.settings.dateSeparator + oFDT.MM + oDTP.settings.dateSeparator + oFDT.dd;
+					}
+					else if(oDTP.oData.bArrMatchFormat[3])
+					{
+						sOutput = oFDT.dd + oDTP.settings.dateSeparator + oFDT.monthShort + oDTP.settings.dateSeparator + oFDT.yyyy;
+					}
+					else if(oDTP.oData.bArrMatchFormat[4])
+					{
+						sOutput = oFDT.MM + oDTP.settings.monthYearSeparator + oFDT.yyyy;
+					}
+					else if(oDTP.oData.bArrMatchFormat[5])
+					{
+						sOutput = oFDT.monthShort + oDTP.settings.monthYearSeparator + oFDT.yyyy;
+					}
+					else if(oDTP.oData.bArrMatchFormat[6])
+					{
+						sOutput = oFDT.month + oDTP.settings.monthYearSeparator + oFDT.yyyy;
+					}
+					else if(oDTP.oData.bArrMatchFormat[7])
+					{
+						sOutput = oFDT.yyyy + oDTP.settings.monthYearSeparator + oFDT.MM;
+					}
+				}
+				else if(oDTP.oData.bTimeMode)
+				{
+					if(oDTP.oData.bArrMatchFormat[0])
+					{
+						sOutput = oFDT.hh + oDTP.settings.timeSeparator + oFDT.mm + oDTP.settings.timeSeparator + oFDT.ss + oDTP.settings.timeMeridiemSeparator + oFDT.ME;
+					}
+					else if(oDTP.oData.bArrMatchFormat[1])
+					{
+						sOutput = oFDT.HH + oDTP.settings.timeSeparator + oFDT.mm + oDTP.settings.timeSeparator + oFDT.ss;
+					}
+					else if(oDTP.oData.bArrMatchFormat[2])
+					{
+						sOutput = oFDT.hh + oDTP.settings.timeSeparator + oFDT.mm + oDTP.settings.timeMeridiemSeparator + oFDT.ME;
+					}
+					else if(oDTP.oData.bArrMatchFormat[3])
+					{
+						sOutput = oFDT.HH + oDTP.settings.timeSeparator + oFDT.mm;
+					}
+				}
+				else if(oDTP.oData.bDateTimeMode) 
+				{
+					// Date Part - "dd-MM-yyyy"
+					if(oDTP.oData.bArrMatchFormat[0] || 
+						oDTP.oData.bArrMatchFormat[1] ||
+						oDTP.oData.bArrMatchFormat[8] || 
+						oDTP.oData.bArrMatchFormat[9])
+					{
+						sDateStr = oFDT.dd + oDTP.settings.dateSeparator + oFDT.MM + oDTP.settings.dateSeparator + oFDT.yyyy;
+					}
+					// Date Part - "MM-dd-yyyy"
+					else if(oDTP.oData.bArrMatchFormat[2] || 
+							oDTP.oData.bArrMatchFormat[3] ||
+							oDTP.oData.bArrMatchFormat[10] || 
+							oDTP.oData.bArrMatchFormat[11])
+					{
+						sDateStr = oFDT.MM + oDTP.settings.dateSeparator + oFDT.dd + oDTP.settings.dateSeparator + oFDT.yyyy;
+					}
+					// Date Part - "yyyy-MM-dd"
+					else if(oDTP.oData.bArrMatchFormat[4] || 
+							oDTP.oData.bArrMatchFormat[5] ||
+							oDTP.oData.bArrMatchFormat[12] || 
+							oDTP.oData.bArrMatchFormat[13])
+					{
+						sDateStr = oFDT.yyyy + oDTP.settings.dateSeparator + oFDT.MM + oDTP.settings.dateSeparator + oFDT.dd;
+					}
+					// Date Part - "dd-MMM-yyyy"
+					else if(oDTP.oData.bArrMatchFormat[6] || 
+							oDTP.oData.bArrMatchFormat[7] ||
+							oDTP.oData.bArrMatchFormat[14] || 
+							oDTP.oData.bArrMatchFormat[15])
+					{
+						sDateStr = oFDT.dd + oDTP.settings.dateSeparator + oFDT.monthShort + oDTP.settings.dateSeparator + oFDT.yyyy;
+					}
+				
+					bAddSeconds = oDTP.oData.bArrMatchFormat[0] || 
+							oDTP.oData.bArrMatchFormat[1] ||
+							oDTP.oData.bArrMatchFormat[2] || 
+							oDTP.oData.bArrMatchFormat[3] ||
+							oDTP.oData.bArrMatchFormat[4] || 
+							oDTP.oData.bArrMatchFormat[5] ||
+							oDTP.oData.bArrMatchFormat[6] || 
+							oDTP.oData.bArrMatchFormat[7];
+					if(bIs12Hour)
+					{
+						if(bAddSeconds)
+						{
+							sTimeStr = oFDT.hh + oDTP.settings.timeSeparator + oFDT.mm + oDTP.settings.timeSeparator + oFDT.ss + oDTP.settings.timeMeridiemSeparator + oFDT.ME;
+						}
+						else
+						{
+							sTimeStr = oFDT.hh + oDTP.settings.timeSeparator + oFDT.mm + oDTP.settings.timeMeridiemSeparator + oFDT.ME;
+						}
+					}
+					else
+					{
+						if(bAddSeconds)
+						{
+							sTimeStr = oFDT.HH + oDTP.settings.timeSeparator + oFDT.mm + oDTP.settings.timeSeparator + oFDT.ss;
+						}
+						else
+						{
+							sTimeStr = oFDT.HH + oDTP.settings.timeSeparator + oFDT.mm;
+						}
+					}
+				
+					if(sDateStr !== "" && sTimeStr !== "")
+						sOutput = sDateStr + oDTP.settings.dateTimeSeparator + sTimeStr;
+				}
+			
+				// Reset bDate, bTime, bDateTime & bArrMatchFormat to original values
+				oDTP._setMatchFormat(iArgsLength);
+			}
+
+			return sOutput;
+		},
+	
+		_clearButtonAction: function()
+		{
+			var oDTP = this;
+		
+			if(oDTP.oData.oInputElement !== null)
+			{
+				oDTP._setValueOfElement("");
+			}
+			if(!oDTP.settings.isInline)
+				oDTP._hidePicker("");
+		},
+	
+		_setOutputOnIncrementOrDecrement: function()
+		{
+			var oDTP = this;
+		
+			if($.cf._isValid(oDTP.oData.oInputElement) && oDTP.settings.setValueInTextboxOnEveryClick)
+			{
+				oDTP._setValueOfElement(oDTP._setOutput());
+			}
+		},
+	
+		_showPicker: function(oElement)
+		{
+			var oDTP = this;
+
+			if(oDTP.oData.oInputElement === null)
+			{
+				oDTP.oData.oInputElement = oElement;
+				oDTP.oData.iTabIndex = parseInt($(oElement).attr("tabIndex"));
+			
+				var sMode = $(oElement).data("field") || "",
+				sMinValue = $(oElement).data("min") || "",
+				sMaxValue = $(oElement).data("max") || "",
+				sFormat = $(oElement).data("format") || "",
+				sView = $(oElement).data("view") || "",
+				sStartEnd = $(oElement).data("startend") || "",
+				sStartEndElem = $(oElement).data("startendelem") || "",
+				sCurrent = oDTP._getValueOfElement(oElement) || "";
+			
+				if(sView !== "")
+				{
+					if($.cf._compare(sView, "Popup"))
+						oDTP.setIsPopup(true);
+					else 
+						oDTP.setIsPopup(false);
+				}
+			
+				if(!oDTP.settings.isPopup && !oDTP.settings.isInline)
+				{
+					oDTP._createPicker();
+				
+					var iElemTop = $(oDTP.oData.oInputElement).offset().top + $(oDTP.oData.oInputElement).outerHeight(),
+					iElemLeft = $(oDTP.oData.oInputElement).offset().left,
+					iElemWidth =  $(oDTP.oData.oInputElement).outerWidth();
+				
+					$(oDTP.element).css({position: "absolute", top: iElemTop, left: iElemLeft, width: iElemWidth, height: "auto"});
+				}
+
+				if(oDTP.settings.beforeShow)
+					oDTP.settings.beforeShow.call(oDTP, oElement);
+			
+				sMode = $.cf._isValid(sMode) ? sMode : oDTP.settings.mode;
+				oDTP.settings.mode = sMode;
+				if(!$.cf._isValid(sFormat))
+				{
+					if($.cf._compare(sMode, "date"))
+						sFormat = oDTP.settings.dateFormat;
+					else if($.cf._compare(sMode, "time"))
+						sFormat = oDTP.settings.timeFormat;
+					else if($.cf._compare(sMode, "datetime"))
+						sFormat = oDTP.settings.dateTimeFormat;
+				}
+
+				oDTP._matchFormat(sMode, sFormat);
+			
+				oDTP.oData.dMinValue = null;
+				oDTP.oData.dMaxValue = null;
+				oDTP.oData.bIs12Hour = false;
+
+				var sMin, sMax,
+				sTempDate, dTempDate,
+				sTempTime, dTempTime,
+				sTempDateTime, dTempDateTime;
+			
+				if(oDTP.oData.bDateMode)
+				{
+					sMin = sMinValue || oDTP.settings.minDate;
+					sMax = sMaxValue || oDTP.settings.maxDate;
+				
+					oDTP.oData.sDateFormat = sFormat;
+				
+					if($.cf._isValid(sMin))
+						oDTP.oData.dMinValue = oDTP._parseDate(sMin);
+					if($.cf._isValid(sMax))
+						oDTP.oData.dMaxValue = oDTP._parseDate(sMax);
+				
+					if(sStartEnd !== "" && ($.cf._compare(sStartEnd, "start") || $.cf._compare(sStartEnd, "end")) && sStartEndElem !== "")
+					{
+						if($(sStartEndElem).length >= 1)
+						{
+							sTempDate = oDTP._getValueOfElement($(sStartEndElem));
+							if(sTempDate !== "")
+							{
+								if(oDTP.settings.parseDateTimeString)
+									dTempDate = oDTP.settings.parseDateTimeString.call(oDTP, sTempDate, sMode, sFormat, $(sStartEndElem));
+								else
+									dTempDate = oDTP._parseDate(sTempDate);
+
+								if($.cf._compare(sStartEnd, "start"))
+								{
+									if($.cf._isValid(sMax))
+									{
+										if(oDTP._compareDates(dTempDate, oDTP.oData.dMaxValue) < 0)
+											oDTP.oData.dMaxValue = new Date(dTempDate);
+									}
+									else
+										oDTP.oData.dMaxValue = new Date(dTempDate);
+								}
+								else if($.cf._compare(sStartEnd, "end"))
+								{
+									if($.cf._isValid(sMin))
+									{
+										if(oDTP._compareDates(dTempDate, oDTP.oData.dMinValue) > 0)
+											oDTP.oData.dMinValue = new Date(dTempDate);
+									}
+									else
+										oDTP.oData.dMinValue = new Date(dTempDate);
+								}
+							}
+						}
+					}
+				
+					if(oDTP.settings.parseDateTimeString)
+						oDTP.oData.dCurrentDate = oDTP.settings.parseDateTimeString.call(oDTP, sCurrent, sMode, sFormat, $(oElement));
+					else
+						oDTP.oData.dCurrentDate = oDTP._parseDate(sCurrent);
+
+					oDTP.oData.dCurrentDate.setHours(0);
+					oDTP.oData.dCurrentDate.setMinutes(0);
+					oDTP.oData.dCurrentDate.setSeconds(0);
+				}
+				else if(oDTP.oData.bTimeMode)
+				{
+					sMin = sMinValue || oDTP.settings.minTime;
+					sMax = sMaxValue || oDTP.settings.maxTime;
+				
+					oDTP.oData.sTimeFormat = sFormat;
+					oDTP.oData.bIs12Hour = oDTP.getIs12Hour();
+				
+					if($.cf._isValid(sMin))
+					{
+						oDTP.oData.dMinValue = oDTP._parseTime(sMin);
+
+						if(!$.cf._isValid(sMax))
+						{
+							if(oDTP.oData.sTimeFormat === oDTP.oData.sArrInputTimeFormats[0])
+								sMax = "11:59:59 PM";
+							else if(oDTP.oData.sTimeFormat === oDTP.oData.sArrInputTimeFormats[1])
+								sMax = "23:59:59";
+							else if(oDTP.oData.sTimeFormat === oDTP.oData.sArrInputTimeFormats[2])
+								sMax = "11:59 PM";
+							else if(oDTP.oData.sTimeFormat === oDTP.oData.sArrInputTimeFormats[3])
+								sMax = "23:59";
+
+							oDTP.oData.dMaxValue = oDTP._parseTime(sMax);
+						}
+					}
+					if($.cf._isValid(sMax))
+					{
+						oDTP.oData.dMaxValue = oDTP._parseTime(sMax);
+
+						if(!$.cf._isValid(sMin))
+						{
+							if(oDTP.oData.sTimeFormat === oDTP.oData.sArrInputTimeFormats[0])
+								sMin = "12:00:00 AM";
+							else if(oDTP.oData.sTimeFormat === oDTP.oData.sArrInputTimeFormats[1])
+								sMin = "00:00:00";
+							else if(oDTP.oData.sTimeFormat === oDTP.oData.sArrInputTimeFormats[2])
+								sMin = "12:00 AM";
+							else if(oDTP.oData.sTimeFormat === oDTP.oData.sArrInputTimeFormats[3])
+								sMin = "00:00";
+
+							oDTP.oData.dMinValue = oDTP._parseTime(sMin);
+						}
+					}
+
+					if(sStartEnd !== "" && ($.cf._compare(sStartEnd, "start") || $.cf._compare(sStartEnd, "end")) && sStartEndElem !== "")
+					{
+						if($(sStartEndElem).length >= 1)
+						{
+							sTempTime = oDTP._getValueOfElement($(sStartEndElem));
+							if(sTempTime !== "")
+							{
+								if(oDTP.settings.parseDateTimeString)
+									dTempDate = oDTP.settings.parseDateTimeString.call(oDTP, sTempTime, sMode, sFormat, $(sStartEndElem));
+								else
+									dTempTime = oDTP._parseTime(sTempTime);
+
+								if($.cf._compare(sStartEnd, "start"))
+								{
+									dTempTime.setMinutes(dTempTime.getMinutes() - 1);
+									if($.cf._isValid(sMax))
+									{
+										if(oDTP._compareTime(dTempTime, oDTP.oData.dMaxValue) === 2)
+											oDTP.oData.dMaxValue = new Date(dTempTime);
+									}
+									else
+										oDTP.oData.dMaxValue = new Date(dTempTime);
+								}
+								else if($.cf._compare(sStartEnd, "end"))
+								{
+									dTempTime.setMinutes(dTempTime.getMinutes() + 1);
+									if($.cf._isValid(sMin))
+									{
+										if(oDTP._compareTime(dTempTime, oDTP.oData.dMinValue) === 3)
+											oDTP.oData.dMinValue = new Date(dTempTime);
+									}
+									else
+										oDTP.oData.dMinValue = new Date(dTempTime);
+								}
+							}
+						}
+					}
+				
+					if(oDTP.settings.parseDateTimeString)
+						oDTP.oData.dCurrentDate = oDTP.settings.parseDateTimeString.call(oDTP, sCurrent, sMode, sFormat, $(oElement));
+					else
+						oDTP.oData.dCurrentDate = oDTP._parseTime(sCurrent);
+				}
+				else if(oDTP.oData.bDateTimeMode)
+				{
+					sMin = sMinValue || oDTP.settings.minDateTime;
+					sMax = sMaxValue || oDTP.settings.maxDateTime;
+				
+					oDTP.oData.sDateTimeFormat = sFormat;
+					oDTP.oData.bIs12Hour = oDTP.getIs12Hour();
+				
+					if($.cf._isValid(sMin))
+						oDTP.oData.dMinValue = oDTP._parseDateTime(sMin);
+					if($.cf._isValid(sMax))
+						oDTP.oData.dMaxValue = oDTP._parseDateTime(sMax);
+								
+					if(sStartEnd !== "" && ($.cf._compare(sStartEnd, "start") || $.cf._compare(sStartEnd, "end")) && sStartEndElem !== "")
+					{
+						if($(sStartEndElem).length >= 1)
+						{
+							sTempDateTime = oDTP._getValueOfElement($(sStartEndElem));
+							if(sTempDateTime !== "")
+							{
+								if(oDTP.settings.parseDateTimeString)
+									dTempDateTime = oDTP.settings.parseDateTimeString.call(oDTP, sTempDateTime, sMode, sFormat, $(sStartEndElem));
+								else
+									dTempDateTime = oDTP._parseDateTime(sTempDateTime);
+								
+								if($.cf._compare(sStartEnd, "start"))
+								{
+									if($.cf._isValid(sMax))
+									{
+										if(oDTP._compareDateTime(dTempDateTime, oDTP.oData.dMaxValue) < 0)
+											oDTP.oData.dMaxValue = new Date(dTempDateTime);
+									}
+									else
+										oDTP.oData.dMaxValue = new Date(dTempDateTime);
+								}
+								else if($.cf._compare(sStartEnd, "end"))
+								{
+									if($.cf._isValid(sMin))
+									{
+										if(oDTP._compareDateTime(dTempDateTime, oDTP.oData.dMinValue) > 0)
+											oDTP.oData.dMinValue = new Date(dTempDateTime);
+									}
+									else
+										oDTP.oData.dMinValue = new Date(dTempDateTime);
+								}
+							}
+						}
+					}
+				
+					if(oDTP.settings.parseDateTimeString)
+						oDTP.oData.dCurrentDate = oDTP.settings.parseDateTimeString.call(oDTP, sCurrent, sMode, sFormat, $(oElement));
+					else
+						oDTP.oData.dCurrentDate = oDTP._parseDateTime(sCurrent);
+				}
+			
+				oDTP._setVariablesForDate();
+				oDTP._modifyPicker();
+				$(oDTP.element).fadeIn(oDTP.settings.animationDuration);
+
+				if(oDTP.settings.afterShow)
+				{
+					setTimeout(function()
+					{
+						oDTP.settings.afterShow.call(oDTP, oElement);
+					}, oDTP.settings.animationDuration);	
+				}
+			}
+		},
+	
+		_hidePicker: function(iDuration, oElementToShow)
+		{
+			var oDTP = this;
+			
+			var oElement = oDTP.oData.oInputElement;
+			
+			if(oDTP.settings.beforeHide)
+				oDTP.settings.beforeHide.call(oDTP, oElement);
+
+			if(!$.cf._isValid(iDuration))
+				iDuration = oDTP.settings.animationDuration;
+		
+			if($.cf._isValid(oDTP.oData.oInputElement))
+			{
+				$(oDTP.oData.oInputElement).blur();
+				oDTP.oData.oInputElement = null;
+			}
+		
+			$(oDTP.element).fadeOut(iDuration);
+			if(iDuration === 0)
+			{
+				$(oDTP.element).find(".dtpicker-subcontent").html("");
+			}
+			else
+			{
+				setTimeout(function()
+				{
+					$(oDTP.element).find(".dtpicker-subcontent").html("");
+				}, iDuration);
+			}
+
+			$(document).unbind("click.DateTimePicker keydown.DateTimePicker keyup.DateTimePicker");
+
+			if(oDTP.settings.afterHide)
+			{
+				if(iDuration === 0)
+				{
+					oDTP.settings.afterHide.call(oDTP, oElement);
+				}
+				else
+				{
+					setTimeout(function()
+					{
+						oDTP.settings.afterHide.call(oDTP, oElement);
+					}, iDuration);
+				}
+			}
+
+			if($.cf._isValid(oElementToShow))
+				oDTP._showPicker(oElementToShow);
+		},
+	
+		_modifyPicker: function()
+		{
+			var oDTP = this;
+
+			var sTitleContent, iNumberOfColumns;
+			var sArrFields = [];
+			if(oDTP.oData.bDateMode)
+			{
+				sTitleContent = oDTP.settings.titleContentDate;
+				iNumberOfColumns = 3;
+			
+				if(oDTP.oData.bArrMatchFormat[0])  // "dd-MM-yyyy"
+				{
+					sArrFields = ["day", "month", "year"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[1])  // "MM-dd-yyyy"
+				{
+					sArrFields = ["month", "day", "year"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[2])  // "yyyy-MM-dd"
+				{
+					sArrFields = ["year", "month", "day"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[3])  // "dd-MMM-yyyy"
+				{
+					sArrFields = ["day", "month", "year"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[4])  // "MM-yyyy"
+				{
+					iNumberOfColumns = 2;
+					sArrFields = ["month", "year"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[5])  // "MMM yyyy"
+				{
+					iNumberOfColumns = 2;
+					sArrFields = ["month", "year"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[6])  // "MMMM yyyy"
+				{
+					iNumberOfColumns = 2;
+					sArrFields = ["month", "year"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[7])  // "yyyy-MM"
+				{
+					iNumberOfColumns = 2;
+					sArrFields = ["year", "month"];
+				}
+			}
+			else if(oDTP.oData.bTimeMode)
+			{
+				sTitleContent = oDTP.settings.titleContentTime;
+				if(oDTP.oData.bArrMatchFormat[0]) // hh:mm:ss AA
+				{
+					iNumberOfColumns = 4;
+					sArrFields = ["hour", "minutes", "seconds", "meridiem"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[1]) // HH:mm:ss
+				{
+					iNumberOfColumns = 3;
+					sArrFields = ["hour", "minutes", "seconds"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[2]) // hh:mm AA
+				{
+					iNumberOfColumns = 3;
+					sArrFields = ["hour", "minutes", "meridiem"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[3]) // HH:mm
+				{
+					iNumberOfColumns = 2;
+					sArrFields = ["hour", "minutes"];
+				}
+			}
+			else if(oDTP.oData.bDateTimeMode)
+			{
+				sTitleContent = oDTP.settings.titleContentDateTime;
+			
+				if(oDTP.oData.bArrMatchFormat[0])
+				{
+					iNumberOfColumns = 6;
+					sArrFields = ["day", "month", "year", "hour", "minutes", "seconds"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[1])
+				{
+					iNumberOfColumns = 7;
+					sArrFields = ["day", "month", "year", "hour", "minutes", "seconds", "meridiem"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[2])
+				{
+					iNumberOfColumns = 6;
+					sArrFields = ["month", "day", "year", "hour", "minutes", "seconds"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[3])
+				{
+					iNumberOfColumns = 7;
+					sArrFields = ["month", "day", "year", "hour", "minutes", "seconds", "meridiem"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[4])
+				{
+					iNumberOfColumns = 6;
+					sArrFields = ["year", "month", "day", "hour", "minutes", "seconds"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[5])
+				{
+					iNumberOfColumns = 7;
+					sArrFields = ["year", "month", "day", "hour", "minutes", "seconds", "meridiem"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[6])
+				{
+					iNumberOfColumns = 6;
+					sArrFields = ["day", "month", "year", "hour", "minutes", "seconds"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[7])
+				{
+					iNumberOfColumns = 7;
+					sArrFields = ["day", "month", "year", "hour", "minutes", "seconds", "meridiem"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[8])
+				{
+					iNumberOfColumns = 5;
+					sArrFields = ["day", "month", "year", "hour", "minutes"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[9])
+				{
+					iNumberOfColumns = 6;
+					sArrFields = ["day", "month", "year", "hour", "minutes", "meridiem"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[10])
+				{
+					iNumberOfColumns = 5;
+					sArrFields = ["month", "day", "year", "hour", "minutes"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[11])
+				{
+					iNumberOfColumns = 6;
+					sArrFields = ["month", "day", "year", "hour", "minutes", "meridiem"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[12])
+				{
+					iNumberOfColumns = 5;
+					sArrFields = ["year", "month", "day", "hour", "minutes"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[13])
+				{
+					iNumberOfColumns = 6;
+					sArrFields = ["year", "month", "day", "hour", "minutes", "meridiem"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[14])
+				{
+					iNumberOfColumns = 5;
+					sArrFields = ["day", "month", "year", "hour", "minutes"];
+				}
+				else if(oDTP.oData.bArrMatchFormat[15])
+				{
+					iNumberOfColumns = 6;
+					sArrFields = ["day", "month", "year", "hour", "minutes", "meridiem"];
+				}
+			}
+			
+		
+			//--------------------------------------------------------------------
+			var sColumnClass = "dtpicker-comp" + iNumberOfColumns,
+			bDisplayHeaderCloseButton = false,
+			bDisplaySetButton = false,
+			bDisplayClearButton = false,
+			iTempIndex;
+			
+			for(iTempIndex = 0; iTempIndex < oDTP.settings.buttonsToDisplay.length; iTempIndex++)
+			{
+				if($.cf._compare(oDTP.settings.buttonsToDisplay[iTempIndex], "HeaderCloseButton"))
+					bDisplayHeaderCloseButton = true;
+				else if($.cf._compare(oDTP.settings.buttonsToDisplay[iTempIndex], "SetButton"))
+					bDisplaySetButton = true;
+				else if($.cf._compare(oDTP.settings.buttonsToDisplay[iTempIndex], "ClearButton"))
+					bDisplayClearButton = true;
+			}
+		
+			var sHeader = "";
+			if(oDTP.settings.showHeader)
+			{
+				sHeader += "<div class='dtpicker-header'>";
+				sHeader += "<div class='dtpicker-title'>" + sTitleContent + "</div>";
+				if(bDisplayHeaderCloseButton)
+					sHeader += "<a class='dtpicker-close'>&times;</a>";
+				sHeader += "<div class='dtpicker-value'></div>";
+				sHeader += "</div>";
+			}
+		
+			//--------------------------------------------------------------------
+		
+			var sDTPickerComp = "";
+			sDTPickerComp += "<div class='dtpicker-components'>";
+
+			for(iTempIndex = 0; iTempIndex < iNumberOfColumns; iTempIndex++)
+			{
+				var sFieldName = sArrFields[iTempIndex];
+
+				sDTPickerComp += "<div class='dtpicker-compOutline " + sColumnClass + "'>";
+				sDTPickerComp += "<div class='dtpicker-comp " + sFieldName + "'>";
+				sDTPickerComp += "<a class='dtpicker-compButton increment'>" + oDTP.settings.incrementButtonContent + "</a>";
+				if(oDTP.settings.readonlyInputs)
+					sDTPickerComp += "<input type='text' class='dtpicker-compValue' readonly>";
+				else
+					sDTPickerComp += "<input type='text' class='dtpicker-compValue'>";
+				sDTPickerComp += "<a class='dtpicker-compButton decrement'>" + oDTP.settings.decrementButtonContent + "</a>";
+				if(oDTP.settings.labels)
+					sDTPickerComp += "<div class='dtpicker-label'>" + oDTP.settings.labels[sFieldName] + "</div>";
+				sDTPickerComp += "</div>";
+				sDTPickerComp += "</div>";
+			}
+		
+			sDTPickerComp += "</div>";
+		
+			//--------------------------------------------------------------------
+		
+			var sButtonContClass = "";
+			if(bDisplaySetButton && bDisplayClearButton)
+				sButtonContClass = " dtpicker-twoButtons";
+			else
+				sButtonContClass = " dtpicker-singleButton";
+		
+			var sDTPickerButtons = "";
+			sDTPickerButtons += "<div class='dtpicker-buttonCont" + sButtonContClass + "'>";
+			if(bDisplaySetButton)
+				sDTPickerButtons += "<a class='dtpicker-button dtpicker-buttonSet'>" + oDTP.settings.setButtonContent + "</a>";
+			if(bDisplayClearButton)
+				sDTPickerButtons += "<a class='dtpicker-button dtpicker-buttonClear'>" + oDTP.settings.clearButtonContent + "</a>";
+			sDTPickerButtons += "</div>";
+		
+			//--------------------------------------------------------------------
+		
+			var sTempStr = sHeader + sDTPickerComp + sDTPickerButtons;
+		
+			$(oDTP.element).find(".dtpicker-subcontent").html(sTempStr);
+		
+			oDTP._setCurrentDate();
+			oDTP._addEventHandlersForPicker();
+		},
+	
+		_addEventHandlersForPicker: function()
+		{
+			var oDTP = this;
+			var classType, keyCode, $nextElem;
+		
+			if(!oDTP.settings.isInline)
+			{
+				$(document).on("click.DateTimePicker", function(e)
+				{
+					oDTP._hidePicker("");
+				});
+			}
+		
+			$(document).on("keydown.DateTimePicker", function(e)
+			{
+				keyCode = parseInt(e.keyCode ? e.keyCode : e.which);
+				if(! $(".dtpicker-compValue").is(":focus") && keyCode === 9) // TAB
+				{
+					oDTP._setButtonAction(true);
+					$("[tabIndex=" + (oDTP.oData.iTabIndex + 1) + "]").focus();
+					return false;
+				}
+				else if($(".dtpicker-compValue").is(":focus"))
+				{
+					/*if(keyCode === 37) // Left Arrow
+					{
+						oDTP._setButtonAction(true);
+						$nextElem = $(".dtpicker-compValue:focus").parent().prev().children(".dtpicker-compValue");
+						$nextElem.focus();
+						console.log('Left Arrow ');
+						console.log($nextElem);
+						return false;
+					}
+					else if(keyCode === 39) // Right Arrow
+					{
+						oDTP._setButtonAction(true);
+						var compVal = $(".dtpicker-compValue:focus");
+						$nextElem = $(".dtpicker-compValue:focus").parent(".dtpicker-comp").next().children(".dtpicker-compValue");
+						$nextElem.focus();
+						console.log('Right Arrow ');
+						console.log($nextElem);
+						return false;
+					}
+					else*/
+					if(keyCode === 38) // Up Arrow
+					{
+						classType = $(".dtpicker-compValue:focus").parent().attr("class");
+						oDTP._incrementDecrementActionsUsingArrowAndMouse(classType, "inc");
+						return false;
+					}
+					else if(keyCode === 40) // Down Arrow
+					{
+						classType = $(".dtpicker-compValue:focus").parent().attr("class");
+						oDTP._incrementDecrementActionsUsingArrowAndMouse(classType, "dec");
+						return false;
+					}
+				}
+			});
+
+			if(!oDTP.settings.isInline)
+			{
+				$(document).on("keydown.DateTimePicker", function(e)
+				{
+					keyCode = parseInt(e.keyCode ? e.keyCode : e.which);
+					// console.log("keydown " + keyCode);
+					if(! $(".dtpicker-compValue").is(":focus") && keyCode !== 9)
+					{
+						//if(keyCode !== 37 && keyCode !== 39)
+							oDTP._hidePicker("");
+					}
+				});
+			}
+
+			$(".dtpicker-cont *").click(function(e)
+			{
+				e.stopPropagation();
+			});
+		
+			if(!oDTP.settings.readonlyInputs)
+			{
+				$(".dtpicker-compValue").not(".month .dtpicker-compValue, .meridiem .dtpicker-compValue").keyup(function() 
+				{ 
+					this.value = this.value.replace(/[^0-9\.]/g,"");
+				});
+
+				$(".dtpicker-compValue").focus(function()
+				{
+					oDTP.oData.bElemFocused = true;
+					$(this).select();
+				});
+			
+				$(".dtpicker-compValue").blur(function()
+				{
+					oDTP._getValuesFromInputBoxes();
+					oDTP._setCurrentDate();
+				
+					oDTP.oData.bElemFocused = false;
+					var $oParentElem = $(this).parent().parent();
+					setTimeout(function()
+					{
+						if($oParentElem.is(":last-child") && !oDTP.oData.bElemFocused)
+						{
+							oDTP._setButtonAction(false);
+						}
+					}, 50);			
+				});
+			
+				$(".dtpicker-compValue").keyup(function(e)
+				{
+					var $oTextField = $(this),
+				
+					sTextBoxVal = $oTextField.val(),
+					iLength = sTextBoxVal.length,
+					sNewTextBoxVal;
+				
+					if($oTextField.parent().hasClass("day") || $oTextField.parent().hasClass("hour") || $oTextField.parent().hasClass("minutes") || $oTextField.parent().hasClass("meridiem"))
+					{
+						if(iLength > 2)
+						{
+							sNewTextBoxVal = sTextBoxVal.slice(0, 2);
+							$oTextField.val(sNewTextBoxVal);
+						}
+					}
+					else if($oTextField.parent().hasClass("month"))
+					{
+						if(iLength > 3)
+						{
+							sNewTextBoxVal = sTextBoxVal.slice(0, 3);
+							$oTextField.val(sNewTextBoxVal);
+						}
+					}
+					else if($oTextField.parent().hasClass("year"))
+					{
+						if(iLength > 4)
+						{
+							sNewTextBoxVal = sTextBoxVal.slice(0, 4);
+							$oTextField.val(sNewTextBoxVal);
+						}
+					}
+					
+					if(parseInt(e.keyCode ? e.keyCode : e.which) === 9)
+						$(this).select();
+				});
+			}
+
+			$(oDTP.element).find(".dtpicker-compValue").on("mousewheel DOMMouseScroll onmousewheel", function(e)
+			{
+				if($(".dtpicker-compValue").is(":focus"))
+				{
+					var delta = Math.max(-1, Math.min(1, e.originalEvent.wheelDelta));
+
+					if(delta > 0)
+					{
+						classType = $(".dtpicker-compValue:focus").parent().attr("class");
+						oDTP._incrementDecrementActionsUsingArrowAndMouse(classType, "inc");
+					}
+					else
+					{
+						classType = $(".dtpicker-compValue:focus").parent().attr("class");
+						oDTP._incrementDecrementActionsUsingArrowAndMouse(classType, "dec");
+					}
+					return false;
+				}
+			});
+
+			//-----------------------------------------------------------------------
+		
+			$(oDTP.element).find(".dtpicker-close").click(function(e)
+			{
+				if(oDTP.settings.buttonClicked)
+					oDTP.settings.buttonClicked.call(oDTP, "CLOSE", oDTP.oData.oInputElement);
+				if(!oDTP.settings.isInline)
+					oDTP._hidePicker("");
+			});
+		
+			$(oDTP.element).find(".dtpicker-buttonSet").click(function(e)
+			{
+				if(oDTP.settings.buttonClicked)
+					oDTP.settings.buttonClicked.call(oDTP, "SET", oDTP.oData.oInputElement);
+				oDTP._setButtonAction(false);
+			});
+		
+			$(oDTP.element).find(".dtpicker-buttonClear").click(function(e)
+			{
+				if(oDTP.settings.buttonClicked)
+					oDTP.settings.buttonClicked.call(oDTP, "CLEAR", oDTP.oData.oInputElement);
+				oDTP._clearButtonAction();
+			});
+		
+			// ----------------------------------------------------------------------------
+		
+			//console.log((oDTP.settings.captureTouchHold || oDTP.settings.captureMouseHold));
+			if(oDTP.settings.captureTouchHold || oDTP.settings.captureMouseHold)
+			{
+				var sHoldEvents = "";
+				if(oDTP.settings.captureTouchHold && oDTP.oData.bIsTouchDevice)
+					sHoldEvents += "touchstart touchmove touchend ";
+				if(oDTP.settings.captureMouseHold)
+					sHoldEvents += "mousedown mouseup";
+ 
+				$(".dtpicker-cont *").on(sHoldEvents, function(e)
+				{
+					oDTP._clearIntervalForTouchEvents();
+				});
+
+				oDTP._bindTouchEvents("day");
+				oDTP._bindTouchEvents("month");
+				oDTP._bindTouchEvents("year");
+				oDTP._bindTouchEvents("hour");
+				oDTP._bindTouchEvents("minutes");
+				oDTP._bindTouchEvents("seconds");
+			}
+			else
+			{
+				$(oDTP.element).find(".day .increment, .day .increment *").click(function(e)
+				{
+					oDTP.oData.iCurrentDay++;
+					oDTP._setCurrentDate();
+					oDTP._setOutputOnIncrementOrDecrement();
+				});
+			
+				$(oDTP.element).find(".day .decrement, .day .decrement *").click(function(e)
+				{
+					oDTP.oData.iCurrentDay--;
+					oDTP._setCurrentDate();
+					oDTP._setOutputOnIncrementOrDecrement();
+				});
+			
+				$(oDTP.element).find(".month .increment, .month .increment *").click(function(e)
+				{
+					oDTP.oData.iCurrentMonth++;
+					oDTP._setCurrentDate();
+					oDTP._setOutputOnIncrementOrDecrement();
+				});
+			
+				$(oDTP.element).find(".month .decrement, .month .decrement *").click(function(e)
+				{
+					oDTP.oData.iCurrentMonth--;
+					oDTP._setCurrentDate();
+					oDTP._setOutputOnIncrementOrDecrement();
+				});
+			
+				$(oDTP.element).find(".year .increment, .year .increment *").click(function(e)
+				{
+					oDTP.oData.iCurrentYear++;
+					oDTP._setCurrentDate();
+					oDTP._setOutputOnIncrementOrDecrement();
+				});
+			
+				$(oDTP.element).find(".year .decrement, .year .decrement *").click(function(e)
+				{
+					oDTP.oData.iCurrentYear--;
+					oDTP._setCurrentDate();
+					oDTP._setOutputOnIncrementOrDecrement();
+				});
+			
+				$(oDTP.element).find(".hour .increment, .hour .increment *").click(function(e)
+				{
+					oDTP.oData.iCurrentHour++;
+					oDTP._setCurrentDate();
+					oDTP._setOutputOnIncrementOrDecrement();
+				});
+			
+				$(oDTP.element).find(".hour .decrement, .hour .decrement *").click(function(e)
+				{
+					oDTP.oData.iCurrentHour--;
+					oDTP._setCurrentDate();
+					oDTP._setOutputOnIncrementOrDecrement();
+				});
+			
+				$(oDTP.element).find(".minutes .increment, .minutes .increment *").click(function(e)
+				{
+					oDTP.oData.iCurrentMinutes += oDTP.settings.minuteInterval;
+					oDTP._setCurrentDate();
+					oDTP._setOutputOnIncrementOrDecrement();
+				});
+			
+				$(oDTP.element).find(".minutes .decrement, .minutes .decrement *").click(function(e)
+				{
+					oDTP.oData.iCurrentMinutes -= oDTP.settings.minuteInterval;
+					oDTP._setCurrentDate();
+					oDTP._setOutputOnIncrementOrDecrement();
+				});
+
+				$(oDTP.element).find(".seconds .increment, .seconds .increment *").click(function(e)
+				{
+					oDTP.oData.iCurrentSeconds += oDTP.settings.secondsInterval;
+					oDTP._setCurrentDate();
+					oDTP._setOutputOnIncrementOrDecrement();
+				});
+			
+				$(oDTP.element).find(".seconds .decrement, .seconds .decrement *").click(function(e)
+				{
+					oDTP.oData.iCurrentSeconds -= oDTP.settings.secondsInterval;
+					oDTP._setCurrentDate();
+					oDTP._setOutputOnIncrementOrDecrement();
+				});
+			}
+		
+			$(oDTP.element).find(".meridiem .dtpicker-compButton, .meridiem .dtpicker-compButton *").click(function(e)
+			{
+				if($.cf._compare(oDTP.oData.sCurrentMeridiem, "AM"))
+				{
+					oDTP.oData.sCurrentMeridiem = "PM";
+					oDTP.oData.iCurrentHour += 12;
+				}
+				else if($.cf._compare(oDTP.oData.sCurrentMeridiem, "PM"))
+				{
+					oDTP.oData.sCurrentMeridiem = "AM";
+					oDTP.oData.iCurrentHour -= 12;
+				}
+				oDTP._setCurrentDate();
+				oDTP._setOutputOnIncrementOrDecrement();
+			});
+		},
+
+		_adjustMinutes: function(iMinutes) 
+		{
+			var oDTP = this;
+			if(oDTP.settings.roundOffMinutes && oDTP.settings.minuteInterval !== 1)
+			{
+				iMinutes = (iMinutes % oDTP.settings.minuteInterval) ? (iMinutes - (iMinutes % oDTP.settings.minuteInterval) + oDTP.settings.minuteInterval) : iMinutes;
+			}
+			return iMinutes;
+		},
+
+		_adjustSeconds: function(iSeconds) 
+		{
+			var oDTP = this;
+			if(oDTP.settings.roundOffSeconds && oDTP.settings.secondsInterval !== 1)
+			{
+				iSeconds = (iSeconds % oDTP.settings.secondsInterval) ? (iSeconds - (iSeconds % oDTP.settings.secondsInterval) + oDTP.settings.secondsInterval) : iSeconds;
+			}
+			return iSeconds;
+		},
+	
+		_getValueOfElement: function(oElem)
+		{
+			var oDTP = this;
+			var sElemValue = "";
+		
+			if($.cf._compare($(oElem).prop("tagName"), "INPUT"))
+				sElemValue = $(oElem).val();
+			else
+				sElemValue = $(oElem).html();
+		
+			return sElemValue;
+		},
+	
+		_setValueOfElement: function(sElemValue, $oElem)
+		{
+			var oDTP = this;
+		
+			if(!$.cf._isValid($oElem))
+				$oElem = $(oDTP.oData.oInputElement);
+		
+			if($.cf._compare($oElem.prop("tagName"), "INPUT"))
+				$oElem.val(sElemValue);
+			else
+				$oElem.html(sElemValue);
+
+			var dElemValue = oDTP.getDateObjectForInputField($oElem);
+
+			if(oDTP.settings.settingValueOfElement)
+				oDTP.settings.settingValueOfElement.call(oDTP, sElemValue, dElemValue, $oElem);
+		
+			$oElem.change();		
+		
+			return sElemValue;
+		},
+
+		_bindTouchEvents: function(type)
+		{
+			var oDTP = this;
+
+			$(oDTP.element).find("." + type + " .increment, ." + type + " .increment *").on("touchstart mousedown", function(e)
+			{
+				e.stopPropagation();
+				if(!$.cf._isValid(oDTP.oData.sTouchButton))
+				{
+					oDTP.oData.iTouchStart = (new Date()).getTime();
+					oDTP.oData.sTouchButton = type + "-inc";
+
+					oDTP._setIntervalForTouchEvents();
+				}
+			});
+
+			$(oDTP.element).find("." + type + " .increment, ." + type + " .increment *").on("touchend mouseup", function(e)
+			{
+				e.stopPropagation();
+				oDTP._clearIntervalForTouchEvents();
+			});
+
+			$(oDTP.element).find("." + type + " .decrement, ." + type + " .decrement *").on("touchstart mousedown", function(e)
+			{
+				e.stopPropagation();
+				if(!$.cf._isValid(oDTP.oData.sTouchButton))
+				{
+					oDTP.oData.iTouchStart = (new Date()).getTime();
+					oDTP.oData.sTouchButton = type + "-dec";
+
+					oDTP._setIntervalForTouchEvents();
+				}
+			});
+
+			$(oDTP.element).find("." + type + " .decrement, ." + type + " .decrement *").on("touchend mouseup", function(e)
+			{
+				e.stopPropagation();
+				oDTP._clearIntervalForTouchEvents();
+			});
+		},
+
+		_setIntervalForTouchEvents: function()
+		{
+			var oDTP = this;
+
+			var iInterval = oDTP.oData.bIsTouchDevice ? oDTP.settings.touchHoldInterval : oDTP.settings.mouseHoldInterval;
+			if(!$.cf._isValid(oDTP.oData.oTimeInterval))
+			{
+				var iDiff;
+
+				oDTP.oData.oTimeInterval = setInterval(function()
+				{
+					iDiff = ((new Date()).getTime() - oDTP.oData.iTouchStart);
+					if(iDiff > iInterval && $.cf._isValid(oDTP.oData.sTouchButton))
+					{
+						if(oDTP.oData.sTouchButton === "day-inc")
+						{
+							oDTP.oData.iCurrentDay++;
+						}
+						else if(oDTP.oData.sTouchButton === "day-dec")
+						{
+							oDTP.oData.iCurrentDay--;
+						}
+						else if(oDTP.oData.sTouchButton === "month-inc")
+						{
+							oDTP.oData.iCurrentMonth++;
+						}
+						else if(oDTP.oData.sTouchButton === "month-dec")
+						{
+							oDTP.oData.iCurrentMonth--;
+						}
+						else if(oDTP.oData.sTouchButton === "year-inc")
+						{
+							oDTP.oData.iCurrentYear++;
+						}
+						else if(oDTP.oData.sTouchButton === "year-dec")
+						{
+							oDTP.oData.iCurrentYear--;
+						}
+						else if(oDTP.oData.sTouchButton === "hour-inc")
+						{
+							oDTP.oData.iCurrentHour++;
+						}
+						else if(oDTP.oData.sTouchButton === "hour-dec")
+						{
+							oDTP.oData.iCurrentHour--;
+						}
+						else if(oDTP.oData.sTouchButton === "minute-inc")
+						{
+							oDTP.oData.iCurrentMinutes += oDTP.settings.minuteInterval;
+						}
+						else if(oDTP.oData.sTouchButton === "minute-dec")
+						{
+							oDTP.oData.iCurrentMinutes -= oDTP.settings.minuteInterval;
+						}
+						else if(oDTP.oData.sTouchButton === "second-inc")
+						{
+							oDTP.oData.iCurrentSeconds += oDTP.settings.secondsInterval;
+						}
+						else if(oDTP.oData.sTouchButton === "second-dec")
+						{
+							oDTP.oData.iCurrentSeconds -= oDTP.settings.secondsInterval;
+						}
+
+						oDTP._setCurrentDate();
+						oDTP._setOutputOnIncrementOrDecrement();
+
+						oDTP.oData.iTouchStart = (new Date()).getTime();
+					}
+				}, iInterval);
+			}
+		},
+
+		_clearIntervalForTouchEvents: function()
+		{
+			var oDTP = this;
+
+			clearInterval(oDTP.oData.oTimeInterval);
+			if($.cf._isValid(oDTP.oData.sTouchButton))
+			{
+				oDTP.oData.sTouchButton = null;
+				oDTP.oData.iTouchStart = 0;
+			}
+			oDTP.oData.oTimeInterval = null;
+		},
+
+		_incrementDecrementActionsUsingArrowAndMouse: function(type, action)
+		{
+			var oDTP = this;
+
+			if(type.includes("day"))
+			{
+				if (action === "inc") oDTP.oData.iCurrentDay++;
+				else if (action === "dec") oDTP.oData.iCurrentDay--;
+			}
+			else if(type.includes("month"))
+			{
+				if (action === "inc") oDTP.oData.iCurrentMonth++;
+				else if (action === "dec") oDTP.oData.iCurrentMonth--;
+			}
+			else if(type.includes("year"))
+			{
+				if (action === "inc") oDTP.oData.iCurrentYear++;
+				else if (action === "dec") oDTP.oData.iCurrentYear--;
+			}
+			else if(type.includes("hour"))
+			{
+				if (action === "inc") oDTP.oData.iCurrentHour++;
+				else if (action === "dec") oDTP.oData.iCurrentHour--;
+			}
+			else if(type.includes("minutes"))
+			{
+				if (action === "inc") oDTP.oData.iCurrentMinutes += oDTP.settings.minuteInterval;
+				else if (action === "dec") oDTP.oData.iCurrentMinutes -= oDTP.settings.minuteInterval;
+			}
+			else if(type.includes("seconds"))
+			{
+				if (action === "inc") oDTP.oData.iCurrentSeconds += oDTP.settings.secondsInterval;
+				else if (action === "dec") oDTP.oData.iCurrentSeconds -= oDTP.settings.secondsInterval;
+			}
+
+			oDTP._setCurrentDate();
+			oDTP._setOutputOnIncrementOrDecrement();
+		},
+	
+		//-----------------------------------------------------------------
+	
+		_parseDate: function(sDate)
+		{
+			var oDTP = this;
+
+			var dTempDate = (oDTP.settings.defaultDate ? new Date(oDTP.settings.defaultDate) : new Date()),
+			iDate = dTempDate.getDate(),
+			iMonth = dTempDate.getMonth(),
+			iYear = dTempDate.getFullYear();
+		
+			if($.cf._isValid(sDate))
+			{
+				if(typeof sDate === "string")
+				{
+					var sArrDate;
+					if(oDTP.oData.bArrMatchFormat[4] || oDTP.oData.bArrMatchFormat[5] || oDTP.oData.bArrMatchFormat[6])
+						sArrDate = sDate.split(oDTP.settings.monthYearSeparator);
+					else
+						sArrDate = sDate.split(oDTP.settings.dateSeparator);
+				
+					if(oDTP.oData.bArrMatchFormat[0])  // "dd-MM-yyyy"
+					{
+						iDate = parseInt(sArrDate[0]);
+						iMonth = parseInt(sArrDate[1] - 1);
+						iYear = parseInt(sArrDate[2]);
+					}
+					else if(oDTP.oData.bArrMatchFormat[1])  // "MM-dd-yyyy"
+					{
+						iMonth = parseInt(sArrDate[0] - 1);
+						iDate = parseInt(sArrDate[1]);
+						iYear = parseInt(sArrDate[2]);
+					}
+					else if(oDTP.oData.bArrMatchFormat[2])  // "yyyy-MM-dd"
+					{
+						iYear = parseInt(sArrDate[0]);
+						iMonth = parseInt(sArrDate[1] - 1);
+						iDate = parseInt(sArrDate[2]);
+					}
+					else if(oDTP.oData.bArrMatchFormat[3])  // "dd-MMM-yyyy"
+					{
+						iDate = parseInt(sArrDate[0]);
+						iMonth = oDTP._getShortMonthIndex(sArrDate[1]);
+						iYear = parseInt(sArrDate[2]);
+					}
+					else if(oDTP.oData.bArrMatchFormat[4])  // "MM-yyyy"
+					{
+						iDate = 1;
+						iMonth = parseInt(sArrDate[0]) - 1;
+						iYear = parseInt(sArrDate[1]);
+					}
+					else if(oDTP.oData.bArrMatchFormat[5])  // "MMM yyyy"
+					{
+						iDate = 1;
+						iMonth = oDTP._getShortMonthIndex(sArrDate[0]);
+						iYear = parseInt(sArrDate[1]);
+					}
+					else if(oDTP.oData.bArrMatchFormat[6])  // "MMMM yyyy"
+					{
+						iDate = 1;
+						iMonth = oDTP._getFullMonthIndex(sArrDate[0]);
+						iYear = parseInt(sArrDate[1]);
+					}
+					else if(oDTP.oData.bArrMatchFormat[7])  // "yyyy MM"
+					{
+						iDate = 1;
+						iMonth = parseInt(sArrDate[1]) - 1;
+						iYear = parseInt(sArrDate[0]);
+					}
+				}
+				else
+				{
+					iDate = sDate.getDate();
+					iMonth = sDate.getMonth();
+					iYear = sDate.getFullYear();
+				}
+			}
+
+			dTempDate = new Date(iYear, iMonth, iDate, 0, 0, 0, 0);
+			return dTempDate;
+		},
+	
+		_parseTime: function(sTime)
+		{
+			var oDTP = this;
+		
+			var dTempDate = (oDTP.settings.defaultDate ? new Date(oDTP.settings.defaultDate) : new Date()),
+			iDate = dTempDate.getDate(),
+			iMonth = dTempDate.getMonth(),
+			iYear = dTempDate.getFullYear(),
+			iHour = dTempDate.getHours(),
+			iMinutes = dTempDate.getMinutes(),
+			iSeconds = dTempDate.getSeconds(),
+			sArrTime, sMeridiem, sArrTimeComp,
+			bShowSeconds = oDTP.oData.bArrMatchFormat[0] ||
+							oDTP.oData.bArrMatchFormat[1];
+
+			iSeconds = bShowSeconds ? oDTP._adjustSeconds(iSeconds) : 0;
+		
+			if($.cf._isValid(sTime))
+			{
+				if(typeof sTime === "string")
+				{
+					if(oDTP.oData.bIs12Hour)
+					{
+						sArrTime = sTime.split(oDTP.settings.timeMeridiemSeparator);
+						sTime = sArrTime[0];
+						sMeridiem = sArrTime[1];
+
+						if(!($.cf._compare(sMeridiem, "AM") || $.cf._compare(sMeridiem, "PM")))
+							sMeridiem = "";
+					}
+
+					sArrTimeComp = sTime.split(oDTP.settings.timeSeparator);
+					iHour = parseInt(sArrTimeComp[0]);
+					iMinutes = parseInt(sArrTimeComp[1]);
+
+					if(bShowSeconds)
+					{
+						iSeconds = parseInt(sArrTimeComp[2]);
+						iSeconds = oDTP._adjustSeconds(iSeconds);
+					}
+
+					if(iHour === 12 && $.cf._compare(sMeridiem, "AM"))
+						iHour = 0;
+					else if(iHour < 12 && $.cf._compare(sMeridiem, "PM"))
+						iHour += 12;
+				}
+				else
+				{
+					iHour = sTime.getHours();
+					iMinutes = sTime.getMinutes();
+
+					if(bShowSeconds)
+					{
+						iSeconds = sTime.getSeconds();
+						iSeconds = oDTP._adjustSeconds(iSeconds);
+					}
+				}
+			}
+			iMinutes = oDTP._adjustMinutes(iMinutes);
+		
+			dTempDate = new Date(iYear, iMonth, iDate, iHour, iMinutes, iSeconds, 0);
+		
+			return dTempDate;
+		},
+	
+		_parseDateTime: function(sDateTime)
+		{
+			var oDTP = this;
+		
+			var dTempDate = (oDTP.settings.defaultDate ? new Date(oDTP.settings.defaultDate) : new Date()),
+			iDate = dTempDate.getDate(),
+			iMonth = dTempDate.getMonth(),
+			iYear = dTempDate.getFullYear(),
+			iHour = dTempDate.getHours(),
+			iMinutes = dTempDate.getMinutes(),
+			iSeconds = dTempDate.getSeconds(),
+			sMeridiem = "",
+			sArrDateTime, sArrDate, sTime, sArrTimeComp, sArrTime,
+			bShowSeconds = oDTP.oData.bArrMatchFormat[0] || // "dd-MM-yyyy HH:mm:ss"
+							oDTP.oData.bArrMatchFormat[1] || // ""dd-MM-yyyy hh:mm:ss AA"
+							oDTP.oData.bArrMatchFormat[2] || // "MM-dd-yyyy HH:mm:ss"
+							oDTP.oData.bArrMatchFormat[3] || // "MM-dd-yyyy hh:mm:ss AA"
+							oDTP.oData.bArrMatchFormat[4] || // "yyyy-MM-dd HH:mm:ss"
+							oDTP.oData.bArrMatchFormat[5] || // "yyyy-MM-dd hh:mm:ss AA"
+							oDTP.oData.bArrMatchFormat[6] || // "dd-MMM-yyyy HH:mm:ss"
+							oDTP.oData.bArrMatchFormat[7]; // "dd-MMM-yyyy hh:mm:ss AA"
+
+			iSeconds = bShowSeconds ? oDTP._adjustSeconds(iSeconds) : 0;
+		
+			if($.cf._isValid(sDateTime))
+			{
+				if(typeof sDateTime === "string")
+				{
+					sArrDateTime = sDateTime.split(oDTP.settings.dateTimeSeparator);
+					sArrDate = sArrDateTime[0].split(oDTP.settings.dateSeparator);
+				
+					if(oDTP.oData.bArrMatchFormat[0] || // "dd-MM-yyyy HH:mm:ss"
+						oDTP.oData.bArrMatchFormat[1] || // ""dd-MM-yyyy hh:mm:ss AA"
+						oDTP.oData.bArrMatchFormat[8] || // "dd-MM-yyyy HH:mm"
+						oDTP.oData.bArrMatchFormat[9]) // "dd-MM-yyyy hh:mm AA"
+					{
+						iDate = parseInt(sArrDate[0]);
+						iMonth = parseInt(sArrDate[1] - 1);
+						iYear = parseInt(sArrDate[2]);
+					}
+					else if(oDTP.oData.bArrMatchFormat[2] ||  // "MM-dd-yyyy HH:mm:ss"
+						oDTP.oData.bArrMatchFormat[3] || // "MM-dd-yyyy hh:mm:ss AA"
+						oDTP.oData.bArrMatchFormat[10] ||  // "MM-dd-yyyy HH:mm"
+						oDTP.oData.bArrMatchFormat[11]) // "MM-dd-yyyy hh:mm AA"
+					{
+						iMonth = parseInt(sArrDate[0] - 1);
+						iDate = parseInt(sArrDate[1]);
+						iYear = parseInt(sArrDate[2]);
+					}
+					else if(oDTP.oData.bArrMatchFormat[4] ||  // "yyyy-MM-dd HH:mm:ss"
+						oDTP.oData.bArrMatchFormat[5] || // "yyyy-MM-dd hh:mm:ss AA"
+						oDTP.oData.bArrMatchFormat[12] ||  // "yyyy-MM-dd HH:mm"
+						oDTP.oData.bArrMatchFormat[13]) // "yyyy-MM-dd hh:mm AA"
+					{
+						iYear = parseInt(sArrDate[0]);
+						iMonth = parseInt(sArrDate[1] - 1);
+						iDate = parseInt(sArrDate[2]);
+					}
+					else if(oDTP.oData.bArrMatchFormat[6] || // "dd-MMM-yyyy HH:mm:ss"
+						oDTP.oData.bArrMatchFormat[7] || // "dd-MMM-yyyy hh:mm:ss AA"
+						oDTP.oData.bArrMatchFormat[14] || // "dd-MMM-yyyy HH:mm:ss"
+						oDTP.oData.bArrMatchFormat[15]) // "dd-MMM-yyyy hh:mm:ss AA"
+					{
+						iDate = parseInt(sArrDate[0]);
+						iMonth = oDTP._getShortMonthIndex(sArrDate[1]);
+						iYear = parseInt(sArrDate[2]);
+					}
+				
+					sTime = sArrDateTime[1];
+					if($.cf._isValid(sTime))
+					{
+						if(oDTP.oData.bIs12Hour)
+						{
+							if($.cf._compare(oDTP.settings.dateTimeSeparator, oDTP.settings.timeMeridiemSeparator) && (sArrDateTime.length === 3))
+								sMeridiem = sArrDateTime[2];
+							else
+							{
+								sArrTimeComp = sTime.split(oDTP.settings.timeMeridiemSeparator);
+								sTime = sArrTimeComp[0];
+								sMeridiem = sArrTimeComp[1];
+							}
+						
+							if(!($.cf._compare(sMeridiem, "AM") || $.cf._compare(sMeridiem, "PM")))
+								sMeridiem = "";
+						}
+						
+						sArrTime = sTime.split(oDTP.settings.timeSeparator);
+
+						iHour = parseInt(sArrTime[0]);
+						iMinutes = parseInt(sArrTime[1]);
+						if(bShowSeconds)
+						{
+							iSeconds = parseInt(sArrTime[2]);
+						}
+
+						if(iHour === 12 && $.cf._compare(sMeridiem, "AM"))
+							iHour = 0;
+						else if(iHour < 12 && $.cf._compare(sMeridiem, "PM"))
+							iHour += 12;
+					}
+				}
+				else
+				{
+					iDate = sDateTime.getDate();
+					iMonth = sDateTime.getMonth();
+					iYear = sDateTime.getFullYear();
+
+					iHour = sDateTime.getHours();
+					iMinutes = sDateTime.getMinutes();
+
+					if(bShowSeconds)
+					{
+						iSeconds = sDateTime.getSeconds();
+						iSeconds = oDTP._adjustSeconds(iSeconds);
+					}
+				}
+			}
+			iMinutes = oDTP._adjustMinutes(iMinutes);
+    	
+			dTempDate = new Date(iYear, iMonth, iDate, iHour, iMinutes, iSeconds, 0);
+			return dTempDate;
+		},
+	
+		_getShortMonthIndex: function(sMonthName)
+		{
+			var oDTP = this;
+
+			for(var iTempIndex = 0; iTempIndex < oDTP.settings.shortMonthNames.length; iTempIndex++)
+			{
+				if($.cf._compare(sMonthName, oDTP.settings.shortMonthNames[iTempIndex]))
+					return iTempIndex;
+			}
+		},
+
+		_getFullMonthIndex: function(sMonthName)
+		{
+			var oDTP = this;
+
+			for(var iTempIndex = 0; iTempIndex < oDTP.settings.fullMonthNames.length; iTempIndex++)
+			{
+				if($.cf._compare(sMonthName, oDTP.settings.fullMonthNames[iTempIndex]))
+					return iTempIndex;
+			}
+		},
+
+		// Public Method
+		getIs12Hour: function(sMode, sFormat)
+		{
+			var oDTP = this;
+
+			var bIs12Hour = false, 
+			iArgsLength = Function.length;
+
+			oDTP._setMatchFormat(iArgsLength, sMode, sFormat);
+
+			if(oDTP.oData.bTimeMode)
+	        {
+	        	bIs12Hour = oDTP.oData.bArrMatchFormat[0] || 
+	        				oDTP.oData.bArrMatchFormat[2];
+	        }
+	        else if(oDTP.oData.bDateTimeMode)
+	        {
+	        	bIs12Hour = oDTP.oData.bArrMatchFormat[1] ||
+							oDTP.oData.bArrMatchFormat[3] ||
+							oDTP.oData.bArrMatchFormat[5] ||
+							oDTP.oData.bArrMatchFormat[7] ||
+							oDTP.oData.bArrMatchFormat[9] ||
+							oDTP.oData.bArrMatchFormat[11] ||
+							oDTP.oData.bArrMatchFormat[13] ||
+							oDTP.oData.bArrMatchFormat[15];
+			}
+
+			oDTP._setMatchFormat(iArgsLength);
+
+			return bIs12Hour;
+		},
+	
+		//-----------------------------------------------------------------
+	
+		_setVariablesForDate: function(dInput, bIncludeTime, bSetMeridiem)
+		{
+			var oDTP = this;
+		
+			var dTemp, oDTV = {},
+			bValidInput = $.cf._isValid(dInput);
+			if(bValidInput)
+			{
+				dTemp = new Date(dInput);
+				if(!$.cf._isValid(bIncludeTime))
+					bIncludeTime = true;
+				if(!$.cf._isValid(bSetMeridiem))
+					bSetMeridiem = true;
+			}
+			else
+			{
+				if (Object.prototype.toString.call(oDTP.oData.dCurrentDate) === "[object Date]" && isFinite(oDTP.oData.dCurrentDate))
+    		  			dTemp = new Date(oDTP.oData.dCurrentDate);
+  				else 
+    					dTemp = new Date();
+    					
+				if(!$.cf._isValid(bIncludeTime))
+					bIncludeTime = (oDTP.oData.bTimeMode || oDTP.oData.bDateTimeMode);
+				if(!$.cf._isValid(bSetMeridiem))
+					bSetMeridiem = oDTP.oData.bIs12Hour;
+			}
+
+			oDTV.iCurrentDay = dTemp.getDate();
+			oDTV.iCurrentMonth = dTemp.getMonth();
+			oDTV.iCurrentYear = dTemp.getFullYear();
+			oDTV.iCurrentWeekday = dTemp.getDay();
+		
+			if(bIncludeTime)
+			{
+				oDTV.iCurrentHour = dTemp.getHours();
+				oDTV.iCurrentMinutes = dTemp.getMinutes();
+				oDTV.iCurrentSeconds = dTemp.getSeconds();
+			
+				if(bSetMeridiem)
+				{
+					oDTV.sCurrentMeridiem = oDTP._determineMeridiemFromHourAndMinutes(oDTV.iCurrentHour, oDTV.iCurrentMinutes);
+				}
+			}
+
+			if(bValidInput)
+				return oDTV;
+			else
+				oDTP.oData = $.extend(oDTP.oData, oDTV);
+		},
+	
+		_getValuesFromInputBoxes: function()
+		{
+			var oDTP = this;
+		
+			if(oDTP.oData.bDateMode || oDTP.oData.bDateTimeMode)
+			{
+				var sMonth, iMonth;
+
+				sMonth = $(oDTP.element).find(".month .dtpicker-compValue").val();
+				if(sMonth.length > 1)
+					sMonth = sMonth.charAt(0).toUpperCase() + sMonth.slice(1);
+				iMonth = oDTP.settings.shortMonthNames.indexOf(sMonth);
+				if(iMonth !== -1)
+				{
+					oDTP.oData.iCurrentMonth = parseInt(iMonth);
+				}
+				else
+				{
+					if(sMonth.match("^[+|-]?[0-9]+$"))
+					{
+						oDTP.oData.iCurrentMonth = parseInt(sMonth - 1);
+					}
+				}
+			
+				oDTP.oData.iCurrentDay = parseInt($(oDTP.element).find(".day .dtpicker-compValue").val()) || oDTP.oData.iCurrentDay;					
+				oDTP.oData.iCurrentYear = parseInt($(oDTP.element).find(".year .dtpicker-compValue").val()) || oDTP.oData.iCurrentYear;
+			}
+		
+			if(oDTP.oData.bTimeMode || oDTP.oData.bDateTimeMode)
+			{
+				var iTempHour, iTempMinutes, iTempSeconds, sMeridiem;
+
+				iTempHour = parseInt($(oDTP.element).find(".hour .dtpicker-compValue").val());
+				iTempMinutes = oDTP._adjustMinutes(parseInt($(oDTP.element).find(".minutes .dtpicker-compValue").val()));
+				iTempSeconds = oDTP._adjustMinutes(parseInt($(oDTP.element).find(".seconds .dtpicker-compValue").val()));
+
+				oDTP.oData.iCurrentHour = isNaN(iTempHour) ? oDTP.oData.iCurrentHour : iTempHour;
+				oDTP.oData.iCurrentMinutes = isNaN(iTempMinutes) ? oDTP.oData.iCurrentMinutes : iTempMinutes;
+				oDTP.oData.iCurrentSeconds = isNaN(iTempSeconds) ? oDTP.oData.iCurrentSeconds : iTempSeconds;
+			
+				if(oDTP.oData.iCurrentSeconds > 59)
+				{
+					oDTP.oData.iCurrentMinutes += oDTP.oData.iCurrentSeconds / 60;
+					oDTP.oData.iCurrentSeconds = oDTP.oData.iCurrentSeconds % 60;
+				}
+				if(oDTP.oData.iCurrentMinutes > 59)
+				{
+					oDTP.oData.iCurrentHour += oDTP.oData.iCurrentMinutes / 60;
+					oDTP.oData.iCurrentMinutes = oDTP.oData.iCurrentMinutes % 60;
+				}
+
+				if(oDTP.oData.bIs12Hour)
+				{
+					if(oDTP.oData.iCurrentHour > 12)
+						oDTP.oData.iCurrentHour = (oDTP.oData.iCurrentHour % 12);
+				}
+				else
+				{
+					if(oDTP.oData.iCurrentHour > 23)
+						oDTP.oData.iCurrentHour = (oDTP.oData.iCurrentHour % 23);
+				}
+			
+				if(oDTP.oData.bIs12Hour)
+				{
+					sMeridiem = $(oDTP.element).find(".meridiem .dtpicker-compValue").val();
+					if($.cf._compare(sMeridiem, "AM") || $.cf._compare(sMeridiem, "PM"))
+						oDTP.oData.sCurrentMeridiem = sMeridiem;
+				
+					if($.cf._compare(oDTP.oData.sCurrentMeridiem, "PM"))
+					{
+						if(oDTP.oData.iCurrentHour !== 12 && oDTP.oData.iCurrentHour < 13)
+							oDTP.oData.iCurrentHour += 12;
+					}
+					if($.cf._compare(oDTP.oData.sCurrentMeridiem, "AM") && oDTP.oData.iCurrentHour === 12)
+						oDTP.oData.iCurrentHour = 0;
+				}
+			}
+		},
+
+		_setCurrentDate: function()
+		{
+			var oDTP = this;
+		
+			if(oDTP.oData.bTimeMode || oDTP.oData.bDateTimeMode)
+			{
+				if(oDTP.oData.iCurrentSeconds > 59)
+				{
+					oDTP.oData.iCurrentMinutes += oDTP.oData.iCurrentSeconds / 60;
+					oDTP.oData.iCurrentSeconds = oDTP.oData.iCurrentSeconds % 60;
+				}
+				else if(oDTP.oData.iCurrentSeconds < 0)
+				{
+					oDTP.oData.iCurrentMinutes -= oDTP.settings.minuteInterval;
+					oDTP.oData.iCurrentSeconds += 60;
+				}
+				oDTP.oData.iCurrentMinutes = oDTP._adjustMinutes(oDTP.oData.iCurrentMinutes);
+				oDTP.oData.iCurrentSeconds = oDTP._adjustSeconds(oDTP.oData.iCurrentSeconds);
+			}
+		
+			var dTempDate = new Date(oDTP.oData.iCurrentYear, oDTP.oData.iCurrentMonth, oDTP.oData.iCurrentDay, oDTP.oData.iCurrentHour, oDTP.oData.iCurrentMinutes, oDTP.oData.iCurrentSeconds, 0),
+			bGTMaxDate = false, bLTMinDate = false,
+			sFormat, oDate, oFormattedDate, oFormattedTime,
+			sDate, sTime, sDateTime;
+		
+			if(oDTP.oData.dMaxValue !== null)
+				bGTMaxDate = (dTempDate.getTime() > oDTP.oData.dMaxValue.getTime());
+			if(oDTP.oData.dMinValue !== null)
+				bLTMinDate = (dTempDate.getTime() < oDTP.oData.dMinValue.getTime());
+		
+			if(bGTMaxDate || bLTMinDate)
+			{
+				var bCDGTMaxDate = false, bCDLTMinDate = false; 
+				if(oDTP.oData.dMaxValue !== null)
+					bCDGTMaxDate = (oDTP.oData.dCurrentDate.getTime() > oDTP.oData.dMaxValue.getTime());
+				if(oDTP.oData.dMinValue !== null)
+					bCDLTMinDate = (oDTP.oData.dCurrentDate.getTime() < oDTP.oData.dMinValue.getTime());
+			
+				if(!(bCDGTMaxDate || bCDLTMinDate))
+					dTempDate = new Date(oDTP.oData.dCurrentDate);
+				else
+				{
+					if(bCDGTMaxDate)
+					{
+						dTempDate = new Date(oDTP.oData.dMaxValue);
+						console.log("Info : Date/Time/DateTime you entered is later than Maximum value, so DateTimePicker is showing Maximum value in Input Field.");
+					}
+					if(bCDLTMinDate)
+					{
+						dTempDate = new Date(oDTP.oData.dMinValue);
+						console.log("Info : Date/Time/DateTime you entered is earlier than Minimum value, so DateTimePicker is showing Minimum value in Input Field.");
+					}
+					console.log("Please enter proper Date/Time/DateTime values.");
+				}
+			}
+		
+			oDTP.oData.dCurrentDate = new Date(dTempDate);
+			oDTP._setVariablesForDate();
+		
+			oDate = {}; sDate = ""; sTime = ""; sDateTime = "";
+
+			if(oDTP.oData.bDateMode || oDTP.oData.bDateTimeMode)
+			{
+				if(oDTP.oData.bDateMode && (oDTP.oData.bArrMatchFormat[4] || oDTP.oData.bArrMatchFormat[5] || oDTP.oData.bArrMatchFormat[6]))
+					oDTP.oData.iCurrentDay = 1;
+			
+				oFormattedDate = oDTP._formatDate();
+
+				$(oDTP.element).find(".day .dtpicker-compValue").val(oFormattedDate.dd);
+			
+				if(oDTP.oData.bDateMode)
+				{
+					if(oDTP.oData.bArrMatchFormat[4] || oDTP.oData.bArrMatchFormat[7])  // "MM-yyyy"
+						$(oDTP.element).find(".month .dtpicker-compValue").val(oFormattedDate.MM);
+					else if(oDTP.oData.bArrMatchFormat[6])  // "MMMM yyyy"
+						$(oDTP.element).find(".month .dtpicker-compValue").val(oFormattedDate.month);
+					else
+						$(oDTP.element).find(".month .dtpicker-compValue").val(oFormattedDate.monthShort);
+				}
+				else
+					$(oDTP.element).find(".month .dtpicker-compValue").val(oFormattedDate.monthShort);
+			
+				$(oDTP.element).find(".year .dtpicker-compValue").val(oFormattedDate.yyyy);
+			
+				if(oDTP.settings.formatHumanDate)
+				{
+					oDate = $.extend(oDate, oFormattedDate);
+				}
+				else
+				{
+					if(oDTP.oData.bDateMode && (oDTP.oData.bArrMatchFormat[4] || oDTP.oData.bArrMatchFormat[5] || oDTP.oData.bArrMatchFormat[6] || oDTP.oData.bArrMatchFormat[7]))
+					{
+						if(oDTP.oData.bArrMatchFormat[4])
+							sDate = oFormattedDate.MM + oDTP.settings.monthYearSeparator + oFormattedDate.yyyy;
+						else if(oDTP.oData.bArrMatchFormat[5])
+							sDate = oFormattedDate.monthShort + oDTP.settings.monthYearSeparator + oFormattedDate.yyyy;
+						else if(oDTP.oData.bArrMatchFormat[6])
+							sDate = oFormattedDate.month + oDTP.settings.monthYearSeparator + oFormattedDate.yyyy;
+						else if(oDTP.oData.bArrMatchFormat[7])
+							sDate = oFormattedDate.yyyy + oDTP.settings.monthYearSeparator + oFormattedDate.MM;
+					}
+					else
+						sDate = oFormattedDate.dayShort + ", " + oFormattedDate.month + " " + oFormattedDate.dd + ", " + oFormattedDate.yyyy;
+				}
+			}
+			if(oDTP.oData.bTimeMode || oDTP.oData.bDateTimeMode)
+			{
+				oFormattedTime = oDTP._formatTime();
+			
+				if(oDTP.oData.bIs12Hour)
+					$(oDTP.element).find(".meridiem .dtpicker-compValue").val(oDTP.oData.sCurrentMeridiem);
+				$(oDTP.element).find(".hour .dtpicker-compValue").val(oFormattedTime.hour);
+				$(oDTP.element).find(".minutes .dtpicker-compValue").val(oFormattedTime.mm);
+				$(oDTP.element).find(".seconds .dtpicker-compValue").val(oFormattedTime.ss);
+			
+				if(oDTP.settings.formatHumanDate)
+				{
+					oDate = $.extend(oDate, oFormattedTime);
+				}
+				else
+				{
+					var bShowSecondsTime = (oDTP.oData.bTimeMode && (
+						oDTP.oData.bArrMatchFormat[0] ||
+						oDTP.oData.bArrMatchFormat[1])),
+
+					bShowSecondsDateTime = (oDTP.oData.bDateTimeMode && 
+							(oDTP.oData.bArrMatchFormat[0] || 
+							oDTP.oData.bArrMatchFormat[1] ||
+							oDTP.oData.bArrMatchFormat[2] || 
+							oDTP.oData.bArrMatchFormat[3] ||
+							oDTP.oData.bArrMatchFormat[4] || 
+							oDTP.oData.bArrMatchFormat[5] ||
+							oDTP.oData.bArrMatchFormat[6] || 
+							oDTP.oData.bArrMatchFormat[7]));
+
+					if(bShowSecondsTime || bShowSecondsDateTime)
+						sTime = oFormattedTime.hour + oDTP.settings.timeSeparator + oFormattedTime.mm + oDTP.settings.timeSeparator + oFormattedTime.ss;
+					else
+						sTime = oFormattedTime.hour + oDTP.settings.timeSeparator + oFormattedTime.mm;
+
+					if(oDTP.oData.bIs12Hour)
+						sTime += oDTP.settings.timeMeridiemSeparator + oDTP.oData.sCurrentMeridiem;
+				}
+			}
+		
+			if(oDTP.settings.formatHumanDate)
+			{
+				if(oDTP.oData.bDateTimeMode)
+					sFormat = oDTP.oData.sDateFormat;
+				else if(oDTP.oData.bDateMode)
+					sFormat = oDTP.oData.sTimeFormat;
+				else if(oDTP.oData.bTimeMode)
+					sFormat = oDTP.oData.sDateTimeFormat;
+
+				sDateTime = oDTP.settings.formatHumanDate.call(oDTP, oDate, oDTP.settings.mode, sFormat);
+			}
+			else		
+			{
+				if(oDTP.oData.bDateTimeMode)
+					sDateTime = sDate + oDTP.settings.dateTimeSeparator + sTime;
+				else if(oDTP.oData.bDateMode)
+					sDateTime = sDate;
+				else if(oDTP.oData.bTimeMode)
+					sDateTime = sTime;
+			}
+
+			$(oDTP.element).find(".dtpicker-value").html(sDateTime);
+
+			oDTP._setButtons();
+		},
+
+		_formatDate: function(oDTVP)
+		{
+			var oDTP = this;
+			var oDTV = {},
+			sDay, sYear, 
+			iMonth, sMonth, sMonthShort, sMonthFull, 
+			iDayOfTheWeek, sDayOfTheWeek, sDayOfTheWeekFull;
+
+			if($.cf._isValid(oDTVP))
+				oDTV = $.extend({}, oDTVP);
+			else
+			{
+				oDTV.iCurrentDay = oDTP.oData.iCurrentDay;
+				oDTV.iCurrentMonth = oDTP.oData.iCurrentMonth;
+				oDTV.iCurrentYear = oDTP.oData.iCurrentYear;
+				oDTV.iCurrentWeekday = oDTP.oData.iCurrentWeekday;
+			}
+
+			sDay = oDTV.iCurrentDay;
+			sDay = (sDay < 10) ? ("0" + sDay) : sDay;
+			iMonth = oDTV.iCurrentMonth;
+			sMonth = oDTV.iCurrentMonth + 1;
+			sMonth = (sMonth < 10) ? ("0" + sMonth) : sMonth;
+			sMonthShort = oDTP.settings.shortMonthNames[iMonth];
+			sMonthFull = oDTP.settings.fullMonthNames[iMonth];
+			sYear = oDTV.iCurrentYear;
+			iDayOfTheWeek = oDTV.iCurrentWeekday;
+			sDayOfTheWeek = oDTP.settings.shortDayNames[iDayOfTheWeek];
+			sDayOfTheWeekFull = oDTP.settings.fullDayNames[iDayOfTheWeek];
+		
+			return {
+				"dd": sDay,
+				"MM": sMonth,
+				"monthShort": sMonthShort,
+				"month": sMonthFull,
+				"yyyy": sYear,
+				"dayShort": sDayOfTheWeek,
+				"day": sDayOfTheWeekFull
+			};
+		},
+
+		_formatTime: function(oDTVP)
+		{
+			var oDTP = this;
+			var oDTV = {},
+			iHour24, sHour24, iHour12, sHour12, sHour,
+			sMinutes, sSeconds;
+
+			if($.cf._isValid(oDTVP))
+				oDTV = $.extend({}, oDTVP);
+			else
+			{
+				oDTV.iCurrentHour = oDTP.oData.iCurrentHour;
+				oDTV.iCurrentMinutes = oDTP.oData.iCurrentMinutes;
+				oDTV.iCurrentSeconds = oDTP.oData.iCurrentSeconds;
+				oDTV.sCurrentMeridiem = oDTP.oData.sCurrentMeridiem;
+			}
+
+			iHour24 = oDTV.iCurrentHour;
+			sHour24 = (iHour24 < 10) ? ("0" + iHour24) : iHour24;
+			sHour = sHour24;
+
+			iHour12 = oDTV.iCurrentHour;
+			if(iHour12 > 12)
+				iHour12 -= 12;
+			if(sHour === "00")
+				iHour12 = 12;
+			sHour12 = (iHour12 < 10) ? ("0" + iHour12) : iHour12;
+			if(oDTP.oData.bIs12Hour)
+				sHour = sHour12;
+		
+			sMinutes = oDTV.iCurrentMinutes;
+			sMinutes = (sMinutes < 10) ? ("0" + sMinutes) : sMinutes;
+			sSeconds = oDTV.iCurrentSeconds;
+			sSeconds = (sSeconds < 10) ? ("0" + sSeconds) : sSeconds;
+		
+			return {
+				"H": iHour24,
+				"HH": sHour24,
+				"h": iHour12,
+				"hh": sHour12,
+				"hour": sHour,
+				"m": oDTV.iCurrentMinutes,
+				"mm": sMinutes,
+				"s": oDTV.iCurrentSeconds,
+				"ss": sSeconds,
+				"ME": oDTV.sCurrentMeridiem
+			};
+		},
+	
+		_setButtons: function()
+		{
+			var oDTP = this;
+			$(oDTP.element).find(".dtpicker-compButton").removeClass("dtpicker-compButtonDisable").addClass("dtpicker-compButtonEnable");
+		
+			var dTempDate;
+			if(oDTP.oData.dMaxValue !== null)
+			{
+				if(oDTP.oData.bTimeMode)
+				{
+					// Decrement Hour
+					if((oDTP.oData.iCurrentHour + 1) > oDTP.oData.dMaxValue.getHours() || ((oDTP.oData.iCurrentHour + 1) === oDTP.oData.dMaxValue.getHours() && oDTP.oData.iCurrentMinutes > oDTP.oData.dMaxValue.getMinutes()))
+						$(oDTP.element).find(".hour .increment").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				
+					// Decrement Minutes
+					if(oDTP.oData.iCurrentHour >= oDTP.oData.dMaxValue.getHours() && (oDTP.oData.iCurrentMinutes + 1) > oDTP.oData.dMaxValue.getMinutes())
+						$(oDTP.element).find(".minutes .increment").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				}
+				else
+				{
+					// Increment Day
+					dTempDate = new Date(oDTP.oData.iCurrentYear, oDTP.oData.iCurrentMonth, (oDTP.oData.iCurrentDay + 1), oDTP.oData.iCurrentHour, oDTP.oData.iCurrentMinutes, oDTP.oData.iCurrentSeconds, 0);
+					if(dTempDate.getTime() > oDTP.oData.dMaxValue.getTime())
+						$(oDTP.element).find(".day .increment").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				
+					// Increment Month
+					dTempDate = new Date(oDTP.oData.iCurrentYear, (oDTP.oData.iCurrentMonth + 1), oDTP.oData.iCurrentDay, oDTP.oData.iCurrentHour, oDTP.oData.iCurrentMinutes, oDTP.oData.iCurrentSeconds, 0);
+					if(dTempDate.getTime() > oDTP.oData.dMaxValue.getTime())
+						$(oDTP.element).find(".month .increment").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				
+					// Increment Year
+					dTempDate = new Date((oDTP.oData.iCurrentYear + 1), oDTP.oData.iCurrentMonth, oDTP.oData.iCurrentDay, oDTP.oData.iCurrentHour, oDTP.oData.iCurrentMinutes, oDTP.oData.iCurrentSeconds, 0);
+					if(dTempDate.getTime() > oDTP.oData.dMaxValue.getTime())
+						$(oDTP.element).find(".year .increment").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				
+					// Increment Hour
+					dTempDate = new Date(oDTP.oData.iCurrentYear, oDTP.oData.iCurrentMonth, oDTP.oData.iCurrentDay, (oDTP.oData.iCurrentHour + 1), oDTP.oData.iCurrentMinutes, oDTP.oData.iCurrentSeconds, 0);
+					if(dTempDate.getTime() > oDTP.oData.dMaxValue.getTime())
+						$(oDTP.element).find(".hour .increment").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				
+					// Increment Minutes
+					dTempDate = new Date(oDTP.oData.iCurrentYear, oDTP.oData.iCurrentMonth, oDTP.oData.iCurrentDay, oDTP.oData.iCurrentHour, (oDTP.oData.iCurrentMinutes + 1), oDTP.oData.iCurrentSeconds, 0);
+					if(dTempDate.getTime() > oDTP.oData.dMaxValue.getTime())
+						$(oDTP.element).find(".minutes .increment").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+
+					// Increment Seconds
+					dTempDate = new Date(oDTP.oData.iCurrentYear, oDTP.oData.iCurrentMonth, oDTP.oData.iCurrentDay, oDTP.oData.iCurrentHour, oDTP.oData.iCurrentMinutes, (oDTP.oData.iCurrentSeconds + 1), 0);
+					if(dTempDate.getTime() > oDTP.oData.dMaxValue.getTime())
+						$(oDTP.element).find(".seconds .increment").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				}
+			}
+		
+			if(oDTP.oData.dMinValue !== null)
+			{
+				if(oDTP.oData.bTimeMode)
+				{
+					// Decrement Hour
+					if((oDTP.oData.iCurrentHour - 1) < oDTP.oData.dMinValue.getHours() || ((oDTP.oData.iCurrentHour - 1) === oDTP.oData.dMinValue.getHours() && oDTP.oData.iCurrentMinutes < oDTP.oData.dMinValue.getMinutes()))
+						$(oDTP.element).find(".hour .decrement").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				
+					// Decrement Minutes
+					if(oDTP.oData.iCurrentHour <= oDTP.oData.dMinValue.getHours() && (oDTP.oData.iCurrentMinutes - 1) < oDTP.oData.dMinValue.getMinutes())
+						$(oDTP.element).find(".minutes .decrement").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				}
+				else
+				{
+					// Decrement Day 
+					dTempDate = new Date(oDTP.oData.iCurrentYear, oDTP.oData.iCurrentMonth, (oDTP.oData.iCurrentDay - 1), oDTP.oData.iCurrentHour, oDTP.oData.iCurrentMinutes, oDTP.oData.iCurrentSeconds, 0);
+					if(dTempDate.getTime() < oDTP.oData.dMinValue.getTime())
+						$(oDTP.element).find(".day .decrement").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				
+					// Decrement Month 
+					dTempDate = new Date(oDTP.oData.iCurrentYear, (oDTP.oData.iCurrentMonth - 1), oDTP.oData.iCurrentDay, oDTP.oData.iCurrentHour, oDTP.oData.iCurrentMinutes, oDTP.oData.iCurrentSeconds, 0);
+					if(dTempDate.getTime() < oDTP.oData.dMinValue.getTime())
+						$(oDTP.element).find(".month .decrement").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				
+					// Decrement Year 
+					dTempDate = new Date((oDTP.oData.iCurrentYear - 1), oDTP.oData.iCurrentMonth, oDTP.oData.iCurrentDay, oDTP.oData.iCurrentHour, oDTP.oData.iCurrentMinutes, oDTP.oData.iCurrentSeconds, 0);
+					if(dTempDate.getTime() < oDTP.oData.dMinValue.getTime())
+						$(oDTP.element).find(".year .decrement").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				
+					// Decrement Hour
+					dTempDate = new Date(oDTP.oData.iCurrentYear, oDTP.oData.iCurrentMonth, oDTP.oData.iCurrentDay, (oDTP.oData.iCurrentHour - 1), oDTP.oData.iCurrentMinutes, oDTP.oData.iCurrentSeconds, 0);
+					if(dTempDate.getTime() < oDTP.oData.dMinValue.getTime())
+						$(oDTP.element).find(".hour .decrement").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				
+					// Decrement Minutes
+					dTempDate = new Date(oDTP.oData.iCurrentYear, oDTP.oData.iCurrentMonth, oDTP.oData.iCurrentDay, oDTP.oData.iCurrentHour, (oDTP.oData.iCurrentMinutes - 1), oDTP.oData.iCurrentSeconds, 0);
+					if(dTempDate.getTime() < oDTP.oData.dMinValue.getTime())
+						$(oDTP.element).find(".minutes .decrement").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+
+					// Decrement Seconds
+					dTempDate = new Date(oDTP.oData.iCurrentYear, oDTP.oData.iCurrentMonth, oDTP.oData.iCurrentDay, oDTP.oData.iCurrentHour, oDTP.oData.iCurrentMinutes, (oDTP.oData.iCurrentSeconds - 1), 0);
+					if(dTempDate.getTime() < oDTP.oData.dMinValue.getTime())
+						$(oDTP.element).find(".seconds .decrement").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+				}
+			}
+			
+			if(oDTP.oData.bIs12Hour)
+			{
+				var iTempHour, iTempMinutes;
+				if(oDTP.oData.dMaxValue !== null || oDTP.oData.dMinValue !== null)
+				{
+					iTempHour = oDTP.oData.iCurrentHour;
+					if($.cf._compare(oDTP.oData.sCurrentMeridiem, "AM"))
+						iTempHour += 12;
+					else if($.cf._compare(oDTP.oData.sCurrentMeridiem, "PM"))
+						iTempHour -= 12;
+				
+					dTempDate = new Date(oDTP.oData.iCurrentYear, oDTP.oData.iCurrentMonth, oDTP.oData.iCurrentDay, iTempHour, oDTP.oData.iCurrentMinutes, oDTP.oData.iCurrentSeconds, 0);
+				
+					if(oDTP.oData.dMaxValue !== null)
+					{
+						if(oDTP.oData.bTimeMode)
+						{
+							iTempMinutes = oDTP.oData.iCurrentMinutes;
+							if(iTempHour > oDTP.oData.dMaxValue.getHours() || (iTempHour === oDTP.oData.dMaxValue.getHours() && iTempMinutes > oDTP.oData.dMaxValue.getMinutes()))
+								$(oDTP.element).find(".meridiem .dtpicker-compButton").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+						}
+						else
+						{
+							if(dTempDate.getTime() > oDTP.oData.dMaxValue.getTime())
+								$(oDTP.element).find(".meridiem .dtpicker-compButton").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+						}
+					}
+				
+					if(oDTP.oData.dMinValue !== null)
+					{
+						if(oDTP.oData.bTimeMode)
+						{
+							iTempMinutes = oDTP.oData.iCurrentMinutes;
+							if(iTempHour < oDTP.oData.dMinValue.getHours() || (iTempHour === oDTP.oData.dMinValue.getHours() && iTempMinutes < oDTP.oData.dMinValue.getMinutes()))
+								$(oDTP.element).find(".meridiem .dtpicker-compButton").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+						}
+						else
+						{
+							if(dTempDate.getTime() < oDTP.oData.dMinValue.getTime())
+								$(oDTP.element).find(".meridiem .dtpicker-compButton").removeClass("dtpicker-compButtonEnable").addClass("dtpicker-compButtonDisable");
+						}
+					}
+				}
+			}
+		},
+	
+		// Public Method
+		setIsPopup: function(bIsPopup)
+		{
+			var oDTP = this;
+		
+			if(!oDTP.settings.isInline)
+			{
+				oDTP.settings.isPopup = bIsPopup;
+
+				if($(oDTP.element).css("display") !== "none")
+					oDTP._hidePicker(0);
+			
+				if(oDTP.settings.isPopup)
+				{
+					$(oDTP.element).addClass("dtpicker-mobile");
+					
+					$(oDTP.element).css({position: "fixed", top: 0, left: 0, width: "100%", height: "100%"});
+				}
+				else
+				{
+					$(oDTP.element).removeClass("dtpicker-mobile");
+					
+					if(oDTP.oData.oInputElement !== null)
+					{
+						var iElemTop = $(oDTP.oData.oInputElement).offset().top + $(oDTP.oData.oInputElement).outerHeight(),
+						iElemLeft = $(oDTP.oData.oInputElement).offset().left,
+						iElemWidth =  $(oDTP.oData.oInputElement).outerWidth();
+					
+						$(oDTP.element).css({position: "absolute", top: iElemTop, left: iElemLeft, width: iElemWidth, height: "auto"});
+					}
+				}
+			}
+		},
+	
+		_compareDates: function(dDate1, dDate2)
+		{
+			dDate1 = new Date(dDate1.getDate(), dDate1.getMonth(), dDate1.getFullYear(), 0, 0, 0, 0);
+			var iDateDiff = (dDate1.getTime() - dDate2.getTime()) / 864E5;
+			return (iDateDiff === 0) ? iDateDiff: (iDateDiff/Math.abs(iDateDiff));
+		},
+	
+		_compareTime: function(dTime1, dTime2)
+		{
+			var iTimeMatch = 0;
+			if((dTime1.getHours() === dTime2.getHours()) && (dTime1.getMinutes() === dTime2.getMinutes()))
+				iTimeMatch = 1;  	// 1 = Exact Match
+			else
+			{
+				if(dTime1.getHours() < dTime2.getHours())
+					iTimeMatch = 2;	 // time1 < time2
+				else if(dTime1.getHours() > dTime2.getHours())
+					iTimeMatch = 3; 	// time1 > time2
+				else if(dTime1.getHours() === dTime2.getHours())
+				{
+					if(dTime1.getMinutes() < dTime2.getMinutes())
+						iTimeMatch = 2;	 // time1 < time2
+					else if(dTime1.getMinutes() > dTime2.getMinutes())
+						iTimeMatch = 3; 	// time1 > time2
+				}
+			}
+			return iTimeMatch;
+		},
+	
+		_compareDateTime: function(dDate1, dDate2)
+		{
+			var iDateTimeDiff = (dDate1.getTime() - dDate2.getTime()) / 6E4;
+			return (iDateTimeDiff === 0) ? iDateTimeDiff: (iDateTimeDiff/Math.abs(iDateTimeDiff));
+		},
+
+		_determineMeridiemFromHourAndMinutes: function(iHour, iMinutes)
+		{
+			if(iHour > 12 || (iHour === 12 && iMinutes >= 0)) 
+			{
+				return "PM";
+			}
+			else 
+			{
+				return "AM";
+			}
+		},
+
+		// Public Method
+		setLanguage: function(sLanguage)
+		{
+			var oDTP = this;
+
+			oDTP.settings = $.extend({}, $.DateTimePicker.defaults, $.DateTimePicker.i18n[sLanguage], oDTP.options);
+			oDTP.settings.language = sLanguage;
+
+			oDTP._setDateFormatArray(); // Set DateFormatArray
+			oDTP._setTimeFormatArray(); // Set TimeFormatArray
+			oDTP._setDateTimeFormatArray(); // Set DateTimeFormatArray
+		
+			return oDTP;
+		}
+
+	};
+	
+}));
+
 
 /**
  * Created by mrashid on 12/15/2017.

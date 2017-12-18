@@ -60,5 +60,8 @@
      // })
 
 
+     // initialize with defaults
+     $('#profilePhoto').fileinput();
+
  });
 
