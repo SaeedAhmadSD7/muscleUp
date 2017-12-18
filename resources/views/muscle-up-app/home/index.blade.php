@@ -1,12 +1,6 @@
 @extends('layouts.frontend-main')
 @section('title','MuscleUP')
 
-@section('style-sheet')
-    <link href="{{url('/assets/plugins/revolution-slider/css/revolution-slider.css')}}" rel="stylesheet">
-    <link href="{{url('/assets/plugins/owl-carousel-2.2.1/css/owl.carousel.css')}}" rel="stylesheet">
-    <link href="{{url('/assets/plugins/hover-2.1.1/css/hover.css')}}" rel="stylesheet">
-@stop
-
 @section('content')
 
     <!-- Main Slider -->
@@ -16,8 +10,8 @@
             <div class="tp-banner" >
                 <ul>
 
-                    <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="{{url('/assets/images/main-slider/bg-one.jpg')}}"  data-saveperformance="off"  data-title="We Serve Quality"> <!-- MAIN IMAGE -->
-                        <img src="{{url('/assets/images/main-slider/bg-one.jpg')}}"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="{{url('/resources/app/images/bg-one.jpg')}}"  data-saveperformance="off"  data-title="We Serve Quality"> <!-- MAIN IMAGE -->
+                        <img src="{{url('/resources/app/images/bg-one.jpg')}}"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
 
                         <div class="tp-caption lfb tp-resizeme"
                              data-x="left" data-hoffset="500"
@@ -76,10 +70,10 @@
 
                     </li>
 
-                    <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="{{url('/assets/images/main-slider/bg-two.jpg')}}"  data-saveperformance="off"  data-title="We Serve Quality">
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="{{url('/resources/app/images/bg-two.jpg')}}"  data-saveperformance="off"  data-title="We Serve Quality">
 
                         <!-- MAIN IMAGE -->
-                        <img src="{{url('/assets/images/main-slider/bg-two.jpg')}}"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                        <img src="{{url('/resources/app/images/bg-two.jpg')}}"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
                         <div class="tp-caption lfl tp-resizeme"
                              data-x="center" data-hoffset="0"
                              data-y="center" data-voffset="-100"
@@ -135,8 +129,8 @@
 
                     </li>
 
-                    <li data-transition="slidedown" data-slotamount="1" data-masterspeed="1000" data-thumb="{{url('/assets/images/main-slider/bg-three.jpg')}}"  data-saveperformance="off"  data-title="We Serve Quality"> <!-- MAIN IMAGE -->
-                        <img src="{{url('/assets/images/main-slider/bg-three.jpg')}}"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                    <li data-transition="slidedown" data-slotamount="1" data-masterspeed="1000" data-thumb="{{url('/resources/app/images/bg-three.jpg')}}"  data-saveperformance="off"  data-title="We Serve Quality"> <!-- MAIN IMAGE -->
+                        <img src="{{url('/resources/app/images/bg-three.jpg')}}"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
 
                         <div class="tp-caption lfb stb tp-resizeme"
                              data-x="left" data-hoffset="242"
@@ -233,7 +227,7 @@
                 <!-- Style Two -->
                 <article class="col-md-4 col-sm-6 col-xs-12">
                     <div class="post style-two wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
-                        <img src="{{url('/assets/images/resource/image-1.png')}}" alt="">
+                        <img src="{{url('/resources/app/images/image-1.png')}}" alt="">
                         <div class="title-box">
                             <h2 class="clearfix">
                                 <span class="pull-left"><span class="med-text">INDOOR </span><br><span class="small-text">CARDIO WORKOUTS</span></span>
@@ -248,7 +242,7 @@
                 <!-- Style Three -->
                 <article class="col-md-4 col-sm-12 col-xs-12">
                     <div class="post style-three wow fadeInRight" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
-                        <img src="{{url('/assets/images/resource/image-2.png')}}" alt="">
+                        <img src="{{url('/resources/app/images/image-2.png')}}" alt="">
                         <div class="post-cont">
                             <div class="post-text">
                                 <div><span class="med-text">PERSONAL</span><br><span class="small-text">TRAINING</span></div>
@@ -281,7 +275,7 @@
                     </div>
 
                     <figure class="image-box">
-                        <div class="image-layer" style="background-image:url(/assets/images/resource/image-11.jpg);"></div>
+                        <div class="image-layer" style="background-image:url({{url('/resources/app/images/image-11.jpg')}});"></div>
                         <div class="text-layer">
                             <ul class="text">
                                 <li>Jenna Jameson</li>
@@ -307,7 +301,7 @@
                     </div>
 
                     <figure class="image-box">
-                        <div class="image-layer" style="background-image:url(/assets/images/resource/image-12.jpg);"></div>
+                        <div class="image-layer" style="background-image:url({{url('/resources/app/images/image-12.jpg')}});"></div>
                         <div class="text-layer">
                             <ul class="text">
                                 <li>Liza Boye</li>
@@ -333,7 +327,7 @@
                     </div>
 
                     <figure class="image-box">
-                        <div class="image-layer" style="background-image:url(/assets/images/resource/image-11.jpg);"></div>
+                        <div class="image-layer" style="background-image:url({{url('/resources/app/images/image-11.jpg')}});"></div>
                         <div class="text-layer">
                             <ul class="text">
                                 <li>Jenna Jameson</li>
@@ -359,7 +353,7 @@
                     </div>
 
                     <figure class="image-box">
-                        <div class="image-layer" style="background:url(/assets/images/resource/image-12.jpg);"></div>
+                        <div class="image-layer" style="background:url({{url('/resources/app/images/image-12.jpg')}});"></div>
                         <div class="text-layer">
                             <ul class="text">
                                 <li>Liza Boye</li>
@@ -432,7 +426,7 @@
 
 
 
-    <section class="fact-counter" style="background-image:url(/assets/images/background/fact-counter-bg.jpg);">
+    <section class="fact-counter" style="background-image:url({{url('/resources/app/images/fact-counter-bg.jpg')}});">
         <div class="auto-container">
             <div class="sec-title">
                 <h3>WHAT YOU CAN REACH WITH US</h3>
@@ -510,7 +504,7 @@
                         <div class="sec-text clearfix">
                             <p>As a member you can also access our pool and tennis courts for free and have priority for booking any of the pre-book activities, classes or sessions that we run. If you don’t want to commit to being a member you can still use all of our facilities but you will need to have an induction session before using the facilities to ensure that Health and Safety requirements are met – you don’t want to injure yourself on your first visit and ruin all your good intentions!</p>
                         </div>
-                        <img class="img-responsive" src="{{url('/assets/images/resource/image-14.jpg')}}" alt="" title="">
+                        <img class="img-responsive" src="{{url('/resources/app/images/image-14.jpg')}}" alt="" title="">
 
                     </div>
 
@@ -590,9 +584,9 @@
         <!--Image Scroller-->
         <div class="image-scroller-container">
             <ul class="image-scroller">
-                <li class="slide-item"><span class="image" style="background-image:url(/assets/images/resource/scroller-image-4.png);"></span></li>
-                <li class="slide-item"><span class="image" style="background-image:url(/assets/images/resource/scroller-image-5.png);"></span></li>
-                <li class="slide-item"><span class="image" style="background-image:url(/assets/images/resource/scroller-image-6.png);"></span></li>
+                <li class="slide-item"><span class="image" style="background-image:url({{url('/resources/app/images/scroller-image-4.png')}});"></span></li>
+                <li class="slide-item"><span class="image" style="background-image:url({{url('/resources/app/images/scroller-image-5.png')}});"></span></li>
+                <li class="slide-item"><span class="image" style="background-image:url({{url('/resources/app/images/scroller-image-6.png')}});"></span></li>
             </ul>
         </div>
 
@@ -600,12 +594,3 @@
 
 
 @endsection
-
-@section('script')
-    <script src="{{url('/assets/plugins/revolution-slider/js/revolution.min.js')}}"></script>
-    <script src="{{url('/assets/plugins/bxslider-4.2.12/js/jquery.bxslider.js')}}"></script>
-    <script src="{{url('/assets/plugins/jquery-appear-0.1/js/jquery.appear.js')}}"></script>
-    <script src="{{url('/assets/plugins/jquery-knob-1.2.13/js/jquery.knob.js')}}"></script>
-    <script src="{{url('/assets/js/index-script.js')}}"></script>
-
-@stop

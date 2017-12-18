@@ -1,12 +1,12 @@
 <!-- Preloader -->
-<div class="preloader"><div class="svg-icon-loader"><img alt="" src="{{url('/assets/preloader/bars.svg')}}" width="40"></div></div>
+<div class="preloader"><div class="svg-icon-loader"><img alt="" src="{{url('/resources/app/fonts/bars.svg')}}" width="40"></div></div>
 
 
 <header class="main-header">
     <div class="auto-container clearfix">
 
         <!-- Logo -->
-        <div class="logo"><a href="{{route('home-page')}}"><img src="{{url('assets/images/logo.png')}}" alt="Logo" title="MuscleUP"></a></div>
+        <div class="logo"><a href="{{route('home-page')}}"><img src="{{url('/resources/app/images/logo.png')}}" alt="Logo" title="MuscleUP"></a></div>
 
         <!-- Main Menu -->
         <nav class="main-menu">

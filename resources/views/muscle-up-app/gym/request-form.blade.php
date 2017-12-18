@@ -2,10 +2,7 @@
 
 @section('title','Gym Request')
 
-@section('style-sheet')
-    <link href="{{url('/assets/plugins/select2/css/select2.css')}}" rel="stylesheet">
-    <link href="{{url('/assets/plugins/select2/css/select2-bootstrap.css')}}" rel="stylesheet">
-@stop
+
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger" role="alert">
@@ -26,7 +23,8 @@
 
                 <div class="t-reg-form">
                     <div class="t-reg-top">
-                        <h2><span class="space"></span>Gym Request Form</h2>
+                        <h2><span class="space"></span>Request For Account</h2>
+                        <hr class="mT0" />
                         <h3><span class="space"></span> Please fill in all the information and click Submit Request</h3>
                     </div>
 
@@ -72,6 +70,7 @@
 
                             <div class="text-right col-md-12">
                                 <button type="submit"><span class="fa fa-angle-right"></span> Submit Request</button>
+                                <button type="button" onclick="goTo({{route('home')}})"><span class="fa fa-angle-right"></span> Cancel </button>
                             </div>
                         </form>
                     </div>
@@ -83,7 +82,5 @@
 @stop
 
 @section('script')
-    <script src="{{url('/assets/plugins/select2/js/select2.full.js')}}"></script>
-    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/request-gym.js')}}"></script>
+    <script src="{{url('/resources/app/pages/js/request-gym.js')}}"></script>
 @stop

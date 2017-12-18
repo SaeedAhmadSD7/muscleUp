@@ -52,13 +52,13 @@
                            title="Lockscreen page example"><i class="glyph-icon icon-linecons-lock"></i></a>
                         <div class="user-account-btn dropdown">
                             <a class="user-profile clearfix" data-toggle="dropdown" href="#" title="My Account"><img
-                                        alt="Profile image" src="{{url('/admin-assets/image-resources/gravatar.jpg')}}"
+                                        alt="Profile image" src="{{url('/resources/app/images/gravatar.jpg')}}"
                                         width="28"> <span>Michael Lee</span> <i class="glyph-icon icon-angle-down"></i></a>
                             <div class="dropdown-menu float-right">
                                 <div class="box-sm">
                                     <div class="login-box clearfix">
                                         <div class="user-img"><a class="change-img" href="#" title="">Change photo</a>
-                                            <img alt="" src="{{url('/admin-assets/image-resources/gravatar.jpg')}}">
+                                            <img alt="" src="{{url('/resources/app/images/gravatar.jpg')}}">
                                         </div>
                                         <div class="user-info">
                                             <span>Michael Lee <i>UX/UI developer</i></span> <a href="#"
@@ -372,49 +372,49 @@
                             <div class="content-box-wrapper text-center clearfix">
                                 <div class="status-badge mrg10A">
                                     <img alt="" class="img-circle"
-                                         src="{{url('/admin-assets/image-resources/people/testimonial1.jpg')}}"
+                                         src="{{url('/resources/app/images/people/testimonial1.jpg')}}"
                                          width="40">
                                     <div class="small-badge bg-red"></div>
                                 </div>
                                 <div class="status-badge mrg10A">
                                     <img alt="" class="img-circle"
-                                         src="{{url('/admin-assets/image-resources/people/testimonial2.jpg')}}"
+                                         src="{{url('/resources/app/images/people/testimonial2.jpg')}}"
                                          width="40">
                                     <div class="small-badge bg-orange"></div>
                                 </div>
                                 <div class="status-badge mrg10A">
                                     <img alt="" class="img-circle"
-                                         src="{{url('/admin-assets/image-resources/people/testimonial3.jpg')}}"
+                                         src="{{url('/resources/app/images/people/testimonial3.jpg')}}"
                                          width="40">
                                     <div class="small-badge bg-red"></div>
                                 </div>
                                 <div class="status-badge mrg10A">
                                     <img alt="" class="img-circle"
-                                         src="{{url('/admin-assets/image-resources/people/testimonial4.jpg')}}"
+                                         src="{{url('/resources/app/images/people/testimonial4.jpg')}}"
                                          width="40">
                                     <div class="small-badge bg-green"></div>
                                 </div>
                                 <div class="status-badge mrg10A">
                                     <img alt="" class="img-circle"
-                                         src="{{url('/admin-assets/image-resources/people/testimonial5.jpg')}}"
+                                         src="{{url('/resources/app/images/people/testimonial5.jpg')}}"
                                          width="40">
                                     <div class="small-badge bg-orange"></div>
                                 </div>
                                 <div class="status-badge mrg10A">
                                     <img alt="" class="img-circle"
-                                         src="{{url('/admin-assets/image-resources/people/testimonial6.jpg')}}"
+                                         src="{{url('/resources/app/images/people/testimonial6.jpg')}}"
                                          width="40">
                                     <div class="small-badge bg-red"></div>
                                 </div>
                                 <div class="status-badge mrg10A">
                                     <img alt="" class="img-circle"
-                                         src="{{url('/admin-assets/image-resources/people/testimonial7.jpg')}}"
+                                         src="{{url('/resources/app/images/people/testimonial7.jpg')}}"
                                          width="40">
                                     <div class="small-badge bg-green"></div>
                                 </div>
                                 <div class="status-badge mrg10A">
                                     <img alt="" class="img-circle"
-                                         src="{{url('/admin-assets/image-resources/people/testimonial8.jpg')}}"
+                                         src="{{url('/resources/app/images/people/testimonial8.jpg')}}"
                                          width="40">
                                     <div class="small-badge bg-orange"></div>
                                 </div>

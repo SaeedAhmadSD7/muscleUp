@@ -1,45 +1,45 @@
 @extends('muscle-up-app.admin.dashboard.admin-dashboard')
-
+<?php /*
 @section('style-sheet')
-    <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/page-transitions.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/material/ripple.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/images.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/info-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/invoice.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/loading-indicators.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/menus.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/panel-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/response-messages.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/responsive-tables.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/ribbon.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/social-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/tile-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/timeline.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/icons/spinnericon/spinnericon.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/accordion-ui/accordion.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/calendar/calendar.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/carousel/carousel.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/charts/justgage/justgage.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/charts/morris/morris.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/charts/piegage/piegage.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/charts/xcharts/xcharts.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/chosen/chosen.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/colorpicker/colorpicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/datatable/datatable.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/datepicker/datepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/datepicker-ui/datepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/daterangepicker/daterangepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/dialog/dialog.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/dropzone/dropzone.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/file-input/fileinput.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/input-switch/inputswitch.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/input-switch/inputswitch-alt.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/ionrangeslider/ionrangeslider.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/jcrop/jcrop.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/widgets/jgrowl-notifications/jgrowl.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/widgets/loading-bar/loadingbar.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/widgets/maps/vector-maps/vectormaps.css')}}" rel="stylesheet" type="text/css">
@@ -70,7 +70,7 @@
     <link href="{{url('/admin-assets/themes/components/default.css')}}" rel="stylesheet" type="text/css">
     <link href="{{url('/admin-assets/widgets/owlcarousel/owlcarousel.css')}}" rel="stylesheet" type="text/css">
 @stop
-
+*/?>
 @section('page-heading')
     <h2>Dashboard</h2>
     <p>The most complete user interface framework that can be used to create stunning admin dashboards and presentation websites.</p>
@@ -272,7 +272,7 @@
 
                                     <div class="thumb-overlay bg-black"></div>
                                     <img alt=""
-                                         src="{{url('/admin-assets/image-resources/stock-images/img-17.jpg')}}">
+                                         src="{{url('/resources/app/images/img-17.jpg')}}">
                                 </div>
 
                                 <div class="thumb-pane">
@@ -298,7 +298,7 @@
 
                                     <div class="thumb-overlay bg-black"></div>
                                     <img alt=""
-                                         src="{{url('/admin-assets/image-resources/stock-images/img-18.jpg')}}">
+                                         src="{{url('/resources/app/images/img-18.jpg')}}">
                                 </div>
 
                                 <div class="thumb-pane">
@@ -324,7 +324,7 @@
 
                                     <div class="thumb-overlay bg-black"></div>
                                     <img alt=""
-                                         src="{{url('/admin-assets/image-resources/stock-images/img-19.jpg')}}">
+                                         src="{{url('/resources/app/images/img-19.jpg')}}">
                                 </div>
 
                                 <div class="thumb-pane">
@@ -350,7 +350,7 @@
 
                                     <div class="thumb-overlay bg-black"></div>
                                     <img alt=""
-                                         src="{{url('/admin-assets/image-resources/stock-images/img-20.jpg')}}">
+                                         src="{{url('/resources/app/images/img-20.jpg')}}">
                                 </div>
 
                                 <div class="thumb-pane">
@@ -376,7 +376,7 @@
 
                                     <div class="thumb-overlay bg-black"></div>
                                     <img alt=""
-                                         src="{{url('/admin-assets/image-resources/stock-images/img-23.jpg')}}">
+                                         src="{{url('/resources/app/images/img-23.jpg')}}">
                                 </div>
 
                                 <div class="thumb-pane">
@@ -402,7 +402,7 @@
 
                                     <div class="thumb-overlay bg-black"></div>
                                     <img alt=""
-                                         src="{{url('/admin-assets/image-resources/stock-images/img-24.jpg')}}">
+                                         src="{{url('/resources/app/images/img-24.jpg')}}">
                                 </div>
 
                                 <div class="thumb-pane">
@@ -628,25 +628,17 @@
 
 @stop
 
+
 @section('script')
-    <script src="{{url('/admin-assets/js-core/jquery-ui-core.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js-core/jquery-ui-widget.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js-core/jquery-ui-mouse.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js-core/jquery-ui-position.js')}}" type="text/javascript"></script>
-
-    <script src="{{url('/admin-assets/widgets/skycons/skycons.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/datatable/datatable.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/datatable/datatable-bootstrap.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/datatable/datatable-tabletools.js')}}" type="text/javascript"></script>
-
+    <script src="{{ elixir('assets/js/backend-chart-app.js') }}"></script>
     <script type="text/javascript">
-        /* Datatables basic */
+        // Datatables basic
 
         $(document).ready(function () {
             $('#datatable-example').dataTable();
         });
 
-        /* Datatables hide columns */
+        // Datatables hide columns
 
         $(document).ready(function () {
             var table = $('#datatable-hide-columns').DataTable({
@@ -667,7 +659,7 @@
             });
         });
 
-        /* Datatable row highlight */
+        // Datatable row highlight
 
         $(document).ready(function () {
             var table = $('#datatable-row-highlight').DataTable();
@@ -682,34 +674,4 @@
             $('.dataTables_filter input').attr("placeholder", "Search...");
         });
     </script>
-    <script src="{{url('/admin-assets/js-core/transition.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js-core/modernizr.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js-core/jquery-cookie.js')}}" type="text/javascript"></script>
-
-
-    <script src="{{url('/admin-assets/widgets/charts/chart-js/chart-core.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/charts/chart-js/chart-doughnut.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/charts/chart-js/chart-demo-1.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/charts/flot/flot.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/charts/flot/flot-resize.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/charts/flot/flot-stack.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/charts/flot/flot-pie.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/charts/flot/flot-tooltip.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/charts/flot/flot-demo-1.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/charts/sparklines/sparklines.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/charts/sparklines/sparklines-demo.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/owlcarousel/owlcarousel.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/owlcarousel/owlcarousel-demo.js')}}" type="text/javascript"></script>
-
-    <script src="{{url('/admin-assets/widgets/progressbar/progressbar.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/input-switch/inputswitch-alt.js')}}" type="text/javascript"></script>
-    {{--<script src="{{url('/admin-assets/widgets/slidebars/slidebars.js')}}" type="text/javascript"></script>--}}
-    {{--<script src="{{url('/admin-assets/widgets/slidebars/slidebars-demo.js')}}" type="text/javascript"></script>--}}
-    <script src="{{url('/admin-assets/widgets/charts/piegage/piegage.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/charts/piegage/piegage-demo.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/screenfull/screenfull.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/material/material.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/material/ripples.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/overlay/overlay.js')}}" type="text/javascript"></script>
 @stop

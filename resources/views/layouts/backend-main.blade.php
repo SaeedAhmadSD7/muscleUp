@@ -9,12 +9,12 @@
     <title>@yield('title')</title>
 
     <style>#loading .svg-icon-loader {position: absolute;top: 50%;left: 50%;margin: -50px 0 0 -50px;}</style>
-    @include('includes.backend._stylesheet')
+    <link rel="stylesheet" href="{{ elixir('dist/css/backend-app.css') }}">
     @yield('style-sheet')
 </head>
 <body>
 <div id="loading">
-    <div class="svg-icon-loader"><img alt="" src="{{url('/assets/preloader/bars.svg')}}" width="40"></div>
+    <div class="svg-icon-loader"><img alt="" src="{{url('/resources/app/fonts/bars.svg')}}" width="40"></div>
 </div>
 <div id="sb-site">
     <div id="page-wrapper">
@@ -31,13 +31,13 @@
                         <div id="header-nav-left">
                             <div class="user-account-btn dropdown">
                                 <a class="user-profile clearfix" data-toggle="dropdown" href="#" title="My Account">
-                                    <img alt="Profile image" src="{{url('/admin-assets/image-resources/gravatar.jpg')}}" width="28">
+                                    <img alt="Profile image" src="{{url('/resources/app/images/gravatar.jpg')}}" width="28">
                                     <span>@yield('user-name')</span> <i class="glyph-icon icon-angle-down"></i></a>
                                 <div class="dropdown-menu float-right">
                                     <div class="box-sm">
                                         <div class="login-box clearfix">
                                             <div class="user-img"><a class="change-img" href="#" title="">Change photo</a>
-                                                <img alt="" src="{{url('/admin-assets/image-resources/gravatar.jpg')}}">
+                                                <img alt="" src="{{url('/resources/app/images/gravatar.jpg')}}">
                                             </div>
                                             <div class="user-info">
                                                 <span>@yield('user-name')</span> <a href="#" title="Edit profile">Edit profile</a>
@@ -62,7 +62,7 @@
 </body>
 
 <footer>
-    @include('includes.backend._script')
+    <script src="{{ elixir('dist/js/backend-app.js') }}"></script>
     <script type="text/javascript">$(window).load(function(){setTimeout(function() {$('#loading').fadeOut( 400, "linear" );}, 300);});</script>
     @yield('script')
 </footer>

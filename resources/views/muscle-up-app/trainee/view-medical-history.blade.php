@@ -27,7 +27,7 @@
                     <ul class="chat-box">
                         <li>
                             <div class="status-badge">
-                                <img alt="" class="img-circle" src="/admin-assets/image-resources/people/testimonial1.jpg" width="40">
+                                <img alt="" class="img-circle" src="/resources/app/images/people/testimonial1.jpg" width="40">
 
                                 <div class="small-badge bg-green">
                                 </div>
@@ -41,7 +41,7 @@
 
                         <li>
                             <div class="status-badge">
-                                <img alt="" class="img-circle" src="/admin-assets/image-resources/people/testimonial2.jpg" width="40">
+                                <img alt="" class="img-circle" src="/resources/app/images/people/testimonial2.jpg" width="40">
 
                                 <div class="small-badge bg-green">
                                 </div>
@@ -55,7 +55,7 @@
 
                         <li>
                             <div class="status-badge">
-                                <img alt="" class="img-circle" src="/admin-assets/image-resources/people/testimonial3.jpg" width="40">
+                                <img alt="" class="img-circle" src="/resources/app/images/people/testimonial3.jpg" width="40">
 
                                 <div class="small-badge bg-green">
                                 </div>
@@ -69,7 +69,7 @@
 
                         <li>
                             <div class="status-badge">
-                                <img alt="" class="img-circle" src="/admin-assets/image-resources/people/testimonial4.jpg" width="40">
+                                <img alt="" class="img-circle" src="/resources/app/images/people/testimonial4.jpg" width="40">
 
                                 <div class="small-badge bg-green">
                                 </div>
@@ -83,7 +83,7 @@
 
                         <li>
                             <div class="status-badge">
-                                <img alt="" class="img-circle" src="/admin-assets/image-resources/people/testimonial5.jpg" width="40">
+                                <img alt="" class="img-circle" src="/resources/app/images/people/testimonial5.jpg" width="40">
 
                                 <div class="small-badge bg-green">
                                 </div>
@@ -104,7 +104,7 @@
                     <ul class="chat-box">
                         <li>
                             <div class="status-badge">
-                                <img alt="" class="img-circle" src="/admin-assets/image-resources/people/testimonial6.jpg" width="40">
+                                <img alt="" class="img-circle" src="/resources/app/images/people/testimonial6.jpg" width="40">
 
                                 <div class="small-badge bg-orange">
                                 </div>
@@ -118,7 +118,7 @@
 
                         <li>
                             <div class="status-badge">
-                                <img alt="" class="img-circle" src="/admin-assets/image-resources/people/testimonial7.jpg" width="40">
+                                <img alt="" class="img-circle" src="/resources/app/images/people/testimonial7.jpg" width="40">
 
                                 <div class="small-badge bg-orange">
                                 </div>
@@ -132,7 +132,7 @@
 
                         <li>
                             <div class="status-badge">
-                                <img alt="" class="img-circle" src="/admin-assets/image-resources/people/testimonial8.jpg" width="40">
+                                <img alt="" class="img-circle" src="/resources/app/images/people/testimonial8.jpg" width="40">
 
                                 <div class="small-badge bg-orange">
                                 </div>
@@ -153,7 +153,7 @@
                     <ul class="chat-box">
                         <li>
                             <div class="status-badge">
-                                <img alt="" class="img-circle" src="/admin-assets/image-resources/people/testimonial1.jpg" width="40">
+                                <img alt="" class="img-circle" src="/resources/app/images/people/testimonial1.jpg" width="40">
 
                                 <div class="small-badge bg-red">
                                 </div>
@@ -167,7 +167,7 @@
 
                         <li>
                             <div class="status-badge">
-                                <img alt="" class="img-circle" src="/admin-assets/image-resources/people/testimonial2.jpg" width="40">
+                                <img alt="" class="img-circle" src="/resources/app/images/people/testimonial2.jpg" width="40">
 
                                 <div class="small-badge bg-red">
                                 </div>
@@ -992,12 +992,12 @@
                             <a class="header-btn" href="../admin/New%20folder/lockscreen-3.html" id="logout-btn" title="Lockscreen page example"><i class="glyph-icon icon-linecons-lock"></i></a>
 
                             <div class="user-account-btn dropdown">
-                                <a class="user-profile clearfix" data-toggle="dropdown" href="#" title="My Account"><img alt="Profile image" src="/admin-assets/image-resources/gravatar.jpg" width="28"> <span>Michael Lee</span> <i class="glyph-icon icon-angle-down"></i></a>
+                                <a class="user-profile clearfix" data-toggle="dropdown" href="#" title="My Account"><img alt="Profile image" src="/resources/app/images/gravatar.jpg" width="28"> <span>Michael Lee</span> <i class="glyph-icon icon-angle-down"></i></a>
 
                                 <div class="dropdown-menu float-right">
                                     <div class="box-sm">
                                         <div class="login-box clearfix">
-                                            <div class="user-img"><a class="change-img" href="#" title="">Change photo</a> <img alt="" src="/admin-assets/image-resources/gravatar.jpg"></div>
+                                            <div class="user-img"><a class="change-img" href="#" title="">Change photo</a> <img alt="" src="/resources/app/images/gravatar.jpg"></div>
 
 
                                             <div class="user-info">
