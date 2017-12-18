@@ -1,6 +1,6 @@
 @extends('muscle-up-app.gym.dashboard.gym-dashboard')
 
-@section('title','Branch User')
+@section('title','branch')
 
 @section('style-sheet')
     <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">

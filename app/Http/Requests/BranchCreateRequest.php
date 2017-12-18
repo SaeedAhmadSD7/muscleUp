@@ -31,7 +31,7 @@ class BranchCreateRequest extends FormRequest
     public function messages()
     {
         return [
-            'branch_name.required' => 'Please enter "Branch Name"',
+            'branch_name.required' => 'Please enter "branch Name"',
             'admin_name.required' => 'Please enter "Admin Name"',
             'admin_email.required' => 'Please enter Admin "Email" to login',
         ];

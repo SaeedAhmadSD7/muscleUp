@@ -1,6 +1,6 @@
 @extends('layouts.frontend-main')
 
-@section('title','Delete Branch')
+@section('title','branch')
 
 @section('content')
     <div class="container-fluid" style="margin: 0; padding: 0;">

@@ -21,20 +21,20 @@ class GymController extends Controller
 {
 
     public function dashboard() {
-        return view('muscle-up-app.gym.index');
+        return view('muscle-up-app.gym.dashboard');
     }
 
     public function index() {
         $gyms=Gym::showAll();
 //        dd($gyms);
-        return view('muscle-up-app.company.index', compact('gyms'));
+        return view('muscle-up-app.gym.index', compact('gyms'));
     }
 
     public function create(){
 
         $company = Null;
 
-        return view('muscle-up-app.company.create', compact('company'));
+        return view('muscle-up-app.gym.create', compact('company'));
     }
 
     public function store(CompanyCreateRequest $request){

@@ -1,19 +1,13 @@
 @extends('muscle-up-app.admin.dashboard.admin-dashboard')
 
-@section('title','Add Branch')
+@section('title','branch')
 
-@section('style-sheet')
-    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
+@section('page-heading')
 
+    <h2>ADD New Branch</h2>
+    <p>Please fill in all the information and then click on Add Company.</p>
 @stop
-
 @section('content')
-    <div id="page-title">
-
-        <h2>ADD New Branch</h2>
-        <p>Please fill in all the information and then click on Add Company.</p>
-    </div>
     <div id="errors">
         @if (count($errors) > 0)
             <div class="alert alert-danger">

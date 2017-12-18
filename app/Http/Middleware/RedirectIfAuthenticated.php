@@ -17,17 +17,18 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check() && Auth::user()->type == 'amdin') {
-            return redirect('admin/dashboard');
+        if (Auth::guard($guard)->check() && Auth::user()->type == 'admin') {
+            return redirect()->route('admin-dashboard');
         }
         else if (Auth::guard($guard)->check() && Auth::user()->type == 'gym') {
-            return redirect('gym/dashboard');
+            dd('this');
+            return redirect()->route('gym-dashboard');
         }
         else if (Auth::guard($guard)->check() && Auth::user()->type == 'trainee') {
-            return redirect('trainee/dashboard');
+            return redirect()->route('trainee-dashboard');
         }
         else if (Auth::guard($guard)->check() && Auth::user()->type == 'employee') {
-            return redirect('employee/dashboard');
+            return redirect()->route('employee-dashboard');
         }
 
         return $next($request);

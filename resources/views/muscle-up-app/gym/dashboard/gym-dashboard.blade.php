@@ -47,7 +47,7 @@
         <div class="sidebar-submenu">
             <ul>
                 <li>
-{{--                    <a href="{{route('branch')}}" title="Inbox"><span>Make Branch</span></a>--}}
+{{--                    <a href="{{route('branch')}}" title="Inbox"><span>Make branch</span></a>--}}
                     <a href="{{route('branch.create')}}" title="Create a New Branch"><span>Create</span></a>
                 </li>
                 <li>

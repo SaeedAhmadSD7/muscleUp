@@ -34,7 +34,7 @@ class BranchController extends Controller
     public function index() {
         $gyms=Branch::all();
 //        dd($gyms->gym->title);
-        return view('muscle-up-app.Branch.index', compact('gyms'));
+        return view('muscle-up-app.branch.index', compact('gyms'));
     }
 
 
@@ -92,7 +92,7 @@ class BranchController extends Controller
 //    public function store(Request $request)
 //    {
 ////        dd($request);
-//        $branch = new Branch();
+//        $branch = new branch();
 //        $branch->branch_no = $request->branch_no;
 //        $branch->email = $request->email;
 //        $branch->phone_no = $request->phone_no;

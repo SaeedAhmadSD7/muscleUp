@@ -8,14 +8,14 @@
 @stop
 
 @section('dashboard_link')
-    {{route('admin-dashboard')}}
+    {{route('adminDashboard')}}
 @stop
 @section('user_type')
     Admin
 @stop
 
 @section('dashboard_link')
-    {{route('admin-dashboard')}}
+    {{route('adminDashboard')}}
 @stop
 
 @section('sidebar_content')

@@ -78,7 +78,7 @@ Route::group(['Public', 'namespace'=>'MuscleUpApp'],function () {
 
             $path = resource_path('/assets/common/fonts/' . $filename);
             if (!File::exists($path)) {
-                return response()->json(['message' => 'JS File not found.'], 404);
+                return response()->json(['message' => 'Font File not found.'], 404);
             }
             $file = File::get($path);
             $response = Response::make($file, 200);
@@ -132,7 +132,7 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
 
         //***AdminController
         Route::group(['Admin'],function () {
-            Route::get('dashboard',['uses'=>'AdminController@index','as'=>'admin-dashboard']);
+            Route::get('admin-dashboard',['uses'=>'AdminController@index','as'=>'adminDashboard']);
             Route::get('inbox',['as'=>'Admin-Inbox','uses'=>'AdminController@inbox']);
             Route::get('inbox/message/detail/{id}',['uses'=>'AdminController@messageDetail','as'=>'message-detail']);
             Route::get('request/process/{id}',['uses'=>'AdminController@requestProcess', 'as'=> 'process-request']);
@@ -153,7 +153,7 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
 
         //***GymController
         Route::group(['Gym'],function () {
-            Route::get('dashboard',['uses'=>'GymController@index','as'=>'gym-dashboard']);
+            Route::get('gym-dashboard',['uses'=>'GymController@index','as'=>'gymDashboard']);
         });
 
         //***EmployeeController
@@ -170,9 +170,6 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
         //***BranchController
         Route::group(['Branch'],function () {
             Route::resource('branch',"BranchController");
-            Route::get('/branch',['as'=>'branch','uses'=>'GymController@create_branch']);
-            Route::get('/branch/user',['as'=>'branch-user','uses'=>'GymController@create_branch_user']);
-
         });
 
         //***TraineeController
@@ -199,7 +196,7 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
 
         //***EmployeeController
         Route::group(['Employee'],function () {
-            Route::get('dashboard',['uses'=>'EmployeeController@index','as'=>'employee-dashboard']);
+            Route::get('employee-dashboard',['uses'=>'EmployeeController@index','as'=>'employeeDashboard']);
         });
 
         //***DietProgramController
@@ -261,7 +258,7 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
         //***TraineeController
         Route::group(['Trainee'],function () {
 
-            Route::get('dashboard',['uses'=>'TraineeController@index','as'=>'trainee-dashboard']);
+            Route::get('trainee-dashboard',['uses'=>'TraineeController@index','as'=>'traineeDashboard']);
             Route::get('trainee/profile/',['as'=>'trainee-profile','uses'=>'TraineeController@view_profile']);
             Route::get('/trainee/personal/detail/{id}',['as'=>'trainee-personal-detail','uses'=>'TraineeController@show']);
             Route::get('/trainee/personal/detail/edit/{id}',['as'=>'trainee-personal-detail-edit','uses'=>'TraineeController@edit']);

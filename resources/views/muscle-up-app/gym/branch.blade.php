@@ -1,6 +1,6 @@
 @extends('layouts.backend-main')
 
-@section('title','Add Branch')
+@section('title','branch')
 
 @section('content')
     <div class="panel">

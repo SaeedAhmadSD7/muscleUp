@@ -35,16 +35,16 @@ class LoginController extends Controller
     protected function authenticated($user,$request)
     {
         if($request->type=== 'admin') {
-            return redirect()->intended('/admin/dashboard');
+            return redirect()->intended(route('adminDashboard'));
         }
         else if($request->type=== 'gym') {
-            return redirect()->intended('/gym/dashboard');
+            return redirect()->intended(route('gymDashboard'));
         }
         else if($request->type=== 'trainee') {
-            return redirect()->intended('/trainee/dashboard');
+            return redirect()->intended(route('traineeDashboard'));
         }
         else if($request->type=== 'employee') {
-            return redirect()->intended('/employee/dashboard');
+            return redirect()->intended(route('employeeDashboard'));
         }
     }
 
