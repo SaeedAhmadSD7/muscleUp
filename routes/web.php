@@ -37,8 +37,8 @@ Route::group(['prefix'=>'admin','middleware' => ['usertype:admin']],function () 
     Route::get('inbox/message/detail/{id}',['uses'=>'MuscleUpApp\AdminController@messageDetail','as'=>'message-detail']);
     Route::get('/request/process/{id}',['uses'=>'MuscleUpApp\AdminController@requestProcess', 'as'=> 'process-request']);
     Route::post('/add/gym',['uses'=>'MuscleUpApp\AdminController@addGym', 'as'=> 'add-gym']);
-    Route::get('gym/list',['as'=>'gym-list','uses'=>'MuscleUpApp\AdminController@gymList']);
-    Route::get('gym/list/delete/{id}',['as'=>'gym-list-delete','uses'=>'MuscleUpApp\AdminController@destroy']);
+//    Route::get('gym/list',['as'=>'gym-list','uses'=>'MuscleUpApp\AdminController@gymList']);
+//    Route::get('gym/list/delete/{id}',['as'=>'gym-list-delete','uses'=>'MuscleUpApp\AdminController@destroy']);
 
     Route::resource('company',"MuscleUpApp\GymController");
 
@@ -56,7 +56,7 @@ Route::group(['prefix'=>'gym','middleware' => ['auth','usertype:gym']],function 
     /***
      * Dashboard
      */
-    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@index','as'=>'gym-dashboard']);
+    Route::get('dashboard',['uses'=>'MuscleUpApp\GymController@dashboard','as'=>'gym-dashboard']);
 
 
 
@@ -98,7 +98,7 @@ Route::group(['prefix'=>'gym','middleware' => ['auth','usertype:gym']],function 
      ***/
     Route::resource('branch',"MuscleUpApp\BranchController");
 
-    Route::get('/branch',['as'=>'branch','uses'=>'MuscleUpApp\GymController@create_branch']);
+//    Route::get('/branch',['as'=>'branch','uses'=>'MuscleUpApp\GymController@create_branch']);
     Route::get('/branch/user',['as'=>'branch-user','uses'=>'MuscleUpApp\GymController@create_branch_user']);
 
 

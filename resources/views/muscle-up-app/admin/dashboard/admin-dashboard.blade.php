@@ -35,7 +35,7 @@
         <div class="sidebar-submenu">
             <ul>
                 <li>
-                    <a href="{{route('gym-list')}}" title="Inbox"><span>View List</span></a>
+{{--                    <a href="{{route('gym-list')}}" title="Inbox"><span>View List</span></a>--}}
                 </li>
             </ul>
         </div>
@@ -46,6 +46,9 @@
             <ul>
                 <li>
                     <a href="{{route('company.create')}}" title="Create a New Company"><span>Create</span></a>
+                </li>
+                <li>
+                    <a href="{{route('company.index')}}" title="Create a New Company"><span>List of Companies</span></a>
                 </li>
             </ul>
         </div>

@@ -19,8 +19,15 @@ use phpDocumentor\Reflection\Types\Null_;
 
 class GymController extends Controller
 {
-    public function index() {
+
+    public function dashboard() {
         return view('muscle-up-app.gym.index');
+    }
+
+    public function index() {
+        $gyms=Gym::showAll();
+//        dd($gyms);
+        return view('muscle-up-app.company.index', compact('gyms'));
     }
 
     public function create(){
@@ -74,6 +81,15 @@ class GymController extends Controller
         dd("Success");
 
         return view('muscle-up-app.company.create');
+    }
+
+    public function destroy($id)
+    {
+        $gym = Gym::find($id);
+//        $gym->user()->whereIn('id', $id)->delete();
+        $gym->delete();
+
+        return redirect()->route('company.index');
     }
 
     public function joinRequest()
