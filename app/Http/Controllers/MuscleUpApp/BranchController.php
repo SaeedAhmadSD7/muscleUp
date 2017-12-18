@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Models\Branch;
 use App\Models\User;
+use App\Models\Gym;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BranchCreateRequest;
@@ -30,6 +31,12 @@ class BranchController extends Controller
 //    {
 //        return view('muscle-up-app.gym.branch');
 //    }
+    public function index() {
+        $gyms=Branch::all();
+//        dd($gyms->gym->title);
+        return view('muscle-up-app.Branch.index', compact('gyms'));
+    }
+
 
     public function create(){
 

@@ -39,7 +39,14 @@
                             <td class="email-body">{{$gym->email}}</td>
                             <td class="date">{{$gym->updated_at}}</td>
                             {{--<td><a href="{{route('message-detail',$gym->id)}}" class="glyph-icon icon-iconic-right-circle"></a></td>--}}
-                            <td><a href="{{route('gym-list-delete',$gym->id)}}" class="glyph-icon icon-iconic-cancel-circle"></a></td>
+{{--                            <td><a href="{{route('company.destroy',$gym->id)}}" class="glyph-icon icon-iconic-cancel-circle"></a></td>--}}
+                            <td>
+                            {!! Form::open(array('route' => array('company.destroy', $gym->id), 'method' => 'delete')) !!}
+                            <button class='btn btn-danger btn-xs' type="submit">Delete</button>
+                            {!! Form::close() !!}
+                            </td>
+
+{{--                            <td><a href="{{route('company.destroy',$gym->id)}}" class="glyph-icon icon-iconic-cancel-circle"></a></td>--}}
                         </tr>
                         <?php $counter++ ?>
                     @endforeach
