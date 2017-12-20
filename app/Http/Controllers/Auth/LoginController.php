@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use \App\Utils\Globals\UserType;
 
 class LoginController extends Controller
 {
@@ -34,16 +35,16 @@ class LoginController extends Controller
 
     protected function authenticated($user,$request)
     {
-        if($request->type=== 'admin') {
+        if($request->type=== UserType::SUPER_ADMIN) {
             return redirect()->intended(route('adminDashboard'));
         }
-        else if($request->type=== 'gym') {
+        else if($request->type=== UserType::ADMIN) {
             return redirect()->intended(route('gymDashboard'));
         }
-        else if($request->type=== 'trainee') {
+        else if($request->type=== UserType::TRAINEE) {
             return redirect()->intended(route('traineeDashboard'));
         }
-        else if($request->type=== 'employee') {
+        else if($request->type=== UserType::EMPLOYEE) {
             return redirect()->intended(route('employeeDashboard'));
         }
     }
