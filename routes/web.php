@@ -176,6 +176,8 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
         Route::group(['Trainee'],function () {
 
             Route::get('trainee/create',['as'=>'trainee-add','uses'=>'TraineeController@create']);
+            Route::post('trainee/upload-profile-pic',['as'=>'uploadProfilePic','uses'=>'TraineeController@uploadProfilePic']);
+            Route::post('trainee/remove-uploaded-profile-pic',['as'=>'removeUploadedProfilePic','uses'=>'TraineeController@removeUploadedProfilePic']);
             Route::post('trainee/store',['uses'=>'TraineeController@store','as'=>'trainee-store']);
             Route::get('trainee/list',['as'=>'trainee-list','uses'=>'TraineeController@inbox']);
             Route::get('trainee/detail/{id}',['as'=>'trainee-list-detail','uses'=>'TraineeController@trainee_detail']);

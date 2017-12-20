@@ -1,5 +1,31 @@
 /*
 ======================================
+General Styles
+======================================
+*/
+.file-caption.form-control.kv-fileinput-caption.icon-visible{
+    padding: 0px;
+}
+.input-group-btn button.btn.btn-default{
+    line-height: 31px;
+    height: 37px;
+    /* min-width: 34px; */
+    padding: 1px 12px;
+}
+
+.input-group-btn a.btn.btn-default{
+    height: 33px;
+    line-height: 31px;
+    text-decoration: none
+}
+.file-caption.icon-visible.file-caption-name{
+    padding-left: 24px;
+}
+
+
+
+/*
+======================================
 Width Styles
 ======================================
 */
@@ -40,3 +66,4 @@ Text Align Styles
 .taRi{text-align: right !important;}
 .taLi{text-align: left !important;}
 .taCi{text-align: center !important;}
+

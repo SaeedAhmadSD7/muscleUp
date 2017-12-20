@@ -50,6 +50,7 @@ elixir(function(mix) {
         // "/assets/backend/css/helpers/animate.css",
         // "/assets/backend/css/helpers/boilerplate.css",
 
+        "/assets/backend/css/bs-glyphicon.css",
         "/assets/backend/css/helpers/grid.css",
         "/assets/backend/css/helpers/utils.css",
         "/assets/backend/css/helpers/colors.css",
@@ -162,7 +163,10 @@ elixir(function(mix) {
     * */
     mix.scripts([
         "assets/frontend/js/jquery-3.2.1.js",
-        "assets/frontend/js/bootstrap.js",
+        //***Common-JS
+        "assets/common/js/bootstrap.js",
+        //***
+
         "assets/frontend/js/wow.min.js",
         "assets/frontend/js/script.js",
         "/assets/frontend/plugins/revolution-slider/js/revolution.min.js",
@@ -172,7 +176,7 @@ elixir(function(mix) {
         "/assets/frontend/js/index-script.js",
         "/assets/frontend/plugins/select2/js/select2.full.js",
         //***Common-JS
-        "/assets/frontend/js/jquery.validate.js",
+        "/assets/common/js/jquery.validate.js",
         "/assets/common/plugins/datetimepicker/js/DateTimePicker.js",
         "/assets/common/js/custom.js",
     ],
@@ -187,6 +191,9 @@ elixir(function(mix) {
      * */
     mix.scripts([
             "/assets/backend/js/js-core/jquery-core.js",
+            //***Common-JS
+            "assets/common/js/bootstrap.js",
+            //***
             "/assets/backend/js/collapse.js",
             "/assets/backend/js/superclick.js",
             "/assets/backend/js/slimscroll.js",
@@ -229,7 +236,7 @@ elixir(function(mix) {
         "/assets/backend/plugins/krajee-file-input/fileinput.js",
         //*******************************************************************************************
             //***Common-JS
-            "/assets/frontend/js/jquery.validate.js",
+            "/assets/common/js/jquery.validate.js",
             "/assets/common/plugins/datetimepicker/js/DateTimePicker.js",
             "/assets/common/js/custom.js",
         ],

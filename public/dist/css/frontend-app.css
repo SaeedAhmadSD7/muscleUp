@@ -263,8 +263,8 @@ th {
 @font-face {
   font-family: 'Glyphicons Halflings';
 
-  src: url('../../../public/assets/plugins/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.eot');
-  src: url('../../../public/assets/plugins/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../../public/assets/plugins/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../../../public/assets/plugins/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../../public/assets/plugins/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../../public/assets/plugins/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('/resources/app/fonts/glyphicons-halflings-regular.eot');
+  src: url('/resources/app/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/resources/app/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('/resources/app/fonts/glyphicons-halflings-regular.woff') format('woff'), url('/resources/app/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('/resources/app/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -25031,6 +25031,29 @@ img.tp-slider-alternative-image {
 }
 /*
 ======================================
+General Styles
+======================================
+*/
+.file-caption.form-control.kv-fileinput-caption.icon-visible{
+    padding: 0px;
+}
+.input-group-btn button.btn.btn-default{
+    line-height: 31px;
+    height: 37px;
+    /* min-width: 34px; */
+    padding: 1px 12px;
+}
+
+.input-group-btn a.btn.btn-default{
+    height: 33px;
+    line-height: 31px;
+    text-decoration: none
+}
+
+
+
+/*
+======================================
 Width Styles
 ======================================
 */
@@ -25071,4 +25094,6 @@ Text Align Styles
 .taRi{text-align: right !important;}
 .taLi{text-align: left !important;}
 .taCi{text-align: center !important;}
+
+
 /*# sourceMappingURL=frontend-app.css.map */

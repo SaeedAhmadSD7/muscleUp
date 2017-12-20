@@ -9,17 +9,11 @@
 namespace App\Utils\Globals;
 
 
-class AppGlobal
+class GlobalsConst
 {
     const RECORD_OFFSET = 0;
     const RECORD_LIMIT = 100;
 
-
-
-    public static function gymPackages(){
-        $gym_package     = \App\Models\Package::all();
-        return $gym_package;
-    }
-
+    const PROFILE_PHOTO_DIR = '/users/';
 
 }

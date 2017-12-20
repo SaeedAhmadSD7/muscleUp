@@ -1554,6 +1554,16 @@
         },
         _listenModalEvent: function (event) {
             var self = this, $modal = self.$modal, getParams = function (e) {
+                if (event === 'show') {
+                    var zIndex = 1040 + (100 * $('.modal:visible').length);
+                    $modal.css('z-index', 9999999);
+                    setTimeout(function() {
+                        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex -1 ).addClass('modal-stack');
+                    }, 0);
+                }
+                if (event === 'hidden') {
+                    $('.modal:visible').length && $(document.body).addClass('modal-open');
+                }
                 return {
                     sourceEvent: e,
                     previewId: $modal.data('previewId'),

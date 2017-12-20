@@ -16,8 +16,9 @@ class CreateFeeLogsTable extends Migration
         Schema::create('fee_logs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('gym_id');
+            $table->integer('branch_id');
             $table->integer('trainee_id');
-            $table->enum('fee_type',['yearly','quaterly','monthly']);
+            $table->enum('fee_type', ['Annually', 'SemiAnnually', 'Quarterly', 'Monthly']);
             $table->integer('amount');
             $table->dateTime('payment_date');
         });
