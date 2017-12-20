@@ -69,7 +69,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Khan',
             'dob'=>'2017-09-02',
             'phone_number'=>'+924237755487',
-            'email' => 'trainee1@example.com',
+            'email' => 'trainee@example.com',
             'password' => bcrypt('asdf1234'),
             'country'=>'Pakistan',
             'city'=>'Lahore',
@@ -130,9 +130,9 @@ class UserSeeder extends Seeder
             'branch_id' => 1,
             'user_id' => 5,
             'joining_date' => '2016-09-02',
-            'previous_salary'=>'15000',
-            'joining_salary'=>'20000',
-            'exp_years' => '5 years',
+            'previous_salary'=>15000,
+            'joining_salary'=>20000,
+            'exp_years' => 5,
             'exp_description' => 'khskd lsdsldk bimpasds hksjksdj jksdsd. shdsdhsjdh sdsd sdsd sd sd ',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -146,8 +146,8 @@ class UserSeeder extends Seeder
             'code' => 123,
             'height' => 182.88,//cm
             'joining_date' => '2016-09-02',
-            'admission_fee'=>'15000',
-            'initial_fee'=>'4000',
+            'admission_fee'=>15000,
+            'initial_fee'=>4000,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -158,8 +158,8 @@ class UserSeeder extends Seeder
             'code' => 123,
             'height' => 158.88,//cm
             'joining_date' => '2016-09-02',
-            'admission_fee'=>'1000',
-            'initial_fee'=>'3000',
+            'admission_fee'=>1000,
+            'initial_fee'=>3000,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);

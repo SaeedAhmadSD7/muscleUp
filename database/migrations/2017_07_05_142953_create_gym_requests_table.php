@@ -22,10 +22,10 @@ class CreateGymRequestsTable extends Migration
             $table->tinyInteger('num_trainees');
             $table->string('country');
             $table->string('city');
-            $table->unsignedInteger('phone_number');
+            $table->string('phone_number');
             $table->string('address',1024);
-            $table->double('latitude')->default(0.0);
-            $table->double('longitude')->default(0.0);
+            $table->decimal('latitude')->default(0.0);
+            $table->decimal('longitude')->default(0.0);
             $table->timestamps();
         });
     }

@@ -22,6 +22,7 @@ class UserType
         self::ADMIN=>self::ADMIN,
         self::EMPLOYEE=>self::EMPLOYEE,
         self::INSTRUCTOR=>self::INSTRUCTOR,
+        self::TRAINEE=>self::TRAINEE,
     ];
 
 

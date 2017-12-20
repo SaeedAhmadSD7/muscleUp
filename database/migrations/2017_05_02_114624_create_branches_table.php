@@ -23,8 +23,8 @@ class CreateBranchesTable extends Migration
             $table->string('phone_number',20)->nullable();
             $table->time('opening_time')->nullable();
             $table->time('closing_time')->nullable();
-            $table->string('latitude',20)->nullable();
-            $table->string('longitude',20)->nullable();
+            $table->decimal('latitude')->default(0.0);
+            $table->decimal('longitude')->default(0.0);
             $table->enum('is_main',['Yes','No'])->default('No');
             $table->timestamps();
         });

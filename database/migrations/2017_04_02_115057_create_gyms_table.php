@@ -24,8 +24,8 @@ class CreateGymsTable extends Migration
             $table->string('phone_number',20)->nullable();
             $table->time('opening_time')->nullable();
             $table->time('closing_time')->nullable();
-            $table->float('latitude')->nullable();
-            $table->float('longitude')->nullable();
+            $table->decimal('latitude')->default(0.0);
+            $table->decimal('longitude')->default(0.0);
             $table->timestamps();
         });
         //

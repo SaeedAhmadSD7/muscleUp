@@ -22,8 +22,8 @@ class CreateTraineesTable extends Migration
             $table->float('height')->nullable(); //height in cm
             $table->dateTime('joining_date'); //height in cm
             $table->dateTime('quit_date')->nullable(); //height in cm
-            $table->dateTime('admission_fee')->nullable(); //height in cm
-            $table->dateTime('initial_fee')->nullable(); //height in cm
+            $table->decimal('admission_fee')->nullable(); //height in cm
+            $table->decimal('initial_fee')->nullable(); //height in cm
             $table->softDeletes();
             $table->timestamps();
         });

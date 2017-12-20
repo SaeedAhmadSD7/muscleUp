@@ -6,7 +6,10 @@
  * Date: 12/20/2017
  * Time: 1:10 AM
  */
-class BranchSeeder
+use Illuminate\Database\Seeder;
+use Carbon\Carbon;
+
+class BranchSeeder extends Seeder
 {
     public function run()
     {
@@ -23,9 +26,11 @@ class BranchSeeder
                     'phone_number'=> '+924235157203',
                     'opening_time'=> '8:00',
                     'closing_time'=> '23:00',
-                    'latitude'=> '‎31.582045',
-                    'longitude'=> '74.329376',
+                    'latitude'=>21.5698,
+                    'longitude'=>74666.5698,
                     'is_main'=> 'Yes',
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     ),
                 array(
                     'gym_id' => 1,
@@ -36,9 +41,11 @@ class BranchSeeder
                     'phone_number'=> '+924235154303',
                     'opening_time'=> '8:00',
                     'closing_time'=> '23:00',
-                    'latitude'=> '‎21.582045',
-                    'longitude'=> '64.329376',
+                    'latitude'=>21.5698,
+                    'longitude'=>74666.5698,
                     'is_main'=> 'No',
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     ),
                 array(
                     'gym_id' => 1,
@@ -49,9 +56,11 @@ class BranchSeeder
                     'phone_number'=> '+924235154303',
                     'opening_time'=> '8:00',
                     'closing_time'=> '23:00',
-                    'latitude'=> '‎21.582045',
-                    'longitude'=> '64.329376',
+                    'latitude'=>21.5698,
+                    'longitude'=>74666.5698,
                     'is_main'=> 'No',
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     ),
             )
         );
