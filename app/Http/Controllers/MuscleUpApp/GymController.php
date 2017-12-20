@@ -69,8 +69,8 @@ class GymController extends Controller
 
 
         $user = new User();
-        $gym->branch_id = $branch->id;
-        $gym->gym_id = $gym->id;
+        $user->branch_id = $branch->id;
+        $user->gym_id = $gym->id;
         $user->first_name=$request->admin_name;
         $user->email = $request->admin_email;
 //        $password = str_random(8);
