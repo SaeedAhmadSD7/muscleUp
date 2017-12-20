@@ -16,7 +16,7 @@ class CreateGymsTable extends Migration
         Schema::create('gyms', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title',60);
-            $table->string('logo',40)->nullable();
+            $table->string('logo',40)->default('gym_logo_default.jpg');
             $table->string('website',40)->nullable();
             $table->string('country',60)->nullable();
             $table->string('city',60)->nullable();
