@@ -1,4 +1,4 @@
-@extends('muscle-up-app.admin.dashboard.admin-dashboard')
+@extends('muscle-up-app.admin.dashboard.super-admin-dashboard')
 
 @section('title','branch')
 

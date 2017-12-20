@@ -31,10 +31,8 @@ class User extends Authenticatable
         return $users;
     }
 
-
-
     function gym(){
-        return $this->hasOne(Gym::class);
+        return $this->belongsTo(Gym::class);
     }
 
     function trainee(){

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use \App\Utils\Globals\UserType;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -30,21 +32,24 @@ class LoginController extends Controller
     /**
      * Where to redirect users after login.
      *
-     * @var string
+     * @param Request $request
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     * @internal param string $
      */
 
-    protected function authenticated($user,$request)
+    protected function authenticated(Request $request, User $user)
     {
-        if($request->type=== UserType::SUPER_ADMIN) {
+        if($user->type=== UserType::SUPER_ADMIN) {
             return redirect()->intended(route('adminDashboard'));
         }
-        else if($request->type=== UserType::ADMIN) {
+        else if($user->type === UserType::ADMIN) {
             return redirect()->intended(route('gymDashboard'));
         }
-        else if($request->type=== UserType::TRAINEE) {
+        else if($user->type === UserType::TRAINEE) {
             return redirect()->intended(route('traineeDashboard'));
         }
-        else if($request->type=== UserType::EMPLOYEE) {
+        else if($user->type === UserType::EMPLOYEE) {
             return redirect()->intended(route('employeeDashboard'));
         }
     }

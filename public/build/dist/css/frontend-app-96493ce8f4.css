@@ -25049,8 +25049,15 @@ General Styles
     line-height: 31px;
     text-decoration: none
 }
+.file-caption.icon-visible.file-caption-name{
+    padding-left: 24px;
+}
 
-
+.alert-danger {
+    color: #c50804;
+    background-color: #ffc9c96e;
+    border-color: #ffc9c96e;
+}
 
 /*
 ======================================
@@ -25076,7 +25083,20 @@ Margin Styles
 ======================================
 */
 .mT0{margin-top: 0px;}
+.mT5{margin-top: 5px;}
+.mT10{margin-top: 10px;}
+.mT15{margin-top: 15px;}
+
+.mL0{margin-left: 0px;}
+.mL5{margin-left: 5px;}
+.mL10{margin-left: 10px;}
+.mL15{margin-left: 15px;}
+
+
 .mB0{margin-bottom: 0px;}
+.mB5{margin-bottom: 5px;}
+.mB10{margin-bottom: 10px;}
+.mB15{margin-bottom: 15px;}
 
 
 .mT0i{margin-top: 0px !important;}

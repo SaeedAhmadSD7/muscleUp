@@ -145,7 +145,7 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
 
         //***GymController
         Route::group(['Gym'],function () {
-            Route::resource('company',"GymController");
+            Route::resource('gym',"GymController");
         });
     });
 
@@ -154,7 +154,8 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
 
         //***GymController
         Route::group(['Gym'],function () {
-            Route::get('gym-dashboard',['uses'=>'GymController@index','as'=>'gymDashboard']);
+            Route::get('gyms/list',['uses'=>'GymController@index','as'=>'gymIndex']);
+            Route::get('gym-dashboard',['uses'=>'GymController@dashboard','as'=>'gymDashboard']);
         });
 
         //***EmployeeController
@@ -176,7 +177,7 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
         //***TraineeController
         Route::group(['Trainee'],function () {
 
-            Route::get('trainee/create',['as'=>'trainee-add','uses'=>'TraineeController@create']);
+            Route::get('trainee/create',['as'=>'trainee-create','uses'=>'TraineeController@create']);
             Route::post('trainee/upload-profile-pic',['as'=>'uploadProfilePic','uses'=>'TraineeController@uploadProfilePic']);
             Route::post('trainee/remove-uploaded-profile-pic',['as'=>'removeUploadedProfilePic','uses'=>'TraineeController@removeUploadedProfilePic']);
             Route::post('trainee/store',['uses'=>'TraineeController@store','as'=>'trainee-store']);

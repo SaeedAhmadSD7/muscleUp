@@ -19,6 +19,19 @@
 
                     <div class="reg-form">
                         <form class="user_login" role="form" method="POST" action="{{route('login')}}">
+
+                            @if ($errors !== null)
+                                @if ($errors->count() > 0)
+                                <div class="alert alert-danger col-md-8 col-sm-12 col-md-offset-2 mB10">
+                                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
+                            @endif
                             {{csrf_field()}}
 
                             <div class="fields clearfix">

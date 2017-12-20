@@ -21,28 +21,42 @@ use \App\Utils\Globals\UserType;
 class GymController extends Controller
 {
 
+    private $_gym;
+    private $_branch;
+
+    /**
+     * GymController constructor.
+     * @param $gym
+     * @param $branch
+     */
+    public function __construct(Gym $gym, Branch $branch)
+    {
+        $this->_gym = $gym;
+        $this->_branch = $branch;
+    }
+
+
     public function dashboard() {
         return view('muscle-up-app.gym.dashboard');
     }
 
     public function index() {
-        $gyms=Gym::showAll();
-//        dd($gyms);
+        $gyms = $this->_gym->fetchGymsRecord();
         return view('muscle-up-app.gym.index', compact('gyms'));
     }
 
     public function create(){
 
-        $company = Null;
+        $gym = Null;
 
-        return view('muscle-up-app.gym.create', compact('company'));
+        return view('muscle-up-app.gym.create', compact('gym'));
     }
 
     public function store(CompanyCreateRequest $request){
 //        dd($request->all());
 
 
-        $gym = new Gym();
+        $gym = $this->_gym;
 
         $gym->title = $request->branch_name;
 //        $gym->email = $request->branch_email;
@@ -90,7 +104,7 @@ class GymController extends Controller
 //        dd($var);
         dd("Success");
 
-        return view('muscle-up-app.company.create');
+        return view('muscle-up-app.gym.create');
     }
 
     public function destroy($id)
@@ -99,7 +113,7 @@ class GymController extends Controller
 //        $gym->user()->whereIn('id', $id)->delete();
         $gym->delete();
 
-        return redirect()->route('company.index');
+        return redirect()->route('gym.index');
     }
 
     public function joinRequest()
