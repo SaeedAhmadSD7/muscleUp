@@ -26,6 +26,7 @@ class GymController extends Controller
     }
 
     public function index() {
+//        dd('saeed');
         $gyms=Gym::showAll();
 //        dd($gyms);
         return view('muscle-up-app.gym.index', compact('gyms'));

@@ -25,7 +25,7 @@
                     <tr>
                         <th class="email-title">Serial</th>
                         <th class="email-body">Name</th>
-                        <th class="email-title">Email</th>
+                        <th class="email-title">Address</th>
                         <th>Date Added</th>
                         <th>Delete</th>
                     </tr>
@@ -36,7 +36,7 @@
                         <tr id="{{$gym->id}}">
                             <td sty>{{$counter}}</td>
                             <td class="email-title">{{$gym->title}}</td>
-                            <td class="email-body">{{$gym->email}}</td>
+                            <td class="email-body">{{$gym->address}}</td>
                             <td class="date">{{$gym->updated_at}}</td>
                             {{--<td><a href="{{route('message-detail',$gym->id)}}" class="glyph-icon icon-iconic-right-circle"></a></td>--}}
 {{--                            <td><a href="{{route('company.destroy',$gym->id)}}" class="glyph-icon icon-iconic-cancel-circle"></a></td>--}}
