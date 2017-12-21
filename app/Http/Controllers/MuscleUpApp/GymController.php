@@ -16,51 +16,56 @@ use App\Models\User;
 use App\Models\Gym;
 use App\Http\Requests\CompanyCreateRequest;
 use phpDocumentor\Reflection\Types\Null_;
+use \App\Utils\Globals\UserType;
 
 class GymController extends Controller
 {
+
+    private $_gym;
+    private $_branch;
+
+    /**
+     * GymController constructor.
+     * @param $gym
+     * @param $branch
+     */
+    public function __construct(Gym $gym, Branch $branch)
+    {
+        $this->_gym = $gym;
+        $this->_branch = $branch;
+    }
+
 
     public function dashboard() {
         return view('muscle-up-app.gym.dashboard');
     }
 
     public function index() {
-        $gyms=Gym::showAll();
-//        dd($gyms);
+        $gyms = $this->_gym->fetchGymsRecord();
         return view('muscle-up-app.gym.index', compact('gyms'));
     }
 
     public function create(){
 
-        $company = Null;
+        $gym = Null;
 
-        return view('muscle-up-app.gym.create', compact('company'));
+        return view('muscle-up-app.gym.create', compact('gym'));
     }
 
     public function store(CompanyCreateRequest $request){
 //        dd($request->all());
 
-        $user = new User();
-        $user->first_name=$request->admin_name;
-        $user->email = $request->admin_email;
-//        $password = str_random(8);
-        $password = "asdf1234";
-        $user->password = bcrypt($password);
-        $user->type = 'gym';
-        $user->phone_number=$request->admin_phone;
-//        $user->address=$request->address;
-        $user->save();
 
-        $gym = new Gym();
-        $gym->user_id = $user->id;
+        $gym = $this->_gym;
+
         $gym->title = $request->branch_name;
-        $gym->email = $request->branch_email;
+//        $gym->email = $request->branch_email;
 //        $gym->country = $request['country'];
 //        $gym->city = $request['city'];
 //        $gym->dial_code = $request['dial_code'][0];
         $gym->phone_number = $request->branch_phone;
-        $gym->open_time = $request->opening_time;
-        $gym->close_time = $request->clossing_time;
+//        $gym->opening_time = $request->opening_time;
+//        $gym->closing_time = $request->clossing_time;
 //        $gym->address = $request->branch_phone;
         $gym->save();
 
@@ -69,18 +74,37 @@ class GymController extends Controller
 //        $branch->branch_no = $request->branch_no;
         $branch->title = $request->branch_name;
 //        $branch->email = $request->branch_email;
-        $branch->phone_no = $request->branch_phone;
-//        $branch->opening_time = $request->opening_time;
-//        $branch->clossing_time = $request->clossing_time;
+        $branch->phone_number = $request->branch_phone;
+//        $gym->opening_time = $request->opening_time;
+//        $gym->closing_time = $request->clossing_time;
         $branch->address = $request->address;
+        $branch->is_main = 'Yes';
         $branch->save();
+
+
+        $user = new User();
+        $user->branch_id = $branch->id;
+        $user->gym_id = $gym->id;
+        $user->first_name=$request->admin_name;
+        $user->email = $request->admin_email;
+//        $password = str_random(8);
+        $password = "asdf1234";
+        $user->password = bcrypt($password);
+        $user->type = UserType::ADMIN;
+        $user->phone_number=$request->admin_phone;
+//        $user->address=$request->address;
+        $user->save();
+
+
+
+
 
 //        $var = $request->branch_email;
 //
 //        dd($var);
         dd("Success");
 
-        return view('muscle-up-app.company.create');
+        return view('muscle-up-app.gym.create');
     }
 
     public function destroy($id)
@@ -89,7 +113,7 @@ class GymController extends Controller
 //        $gym->user()->whereIn('id', $id)->delete();
         $gym->delete();
 
-        return redirect()->route('company.index');
+        return redirect()->route('gym.index');
     }
 
     public function joinRequest()

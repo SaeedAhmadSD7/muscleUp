@@ -8,8 +8,16 @@
 
 namespace App\Utils;
 
+use App\Utils\Globals\GlobalsConst;
 
 class AppUtil
 {
-
+    /**
+     * getProfileUploadPath
+     * @return string
+     */
+    public static function getProfileUploadPath()
+    {
+        return resource_path('assets/uploads'. GlobalsConst::PROFILE_PHOTO_DIR);
+    }
 }

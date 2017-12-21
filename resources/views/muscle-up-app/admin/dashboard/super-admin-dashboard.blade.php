@@ -35,20 +35,25 @@
         <div class="sidebar-submenu">
             <ul>
                 <li>
-{{--                    <a href="{{route('gym-list')}}" title="Inbox"><span>View List</span></a>--}}
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li class="menu-element">
-        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Company</span></a>
-        <div class="sidebar-submenu">
-            <ul>
-                <li>
                     <a href="{{route('company.create')}}" title="Create a New Company"><span>Create</span></a>
                 </li>
                 <li>
                     <a href="{{route('company.index')}}" title="Create a New Company"><span>List of Companies</span></a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
+    {{-- Trainees --}}
+    <li class="menu-element">
+        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Trainees</span></a>
+        <div class="sidebar-submenu">
+            <ul>
+                <li>
+                    <a href="{{route('trainee-create')}}" title="Create a New Company"><span> Add New</span></a>
+                </li>
+                <li>
+                    <a href="{{route('company.index')}}" title="Create a New Company"><span>List of Trainees</span></a>
                 </li>
             </ul>
         </div>

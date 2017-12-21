@@ -263,8 +263,8 @@ th {
 @font-face {
   font-family: 'Glyphicons Halflings';
 
-  src: url('../../../public/assets/plugins/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.eot');
-  src: url('../../../public/assets/plugins/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../../public/assets/plugins/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../../../public/assets/plugins/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../../public/assets/plugins/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../../public/assets/plugins/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('/resources/app/fonts/glyphicons-halflings-regular.eot');
+  src: url('/resources/app/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/resources/app/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('/resources/app/fonts/glyphicons-halflings-regular.woff') format('woff'), url('/resources/app/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('/resources/app/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -25031,6 +25031,36 @@ img.tp-slider-alternative-image {
 }
 /*
 ======================================
+General Styles
+======================================
+*/
+.file-caption.form-control.kv-fileinput-caption.icon-visible{
+    padding: 0px;
+}
+.input-group-btn button.btn.btn-default{
+    line-height: 31px;
+    height: 37px;
+    /* min-width: 34px; */
+    padding: 1px 12px;
+}
+
+.input-group-btn a.btn.btn-default{
+    height: 33px;
+    line-height: 31px;
+    text-decoration: none
+}
+.file-caption.icon-visible.file-caption-name{
+    padding-left: 24px;
+}
+
+.alert-danger {
+    color: #c50804;
+    background-color: #ffc9c96e;
+    border-color: #ffc9c96e;
+}
+
+/*
+======================================
 Width Styles
 ======================================
 */
@@ -25053,7 +25083,20 @@ Margin Styles
 ======================================
 */
 .mT0{margin-top: 0px;}
+.mT5{margin-top: 5px;}
+.mT10{margin-top: 10px;}
+.mT15{margin-top: 15px;}
+
+.mL0{margin-left: 0px;}
+.mL5{margin-left: 5px;}
+.mL10{margin-left: 10px;}
+.mL15{margin-left: 15px;}
+
+
 .mB0{margin-bottom: 0px;}
+.mB5{margin-bottom: 5px;}
+.mB10{margin-bottom: 10px;}
+.mB15{margin-bottom: 15px;}
 
 
 .mT0i{margin-top: 0px !important;}
@@ -25071,4 +25114,6 @@ Text Align Styles
 .taRi{text-align: right !important;}
 .taLi{text-align: left !important;}
 .taCi{text-align: center !important;}
+
+
 /*# sourceMappingURL=frontend-app.css.map */

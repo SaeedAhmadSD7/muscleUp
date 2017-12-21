@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\MuscleUpApp;
+use App\Http\Requests\PicUploadRequest;
 use App\Models\User;
 use App\Models\Trainee;
 use App\Models\Employee;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\MedicalHistory;
 use App\Mail\AddTraineeRequest;
 use Illuminate\Support\Facades\Mail;
+use App\Utils\AppUtil;
 
 class TraineeController extends Controller
 {
@@ -174,7 +176,7 @@ class TraineeController extends Controller
     public function create()
     {
 
-        return view('muscle-up-app.gym.trainee.trainee-add');
+        return view('muscle-up-app.trainee.create');
     }
 
     /**
@@ -354,5 +356,47 @@ class TraineeController extends Controller
         $trainee->user()->delete();
         $trainee->delete();
         return redirect()->route('trainee-list');
+    }
+
+    /**
+     * uploadProfilePic | upload trainee profile pic
+     * @param PicUploadRequest $request
+     */
+    public function uploadProfilePic(PicUploadRequest $request){
+        $fileData = $request->file('fileData', null);
+        $destinationPath = AppUtil::getProfileUploadPath();
+        $filename        = str_random(4).'_'.$fileData->getClientOriginalName();
+        if (!file_exists($destinationPath)) {
+            mkdir($destinationPath, 0777, true);
+        }
+        $uploadSuccess   = $fileData->move($destinationPath, $filename);
+        return response()->json(['uploaded_file_name'=>$filename]);
+    }
+
+    public function removeUploadedProfilePic(Request $request){
+        $response['file_deleted'] = false;
+        $response['message'] = "Deleting File process fails due to some internal technical issue.";
+        $profile_img = $request->get('profile_img',null);
+
+        //*** Null exception
+        if($profile_img==null){
+            $response['file_deleted'] = false;
+            $response['message'] = "File can't be empty";
+            return response()->json($response);
+        }
+
+        //*** Default File exception
+        if($profile_img === 'default.jpg'){
+            $response['file_deleted'] = false;
+            $response['message'] = "You can't delete default file";
+            return response()->json($response);
+        }
+
+        $destinationPath = AppUtil::getProfileUploadPath();
+        if(file_exists($destinationPath.$profile_img)){
+            $response['file_deleted'] = unlink($destinationPath.$profile_img);
+            $response['message'] = "File has been deleted successfully";
+        }
+        return response()->json($response);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 use \App\Http\Controllers\GymController;
+use \App\Utils\Globals\UserType;
 
 Auth::routes();
 
@@ -128,7 +129,7 @@ Route::group(['Public', 'namespace'=>'MuscleUpApp'],function () {
 Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],function () {
 
     //***UserType = SuperAdmin = admin
-    Route::group(['UserTypeAsTrainee','middleware' => 'userType:admin'],function () {
+    Route::group(['UserTypeAsTrainee','middleware' => 'userType:'.UserType::SUPER_ADMIN],function () {
 
         //***AdminController
         Route::group(['Admin'],function () {
@@ -144,16 +145,17 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
 
         //***GymController
         Route::group(['Gym'],function () {
-            Route::resource('company',"GymController");
+            Route::resource('gym',"GymController");
         });
     });
 
     //***UserType = Admin = gym
-    Route::group(['UserTypeAsGym','middleware' => 'userType:gym'],function () {
+    Route::group(['UserTypeAsGym','middleware' => 'userType:'.UserType::ADMIN],function () {
 
         //***GymController
         Route::group(['Gym'],function () {
-            Route::get('gym-dashboard',['uses'=>'GymController@index','as'=>'gymDashboard']);
+            Route::get('gyms/list',['uses'=>'GymController@index','as'=>'gymIndex']);
+            Route::get('gym-dashboard',['uses'=>'GymController@dashboard','as'=>'gymDashboard']);
         });
 
         //***EmployeeController
@@ -175,7 +177,9 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
         //***TraineeController
         Route::group(['Trainee'],function () {
 
-            Route::get('trainee/create',['as'=>'trainee-add','uses'=>'TraineeController@create']);
+            Route::get('trainee/create',['as'=>'trainee-create','uses'=>'TraineeController@create']);
+            Route::post('trainee/upload-profile-pic',['as'=>'uploadProfilePic','uses'=>'TraineeController@uploadProfilePic']);
+            Route::post('trainee/remove-uploaded-profile-pic',['as'=>'removeUploadedProfilePic','uses'=>'TraineeController@removeUploadedProfilePic']);
             Route::post('trainee/store',['uses'=>'TraineeController@store','as'=>'trainee-store']);
             Route::get('trainee/list',['as'=>'trainee-list','uses'=>'TraineeController@inbox']);
             Route::get('trainee/detail/{id}',['as'=>'trainee-list-detail','uses'=>'TraineeController@trainee_detail']);
@@ -192,7 +196,7 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
     });
 
     //***UserType = Employee = employee
-    Route::group(['UserTypeAsEmployee','middleware' => 'userType:employee'],function () {
+    Route::group(['UserTypeAsEmployee','middleware' => 'userType:'.UserType::EMPLOYEE],function () {
 
         //***EmployeeController
         Route::group(['Employee'],function () {
@@ -253,7 +257,7 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
     });
 
     //***UserType = Trainee = trainee
-    Route::group(['UserTypeAsTrainee','middleware' => 'userType:trainee'],function () {
+    Route::group(['UserTypeAsTrainee','middleware' => 'userType:'.UserType::TRAINEE],function () {
 
         //***TraineeController
         Route::group(['Trainee'],function () {
@@ -283,4 +287,6 @@ Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],fun
 
         });
     });
+
+
 });

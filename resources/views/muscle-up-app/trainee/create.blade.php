@@ -11,12 +11,14 @@
 
 
     <div class="panel">
-        <h3 class="content-box-header bg-google">Basic Info</h3>
+
         <div class="panel-body">
+            <h3 class="content-box-header bg-google">Basic Info</h3>
             <div class="example-box-wrapper">
                 <form class="form-horizontal bordered-row add-trainee-form" role="form" method="POST" action="{{route('trainee-store')}}">
                     {{csrf_field()}}
-                    <div class="tab-pane active" id="tab2"  >
+                    <input type="hidden" id="profile_img" name="profile_img" />
+                    <div class="tab-pane active pL0" id="tab2">
                         <div class="col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Enter First Name:</label>
@@ -70,12 +72,24 @@
                                     <input class="form-control " placeholder="Address..." name="address" maxlength="255">
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="col-sm-12 col-md-6">
-                            <input type="file" id="profilePhoto" class="form-control">
+                            <div class="form-group">
+                                <label for="col-md-4 control-label">Profile Photo</label>
+                                <div class="file-loading col-md-7">
+                                    <input type="file" id="profilePhoto" name="fileData" >
+                                </div>
+                            </div>
+
                         </div>
 
+                    </div>
+                    <div class="tab-pane active pL0" id="tab2">
+                        <div class="col-sm-12 col-md-6">
+
+                        </div>
                     </div>
                     <div class="clear"></div>
                     <div class="form-group col-sm-12">
@@ -92,5 +106,10 @@
 @stop
 
 @section('script')
+     <script>
+         window.previewImage = "{{url('/resources/app/images/default.jpg')}}";
+         window.uploadProfilePic = "{{route('uploadProfilePic')}}";
+         window.removeUploadedProfilePic = "{{route('removeUploadedProfilePic')}}";
+     </script>
     <script src="{{url('/resources/app/pages/js/create-trainee.js')}}" type="text/javascript"></script>
 @stop

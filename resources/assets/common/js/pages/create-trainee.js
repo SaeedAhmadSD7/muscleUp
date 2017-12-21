@@ -61,7 +61,65 @@
 
 
      // initialize with defaults
-     $('#profilePhoto').fileinput();
+     $('#profilePhoto').fileinput({
+         'showUpload':true,
+         'previewFileType':'image',
+         // initialPreview: [url1, url2],
+         initialPreview: window.previewImage,
+         uploadUrl: window.uploadProfilePic,
+         initialPreviewConfig: [
+             {
+                 caption: 'Default Pic',
+                 width: '120px',
+                 url: window.removeUploadedProfilePic, // server delete action
+                 key: 100,
+                 extra: {_token: $('[name="_token"]').val(),'profile_img': $('#profile_img').val()}
+             }
+         ],
+         uploadExtraData: {_token: $('[name="_token"]').val()},
+         initialPreviewAsData: true,
+         allowedFileTypes: ['image'],
+         allowedFileExtensions: ["jpg", "gif", "png", "jpeg"]
+     });
+
+     $('#profilePhoto').on('fileselect', function(event, numFiles, label) {
+         console.log("fileselect");
+     });
+
+     $('#profilePhoto').on('fileselectnone', function(event) {
+         console.log("Huh! No files were selected.");
+     });
+
+     $('#profilePhoto').on('filebatchselected', function(event, files) {
+         console.log('File batch selected triggered');
+     });
+
+     $('#profilePhoto').on('fileclear', function(event) {
+         console.log("fileclear");
+     });
+
+     $('#profilePhoto').on('filecleared', function(event) {
+         console.log("filecleared");
+     });
+
+     $('#profilePhoto').on('fileimageloaded', function(event, previewId) {
+         console.log("fileimageloaded");
+     });
+     $('#profilePhoto').on('filereset', function(event) {
+         console.log("filereset");
+     });
+     $('#profilePhoto').on('fileloaded', function(event, file, previewId, index, reader) {
+         console.log("fileloaded");
+     });
+
+     $('#profilePhoto').on('fileuploaded', function(event, data, previewId, index, reader) {
+         console.log("fileuploadedddddd");
+         var response = data.response;
+         console.log(response);
+         console.log(response.uploaded_file_name);
+         $('.file-caption.icon-visible.file-caption-name').val(response.uploaded_file_name);
+         $('#profile_img').val(response.uploaded_file_name);
+     });
 
  });
 

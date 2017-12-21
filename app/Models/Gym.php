@@ -3,27 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Utils\Globals\GlobalsConst;
 
 class Gym extends Model {
     protected $table= 'gyms';
     protected $primaryKey = 'id';
-    protected $fillable = ['user_id','name','email','dial_code','phone_number','country','city','open_time','close_time','latitude','longitude','address'];
+    protected $fillable = ['branch_id','name','email','phone_number','country','city','latitude','longitude','address'];
+
     function  users(){
         return $this->hasMany(User::class);
     }
 
-    function branches(){
-        return $this-> hasMany(Branch :: class);
-
-    }
-
-    function bootCamp(){
-        return $this->hasMany(BootCamp :: class);
-
-    }
-
-    function batches(){
-        return $this-> hasMany(Batch :: class);
+    public function branches(){
+        return $this->hasMany(Branch::class);
 
     }
 
@@ -59,9 +51,9 @@ class Gym extends Model {
         return $this->hasMany(Instructor::class);
     }
 
-    public static function showAll() {
+    public function fetchGymsRecord() {
 
-        $gym = Gym::all();
+        $gym = $this->paginate(GlobalsConst::RECORD_LIMIT);
         return $gym;
     }
 }

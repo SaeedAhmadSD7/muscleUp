@@ -17,14 +17,15 @@ class CreateGymRequestsTable extends Migration
             $table->increments('id');
             $table->string('title',60)->unique();
             $table->string('email',40)->unique();
-            $table->unsignedSmallInteger('num_branches');
+            $table->tinyInteger('num_branches');
+            $table->tinyInteger('num_employees');
+            $table->tinyInteger('num_trainees');
             $table->string('country');
             $table->string('city');
-            $table->string('dial_code',4);
-            $table->unsignedInteger('phone_number');
+            $table->string('phone_number');
             $table->string('address',1024);
-            $table->double('latitude')->default(0.0);
-            $table->double('longitude')->default(0.0);
+            $table->decimal('latitude')->default(0.0);
+            $table->decimal('longitude')->default(0.0);
             $table->timestamps();
         });
     }

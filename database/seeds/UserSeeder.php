@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Carbon\Carbon;
+use \App\Utils\Globals\UserType;
 
 class UserSeeder extends Seeder
 {
@@ -16,112 +17,149 @@ class UserSeeder extends Seeder
         User::truncate();
 
         /***
-         * Admin
+         * User- Super Admin
          */
 
         DB::table('users')->insert([
-            'first_name' => 'Admin',
-            'last_name' => 'Admin',
+            'type' => UserType::SUPER_ADMIN,
+            'first_name' => 'Fabulous',
+            'last_name' => 'Technologies',
             'dob'=>'2017-09-02',
-            'dial_code'=>'+92',
-            'phone_number'=>'1234567',
+            'phone_number'=>'+924236655487',
+            'email' => 'sadmin@example.com',
+            'password' => bcrypt('asdf1234'),
+            'country'=>'Pakistan',
+            'city'=>'Lahore',
+            'address'=>'Shalimar Town',
+            'remember_token'=>'0',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        /***
+         * User-Admin
+         */
+
+        DB::table('users')->insert([
+            'gym_id' => 1,
+            'branch_id' => 1,
+            'type' => UserType::ADMIN,
+            'first_name' => 'Ali',
+            'last_name' => 'Khan',
+            'dob'=>'2017-09-02',
+            'phone_number'=>'+924236655487',
             'email' => 'admin@example.com',
             'password' => bcrypt('asdf1234'),
-            'type'=>'admin',
-            'address'=>'addressed',
+            'country'=>'Pakistan',
+            'city'=>'Lahore',
+            'address'=>'Shalimar Town',
             'remember_token'=>'0',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         /***
-         * Gym
+         * User-Trainee
          */
         DB::table('users')->insert([
-            'first_name' => 'Gym',
-            'last_name' => 'Gym',
+            'gym_id' => 1,
+            'branch_id' => 1,
+            'type' => UserType::TRAINEE,
+            'first_name' => 'Kashif',
+            'last_name' => 'Khan',
             'dob'=>'2017-09-02',
-            'dial_code'=>'+92',
-            'phone_number'=>'1234567',
-            'email' => 'gym@example.com',
-            'password' => bcrypt('asdf1234'),
-            'type'=>'gym',
-            'address'=>'addressed',
-            'remember_token'=>'0',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::table('gyms')->insert([
-            'user_id' => '2',
-            'title' => 'Crossfit',
-            'email' => 'crossfit@example.com',
-            'country'=>'pakistan',
-            'city'=>'lahore',
-            'dial_code'=>'+92',
-            'phone_number'=>'1234567',
-            'open_time'=> 2017-01-01,
-            'close_time'=> 2017-01-01,
-            'latitude'=>'1.00',
-            'longitude'=>'1.00',
-            'address'=>'addressed',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-
-        /***
-         * Employee
-         */
-        DB::table('users')->insert([
-            'first_name' => 'Employee',
-            'last_name' => 'Employee',
-            'dob'=>'2017-09-02',
-            'dial_code'=>'+92',
-            'phone_number'=>'1234567',
-            'email' => 'employee@example.com',
-            'password' => bcrypt('asdf1234'),
-            'type'=>'employee',
-            'address'=>'addressed',
-            'remember_token'=>'0',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::table('employees')->insert([
-            'user_id' => '3',
-            'joining_date' => '2017:09:02',
-            'quit_date' => '2017:09:03',
-            'previous_salary' => '2000',
-            'joining_salary' => '255000',
-            'exp_years' => 3,
-            'exp_description' => 'work ',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-
-        /***
-         * Trainee
-         */
-        DB::table('users')->insert([
-            'first_name' => 'Trainee',
-            'last_name' => 'Trainee',
-            'dob'=>'2017-09-02',
-            'dial_code'=>'+92',
-            'phone_number'=>'1234567',
+            'phone_number'=>'+924237755487',
             'email' => 'trainee@example.com',
             'password' => bcrypt('asdf1234'),
-            'type'=>'trainee',
-            'address'=>'addressed',
+            'country'=>'Pakistan',
+            'city'=>'Lahore',
+            'address'=>'Kaji Town',
             'remember_token'=>'0',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
+
+        /***
+         * User-Trainee
+         */
+        DB::table('users')->insert([
+            'gym_id' => 1,
+            'branch_id' => 1,
+            'type' => UserType::TRAINEE,
+            'first_name' => 'Rizwan',
+            'last_name' => 'Khan',
+            'dob'=>'2017-09-02',
+            'phone_number'=>'+924237759487',
+            'email' => 'trainee1@example.com',
+            'password' => bcrypt('asdf1234'),
+            'country'=>'Pakistan',
+            'city'=>'Lahore',
+            'address'=>'Rola Town',
+            'remember_token'=>'0',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        /***
+         * User-Employee
+         */
+        DB::table('users')->insert([
+            'gym_id' => 1,
+            'branch_id' => 1,
+            'type' => UserType::EMPLOYEE,
+            'first_name' => 'Temoor',
+            'last_name' => 'Khan',
+            'dob'=>'2017-09-02',
+            'phone_number'=>'+924238759487',
+            'email' => 'employee@example.com',
+            'password' => bcrypt('asdf1234'),
+            'country'=>'Pakistan',
+            'city'=>'Lahore',
+            'address'=>'Teja Town',
+            'remember_token'=>'0',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        $this->addDummyEmployees();
+        $this->addDummyTrainees();
+    }
+
+    private function addDummyEmployees(){
+        DB::table('employees')->insert([
+            'branch_id' => 1,
+            'user_id' => 5,
+            'joining_date' => '2016-09-02',
+            'previous_salary'=>15000,
+            'joining_salary'=>20000,
+            'exp_years' => 5,
+            'exp_description' => 'khskd lsdsldk bimpasds hksjksdj jksdsd. shdsdhsjdh sdsd sdsd sd sd ',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+    }
+
+    private function addDummyTrainees(){
         DB::table('trainees')->insert([
-            'user_id' => '4',
-            'weight' => '50.0',
-            'height' => '5.7',
-            'bmi' => '5',
-            'bfp' => '5.00',
+            'branch_id' => 1,
+            'user_id' => 3,
+            'code' => 123,
+            'height' => 182.88,//cm
+            'joining_date' => '2016-09-02',
+            'admission_fee'=>15000,
+            'initial_fee'=>4000,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('trainees')->insert([
+            'branch_id' => 1,
+            'user_id' => 4,
+            'code' => 123,
+            'height' => 158.88,//cm
+            'joining_date' => '2016-09-02',
+            'admission_fee'=>1000,
+            'initial_fee'=>3000,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);

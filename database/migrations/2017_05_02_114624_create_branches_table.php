@@ -17,10 +17,15 @@ class CreateBranchesTable extends Migration
             $table->increments('id');
             $table->integer('gym_id');
             $table->string('title');
-            $table->string('phone_no',20)->nullable();
-            $table->integer('opening_time')->nullable();
-            $table->integer('clossing_time')->nullable();
+            $table->string('country',60)->nullable();
+            $table->string('city',60)->nullable();
             $table->string('address',1024)->nullable();
+            $table->string('phone_number',20)->nullable();
+            $table->time('opening_time')->nullable();
+            $table->time('closing_time')->nullable();
+            $table->decimal('latitude')->default(0.0);
+            $table->decimal('longitude')->default(0.0);
+            $table->enum('is_main',['Yes','No'])->default('No');
             $table->timestamps();
         });
     }

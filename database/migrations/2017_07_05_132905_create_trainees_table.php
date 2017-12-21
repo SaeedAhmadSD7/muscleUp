@@ -17,12 +17,13 @@ class CreateTraineesTable extends Migration
         Schema::create('trainees', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('branch_id')->nullable();
-            $table->integer('employee_id')->nullable();
             $table->integer('user_id');
-            $table->float('weight')->nullable(); //weight in lbs
+            $table->string('code')->nullable(); //height in cm
             $table->float('height')->nullable(); //height in cm
-            $table->float('bmi')->nullable(); //BODY MASS INDEX
-            $table->float('bfp')->nullable(); //BODY FAT PERCENTAGE: height in cm
+            $table->dateTime('joining_date'); //height in cm
+            $table->dateTime('quit_date')->nullable(); //height in cm
+            $table->decimal('admission_fee')->nullable(); //height in cm
+            $table->decimal('initial_fee')->nullable(); //height in cm
             $table->softDeletes();
             $table->timestamps();
         });
