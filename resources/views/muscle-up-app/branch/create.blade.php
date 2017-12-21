@@ -1,6 +1,11 @@
-@extends('muscle-up-app.admin.dashboard.admin-dashboard')
+@extends('layouts.backend-main')
 
 @section('title','branch')
+
+
+@section('sidebar_content')
+    @include('includes.backend._adminLeftBar')
+@stop
 
 @section('page-heading')
 
@@ -112,8 +117,7 @@
 @stop
 
 @section('script')
-    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
+
     <script src="{{url('/assets/js/branch.js')}}" type="text/javascript"></script>
 
 @stop
