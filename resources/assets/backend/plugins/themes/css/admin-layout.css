@@ -190,7 +190,8 @@ input[type=number] {
     font-size: 14px;
     line-height: 32px;
     height: 32px;
-    font-weight: 400
+    font-weight: 400;
+    text-decoration: none;
 }
 
 #sidebar-menu>li>a .bs-badge, #sidebar-menu>li>a .bs-label {
@@ -279,9 +280,9 @@ input[type=number] {
 #sidebar-menu li .sidebar-submenu {
     display: none;
     width: 300px;
-    margin: 15px 0 0 -20px;
+    margin: 0px 0 0 -20px;
     list-style: none;
-    padding: 10px 0
+    /*padding: 10px 0*/
 }
 
 #sidebar-menu li .sidebar-submenu ul {
@@ -297,7 +298,8 @@ input[type=number] {
 #sidebar-menu li .sidebar-submenu ul li a {
     font-size: 13px;
     font-family: Arial, sans-serif;
-    padding: 0 20px
+    padding: 0 0 0 45px;
+    text-decoration: none;
 }
 
 #sidebar-menu li .sidebar-submenu ul li a.active, #sidebar-menu li .sidebar-submenu ul li a:hover {

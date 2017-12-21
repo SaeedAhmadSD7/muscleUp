@@ -11,7 +11,7 @@
 @section('sidebar_content')
     <li class="header"><span>Members Area</span></li>
     <li class="menu-element">
-        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Trainees</span></a>
+        <a href="#"><i class="glyph-icon icon-linecons-user"></i><span>Trainees</span></a>
         <div class="sidebar-submenu">
             <ul>
                 <li><a href="{{route('trainee-create')}}" title="Inbox"><span>Add Trainee</span></a></li>
@@ -20,7 +20,7 @@
         </div>
     </li>
     <li class="menu-element">
-        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Instructors</span></a>
+        <a href="#"><i class="glyph-icon icon-linecons-user"></i><span>Instructors</span></a>
         <div class="sidebar-submenu">
             <ul>
                 <li><a href="{{route('instructor-add')}}" title="Inbox"><span>Add Instructor</span></a></li>
@@ -29,7 +29,7 @@
         </div>
     </li>
     <li class="menu-element">
-        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Allocate Trainee</span></a>
+        <a href="#"><i class="glyph-icon icon-linecons-photo"></i><span>Allocate Trainee</span></a>
         <div class="sidebar-submenu">
             <ul>
                 <li><a href="{{route('trainee-allocation')}}" title="Inbox"><span>Allocation</span></a></li>
@@ -55,7 +55,7 @@
 
 @section('page-heading')
     <h2>Dashboard</h2>
-    <p>The most complete user interface framework that can be used to create stunning admin dashboards and presentation websites.</p>
+    <p>The most complete user interface framework that can be used to create stunning admin dashboards and presentation websites. This page took {{ (microtime(true) - LARAVEL_START) }} seconds to render</p>
 @stop
 
 @section('content')
