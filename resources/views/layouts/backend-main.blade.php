@@ -10,9 +10,6 @@
 
     <style>#loading .svg-icon-loader {position: absolute;top: 50%;left: 50%;margin: -50px 0 0 -50px;}</style>
     <link rel="stylesheet" href="{{ elixir('dist/css/backend-app.css') }}">
-
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/modal/modal.css')}}">
-
     @yield('style-sheet')
 </head>
 <body>
@@ -76,7 +73,6 @@
                             </div>
                         </div>
 
-
                     </div>
                 </div>
                 @yield('content')
@@ -96,7 +92,6 @@
     <script type="text/javascript">$(window).load(function(){setTimeout(function() {$('#loading').fadeOut( 400, "linear" );}, 300);});</script>
 
 
-    <script type="text/javascript" src="{{asset('assets\modal\modal.js')}}"></script>
 
     <script>
 
