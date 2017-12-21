@@ -52,29 +52,29 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Email:</label>
+                                    <label class="col-sm-3 control-label">Address</label>
                                     <div class="col-sm-4">
-                                        <input class="form-control" data-parsley-type="email" required name="branch_email" value="" placeholder="Branch Email ...">
+                                        <textarea name="branch_address" placeholder="Address of the Branch" rows="3" class="form-control textarea-counter"></textarea>
+                                        <div class="character-remaining clear input-description">1000 characters left</div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Opening Time:</label>
-                                    <div class="col-sm-4">
-                                        <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="opening_time" value="" placeholder="opening time...">
-                                        <div class="btn-date"></div>
-
+                                    <label for="" class="col-sm-3 control-label">Opening Time:</label>
+                                    <div class="col-sm-4"><div class="bootstrap-timepicker dropdown">
+                                            <input name="opening_time" placeholder="08:00:00" class="timepicker-example form-control" type="text">
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Clossing Time:</label>
-                                    <div class="col-sm-4">
-                                        <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="clossing_time" value="" placeholder="clossing time...">
-                                        <div class="btn-date"></div>
-
+                                    <label for="" class="col-sm-3 control-label">Clossing Time:</label>
+                                    <div class="col-sm-4"><div class="bootstrap-timepicker dropdown">
+                                            <input name="closing_time" placeholder="23:00:00" class="timepicker-example form-control" type="text">
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         <div class="content-box">
