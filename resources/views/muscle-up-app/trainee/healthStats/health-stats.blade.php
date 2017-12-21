@@ -1,15 +1,16 @@
-@extends('muscle-up-app.admin.dashboard.super-admin-dashboard')
+@extends('layouts.backend-main')
 
 @section('title','Health Stats')
 
+@section('sidebar_content')
+    @include('includes.backend._adminLeftBar')
+@stop
+
 @section('page-heading')
     <h2>Record Health Stats</h2>
-    <p>Please fill in the relevant infomation if any.</p>
+    <p>Please fill in the relevant information if any.</p>
 @stop
 @section('content')
-
-
-
     <div class="panel">
 
         <div class="panel-body">
