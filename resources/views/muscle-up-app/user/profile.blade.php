@@ -1,4 +1,23 @@
-@extends('muscle-up-app.admin.dashboard.super-admin-dashboard')
+@extends('layouts.backend-main')
+
+@section('title')
+    Admin Dashboard
+@stop
+
+@section('user-name')
+    {{get_auth_user_full_name()}}
+@stop
+
+@section('dashboard_link')
+    {{route('adminDashboard')}}
+@stop
+@section('user_type')
+    Admin
+@stop
+
+@section('dashboard_link')
+    {{route('adminDashboard')}}
+@stop
 
 @section('title','branch')
 

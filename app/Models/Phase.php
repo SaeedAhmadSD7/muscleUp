@@ -4,6 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Phase
+ *
+ * @property int $id
+ * @property int|null $gym_id
+ * @property string $title
+ * @property string $description
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Day[] $day
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Program[] $program
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Phase whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Phase whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Phase whereGymId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Phase whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Phase whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Phase whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Phase extends Model {
 
     protected $table = 'phases';

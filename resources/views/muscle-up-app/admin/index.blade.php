@@ -1,76 +1,24 @@
-@extends('muscle-up-app.admin.dashboard.admin-dashboard')
-<?php /*
-@section('style-sheet')
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/jgrowl-notifications/jgrowl.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/loading-bar/loadingbar.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/maps/vector-maps/vectormaps.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/markdown/markdown.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/modal/modal.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/multi-select/multiselect.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/multi-upload/fileupload.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/nestable/nestable.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/noty-notifications/noty.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/pretty-photo/prettyphoto.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/progressbar/progressbar.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/range-slider/rangeslider.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/slidebars/slidebars.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/slider-ui/slider.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/summernote-wysiwyg/summernote-wysiwyg.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/tabs-ui/tabs.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/timepicker/timepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/tocify/tocify.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/touchspin/touchspin.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/uniform/uniform.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/wizard/wizard.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/xeditable/xeditable.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/chat.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/files-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/progress-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/todo.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/applications/mailbox.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/themes/components/default.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/owlcarousel/owlcarousel.css')}}" rel="stylesheet" type="text/css">
+@extends('layouts.backend-main')
+
+@section('title')
+    Admin Dashboard
 @stop
-*/?>
+
+@section('user-name')
+    {{get_auth_user_full_name()}}
+@stop
+
+@section('dashboard_link')
+    {{route('adminDashboard')}}
+@stop
+@section('user_type')
+    Admin
+@stop
+
+@section('dashboard_link')
+    {{route('adminDashboard')}}
+@stop
+
 @section('page-heading')
     <h2>Dashboard</h2>
     <p>The most complete user interface framework that can be used to create stunning admin dashboards and presentation websites.</p>
