@@ -43,4 +43,7 @@ class Trainee extends Model
     public function traineeActivity(){
         return $this->hasOne(TraineeActivity::class);
     }
+    public function healthQuestion(){
+        return $this->hasMany(HealthQuestion::class);
+    }
 }

@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
         $this->command->info('ExerciseSeeded!');
         $this->call(DaySeeder::class);
         $this->command->info('DaySeeder!');
+        $this->call(HealthQuestionsSeeder::class);
+        $this->command->info('CreateHealthQuestionsSeeded!');
 
     }
 }

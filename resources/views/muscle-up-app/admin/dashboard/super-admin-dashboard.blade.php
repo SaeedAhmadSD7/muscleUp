@@ -35,10 +35,10 @@
         <div class="sidebar-submenu">
             <ul>
                 <li>
-                    <a href="{{route('company.create')}}" title="Create a New Company"><span>Create</span></a>
+                    {{--<a href="{{route('company.create')}}" title="Create a New Company"><span>Create</span></a>--}}
                 </li>
                 <li>
-                    <a href="{{route('company.index')}}" title="Create a New Company"><span>List of Companies</span></a>
+                    {{--<a href="{{route('company.index')}}" title="Create a New Company"><span>List of Companies</span></a>--}}
                 </li>
             </ul>
         </div>
@@ -53,7 +53,7 @@
                     <a href="{{route('trainee-create')}}" title="Create a New Company"><span> Add New</span></a>
                 </li>
                 <li>
-                    <a href="{{route('company.index')}}" title="Create a New Company"><span>List of Trainees</span></a>
+                    {{--<a href="{{route('company.index')}}" title="Create a New Company"><span>List of Trainees</span></a>--}}
                 </li>
             </ul>
         </div>

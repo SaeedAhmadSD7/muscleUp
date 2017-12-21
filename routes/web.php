@@ -1,16 +1,17 @@
 <?php
+
 use \App\Http\Controllers\GymController;
 use \App\Utils\Globals\UserType;
 
 Auth::routes();
 
 //***LoginController
-Route::get('/logout', ['uses'=>'\App\Http\Controllers\Auth\LoginController@logout','as'=>'logout']);
+Route::get('/logout', ['uses' => '\App\Http\Controllers\Auth\LoginController@logout', 'as' => 'logout']);
 
-Route::group(['Public', 'namespace'=>'MuscleUpApp'],function () {
+Route::group(['Public', 'namespace' => 'MuscleUpApp'], function () {
 
     //***Public Resources Like Images, Js, Fonts
-    Route::group(['PublicResources'],function () {
+    Route::group(['PublicResources'], function () {
         /**
          * Images Route
          */
@@ -32,7 +33,7 @@ Route::group(['Public', 'namespace'=>'MuscleUpApp'],function () {
         Route::get('/resources/app/js/{filename}', function ($filename) {
 
             //only js files allow
-            switch ($filename){
+            switch ($filename) {
                 case 'html5-shiv.js';
                 case 'respond-1.4.2.js';
                     break;
@@ -85,10 +86,10 @@ Route::group(['Public', 'namespace'=>'MuscleUpApp'],function () {
             $response = Response::make($file, 200);
             $type = File::mimeType($path);
 //        dd($type);
-            switch (strtolower($type)){
+            switch (strtolower($type)) {
                 case 'text/plain':
                     $ext = File::extension($path);
-                    switch(strtolower($ext)){
+                    switch (strtolower($ext)) {
                         case 'svg':
                             $type = "image/svg+xml";
                             break;
@@ -101,189 +102,192 @@ Route::group(['Public', 'namespace'=>'MuscleUpApp'],function () {
     });
 
     //***HomeController
-    Route::group(['Home'],function () {
+    Route::group(['Home'], function () {
         Route::get('/', ['as' => 'home-page', 'uses' => 'HomeController@index']);
     });
 
     //***GymController
-    Route::group(['Gym'],function () {
-        Route::get('gym/request/join', ['uses'=>'GymController@joinRequest', 'as'=>'gym-request']);
-        Route::post('gym/request/save',['uses'=>'GymController@requestSubmit', 'as'=> 'save-request']);
+    Route::group(['Gym'], function () {
+        Route::get('gym/request/join', ['uses' => 'GymController@joinRequest', 'as' => 'gym-request']);
+        Route::post('gym/request/save', ['uses' => 'GymController@requestSubmit', 'as' => 'save-request']);
     });
 
 
     //***ContactController
-    Route::group(['ContactUs'],function () {
-        Route::get('contact', ['as'=>'contact', 'uses'=> 'ContactController@contact' ]);
-        Route::post('contact/store',['as'=>'contact-store','uses'=>'ContactController@store']);
-        Route::post('postcontact',['as'=>'postContact','uses'=>'ContactController@postContact']);
+    Route::group(['ContactUs'], function () {
+        Route::get('contact', ['as' => 'contact', 'uses' => 'ContactController@contact']);
+        Route::post('contact/store', ['as' => 'contact-store', 'uses' => 'ContactController@store']);
+        Route::post('postcontact', ['as' => 'postContact', 'uses' => 'ContactController@postContact']);
         Route::get('/home/contact', ['as' => 'home.store', 'uses' => 'ContactController@store']);
     });
 
     //***Permission Denied
-    Route::get('/denied', function (){return view('muscle-up-app.errors.permission-denied');})->name('denied');
+    Route::get('/denied', function () {
+        return view('muscle-up-app.errors.permission-denied');
+    })->name('denied');
 
 });
 
 
-Route::group(['Private', 'namespace'=>'MuscleUpApp', 'middleware' => 'auth'],function () {
+Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], function () {
 
     //***UserType = SuperAdmin = admin
-    Route::group(['UserTypeAsTrainee','middleware' => 'userType:'.UserType::SUPER_ADMIN],function () {
+    Route::group(['UserTypeAsTrainee', 'middleware' => 'userType:' . UserType::SUPER_ADMIN], function () {
 
         //***AdminController
-        Route::group(['Admin'],function () {
-            Route::get('admin-dashboard',['uses'=>'AdminController@index','as'=>'adminDashboard']);
-            Route::get('inbox',['as'=>'Admin-Inbox','uses'=>'AdminController@inbox']);
-            Route::get('inbox/message/detail/{id}',['uses'=>'AdminController@messageDetail','as'=>'message-detail']);
-            Route::get('request/process/{id}',['uses'=>'AdminController@requestProcess', 'as'=> 'process-request']);
-            Route::post('add/gym',['uses'=>'AdminController@addGym', 'as'=> 'add-gym']);
-            Route::get('gym/list',['as'=>'gym-list','uses'=>'AdminController@gymList']);
-            Route::get('gym/list/delete/{id}',['as'=>'gym-list-delete','uses'=>'AdminController@destroy']);
+        Route::group(['Admin'], function () {
+            Route::get('admin-dashboard', ['uses' => 'AdminController@index', 'as' => 'adminDashboard']);
+            Route::get('inbox', ['as' => 'Admin-Inbox', 'uses' => 'AdminController@inbox']);
+            Route::get('inbox/message/detail/{id}', ['uses' => 'AdminController@messageDetail', 'as' => 'message-detail']);
+            Route::get('request/process/{id}', ['uses' => 'AdminController@requestProcess', 'as' => 'process-request']);
+            Route::post('add/gym', ['uses' => 'AdminController@addGym', 'as' => 'add-gym']);
+            Route::get('gym/list', ['as' => 'gym-list', 'uses' => 'AdminController@gymList']);
+            Route::get('gym/list/delete/{id}', ['as' => 'gym-list-delete', 'uses' => 'AdminController@destroy']);
 
         });
 
         //***GymController
-        Route::group(['Gym'],function () {
-            Route::resource('gym',"GymController");
+        Route::group(['Gym'], function () {
+            Route::resource('gym', "GymController");
         });
     });
 
     //***UserType = Admin = gym
-    Route::group(['UserTypeAsGym','middleware' => 'userType:'.UserType::ADMIN],function () {
+    Route::group(['UserTypeAsGym', 'middleware' => 'userType:' . UserType::ADMIN], function () {
 
         //***GymController
-        Route::group(['Gym'],function () {
-            Route::get('gyms/list',['uses'=>'GymController@index','as'=>'gymIndex']);
-            Route::get('gym-dashboard',['uses'=>'GymController@dashboard','as'=>'gymDashboard']);
+        Route::group(['Gym'], function () {
+            Route::get('gyms/list', ['uses' => 'GymController@index', 'as' => 'gymIndex']);
+            Route::get('gym-dashboard', ['uses' => 'GymController@dashboard', 'as' => 'gymDashboard']);
         });
 
         //***EmployeeController
-        Route::group(['Employee'],function () {
-            Route::get('instructor/add',['as'=>'instructor-add','uses'=>'EmployeeController@create']);
-            Route::post('instructor/store',['as'=>'instructor-store','uses'=>'EmployeeController@store']);
-            Route::get('instructor/list',['as'=>'instructor-show','uses'=>'EmployeeController@show']);
-            Route::get('instructor/edit/{id}',['as'=>'instructor-edit','uses'=>'EmployeeController@edit']);
-            Route::post('instructor/update/{id}',['as'=>'instructor-update','uses'=>'EmployeeController@update']);
-            Route::get('instructor/delete/{id}',['as'=>'instructor-delete','uses'=>'EmployeeController@destroy']);
+        Route::group(['Employee'], function () {
+            Route::get('instructor/add', ['as' => 'instructor-add', 'uses' => 'EmployeeController@create']);
+            Route::post('instructor/store', ['as' => 'instructor-store', 'uses' => 'EmployeeController@store']);
+            Route::get('instructor/list', ['as' => 'instructor-show', 'uses' => 'EmployeeController@show']);
+            Route::get('instructor/edit/{id}', ['as' => 'instructor-edit', 'uses' => 'EmployeeController@edit']);
+            Route::post('instructor/update/{id}', ['as' => 'instructor-update', 'uses' => 'EmployeeController@update']);
+            Route::get('instructor/delete/{id}', ['as' => 'instructor-delete', 'uses' => 'EmployeeController@destroy']);
 
         });
 
         //***BranchController
-        Route::group(['Branch'],function () {
-            Route::resource('branch',"BranchController");
+        Route::group(['Branch'], function () {
+            Route::resource('branch', "BranchController");
         });
 
         //***TraineeController
-        Route::group(['Trainee'],function () {
+        Route::group(['Trainee'], function () {
 
-            Route::get('trainee/create',['as'=>'trainee-create','uses'=>'TraineeController@create']);
-            Route::post('trainee/upload-profile-pic',['as'=>'uploadProfilePic','uses'=>'TraineeController@uploadProfilePic']);
-            Route::post('trainee/remove-uploaded-profile-pic',['as'=>'removeUploadedProfilePic','uses'=>'TraineeController@removeUploadedProfilePic']);
-            Route::post('trainee/store',['uses'=>'TraineeController@store','as'=>'trainee-store']);
-            Route::get('trainee/list',['as'=>'trainee-list','uses'=>'TraineeController@inbox']);
-            Route::get('trainee/detail/{id}',['as'=>'trainee-list-detail','uses'=>'TraineeController@trainee_detail']);
-            Route::get('trainee/list/delete/{id}',['as'=>'trainee-list-delete','uses'=>'TraineeController@destroy']);
+            Route::get('trainee/create', ['as' => 'trainee-create', 'uses' => 'TraineeController@create']);
+            Route::post('trainee/upload-profile-pic', ['as' => 'uploadProfilePic', 'uses' => 'TraineeController@uploadProfilePic']);
+            Route::post('trainee/remove-uploaded-profile-pic', ['as' => 'removeUploadedProfilePic', 'uses' => 'TraineeController@removeUploadedProfilePic']);
+            Route::post('trainee/store', ['uses' => 'TraineeController@store', 'as' => 'trainee-store']);
+            Route::get('trainee/list', ['as' => 'trainee-list', 'uses' => 'TraineeController@inbox']);
+            Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
+            Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
 
-            Route::get('trainee/allocation',['as'=>'trainee-allocation','uses'=>'TraineeController@create_allocation']);
-            Route::post('trainee/allocation/store',['as'=>'trainee_allocation_store','uses'=>'TraineeController@store_allocation']);
-            Route::get('trainee/allocation/list',['as'=>'show-trainee-allocation','uses'=>'TraineeController@show_allocation']);
-            Route::get('trainee/allocation/edit/{id}',['as'=>'edit-trainee-allocation','uses'=>'TraineeController@edit_allocation']);
-            Route::post('trainee/allocation/update/{id}',['as'=>'update-trainee-allocation','uses'=>'TraineeController@update_allocation']);
-            Route::get('trainee/allocation/delete/{id}',['as'=>'delete-trainee-allocation','uses'=>'TraineeController@destroy_allocation']);
+            Route::get('trainee/allocation', ['as' => 'trainee-allocation', 'uses' => 'TraineeController@create_allocation']);
+            Route::post('trainee/allocation/store', ['as' => 'trainee_allocation_store', 'uses' => 'TraineeController@store_allocation']);
+            Route::get('trainee/allocation/list', ['as' => 'show-trainee-allocation', 'uses' => 'TraineeController@show_allocation']);
+            Route::get('trainee/allocation/edit/{id}', ['as' => 'edit-trainee-allocation', 'uses' => 'TraineeController@edit_allocation']);
+            Route::post('trainee/allocation/update/{id}', ['as' => 'update-trainee-allocation', 'uses' => 'TraineeController@update_allocation']);
+            Route::get('trainee/allocation/delete/{id}', ['as' => 'delete-trainee-allocation', 'uses' => 'TraineeController@destroy_allocation']);
+            Route::get('trainee/health_stats/{id}', ['as' => 'health_stats', 'uses' => 'TraineeController@HealthStats']);
 
         });
     });
 
     //***UserType = Employee = employee
-    Route::group(['UserTypeAsEmployee','middleware' => 'userType:'.UserType::EMPLOYEE],function () {
+    Route::group(['UserTypeAsEmployee', 'middleware' => 'userType:' . UserType::EMPLOYEE], function () {
 
         //***EmployeeController
-        Route::group(['Employee'],function () {
-            Route::get('employee-dashboard',['uses'=>'EmployeeController@index','as'=>'employeeDashboard']);
+        Route::group(['Employee'], function () {
+            Route::get('employee-dashboard', ['uses' => 'EmployeeController@index', 'as' => 'employeeDashboard']);
         });
 
         //***DietProgramController
-        Route::group(['DietProgram'],function () {
-            Route::get('/diet/create',['as'=>'diet-create','uses'=>'DietProgramController@create']);
-            Route::post('/diet/add',['as'=>'add-diet','uses'=>'DietProgramController@store']);
-            Route::get('/diet/list',['as'=>'diet-list','uses'=>'DietProgramController@index']);
-            Route::get('/diet/edit/{id}',['as'=>'edit-diet','uses'=>'DietProgramController@edit']);
-            Route::post('/diet/update',['as'=>'update-diet','uses'=>'DietProgramController@update']);
-            Route::get('/diet/delete/{id}',['as'=>'delete-diet','uses'=>'DietProgramController@delete']);
+        Route::group(['DietProgram'], function () {
+            Route::get('/diet/create', ['as' => 'diet-create', 'uses' => 'DietProgramController@create']);
+            Route::post('/diet/add', ['as' => 'add-diet', 'uses' => 'DietProgramController@store']);
+            Route::get('/diet/list', ['as' => 'diet-list', 'uses' => 'DietProgramController@index']);
+            Route::get('/diet/edit/{id}', ['as' => 'edit-diet', 'uses' => 'DietProgramController@edit']);
+            Route::post('/diet/update', ['as' => 'update-diet', 'uses' => 'DietProgramController@update']);
+            Route::get('/diet/delete/{id}', ['as' => 'delete-diet', 'uses' => 'DietProgramController@delete']);
         });
 
         //***WbsController
-        Route::group(['WBS'],function () {
-            Route::get('/wbs/list',['uses'=>'WbsController@index','as'=>'wbs-list']);
-            Route::get('/wbs/add',['uses'=>'WbsController@create','as'=>'wbs-add']);
-            Route::post('/wbs/store',['uses'=>'WbsController@store','as'=>'wbs-store']);
-            Route::get('/wbs/edit/{wbs}',['uses'=>'WbsController@edit','as'=>'wbs-edit']);
-            Route::post('/wbs/update/',['uses'=>'WbsController@update','as'=>'wbs-update']);
-            Route::get('/wbs/delete/{wbs}',['uses'=>'WbsController@destroy','as'=>'wbs-delete']);
+        Route::group(['WBS'], function () {
+            Route::get('/wbs/list', ['uses' => 'WbsController@index', 'as' => 'wbs-list']);
+            Route::get('/wbs/add', ['uses' => 'WbsController@create', 'as' => 'wbs-add']);
+            Route::post('/wbs/store', ['uses' => 'WbsController@store', 'as' => 'wbs-store']);
+            Route::get('/wbs/edit/{wbs}', ['uses' => 'WbsController@edit', 'as' => 'wbs-edit']);
+            Route::post('/wbs/update/', ['uses' => 'WbsController@update', 'as' => 'wbs-update']);
+            Route::get('/wbs/delete/{wbs}', ['uses' => 'WbsController@destroy', 'as' => 'wbs-delete']);
 
         });
 
         //***PhaseController
-        Route::group(['Phase'],function () {
-            Route::get('phase/create',['as'=>'phase','uses'=>'PhaseController@create']);
-            Route::post('phase/store',['as'=>'phase_store','uses'=>'PhaseController@store']);
-            Route::get('phase/list',['as'=>'show-phase','uses'=>'PhaseController@show']);
-            Route::get('phase/edit/{id?}',['as'=>'edit-phase','uses'=>'PhaseController@edit']);
-            Route::post('phase/update',['as'=>'update-phase','uses'=>'PhaseController@update']);
-            Route::get('phase/delete/{id?}',['as'=>'delete-phase','uses'=>'PhaseController@destroy']);
+        Route::group(['Phase'], function () {
+            Route::get('phase/create', ['as' => 'phase', 'uses' => 'PhaseController@create']);
+            Route::post('phase/store', ['as' => 'phase_store', 'uses' => 'PhaseController@store']);
+            Route::get('phase/list', ['as' => 'show-phase', 'uses' => 'PhaseController@show']);
+            Route::get('phase/edit/{id?}', ['as' => 'edit-phase', 'uses' => 'PhaseController@edit']);
+            Route::post('phase/update', ['as' => 'update-phase', 'uses' => 'PhaseController@update']);
+            Route::get('phase/delete/{id?}', ['as' => 'delete-phase', 'uses' => 'PhaseController@destroy']);
         });
 
         //***ProgramController
-        Route::group(['Program'],function () {
-            Route::get('/program',['as'=>'program','uses'=>'ProgramController@create']);
-            Route::post('/program/add',['as'=>'program_store','uses'=>'ProgramController@store']);
-            Route::get('/program/list',['as'=>'show-program','uses'=>'ProgramController@show']);
-            Route::get('/program/edit/{id?}',['as'=>'edit-program','uses'=>'ProgramController@edit']);
-            Route::post('/program/update',['as'=>'update-program','uses'=>'ProgramController@update']);
-            Route::get('/program/delete/{id?}',['as'=>'delete-program','uses'=>'ProgramController@destroy']);
+        Route::group(['Program'], function () {
+            Route::get('/program', ['as' => 'program', 'uses' => 'ProgramController@create']);
+            Route::post('/program/add', ['as' => 'program_store', 'uses' => 'ProgramController@store']);
+            Route::get('/program/list', ['as' => 'show-program', 'uses' => 'ProgramController@show']);
+            Route::get('/program/edit/{id?}', ['as' => 'edit-program', 'uses' => 'ProgramController@edit']);
+            Route::post('/program/update', ['as' => 'update-program', 'uses' => 'ProgramController@update']);
+            Route::get('/program/delete/{id?}', ['as' => 'delete-program', 'uses' => 'ProgramController@destroy']);
         });
 
         //***AllocationController
-        Route::group(['Allocation'],function () {
-            Route::get('allocation/',['as'=>'allocation','uses'=>'AllocationController@create']);
-            Route::post('allocation/store',['as'=>'allocation_store','uses'=>'AllocationController@store']);
-            Route::get('/allocation/list/',['as'=>'show-allocation','uses'=>'AllocationController@show']);
-            Route::get('/allocation/edit/{id}',['as'=>'edit-allocation','uses'=>'AllocationController@edit']);
-            Route::post('/allocation/update/{id}',['as'=>'update-allocation','uses'=>'AllocationController@update']);
-            Route::get('/allocation/delete/{id}',['as'=>'delete-allocation','uses'=>'AllocationController@destroy']);
+        Route::group(['Allocation'], function () {
+            Route::get('allocation/', ['as' => 'allocation', 'uses' => 'AllocationController@create']);
+            Route::post('allocation/store', ['as' => 'allocation_store', 'uses' => 'AllocationController@store']);
+            Route::get('/allocation/list/', ['as' => 'show-allocation', 'uses' => 'AllocationController@show']);
+            Route::get('/allocation/edit/{id}', ['as' => 'edit-allocation', 'uses' => 'AllocationController@edit']);
+            Route::post('/allocation/update/{id}', ['as' => 'update-allocation', 'uses' => 'AllocationController@update']);
+            Route::get('/allocation/delete/{id}', ['as' => 'delete-allocation', 'uses' => 'AllocationController@destroy']);
         });
 
     });
 
     //***UserType = Trainee = trainee
-    Route::group(['UserTypeAsTrainee','middleware' => 'userType:'.UserType::TRAINEE],function () {
+    Route::group(['UserTypeAsTrainee', 'middleware' => 'userType:' . UserType::TRAINEE], function () {
 
         //***TraineeController
-        Route::group(['Trainee'],function () {
+        Route::group(['Trainee'], function () {
 
-            Route::get('trainee-dashboard',['uses'=>'TraineeController@index','as'=>'traineeDashboard']);
-            Route::get('trainee/profile/',['as'=>'trainee-profile','uses'=>'TraineeController@view_profile']);
-            Route::get('/trainee/personal/detail/{id}',['as'=>'trainee-personal-detail','uses'=>'TraineeController@show']);
-            Route::get('/trainee/personal/detail/edit/{id}',['as'=>'trainee-personal-detail-edit','uses'=>'TraineeController@edit']);
-            Route::post('/trainee/personal/detail/update/{id}',['as'=>'trainee-detail-update','uses'=>'TraineeController@update']);
-            Route::post('trainee/profile/image',['as'=>'trainee-image','uses'=>'TraineeController@upload_profile']);
+            Route::get('trainee-dashboard', ['uses' => 'TraineeController@index', 'as' => 'traineeDashboard']);
+            Route::get('trainee/profile/', ['as' => 'trainee-profile', 'uses' => 'TraineeController@view_profile']);
+            Route::get('/trainee/personal/detail/{id}', ['as' => 'trainee-personal-detail', 'uses' => 'TraineeController@show']);
+            Route::get('/trainee/personal/detail/edit/{id}', ['as' => 'trainee-personal-detail-edit', 'uses' => 'TraineeController@edit']);
+            Route::post('/trainee/personal/detail/update/{id}', ['as' => 'trainee-detail-update', 'uses' => 'TraineeController@update']);
+            Route::post('trainee/profile/image', ['as' => 'trainee-image', 'uses' => 'TraineeController@upload_profile']);
 
-            Route::get('trainee/medical',['as'=>'trainee-medical','uses'=>'TraineeController@medical']);
-            Route::post('trainee/medical/save',['as'=>'save-medical','uses'=>'TraineeController@medial_history']);
-            Route::get('trainee/view/medical/{id}',['as'=>'trainee-view-medical','uses'=>'TraineeController@view_medical_history']);
-            Route::get('trainee/medical/edit/{id}',['as'=>'edit-trainee-medical','uses'=>'TraineeController@edit_medical_history']);
-            Route::post('trainee/medical/update/{id}',['as'=>'trainee-medical-update','uses'=>'TraineeController@medical_history_update']);
+            Route::get('trainee/medical', ['as' => 'trainee-medical', 'uses' => 'TraineeController@medical']);
+            Route::post('trainee/medical/save', ['as' => 'save-medical', 'uses' => 'TraineeController@medial_history']);
+            Route::get('trainee/view/medical/{id}', ['as' => 'trainee-view-medical', 'uses' => 'TraineeController@view_medical_history']);
+            Route::get('trainee/medical/edit/{id}', ['as' => 'edit-trainee-medical', 'uses' => 'TraineeController@edit_medical_history']);
+            Route::post('trainee/medical/update/{id}', ['as' => 'trainee-medical-update', 'uses' => 'TraineeController@medical_history_update']);
 
-            Route::get('dietProgram',['as'=>'dietprogram-view','uses'=>'TraineeController@dietProgram']);
+            Route::get('dietProgram', ['as' => 'dietprogram-view', 'uses' => 'TraineeController@dietProgram']);
 
-            Route::get('workoutProgram',['as'=>'workoutprogram-view','uses'=>'TraineeController@workoutProgram']);
-            Route::get('activity',['uses'=>'TraineeController@activity','as'=>'trainee-activity']);
+            Route::get('workoutProgram', ['as' => 'workoutprogram-view', 'uses' => 'TraineeController@workoutProgram']);
+            Route::get('activity', ['uses' => 'TraineeController@activity', 'as' => 'trainee-activity']);
 
-            Route::get('activity/phase/{phase}','PhaseController@getPhaseDetails');
-            Route::get('activity/phase/{phase}/day/{day}','PhaseController@getDayDetails');
-            Route::get('activity/phase/{phase}/day/{day}/wbs/{wbs}','PhaseController@getWbsDetails');
-            Route::get('activity/dietProgram/{dietProgram}/meal/{meal}','DietProgramController@foodList');
+            Route::get('activity/phase/{phase}', 'PhaseController@getPhaseDetails');
+            Route::get('activity/phase/{phase}/day/{day}', 'PhaseController@getDayDetails');
+            Route::get('activity/phase/{phase}/day/{day}/wbs/{wbs}', 'PhaseController@getWbsDetails');
+            Route::get('activity/dietProgram/{dietProgram}/meal/{meal}', 'DietProgramController@foodList');
 
         });
     });
