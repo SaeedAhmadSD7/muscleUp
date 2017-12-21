@@ -9,53 +9,12 @@
 @stop
 
 @section('sidebar_content')
-    <li class="header"><span>Members Area</span></li>
-    <li class="menu-element">
-        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Trainees</span></a>
-        <div class="sidebar-submenu">
-            <ul>
-                <li><a href="{{route('trainee-create')}}" title="Inbox"><span>Add Trainee</span></a></li>
-                <li><a href="{{route('trainee-list')}}" title="Inbox"><span>View Trainee List</span></a></li>
-            </ul>
-        </div>
-    </li>
-    <li class="menu-element">
-        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Instructors</span></a>
-        <div class="sidebar-submenu">
-            <ul>
-                <li><a href="{{route('instructor-add')}}" title="Inbox"><span>Add Instructor</span></a></li>
-                <li><a href="{{route('instructor-show')}}" title="Inbox"><span>View Instructor List</span></a></li>
-            </ul>
-        </div>
-    </li>
-    <li class="menu-element">
-        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Allocate Trainee</span></a>
-        <div class="sidebar-submenu">
-            <ul>
-                <li><a href="{{route('trainee-allocation')}}" title="Inbox"><span>Allocation</span></a></li>
-                <li><a href="{{route('show-trainee-allocation')}}" title="Inbox"><span>View Allocation List</span></a></li>
-            </ul>
-        </div>
-    </li>
-    <li class="menu-element">
-        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Add Branch</span></a>
-        <div class="sidebar-submenu">
-            <ul>
-                <li>
-                    {{--                    <a href="{{route('branch')}}" title="Inbox"><span>Make branch</span></a>--}}
-                    <a href="{{route('branch.create')}}" title="Create a New Branch"><span>Create</span></a>
-                </li>
-                <li>
-                    <a href="{{route('branch.index')}}" title="List of Branches"><span>List of Branches</span></a>
-                </li>
-            </ul>
-        </div>
-    </li>
+    @include('includes.backend._adminLeftBar')
 @stop
 
 @section('page-heading')
     <h2>Dashboard</h2>
-    <p>The most complete user interface framework that can be used to create stunning admin dashboards and presentation websites.</p>
+    <p>The most complete user interface framework that can be used to create stunning admin dashboards and presentation websites. This page took {{ (microtime(true) - LARAVEL_START) }} seconds to render</p>
 @stop
 
 @section('content')
