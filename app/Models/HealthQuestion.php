@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MedicalHistory extends Model
+class HealthQuestion extends Model
 {
-    protected $table = 'medical_histories';
+    protected $table = 'health_questions';
     protected $fillable=[
-      'gym_id' ,'branch_id','trainee_id','health_question_id'
+      'question' ,'stat_name','is_active',
     ];
 
     public function trainee(){

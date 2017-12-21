@@ -16,6 +16,7 @@ class CreateHealthQuestions extends Migration
         Schema::create('health_questions',function (Blueprint $table) {
             $table->increments('id');
             $table->string('question');
+            $table->string('stat_name');
             $table->enum('is_active',['Yes','No'])->nullable();
             $table->timestamps();
         });
