@@ -4,6 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\HealthQuestion
+ *
+ * @property-read \App\Models\Trainee $trainee
+ * @mixin \Eloquent
+ */
 class HealthQuestion extends Model
 {
     protected $table = 'health_questions';

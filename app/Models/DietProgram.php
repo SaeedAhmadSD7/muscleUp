@@ -4,6 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\DietProgram
+ *
+ * @property int $id
+ * @property string $title
+ * @property string $description
+ * @property string|null $deleted_at
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Food[] $food
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Meal[] $meal
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietProgram whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietProgram whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietProgram whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietProgram whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietProgram whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietProgram whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class DietProgram extends Model
 {
     protected $table='diet_programs';

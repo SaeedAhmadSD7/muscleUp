@@ -4,7 +4,7 @@
 
 
 @section('sidebar_content')
-    @include('includes.backend._adminLeftBar')
+    @include('includes.backend._leftBarAdmin')
 @stop
 
 @section('page-heading')
