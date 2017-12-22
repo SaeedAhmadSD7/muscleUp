@@ -144,4 +144,5 @@
         window.removeUploadedProfilePic = "{{route('removeUploadedProfilePic')}}";
     </script>
     <script src="{{url('/resources/app/pages/js/create-trainee.js')}}" type="text/javascript"></script>
+    <script src="{{url('/resources/app/pages/js/request-gym.js')}}" type="text/javascript"></script>
 @stop
