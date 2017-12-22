@@ -4,6 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Food
+ *
+ * @property int $id
+ * @property string $title
+ * @property string $unit
+ * @property int $unit_value
+ * @property int $calories
+ * @property string|null $deleted_at
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Meal[] $meal
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Food whereCalories($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Food whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Food whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Food whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Food whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Food whereUnit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Food whereUnitValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Food whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Food extends Model
 {
     protected $table = 'foods';

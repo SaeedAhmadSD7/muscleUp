@@ -4,6 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Program
+ *
+ * @property int $id
+ * @property int|null $gym_id
+ * @property string $title
+ * @property string|null $description
+ * @property string|null $deleted_at
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Models\Allocation $allocation
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Program[] $exercise
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Phase[] $phase
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Program whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Program whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Program whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Program whereGymId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Program whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Program whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Program whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Program extends Model {
 
     protected $table= 'programs';
@@ -16,7 +38,7 @@ class Program extends Model {
     }
 
     public function exercise() {
-        return $this->hasManyThrough('Program', 'Exercise');
+        return $this->hasManyThrough(Program::class, Exercise::class);
     }
 
     public function allocation() {

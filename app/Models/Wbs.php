@@ -4,6 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Wbs
+ *
+ * @property int $id
+ * @property int|null $gym_id
+ * @property string $title
+ * @property string $description
+ * @property string|null $deleted_at
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Day[] $day
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Exercise[] $exercise
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Wbs whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Wbs whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Wbs whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Wbs whereGymId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Wbs whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Wbs whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Wbs whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Wbs extends Model
 {
     protected $table= 'wbs';

@@ -4,18 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\MedicalHistory
+ *
+ * @property int $id
+ * @property int $gym_id
+ * @property int $branch_id
+ * @property int $trainee_id
+ * @property int $health_question_id
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Models\Trainee $trainee
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MedicalHistory whereBranchId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MedicalHistory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MedicalHistory whereGymId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MedicalHistory whereHealthQuestionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MedicalHistory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MedicalHistory whereTraineeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MedicalHistory whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class MedicalHistory extends Model
 {
+    protected $table = 'medical_histories';
     protected $fillable=[
-      'asthma' ,'diabetes','blood_pressure','cholesterol','heart_murmur','knee_problems','arthritis','dizziness',
-        'back_pain','neck_pain','kidney_condition','liver_condition','heart_palpitation','glandular_fever','smoke','drink' ,'egg_allergies'
-        ,'fish_allergies','peanut_allergies','treenut_allergies','shellfish_allergies','wheat_allergies',
-        'soy_allergies','meat_allergies','seed_allergies'
-
-
+      'gym_id' ,'branch_id','trainee_id','health_question_id'
     ];
 
     public function trainee(){
-        return $this->belongsTo(Trainee::clas);
+        return $this->belongsTo(Trainee::class);
     }
 }

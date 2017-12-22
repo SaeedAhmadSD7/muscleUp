@@ -34,7 +34,13 @@
                     <li class="menu-element">
                         <a href="@yield('dashboard_link')"><i class="glyph-icon icon-linecons-tv"></i><span> @yield('user_type') Dashboard</span></a>
                     </li>
-                    @yield('sidebar_content')
+                    @section('sidebar_content')
+                        @if(get_auth_user_type() == \App\Utils\Globals\UserType::SUPER_ADMIN)
+                            @include('includes.backend._leftBarAdmin')
+                        @elseif(get_auth_user_type() == \App\Utils\Globals\UserType::ADMIN)
+                            @include('includes.backend._leftBarAdmin')
+                        @endif
+                    @show
                 </ul>
             </div>
         </div>

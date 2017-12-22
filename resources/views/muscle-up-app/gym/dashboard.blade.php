@@ -5,11 +5,7 @@
 @stop
 
 @section('user-name')
-    {{\Auth::user()->first_name}}
-@stop
-
-@section('sidebar_content')
-    @include('includes.backend._adminLeftBar')
+    {{get_current_user_full_name()}}
 @stop
 
 @section('page-heading')

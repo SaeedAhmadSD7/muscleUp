@@ -1,15 +1,21 @@
-@extends('muscle-up-app.gym.dashboard.gym-dashboard')
+@extends('layouts.backend-main')
 
 @section('title','Add trainee')
+
+@section('title')
+    Gym Dashboard
+@stop
+
+@section('user-name')
+    {{get_auth_user_full_name()}}
+@stop
 
 @section('page-heading')
     <h2>Add Trainee</h2>
     <p>Please fill in all the information and then click Add Trainee.</p>
 @stop
+
 @section('content')
-
-
-
     <div class="panel">
 
         <div class="panel-body">
