@@ -68,6 +68,26 @@
                                     </label>
                                 </div>
                             </div>
+
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Country</label>
+                                <div class="col-md-8">
+                                <select class="form-control" name="country">
+                                    <option>{{$user->country}}</option>
+                                    @foreach($countries as $country)
+                                        <option data-code="{{$country['code']}}" value="{{$country['name']}}" data-dialcode="{{$country['dial_code']}}">{{$country['name']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">City</label>
+                                <div class="col-md-8">
+                                <input class="form-control" type="text" name="city" value="{{$user->city}}" placeholder="City...">
+                            </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Phone number:</label>
                                 <div class="col-md-1">

@@ -34,7 +34,8 @@ class UserController extends Controller
 
     public function index() {
         $user = Auth::user();
-        return view('muscle-up-app.user.index', compact('user'));
+        $countries = Country::all();
+        return view('muscle-up-app.user.index', compact('user', 'countries'));
     }
 
     public function create(){
@@ -44,18 +45,17 @@ class UserController extends Controller
         return view('muscle-up-app.gym.create', compact('gym'));
     }
 
-    public function update(Request $request, $id){
-        dd($request->fileData[]);
+    public function update(Request $request){
+//        dd($request->fileData[]);
 
-//        $user = $this->_user;
-//        $userid = Auth::user()->id;
-//        $user = User::findOrFail($userid);
         $user = Auth::user();
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->dob = $request->dob;
         $user->gender = $request->gender;
+        $user->country = $request->country;
+        $user->city = $request->city;
         $user->phone_number = $request->phone_number;
         $user->address = $request->address;
         $user->save();
