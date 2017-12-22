@@ -195,6 +195,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::post('trainee/allocation/update/{id}', ['as' => 'update-trainee-allocation', 'uses' => 'TraineeController@update_allocation']);
             Route::get('trainee/allocation/delete/{id}', ['as' => 'delete-trainee-allocation', 'uses' => 'TraineeController@destroy_allocation']);
             Route::get('trainee/health_stats/{id}', ['as' => 'health_stats', 'uses' => 'TraineeController@HealthStats']);
+            Route::post('trainee/health_stats_save', ['as' => 'health_stats_save', 'uses' => 'TraineeController@HealthStatsSave']);
 
         });
     });

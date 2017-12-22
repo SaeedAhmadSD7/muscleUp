@@ -19,6 +19,7 @@ class CreateMedicalHistoriesTable extends Migration
             $table->integer('branch_id');
             $table->integer('trainee_id');
             $table->integer('health_question_id');
+            $table->enum('status',['Yes','No'])->nullable();
             $table->timestamps();
         });
     }
