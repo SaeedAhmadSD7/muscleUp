@@ -5,7 +5,7 @@
 @stop
 
 @section('user-name')
-    {{get_current_user_full_name()}}
+    {{--{{get_current_user_full_name()}}--}}
 @stop
 
 @section('page-heading')

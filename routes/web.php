@@ -131,6 +131,11 @@ Route::group(['Public', 'namespace' => 'MuscleUpApp'], function () {
 
 Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], function () {
 
+    //***UserType = All authenticated Users
+
+    Route::resource('user', "UserController");
+
+
     //***UserType = SuperAdmin = admin
     Route::group(['UserTypeAsTrainee', 'middleware' => 'userType:' . UserType::SUPER_ADMIN], function () {
 
