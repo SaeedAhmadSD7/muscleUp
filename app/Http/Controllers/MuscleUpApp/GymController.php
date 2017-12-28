@@ -23,16 +23,19 @@ class GymController extends Controller
 
     private $_gym;
     private $_branch;
+    private $_user;
 
     /**
      * GymController constructor.
      * @param $gym
      * @param $branch
+     * @param $user
      */
-    public function __construct(Gym $gym, Branch $branch)
+    public function __construct(Gym $gym, Branch $branch, User $user)
     {
         $this->_gym = $gym;
         $this->_branch = $branch;
+        $this->_user = $user;
     }
 
 
@@ -69,7 +72,7 @@ class GymController extends Controller
 //        $gym->address = $request->branch_phone;
         $gym->save();
 
-        $branch = new Branch();
+        $branch = $this->_branch;
         $branch->gym_id = $gym->id;
 //        $branch->branch_no = $request->branch_no;
         $branch->title = $request->branch_name;
@@ -82,7 +85,7 @@ class GymController extends Controller
         $branch->save();
 
 
-        $user = new User();
+        $user = $this->_user;
         $user->branch_id = $branch->id;
         $user->gym_id = $gym->id;
         $user->first_name=$request->admin_name;
