@@ -166,6 +166,7 @@ class BranchController extends Controller
      */
     public function update(Request $request, $id)
     {
+//        dd($request->title);
         $user = Auth::user();
         $id =$user->branch_id;
         $branch = Branch::find($id);
@@ -179,7 +180,7 @@ class BranchController extends Controller
         $branch->address = $request->address;
         $branch->save();
 
-        return redirect()->route('show-branch');
+        return back();
     }
 
     /**

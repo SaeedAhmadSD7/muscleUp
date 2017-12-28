@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Phone:</label>
                                 <div class="col-md-8">
-                                    <input class="form-control phone_number" type="text" name="branch_phone" value="{{$branch->phone_number}}" placeholder="Branch Phone Number..." maxlength="15">
+                                    <input class="form-control phone_number" type="text" name="phone_number" value="{{$branch->phone_number}}" placeholder="Branch Phone Number..." maxlength="15">
                                 </div>
                             </div>
 
@@ -94,7 +94,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Address</label>
                                 <div class="col-md-8">
-                                    <textarea name="branch_address" placeholder="Address of the Branch" rows="3" class="form-control textarea-counter">{{$branch->address}}</textarea>
+                                    <textarea name="address" placeholder="Address of the Branch" rows="3" class="form-control textarea-counter">{{$branch->address}}</textarea>
                                     <div class="character-remaining clear input-description">1000 characters left</div>
                                 </div>
                             </div>
