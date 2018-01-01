@@ -1,11 +1,13 @@
-@extends('muscle-up-app.gym.dashboard.gym-dashboard')
+@extends('layouts.backend-main')
 
 @section('title','Add Instructor')
 
-@section('style-sheet')
-    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
+@section('title')
+    Gym Dashboard
+@stop
 
+@section('user-name')
+    {{get_auth_user_full_name()}}
 @stop
 
 @section('content')
@@ -40,7 +42,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Date of birth:</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="dob" value="" placeholder="Date of Birth..." readonly>
+                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="dob" value="" placeholder="Date of Birth...">
                             <div class="btn-date"></div>
 
                         </div>
@@ -69,7 +71,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Joining Date:</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="joining_date" value="" placeholder="Joining Date..." readonly>
+                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="joining_date" value="" placeholder="Joining Date...">
                             <div class="btn-date"></div>
 
                         </div>
@@ -77,7 +79,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Quit Date:</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="quit_date" value="" placeholder="Quit Date..." readonly>
+                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="quit_date" value="" placeholder="Quit Date...">
                             <div class="btn-date"></div>
 
                         </div>

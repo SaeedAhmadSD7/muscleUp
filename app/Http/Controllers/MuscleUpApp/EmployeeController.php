@@ -54,7 +54,7 @@ class EmployeeController extends Controller
         $user['type'] = 'employee';
         $user->first_name=$request->first_name;
         $user->last_name=$request->last_name;
-        $user->dial_code = '+27';
+//        $user->dial_code = '+27';
         $user->phone_number=$request->phone_number;
         $user->address=$request->address;
         $user->dob=$request->dob;
@@ -71,7 +71,7 @@ class EmployeeController extends Controller
         $instructor->exp_description=$request->exp_description;
         $user->employee()->save($instructor);
 
-        Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
+//        Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
 
 
         Session::flash('success','Save Successfully');

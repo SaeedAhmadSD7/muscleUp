@@ -38,7 +38,7 @@
                 <a href="{{route('branch.index')}}" title="List of Branches"><span>List of Branches</span></a>
             </li>
             <li>
-                <a href="{{route('branch.edit', 2)}}" title="Update my Branch Info"><span>My Branch</span></a>
+                <a href="{{route('branch.edit', 0)}}" title="Update my Branch Info"><span>My Branch</span></a>
             </li>
         </ul>
     </div>

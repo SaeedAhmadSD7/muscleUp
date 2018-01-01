@@ -1,12 +1,13 @@
-@extends('muscle-up-app.gym.dashboard.gym-dashboard')
+@extends('layouts.backend-main')
 
 @section('title','Instructor List')
 
-@section('style-sheet')
-    <link href="{{url('/admin-assets/applications/mailbox.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/icons/iconic/iconic.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/assets/css/inbox.css')}}" rel="stylesheet" type="text/css">
+@section('title')
+    Gym Dashboard
+@stop
+
+@section('user-name')
+    {{get_auth_user_full_name()}}
 @stop
 
 
