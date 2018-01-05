@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Utils\Globals\UserType;
 use Illuminate\Database\Eloquent\Model;
+use App\Utils\Globals\AppConstant;
 
 /**
  * App\Models\Trainee
@@ -43,7 +45,7 @@ class Trainee extends Model
 {
     protected $table = 'trainees';
     protected $primaryKey = 'id';
-    protected $fillable = ["branch_id" ,"user_id","weight","height","bmi","bfp"];
+    protected $guarded = ["id"];
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -73,6 +75,30 @@ class Trainee extends Model
     }
     public function healthQuestion(){
         return $this->hasMany(HealthQuestion::class);
+    }
+
+    /**
+     * @param array $params
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function fetchRecords(array $params=[])
+    {
+        $limit = isset($params['limit']) ? $params['limit'] : AppConstant::RECORD_LIMIT;
+        $oderBy = isset($params['orderBy']) ? $params['orderBy'] : ['created_at|DESC'];
+
+        $qry = $this->from('trainees AS t')
+            ->select(['b.id AS bId','u.id AS uId','t.id','t.code', 'u.first_name','u.last_name','u.email','profile_img','t.initial_fee'])
+            ->join('users AS u','u.id','t.user_id')
+            ->join('branches AS b','b.id','t.branch_id');
+
+        foreach ($oderBy as $o){
+            list($oderByCol,$direction) = explode('|',$o);
+            $qry->orderBy('t.'.$oderByCol,$direction);
+        }
+//        $qry->groupBy(['b.id','u.id','t.id','u.first_name','u.last_name','u.email','t.initial_fee','t.created_at']);
+//      dd($qry->toSql());
+
+        return $qry->paginate($limit);
     }
 
     public function instructors()

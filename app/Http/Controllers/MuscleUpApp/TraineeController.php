@@ -20,10 +20,22 @@ use App\Utils\AppUtil;
 
 class TraineeController extends Controller
 {
+    private $_trainee;
+
+    /**
+     * TraineeController constructor.
+     * @param $_trainee
+     */
+    public function __construct(Trainee $_trainee)
+    {
+        $this->_trainee = $_trainee;
+    }
+
+
     public function view_profile()
     {
 //     $trainee = Trainee::find(Auth::user->id)->first();
-        $user = Auth::user();
+        $user = get_auth_user();
         $trainee = $user->trainee;
 //       $trainee_his = MedicalHistory::find($trainee->id);
         return view('muscle-up-app.trainee.view-profile')->with('trainee', $trainee);
@@ -98,7 +110,7 @@ class TraineeController extends Controller
     public function inbox()
     {
         $trainees = Trainee::with('user')->get();
-        return view('muscle-up-app.gym.trainee.trainee-list')->with('trainees', $trainees);
+        return view('muscle-up-app.trainee.trainee-list')->with('trainees', $trainees);
     }
 
 
@@ -113,6 +125,15 @@ class TraineeController extends Controller
     public function index()
     {
         return view('muscle-up-app.trainee.index');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function traineesList(){
+
+        $trainees = $this->_trainee->fetchRecords();
+        return view('muscle-up-app.trainee.trainees-list',compact('trainees'));
     }
 
     /**
@@ -196,8 +217,6 @@ class TraineeController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $user = new User($request->all());
         $password = str_random(8);
         $user->password = bcrypt($password);

@@ -3,11 +3,6 @@
     Instructor Dashboard
 @stop
 
-@section('user-name')
-    {{\Auth::user()->first_name}}
-@stop
-
-
 @section('dashboard_link')
     {{route('employee-dashboard')}}
 @stop

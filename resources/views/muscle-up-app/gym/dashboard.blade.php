@@ -4,10 +4,6 @@
     Gym Dashboard
 @stop
 
-@section('user-name')
-    {{--{{get_current_user_full_name()}}--}}
-@stop
-
 @section('page-heading')
     <h2>Dashboard</h2>
     <p>The most complete user interface framework that can be used to create stunning admin dashboards and presentation websites. This page took {{ (microtime(true) - LARAVEL_START) }} seconds to render</p>
