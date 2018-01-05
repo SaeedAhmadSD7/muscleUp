@@ -6,6 +6,7 @@ use App\Models\Employee;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Instructor;
 use App\Mail\AddInstructorRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
@@ -13,6 +14,24 @@ use Illuminate\Support\Facades\Mail;
 class EmployeeController extends Controller
 
 {
+    private $_employee;
+    private $_user;
+    private $_instructor;
+
+    /**
+     * EmployeeController constructor.
+     * @param $employee
+     * @param $user
+     * @param $instructor
+     */
+    public function __construct(Employee $employee, User $user, Instructor $instructor)
+    {
+        $this->_employee = $employee;
+        $this->_user = $user;
+        $this->_instructor = $instructor;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +66,7 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
 
-        $user = new User();
+        $user = $this->_user;
         $user->email = $request->email;
         $password = str_random(8);
         $user->password = bcrypt($password);
@@ -61,15 +80,21 @@ class EmployeeController extends Controller
         $user->gender =$request->gender;
         $user->save();
 
-        $instructor = new  Employee();
-        $instructor->user_id=$user->id;
-        $instructor->joining_date=$request->joining_date;
-        $instructor->quit_date=$request->quit_date;
-        $instructor->previous_salary=$request->previous_salary;
-        $instructor->joining_salary=$request->joining_salary;
-        $instructor->exp_years=$request->exp_years;
-        $instructor->exp_description=$request->exp_description;
-        $user->employee()->save($instructor);
+        $employee = $this->_employee;
+        $employee->user_id=$user->id;
+        $employee->joining_date=$request->joining_date;
+        $employee->quit_date=$request->quit_date;
+        $employee->previous_salary=$request->previous_salary;
+        $employee->joining_salary=$request->joining_salary;
+        $employee->exp_years=$request->exp_years;
+        $employee->exp_description=$request->exp_description;
+        $user->employee()->save($employee);
+
+        $instructor = $this->_instructor;
+        $instructor->user_id = $user->id;
+        $instructor->employee_id = $employee->id;
+        $instructor->branch_id = \Auth::user()->branch_id;
+        $instructor->save();
 
 //        Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
 

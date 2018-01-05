@@ -12,6 +12,12 @@ use Illuminate\Database\Eloquent\Model;
 class Instructor extends Model
 {
 
+    protected $table = 'instructors';
+    protected $primaryKey = 'id';
+    protected $fillable = ["user_id","employee_id","branch_id"];
+
+
+
     public function trainees()
     {
         return $this->hasMany(Trainee::class);

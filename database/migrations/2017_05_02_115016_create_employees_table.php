@@ -20,7 +20,7 @@ class CreateEmployeesTable extends Migration
             $table->integer('user_id')->nullable();
             $table->dateTime('joining_date');
             $table->dateTime('quit_date')->nullable();
-            $table->decimal('previous_salary')->nullable();
+            $table->integer('previous_salary')->nullable();
             $table->integer('joining_salary')->nullable();
             $table->smallInteger('exp_years')->nullable();
             $table->string('exp_description',1024);
