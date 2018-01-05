@@ -47,9 +47,9 @@ class Employee extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function trainee()
+    public function instructors()
     {
-        return $this->hasMany(Trainee::class);
+        return $this->hasMany(Instructor::class);
     }
 
     public static function showAll()

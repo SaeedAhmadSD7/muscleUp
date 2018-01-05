@@ -43,7 +43,7 @@ class Trainee extends Model
 {
     protected $table = 'trainees';
     protected $primaryKey = 'id';
-    protected $fillable = ["branch_id","instructor_id" ,"user_id","weight","height","bmi","bfp"];
+    protected $fillable = ["branch_id" ,"user_id","weight","height","bmi","bfp"];
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -73,5 +73,10 @@ class Trainee extends Model
     }
     public function healthQuestion(){
         return $this->hasMany(HealthQuestion::class);
+    }
+
+    public function instructors()
+    {
+        return $this->belongsToMany(Instructor::class);
     }
 }

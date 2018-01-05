@@ -202,8 +202,14 @@ class TraineeController extends Controller
         $password = str_random(8);
         $user->password = bcrypt($password);
         $user['type'] = 'trainee';
+        //        $user->first_name = $request->first_name;
+//        $user->last_name = $request->last_name;
+//        $user->email = $request->email;
+//        $user->dob = $request->dob;
+//        $user->gender = $request->gender;
+//        $user->phone_number = $request->phone_number;
         $user->address = $request->address;
-        $user->dial_code = '+27';
+//        $user->dial_code = '+27';
         $user->save();
         $trainee = new Trainee($request->all());
         $trainee['user_id'] = $user->id;

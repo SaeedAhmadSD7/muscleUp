@@ -12,4 +12,18 @@ use Illuminate\Database\Eloquent\Model;
 class Instructor extends Model
 {
 
+    public function trainees()
+    {
+        return $this->hasMany(Trainee::class);
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
