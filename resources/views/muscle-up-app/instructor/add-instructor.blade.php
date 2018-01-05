@@ -22,7 +22,7 @@
         <div class="panel-body">
             <h3 class="content-box-header bg-google">Basic Info</h3>
             <div class="example-box-wrapper">
-                <form class="form-horizontal bordered-row add-trainee-form" role="form" method="POST" action="{{route('instructor-store')}}">
+                <form class="form-horizontal bordered-row create-instructor-form" role="form" method="POST" action="{{route('instructor-store')}}">
                     {{csrf_field()}}
                     <input type="hidden" id="profile_img" name="profile_img" />
                     <div class="tab-pane active pL0" id="tab2">
@@ -167,6 +167,5 @@
         window.uploadProfilePic = "{{route('uploadProfilePic')}}";
         window.removeUploadedProfilePic = "{{route('removeUploadedProfilePic')}}";
     </script>
-    <script src="{{url('/resources/app/pages/js/create-trainee.js')}}" type="text/javascript"></script>
-    <script src="{{url('/resources/app/pages/js/add-instructor.js')}}" type="text/javascript"></script>
+    <script src="{{url('/resources/app/pages/js/create-instructor.js')}}" type="text/javascript"></script>
 @stop
