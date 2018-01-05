@@ -110,7 +110,7 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show() {
-         $instructors=Employee::with('user')->get();
+         $instructors=Instructor::with('user')->get();
         return view('muscle-up-app.instructor.instructor-list')->with('instructors',$instructors);
     }
     public function profileshow($id)

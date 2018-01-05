@@ -41,7 +41,7 @@
                     @foreach($instructors as $instructor)
                         <tr id="{{$instructor->id}}">
                             <td sty>{{$counter}}</td>
-                            <td class="email-title">{{$instructor->user->first_name}}</td>
+                            <td class="Instructor-title">{{$instructor->user->first_name}}</td>
                             <td class="email-body">{{$instructor->user->email}}</td>
                             <td class="date">{{$instructor->user->updated_at}}</td>
                             <td><a href="{{route('instructor-edit',$instructor->id)}}" class="glyph-icon icon-iconic-right-circle"></a></td>
@@ -59,4 +59,45 @@
 @section('script')
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/js/inbox.js')}}" type="text/javascript"></script>
+    <script>
+        // delete a post
+        $(document).on('click', '.Instructor-title', function() {
+
+            id = $(this).parent().attr('id');
+            alert(id);
+
+            $.ajax({
+                type: 'DELETE',
+                url: 'posts/' + id,
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                },
+                success: function(data) {
+                    toastr.success('Successfully deleted Post!', 'Success Alert', {timeOut: 5000});
+                    $('.item' + data['id']).remove();
+                    $('.col1').each(function (index) {
+                        $(this).html(index+1);
+                    });
+                }
+            });
+
+        });
+        $('.modal-footer').on('click', '.delete', function() {
+            $.ajax({
+                type: 'DELETE',
+                url: 'posts/' + id,
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                },
+                success: function(data) {
+                    toastr.success('Successfully deleted Post!', 'Success Alert', {timeOut: 5000});
+                    $('.item' + data['id']).remove();
+                    $('.col1').each(function (index) {
+                        $(this).html(index+1);
+                    });
+                }
+            });
+        });
+
+    </script>
 @stop
