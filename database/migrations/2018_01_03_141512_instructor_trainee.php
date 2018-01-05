@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use \App\Utils\Globals\InstructorType;
 
-class CreateMedicalHistoriesTable extends Migration
+class InstructorTrainee extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +14,11 @@ class CreateMedicalHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('medical_histories', function (Blueprint $table) {
+        Schema::create('instructor_trainee', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('gym_id');
-            $table->integer('branch_id');
-            $table->integer('trainee_id');
-            $table->integer('health_question_id');
-            $table->enum('status',['Yes','No'])->nullable();
+            $table->unsignedInteger('instructor');
+            $table->unsignedInteger('trainee');
+            $table->enum('type', array_values(InstructorType::$instructorTypes));
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateMedicalHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medical_histories');
+        Schema::dropIfExists('instructor_trainee');
     }
 }

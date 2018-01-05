@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
+use App\Http\Requests\HealthStatsRequest;
 use App\Http\Requests\PicUploadRequest;
 use App\Models\HealthQuestion;
 use App\Models\User;
@@ -220,8 +221,14 @@ class TraineeController extends Controller
         $password = str_random(8);
         $user->password = bcrypt($password);
         $user['type'] = 'trainee';
+        //        $user->first_name = $request->first_name;
+//        $user->last_name = $request->last_name;
+//        $user->email = $request->email;
+//        $user->dob = $request->dob;
+//        $user->gender = $request->gender;
+//        $user->phone_number = $request->phone_number;
         $user->address = $request->address;
-        $user->dial_code = '+27';
+//        $user->dial_code = '+27';
         $user->save();
         $trainee = new Trainee($request->all());
         $trainee['user_id'] = $user->id;
@@ -429,17 +436,46 @@ class TraineeController extends Controller
 
     public function HealthStats($id)
     {
-        $Trainee = Trainee::where(['user_id'=>$id])->first();
+        $Trainee = Trainee::where(['user_id' => $id])->first();
 //        dd($Trainee->healthQuestion());
         $TraineeStats = $Trainee->healthQuestion();
-//        dd($TraineeStats);
-         if (count($TraineeStats)>0) {
-             $HealthStats = HealthQuestion::where(['is_active' => 'Yes'])->get();
-             $TraineeStats = $HealthStats;
+        $MedicalHistories = MedicalHistory::where(['trainee_id' => $id])->get();
+
+        if (count($TraineeStats) > 0) {
+            $HealthStats = HealthQuestion::where(['is_active' => 'Yes'])->get();
+            $TraineeStats = $HealthStats;
         }
-//        $layoutData['HealthStats'] = $HealthStats;
+        if (count($MedicalHistories) > 0) {
+            $layoutData['MedicalHistories'] = $MedicalHistories;
+        }
+//        dd($MedicalHistories);
+        $layoutData['Trainee'] = $Trainee;
         $layoutData['TraineeStats'] = $TraineeStats;
+
         return view('muscle-up-app.trainee.healthStats.health-stats', $layoutData);
+
+    }
+
+    public function HealthStatsSave(HealthStatsRequest $request)
+    {
+        $trainee_id = $request->get('trainee_id');
+        $health_stats = $request->get('stat');
+//        dd($health_stats);
+        foreach ($health_stats as $key => $health_stat) {
+            $MedicalHistory = MedicalHistory::where(['trainee_id' => $trainee_id, 'health_question_id' => $key])->first();
+            if (!$MedicalHistory) {
+                $MedicalHistory = new MedicalHistory();
+            }
+            $MedicalHistory->gym_id = 1;
+            $MedicalHistory->branch_id = 1;
+            $MedicalHistory->trainee_id = $trainee_id;
+            $MedicalHistory->health_question_id = $key;
+            $MedicalHistory->status = $health_stat;
+            $MedicalHistory->save();
+
+        }
+        return redirect()->route('trainee-personal-detail', $trainee_id);
+
 
     }
 }

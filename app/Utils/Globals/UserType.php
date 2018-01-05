@@ -27,3 +27,16 @@ class UserType
 
 
 }
+
+class InstructorType
+{
+    const PERSONAL_TRAINER = 'Personal Trainer';
+    const GROUP_FITNESS = 'Group Fitness';
+
+    public static $instructorTypes = [
+        self::PERSONAL_TRAINER=>self::PERSONAL_TRAINER,
+        self::GROUP_FITNESS=>self::GROUP_FITNESS,
+    ];
+
+
+}

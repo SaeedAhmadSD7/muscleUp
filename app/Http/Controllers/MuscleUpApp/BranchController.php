@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Models\Branch;
 use App\Models\User;
+use App\Models\Country;
 use App\Models\Gym;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,6 +14,21 @@ use \App\Utils\Globals\UserType;
 
 class BranchController extends Controller
 {
+    private $_branch;
+    private $_user;
+
+    /**
+     * BranchController constructor.
+     * @param $branch
+     * @param $user
+     */
+    public function __construct(Branch $branch, User $user)
+    {
+        $this->_branch = $branch;
+        $this->_user = $user;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -33,9 +49,12 @@ class BranchController extends Controller
 //        return view('muscle-up-app.gym.branch');
 //    }
     public function index() {
-        $gyms=Branch::all();
+
+        $user = Auth::user();
+        $gyms=Branch::where('gym_id',$user->gym_id)->get();
+        $countries = Country::all();   //only for user modal data
 //        dd($gyms->gym->title);
-        return view('muscle-up-app.branch.index', compact('gyms'));
+        return view('muscle-up-app.branch.index', compact('gyms','countries','user'));
     }
 
 
@@ -50,7 +69,7 @@ class BranchController extends Controller
 
 
 //dd(Auth::user()->id);
-        $branch = new Branch();
+        $branch = $this->_branch;
         $branch->gym_id = Auth::user()->gym_id;
 //        $branch->branch_no = $request->branch_no;
         $branch->title = $request->branch_name;
@@ -62,7 +81,7 @@ class BranchController extends Controller
         $branch->save();
 
         //        dd($request)->all;
-        $user = new User();
+        $user = $this->_user;
         $user->branch_id = $branch->id;
         $user->gym_id = Auth::user()->gym_id;
         $user->first_name=$request->admin_name;
@@ -131,8 +150,11 @@ class BranchController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::user();
+        $id =$user->branch_id;
         $branch=Branch::find($id);
-        return view('muscle-up-app.gym.update')->with('branch',$branch);
+        $countries = Country::all();   //only for user modal data
+        return view('muscle-up-app.branch.edit',compact('user','branch','countries'));
     }
 
     /**
@@ -144,16 +166,21 @@ class BranchController extends Controller
      */
     public function update(Request $request, $id)
     {
+//        dd($request->title);
+        $user = Auth::user();
+        $id =$user->branch_id;
         $branch = Branch::find($id);
-        $branch->branch_no = $request->branch_no;
-        $branch->email = $request->email;
-        $branch->phone_no = $request->phone_no;
+//        $branch->branch_no = $request->branch_no;
+        $branch->title = $request->title;
+        $branch->phone_number = $request->phone_number;
         $branch->opening_time = $request->opening_time;
-        $branch->clossing_time = $request->clossing_time;
+        $branch->closing_time = $request->closing_time;
+        $branch->country = $request->country;
+        $branch->city = $request->city;
         $branch->address = $request->address;
         $branch->save();
 
-        return redirect()->route('show-branch');
+        return back();
     }
 
     /**
