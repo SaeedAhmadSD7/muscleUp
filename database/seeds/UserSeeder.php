@@ -126,6 +126,7 @@ class UserSeeder extends Seeder
     }
 
     private function addDummyEmployees(){
+        \App\Models\Employee::truncate();
         DB::table('employees')->insert([
             'branch_id' => 1,
             'user_id' => 5,
@@ -140,6 +141,7 @@ class UserSeeder extends Seeder
     }
 
     private function addDummyTrainees(){
+        \App\Models\Trainee::truncate();
         DB::table('trainees')->insert([
             'branch_id' => 1,
             'user_id' => 3,

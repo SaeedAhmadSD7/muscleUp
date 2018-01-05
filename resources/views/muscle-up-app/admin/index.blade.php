@@ -4,10 +4,6 @@
     Admin Dashboard
 @stop
 
-@section('user-name')
-    {{get_auth_user_full_name()}}
-@stop
-
 @section('dashboard_link')
     {{route('adminDashboard')}}
 @stop

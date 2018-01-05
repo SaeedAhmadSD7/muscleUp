@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Utils\Globals\GlobalsConst;
+use App\Utils\Globals\AppConstant;
 
 /**
  * App\Models\Gym
@@ -73,7 +73,7 @@ class Gym extends Model {
 
     public function fetchGymsRecord() {
 
-        $gym = $this->paginate(GlobalsConst::RECORD_LIMIT);
+        $gym = $this->paginate(AppConstant::RECORD_LIMIT);
         return $gym;
     }
 }

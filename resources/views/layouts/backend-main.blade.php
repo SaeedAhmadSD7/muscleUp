@@ -59,7 +59,7 @@
                             <div class="user-account-btn dropdown">
                                 <a class="user-profile clearfix" data-toggle="dropdown" href="#" title="My Account">
                                     <img alt="Profile image" src="{{url('/resources/app/images/gravatar.jpg')}}" width="28">
-                                    <span>@yield('user-name')</span> <i class="glyph-icon icon-angle-down"></i></a>
+                                    <span>{{get_auth_user_full_name()}}</span> <i class="glyph-icon icon-angle-down"></i></a>
                                 <div class="dropdown-menu float-right">
                                     <div class="box-sm">
                                         <div class="login-box clearfix">
@@ -67,7 +67,9 @@
                                                 <img alt="" src="{{url('/resources/app/images/gravatar.jpg')}}">
                                             </div>
                                             <div class="user-info">
-                                                <span>@yield('user-name')</span> <a href="#" title="Edit profile">Edit profile</a>
+                                                <span>{{get_auth_user_email()}}</span>
+                                                <a href="#" class="btn btn-primary" title="Edit profile">Edit profile</a>
+                                                <a href="#"  class="btn btn-primary" title="Change Password">Change Password</a>
                                             </div>
                                         </div>
                                         <div class="divider"></div>
@@ -95,17 +97,22 @@
 
 <footer>
     <script src="{{ elixir('dist/js/backend-app.js') }}"></script>
-    <script type="text/javascript">$(window).load(function(){setTimeout(function() {$('#loading').fadeOut( 400, "linear" );}, 300);});</script>
+    <script type="text/javascript">
+        $(window).load(function(){setTimeout(function() {$('#loading').fadeOut( 400, "linear" );}, 300);});
 
-
-
-    <script>
 
         $("#edit-user").click(function(){
             $("#edit-user-modal").modal("show");
         })
 
+        $('.user-profile.clearfix').click(function (e) {
+            e.preventDefault();
+            $(this).siblings('.dropdown-menu.float-right').toggle('show');
+            e.stopImmediatePropagation();
+        });
+
     </script>
+
     @yield('script')
 </footer>
 

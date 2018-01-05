@@ -28,6 +28,21 @@ Route::group(['Public', 'namespace' => 'MuscleUpApp'], function () {
         });
 
         /**
+         * Images Route
+         */
+        Route::get('/resources/app/images/{uploadType}/{filename}', function ($uploadType,$filename) {
+            $path = resource_path('/assets/uploads/'. $uploadType .'/'. $filename);
+            if (!File::exists($path)) {
+                return response()->json(['message' => 'Image not found.'], 404);
+            }
+            $file = File::get($path);
+            $type = File::mimeType($path);
+            $response = Response::make($file, 200);
+            $response->header("Content-Type", $type);
+            return $response;
+        });
+
+        /**
          * Some Js Files
          */
         Route::get('/resources/app/js/{filename}', function ($filename) {
@@ -184,7 +199,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::post('trainee/upload-profile-pic', ['as' => 'uploadProfilePic', 'uses' => 'TraineeController@uploadProfilePic']);
             Route::post('trainee/remove-uploaded-profile-pic', ['as' => 'removeUploadedProfilePic', 'uses' => 'TraineeController@removeUploadedProfilePic']);
             Route::post('trainee/store', ['uses' => 'TraineeController@store', 'as' => 'trainee-store']);
-            Route::get('trainee/list', ['as' => 'trainee-list', 'uses' => 'TraineeController@inbox']);
+            Route::get('trainee/list', ['as' => 'trainee-list', 'uses' => 'TraineeController@traineesList']);
             Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
             Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
 

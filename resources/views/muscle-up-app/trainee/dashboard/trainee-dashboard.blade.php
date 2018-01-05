@@ -3,11 +3,6 @@
     Trainee Dashboard
 @stop
 
-@section('user-name')
-    {{\Auth::user()->first_name}}
-@stop
-
-
 @section('user_type')
     Trainee
 @stop

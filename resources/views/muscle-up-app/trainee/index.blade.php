@@ -1,79 +1,10 @@
-@extends('muscle-up-app.trainee.dashboard.trainee-dashboard')
+@extends('layouts.backend-main')
 
-@section('style-sheet')
-    <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/page-transitions.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/material/ripple.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/images.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/info-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/invoice.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/loading-indicators.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/menus.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/panel-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/response-messages.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/responsive-tables.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/ribbon.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/social-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/tile-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/timeline.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/icons/spinnericon/spinnericon.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/accordion-ui/accordion.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/calendar/calendar.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/carousel/carousel.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/charts/justgage/justgage.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/charts/morris/morris.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/charts/piegage/piegage.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/charts/xcharts/xcharts.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/chosen/chosen.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/colorpicker/colorpicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/datatable/datatable.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/datepicker/datepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/datepicker-ui/datepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/daterangepicker/daterangepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/dialog/dialog.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/dropzone/dropzone.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/file-input/fileinput.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/input-switch/inputswitch.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/input-switch/inputswitch-alt.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/ionrangeslider/ionrangeslider.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/jcrop/jcrop.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/jgrowl-notifications/jgrowl.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/loading-bar/loadingbar.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/maps/vector-maps/vectormaps.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/markdown/markdown.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/modal/modal.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/multi-select/multiselect.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/multi-upload/fileupload.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/nestable/nestable.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/noty-notifications/noty.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/pretty-photo/prettyphoto.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/progressbar/progressbar.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/range-slider/rangeslider.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/slidebars/slidebars.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/slider-ui/slider.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/summernote-wysiwyg/summernote-wysiwyg.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/tabs-ui/tabs.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/timepicker/timepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/tocify/tocify.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/touchspin/touchspin.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/uniform/uniform.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/wizard/wizard.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/xeditable/xeditable.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/chat.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/files-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/progress-box.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/snippets/todo.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/applications/mailbox.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/themes/components/default.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/owlcarousel/owlcarousel.css')}}" rel="stylesheet" type="text/css">
-@stop
+@section('title','Trainee Dashboard')
 
 @section('page-heading')
-    <h2>Dashboard</h2>
-    <p>The most complete user interface framework that can be used to create stunning admin dashboards and presentation websites.</p>
+    <h2>Trainee Dashboard</h2>
+    <p>Please fill in all the information and then click Add Trainee.</p>
 @stop
 
 @section('content')
