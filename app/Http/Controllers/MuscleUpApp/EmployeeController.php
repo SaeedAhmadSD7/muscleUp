@@ -170,6 +170,35 @@ class EmployeeController extends Controller
         return redirect()->route('instructor-show');
     }
 
+    public function allocate($id)
+    {
+        dd($id);
+        $user = User::find($id);
+        $user->first_name=$request->input('first_name');
+        $user->last_name=$request->input('last_name');
+        $user->dial_code = '+45';
+        $user->phone_number=$request->input('phone_number');
+        $user->dob=$request->input('dob');
+        $user->address=$request->input('address');
+        $user->gender =$request->input('gender');
+        $user->save();
+
+        $instructor= Employee::where('user_id','=',$id)->first();
+
+        $instructor->joining_date=$request->input('joining_date');
+        $instructor->quit_date=$request->input('quit_date');
+        $instructor->previous_salary=$request->input('previous_salary');
+        $instructor->joining_salary=$request->input('joining_salary');
+        $instructor->exp_years=$request->input('exp_years');
+        $instructor->exp_description=$request->input('exp_description');
+        $instructor->save();
+
+
+        Session::flash('Success','Congratulations Employeee have been added succesfully. Credentials have been mailed to entered email.');
+
+        return redirect()->route('instructor-show');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
