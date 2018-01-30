@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Models\Employee;
+use App\Models\Trainee;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -165,38 +166,50 @@ class EmployeeController extends Controller
         $instructor->save();
 
 
-        Session::flash('Success','Congratulations Employeee have been added succesfully. Credentials have been mailed to entered email.');
+        Session::flash('Success','Congratulations Employee have been added successfully. Credentials have been mailed to entered email.');
 
         return redirect()->route('instructor-show');
     }
 
-    public function allocate($id)
+    public function allocate(Request $request)
     {
-        dd($id);
-        $user = User::find($id);
-        $user->first_name=$request->input('first_name');
-        $user->last_name=$request->input('last_name');
-        $user->dial_code = '+45';
-        $user->phone_number=$request->input('phone_number');
-        $user->dob=$request->input('dob');
-        $user->address=$request->input('address');
-        $user->gender =$request->input('gender');
-        $user->save();
+//        dd($request);
 
-        $instructor= Employee::where('user_id','=',$id)->first();
+        $trainee_id = $request->input('trainee_id');
+        $instructor_id = $request->input('instructor_id');
+        $allocation_type = $request->input('allocationType');
+        $instructor = Instructor::find($instructor_id);
 
-        $instructor->joining_date=$request->input('joining_date');
-        $instructor->quit_date=$request->input('quit_date');
-        $instructor->previous_salary=$request->input('previous_salary');
-        $instructor->joining_salary=$request->input('joining_salary');
-        $instructor->exp_years=$request->input('exp_years');
-        $instructor->exp_description=$request->input('exp_description');
-        $instructor->save();
+        $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
 
 
-        Session::flash('Success','Congratulations Employeee have been added succesfully. Credentials have been mailed to entered email.');
+        Session::flash('Success','Congratulations Employee have been added successfully. Credentials have been mailed to entered email.');
 
-        return redirect()->route('instructor-show');
+
+
+        return response()->json([
+            'success' => true,
+            'message'   => 'Congratulations Employee have been added successfully. Credentials have been mailed to entered email.'
+        ]);
+
+
+//        return redirect()->route('instructor-show');
+    }
+
+
+    public function allocation($id)
+    {
+//        dd($id);
+
+        $instructor = Instructor::find($id);
+
+        $allocatedTrainees = $instructor->trainees()->get();
+
+//dd($allocatedTrainees);
+
+        return view('muscle-up-app.instructor.trainee-allocation', compact('allocatedTrainees','instructor'));
+
+//        return redirect()->route('instructor-show');
     }
 
     /**
