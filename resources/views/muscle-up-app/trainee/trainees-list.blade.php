@@ -39,7 +39,7 @@
                             <td>{{$t->initial_fee}}</td>
                             <td>
                                 <ul class="">
-                                    <li class="dropdown">
+                                    <li class="dropdozwn">
                                         <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown">
                                             <i class="glyphicon glyphicon-th-list"></i>
                                         </a>
