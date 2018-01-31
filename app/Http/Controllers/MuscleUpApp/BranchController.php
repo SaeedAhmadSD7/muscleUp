@@ -193,7 +193,6 @@ class BranchController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
         $branch=Branch::find($id);
         $branch->delete();
 
