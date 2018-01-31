@@ -1,4 +1,4 @@
-@extends('muscle-up-app.gym.dashboard.gym-dashboard')
+@extends('muscle-up-app.gym.dashboard')
 
 @section('title','Instructor List')
 
