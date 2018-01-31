@@ -238,9 +238,12 @@ class TraineeController extends Controller
      */
     public function show($id)
     {
-        $trainee = User::find($id);
-//        $user = User::find($trainee->user_id);
-        return view('muscle-up-app.trainee.trainee-personal-detail')->with(['trainee' => $trainee]);
+//        dd("hi");
+        $trainees = $this->_trainee->fetchRecords();
+        return view('muscle-up-app.trainee.trainees-list',compact('trainees'));
+//        $trainee = User::find($id);
+////        $user = User::find($trainee->user_id);
+//        return view('muscle-up-app.trainee.trainee-personal-detail')->with(['trainee' => $trainee]);
     }
 
     /**

@@ -112,13 +112,14 @@ class Trainee extends Model
 //        $vRules = Trainee::$rules;
 //            $id = isset($data['id']) ? $data['id'] : '';
 //            if($id != ''){
-//                $trainees = Trainee::find($id);
+//                $trainee = Trainee::find($id);
+//                $user = User::find($id);
 //            }else{
 //                return $response = ['success'=>false, 'error'=> true, 'message' => ' record did not find for updation! '];
 //            }
 //dd($data);
         $user = new User($data);
-        $password = str_random(8);
+        $password = "asdf1234";
         $user->password = bcrypt($password);
         $user['type'] = 'Trainee';
         $user->first_name = $user->first_name;
@@ -129,6 +130,8 @@ class Trainee extends Model
         $user->phone_number = $user->phone_number;
         $user->address = $user->address;
         $user->profile_img = $user->profile_img;
+        $user->branch_id= "1";
+        $user->gym_id = "1";
 //        $user->dial_code = '+27';
         $user->save();
 
@@ -139,6 +142,7 @@ class Trainee extends Model
         $trainee['user_id'] = $user->id;
         $trainee['joining_date'] = $joining_date;
         $trainee->height = $trainee->height;
+        $trainee->branch_id = "1";
         $trainee->save();
 
         $response = ['success'=>true, 'error'=> false, 'message'=> 'Tainee has been saved successfully!'];
