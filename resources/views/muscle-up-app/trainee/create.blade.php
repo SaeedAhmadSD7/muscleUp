@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Phone number:</label>
                                 <div class="col-md-1">
-                                    <input class="form-control dial-code" type="text" name="dial_code" value="" placeholder="+1..." readonly>
+                                    <input class="form-control dial-code" type="text"  value="" placeholder="+1..." readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <input class="form-control phone_number" type="text" name="phone_number" value="" placeholder="Phone Number..." maxlength="15">

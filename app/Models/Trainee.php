@@ -46,6 +46,7 @@ class Trainee extends Model
     protected $table = 'trainees';
     protected $primaryKey = 'id';
     protected $guarded = ["id"];
+    public $fillable = ['branch_id','user_id','code','height','joining_date', 'quit_date','admission_fee','initial_fee','deleted_at'];
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -105,4 +106,9 @@ class Trainee extends Model
     {
         return $this->belongsToMany(Instructor::class);
     }
+//    public function saveTrainee($data)
+//    {
+//
+//    }
+
 }

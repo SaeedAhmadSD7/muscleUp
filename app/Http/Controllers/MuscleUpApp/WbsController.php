@@ -6,7 +6,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\Wbs;
 use App\Models\Exercise;
-
+use Illuminate\Support\Facades\Auth;
 
 class WbsController extends Controller
 {
@@ -39,6 +39,7 @@ class WbsController extends Controller
      */
     public function store(Request $request) {
         $formData = $request->all();
+        $formData['gym_id']=Auth::user()->gym_id;
         Wbs::createUpdateWbs($formData);
         return redirect()->route('wbs-list');
     }
@@ -78,6 +79,7 @@ class WbsController extends Controller
     public function update(Request $request, Wbs $wbs)
     {
         $formData = $request->all();
+        $formData['gym_id']=Auth::user()->gym_id;
         Wbs::createUpdateWbs($formData);
         return redirect()->route('wbs-list');
 

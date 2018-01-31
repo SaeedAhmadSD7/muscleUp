@@ -30,6 +30,9 @@ class RedirectIfAuthenticated
         else if (Auth::guard($guard)->check() && Auth::user()->type == 'employee') {
             return redirect()->route('employee-dashboard');
         }
+//        else if (Auth::guard($guard)->check() && Auth::user()->type == 'instructor') {
+//            return redirect()->route('employee-dashboard');
+//        }
 
         return $next($request);
     }

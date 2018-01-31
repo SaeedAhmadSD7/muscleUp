@@ -64,6 +64,7 @@ class Wbs extends Model
 
         $Wbs->title = $formData['title'];
         $Wbs->description = $formData['description'];
+        $Wbs->gym_id = $formData['gym_id'];
         $Wbs->save();
         $Wbs->exercise()->detach();
         $Wbs->exercise()->attach($wbs_data);

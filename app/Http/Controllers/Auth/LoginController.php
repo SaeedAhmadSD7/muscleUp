@@ -52,6 +52,9 @@ class LoginController extends Controller
         else if($user->type === UserType::EMPLOYEE) {
             return redirect()->intended(route('employeeDashboard'));
         }
+        else if($user->type === UserType::INSTRUCTOR) {
+            return redirect()->intended(route('employeeDashboard'));
+        }
     }
 
     protected $redirectTo = '/';

@@ -37,15 +37,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $counter = 1 ?>
+                    <?php $counter = 1?>
                     @foreach($instructors as $instructor)
                         <tr id="{{$instructor->id}}">
-                            <td sty>{{$counter}}</td>
+                            <td>{{$counter}}</td>
                             <td class="email-title">{{$instructor->user->first_name}}</td>
                             <td class="email-body">{{$instructor->user->email}}</td>
                             <td class="date">{{$instructor->user->updated_at}}</td>
-                            <td><a href="{{route('instructor-edit',$instructor->id)}}" class="glyph-icon icon-iconic-right-circle"></a></td>
-                            <td><a href="{{route('instructor-delete',$instructor->id)}}" class="glyph-icon icon-iconic-cancel-circle"></a></td>
+                            <td><a href="{{route('instructor-edit',$instructor->id)}}" class="glyph-icon icon-iconic-right-circle">edit</a></td>
+                            <td><a href="{{route('instructor-delete',$instructor->id)}}" class="glyph-icon icon-iconic-cancel-circle">delete</a></td>
                         </tr>
                         <?php $counter++ ?>
                     @endforeach

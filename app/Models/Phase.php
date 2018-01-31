@@ -27,7 +27,7 @@ class Phase extends Model {
 
     protected $table = 'phases';
     protected $primaryKey = 'id';
-    public $fillable = ['title','description'];
+    public $fillable = ['title','description' , 'gym_id'];
 
     public function program() {
         return $this->belongsToMany(Program::class,'programs_phases','phase_id','program_id')->withTimestamps();
@@ -53,11 +53,13 @@ class Phase extends Model {
 
         $phase_data = array();
         for($i = 0; $i < count($formData['day_id']) ; $i++) {
-                $phase_data[$i]['day_id'] = $formData['day_id'][$i];
+                $phase_data[$i]['day_id'] = $formData['day_id'][$i];                               //for dropdown
                 $phase_data[$i]['wbs_id'] = $formData['wbs_id'][$i];
         }
         $phase->title = $formData['title'];
         $phase->description = $formData['description'];
+        $phase->gym_id = $formData['gym_id'];
+
         $phase->save();
         $phase->day()->detach();
         $phase->day()->attach($phase_data);

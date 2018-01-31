@@ -10,7 +10,7 @@ use App\Models\Instructor;
 use App\Mail\AddInstructorRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Facades\Auth;
 class EmployeeController extends Controller
 
 {
@@ -68,7 +68,12 @@ class EmployeeController extends Controller
 
         $user = $this->_user;
         $user->email = $request->email;
-        $password = str_random(8);
+        $password = "asdf1234";
+        $data=Auth::user($user->id);
+        $user->gym_id=$data['gym_id'];
+        $user->branch_id=$data['branch_id'];
+        $user->country=$data['country'];
+        $user->city=$data['city'];
         $user->password = bcrypt($password);
         $user['type'] = 'employee';
         $user->first_name=$request->first_name;
@@ -82,6 +87,7 @@ class EmployeeController extends Controller
 
         $employee = $this->_employee;
         $employee->user_id=$user->id;
+        $employee->branch_id=$data['branch_id'];
         $employee->joining_date=$request->joining_date;
         $employee->quit_date=$request->quit_date;
         $employee->previous_salary=$request->previous_salary;
@@ -93,7 +99,7 @@ class EmployeeController extends Controller
         $instructor = $this->_instructor;
         $instructor->user_id = $user->id;
         $instructor->employee_id = $employee->id;
-        $instructor->branch_id = \Auth::user()->branch_id;
+        $instructor->branch_id = Auth::user()->branch_id;
         $instructor->save();
 
 //        Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
@@ -111,6 +117,7 @@ class EmployeeController extends Controller
      */
     public function show() {
          $instructors=Employee::with('user')->get();
+
         return view('muscle-up-app.instructor.instructor-list')->with('instructors',$instructors);
     }
     public function profileshow($id)
@@ -147,7 +154,8 @@ class EmployeeController extends Controller
         $user = User::find($id);
         $user->first_name=$request->input('first_name');
         $user->last_name=$request->input('last_name');
-        $user->dial_code = '+45';
+        $user->email=$request->input('email');
+//        $user->dial_code = '+45';
         $user->phone_number=$request->input('phone_number');
         $user->dob=$request->input('dob');
         $user->address=$request->input('address');

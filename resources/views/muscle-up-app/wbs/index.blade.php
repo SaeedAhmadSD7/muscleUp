@@ -36,8 +36,8 @@
                       </tr>
                    </thead>
                     <tbody>
+                            <?php $count=1; ?>
                             @foreach($wbs_list as $wbs)
-                                <?php $count=1; ?>
                                 <tr>
                                     <td width="20px" style="text-align:center;"><h5><?php echo $count; ?></h5></td>
                                     <td width="140px" style="text-align:center;"><h5>{{$wbs->title}}</h5></td>

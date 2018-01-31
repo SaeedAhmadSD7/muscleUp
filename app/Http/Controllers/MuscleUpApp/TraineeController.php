@@ -232,6 +232,7 @@ class TraineeController extends Controller
         $user->save();
         $trainee = new Trainee($request->all());
         $trainee['user_id'] = $user->id;
+
         $user->trainee()->save($trainee);
 
 
