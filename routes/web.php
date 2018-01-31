@@ -179,6 +179,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
         Route::group(['Gym'], function () {
             Route::get('gyms/list', ['uses' => 'GymController@index', 'as' => 'gymIndex']);
             Route::get('gym-dashboard', ['uses' => 'GymController@dashboard', 'as' => 'gymDashboard']);
+            Route::get('instructor/allocation/{id}', ['as' => 'instructor-allocation', 'uses' => 'EmployeeController@allocation']);
         });
 
         //***EmployeeController
@@ -188,6 +189,8 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::get('instructor/list', ['as' => 'instructor-show', 'uses' => 'EmployeeController@show']);
             Route::get('instructor/edit/{id}', ['as' => 'instructor-edit', 'uses' => 'EmployeeController@edit']);
             Route::post('instructor/update/{id}', ['as' => 'instructor-update', 'uses' => 'EmployeeController@update']);
+            Route::post('instructor/allocate/{id}', ['as' => 'instructor-allocate', 'uses' => 'EmployeeController@allocate']);
+            Route::post('instructor/allocation/{id}', ['as' => 'instructor-allocation', 'uses' => 'EmployeeController@allocation']);
             Route::get('instructor/delete/{id}', ['as' => 'instructor-delete', 'uses' => 'EmployeeController@destroy']);
 
         });
@@ -204,7 +207,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::post('trainee/upload-profile-pic', ['as' => 'uploadProfilePic', 'uses' => 'TraineeController@uploadProfilePic']);
             Route::post('trainee/remove-uploaded-profile-pic', ['as' => 'removeUploadedProfilePic', 'uses' => 'TraineeController@removeUploadedProfilePic']);
             Route::post('trainee/store', ['uses' => 'TraineeController@store', 'as' => 'trainee-store']);
-            Route::get('trainee/list', ['as' => 'trainee-list', 'uses' => 'TraineeController@traineesList']);
+            Route::get('trainee/list/{id?}', ['as' => 'trainee-list', 'uses' => 'TraineeController@traineesList']);
             Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
             Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
 

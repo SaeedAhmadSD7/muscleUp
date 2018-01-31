@@ -74,6 +74,26 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-md-4 control-label">Country:</label>
+                                <div class="col-md-8">
+                                    {{--<input class="form-control" type="text" name="country" value="" placeholder="Country...">--}}
+                                        <select class="form-control" name="country">
+                                                <option value="">Select Country..</option>
+                                            @if(isset($countries))
+                                                @foreach($countries as $country )
+                                                    <option value="{{$country->name}}">{{$country->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">City:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="text" name="city" value="" placeholder="City...">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-md-4 control-label">Address</label>
                                 <div class="col-md-8">
                                     <textarea name="address" rows="3"  placeholder="Address..."  class="form-control textarea-counter"></textarea>

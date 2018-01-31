@@ -61,12 +61,11 @@ class BranchController extends Controller
     public function create(){
 
         $branch = Null;
-
-        return view('muscle-up-app.branch.create', compact('branch'));
+        $countries=Country::all();
+        return view('muscle-up-app.branch.create', compact('branch','countries'));
     }
 
     public function store(BranchCreateRequest $request){
-
 
 //dd(Auth::user()->id);
         $branch = $this->_branch;
@@ -74,7 +73,11 @@ class BranchController extends Controller
 //        $branch->branch_no = $request->branch_no;
         $branch->title = $request->branch_name;
 //        $branch->email = $request->branch_email;
-//        $branch->phone_no = $request->branch_phone;
+        $branch->phone_number = $request->branch_phone;
+        $branch->country = $request->country;
+        $branch->city = $request->city;
+        $branch->latitude = $request->latitude;
+        $branch->longitude = $request->longitude;
         $branch->opening_time = $request->opening_time;
         $branch->closing_time = $request->closing_time;
         $branch->address = $request->branch_address;
@@ -95,9 +98,8 @@ class BranchController extends Controller
         $user->save();
 
 
-        dd("Success");
 
-        return view('muscle-up-app.company.create');
+        return view('muscle-up-app.branch.index');
     }
 
 
@@ -151,7 +153,7 @@ class BranchController extends Controller
     public function edit($id)
     {
         $user = Auth::user();
-        $id =$user->branch_id;
+//        $id =$user->branch_id;
         $branch=Branch::find($id);
         $countries = Country::all();   //only for user modal data
         return view('muscle-up-app.branch.edit',compact('user','branch','countries'));
@@ -168,7 +170,7 @@ class BranchController extends Controller
     {
 //        dd($request->title);
         $user = Auth::user();
-        $id =$user->branch_id;
+//        $id =$user->branch_id;
         $branch = Branch::find($id);
 //        $branch->branch_no = $request->branch_no;
         $branch->title = $request->title;
@@ -180,7 +182,7 @@ class BranchController extends Controller
         $branch->address = $request->address;
         $branch->save();
 
-        return back();
+        return redirect()->route('muscle-up-app.branch.index');
     }
 
     /**
@@ -194,6 +196,6 @@ class BranchController extends Controller
         $branch=Branch::find($id);
         $branch->delete();
 
-        return redirect()->route('show-branch');
+        return redirect()->route('muscle-up-app.branch.index');
     }
 }

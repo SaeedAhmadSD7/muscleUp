@@ -199,6 +199,12 @@
                             <button class='btn btn-danger btn-xs' type="submit">Delete</button>
                             {!! Form::close() !!}
                             </td>
+                        <td>
+                            {!! Form::open(array('route' => array('branch.edit', $gym->id), 'method' => 'get')) !!}
+                                <input type="hidden" value="{{$gym->id}}">
+                            <button class='btn btn-success btn-xs' type="submit">Edit</button>
+                            {!! Form::close() !!}
+                            </td>
 
 {{--                            <td><a href="{{route('company.destroy',$gym->id)}}" class="glyph-icon icon-iconic-cancel-circle"></a></td>--}}
                         </tr>

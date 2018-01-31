@@ -130,8 +130,10 @@ class TraineeController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function traineesList(){
+    public function traineesList($id){
 
+
+//        ifisset($id);
         $trainees = $this->_trainee->fetchRecords();
         return view('muscle-up-app.trainee.trainees-list',compact('trainees'));
     }
