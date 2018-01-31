@@ -20,7 +20,7 @@ class Instructor extends Model
 
     public function trainees()
     {
-        return $this->hasMany(Trainee::class);
+        return $this->belongsToMany(Trainee::class, 'instructor_trainee')->withPivot('type')->withTimestamps();
     }
 
     public function employee()

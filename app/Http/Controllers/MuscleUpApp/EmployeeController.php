@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Models\Country;
 use App\Models\Employee;
+use App\Models\Trainee;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -172,9 +173,50 @@ class EmployeeController extends Controller
         $instructor->save();
 
 
-        Session::flash('Success','Congratulations Employeee have been added succesfully. Credentials have been mailed to entered email.');
+        Session::flash('Success','Congratulations Employee have been added successfully. Credentials have been mailed to entered email.');
 
         return redirect()->route('instructor-show');
+    }
+
+    public function allocate(Request $request)
+    {
+//        dd($request);
+
+        $trainee_id = $request->input('trainee_id');
+        $instructor_id = $request->input('instructor_id');
+        $allocation_type = $request->input('allocationType');
+        $instructor = Instructor::find($instructor_id);
+
+        $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
+
+
+        Session::flash('Success','Congratulations Employee have been added successfully. Credentials have been mailed to entered email.');
+
+
+
+        return response()->json([
+            'success' => true,
+            'message'   => 'Congratulations Employee have been added successfully. Credentials have been mailed to entered email.'
+        ]);
+
+
+//        return redirect()->route('instructor-show');
+    }
+
+
+    public function allocation($id)
+    {
+//        dd($id);
+
+        $instructor = Instructor::find($id);
+
+        $allocatedTrainees = $instructor->trainees()->get();
+
+//dd($allocatedTrainees);
+
+        return view('muscle-up-app.instructor.trainee-allocation', compact('allocatedTrainees','instructor'));
+
+//        return redirect()->route('instructor-show');
     }
 
     /**

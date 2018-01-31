@@ -16,8 +16,8 @@ class InstructorTrainee extends Migration
     {
         Schema::create('instructor_trainee', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('instructor');
-            $table->unsignedInteger('trainee');
+            $table->unsignedInteger('instructor_id');
+            $table->unsignedInteger('trainee_id');
             $table->enum('type', array_values(InstructorType::$instructorTypes));
             $table->timestamps();
         });
