@@ -99,7 +99,7 @@ class BranchController extends Controller
 
 
 
-        return view('muscle-up-app.branch.index');
+        return redirect()-> route('branch.index');
     }
 
 
@@ -182,7 +182,7 @@ class BranchController extends Controller
         $branch->address = $request->address;
         $branch->save();
 
-        return redirect()->route('muscle-up-app.branch.index');
+        return redirect()->route('branch.index');
     }
 
     /**
@@ -193,9 +193,11 @@ class BranchController extends Controller
      */
     public function destroy($id)
     {
+        dd($id);
         $branch=Branch::find($id);
         $branch->delete();
 
-        return redirect()->route('muscle-up-app.branch.index');
+//        return view('muscle-up-app.branch.index');
+        return redirect()->route('branch.index');
     }
 }

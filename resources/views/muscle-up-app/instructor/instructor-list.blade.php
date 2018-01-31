@@ -32,20 +32,30 @@
                         <th class="email-body">Name</th>
                         <th class="email-title">Email</th>
                         <th>Date</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Action</th>
+
                     </tr>
                     </thead>
                     <tbody>
                     <?php $counter = 1 ?>
                     @foreach($instructors as $instructor)
                         <tr id="{{$instructor->id}}">
-                            <td sty>{{$counter}}</td>
+                            <td>{{$counter}}</td>
                             <td class="email-title">{{$instructor->user->first_name}}</td>
                             <td class="email-body">{{$instructor->user->email}}</td>
                             <td class="date">{{$instructor->user->updated_at}}</td>
-                            <td><a href="{{route('instructor-edit',$instructor->id)}}" class="glyph-icon icon-iconic-right-circle">Edit</a></td>
-                            <td><a href="{{route('instructor-delete',$instructor->id)}}" class="glyph-icon icon-iconic-cancel-circle">Delete</a></td>
+                            <td>
+                                <ul class="">
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown">
+                                            <i class="glyphicon glyphicon-th-list"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a class="btnEdit" href="{{route('instructor-edit',$instructor->id)}}"><i class="glyphicon glyphicon-dashboard"></i> Edit</a></li>
+                                            <li><a class="btnDelete" href="{{route('instructor-delete',$instructor->id)}}"> <i class="glyphicon glyphicon-ban-circle"></i> Delete</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
                         </tr>
                         <?php $counter++ ?>
                     @endforeach
@@ -177,6 +187,24 @@
             });
 
         });
+
+    </script>
+
+    <script>
+
+
+        $(document).ready(function () {
+            /* Datatables basic */
+            $('#datatable-example').dataTable();
+
+            //*** trainee table detail action dropdown
+            $('.dropdown-toggle').click(function (e) {
+                e.preventDefault();
+                $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
+                e.stopImmediatePropagation();
+            })
+        });
+
 
     </script>
 @stop
