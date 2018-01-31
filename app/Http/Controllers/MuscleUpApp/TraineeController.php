@@ -130,10 +130,11 @@ class TraineeController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function traineesList(){
-        dd("hi");
+    public function traineesList($id){
 
-        dd($trainees = $this->_trainee->fetchRecords());
+
+//        ifisset($id);
+        $trainees = $this->_trainee->fetchRecords();
         return view('muscle-up-app.trainee.trainees-list',compact('trainees'));
     }
 
@@ -224,7 +225,7 @@ class TraineeController extends Controller
 //        Mail::to($user->email)->send(new AddTraineeRequest($user->email,$password));
         session()->flash('success', 'Congratulations Trainee have been added succesfully. Credentials have been mailed to entered email.');
 
-dd("hi");
+
         return redirect()->route('trainee-list');
     }
 

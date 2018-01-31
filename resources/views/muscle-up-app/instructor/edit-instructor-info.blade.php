@@ -1,4 +1,4 @@
-@extends('muscle-up-app.gym.dashboard.gym-dashboard')
+@extends('muscle-up-app.gym.dashboard')
 
 @section('title','Instructor List')
 
@@ -32,6 +32,12 @@
                         <div class="col-sm-4">
                             <input class="form-control" type="text" name="last_name" value="{{$employee->user->last_name}}" placeholder="Last Name...">
                         </div>
+                    </div>
+                    <div class="form-group">
+                    <label class="col-sm-3 control-label">Email:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" name="email" value="{{$employee->user->email}}" placeholder="Email...">
+                    </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Date of birth:</label>

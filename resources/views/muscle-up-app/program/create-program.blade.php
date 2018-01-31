@@ -53,6 +53,7 @@
                                 <label class="col-sm-3 control-label" for="name">Program Title</label>
                                 <div class="col-sm-6">
                                     <input class="form-control" type="text" name="title" value="" placeholder="Program Title... ">
+                                    {{--<input type="hidden" name="gym_id" >--}}
                                 </div>
                             </div>
 
@@ -72,7 +73,7 @@
                                 <tr>
                                     <th>Serial </th>
                                     <th>Phase Number</th>
-                                    <th width="20px">Action</th>
+                                    {{--<th width="20px">Action</th>--}}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -87,17 +88,17 @@
                                         </select>
                                     </td>
 
-                                    <td>
-                                        <button class="remove_row btn btn-danger" type="button"><span class="glyphicon icon-typicons-cancel"></span></button>
-                                    </td>
+                                    {{--<td>--}}
+                                        {{--<button class="remove_row btn btn-danger" type="button"><span class="glyphicon icon-typicons-cancel"></span></button>--}}
+                                    {{--</td>--}}
                                 </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>
                                     <th colspan="7">
-                                        <div class="create">
-                                            <button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon icon-typicons-plus"></span></button>
-                                        </div>
+                                        {{--<div class="create">--}}
+                                            {{--<button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon icon-typicons-plus"></span></button>--}}
+                                        {{--</div>--}}
                                     </th>
                                 </tr>
                                 </tfoot>

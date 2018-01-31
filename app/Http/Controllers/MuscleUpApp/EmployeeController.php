@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
+use App\Models\Country;
 use App\Models\Employee;
+use App\Models\Trainee;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -53,7 +55,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('muscle-up-app.instructor.add-instructor');
+        $countries=Country::all();
+        return view('muscle-up-app.instructor.add-instructor')->with('countries',$countries);;
 
     }
 
@@ -68,14 +71,19 @@ class EmployeeController extends Controller
 
         $user = $this->_user;
         $user->email = $request->email;
-        $password = str_random(8);
+//        $password = str_random(8);
+        $password="asdf1234";
         $user->password = bcrypt($password);
-        $user['type'] = 'employee';
+        $user->branch_id=\Auth::user()->branch_id;
+        $user->gym_id=\Auth::user()->gym_id;
+        $user['type'] = 'instructor';
         $user->first_name=$request->first_name;
         $user->last_name=$request->last_name;
 //        $user->dial_code = '+27';
         $user->phone_number=$request->phone_number;
         $user->address=$request->address;
+        $user->country=$request->country;
+        $user->city=$request->city;
         $user->dob=$request->dob;
         $user->gender =$request->gender;
         $user->save();
@@ -147,7 +155,7 @@ class EmployeeController extends Controller
         $user = User::find($id);
         $user->first_name=$request->input('first_name');
         $user->last_name=$request->input('last_name');
-        $user->dial_code = '+45';
+//        $user->dial_code = '+45';
         $user->phone_number=$request->input('phone_number');
         $user->dob=$request->input('dob');
         $user->address=$request->input('address');
@@ -165,9 +173,50 @@ class EmployeeController extends Controller
         $instructor->save();
 
 
-        Session::flash('Success','Congratulations Employeee have been added succesfully. Credentials have been mailed to entered email.');
+        Session::flash('Success','Congratulations Employee have been added successfully. Credentials have been mailed to entered email.');
 
         return redirect()->route('instructor-show');
+    }
+
+    public function allocate(Request $request)
+    {
+//        dd($request);
+
+        $trainee_id = $request->input('trainee_id');
+        $instructor_id = $request->input('instructor_id');
+        $allocation_type = $request->input('allocationType');
+        $instructor = Instructor::find($instructor_id);
+
+        $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
+
+
+        Session::flash('Success','Congratulations Employee have been added successfully. Credentials have been mailed to entered email.');
+
+
+
+        return response()->json([
+            'success' => true,
+            'message'   => 'Congratulations Employee have been added successfully. Credentials have been mailed to entered email.'
+        ]);
+
+
+//        return redirect()->route('instructor-show');
+    }
+
+
+    public function allocation($id)
+    {
+//        dd($id);
+
+        $instructor = Instructor::find($id);
+
+        $allocatedTrainees = $instructor->trainees()->get();
+
+//dd($allocatedTrainees);
+
+        return view('muscle-up-app.instructor.trainee-allocation', compact('allocatedTrainees','instructor'));
+
+//        return redirect()->route('instructor-show');
     }
 
     /**
@@ -179,8 +228,10 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         $employee = Employee::find($id);
+        $instructor=Instructor::where("employee_id",$id)->first();
         $employee->user()->delete();
         $employee->delete();
+        $instructor->delete();
         return redirect()->route('instructor-show');
     }
 }
