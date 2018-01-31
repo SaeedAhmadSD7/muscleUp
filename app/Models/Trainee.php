@@ -106,9 +106,46 @@ class Trainee extends Model
     {
         return $this->belongsToMany(Instructor::class, 'instructor_trainee');
     }
-//    public function saveTrainee($data)
-//    {
-//
-//    }
 
+    public static function saveTrainee($data){
+
+//        $vRules = Trainee::$rules;
+//            $id = isset($data['id']) ? $data['id'] : '';
+//            if($id != ''){
+//                $trainee = Trainee::find($id);
+//                $user = User::find($id);
+//            }else{
+//                return $response = ['success'=>false, 'error'=> true, 'message' => ' record did not find for updation! '];
+//            }
+//dd($data);
+        $user = new User($data);
+        $password = "asdf1234";
+        $user->password = bcrypt($password);
+        $user['type'] = 'Trainee';
+        $user->first_name = $user->first_name;
+        $user->last_name= $user->last_name;
+        $user->email = $user->email;
+        $user->dob = $user->dob;
+        $user->gender = $user->gender;
+        $user->phone_number = $user->phone_number;
+        $user->address = $user->address;
+        $user->profile_img = $user->profile_img;
+        $user->branch_id= "1";
+        $user->gym_id = "1";
+//        $user->dial_code = '+27';
+        $user->save();
+
+        date_default_timezone_set("Asia/Karachi");
+        $joining_date = date('Y-m-d H:i:s');
+
+        $trainee = new Trainee($data);
+        $trainee['user_id'] = $user->id;
+        $trainee['joining_date'] = $joining_date;
+        $trainee->height = $trainee->height;
+        $trainee->branch_id = "1";
+        $trainee->save();
+
+        $response = ['success'=>true, 'error'=> false, 'message'=> 'Tainee has been saved successfully!'];
+        return $response;
+    }
 }

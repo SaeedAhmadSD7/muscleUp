@@ -16,8 +16,12 @@
 
         <div class="panel-body">
             <div class="example-box-wrapper">
-                <form class="form-horizontal bordered-row add-trainee-form" role="form" method="POST" action="{{route('trainee-store')}}">
+                <form class="form-horizontal bordered-row add-trainee-form" role="form" enctype="multipart/form-data" method="POST" action="{{route('trainee.store')}}">
+
                     {{csrf_field()}}
+                    {!! csrf_field() !!}
+                    <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
+
                     <input type="hidden" id="profile_img" name="profile_img" />
                     {{-- Start Basic Info fields --}}
                     <h3 class="content-box-header bg-google">Basic Info</h3>
@@ -79,8 +83,8 @@
                                 <label class="col-md-4 control-label">Height</label>
                                 <div class="col-md-3">
                                     <input class="form-control" type="text" name="height" value="" placeholder="CM">
-                                    <input class="form-control ftAndInch dN" type="text" name="foot" value="" placeholder="Foot">
-                                    <input class="form-control ftAndInch dN" type="text" name="inch" value="" placeholder="Inch">
+                                    <input class="form-control ftAndInch dN" type="text" name="foot" value="foot" placeholder="Foot">
+                                    <input class="form-control ftAndInch dN" type="text" name="inch" value="inch" placeholder="Inch">
                                 </div>
                                 <div class="col-md-3 col-md-offset-1 mL28">
                                     <select class="form-control h46">

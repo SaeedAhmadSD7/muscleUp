@@ -219,24 +219,8 @@ class TraineeController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User($request->all());
-        $password = str_random(8);
-        $user->password = bcrypt($password);
-        $user['type'] = 'trainee';
-        //        $user->first_name = $request->first_name;
-//        $user->last_name = $request->last_name;
-//        $user->email = $request->email;
-//        $user->dob = $request->dob;
-//        $user->gender = $request->gender;
-//        $user->phone_number = $request->phone_number;
-        $user->address = $request->address;
-//        $user->dial_code = '+27';
-        $user->save();
-        $trainee = new Trainee($request->all());
-        $trainee['user_id'] = $user->id;
-
-        $user->trainee()->save($trainee);
-
+        $data = $request->all();
+        Trainee::saveTrainee($data);
 
 //        Mail::to($user->email)->send(new AddTraineeRequest($user->email,$password));
         session()->flash('success', 'Congratulations Trainee have been added succesfully. Credentials have been mailed to entered email.');
@@ -254,9 +238,12 @@ class TraineeController extends Controller
      */
     public function show($id)
     {
-        $trainee = User::find($id);
-//        $user = User::find($trainee->user_id);
-        return view('muscle-up-app.trainee.trainee-personal-detail')->with(['trainee' => $trainee]);
+//        dd("hi");
+        $trainees = $this->_trainee->fetchRecords();
+        return view('muscle-up-app.trainee.trainees-list',compact('trainees'));
+//        $trainee = User::find($id);
+////        $user = User::find($trainee->user_id);
+//        return view('muscle-up-app.trainee.trainee-personal-detail')->with(['trainee' => $trainee]);
     }
 
     /**
