@@ -87,6 +87,17 @@ function get_trainee_full_name(\App\Models\Trainee $t):string {
 }
 
 /**
+ * @param \App\Models\Trainee $t
+ * @return string
+ */
+function get_trainee_id():string {
+    if(auth_check())
+        return get_auth_user()->id;
+    else
+        return null;
+}
+
+/**
  * @param \App\Models\User $u
  * @return string
  */

@@ -8,7 +8,7 @@
 @stop
 
 @section('dashboard_link')
-    {{route('trainee-dashboard')}}
+    {{route('traineeDashboard')}}
 @stop
 
 @section('sidebar_content')
