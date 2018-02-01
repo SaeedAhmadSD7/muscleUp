@@ -30,8 +30,8 @@
                           <th width="20px">No.</th>
                           <th style="text-align:center;" width="140px">Program Name</th>
                           <th style="text-align:center;">Description</th>
-                          <th width="20px">Edit</th>
-                          <th width="20px">Delete</th>
+                          <th>Action</th>
+
                       </tr>
                    </thead>
                     <tbody>
@@ -41,12 +41,25 @@
                                     <td width="20px" style="text-align:center;"><h5><?php echo $count; ?></h5></td>
                                     <td width="140px" style="text-align:center;"><h5>{{$dietProgram->title}}</h5></td>
                                     <td><h5>{{$dietProgram->description}}</h5></td>
-                                        <td width="20px">
-                                            <a class="btn btn-primary" href="{{route('edit-diet',['id'=>$dietProgram->id])}}" type="submit"><span class="glyphicon icon-elusive-pencil"></span></a>
-                                        </td>
-                                        <td width="20px">
-                                            <a class="btn btn-danger" href="{{route('delete-diet',['id'=>$dietProgram->id])}}" type="submit"><span class="glyphicon icon-typicons-cancel"></span></a>
-                                        </td>
+                                    <td>
+                                        <ul class="">
+                                            <li class="dropdown">
+                                                <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown">
+                                                    <i class="glyphicon glyphicon-th-list"></i>
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                    <li><a class="glyphicon glyphicon-edit"  href="{{route('edit-diet',['id'=>$dietProgram->id])}}" type="submit">Edit</a></li>
+                                                    <li><a class="glyphicon glyphicon-trash"  href="{{route('delete-diet',['id'=>$dietProgram->id])}}" type="submit">Delete</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                        {{--<td width="20px">--}}
+                                            {{--<a class="btn btn-primary" href="{{route('edit-diet',['id'=>$dietProgram->id])}}" type="submit"><span class="glyphicon icon-elusive-pencil"></span></a>--}}
+                                        {{--</td>--}}
+                                        {{--<td width="20px">--}}
+                                            {{--<a class="btn btn-danger" href="{{route('delete-diet',['id'=>$dietProgram->id])}}" type="submit"><span class="glyphicon icon-typicons-cancel"></span></a>--}}
+                                        {{--</td>--}}
                                 </tr>
                                 <?php $count++; ?>
                             @endforeach
@@ -58,7 +71,24 @@
 @stop
 
 @section('script')
-    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js/diet.js')}}"></script>
+    {{--<script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{url('/admin-assets/js/diet.js')}}"></script>--}}
+    <script>
+
+
+        $(document).ready(function () {
+            /* Datatables basic */
+            $('#datatable-example').dataTable();
+
+            //*** trainee table detail action dropdown
+            $('.dropdown-toggle').click(function (e) {
+                e.preventDefault();
+                $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
+                e.stopImmediatePropagation();
+            })
+        });
+
+
+    </script>
 @stop

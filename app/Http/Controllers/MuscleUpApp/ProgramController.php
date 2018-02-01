@@ -92,6 +92,7 @@ class ProgramController extends Controller
         $formData = $request->all();
 
         $formData['gym_id'] = Auth::user()->gym_id;
+//        dd($formData);
         Program::createUpdateProgram($formData);
         return redirect()->route('show-program');
 
