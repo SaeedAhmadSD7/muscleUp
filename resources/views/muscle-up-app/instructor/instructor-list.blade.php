@@ -38,10 +38,13 @@
                     <?php $counter = 1 ?>
                     @foreach($instructors as $instructor)
                         <tr id="{{$instructor->id}}">
-                            <td>{{$counter}}</td>
-                            <td class="email-title">{{$instructor->user->first_name}}</td>
-                            <td class="email-body">{{$instructor->user->email}}</td>
+                            {{--<td>{{$counter}}</td>--}}
+                            <td class="Instructor-title-1">
+                                {{--                                <img width="20%" src="{{get_profile_pic_url($instructor->user->profile_img)}}" /> --}}
+                                <span class="instructorName"><a href="{{route('instructor-allocation', $instructor->id)}}" >{{get_full_name($instructor->user)}}</a></span> <kbd class="mL5">01{{$instructor->user->code}}</kbd></td>
+                            <td>{{$instructor->user->email}}</td>
                             <td class="date">{{$instructor->user->updated_at}}</td>
+
                             <td>
                                 <ul class="">
                                     <li class="dropdown">
