@@ -39,6 +39,12 @@
                             @include('includes.backend._leftBarAdmin')
                         @elseif(get_auth_user_type() == \App\Utils\Globals\UserType::ADMIN)
                             @include('includes.backend._leftBarAdmin')
+                        @elseif(get_auth_user_type() == \App\Utils\Globals\UserType::TRAINEE)
+                            @include('includes.backend._leftBarTrainee')
+                        @elseif(get_auth_user_type() == \App\Utils\Globals\UserType::EMPLOYEE)
+                            @include('includes.backend._leftBarEmployee')
+                        @elseif(get_auth_user_type() == \App\Utils\Globals\UserType::INSTRUCTOR)
+                            @include('includes.backend._leftBarInstructor')
                         @endif
                     @show
                 </ul>

@@ -31,8 +31,8 @@
                         <th width="20px">No.</th>
                         <th>Program Name</th>
                         <th>Description</th>
-                        <th width="20px">Edit</th>
-                        <th width="20px">Delete</th>
+                        <th>Action</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -42,17 +42,20 @@
                             <td width="20px" style="text-align:center;"><h5> <?php echo $count; ?> </h5></td>
                             <td width="140px" style="text-align:center;"><h5>{{$program->title}}</h5></td>
                             <td><h5>{{$program->description}}</h5></td>
-                            <td width="20px">
-                                <form method="get" action="{{route('edit-program',['id'=>$program->id])}}">
-                                    <button class="btn btn-primary" type="submit"><span class="glyphicon icon-elusive-pencil"></span></button>
-                                </form>
+                            <td>
+                                <ul class="">
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown">
+                                            <i class="glyphicon glyphicon-th-list"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a class="glyphicon glyphicon-edit"  href="{{route('edit-program',$program->id)}}" type="submit">Edit</a></li>
+                                            <li><a class="glyphicon glyphicon-trash"  href="{{route('delete-program',$program->id)}}" type="submit">Delete</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </td>
-                            <td width="20px">
-                                <form method="get" action="{{route('delete-program',['id'=>$program->id])}}">
-                                    <button class="btn btn-danger" type="submit"><span class="glyphicon icon-typicons-cancel"></span>
-                                    </button>
-                                </form>
-                            </td>
+
                         </tr>
                         <?php $count++; ?>
                     @endforeach
@@ -64,8 +67,25 @@
 @stop
 
 @section('script')
-    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js/diet.js')}}"></script>
+    {{--<script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{url('/admin-assets/js/diet.js')}}"></script>--}}
+    <script>
+
+
+        $(document).ready(function () {
+            /* Datatables basic */
+            $('#datatable-example').dataTable();
+
+            //*** trainee table detail action dropdown
+            $('.dropdown-toggle').click(function (e) {
+                e.preventDefault();
+                $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
+                e.stopImmediatePropagation();
+            })
+        });
+
+
+    </script>
 @stop
 

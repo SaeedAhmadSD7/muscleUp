@@ -132,7 +132,6 @@ class Trainee extends Model
         $user->profile_img = $user->profile_img;
         $user->branch_id= "1";
         $user->gym_id = "1";
-//        $user->dial_code = '+27';
         $user->save();
 
         date_default_timezone_set("Asia/Karachi");
@@ -143,9 +142,43 @@ class Trainee extends Model
         $trainee['joining_date'] = $joining_date;
         $trainee->height = $trainee->height;
         $trainee->branch_id = "1";
+        $trainee->code = "123";
         $trainee->save();
 
         $response = ['success'=>true, 'error'=> false, 'message'=> 'Tainee has been saved successfully!'];
+        return $response;
+    }
+
+    public static function editTrainee($data, $id){
+
+        $user = User::find($id);
+        $user->first_name = $data['first_name'];
+        $user->last_name = $data['last_name'];
+        $user->phone_number = $data['phone_number'];
+        $user->dob = $data['dob'];
+        $user->gender = $data['gender'];
+        $user->address = $data['address'];
+        $user->city = $data['city'];
+        $user->country = $data['country'];
+        $user->profile_img = $user->profile_img;
+        $user->branch_id= $user->branch_id;
+        $user->gym_id = $user->gym_id;
+        $user->email = $user->email;
+        $user->type = $user->type;
+        $user->save();
+
+        $trainee = $user->trainee;
+        $trainee->branch_id = $trainee->branch_id;
+        $trainee->user_id = $id;
+        $trainee->height = $data['height'];
+        $trainee->code = $trainee->code;
+        $trainee->joining_date = $trainee->joining_date;
+        $trainee->quit_date = $trainee->quit_date;
+        $trainee->admission_fee = $trainee->admission_fee;
+        $trainee->initial_fee = $trainee->initial_fee;
+        $trainee->save();
+
+        $response = ['success'=>true, 'error'=> false, 'message'=> 'Tainee has been Updated successfully!'];
         return $response;
     }
 }

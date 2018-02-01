@@ -91,7 +91,7 @@
                                     <th >Quantity</th>
                                     <th>Calories</th>
                                     <th>Duration</th>
-                                    <th style="width: 60px; ">Action</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -109,7 +109,8 @@
                                         <select class="form-control food_name" id="food_name" name="food_id[]">
                                             <option value="0">Select Food:</option>
                                             @foreach($foods as $food)
-                                                <option data-calories="{{$food->calories}}" value="{{$food->id}}">{{$food->title}}</option>
+                                                {{--<option data-calories="{{$food->calories}}" value="{{$food->id}}">{{$food->title}}</option>--}}
+                                                <option value="{{$food->calories}}">{{$food->title}}</option>
                                             @endforeach
                                         </select>
                                     </td>
@@ -122,17 +123,24 @@
                                     <td>
                                         <input class="form-control time_take_input" type="text" name="taketime[]" placeholder="Time" style="width:60px" readonly>
                                     </td>
-                                    <td>
-                                        <button class="remove_row btn btn-danger" type="button"><span class="glyphicon icon-typicons-cancel"></span></button>
-                                    </td>
+
+                                    <script>
+                                        $(document).ready(function(){
+                                            $('#food_name').keyup(calculate);
+                                            $('#quantity').keyup(calculate);
+                                        });
+                                        function calculate(e)
+                                        {
+                                            $('#calories').val($('#food_name').val() * $('#quantity').val());
+                                        }
+
+                                    </script>
                                 </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>
                                     <th colspan="7">
-                                        <div class="create">
-                                            <button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon icon-typicons-plus"></span></button>
-                                        </div>
+
                                     </th>
                                 </tr>
                                 </tfoot>
@@ -152,4 +160,5 @@
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/js/diet.js')}}"></script>
+
 @stop
