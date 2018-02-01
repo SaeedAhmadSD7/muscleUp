@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
+use App\Http\Requests\BranchUpdateRequest;
 use App\Models\Branch;
 use App\Models\User;
 use App\Models\Country;
@@ -61,12 +62,11 @@ class BranchController extends Controller
     public function create(){
 
         $branch = Null;
-
-        return view('muscle-up-app.branch.create', compact('branch'));
+        $countries=Country::all();
+        return view('muscle-up-app.branch.create', compact('branch','countries'));
     }
 
     public function store(BranchCreateRequest $request){
-
 
 //dd(Auth::user()->id);
         $branch = $this->_branch;
@@ -74,7 +74,11 @@ class BranchController extends Controller
 //        $branch->branch_no = $request->branch_no;
         $branch->title = $request->branch_name;
 //        $branch->email = $request->branch_email;
-//        $branch->phone_no = $request->branch_phone;
+        $branch->phone_number = $request->branch_phone;
+        $branch->country = $request->country;
+        $branch->city = $request->city;
+        $branch->latitude = $request->latitude;
+        $branch->longitude = $request->longitude;
         $branch->opening_time = $request->opening_time;
         $branch->closing_time = $request->closing_time;
         $branch->address = $request->branch_address;
@@ -95,9 +99,8 @@ class BranchController extends Controller
         $user->save();
 
 
-        dd("Success");
 
-        return view('muscle-up-app.company.create');
+        return redirect()-> route('branch.index');
     }
 
 
@@ -151,8 +154,12 @@ class BranchController extends Controller
     public function edit($id)
     {
         $user = Auth::user();
-        $id =$user->branch_id;
+        if(($id==0)){
+            $id =$user->branch_id;
+        }
         $branch=Branch::find($id);
+
+
         $countries = Country::all();   //only for user modal data
         return view('muscle-up-app.branch.edit',compact('user','branch','countries'));
     }
@@ -164,23 +171,23 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BranchUpdateRequest $request, $id)
     {
 //        dd($request->title);
         $user = Auth::user();
-        $id =$user->branch_id;
+//        $id =$user->branch_id;
         $branch = Branch::find($id);
 //        $branch->branch_no = $request->branch_no;
-        $branch->title = $request->title;
+        $branch->title = $request->branch_name;
         $branch->phone_number = $request->phone_number;
         $branch->opening_time = $request->opening_time;
         $branch->closing_time = $request->closing_time;
         $branch->country = $request->country;
         $branch->city = $request->city;
-        $branch->address = $request->address;
+        $branch->address = $request->branch_address;
         $branch->save();
 
-        return back();
+        return redirect()->route('branch.index');
     }
 
     /**
@@ -194,6 +201,7 @@ class BranchController extends Controller
         $branch=Branch::find($id);
         $branch->delete();
 
-        return redirect()->route('show-branch');
+//        return view('muscle-up-app.branch.index');
+        return redirect()->route('branch.index');
     }
 }

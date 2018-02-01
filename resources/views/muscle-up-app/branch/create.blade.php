@@ -58,7 +58,38 @@
                                         <div class="character-remaining clear input-description">1000 characters left</div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Country</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="country">
+                                            <option value="">Select Country..</option>
+                                            @if(isset($countries))
+                                                @foreach($countries as $country )
+                                                    <option value="{{$country->name}}">{{$country->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
 
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">City</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" name="city" value="" placeholder="City...">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">Latitude</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" name="latitude" value="" placeholder="Latitude..">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">Longitude</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" name="longitude" value="" placeholder="Longitude..">
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="" class="col-sm-3 control-label">Opening Time:</label>
                                     <div class="col-sm-4"><div class="bootstrap-timepicker dropdown">

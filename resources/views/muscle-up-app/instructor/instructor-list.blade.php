@@ -2,20 +2,29 @@
 
 @section('title','Instructor List')
 
+@section('title')
+    Gym Dashboard
+@stop
+
+@section('user-name')
+    {{get_auth_user_full_name()}}
+@stop
+
 
 @section('page-heading')
-    <h2 xmlns="http://www.w3.org/1999/html">List of Instructor</h2>
-    {{--<p>Please fill in all the information and then click Add Instructor.</p>--}}
+    <h2>Instructor List</h2>
+    <p>List of Instructors added</p>
 @stop
 
 
 @section('content')
-    <div class="panel">
-        <div class="panel-body">
-            <h3 class="title-hero">Instructor</h3>
-            <div class="example-box-wrapper">
-                <table border="0" cellpadding="0" cellspacing="0"
-                       class="table table-striped table-bordered" id="datatable-example">
+    <div class="row mailbox-wrapper">
+        <div class="col-md-12">
+            <div class="content-box">
+                <div class="mail-header clearfix">
+                    <span class="mail-title">List</span>
+                </div>
+                <table class="table table-hover text-center">
                     <thead>
                     <tr>
                         <th>Name</th>
@@ -26,38 +35,28 @@
                     </thead>
 
                     <tbody>
-                    @if($instructors == null)
-                        <tr class="odd gradeA"><td colspan="6"> There is no record found.</td></tr>
-                    @else
-                        @if($instructors->count() == 0)
-                            <tr class="odd gradeX"><td colspan="6"> There is no record found.</td></tr>
-                        @else
-
-                            @foreach($instructors as $i=>$instructor)
-
-                                <tr class="{{ (($i+1)%2) ? "even" : "odd" }} gradeX" id="{{$instructor->id}}">
-                                    <td class="Instructor-title-1"><img width="20%" src="{{get_profile_pic_url($instructor->user->profile_img)}}" /> <span class="instructorName"><a href="{{route('instructor-allocation', $instructor->id)}}" >{{get_full_name($instructor->user)}}</a></span> <kbd class="mL5">01{{$instructor->user->code}}</kbd></td>
-                                    <td>{{$instructor->user->email}}</td>
-                                    <td>60,000</td>
-                                    <td>
-                                        <ul class="">
-                                            <li class="dropdown">
-                                                <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown">
-                                                    <i class="glyphicon glyphicon-th-list"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-right">
-                                                    <li><a class="create_modal_btn" href=""><i class="glyphicon glyphicon-eye-open"></i> Detail </a></li>
-                                                    <li><a class="btnEdit" href=""><i class="glyphicon glyphicon-question-sign"></i> Health FAQs </a></li>
-                                                    <li><a class="btnEdit" href=""><i class="glyphicon glyphicon-dashboard"></i> Health Statistics </a></li>
-                                                    <li><a class="btnDelete" href=""> <i class="glyphicon glyphicon-ban-circle"></i> Deactivate </a></li>
-                                                </ul>
-                                            </li>
+                    <?php $counter = 1 ?>
+                    @foreach($instructors as $instructor)
+                        <tr id="{{$instructor->id}}">
+                            <td>{{$counter}}</td>
+                            <td class="email-title">{{$instructor->user->first_name}}</td>
+                            <td class="email-body">{{$instructor->user->email}}</td>
+                            <td class="date">{{$instructor->user->updated_at}}</td>
+                            <td>
+                                <ul class="">
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown">
+                                            <i class="glyphicon glyphicon-th-list"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a class="btnEdit" href="{{route('instructor-edit',$instructor->id)}}"><i class="glyphicon glyphicon-dashboard"></i> Edit</a></li>
+                                            <li><a class="btnDelete" href="{{route('instructor-delete',$instructor->id)}}"> <i class="glyphicon glyphicon-ban-circle"></i> Delete</a></li>
                                         </ul>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endif
-                    @endif
+                                    </li>
+                                </ul>
+                        </tr>
+                        <?php $counter++ ?>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -136,10 +135,10 @@
                 e.stopImmediatePropagation();
             })
 
-            $('.exercise_list').select2({
-                placeholder:'Exercise List....'
-
-            });
+//            $('.exercise_list').select2({
+//                placeholder:'Exercise List....'
+//
+//            });
         });
 
         $(document).on('click', '.Instructor-title', function() {
@@ -187,6 +186,24 @@
             });
 
         });
+
+    </script>
+
+    <script>
+
+
+        $(document).ready(function () {
+            /* Datatables basic */
+            $('#datatable-example').dataTable();
+
+            //*** trainee table detail action dropdown
+            $('.dropdown-toggle').click(function (e) {
+                e.preventDefault();
+                $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
+                e.stopImmediatePropagation();
+            })
+        });
+
 
     </script>
 @stop

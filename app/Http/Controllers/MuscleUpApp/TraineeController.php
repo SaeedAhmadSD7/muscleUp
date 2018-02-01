@@ -219,23 +219,8 @@ class TraineeController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User($request->all());
-        $password = str_random(8);
-        $user->password = bcrypt($password);
-        $user['type'] = 'trainee';
-        //        $user->first_name = $request->first_name;
-//        $user->last_name = $request->last_name;
-//        $user->email = $request->email;
-//        $user->dob = $request->dob;
-//        $user->gender = $request->gender;
-//        $user->phone_number = $request->phone_number;
-        $user->address = $request->address;
-//        $user->dial_code = '+27';
-        $user->save();
-        $trainee = new Trainee($request->all());
-        $trainee['user_id'] = $user->id;
-        $user->trainee()->save($trainee);
-
+        $data = $request->all();
+        Trainee::saveTrainee($data);
 
 //        Mail::to($user->email)->send(new AddTraineeRequest($user->email,$password));
         session()->flash('success', 'Congratulations Trainee have been added succesfully. Credentials have been mailed to entered email.');
@@ -253,9 +238,12 @@ class TraineeController extends Controller
      */
     public function show($id)
     {
-        $trainee = User::find($id);
-//        $user = User::find($trainee->user_id);
-        return view('muscle-up-app.trainee.trainee-personal-detail')->with(['trainee' => $trainee]);
+//        dd("hi");
+        $trainees = $this->_trainee->fetchRecords();
+        return view('muscle-up-app.trainee.trainees-list',compact('trainees'));
+//        $trainee = User::find($id);
+////        $user = User::find($trainee->user_id);
+//        return view('muscle-up-app.trainee.trainee-personal-detail')->with(['trainee' => $trainee]);
     }
 
     /**
@@ -266,10 +254,11 @@ class TraineeController extends Controller
      */
     public function edit($id)
     {
-        $trainee = User::find($id);
-//        $user = User::find($trainee->user_id);
+        $trainee_user = User::find($id);
+        $trainee = $trainee_user->trainee;
+//        dd($user = Trainee::where('user_id', $id)->get());
 
-        return view('muscle-up-app.trainee.profile-detail-edit')->with(['trainee' => $trainee]);
+        return view('muscle-up-app.trainee.profile-detail-edit')->with(['trainee' => $trainee, 'trainee_user' => $trainee_user]);
     }
 
     /**
@@ -282,22 +271,14 @@ class TraineeController extends Controller
     public function update(Request $request, $id)
     {
 
-        $trainee = User::find($id);
-        $trainee->first_name = $request->input('first_name');
-        $trainee->last_name = $request->input('last_name');
-        $trainee->dial_code = '+27';
-        $trainee->phone_number = $request->input('phone_number');
-        $trainee->dob = $request->input('dob');
-        $trainee->gender = $request->input('gender');
-        $trainee->address = $request->input('address');
-        $trainee->save();
-
+        $data = $request->all();
+        Trainee::editTrainee($data, $id);
 
         Session::flash('success', 'This Trainee was information successfully update.');
 
 
 //        Redirect with flash data to post.show
-        return redirect()->route('trainee-personal-detail', $trainee->id);
+        return redirect()->route('traineeDashboard');
     }
 
     /***

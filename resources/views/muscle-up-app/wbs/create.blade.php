@@ -77,7 +77,7 @@
                                     <th>Set</th>
                                     <th>Rep</th>
                                     <th>Rest</th>
-                                    <th>Action</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -94,13 +94,13 @@
                                     <td id="qtyRow"><input class="form-control" type="number" id="set" name="set[]" placeholder="Set" style="width:60px;"></td>
                                     <td id="caloryRow"><input class="form-control" type="number" id="rep" name="rep[]" placeholder="Rep" style="width:60px;"></td>
                                     <td><input class="form-control time_take_input" type="text" name="rest[]" placeholder="Rest" style="width:60px"></td>
-                                    <td><button class="remove_row btn btn-danger" type="button"><span class="glyph-icon icon-typicons-cancel"></span></button></td>
+
                                 </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>
                                     <th colspan="7">
-                                        <div class="create"><button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon icon-typicons-plus"></span></button></div>
+                                        {{--<div class="create"><button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon icon-typicons-plus"></span></button></div>--}}
                                     </th>
                                 </tr>
                                 </tfoot>

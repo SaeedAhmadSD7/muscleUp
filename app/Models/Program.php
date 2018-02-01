@@ -30,7 +30,7 @@ class Program extends Model {
 
     protected $table= 'programs';
     protected $primaryKey = 'id';
-    protected $fillable = ['title','description'];
+    protected $fillable = ['title','description','gym_id'];
 
 
     public function phase() {
@@ -63,6 +63,7 @@ class Program extends Model {
 
         $program->title = $formData['title'];
         $program->description = $formData['description'];
+        $program->gym_id = $formData['gym_id'];
         $program->save();
         $program->phase()->detach();
         $program->phase()->attach($formData['phase_id']);

@@ -1,4 +1,4 @@
-@extends('muscle-up-app.gym.dashboard.gym-dashboard')
+@extends('muscle-up-app.gym.dashboard')
 
 @section('title','Instructor List')
 
@@ -6,6 +6,18 @@
 @section('page-heading')
     <h2>Instructor Detail</h2>
     <p>Details of Instructor</p>
+    <div id="errors">
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
 @stop
 
 
@@ -61,6 +73,55 @@
                             <input class="form-control phone_number" type="text" name="phone_number" value="{{$employee->user->phone_number}}" placeholder="Phone Number..." maxlength="15">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Country:</label>
+                        <div class="col-md-8">
+                            {{--<input class="form-control" type="text" name="country" value="" placeholder="Country...">--}}
+                            <select class="form-control country_list" name="country">
+                                @if(isset($employee->user->country))
+                                    <option value="$employee->user->country">{{$employee->user->country}}</option>
+                                @else
+                                    <option value="">Select Country..</option>
+                                @endif
+                                @if(isset($countries))
+                                    @foreach($countries as $country )
+                                        <option value="{{$country->name}}">{{$country->name}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">City:</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" name="city" value="{{$employee->user->city}}" placeholder="City...">
+                        </div>
+                    </div>
+                    {{--<div class="form-group">--}}
+                        {{--<label class="col-md-4 control-label">Country:</label>--}}
+                        {{--<div class="col-md-8">--}}
+                            {{--<input class="form-control" type="text" name="country" value="" placeholder="Country...">--}}
+                            {{--<select   class="form-control country_list" name="country">--}}
+                                {{--@if(isset($employee->user->country))--}}
+                                    {{--<option value="">Select Country..</option>--}}
+
+                                {{--@else--}}
+                                    {{--<option value="">Select Country..</option>--}}
+                                   {{--@endif--}}
+                                {{--@if(isset($countries))--}}
+                                    {{--@foreach($countries as $country )--}}
+                                        {{--<option value="{{$country->name}}">{{$country->name}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--@endif--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group">--}}
+                        {{--<label class="col-md-4 control-label">City:</label>--}}
+                        {{--<div class="col-md-8">--}}
+                            {{--<input class="form-control" type="text" name="city" value="{{$employee->user->city}}" placeholder="City...">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Joining Date:</label>
                         <div class="col-sm-4">

@@ -202,7 +202,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
 
         //***TraineeController
         Route::group(['Trainee'], function () {
-
+            Route::resource('trainee', "TraineeController");
             Route::get('trainee/create', ['as' => 'trainee-create', 'uses' => 'TraineeController@create']);
             Route::post('trainee/upload-profile-pic', ['as' => 'uploadProfilePic', 'uses' => 'TraineeController@uploadProfilePic']);
             Route::post('trainee/remove-uploaded-profile-pic', ['as' => 'removeUploadedProfilePic', 'uses' => 'TraineeController@removeUploadedProfilePic']);

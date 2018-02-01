@@ -85,7 +85,7 @@
                                     <th>Serial</th>
                                     <th>Day Number</th>
                                     <th>Work BreakDown Title</th>
-                                    <th width="20px">Action</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -107,18 +107,14 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
-                                        <button class="remove_row btn btn-danger" type="button"><span class="glyph-icon icon-typicons-cancel"></span></button>
-                                    </td>
+
                                 </tr>
                                 </tbody>
 
                                 <tfoot>
                                 <tr>
                                     <th colspan="7">
-                                        <div class="create">
-                                            <button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon icon-typicons-plus"></span></button>
-                                        </div>
+
                                     </th>
                                 </tr>
                                 </tfoot>

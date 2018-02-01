@@ -2,6 +2,10 @@
 
 @section('title','Trainee Dashboard')
 
+@section('dashboard_link')
+    {{route('traineeDashboard')}}
+@stop
+
 @section('page-heading')
     <h2>Trainee Dashboard</h2>
     <p>Please fill in all the information and then click Add Trainee.</p>

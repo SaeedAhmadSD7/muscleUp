@@ -1,42 +1,7 @@
+{!! $id = get_trainee_id() !!}
+
 <li class="header"><span>Members Area</span></li>
-<li class="menu-element">
-    <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Trainees</span></a>
-    <div class="sidebar-submenu">
-        <ul>
-            <li><a href="{{route('trainee-create')}}" title="Inbox"><span>Add Trainee</span></a></li>
-            <li><a href="{{route('trainee-list')}}" title="Inbox"><span>View Trainee List</span></a></li>
-        </ul>
-    </div>
-</li>
-<li class="menu-element">
-    <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Instructors</span></a>
-    <div class="sidebar-submenu">
-        <ul>
-            <li><a href="{{route('instructor-add')}}" title="Inbox"><span>Add Instructor</span></a></li>
-            <li><a href="{{route('instructor-show')}}" title="Inbox"><span>View Instructor List</span></a></li>
-        </ul>
-    </div>
-</li>
-<li class="menu-element">
-    <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Allocate Trainee</span></a>
-    <div class="sidebar-submenu">
-        <ul>
-            <li><a href="{{route('trainee-allocation')}}" title="Inbox"><span>Allocation</span></a></li>
-            <li><a href="{{route('show-trainee-allocation')}}" title="Inbox"><span>View Allocation List</span></a></li>
-        </ul>
-    </div>
-</li>
-<li class="menu-element">
-    <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Add Branch</span></a>
-    <div class="sidebar-submenu">
-        <ul>
-            <li>
-                {{--                    <a href="{{route('branch')}}" title="Inbox"><span>Make branch</span></a>--}}
-                <a href="{{route('branch.create')}}" title="Create a New Branch"><span>Create</span></a>
-            </li>
-            <li>
-                <a href="{{route('branch.index')}}" title="List of Branches"><span>List of Branches</span></a>
-            </li>
-        </ul>
-    </div>
-</li>
+<li class="menu-element"><a href="{{route('trainee-personal-detail-edit',$id)}}"><i class="glyph-icon icon-linecons-tv"></i><span>Edit</span></a></li>
+<li class="menu-element"><a href="{{route('dietprogram-view')}}"><i class="glyph-icon icon-linecons-tv"></i><span>Diet Program</span></a></li>
+<li class="menu-element"><a href="{{route('workoutprogram-view')}}"><i class="glyph-icon icon-linecons-tv"></i><span>Workout Program</span></a></li>
+<li class="menu-element"><a href="{{route('trainee-activity')}}"><i class="glyph-icon icon-linecons-tv"></i><span>Progress</span></a></li>

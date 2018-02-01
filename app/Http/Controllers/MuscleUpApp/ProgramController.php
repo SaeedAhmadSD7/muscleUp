@@ -6,14 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Program;
 use App\Models\Phase;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProgramController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
@@ -38,7 +42,10 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
+
         $formData = $request->all();
+        $formData['gym_id'] = Auth::user()->gym_id;
+//        dd($formData);
         Program::createUpdateProgram($formData);
         return redirect()->route('show-program');
     }
@@ -81,7 +88,11 @@ class ProgramController extends Controller
      */
     public function update(Request $request)
     {
+
         $formData = $request->all();
+
+        $formData['gym_id'] = Auth::user()->gym_id;
+//        dd($formData);
         Program::createUpdateProgram($formData);
         return redirect()->route('show-program');
 

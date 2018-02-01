@@ -4,12 +4,19 @@ namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Models\Day;
 use App\Models\Phase;
+use App\Models\User;
 use App\Models\Wbs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-
+use Illuminate\Support\Facades\Auth;
 class PhaseController extends Controller
 {
+    private $_user;
+
+    public function __construct(User $user)
+    {
+        $this->_user = $user;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +47,9 @@ class PhaseController extends Controller
      */
     public function store(Request $request)
     {
+//        $user = $this->_user;
         $formData = $request->all();
+        $formData['gym_id']=Auth::user()->gym_id;
         Phase::createUpdatePhase($formData);
         return redirect()->route('show-phase');
 
@@ -86,6 +95,7 @@ class PhaseController extends Controller
     public function update(Request $request)
     {
         $formData = $request->all();
+        $formData['gym_id']=Auth::user()->gym_id;
         Phase::createUpdatePhase($formData);
         return redirect()->route('show-phase');
     }

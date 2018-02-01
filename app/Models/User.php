@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     protected $table = 'users';
     protected $primaryKey = 'id';
-    protected $fillable = ["gym_id","branch_id","email", "password","first_name","last_name" ,"address","dial_code","phone_number","dob","gender"];
+    protected $fillable = ["gym_id","branch_id","email", "password","first_name","last_name" ,"address","phone_number","dob","gender", "profile_img"];
 
     /**
      * The attributes that should be hidden for arrays.
