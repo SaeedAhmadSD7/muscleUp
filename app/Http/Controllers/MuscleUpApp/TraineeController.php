@@ -4,7 +4,9 @@ namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Http\Requests\HealthStatsRequest;
 use App\Http\Requests\PicUploadRequest;
+use App\Models\DietProgram;
 use App\Models\HealthQuestion;
+use App\Models\Program;
 use App\Models\User;
 use App\Models\Trainee;
 use App\Models\Employee;
@@ -289,16 +291,22 @@ class TraineeController extends Controller
     public function dietProgram()
     {
         $trainee = Trainee::where('user_id', Auth::user()->id)->first();
+        $diet_allocation = $trainee->allocation;
+        $program = $trainee->allocation->program;
+        $diet_program = $trainee->allocation->diet_program;
+        $meal = $trainee->allocation->diet_program->meal;
+        $food = $trainee->allocation->diet_program->food;
 
-        if ($trainee->allocation) {
-            $trainee->allocation->diet_program->meal;
-            $trainee->allocation->diet_program->food;
-            $dietProgram = 1;
-        } else {
-            $dietProgram = 0;
-        }
 
-        return view('muscle-up-app.trainee.dietProgram.dietProgram')->with(['trainee' => $trainee, 'dietProgram' => $dietProgram]);
+//        if ($trainee->allocation) {
+//            $trainee->allocation->diet_program->meal;
+//            $trainee->allocation->diet_program->food;
+//            $dietProgram = 1;
+//        } else {
+//            $dietProgram = 0;
+//        }
+
+        return view('muscle-up-app.trainee.dietProgram.dietProgram')->with(['trainee' => $trainee,'diet_allocation'=> $diet_allocation, 'diet_program' => $diet_program, 'program' => $program, 'meal' => $meal, 'food' => $food]);
     }
 
     public function workoutProgram()

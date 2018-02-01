@@ -27,29 +27,29 @@
         <div class="panel-body">
             <div class="example-box-wrapper">
                 <div class="form-wizard" id="form-wizard-3">
-                    @if($dietProgram)
+                    @if($diet_program)
                         <form class="workout-program form-horizontal bordered-row" action="">
                             <div class="tab-content">
                                 <h3 class="content-box-header bg-default">Diet Program</h3>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Diet Program Name</label>
                                     <div class="col-sm-6">
-                                        <input class="diet_program_id" type="hidden" value="{{$trainee->allocation->diet_program->id}}">
-                                        <span class="form-control">{{$trainee->allocation->diet_program->title}}</span>
+                                        <input class="diet_program_id" type="hidden" value="{{$diet_program->id}}">
+                                        <span class="form-control">{{$diet_program->title}}</span>
                                     </div>
                                 </div>
                                 <div class="form-group date-div">
                                     <label class="col-sm-3 control-label">Start Date</label>
                                     <div class="col-sm-6">
-                                        <input type="hidden" class="start_date" value="{{$trainee->allocation->start_date}}">
-                                        <span class="form-control date-span"></span>
+                                        <input type="hidden" class="start_date" value="{{ $trainee->allocation->start_date }}">
+                                        <span class="form-control date-span">{{ $trainee->allocation->start_date }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group wbs"></div>
-                                @foreach($trainee->allocation->diet_program->meal as $meal)
-                                    <h3 class="content-box-header bg-default">Meal Name: {{$meal->title}}</h3>
+                                @foreach($meal as $m)
+                                    <h3 class="content-box-header bg-default">Meal Name: {{$m->title}}</h3>
                                     <fieldset>
-                                        <input type="hidden" value="{{$meal->id}}">
+                                        <input type="hidden" value="{{$m->id}}">
                                         <div class="meal_cotainer">
                                             <div class="first-group form-group">
                                                 <div class="col-md-6 col-md-offset-3">
@@ -58,20 +58,20 @@
                                             </div>
                                             <div class="form-group meal_detail-div">
                                                 <div class="toggle-content meal_content">
-                                                    @foreach($trainee->allocation->diet_program->food as $food)
+                                                    @foreach($food as $f)
                                                         <div class="food-container">
-                                                            @if($food->pivot->meal_id === $meal->pivot->meal_id)
+                                                            @if($f->pivot->meal_id === $m->pivot->meal_id)
                                                                 <div class="form-group col-md-offset-3 col-md-6" >
-                                                                    <span class="form-control"><strong>Food Name: </strong>{{$food->title}}</span>
+                                                                    <span class="form-control"><strong>Food Name: </strong>{{$f->title}}</span>
                                                                 </div>
                                                                 <div class="form-group col-md-offset-3 col-md-2 quantity-actual-div">
-                                                                    <span class="form-control"><strong>Quantity: </strong>{{$food->pivot->quantity}}</span>
+                                                                    <span class="form-control"><strong>Quantity: </strong>{{$f->pivot->quantity}}</span>
                                                                 </div>
                                                                 <div class="form-group col-md-2 calories-actual-div">
-                                                                    <span class="form-control"><strong>Calories: </strong>{{$food->pivot->calories}}</span>
+                                                                    <span class="form-control"><strong>Calories: </strong>{{$f->pivot->calories}}</span>
                                                                 </div>
                                                                 <div class="form-group col-md-2">
-                                                                    <span class="form-control"><strong>Take Time: </strong>{{$food->pivot->taketime}}</span>
+                                                                    <span class="form-control"><strong>Take Time: </strong>{{$f->pivot->taketime}}</span>
                                                                 </div>
                                                             @endif
                                                         </div>
