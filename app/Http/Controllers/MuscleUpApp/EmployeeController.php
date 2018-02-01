@@ -121,7 +121,7 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show() {
-        $instructors=Instructor::with('user')->get();
+        $instructors=Employee::with('user')->get();
         return view('muscle-up-app.instructor.instructor-list')->with('instructors',$instructors);
     }
     public function profileshow($id)
@@ -168,7 +168,6 @@ class EmployeeController extends Controller
 
         $instructor= Employee::where('user_id','=',$id)->first();
 
-        $instructor->joining_date=$request->input('joining_date');
         $instructor->quit_date=$request->input('quit_date');
         $instructor->previous_salary=$request->input('previous_salary');
         $instructor->joining_salary=$request->input('joining_salary');
