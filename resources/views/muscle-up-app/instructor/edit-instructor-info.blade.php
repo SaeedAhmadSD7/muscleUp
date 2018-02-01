@@ -33,68 +33,70 @@
             <div class="example-box-wrapper">
                 <form class="form-horizontal bordered-row add-instructor-form" role="form" method="POST" action="{{route('instructor-update',$employee->user->id)}}">
                     {{csrf_field()}}
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Enter First Name:</label>
-                        <div class="col-sm-4">
-                            <input class="form-control" type="text" name="first_name" value="{{$employee->user->first_name}}" placeholder="First Name ...">
+                    <div class="tab-pane active pL0" id="tab2">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Enter First Name:</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="first_name" value="{{$employee->user->first_name}}" placeholder="First Name ...">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Enter last Name:</label>
-                        <div class="col-sm-4">
-                            <input class="form-control" type="text" name="last_name" value="{{$employee->user->last_name}}" placeholder="Last Name...">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Enter last Name:</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="last_name" value="{{$employee->user->last_name}}" placeholder="Last Name...">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Date of birth:</label>
-                        <div class="col-sm-4">
-                            <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="dob" value="{{$employee->user->dob}}" placeholder="Date of Birth..." readonly>
-                            <div class="btn-date"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Date of birth:</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" data-field="date" data-format="yyyy-MM-dd" name="dob" value="{{$employee->user->dob}}" placeholder="Date of Birth..." readonly>
+                                <div class="btn-date"></div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Gender</label>
-                        <div class="col-sm-6">
-                            <label class="radio-inline">
-                                <input id="" name="gender" type="radio" value="male" checked> Male
-                            </label>
-                            <label class="radio-inline">
-                                <input id="" name="gender" type="radio" value="female"> Female
-                            </label>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Gender</label>
+                            <div class="col-sm-6">
+                                <label class="radio-inline">
+                                    <input id="" name="gender" type="radio" value="male" checked> Male
+                                </label>
+                                <label class="radio-inline">
+                                    <input id="" name="gender" type="radio" value="female"> Female
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Phone number:</label>
-                        <div class="col-sm-1">
-                            <input class="form-control dial-code" type="text" name="dial_code" value="{{$employee->user->dial_code}}" placeholder="+1..." readonly>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Phone number:</label>
+                            <div class="col-sm-1">
+                                <input class="form-control dial-code" type="text" name="dial_code" value="{{$employee->user->dial_code}}" placeholder="+1..." readonly>
+                            </div>
+                            <div class="col-sm-3">
+                                <input class="form-control phone_number" type="text" name="phone_number" value="{{$employee->user->phone_number}}" placeholder="Phone Number..." maxlength="15">
+                            </div>
                         </div>
-                        <div class="col-sm-3">
-                            <input class="form-control phone_number" type="text" name="phone_number" value="{{$employee->user->phone_number}}" placeholder="Phone Number..." maxlength="15">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Country:</label>
+                            <div class="col-sm-4">
+                                {{--<input class="form-control" type="text" name="country" value="" placeholder="Country...">--}}
+                                <select class="form-control country_list" name="country">
+                                    @if(isset($employee->user->country))
+                                        <option value="$employee->user->country">{{$employee->user->country}}</option>
+                                    @else
+                                        <option value="">Select Country..</option>
+                                    @endif
+                                    @if(isset($countries))
+                                        @foreach($countries as $country )
+                                            <option value="{{$country->name}}">{{$country->name}}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Country:</label>
-                        <div class="col-md-8">
-                            {{--<input class="form-control" type="text" name="country" value="" placeholder="Country...">--}}
-                            <select class="form-control country_list" name="country">
-                                @if(isset($employee->user->country))
-                                    <option value="$employee->user->country">{{$employee->user->country}}</option>
-                                @else
-                                    <option value="">Select Country..</option>
-                                @endif
-                                @if(isset($countries))
-                                    @foreach($countries as $country )
-                                        <option value="{{$country->name}}">{{$country->name}}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">City:</label>
-                        <div class="col-md-8">
-                            <input class="form-control" type="text" name="city" value="{{$employee->user->city}}" placeholder="City...">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">City:</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="city" value="{{$employee->user->city}}" placeholder="City...">
+                            </div>
                         </div>
                     </div>
                     {{--<div class="form-group">--}}
@@ -122,6 +124,8 @@
                             {{--<input class="form-control" type="text" name="city" value="{{$employee->user->city}}" placeholder="City...">--}}
                         {{--</div>--}}
                     {{--</div>--}}
+                    <div class="tab-pane active pL0" id="tab2">
+
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Joining Date:</label>
                         <div class="col-sm-4">
@@ -169,7 +173,7 @@
                             <textarea class="form-control" name="address">{{$employee->user->address}}</textarea>
                         </div>
                     </div>
-
+                    </div>
                     <div class="form-group">
 
                         <div class="col-sm-offset-6">
