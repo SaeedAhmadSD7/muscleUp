@@ -13,6 +13,18 @@
 @section('page-heading')
     <h2>My Branch Info</h2>
     <p>Change the information and then click Update.</p>
+    <div id="errors">
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
 @stop
 
 @section('content')
@@ -22,10 +34,8 @@
             <h3 class="content-box-header bg-google">Basic Info</h3>
             <div class="example-box-wrapper">
                 <input type="hidden" value="1" id="test">
-
                 <form class="form-horizontal bordered-row add-trainee-form" role="form" method="post" action="{{route('branch.update',['id'=>$branch->id])}}"  enctype="multipart/form-data">
                     {{csrf_field()}}
-
                     <input type="hidden" name="_method" value="put">
 
                     <input type="hidden" id="profile_img" name="profile_img" />
@@ -34,7 +44,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Name:</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" name="title" value="{{$branch->title}}" placeholder="Branch Name ...">
+                                    <input class="form-control" type="text" name="branch_name" value="{{$branch->title}}" placeholder="Branch Name ...">
                                 </div>
                             </div>
 
@@ -94,7 +104,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Address</label>
                                 <div class="col-md-8">
-                                    <textarea name="address" placeholder="Address of the Branch" rows="3" class="form-control textarea-counter">{{$branch->address}}</textarea>
+                                    <textarea name="branch_address" placeholder="Address of the Branch" rows="3" class="form-control textarea-counter">{{$branch->address}}</textarea>
                                     <div class="character-remaining clear input-description">1000 characters left</div>
                                 </div>
                             </div>

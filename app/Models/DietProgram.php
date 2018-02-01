@@ -51,7 +51,7 @@ class DietProgram extends Model
         else{
             $dietProgram = new DietProgram();
         }
-
+        //dd($formData);
         $dietProgram->title = $formData['title'];
         $dietProgram->description = $formData['description'];
         $dietProgram->save();

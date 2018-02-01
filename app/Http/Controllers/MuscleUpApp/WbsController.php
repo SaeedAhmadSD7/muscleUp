@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
+
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\Wbs;
 use App\Models\Exercise;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\WbsCreateRequest;
 class WbsController extends Controller
 {
     /**
@@ -37,7 +38,7 @@ class WbsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(WbsCreateRequest $request) {
         $formData = $request->all();
         $formData['gym_id']=Auth::user()->gym_id;
         Wbs::createUpdateWbs($formData);
@@ -76,7 +77,7 @@ class WbsController extends Controller
      * @param  \App\Models\Wbs  $wbs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Wbs $wbs)
+    public function update(WbsCreateRequest $request, Wbs $wbs)
     {
         $formData = $request->all();
         $formData['gym_id']=Auth::user()->gym_id;

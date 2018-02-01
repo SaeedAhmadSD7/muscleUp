@@ -9,7 +9,7 @@
 
 @section('page-heading')
 
-    <h2>Allocation: {{$instructor->first_name }}{{$instructor->last_name}}</h2>
+    <h2>Allocation: {{get_full_name($instructor->user)}}</h2>
     <p>Please fill in all the information and Allocate a one.</p>
 
 
@@ -23,15 +23,14 @@
 
                 <div class="col-sm-6"><select class="form-control" id="traineeId">
 
-                        {{--@if($roles->count() > 0)--}}
-                        {{--@foreach($roles as $role)--}}
-                        {{--<option value="{{$role->id}}">{{$role->name}}</option>--}}
-                        {{--@endForeach--}}
-                        {{--@else--}}
-                        {{--No Record Found--}}
-                        {{--@endif--}}
 
-                        <option value="1">Ahmad</option><option value="2">Saeed</option><option value="3">Gill</option>
+                        <option value="">Select a Trainee</option>
+                        @if($unAllocatedTrainees->count() > 0)
+                        @foreach($unAllocatedTrainees as $unAllocatedTrainee)
+                        <option value="{{$unAllocatedTrainee->id}}">{{get_full_name($unAllocatedTrainee->user)}}</option>
+                        @endForeach
+                        @endif
+
                     </select>
                 </div>
 
@@ -221,5 +220,24 @@
 
         });
     </script>
+
+    <script>
+
+
+        $(document).ready(function () {
+            /* Datatables basic */
+            $('#datatable-example').dataTable();
+
+            //*** trainee table detail action dropdown
+            $('.dropdown-toggle').click(function (e) {
+                e.preventDefault();
+                $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
+                e.stopImmediatePropagation();
+            })
+        });
+
+
+    </script>
+
 
 @stop

@@ -57,6 +57,18 @@
     <div id="page-title">
         <h2>Diet Program</h2>
         <p>Create Diet Program</p>
+        <div id="errors">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
     </div>
 
     <div class="panel">
@@ -94,7 +106,7 @@
                                     <th>Quantity</th>
                                     <th>Calories</th>
                                     <th>Duration</th>
-                                    <th style="width: 60px; ">Action</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -112,24 +124,24 @@
                                             </select>
                                         </td>
                                         <td class="foodRow">
-                                            <select class="form-control day_name food_name" id="food_name" name="food_id[]" data-value="{{$dietList->pivot->food_id}}">
+                                            <select class="form-control day_name food_name" id="food_name1" name="food_id[]" data-value="{{$dietList->pivot->food_id}}">
                                                 @foreach($foods as $food)
                                                     <option data-calories="{{$food->calories}}" value="{{$food->id}}">{{$food->title}}</option>
                                                 @endforeach
                                             </select>
                                         </td>
                                         <td id="qtyRow">
-                                            <input class="form-control quantity" type="number" id="quantity" name="quantity[]" placeholder="Qrt:" style="width:60px;" value="{{$dietList->pivot->quantity}}">
+                                            <input class="form-control quantity" type="number" id="quantity1" name="quantity[]" onkeyup="myFunction()" placeholder="Qrt:" style="width:60px;" value="{{$dietList->pivot->quantity}}">
                                         </td>
                                         <td id="caloryRow">
-                                            <input class="form-control" type="text" id="calories" name="calories[]" placeholder="Cal" style="width:60px;" value="{{$dietList->pivot->calories}}" readonly>
+                                            <input class="form-control" type="text" id="calories1" name="calories[]" placeholder="Cal" style="width:60px;" value="{{$dietList->pivot->calories}}" readonly>
                                         </td>
                                         <td>
-                                            <input class="form-control time_take_input" type="text" name="taketime[]" placeholder="Time" style="width:60px" value="{{$dietList->pivot->taketime}}" readonly>
+                                            <input class="form-control time_take_input" type="text" name="taketime[]" placeholder="Time" style="width:60px" value="{{$dietList->pivot->taketime}}" >
                                         </td>
-                                        <td>
-                                            <button class="remove_row btn btn-danger" type="button"><span class="glyphicon icon-typicons-cancel"></span></button>
-                                        </td>
+                                        {{--<td>--}}
+                                            {{--<button class="remove_row btn btn-danger" type="button"><span class="glyphicon icon-typicons-cancel"></span></button>--}}
+                                        {{--</td>--}}
                                     </tr>
                                     <?php $count++; ?>
                                 @endforeach
@@ -138,9 +150,9 @@
                                 <tfoot>
                                     <tr>
                                         <th colspan="7">
-                                            <div class="create">
-                                                <button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon icon-typicons-plus"></span></button>
-                                            </div>
+                                            {{--<div class="create">--}}
+                                                {{--<button type="button" id="assign" class="btn btn-primary"><span class=" glyphicon icon-typicons-plus"></span></button>--}}
+                                            {{--</div>--}}
                                         </th>
                                     </tr>
                                 </tfoot>
@@ -160,4 +172,13 @@
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/js/diet.js')}}"></script>
+
+    <script>
+        function myFunction() {
+            var cal = $('#food_name1').find(':selected').attr('data-calories');
+            var qnty = document.getElementById("quantity1").value;
+
+            document.getElementById('calories1').value = cal * qnty;
+        }
+    </script>
 @stop

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
+use App\Http\Requests\InstructorCreateRequest;
+use App\Http\Requests\InstructorUpdateRequest;
 use App\Models\Country;
 use App\Models\Employee;
 use App\Models\Trainee;
@@ -66,7 +68,7 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InstructorCreateRequest $request)
     {
 
         $user = $this->_user;
@@ -90,6 +92,7 @@ class EmployeeController extends Controller
 
         $employee = $this->_employee;
         $employee->user_id=$user->id;
+        $employee->branch_id=\Auth::user()->branch_id;
         $employee->joining_date=$request->joining_date;
         $employee->quit_date=$request->quit_date;
         $employee->previous_salary=$request->previous_salary;
@@ -118,7 +121,7 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show() {
-         $instructors=Employee::with('user')->get();
+        $instructors=Employee::with('user')->get();
         return view('muscle-up-app.instructor.instructor-list')->with('instructors',$instructors);
     }
     public function profileshow($id)
@@ -138,8 +141,9 @@ class EmployeeController extends Controller
     {
         $employee= Employee::find($id);
         $employee->user;
+        $countries=Country::all();
 
-        return view('muscle-up-app.instructor.edit-instructor-info', compact('employee'));
+        return view('muscle-up-app.instructor.edit-instructor-info', compact('employee','countries'));
     }
 
     /**
@@ -149,7 +153,7 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(InstructorUpdateRequest $request, $id)
     {
 
         $user = User::find($id);
@@ -164,7 +168,6 @@ class EmployeeController extends Controller
 
         $instructor= Employee::where('user_id','=',$id)->first();
 
-        $instructor->joining_date=$request->input('joining_date');
         $instructor->quit_date=$request->input('quit_date');
         $instructor->previous_salary=$request->input('previous_salary');
         $instructor->joining_salary=$request->input('joining_salary');
@@ -187,7 +190,13 @@ class EmployeeController extends Controller
         $allocation_type = $request->input('allocationType');
         $instructor = Instructor::find($instructor_id);
 
-        $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
+//        $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
+//        if (!$instructor->trainees()->exists($trainee_id)) {
+//            $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
+//        }
+        if (!$instructor->trainees()->where('trainee_id', $trainee_id)->where('instructor_id', $instructor_id)) {
+            $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
+        }
 
 
         Session::flash('Success','Congratulations Employee have been added successfully. Credentials have been mailed to entered email.');
@@ -206,15 +215,17 @@ class EmployeeController extends Controller
 
     public function allocation($id)
     {
-//        dd($id);
 
         $instructor = Instructor::find($id);
 
         $allocatedTrainees = $instructor->trainees()->get();
+//        $unAllocatedTrainees = $instructor->notMyTrainees()->get();
+        $unAllocatedTrainees = Trainee::all();
+//        dd($allocatedTrainees->count());
 
-//dd($allocatedTrainees);
+//        dd($unAllocatedTrainees);
 
-        return view('muscle-up-app.instructor.trainee-allocation', compact('allocatedTrainees','instructor'));
+        return view('muscle-up-app.instructor.trainee-allocation', compact('allocatedTrainees','instructor','unAllocatedTrainees'));
 
 //        return redirect()->route('instructor-show');
     }
