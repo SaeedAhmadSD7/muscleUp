@@ -180,7 +180,13 @@ class EmployeeController extends Controller
         $allocation_type = $request->input('allocationType');
         $instructor = Instructor::find($instructor_id);
 
-        $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
+//        $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
+//        if (!$instructor->trainees()->exists($trainee_id)) {
+//            $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
+//        }
+        if (!$instructor->trainees()->where('trainee_id', $trainee_id)->where('instructor_id', $instructor_id)) {
+            $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
+        }
 
 
         Session::flash('Success','Congratulations Employee have been added successfully. Credentials have been mailed to entered email.');
@@ -199,15 +205,17 @@ class EmployeeController extends Controller
 
     public function allocation($id)
     {
-//        dd($id);
 
         $instructor = Instructor::find($id);
 
         $allocatedTrainees = $instructor->trainees()->get();
+//        $unAllocatedTrainees = $instructor->notMyTrainees()->get();
+        $unAllocatedTrainees = Trainee::all();
+//        dd($allocatedTrainees->count());
 
-//dd($allocatedTrainees);
+//        dd($unAllocatedTrainees);
 
-        return view('muscle-up-app.instructor.trainee-allocation', compact('allocatedTrainees','instructor'));
+        return view('muscle-up-app.instructor.trainee-allocation', compact('allocatedTrainees','instructor','unAllocatedTrainees'));
 
 //        return redirect()->route('instructor-show');
     }
