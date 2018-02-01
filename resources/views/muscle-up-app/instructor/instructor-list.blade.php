@@ -17,7 +17,6 @@
 @stop
 
 
-
 @section('content')
     <div class="row mailbox-wrapper">
         <div class="col-md-12">
@@ -28,22 +27,24 @@
                 <table class="table table-hover text-center">
                     <thead>
                     <tr>
-                        <th class="email-title">Serial</th>
-                        <th class="email-body">Name</th>
-                        <th class="email-title">Email</th>
-                        <th>Date</th>
-                        <th>Action</th>
-
+                        <th>Name</th>
+                        <th>email</th>
+                        <th>Package(Fee)</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
+
                     <tbody>
                     <?php $counter = 1 ?>
                     @foreach($instructors as $instructor)
                         <tr id="{{$instructor->id}}">
-                            <td>{{$counter}}</td>
-                            <td class="email-title">{{$instructor->user->first_name}}</td>
-                            <td class="email-body">{{$instructor->user->email}}</td>
+                            {{--<td>{{$counter}}</td>--}}
+                            <td class="Instructor-title-1">
+                                {{--                                <img width="20%" src="{{get_profile_pic_url($instructor->user->profile_img)}}" /> --}}
+                                <span class="instructorName"><a href="{{route('instructor-allocation', $instructor->id)}}" >{{get_full_name($instructor->user)}}</a></span> <kbd class="mL5">01{{$instructor->user->code}}</kbd></td>
+                            <td>{{$instructor->user->email}}</td>
                             <td class="date">{{$instructor->user->updated_at}}</td>
+
                             <td>
                                 <ul class="">
                                     <li class="dropdown">
@@ -77,12 +78,13 @@
                         <div class="content-box-wrapper">
                             <div class="form-group"><label class="col-sm-4 control-label">Select Trainee</label><div class="col-sm-8"><select class="form-control" id="traineeId">
 
-                                        {{--@if($roles->count() > 0)--}}
-                                        {{--@foreach($roles as $role)--}}
-                                        {{--<option value="{{$role->id}}">{{$role->name}}</option>--}}
+                                        {{--@if($unAllocatedTrainees->count() > 0)--}}
+                                            {{--<option value="1">Ahmad</option>--}}
+                                        {{--@foreach($unAllocatedTrainees as $unAllocatedTrainee)--}}
+                                                {{--<option value="1">Ahmad</option>--}}
+                                        {{--<option value="{{$unAllocatedTrainees->id}}">{{$unAllocatedTrainees->first_name}}</option>--}}
                                         {{--@endForeach--}}
-                                        {{--@else--}}
-                                        {{--No Record Found--}}
+
                                         {{--@endif--}}
 
                                         <option value="1">Ahmad</option><option value="2">Saeed</option><option value="3">Gill</option>

@@ -190,7 +190,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::get('instructor/edit/{id}', ['as' => 'instructor-edit', 'uses' => 'EmployeeController@edit']);
             Route::post('instructor/update/{id}', ['as' => 'instructor-update', 'uses' => 'EmployeeController@update']);
             Route::post('instructor/allocate/{id}', ['as' => 'instructor-allocate', 'uses' => 'EmployeeController@allocate']);
-            Route::post('instructor/allocation/{id}', ['as' => 'instructor-allocation', 'uses' => 'EmployeeController@allocation']);
+//            Route::post('instructor/allocation/{id}', ['as' => 'instructor-allocation', 'uses' => 'EmployeeController@allocation']);
             Route::get('instructor/delete/{id}', ['as' => 'instructor-delete', 'uses' => 'EmployeeController@destroy']);
 
         });
