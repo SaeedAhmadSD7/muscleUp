@@ -35,9 +35,9 @@
                       </tr>
                    </thead>
                     <tbody>
-                            @foreach($dietPrograms as $dietProgram)
-                                <?php $count=1; ?>
-                                <tr>
+                    <?php $count=1; ?>
+                         @foreach($dietPrograms as $dietProgram)
+                              <tr>
                                     <td width="20px" style="text-align:center;"><h5><?php echo $count; ?></h5></td>
                                     <td width="140px" style="text-align:center;"><h5>{{$dietProgram->title}}</h5></td>
                                     <td><h5>{{$dietProgram->description}}</h5></td>

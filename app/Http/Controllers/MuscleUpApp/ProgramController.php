@@ -8,7 +8,7 @@ use App\Models\Program;
 use App\Models\Phase;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\ProgramCreateRequest;
 class ProgramController extends Controller
 {
 
@@ -40,7 +40,7 @@ class ProgramController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProgramCreateRequest $request)
     {
 
         $formData = $request->all();
@@ -86,7 +86,7 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(ProgramCreateRequest $request)
     {
 
         $formData = $request->all();

@@ -7,8 +7,10 @@ use App\Models\Phase;
 use App\Models\User;
 use App\Models\Wbs;
 use Illuminate\Http\Request;
+use App\Http\Requests\PhaseCreateRequest;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+
 class PhaseController extends Controller
 {
     private $_user;
@@ -45,7 +47,7 @@ class PhaseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PhaseCreateRequest $request)
     {
 //        $user = $this->_user;
         $formData = $request->all();
@@ -92,7 +94,7 @@ class PhaseController extends Controller
      * @param  \App\Models\Phase  $phase
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(PhaseCreateRequest $request)
     {
         $formData = $request->all();
         $formData['gym_id']=Auth::user()->gym_id;
