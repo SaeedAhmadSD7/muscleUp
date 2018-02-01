@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
+use App\Http\Requests\InstructorCreateRequest;
+use App\Http\Requests\InstructorUpdateRequest;
 use App\Models\Country;
 use App\Models\Employee;
 use App\Models\Trainee;
@@ -66,7 +68,7 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InstructorCreateRequest $request)
     {
 
         $user = $this->_user;
@@ -138,8 +140,9 @@ class EmployeeController extends Controller
     {
         $employee= Employee::find($id);
         $employee->user;
+        $countries=Country::all();
 
-        return view('muscle-up-app.instructor.edit-instructor-info', compact('employee'));
+        return view('muscle-up-app.instructor.edit-instructor-info', compact('employee','countries'));
     }
 
     /**
@@ -149,7 +152,7 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(InstructorUpdateRequest $request, $id)
     {
 
         $user = User::find($id);

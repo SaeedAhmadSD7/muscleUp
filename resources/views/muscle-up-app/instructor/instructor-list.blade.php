@@ -136,10 +136,10 @@
                 e.stopImmediatePropagation();
             })
 
-            $('.exercise_list').select2({
-                placeholder:'Exercise List....'
-
-            });
+//            $('.exercise_list').select2({
+//                placeholder:'Exercise List....'
+//
+//            });
         });
 
         $(document).on('click', '.Instructor-title', function() {

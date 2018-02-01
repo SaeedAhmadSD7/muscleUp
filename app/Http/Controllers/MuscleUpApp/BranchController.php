@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
+use App\Http\Requests\BranchUpdateRequest;
 use App\Models\Branch;
 use App\Models\User;
 use App\Models\Country;
@@ -153,8 +154,12 @@ class BranchController extends Controller
     public function edit($id)
     {
         $user = Auth::user();
-//        $id =$user->branch_id;
+        if(($id==0)){
+            $id =$user->branch_id;
+        }
         $branch=Branch::find($id);
+
+
         $countries = Country::all();   //only for user modal data
         return view('muscle-up-app.branch.edit',compact('user','branch','countries'));
     }
@@ -166,20 +171,20 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BranchUpdateRequest $request, $id)
     {
 //        dd($request->title);
         $user = Auth::user();
 //        $id =$user->branch_id;
         $branch = Branch::find($id);
 //        $branch->branch_no = $request->branch_no;
-        $branch->title = $request->title;
+        $branch->title = $request->branch_name;
         $branch->phone_number = $request->phone_number;
         $branch->opening_time = $request->opening_time;
         $branch->closing_time = $request->closing_time;
         $branch->country = $request->country;
         $branch->city = $request->city;
-        $branch->address = $request->address;
+        $branch->address = $request->branch_address;
         $branch->save();
 
         return redirect()->route('branch.index');
