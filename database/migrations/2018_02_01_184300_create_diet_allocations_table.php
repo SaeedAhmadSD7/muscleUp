@@ -1,10 +1,11 @@
+
 <?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAllocationsTable extends Migration
+class CreateDietAllocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +14,7 @@ class CreateAllocationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('allocations', function (Blueprint $table) {
+        Schema::create('diet_allocations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trainee_id');
             $table->integer('program_id');
@@ -22,7 +23,7 @@ class CreateAllocationsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-}
+    }
 
     /**
      * Reverse the migrations.
@@ -31,6 +32,6 @@ class CreateAllocationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('allocations');
+        Schema::dropIfExists('diet_allocations');
     }
 }

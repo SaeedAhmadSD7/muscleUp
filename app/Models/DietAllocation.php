@@ -19,25 +19,25 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\Employee $employee
  * @property-read \App\Models\Program $program
  * @property-read \App\Models\Trainee $trainee
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Allocation whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Allocation whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Allocation whereDietProgramId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Allocation whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Allocation whereProgramId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Allocation whereStartDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Allocation whereTraineeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Allocation whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietAllocation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietAllocation whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietAllocation whereDietProgramId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietAllocation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietAllocation whereProgramId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietAllocation whereStartDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietAllocation whereTraineeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DietAllocation whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Allocation extends Model
+class DietAllocation extends Model
 {
-    protected $table = 'allocations';
+    protected $table = 'diet_allocations';
     protected $primaryKey = 'id';
     public $fillable = ['trainee_id','instructor_id','program_id','diet_program_id','start_date'];
 
     public static function showAll()
     {
-        $allocations = Allocation::all();
+        $allocations = DietAllocation::all();
         return $allocations;
     }
 
@@ -56,3 +56,4 @@ class Allocation extends Model
         return $this->belongsTo(DietProgram::class);
     }
 }
+

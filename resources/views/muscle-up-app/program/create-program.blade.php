@@ -37,9 +37,23 @@
         </tfoot>
     </table>
 
+
+
     <div id="page-title">
         <h2>Add Program</h2>
         <p>Create Program</p>
+        <div id="errors">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
     </div>
 
     <div class="panel">
@@ -80,17 +94,13 @@
                                 <tr id="tmpRow" class="fieldR">
                                     <td style='width:20px;text-align:center;'><span class="sr">1</span></td>
                                     <td>
-                                        <select class="form-control" name="phase_id[]" id="">
-                                            <option value="0">Select phase:</option>
-                                            @foreach($phases as $phase)
+                                            <select  class="selectpicker" multiple title="Select Phase"  name="phase_id[]" id="">
+                                                {{--<option value="0">Select phase:</option>--}}
+                                                @foreach($phases as $phase)
                                                 <option value="{{$phase->id}}">{{$phase->title}}</option>
-                                            @endforeach
-                                        </select>
+                                                @endforeach
+                                            </select>
                                     </td>
-
-                                    {{--<td>--}}
-                                        {{--<button class="remove_row btn btn-danger" type="button"><span class="glyphicon icon-typicons-cancel"></span></button>--}}
-                                    {{--</td>--}}
                                 </tr>
                                 </tbody>
                                 <tfoot>
@@ -118,4 +128,15 @@
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/js/diet.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+    <script>
+        $(".selectpicker").chosen({
+            no_results_text: "Oops, nothing found!"
+        })
+
+    </script>
+
+
 @stop

@@ -48,8 +48,19 @@
 
     <div id="page-title">
         <h2>Add Phase</h2>
-
         <p>Create Phase</p>
+        <div id="errors">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
     </div>
 
     <div class="panel">

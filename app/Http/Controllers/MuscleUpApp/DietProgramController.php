@@ -7,7 +7,7 @@ use App\Models\Food;
 use App\Models\Meal;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-
+use App\Http\Requests\DietCreateRequest;
 class DietProgramController extends Controller
 {
 
@@ -39,8 +39,9 @@ class DietProgramController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request) {
+    public function store(DietCreateRequest $request) {
         $formData = $request->all();
+//        dd($formData);
         DietProgram::createorUpdateDiet($formData);
         return redirect()->route('diet-list');
 
@@ -66,7 +67,7 @@ class DietProgramController extends Controller
     /**
      * @param Request $request
      */
-    public function update(Request $request){
+    public function update(DietCreateRequest $request){
         $formData = $request->all();
         DietProgram::createorUpdateDiet($formData);
         return redirect()->route('diet-list');

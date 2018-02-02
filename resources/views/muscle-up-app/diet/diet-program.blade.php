@@ -55,6 +55,18 @@
     <div id="page-title">
         <h2>Diet Program</h2>
         <p>Create Diet Program</p>
+        <div id="errors">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
     </div>
 
     <div class="panel">
@@ -98,7 +110,8 @@
                                 <tr id="tmpRow" class="fieldR">
                                     <td style='width:20px;text-align:center;'><span class="sr">1</span></td>
                                     <td>
-                                        <select class="form-control" name="meal_id[]" id="meal_no">
+
+                                        <select class="form-control" name="meal_id[]"  id="meal_no">
                                             <option value="0">Select Meal:</option>
                                             @foreach($meals as $meal)
                                                 <option value="{{$meal->id}}">{{$meal->title}}</option>
@@ -106,34 +119,33 @@
                                         </select>
                                     </td>
                                     <td class="foodRow">
-                                        <select class="form-control food_name" id="food_name" name="food_id[]">
-                                            <option value="0">Select Food:</option>
+                                        <select class="form-control food_name" id="food_name1"  name="food_id[]" >
+                                            <option>Select Food:</option>
                                             @foreach($foods as $food)
                                                 {{--<option data-calories="{{$food->calories}}" value="{{$food->id}}">{{$food->title}}</option>--}}
-                                                <option value="{{$food->calories}}">{{$food->title}}</option>
+                                                <option data-calories="{{$food->calories}}" value="{{$food->id}}">{{$food->title}}</option>
                                             @endforeach
                                         </select>
+
                                     </td>
                                     <td id="qtyRow">
-                                        <input class="form-control quantity" type="number" id="quantity" name="quantity[]" placeholder="Qrt:" style="width:60px;">
+
+                                        <input class="form-control quantity" type="number" id="quantity1"  onkeyup="myFunction()" name="quantity[]" placeholder="Qrt:" style="width:60px;">
                                     </td>
                                     <td id="caloryRow">
-                                        <input class="form-control" type="text" id="calories" name="calories[]" placeholder="Cal" style="width:60px;" readonly>
+                                        <input class="form-control" type="text" id="calories1" name="calories[]" placeholder="Cal" style="width:60px;" readonly>
                                     </td>
                                     <td>
-                                        <input class="form-control time_take_input" type="text" name="taketime[]" placeholder="Time" style="width:60px" readonly>
+                                        <input class="form-control time_take_input" type="text" name="taketime[]" placeholder="Time" style="width:60px">
                                     </td>
 
                                     <script>
-                                        $(document).ready(function(){
-                                            $('#food_name').keyup(calculate);
-                                            $('#quantity').keyup(calculate);
-                                        });
-                                        function calculate(e)
-                                        {
-                                            $('#calories').val($('#food_name').val() * $('#quantity').val());
-                                        }
+                                        function myFunction() {
+                                            var cal = $('#food_name1').find(':selected').attr('data-calories');
+                                            var qnty = document.getElementById("quantity1").value;
 
+                                            document.getElementById('calories1').value = cal * qnty;
+                                        }
                                     </script>
                                 </tr>
                                 </tbody>
