@@ -20,7 +20,7 @@
     </div>
 
     <div class="panel">
-        <form method="get" action="{{route('allocation')}}">
+        <form method="get" action="{{route('diet-allocation')}}">
             <button class="btn btn-success" type="submit">Allocation<span class="glyphicon glyphicon-plus"></span></button>
         </form>
         <div class="panel-body">

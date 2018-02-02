@@ -78,7 +78,7 @@ class EmployeeController extends Controller
         $user->password = bcrypt($password);
         $user->branch_id=\Auth::user()->branch_id;
         $user->gym_id=\Auth::user()->gym_id;
-        $user['type'] = 'instructor';
+        $user['type'] = 'employee';
         $user->first_name=$request->first_name;
         $user->last_name=$request->last_name;
 //        $user->dial_code = '+27';

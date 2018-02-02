@@ -272,14 +272,14 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::get('/program/delete/{id?}', ['as' => 'delete-program', 'uses' => 'ProgramController@destroy']);
         });
 
-        //***AllocationController
-        Route::group(['Allocation'], function () {
-            Route::get('allocation/', ['as' => 'allocation', 'uses' => 'AllocationController@create']);
-            Route::post('allocation/store', ['as' => 'allocation_store', 'uses' => 'AllocationController@store']);
-            Route::get('/allocation/list/', ['as' => 'show-allocation', 'uses' => 'AllocationController@show']);
-            Route::get('/allocation/edit/{id}', ['as' => 'edit-allocation', 'uses' => 'AllocationController@edit']);
-            Route::post('/allocation/update/{id}', ['as' => 'update-allocation', 'uses' => 'AllocationController@update']);
-            Route::get('/allocation/delete/{id}', ['as' => 'delete-allocation', 'uses' => 'AllocationController@destroy']);
+        //***DietAllocationController
+        Route::group(['DietAllocation'], function () {
+            Route::get('diet-allocation/', ['as' => 'diet-allocation', 'uses' => 'DietAllocationController@create']);
+            Route::post('diet-allocation/store', ['as' => 'diet_allocation_store', 'uses' => 'DietAllocationController@store']);
+            Route::get('/diet-allocation/list/', ['as' => 'show-diet-allocation', 'uses' => 'DietAllocationController@show']);
+            Route::get('/diet-allocation/edit/{id}', ['as' => 'edit-diet-allocation', 'uses' => 'DietAllocationController@edit']);
+            Route::post('/diet-allocation/update/{id}', ['as' => 'update-diet-allocation', 'uses' => 'DietAllocationController@update']);
+            Route::get('/diet-allocation/delete/{id}', ['as' => 'delete-diet-allocation', 'uses' => 'DietAllocationController@destroy']);
         });
 
     });

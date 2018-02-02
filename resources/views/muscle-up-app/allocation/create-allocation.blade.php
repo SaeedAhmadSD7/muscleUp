@@ -19,13 +19,13 @@
     <div id="page-title">
         <h2> Allocate Workout Program </h2>
 
-        <p> Create Allocation</p>
+        <p> Create Diet Allocation</p>
     </div>
 
     <div class="panel">
         <div class="panel-body">
             <div class="example-box-wrapper">
-                <form class="form-group allocate-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('allocation_store')}}">
+                <form class="form-group allocate-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('diet_allocation_store')}}">
                     {{csrf_field()}}
                     <div class="tab-content">
                         <div class="form-wizard" id="form-wizard-3">
