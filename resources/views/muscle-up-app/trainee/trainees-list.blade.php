@@ -4,7 +4,6 @@
 
 @section('page-heading')
     <h2>List of Trainees</h2>
-    <p>Please fill in all the information and then click Add Trainee.</p>
 @stop
 
 
@@ -19,7 +18,6 @@
                         <tr>
                             <th>Name</th>
                             <th>email</th>
-                            <th>Package(Fee)</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -36,18 +34,17 @@
                         <tr class="{{ (($i+1)%2) ? "even" : "odd" }} gradeX">
                             <td><img width="20%" src="{{get_profile_pic_url($t->profile_img)}}" /> {{get_trainee_full_name($t)}} <kbd class="mL5">{{$t->code}}</kbd></td>
                             <td>{{$t->email}}</td>
-                            <td>{{$t->initial_fee}}</td>
                             <td>
                                 <ul class="">
-                                    <li class="dropdozwn">
+                                    <li class="dropdown">
                                         <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown">
                                             <i class="glyphicon glyphicon-th-list"></i>
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a class="create_modal_btn" href=""><i class="glyphicon glyphicon-eye-open"></i> Detail </a></li>
-                                            <li><a class="btnEdit" href=""><i class="glyphicon glyphicon-question-sign"></i> Health FAQs </a></li>
-                                            <li><a class="btnEdit" href=""><i class="glyphicon glyphicon-dashboard"></i> Health Statistics </a></li>
-                                            <li><a class="btnDelete" href=""> <i class="glyphicon glyphicon-ban-circle"></i> Deactivate </a></li>
+                                            <li><a class="create_modal_btn" href="{{route('trainee-list-detail',$t->id)}}"><i class="glyphicon glyphicon-eye-open"></i> Detail </a></li>
+                                            <li><a class="btnEdit" href="{{$t->id}}"><i class="glyphicon glyphicon-question-sign"></i> Health FAQs </a></li>
+                                            <li><a class="btnEdit" href="{{$t->id}}"><i class="glyphicon glyphicon-dashboard"></i> Health Statistics </a></li>
+                                            <li><a class="btnDelete" href="{{$t->id}}"> <i class="glyphicon glyphicon-ban-circle"></i> Deactivate </a></li>
                                         </ul>
                                     </li>
                                 </ul>

@@ -106,7 +106,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'gym_id' => 1,
             'branch_id' => 1,
-            'type' => UserType::EMPLOYEE,
+            'type' => UserType::INSTRUCTOR,
             'first_name' => 'Temoor',
             'last_name' => 'Khan',
             'dob'=>'2017-09-02',

@@ -116,9 +116,19 @@ class TraineeController extends Controller
 
     public function trainee_detail($id)
     {
+
         $trainee = Trainee::find($id);
         $trainee->user;
-        return view('muscle-up-app.gym.trainee.trainee-list-detail')->with(['trainee' => $trainee]);
+        return view('muscle-up-app.trainee.trainee-list-detail')->with(['trainee' => $trainee]);
+
+    }
+
+    public function programAllocation($id)
+    {
+
+        $trainee = Trainee::find($id);
+        $trainee->user;
+        return view('muscle-up-app.trainee.trainee-list-detail')->with(['trainee' => $trainee]);
 
     }
 
@@ -132,10 +142,11 @@ class TraineeController extends Controller
      */
     public function traineesList($id){
 
-
+        $user=Auth::user();
 //        ifisset($id);
         $trainees = $this->_trainee->fetchRecords();
-        return view('muscle-up-app.trainee.trainees-list',compact('trainees'));
+//        dd($trainees);
+        return view('muscle-up-app.trainee.trainees-list',compact('trainees','user'));
     }
 
     /**
