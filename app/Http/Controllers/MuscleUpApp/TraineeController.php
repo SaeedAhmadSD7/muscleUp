@@ -13,6 +13,7 @@ use App\Models\Trainee;
 use App\Models\Employee;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
@@ -145,21 +146,21 @@ class TraineeController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function traineesList($id){
-
         $user=Auth::user();
-//        ifisset($id);
         $trainees = $this->_trainee->fetchRecords();
+
 //        dd($trainees);
         return view('muscle-up-app.trainee.trainees-list',compact('trainees','user'));
     }
     public function ajaxtraineesList(){
-
+        $params['limit'] = Input::get('pageinateData');
         $user=Auth::user();
 //        ifisset($id);
-        $trainees = $this->_trainee->fetchRecords();
+        $trainees = $this->_trainee->fetchRecords($params);
 //        dd($trainees);
         return View::make('muscle-up-app.trainee.list',compact('trainees','user'))->render();
     }
+
 
 
 

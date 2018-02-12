@@ -24,7 +24,12 @@
         {{--</ul>--}}
         {{--</div>--}}
         {{--{{$trainees->links()}}--}}
-
+        <select id="issueinput5" name="limit">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+        </select>
     </div>
 @stop
 
@@ -47,12 +52,16 @@
         function getProducts(page){
             var url,success,params;
             url='/ajax/trainee/list?page=' + page;
-            params='';
+            params={'pageinateData':$('#issueinput5').val()};
             success=function(data){
                 $('#ajx').html(data);
             };
             ajaxCallMethod(url,params,success);
         }
+        $('#issueinput5').on('change', function() {
+            page = window.location.hash.replace('#','');
+            getProducts(page);
+        });
 
         $(document).ready(function(){
             var url,success,params;
@@ -63,6 +72,9 @@
                 $('#ajx').html(data);
             };
             ajaxCallMethod(url,params,success);
+
+        });
+        $(document).ready(function() {
 
         });
 

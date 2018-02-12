@@ -148,32 +148,20 @@
             // getProducts(page);
             location.hash = page;
         });
+        $('#issueinput5').on('change', function() {
+            page = window.location.hash.replace('#','');
+            getProducts(page);
+        });
         function getProducts(page){
             var url,success,params;
             url='/ajax/instructor/list?page=' + page;
-            params='';
+            params={'pageinateData':$('#issueinput5').val()};
             success=function(data){
                 $('#pg').css("display", "none");
                 $('#ajx').html(data);
             };
             ajaxCallMethod(url,params,success);
-
         }
-
-
-
-        $(document).ready(function() {
-            $('#issueinput5').on('change', function() {
-                var url,success,params;
-                url='/ajax/instructor/limit';
-                params={'pageinateData':$('#issueinput5').val()};
-                success=function(data){
-                    // Do your code...
-                    $('#ajx').html(data);
-                };
-                ajaxCallMethod(url,params,success);
-            });
-        });
 
         $(document).ready(function(){
             var url,success,params;

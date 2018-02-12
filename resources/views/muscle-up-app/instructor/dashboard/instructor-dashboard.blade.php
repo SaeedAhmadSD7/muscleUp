@@ -52,7 +52,7 @@
         <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Trainee's</span></a>
         <div class="sidebar-submenu">
             <ul>
-                <li><a href="{{route('Instructor-trainee-list',1)}}" title="Inbox"><span>Trainee List</span></a></li>
+                <li><a href="{{route('Instructor-trainee-list')}}" title="Inbox"><span>Trainee List</span></a></li>
                 {{--<li><a href="{{route('diet-list')}}" title="Inbox"><span>View Diet Program List</span></a></li>--}}
             </ul>
         </div>

@@ -128,16 +128,12 @@ class EmployeeController extends Controller
         return view('muscle-up-app.instructor.instructor-list')->with('instructors',$instructors);
     }
     public function ajaxshow() {
-        $instructors=Employee::with('user')->paginate(1);
-        return view('muscle-up-app.instructor.list')->with('instructors',$instructors)->render();
-    }
-    public function limitshow() {
         $limit = Input::get('pageinateData');
         if(isset($limit))
-        $instructors=Employee::with('user')->paginate($limit);
+            $instructors=Employee::with('user')->paginate($limit);
         else
         $instructors=Employee::with('user')->paginate(1);
-        return view('muscle-up-app.instructor.list')->with('instructors',$instructors);
+        return view('muscle-up-app.instructor.list')->with('instructors',$instructors)->render();
     }
     public function profileshow($id)
     {

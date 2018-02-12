@@ -188,7 +188,6 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::post('instructor/store', ['as' => 'instructor-store', 'uses' => 'EmployeeController@store']);
             Route::get('instructor/list', ['as' => 'instructor-show', 'uses' => 'EmployeeController@show']);
             Route::get('/ajax/instructor/list', ['as' => 'ajax-instructor-list', 'uses' => 'EmployeeController@ajaxshow']);
-            Route::get('/ajax/instructor/limit', ['as' => 'ajax-instructor-limit', 'uses' => 'EmployeeController@limitshow']);
             Route::get('instructor/edit/{id}', ['as' => 'instructor-edit', 'uses' => 'EmployeeController@edit']);
             Route::post('instructor/update/{id}', ['as' => 'instructor-update', 'uses' => 'EmployeeController@update']);
             Route::post('instructor/allocate/{id}', ['as' => 'instructor-allocate', 'uses' => 'EmployeeController@allocate']);

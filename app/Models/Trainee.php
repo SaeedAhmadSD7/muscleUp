@@ -98,7 +98,7 @@ class Trainee extends Model
         }
 //        $qry->groupBy(['b.id','u.id','t.id','u.first_name','u.last_name','u.email','t.initial_fee','t.created_at']);
 //      dd($qry->toSql());
-
+//        dd($limit);
         return $qry->paginate($limit);
     }
 
