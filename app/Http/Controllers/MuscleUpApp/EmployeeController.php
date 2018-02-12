@@ -12,8 +12,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Instructor;
 use App\Mail\AddInstructorRequest;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\View;
 
 class EmployeeController extends Controller
 
@@ -122,8 +124,20 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show() {
-        $instructors=Employee::with('user')->get();
+        $instructors=Employee::with('user')->paginate(1);
         return view('muscle-up-app.instructor.instructor-list')->with('instructors',$instructors);
+    }
+    public function ajaxshow() {
+        $instructors=Employee::with('user')->paginate(1);
+        return view('muscle-up-app.instructor.list')->with('instructors',$instructors)->render();
+    }
+    public function limitshow() {
+        $limit = Input::get('pageinateData');
+        if(isset($limit))
+        $instructors=Employee::with('user')->paginate($limit);
+        else
+        $instructors=Employee::with('user')->paginate(1);
+        return view('muscle-up-app.instructor.list')->with('instructors',$instructors);
     }
     public function profileshow($id)
     {

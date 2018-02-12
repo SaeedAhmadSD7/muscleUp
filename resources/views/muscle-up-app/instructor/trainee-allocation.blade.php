@@ -238,6 +238,16 @@
 
 
     </script>
-
+    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/add-instructor.js')}}" type="text/javascript"></script>
+    <script>
+        window.previewImage = "{{url('/resources/app/images/default.jpg')}}";
+        window.uploadProfilePic = "{{route('uploadProfilePic')}}";
+        window.removeUploadedProfilePic = "{{route('removeUploadedProfilePic')}}";
+    </script>
+    <script src="{{url('/resources/app/pages/js/create-instructor.js')}}" type="text/javascript"></script>
+    <script src="{{url('/resources/app/pages/js/create-trainee.js')}}" type="text/javascript"></script>
+    <script src="{{url('/resources/app/pages/js/request-gym.js')}}" type="text/javascript"></script>
 
 @stop

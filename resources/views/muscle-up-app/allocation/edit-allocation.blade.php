@@ -26,7 +26,7 @@
         <div class="panel-body">
             <div class="example-box-wrapper">
 
-                <form class="form-group diet-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('update-allocation', $allocation->id)}}">
+                <form class="form-group diet-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('update-diet-allocation', $allocation->id)}}">
                     {{csrf_field()}}
                     <div class="tab-content">
                         <div class="form-wizard" id="form-wizard-3">

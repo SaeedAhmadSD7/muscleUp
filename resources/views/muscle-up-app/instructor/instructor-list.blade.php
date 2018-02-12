@@ -24,44 +24,56 @@
                 <div class="mail-header clearfix">
                     <span class="mail-title">List</span>
                 </div>
-                <table class="table table-hover text-center">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>email</th>
-                        <th>Package(Fee)</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <?php $counter = 1 ?>
-                    @foreach($instructors as $instructor)
-                        <tr id="{{$instructor->id}}">
+                <div id="ajx">
+                {{--<table class="table table-hover text-center">--}}
+                    {{--<thead>--}}
+                    {{--<tr>--}}
+                        {{--<th>Name</th>--}}
+                        {{--<th>email</th>--}}
+                        {{--<th>Package(Fee)</th>--}}
+                        {{--<th>Actions</th>--}}
+                    {{--</tr>--}}
+                    {{--</thead>--}}
+                    {{--<tbody id="" >--}}
+                    {{--<?php $counter = 1 ?>--}}
+                    {{--@foreach($instructors as $instructor)--}}
+                        {{--<tr id="{{$instructor->id}}">--}}
                             {{--<td>{{$counter}}</td>--}}
-                            <td class="Instructor-title-1">
+                            {{--<td class="Instructor-title-1">--}}
                                 {{--                                <img width="20%" src="{{get_profile_pic_url($instructor->user->profile_img)}}" /> --}}
-                                <span class="instructorName"><a href="{{route('instructor-allocation', $instructor->id)}}" >{{get_full_name($instructor->user)}}</a></span> <kbd class="mL5">01{{$instructor->user->code}}</kbd></td>
-                            <td>{{$instructor->user->email}}</td>
-                            <td class="date">{{$instructor->user->updated_at}}</td>
+                                {{--<span class="instructorName"><a href="{{route('instructor-allocation', $instructor->id)}}" >{{get_full_name($instructor->user)}}</a></span> <kbd class="mL5">01{{$instructor->user->code}}</kbd></td>--}}
+                            {{--<td>{{$instructor->user->email}}</td>--}}
+                            {{--<td class="date">{{$instructor->user->updated_at}}</td>--}}
 
-                            <td>
-                                <ul class="">
-                                    <li class="dropdown">
-                                        <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown">
-                                            <i class="glyphicon glyphicon-th-list"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a class="btnEdit" href="{{route('instructor-edit',$instructor->id)}}"><i class="glyphicon glyphicon-dashboard"></i> Edit</a></li>
-                                            <li><a class="btnDelete" href="{{route('instructor-delete',$instructor->id)}}"> <i class="glyphicon glyphicon-ban-circle"></i> Delete</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                        </tr>
-                        <?php $counter++ ?>
-                    @endforeach
-                    </tbody>
-                </table>
+                            {{--<td>--}}
+                                {{--<ul class="">--}}
+                                    {{--<li class="dropdown">--}}
+                                        {{--<a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown">--}}
+                                            {{--<i class="glyphicon glyphicon-th-list"></i>--}}
+                                        {{--</a>--}}
+                                        {{--<ul class="dropdown-menu dropdown-menu-right">--}}
+                                            {{--<li><a class="btnEdit" href="{{route('instructor-edit',$instructor->id)}}"><i class="glyphicon glyphicon-dashboard"></i> Edit</a></li>--}}
+                                            {{--<li><a class="btnDelete" href="{{route('instructor-delete',$instructor->id)}}"> <i class="glyphicon glyphicon-ban-circle"></i> Delete</a></li>--}}
+                                        {{--</ul>--}}
+                                    {{--</li>--}}
+                                {{--</ul>--}}
+                        {{--</tr>--}}
+                        {{--<?php $counter++ ?>--}}
+                    {{--@endforeach--}}
+                    {{--</tbody>--}}
+                {{--</table>--}}
+                    {{--<div id="pg">--}}
+                        {{--{{$instructors->links()}}--}}
+                    {{--</div>--}}
+                </div>
+
+                <select id="issueinput5" name="limit">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                </select>
+
             </div>
         </div>
     </div>
@@ -123,26 +135,61 @@
     {{--<script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>--}}
     {{--<script src="{{url('/assets/js/trainee-inbox.js')}}" type="text/javascript"></script>--}}
     {{--<script src="{{url('/assets/js/inbox.js')}}" type="text/javascript"></script>--}}
+    <script src="{{url('/dist/js/AjaxCallMethod.js')}}" type="text/javascript"></script>
+    <script>
+        /*==================== PAGINATION =========================*/
+        $(window).on('hashchange',function(){
+            page = window.location.hash.replace('#','');
+            getProducts(page);
+        });
+        $(document).on('click','.pagination a', function(e){
+            e.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            // getProducts(page);
+            location.hash = page;
+        });
+        function getProducts(page){
+            var url,success,params;
+            url='/ajax/instructor/list?page=' + page;
+            params='';
+            success=function(data){
+                $('#pg').css("display", "none");
+                $('#ajx').html(data);
+            };
+            ajaxCallMethod(url,params,success);
 
+        }
+
+
+
+        $(document).ready(function() {
+            $('#issueinput5').on('change', function() {
+                var url,success,params;
+                url='/ajax/instructor/limit';
+                params={'pageinateData':$('#issueinput5').val()};
+                success=function(data){
+                    // Do your code...
+                    $('#ajx').html(data);
+                };
+                ajaxCallMethod(url,params,success);
+            });
+        });
+
+        $(document).ready(function(){
+            var url,success,params;
+            url='/ajax/instructor/list?page=1';
+            params='';
+            success=function(data){
+                $('#pg').css("display", "none");
+                $('#ajx').html(data);
+            };
+            ajaxCallMethod(url,params,success);
+        });
+
+    </script>
     <script>
 
 
-        $(document).ready(function () {
-            /* Datatables basic */
-            $('#datatable-example').dataTable();
-
-            //*** trainee table detail action dropdown
-            $('.dropdown-toggle').click(function (e) {
-                e.preventDefault();
-                $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
-                e.stopImmediatePropagation();
-            })
-
-//            $('.exercise_list').select2({
-//                placeholder:'Exercise List....'
-//
-//            });
-        });
 
         $(document).on('click', '.Instructor-title', function() {
 
@@ -195,17 +242,17 @@
     <script>
 
 
-        $(document).ready(function () {
-            /* Datatables basic */
-            $('#datatable-example').dataTable();
-
-            //*** trainee table detail action dropdown
-            $('.dropdown-toggle').click(function (e) {
-                e.preventDefault();
-                $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
-                e.stopImmediatePropagation();
-            })
-        });
+//        $(document).ready(function () {
+//            /* Datatables basic */
+//            $('#datatable-example').dataTable();
+//
+//            //*** trainee table detail action dropdown
+//            $('.dropdown-toggle').click(function (e) {
+//                e.preventDefault();
+//                $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
+//                e.stopImmediatePropagation();
+//            })
+//        });
 
 
     </script>

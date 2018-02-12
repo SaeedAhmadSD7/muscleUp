@@ -48,7 +48,7 @@ class DietAllocationController extends Controller
      */
     public function store(request $request) {
         DietAllocation::create($request->all());
-        return redirect()->route('show-allocation');
+        return redirect()->route('show-diet-allocation');
 
     }
 
@@ -100,7 +100,7 @@ class DietAllocationController extends Controller
 
 
 
-        return redirect()->route('show-allocation');
+        return redirect()->route('show-diet-allocation');
     }
 
     /**
@@ -113,7 +113,7 @@ class DietAllocationController extends Controller
     {
         $allocation =DietAllocation::find($id);
         $allocation->delete();
-        return redirect()->route('show-allocation');
+        return redirect()->route('show-diet-allocation');
 
     }
 

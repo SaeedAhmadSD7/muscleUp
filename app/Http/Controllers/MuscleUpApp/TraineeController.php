@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Http\Requests\HealthStatsRequest;
+//use View;
 use App\Http\Requests\PicUploadRequest;
 use App\Models\DietProgram;
 use App\Models\HealthQuestion;
@@ -12,6 +13,7 @@ use App\Models\Trainee;
 use App\Models\Employee;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -150,6 +152,16 @@ class TraineeController extends Controller
 //        dd($trainees);
         return view('muscle-up-app.trainee.trainees-list',compact('trainees','user'));
     }
+    public function ajaxtraineesList(){
+
+        $user=Auth::user();
+//        ifisset($id);
+        $trainees = $this->_trainee->fetchRecords();
+//        dd($trainees);
+        return View::make('muscle-up-app.trainee.list',compact('trainees','user'))->render();
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -324,23 +336,22 @@ class TraineeController extends Controller
     {
 
         $trainee = Trainee::where('user_id', Auth::user()->id)->first();
-
+        $p_day=array();
         if ($trainee->allocation) {
-
             $days = array();
             $phase_daycount = array();
             foreach ($trainee->allocation->program->phase as $phase) {
                 $days[] = $phase->day()->get();
+                $p_day[]=$phase->day()->first()->title;
             }
             foreach ($days as $phase_day) {
                 $phase_daycount[] = count($phase_day->unique()->toArray());
             }
-
         } else {
             $phase_daycount = 0;
         }
 
-        return view('muscle-up-app.trainee.workoutProgram.workoutProgram')->with(['trainee' => $trainee, 'phase_daycount' => $phase_daycount]);
+        return view('muscle-up-app.trainee.workoutProgram.workoutProgram')->with(['trainee' => $trainee, 'phase_daycount' => $phase_daycount,'p_day' => $p_day]);
     }
 
 
@@ -372,7 +383,6 @@ class TraineeController extends Controller
         } else {
             $phase_daycount = 0;
         }
-
         return view('muscle-up-app.trainee.activity.activity')->with(['trainee' => $trainee, 'phase_daycount' => $phase_daycount]);
     }
 

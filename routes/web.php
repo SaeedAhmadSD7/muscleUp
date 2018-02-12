@@ -187,6 +187,8 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::get('instructor/add', ['as' => 'instructor-add', 'uses' => 'EmployeeController@create']);
             Route::post('instructor/store', ['as' => 'instructor-store', 'uses' => 'EmployeeController@store']);
             Route::get('instructor/list', ['as' => 'instructor-show', 'uses' => 'EmployeeController@show']);
+            Route::get('/ajax/instructor/list', ['as' => 'ajax-instructor-list', 'uses' => 'EmployeeController@ajaxshow']);
+            Route::get('/ajax/instructor/limit', ['as' => 'ajax-instructor-limit', 'uses' => 'EmployeeController@limitshow']);
             Route::get('instructor/edit/{id}', ['as' => 'instructor-edit', 'uses' => 'EmployeeController@edit']);
             Route::post('instructor/update/{id}', ['as' => 'instructor-update', 'uses' => 'EmployeeController@update']);
             Route::post('instructor/allocate/{id}', ['as' => 'instructor-allocate', 'uses' => 'EmployeeController@allocate']);
@@ -208,6 +210,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::post('trainee/remove-uploaded-profile-pic', ['as' => 'removeUploadedProfilePic', 'uses' => 'TraineeController@removeUploadedProfilePic']);
             Route::post('trainee/store', ['uses' => 'TraineeController@store', 'as' => 'trainee-store']);
             Route::get('trainee/list/{id?}', ['as' => 'trainee-list', 'uses' => 'TraineeController@traineesList']);
+            Route::get('/ajax/trainee/list', ['as' => 'ajax-trainee-list', 'uses' => 'TraineeController@ajaxtraineesList']);
             Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
             Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
 
@@ -231,19 +234,19 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
 
         Route::group(['Trainee'], function () {
 
-            Route::get('assign-trainee/list{id?}', ['as' => 'Instructor-trainee-list', 'uses' => 'TraineeController@traineesList']);
-            Route::resource('trainee', "TraineeController");
-            Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
-            Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
-
-            Route::get('trainee/allocation', ['as' => 'trainee-allocation', 'uses' => 'TraineeController@create_allocation']);
-            Route::post('trainee/allocation/store', ['as' => 'trainee_allocation_store', 'uses' => 'TraineeController@store_allocation']);
-            Route::get('trainee/allocation/list', ['as' => 'show-trainee-allocation', 'uses' => 'TraineeController@show_allocation']);
-            Route::get('trainee/allocation/edit/{id}', ['as' => 'edit-trainee-allocation', 'uses' => 'TraineeController@edit_allocation']);
-            Route::post('trainee/allocation/update/{id}', ['as' => 'update-trainee-allocation', 'uses' => 'TraineeController@update_allocation']);
-            Route::get('trainee/allocation/delete/{id}', ['as' => 'delete-trainee-allocation', 'uses' => 'TraineeController@destroy_allocation']);
-            Route::get('trainee/health_stats/{id}', ['as' => 'health_stats', 'uses' => 'TraineeController@HealthStats']);
-            Route::post('trainee/health_stats_save', ['as' => 'health_stats_save', 'uses' => 'TraineeController@HealthStatsSave']);
+//            Route::get('assign-trainee/list{id?}', ['as' => 'Instructor-trainee-list', 'uses' => 'TraineeController@traineesList']);
+//            Route::resource('trainee', "TraineeController");
+//            Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
+//            Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
+//
+//            Route::get('trainee/allocation', ['as' => 'trainee-allocation', 'uses' => 'TraineeController@create_allocation']);
+//            Route::post('trainee/allocation/store', ['as' => 'trainee_allocation_store', 'uses' => 'TraineeController@store_allocation']);
+//            Route::get('trainee/allocation/list', ['as' => 'show-trainee-allocation', 'uses' => 'TraineeController@show_allocation']);
+//            Route::get('trainee/allocation/edit/{id}', ['as' => 'edit-trainee-allocation', 'uses' => 'TraineeController@edit_allocation']);
+//            Route::post('trainee/allocation/update/{id}', ['as' => 'update-trainee-allocation', 'uses' => 'TraineeController@update_allocation']);
+//            Route::get('trainee/allocation/delete/{id}', ['as' => 'delete-trainee-allocation', 'uses' => 'TraineeController@destroy_allocation']);
+//            Route::get('trainee/health_stats/{id}', ['as' => 'health_stats', 'uses' => 'TraineeController@HealthStats']);
+//            Route::post('trainee/health_stats_save', ['as' => 'health_stats_save', 'uses' => 'TraineeController@HealthStatsSave']);
 
         });
 

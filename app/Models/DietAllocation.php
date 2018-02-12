@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Allocation
+ * App\Models\DietAllocation
  *
  * @property int $id
  * @property int $trainee_id
