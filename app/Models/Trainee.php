@@ -21,7 +21,7 @@ use App\Utils\Globals\AppConstant;
  * @property string|null $deleted_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \App\Models\Allocation $allocation
+ * @property-read \App\Models\DietAllocation $allocation
  * @property-read \App\Models\Employee $employee
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\HealthQuestion[] $healthQuestion
  * @property-read \App\Models\MedicalHistory $medicalhistory
@@ -68,7 +68,7 @@ class Trainee extends Model
 
     public function allocation()
     {
-        return $this->hasOne(Allocation::class);
+        return $this->hasOne(DietAllocation::class);
     }
 
     public function traineeActivity(){
@@ -98,7 +98,7 @@ class Trainee extends Model
         }
 //        $qry->groupBy(['b.id','u.id','t.id','u.first_name','u.last_name','u.email','t.initial_fee','t.created_at']);
 //      dd($qry->toSql());
-
+//        dd($limit);
         return $qry->paginate($limit);
     }
 

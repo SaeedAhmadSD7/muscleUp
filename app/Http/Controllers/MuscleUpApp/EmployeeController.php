@@ -12,8 +12,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Instructor;
 use App\Mail\AddInstructorRequest;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\View;
 
 class EmployeeController extends Controller
 
@@ -45,6 +47,7 @@ class EmployeeController extends Controller
 
     public function index()
     {
+
         return view('muscle-up-app.instructor.index');
 
     }
@@ -78,7 +81,7 @@ class EmployeeController extends Controller
         $user->password = bcrypt($password);
         $user->branch_id=\Auth::user()->branch_id;
         $user->gym_id=\Auth::user()->gym_id;
-        $user['type'] = 'instructor';
+        $user['type'] = 'employee';
         $user->first_name=$request->first_name;
         $user->last_name=$request->last_name;
 //        $user->dial_code = '+27';
@@ -92,6 +95,7 @@ class EmployeeController extends Controller
 
         $employee = $this->_employee;
         $employee->user_id=$user->id;
+        $employee->branch_id=\Auth::user()->branch_id;
         $employee->joining_date=$request->joining_date;
         $employee->quit_date=$request->quit_date;
         $employee->previous_salary=$request->previous_salary;
@@ -120,8 +124,16 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show() {
-        $instructors=Instructor::with('user')->get();
+        $instructors=Employee::with('user')->paginate(1);
         return view('muscle-up-app.instructor.instructor-list')->with('instructors',$instructors);
+    }
+    public function ajaxshow() {
+        $limit = Input::get('pageinateData');
+        if(isset($limit))
+            $instructors=Employee::with('user')->paginate($limit);
+        else
+        $instructors=Employee::with('user')->paginate(1);
+        return view('muscle-up-app.instructor.list')->with('instructors',$instructors)->render();
     }
     public function profileshow($id)
     {
@@ -167,7 +179,6 @@ class EmployeeController extends Controller
 
         $instructor= Employee::where('user_id','=',$id)->first();
 
-        $instructor->joining_date=$request->input('joining_date');
         $instructor->quit_date=$request->input('quit_date');
         $instructor->previous_salary=$request->input('previous_salary');
         $instructor->joining_salary=$request->input('joining_salary');

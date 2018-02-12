@@ -20,7 +20,7 @@
     </div>
 
     <div class="panel">
-        <form method="get" action="{{route('allocation')}}">
+        <form method="get" action="{{route('diet-allocation')}}">
             <button class="btn btn-success" type="submit">Allocation<span class="glyphicon glyphicon-plus"></span></button>
         </form>
         <div class="panel-body">
@@ -57,12 +57,12 @@
                             </td>
                             {{--{{dd($trainees[$i]->allocation->id)}}--}}
                             <td width="20px">
-                                <form method="get" action="{{route('edit-allocation',$allocation->id)}}">
+                                <form method="get" action="{{route('edit-diet-allocation',$allocation->id)}}">
                                     <button class="btn btn-primary" type="submit"><span class="glyphicon icon-elusive-pencil"></span></button>
                                 </form>
                             </td>
                             <td width="20px">
-                                <form method="get" action="{{route('delete-allocation',$allocation->id)}}">
+                                <form method="get" action="{{route('delete-diet-allocation',$allocation->id)}}">
                                     <button class="btn btn-danger" type="submit"><span class="glyphicon icon-typicons-cancel"></span></button>
                                 </form>
                             </td>

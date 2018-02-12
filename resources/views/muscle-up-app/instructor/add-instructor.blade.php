@@ -14,18 +14,13 @@
     <div id="page-title">
         <h2 class="title-hero">ADD Instructor</h2>
         <p>Please fill in all the information and then click Add Instructor.</p>
-        <div id="errors">
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
+        @if(count($errors)>0)
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li class="alert alert-danger"><h4>{{$error}}</h4></li>
+                @endforeach
+            </ul>
+        @endif
     </div>
 
     <div class="panel">
@@ -82,6 +77,26 @@
                                 </div>
                                 <div class="col-md-6">
                                     <input class="form-control phone_number" type="text" name="phone_number" value="" placeholder="Phone Number..." maxlength="15">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Country:</label>
+                                <div class="col-md-8">
+                                    {{--<input class="form-control" type="text" name="country" value="" placeholder="Country...">--}}
+                                        <select class="form-control country_list" name="country">
+                                                <option value="">Select Country..</option>
+                                            @if(isset($countries))
+                                                @foreach($countries as $country )
+                                                    <option value="{{$country->name}}">{{$country->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">City:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="text" name="city" value="" placeholder="City...">
                                 </div>
                             </div>
                             <div class="form-group">

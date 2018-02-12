@@ -187,6 +187,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::get('instructor/add', ['as' => 'instructor-add', 'uses' => 'EmployeeController@create']);
             Route::post('instructor/store', ['as' => 'instructor-store', 'uses' => 'EmployeeController@store']);
             Route::get('instructor/list', ['as' => 'instructor-show', 'uses' => 'EmployeeController@show']);
+            Route::get('/ajax/instructor/list', ['as' => 'ajax-instructor-list', 'uses' => 'EmployeeController@ajaxshow']);
             Route::get('instructor/edit/{id}', ['as' => 'instructor-edit', 'uses' => 'EmployeeController@edit']);
             Route::post('instructor/update/{id}', ['as' => 'instructor-update', 'uses' => 'EmployeeController@update']);
             Route::post('instructor/allocate/{id}', ['as' => 'instructor-allocate', 'uses' => 'EmployeeController@allocate']);
@@ -208,6 +209,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::post('trainee/remove-uploaded-profile-pic', ['as' => 'removeUploadedProfilePic', 'uses' => 'TraineeController@removeUploadedProfilePic']);
             Route::post('trainee/store', ['uses' => 'TraineeController@store', 'as' => 'trainee-store']);
             Route::get('trainee/list/{id?}', ['as' => 'trainee-list', 'uses' => 'TraineeController@traineesList']);
+            Route::get('/ajax/trainee/list', ['as' => 'ajax-trainee-list', 'uses' => 'TraineeController@ajaxtraineesList']);
             Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
             Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
 
@@ -223,14 +225,41 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
         });
     });
 
-    //***UserType = Employee = employee
-    Route::group(['UserTypeAsEmployee', 'middleware' => 'userType:' . UserType::EMPLOYEE], function () {
+    //***UserType = Instructor = instructor
+    Route::group(['UserTypeAsInstructor', 'middleware' => 'userType:' . UserType::INSTRUCTOR], function () {
+        Route::group(['Instructor'], function () {
+            Route::get('Instructor-dashboard', ['uses' => 'EmployeeController@index', 'as' => 'InstructorDashboard']);
+        });
+
+        Route::group(['Trainee'], function () {
+
+//            Route::get('assign-trainee/list{id?}', ['as' => 'Instructor-trainee-list', 'uses' => 'TraineeController@traineesList']);
+//            Route::resource('trainee', "TraineeController");
+//            Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
+//            Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
+//
+//            Route::get('trainee/allocation', ['as' => 'trainee-allocation', 'uses' => 'TraineeController@create_allocation']);
+//            Route::post('trainee/allocation/store', ['as' => 'trainee_allocation_store', 'uses' => 'TraineeController@store_allocation']);
+//            Route::get('trainee/allocation/list', ['as' => 'show-trainee-allocation', 'uses' => 'TraineeController@show_allocation']);
+//            Route::get('trainee/allocation/edit/{id}', ['as' => 'edit-trainee-allocation', 'uses' => 'TraineeController@edit_allocation']);
+//            Route::post('trainee/allocation/update/{id}', ['as' => 'update-trainee-allocation', 'uses' => 'TraineeController@update_allocation']);
+//            Route::get('trainee/allocation/delete/{id}', ['as' => 'delete-trainee-allocation', 'uses' => 'TraineeController@destroy_allocation']);
+//            Route::get('trainee/health_stats/{id}', ['as' => 'health_stats', 'uses' => 'TraineeController@HealthStats']);
+//            Route::post('trainee/health_stats_save', ['as' => 'health_stats_save', 'uses' => 'TraineeController@HealthStatsSave']);
+
+        });
+
+    });
+        //***UserType = Employee = employee
+    Route::group(['UserTypeAsEmployee', 'middleware' => 'userType:' . UserType::INSTRUCTOR], function () {
 
         //***EmployeeController
         Route::group(['Employee'], function () {
             Route::get('employee-dashboard', ['uses' => 'EmployeeController@index', 'as' => 'employeeDashboard']);
         });
 
+        Route::group(['Trainee'], function () {
+        });
         //***DietProgramController
         Route::group(['DietProgram'], function () {
             Route::get('/diet/create', ['as' => 'diet-create', 'uses' => 'DietProgramController@create']);
@@ -272,14 +301,14 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::get('/program/delete/{id?}', ['as' => 'delete-program', 'uses' => 'ProgramController@destroy']);
         });
 
-        //***AllocationController
-        Route::group(['Allocation'], function () {
-            Route::get('allocation/', ['as' => 'allocation', 'uses' => 'AllocationController@create']);
-            Route::post('allocation/store', ['as' => 'allocation_store', 'uses' => 'AllocationController@store']);
-            Route::get('/allocation/list/', ['as' => 'show-allocation', 'uses' => 'AllocationController@show']);
-            Route::get('/allocation/edit/{id}', ['as' => 'edit-allocation', 'uses' => 'AllocationController@edit']);
-            Route::post('/allocation/update/{id}', ['as' => 'update-allocation', 'uses' => 'AllocationController@update']);
-            Route::get('/allocation/delete/{id}', ['as' => 'delete-allocation', 'uses' => 'AllocationController@destroy']);
+        //***DietAllocationController
+        Route::group(['DietAllocation'], function () {
+            Route::get('diet-allocation/', ['as' => 'diet-allocation', 'uses' => 'DietAllocationController@create']);
+            Route::post('diet-allocation/store', ['as' => 'diet_allocation_store', 'uses' => 'DietAllocationController@store']);
+            Route::get('/diet-allocation/list/', ['as' => 'show-diet-allocation', 'uses' => 'DietAllocationController@show']);
+            Route::get('/diet-allocation/edit/{id}', ['as' => 'edit-diet-allocation', 'uses' => 'DietAllocationController@edit']);
+            Route::post('/diet-allocation/update/{id}', ['as' => 'update-diet-allocation', 'uses' => 'DietAllocationController@update']);
+            Route::get('/diet-allocation/delete/{id}', ['as' => 'delete-diet-allocation', 'uses' => 'DietAllocationController@destroy']);
         });
 
     });

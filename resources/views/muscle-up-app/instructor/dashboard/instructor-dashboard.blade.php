@@ -48,12 +48,21 @@
             </ul>
         </div>
     </li>
-<li class="menu-element">
-        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Programs Allocation</span></a>
+    <li class="menu-element">
+        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Trainee's</span></a>
         <div class="sidebar-submenu">
             <ul>
-                <li><a href="{{route('allocation')}}" title="Inbox"><span>Allocate Plan</span></a></li>
-                <li><a href="{{route('show-allocation')}}" title="Inbox"><span>View List</span></a></li>
+                <li><a href="{{route('Instructor-trainee-list')}}" title="Inbox"><span>Trainee List</span></a></li>
+                {{--<li><a href="{{route('diet-list')}}" title="Inbox"><span>View Diet Program List</span></a></li>--}}
+            </ul>
+        </div>
+    </li>
+<li class="menu-element">
+        <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Diet Allocation</span></a>
+        <div class="sidebar-submenu">
+            <ul>
+                <li><a href="{{route('diet-allocation')}}" title="Inbox"><span>Allocate Diet Plan</span></a></li>
+                <li><a href="{{route('show-diet-allocation')}}" title="Inbox"><span>View List</span></a></li>
             </ul>
         </div>
     </li>

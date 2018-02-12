@@ -19,13 +19,13 @@
     <div id="page-title">
         <h2> Allocate Workout Program </h2>
 
-        <p> Create Allocation</p>
+        <p> Create Diet Allocation</p>
     </div>
 
     <div class="panel">
         <div class="panel-body">
             <div class="example-box-wrapper">
-                <form class="form-group allocate-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('allocation_store')}}">
+                <form class="form-group allocate-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('diet_allocation_store')}}">
                     {{csrf_field()}}
                     <div class="tab-content">
                         <div class="form-wizard" id="form-wizard-3">
@@ -121,5 +121,16 @@
     <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/js/allocation.js')}}" type="text/javascript"></script>
     <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/add-instructor.js')}}" type="text/javascript"></script>
+    <script>
+        window.previewImage = "{{url('/resources/app/images/default.jpg')}}";
+        window.uploadProfilePic = "{{route('uploadProfilePic')}}";
+        window.removeUploadedProfilePic = "{{route('removeUploadedProfilePic')}}";
+    </script>
+    <script src="{{url('/resources/app/pages/js/create-instructor.js')}}" type="text/javascript"></script>
+    <script src="{{url('/resources/app/pages/js/create-trainee.js')}}" type="text/javascript"></script>
+    <script src="{{url('/resources/app/pages/js/request-gym.js')}}" type="text/javascript"></script>
 
 @stop
