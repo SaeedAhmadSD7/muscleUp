@@ -35,13 +35,16 @@
                     </thead>
 
                     <tbody>
-                    <?php $counter = 1 ?>
+                    @if($instructors == null || $instructors->count() == 0)
+                        {{--{{$allocatedTrainees->count()}}--}}
+                        <tr class="odd gradeA"><td colspan="6"> There is no record found.</td></tr>
+                    @else
                     @foreach($instructors as $instructor)
                         <tr id="{{$instructor->id}}">
                             {{--<td>{{$counter}}</td>--}}
                             <td class="Instructor-title-1">
                                 {{--                                <img width="20%" src="{{get_profile_pic_url($instructor->user->profile_img)}}" /> --}}
-                                <span class="instructorName"><a href="{{route('instructor-allocation', $instructor->id)}}" >{{get_full_name($instructor->user)}}</a></span> <kbd class="mL5">01{{$instructor->user->code}}</kbd></td>
+                                <span class="instructorName"><a href="{{route('instructor-allocation', $instructor->id)}}" >{{$instructor->user->first_name}}</a></span> <kbd class="mL5">01{{$instructor->user->code}}</kbd></td>
                             <td>{{$instructor->user->email}}</td>
                             <td class="date">{{$instructor->user->updated_at}}</td>
 
@@ -58,8 +61,9 @@
                                     </li>
                                 </ul>
                         </tr>
-                        <?php $counter++ ?>
+
                     @endforeach
+                    @endif
                     </tbody>
                 </table>
             </div>

@@ -9,7 +9,7 @@
 
 @section('page-heading')
 
-    <h2>Allocation: {{get_full_name($instructor->user)}}</h2>
+    <h2>Allocation: {{$instructor->user->first_name}}</h2>
     <p>Please fill in all the information and Allocate a one.</p>
 
 
@@ -27,7 +27,7 @@
                         <option value="">Select a Trainee</option>
                         @if($unAllocatedTrainees->count() > 0)
                         @foreach($unAllocatedTrainees as $unAllocatedTrainee)
-                        <option value="{{$unAllocatedTrainee->id}}">{{get_full_name($unAllocatedTrainee->user)}}</option>
+                        <option value="{{$unAllocatedTrainee->id}}">{{$unAllocatedTrainee->user->first_name}}</option>
                         @endForeach
                         @endif
 
@@ -101,7 +101,7 @@
                                 <tr class="{{ (($i+1)%2) ? "even" : "odd" }} gradeX" id="{{$allocatedTrainee->id}}">
                                     <td class="Instructor-title">
 {{--                                        <img width="5%" src="{{get_profile_pic_url($allocatedTrainee->user->profile_img)}}" /> --}}
-                                        <span class="instructorName">{{get_full_name($allocatedTrainee->user)}}</span> <kbd class="mL5">01{{$allocatedTrainee->user->code}}</kbd></td>
+                                        <span class="instructorName">{{$allocatedTrainee->user->first_name}}</span> <kbd class="mL5">01{{$allocatedTrainee->user->code}}</kbd></td>
 {{--                                    <td>{{$allocatedTrainee->user->first_name}}</td>--}}
                                     <td>{{$allocatedTrainee->user->email}}</td>
                                     <td>{{$allocatedTrainee->pivot->type}}</td>
