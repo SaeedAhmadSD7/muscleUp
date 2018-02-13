@@ -1,5 +1,6 @@
-function ajaxCallMethod(url, parameters, successCallback) {
+function ajaxCallMethod(type,url, parameters, successCallback) {
     $.ajax({
+        type:type,
         url: url,
         data: parameters,
         success: successCallback,

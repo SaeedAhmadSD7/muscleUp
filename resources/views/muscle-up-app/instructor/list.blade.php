@@ -36,3 +36,21 @@
     </tbody>
 </table>
 {{$instructors->links()}}
+
+<script>
+
+
+    $(document).ready(function () {
+//            /* Datatables basic */
+//            $('#datatable-example').dataTable();
+
+        //*** trainee table detail action dropdown
+        $('.dropdown-toggle').click(function (e) {
+            e.preventDefault();
+            $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
+            e.stopImmediatePropagation();
+        })
+    });
+
+
+</script>

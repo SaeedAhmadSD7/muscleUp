@@ -51,12 +51,13 @@
         });
         function getProducts(page){
             var url,success,params;
+            var type='';
             url='/ajax/trainee/list?page=' + page;
             params={'pageinateData':$('#issueinput5').val()};
             success=function(data){
                 $('#ajx').html(data);
             };
-            ajaxCallMethod(url,params,success);
+            ajaxCallMethod(type,url,params,success);
         }
         $('#issueinput5').on('change', function() {
             page = window.location.hash.replace('#','');
@@ -65,23 +66,21 @@
 
         $(document).ready(function(){
             var url,success,params;
+            var type='';
             url='/ajax/trainee/list?page=' + 1;
             params='';
             success=function(data){
                 $('#pg').css("display", "none");
                 $('#ajx').html(data);
             };
-            ajaxCallMethod(url,params,success);
-
-        });
-        $(document).ready(function() {
+            ajaxCallMethod(type,url,params,success);
 
         });
 
     </script>
-    {{--<script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>--}}
-    {{--<script src="{{url('/assets/js/trainee-inbox.js')}}" type="text/javascript"></script>--}}
-    {{--<script src="{{url('/assets/js/inbox.js')}}" type="text/javascript"></script>--}}
+    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/trainee-inbox.js')}}" type="text/javascript"></script>
+    <script src="{{url('/assets/js/inbox.js')}}" type="text/javascript"></script>
 
     <script>
 

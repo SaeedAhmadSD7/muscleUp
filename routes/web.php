@@ -116,6 +116,9 @@ Route::group(['Public', 'namespace' => 'MuscleUpApp'], function () {
         });
     });
 
+    Route::get('zz', ['as' => 'ta', 'uses' => 'TraineeController@create_allocation']);
+
+
     //***HomeController
     Route::group(['Home'], function () {
         Route::get('/', ['as' => 'home-page', 'uses' => 'HomeController@index']);
@@ -191,6 +194,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::get('instructor/edit/{id}', ['as' => 'instructor-edit', 'uses' => 'EmployeeController@edit']);
             Route::post('instructor/update/{id}', ['as' => 'instructor-update', 'uses' => 'EmployeeController@update']);
             Route::post('instructor/allocate/{id}', ['as' => 'instructor-allocate', 'uses' => 'EmployeeController@allocate']);
+            Route::post('instructor/delete-allocate/{id}', ['as' => 'instructor-delete-allocate', 'uses' => 'EmployeeController@allocateDelete']);
 //            Route::post('instructor/allocation/{id}', ['as' => 'instructor-allocation', 'uses' => 'EmployeeController@allocation']);
             Route::get('instructor/delete/{id}', ['as' => 'instructor-delete', 'uses' => 'EmployeeController@destroy']);
 
@@ -212,7 +216,6 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::get('/ajax/trainee/list', ['as' => 'ajax-trainee-list', 'uses' => 'TraineeController@ajaxtraineesList']);
             Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
             Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
-
             Route::get('trainee/allocation', ['as' => 'trainee-allocation', 'uses' => 'TraineeController@create_allocation']);
             Route::post('trainee/allocation/store', ['as' => 'trainee_allocation_store', 'uses' => 'TraineeController@store_allocation']);
             Route::get('trainee/allocation/list', ['as' => 'show-trainee-allocation', 'uses' => 'TraineeController@show_allocation']);

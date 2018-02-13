@@ -154,24 +154,27 @@
         });
         function getProducts(page){
             var url,success,params;
+            var type='';
+
             url='/ajax/instructor/list?page=' + page;
             params={'pageinateData':$('#issueinput5').val()};
             success=function(data){
                 $('#pg').css("display", "none");
                 $('#ajx').html(data);
             };
-            ajaxCallMethod(url,params,success);
+            ajaxCallMethod(type,url,params,success);
         }
 
         $(document).ready(function(){
             var url,success,params;
+            var type='';
             url='/ajax/instructor/list?page=1';
             params='';
             success=function(data){
                 $('#pg').css("display", "none");
                 $('#ajx').html(data);
             };
-            ajaxCallMethod(url,params,success);
+            ajaxCallMethod(type,url,params,success);
         });
 
     </script>
@@ -230,17 +233,17 @@
     <script>
 
 
-//        $(document).ready(function () {
+        $(document).ready(function () {
 //            /* Datatables basic */
 //            $('#datatable-example').dataTable();
-//
-//            //*** trainee table detail action dropdown
-//            $('.dropdown-toggle').click(function (e) {
-//                e.preventDefault();
-//                $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
-//                e.stopImmediatePropagation();
-//            })
-//        });
+
+            //*** trainee table detail action dropdown
+            $('.dropdown-toggle').click(function (e) {
+                e.preventDefault();
+                $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
+                e.stopImmediatePropagation();
+            })
+        });
 
 
     </script>

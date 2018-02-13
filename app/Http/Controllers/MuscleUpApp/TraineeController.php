@@ -153,6 +153,7 @@ class TraineeController extends Controller
         return view('muscle-up-app.trainee.trainees-list',compact('trainees','user'));
     }
     public function ajaxtraineesList(){
+
         $params['limit'] = Input::get('pageinateData');
         $user=Auth::user();
 //        ifisset($id);
@@ -176,7 +177,7 @@ class TraineeController extends Controller
     {
         $instructors = Employee::all();
         $instructors->load('user');
-        $trainees = Trainee::whereNull('employee_id')->get();
+        $trainees = Trainee::all();
         $trainees->load('user');
         return view('muscle-up-app.trainee_allocation.create-allocation', compact('instructors', 'trainees'));
     }
