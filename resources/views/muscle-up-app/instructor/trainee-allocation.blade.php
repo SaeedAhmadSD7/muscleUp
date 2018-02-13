@@ -114,8 +114,7 @@
                                         <td>
                                             <ul class="">
                                                 <li class="dropdown">
-                                                    <a href="javascript:void(0);" class="dropdown-toggle "
-                                                       data-toggle="dropdown">
+                                                    <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown">
                                                         <i class="glyphicon glyphicon-th-list"></i>
                                                     </a>
                                                     <ul class="dropdown-menu dropdown-menu-right">
@@ -211,6 +210,7 @@
             </div>
         </div>
     </div>
+
 @stop
 
 @section('script')

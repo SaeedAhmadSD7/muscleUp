@@ -199,7 +199,7 @@ class TraineeController extends Controller
 
     public function show_allocation()
     {
-        $trainees = Trainee::with('user', 'employee', 'employee.user')->whereNotNull('employee_id')->get();
+        $trainees = Trainee::with('user', 'employee', 'employee.user')->get();
         return view('muscle-up-app.trainee_allocation.show-allocation-list', compact('trainees'));
 
     }
