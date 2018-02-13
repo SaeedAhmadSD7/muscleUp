@@ -183,7 +183,7 @@
                                         </select></div>
                                 </div>
                                 <br>
-                                <input type="hidden" name="instructorId" id="instructorId" value=""> </input>
+                                {{--<input type="hidden" name="instructorId" id="instructorId" value=""> </input>--}}
 
                             </div>
                             <div class="modal-footer">

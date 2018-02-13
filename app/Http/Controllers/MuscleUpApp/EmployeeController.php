@@ -124,15 +124,15 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show() {
-        $instructors=Employee::with('user')->paginate(1);
+        $instructors=Instructor::with('user')->paginate(5);
         return view('muscle-up-app.instructor.instructor-list')->with('instructors',$instructors);
     }
     public function ajaxshow() {
         $limit = Input::get('pageinateData');
         if(isset($limit))
-            $instructors=Employee::with('user')->paginate($limit);
+            $instructors=Instructor::with('user')->paginate($limit);
         else
-        $instructors=Employee::with('user')->paginate(1);
+        $instructors=Instructor::with('user')->paginate(5);
         return view('muscle-up-app.instructor.list')->with('instructors',$instructors)->render();
     }
     public function profileshow($id)
@@ -243,7 +243,7 @@ class EmployeeController extends Controller
 //        dd($instructor->user->first_name);
 
         $allocatedTrainees = $instructor->trainees()->get();
-        if(isset($allocatedTrainees)){
+        if($allocatedTrainees->count()>0){
                 foreach($allocatedTrainees as $traine){
                     $traineeList[]=$traine->id;
                 }
@@ -268,10 +268,10 @@ class EmployeeController extends Controller
 //        dd($instructor->user->first_name);
 
         $allocatedTrainees = $instructor->trainees()->get();
-        if(isset($allocatedTrainees)){
-                foreach($allocatedTrainees as $traine){
-                    $traineeList[]=$traine->id;
-                }
+        if($allocatedTrainees->count()>0){
+            foreach($allocatedTrainees as $traine){
+                $traineeList[]=$traine->id;
+            }
             $unAllocatedTrainees = Trainee::all()->whereNotIn('id',$traineeList);
         }
         else{
