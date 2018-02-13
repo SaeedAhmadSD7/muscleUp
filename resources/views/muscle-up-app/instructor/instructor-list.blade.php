@@ -154,7 +154,7 @@
         });
         function getProducts(page){
             var url,success,params;
-            var type='';
+            var type='GET';
 
             url='/ajax/instructor/list?page=' + page;
             params={'pageinateData':$('#issueinput5').val()};
@@ -167,7 +167,7 @@
 
         $(document).ready(function(){
             var url,success,params;
-            var type='';
+            var type='GET';
             url='/ajax/instructor/list?page=1';
             params='';
             success=function(data){
@@ -205,26 +205,26 @@
 //                        alert(token);
 
 //            $('#myModal').modal('toggle');
-
-            $.ajax({
-                type: 'POST',
-                url: '/instructor/allocate/' + id,
-                data: {
-                    '_token': token,
-                    'instructor_id': id,
-                    'trainee_id': traineeId,
-                    'allocationType': allocationType,
-                },
-                success: function(data) {
-                    $('#myModal').modal('toggle');
+            var url,success,params;
+            var type='POST';
+            url='/instructor/allocate/' + id;
+            params={
+                '_token': token,
+                'instructor_id': id,
+                'trainee_id': traineeId,
+                'allocationType': allocationType
+            };
+            success=function(data) {
+                $('#myModal').modal('toggle');
 //                    alert(token);
-                    toastr.success('Successfully deleted Post!', 'Success Alert', {timeOut: 5000});
-                    $('.item' + data['id']).remove();
-                    $('.col1').each(function (index) {
-                        $(this).html(index+1);
-                    });
-                }
-            });
+                toastr.success('Successfully deleted Post!', 'Success Alert', {timeOut: 5000});
+                $('.item' + data['id']).remove();
+                $('.col1').each(function (index) {
+                    $(this).html(index+1);
+                });
+            };
+            ajaxCallMethod(type,url,params,success);
+
 
         });
 

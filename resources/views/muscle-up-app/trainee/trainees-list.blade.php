@@ -51,7 +51,7 @@
         });
         function getProducts(page){
             var url,success,params;
-            var type='';
+            var type='GET';
             url='/ajax/trainee/list?page=' + page;
             params={'pageinateData':$('#issueinput5').val()};
             success=function(data){
@@ -66,7 +66,7 @@
 
         $(document).ready(function(){
             var url,success,params;
-            var type='';
+            var type='GET';
             url='/ajax/trainee/list?page=' + 1;
             params='';
             success=function(data){
