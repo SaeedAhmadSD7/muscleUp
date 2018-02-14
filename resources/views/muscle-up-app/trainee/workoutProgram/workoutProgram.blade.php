@@ -41,7 +41,6 @@
                                 <label class="col-sm-3 control-label">Phase Name</label>
                                 <div class="col-sm-6">
                                     <select class="phase_list form-control" name="">
-
                                         @for($i = 0; $i < count($trainee->allocation->program->phase); $i++)
                                             <option  value="{{$trainee->allocation->program->phase[$i]->id}}" data-value="{{$phase_daycount[$i]}}" data-order="{{$i}}">{{$trainee->allocation->program->phase[$i]->title}}</option>
                                         @endfor
@@ -52,8 +51,9 @@
                                 <label class="col-sm-3 control-label">Day Name</label>
                                 <div class="col-sm-6">
                                     <select class="day_list form-control" name="">
-                                        <option></option>
-                                    </select>
+                                        @foreach($p_day as $day)
+                                            <option>{{$day}}</option>
+                                        @endforeach                                    </select>
                                 </div>
                             </div>
                             <div class="form-group date-div">
@@ -61,7 +61,7 @@
                                 <div class="col-sm-6">
                                     <input type="hidden" class="start_date" value="{{$trainee->allocation->start_date}}">
                                     <input class="calc_date" type="hidden" value="">
-                                    <span class="form-control date-span"></span>
+                                    <span class="form-control date-span"> {{$trainee->allocation->start_date}} </span>
                                 </div>
                             </div>
                             <div class="form-group wbs"></div>

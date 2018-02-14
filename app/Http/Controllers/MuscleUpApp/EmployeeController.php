@@ -12,8 +12,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Instructor;
 use App\Mail\AddInstructorRequest;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\View;
 
 class EmployeeController extends Controller
 
@@ -45,6 +47,7 @@ class EmployeeController extends Controller
 
     public function index()
     {
+
         return view('muscle-up-app.instructor.index');
 
     }
@@ -121,8 +124,16 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show() {
-        $instructors=Employee::with('user')->get();
+        $instructors=Instructor::with('user')->paginate(5);
         return view('muscle-up-app.instructor.instructor-list')->with('instructors',$instructors);
+    }
+    public function ajaxshow() {
+        $limit = Input::get('pageinateData');
+        if(isset($limit))
+            $instructors=Instructor::with('user')->paginate($limit);
+        else
+        $instructors=Instructor::with('user')->paginate(5);
+        return view('muscle-up-app.instructor.list')->with('instructors',$instructors)->render();
     }
     public function profileshow($id)
     {
@@ -194,41 +205,87 @@ class EmployeeController extends Controller
 //        if (!$instructor->trainees()->exists($trainee_id)) {
 //            $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
 //        }
-        if (!$instructor->trainees()->where('trainee_id', $trainee_id)->where('instructor_id', $instructor_id)) {
+//        if (!$instructor->trainees()->where('trainee_id', $trainee_id)->where('instructor_id', $instructor_id)) {
             $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
-        }
+//        }
+
 
 
         Session::flash('Success','Congratulations Employee have been added successfully. Credentials have been mailed to entered email.');
+            return $this->ajaxAllocation($instructor_id);
 
 
-
-        return response()->json([
-            'success' => true,
-            'message'   => 'Congratulations Employee have been added successfully. Credentials have been mailed to entered email.'
-        ]);
+//        return response()->json([
+//            'success' => true,
+//            'message'   => 'Congratulations Employee have been added successfully. Credentials have been mailed to entered email.'
+//        ]);
 
 
 //        return redirect()->route('instructor-show');
     }
 
+    public function allocateDelete(Request $request)
+    {
+        $trainee_id = $request->input('trainee_id');
+        $instructor_id = $request->input('instructor_id');
+        $instructor = Instructor::find($instructor_id);
+        $instructor->trainees()->detach($trainee_id);
+
+        Session::flash('Success','Congratulations Employee have been added successfully. Credentials have been mailed to entered email.');
+        return $this->ajaxAllocation($instructor_id);
+
+    }
 
     public function allocation($id)
     {
 
         $instructor = Instructor::find($id);
+//        dd($instructor->user->first_name);
 
         $allocatedTrainees = $instructor->trainees()->get();
-//        $unAllocatedTrainees = $instructor->notMyTrainees()->get();
-        $unAllocatedTrainees = Trainee::all();
-//        dd($allocatedTrainees->count());
+        if($allocatedTrainees->count()>0){
+                foreach($allocatedTrainees as $traine){
+                    $traineeList[]=$traine->id;
+                }
+            $unAllocatedTrainees = Trainee::all()->whereNotIn('id',$traineeList);
+        }
+        else{
+            $unAllocatedTrainees = Trainee::all();
 
-//        dd($unAllocatedTrainees);
+        }
+//        $unAllocatedTrainees = $instructor->notMyTrainees()->get();
+//        dd($allocatedTrainees->count());
 
         return view('muscle-up-app.instructor.trainee-allocation', compact('allocatedTrainees','instructor','unAllocatedTrainees'));
 
 //        return redirect()->route('instructor-show');
     }
+
+    public function ajaxAllocation($id)
+    {
+
+        $instructor = Instructor::find($id);
+//        dd($instructor->user->first_name);
+
+        $allocatedTrainees = $instructor->trainees()->get();
+        if($allocatedTrainees->count()>0){
+            foreach($allocatedTrainees as $traine){
+                $traineeList[]=$traine->id;
+            }
+            $unAllocatedTrainees = Trainee::all()->whereNotIn('id',$traineeList);
+        }
+        else{
+            $unAllocatedTrainees = Trainee::all();
+
+        }
+//        $unAllocatedTrainees = $instructor->notMyTrainees()->get();
+//        dd($allocatedTrainees->count());
+
+        return view('muscle-up-app.instructor.dashboard.allocated-trainee-list', compact('allocatedTrainees','instructor','unAllocatedTrainees'));
+
+//        return redirect()->route('instructor-show');
+    }
+
 
     /**
      * Remove the specified resource from storage.

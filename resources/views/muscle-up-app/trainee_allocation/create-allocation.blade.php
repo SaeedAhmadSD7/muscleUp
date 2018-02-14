@@ -1,4 +1,5 @@
-@extends('muscle-up-app.gym.dashboard.gym-dashboard')
+{{--@extends('muscle-up-app.gym.dashboard.gym-dashboard')--}}
+@extends('layouts.backend-main')
 @section('title','Trainee Allocation')
 
 

@@ -56,29 +56,16 @@
                                 <h5>{{$allocation->start_date}}</h5>
                             </td>
                             {{--{{dd($trainees[$i]->allocation->id)}}--}}
-                            <td>
-                                <ul class="">
-                                    <li class="dropdown">
-                                        <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown">
-                                            <i class="glyphicon glyphicon-th-list"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a class="glyphicon glyphicon-edit"  href="{{route('edit-diet-allocation',$allocation->id)}}" type="submit">Edit</a></li>
-                                            <li><a class="glyphicon glyphicon-trash"  href="{{route('delete-diet-allocation',$allocation->id)}}" type="submit">Delete</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                            <td width="20px">
+                                <form method="get" action="{{route('edit-diet-allocation',$allocation->id)}}">
+                                    <button class="btn btn-primary" type="submit"><span class="glyphicon icon-elusive-pencil"></span></button>
+                                </form>
                             </td>
-                            {{--<td width="20px">--}}
-                                {{--<form method="get" action="{{route('edit-diet-allocation',$allocation->id)}}">--}}
-                                    {{--<button class="btn btn-primary" type="submit"><span class="glyphicon icon-elusive-pencil"></span></button>--}}
-                                {{--</form>--}}
-                            {{--</td>--}}
-                            {{--<td width="20px">--}}
-                                {{--<form method="get" action="{{route('delete-diet-allocation',$allocation->id)}}">--}}
-                                    {{--<button class="btn btn-danger" type="submit"><span class="glyphicon icon-typicons-cancel"></span></button>--}}
-                                {{--</form>--}}
-                            {{--</td>--}}
+                            <td width="20px">
+                                <form method="get" action="{{route('delete-diet-allocation',$allocation->id)}}">
+                                    <button class="btn btn-danger" type="submit"><span class="glyphicon icon-typicons-cancel"></span></button>
+                                </form>
+                            </td>
                         </tr>
                         <?php $count++; ?>
                     @endforeach
@@ -93,18 +80,4 @@
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/js/diet.js')}}"></script>
-
-    <script>
-        $(document).ready(function () {
-            /* Datatables basic */
-            $('#datatable-example').dataTable();
-
-            //*** trainee table detail action dropdown
-            $('.dropdown-toggle').click(function (e) {
-                e.preventDefault();
-                $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
-                e.stopImmediatePropagation();
-            })
-        });
-    </script>
 @stop

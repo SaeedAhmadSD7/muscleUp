@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Http\Requests\HealthStatsRequest;
+//use View;
 use App\Http\Requests\PicUploadRequest;
 use App\Models\DietProgram;
 use App\Models\HealthQuestion;
@@ -12,6 +13,8 @@ use App\Models\Trainee;
 use App\Models\Employee;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\View;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -118,9 +121,19 @@ class TraineeController extends Controller
 
     public function trainee_detail($id)
     {
+
         $trainee = Trainee::find($id);
         $trainee->user;
-        return view('muscle-up-app.gym.trainee.trainee-list-detail')->with(['trainee' => $trainee]);
+        return view('muscle-up-app.trainee.trainee-list-detail')->with(['trainee' => $trainee]);
+
+    }
+
+    public function programAllocation($id)
+    {
+
+        $trainee = Trainee::find($id);
+        $trainee->user;
+        return view('muscle-up-app.trainee.trainee-list-detail')->with(['trainee' => $trainee]);
 
     }
 
@@ -133,12 +146,24 @@ class TraineeController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function traineesList($id){
-
-
-//        ifisset($id);
+        $user=Auth::user();
         $trainees = $this->_trainee->fetchRecords();
-        return view('muscle-up-app.trainee.trainees-list',compact('trainees'));
+
+//        dd($trainees);
+        return view('muscle-up-app.trainee.trainees-list',compact('trainees','user'));
     }
+    public function ajaxtraineesList(){
+
+        $params['limit'] = Input::get('pageinateData');
+        $user=Auth::user();
+//        ifisset($id);
+        $trainees = $this->_trainee->fetchRecords($params);
+//        dd($trainees);
+        return View::make('muscle-up-app.trainee.list',compact('trainees','user'))->render();
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -174,7 +199,7 @@ class TraineeController extends Controller
 
     public function show_allocation()
     {
-        $trainees = Trainee::with('user', 'employee', 'employee.user')->whereNotNull('employee_id')->get();
+        $trainees = Trainee::with('user', 'employee', 'employee.user')->get();
         return view('muscle-up-app.trainee_allocation.show-allocation-list', compact('trainees'));
 
     }
@@ -291,22 +316,16 @@ class TraineeController extends Controller
     public function dietProgram()
     {
         $trainee = Trainee::where('user_id', Auth::user()->id)->first();
-//        dd($trainee);
         $diet_allocation = $trainee->allocation;
-//        dd($diet_allocation);
         $program = $trainee->allocation->program;
-//        dd($program);
         $diet_program = $trainee->allocation->diet_program;
-//        dd($diet_program);
         $meal = $trainee->allocation->diet_program->meal;
-//        dd($meal);
         $food = $trainee->allocation->diet_program->food;
 
 
-
-//        if ($trainee->dietallocation) {
-//            $trainee->dietallocation->diet_program->meal;
-//            $trainee->dietallocation->diet_program->food;
+//        if ($trainee->allocation) {
+//            $trainee->allocation->diet_program->meal;
+//            $trainee->allocation->diet_program->food;
 //            $dietProgram = 1;
 //        } else {
 //            $dietProgram = 0;
@@ -319,7 +338,7 @@ class TraineeController extends Controller
     {
 
         $trainee = Trainee::where('user_id', Auth::user()->id)->first();
-//        dd($trainee);
+
         if ($trainee->allocation) {
 
             $days = array();
@@ -334,7 +353,6 @@ class TraineeController extends Controller
         } else {
             $phase_daycount = 0;
         }
-//        dd($phase_daycount);
 
         return view('muscle-up-app.trainee.workoutProgram.workoutProgram')->with(['trainee' => $trainee, 'phase_daycount' => $phase_daycount]);
     }
@@ -355,22 +373,19 @@ class TraineeController extends Controller
             $phase_daycount = array();
 
             foreach ($trainee->allocation->program->phase as $phase) {
-                $days[] = $phase->day()->title;
+                $days[] = $phase->day()->get();
 
             }
 
             foreach ($days as $phase_day) {
                 $phase_daycount[] = count($phase_day->unique()->toArray());
-
             }
-//           dd($phase_daycount);
             $trainee->allocation->program->phase;
             $trainee->allocation->diet_program->meal;
             $trainee->allocation->diet_program->food;
-            }
-//           else {
-//            $phase_daycount = 0;
-//        }
+        } else {
+            $phase_daycount = 0;
+        }
 
         return view('muscle-up-app.trainee.activity.activity')->with(['trainee' => $trainee, 'phase_daycount' => $phase_daycount]);
     }
@@ -385,7 +400,7 @@ class TraineeController extends Controller
     public function destroy($id)
     {
         $trainee = Trainee::find($id);
-        $trainee->dietallocation()->delete();
+        $trainee->allocation()->delete();
         $trainee->user()->delete();
         $trainee->delete();
         return redirect()->route('trainee-list');

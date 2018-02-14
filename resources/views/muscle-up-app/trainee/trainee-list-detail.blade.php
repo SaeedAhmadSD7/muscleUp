@@ -1,4 +1,4 @@
-@extends('muscle-up-app.gym.dashboard.gym-dashboard')
+@extends('layouts.backend-main')
 
 @section('page-heading')
     <h2>Trainee Detail</h2>
