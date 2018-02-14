@@ -49,41 +49,32 @@ class DietProgramController extends Controller
 
     public function store(DietCreateRequest $request) {
         $formData = $request->all();
-        $data=$formData['total_data'];
-        foreach($data as $d)
-        dd($d['food_id']);
-//        foreach($ddd as $data)
-//        {
-//            if(in_array('food_id' ,$data)){
-//
-//                dd("found");
-//            }
-//            dd("ddd");
-//
-//        }
-////        dd($formData['total_data']);
-////        $formData['total_data']
+//        $data=$formData['total_data'];
+//        dd($data);
+
+
+
         $dietPrograms=DietProgram::showAll();
 //        dd($dietPrograms->food());
-        foreach($dietPrograms as $singleDiet)
-        {
-//              dd($singleDiet);
-                $ww = $singleDiet->food();
-              dd($ww);
-                foreach ($ww as $w) {
-                    $w->pivot->food_id;
-                    if($data['food_id'] == $w->pivot->food_id && $data['meal_id'] == $w->pivot->meal_id)
-                    {
-                        return "error";
-                    }
-                    dd("ddd");
-            }
+//        foreach($dietPrograms as $singleDiet)
+//        {
+////              dd($singleDiet);
+//                $ww = $singleDiet->food();
+//              dd($ww);
+//                foreach ($ww as $w) {
+//                    $w->pivot->food_id;
+//                    if($data['food_id'] == $w->pivot->food_id && $data['meal_id'] == $w->pivot->meal_id)
+//                    {
+//                        return "error";
+//                    }
+//                    dd("ddd");
+//            }
+//
+//                        dd();
+//                    }
 
-                        dd();
-                    }
 
-
-        dd();
+//        dd();
         DietProgram::createorUpdateDiet($formData);
         return redirect()->route('diet-list');
 

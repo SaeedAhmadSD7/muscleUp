@@ -55,9 +55,12 @@ class DietProgram extends Model
         $dietProgram->title = $formData['title'];
         $dietProgram->description = $formData['description'];
         $dietProgram->save();
+//        $dd=self::find($dietProgram);
+//        dd($dd['id']);
+        $meal_data = array();
         foreach ($formData['total_data'] as $data) {
 
-                $meal_data = array();
+
                 for ($i = 0; $i < count($data['meal_id']); $i++) {
                     $meal_data[$i]['food_id'] = $data['food_id'][$i];
                     $meal_data[$i]['meal_id'] = $data['meal_id'][$i];
@@ -65,29 +68,36 @@ class DietProgram extends Model
                     $meal_data[$i]['calories'] = $data['calories'][$i];
                     $meal_data[$i]['taketime'] = $data['taketime'][$i];
 
+
 //                    $dietProgram->meal()->detach();
 //                    $dietProgram->food()->detach();
+
                     $dietProgram->meal()->attach($data['meal_id']);
                     $dietProgram->food()->attach($meal_data);
-                }
-
-        }
-//            $meal_data = array();
-//            for ($i = 0; $i < count($mainData['meal_id']); $i++) {
+                    $object=$dietProgram->food()->attach($meal_data);
+                    $detail = $object->pivot->where('meal_id', $data['meal_id'] )->where('food_id', $data['food_id']);
+//                    dd($object);
+//                    $detail=$object::where('meal_id', $data['meal_id'] )->where('food_id', $data['food_id']);
 //
-//                $meal_data[$i]['food_id'] = $mainData['food_id'][$i];
-//                $meal_data[$i]['meal_id'] = $mainData['meal_id'][$i];
-//                $meal_data[$i]['quantity'] = $mainData['quantity'][$i];
-//                $meal_data[$i]['calories'] = $mainData['calories'][$i];
-//                $meal_data[$i]['taketime'] = $mainData['taketime'][$i];
-//            }
+//                    if(isset($detail))
+//                    {
+//                        echo "error";
+////                        dd($detail);
+//
+//                    }
 
 
+                    $detail=$object::where('meal_id', $data['meal_id'] )->where('food_id', $data['food_id']);
 
+                    if(isset($detail))
+                    {
+                        echo "error";
+//                        dd($detail);
 
-//            $dietProgram->meal()->sync($ingleData['meal_id']);
-//            $dietProgram->food()->sync($meal_data);
+                    }
 
+                }
+        }
     }
     public static function deleteDietProgram($id) {
         $dietProgram = DietProgram::find($id);

@@ -324,29 +324,36 @@ $('.df').on('submit', function (e) {
             var row = [];
             var count=0;
 
-//$('#assignedTable tr').each(function())
             $("#dtble .fieldR").each(function() {
                  row=$(this).children('.serial').children('.sr').text();
                  row= {
 
-                food_id : $(this).children('.foodRow').children(".food_name1").val(),
-                meal_id : $(this).children('.mealRow').children(".meal_name1").val(),
+                     food_id : $(this).children('.foodRow').children(".food_name1").val(),
+                     meal_id : $(this).children('.mealRow').children(".meal_name1").val(),
                      quantity : $(this).children('.qtyRow').find('.quantity1').val(),
-                calories : $(this).children('.caloryRow').find('.calories1').val(),
-                taketime : $(this).children('.take_time').find('.take_time1').val()
-//                     _token  : $(this).children('.token').find('.token1').val()
+                     calories : $(this).children('.caloryRow').find('.calories1').val(),
+                     taketime : $(this).children('.take_time').find('.take_time1').val()
+//
 
             };
                 total_data[count]=row;
-                console.log(total_data[count]);
-                count++;
-//                alert(total_data[count][row]);
+//                console.log(total_data);
 
-//                if( row['food_id'] == row[count]['food_id']  && row['meal_id'] == row[count]['meal_id'])
-//                {
-//                    alert("already exist")
+
+                count++;
+//                var a1=total_data[count]=row['food_id'];
+//                var a2=total_data[count]=row['meal_id'];
+//                alert(a1);
+//                alert(a2);
+
+//                alert(total_data[count][row]);
 //
-//                }
+//                if( total_data[count-1]=row['food_id']  =  total_data[count]=row['food_id']  &&  total_data[count-1]=row['meal_id'] = total_data[count]=row['meal_id']);
+////                {
+////                    alert("already exist")
+////
+////                }
+//
 //
             });
 
@@ -361,11 +368,9 @@ $('.df').on('submit', function (e) {
         $.ajax({
             type: 'post',
             url: '{{url("diet/add")}}',
-//            data:{ title:title , description:description , meal_id:meal_id , food_id:food_id , quantity:quantity , calories:calories , take_time:take_time ,_token:_token },
             data:{ title:title , description:description ,total_data ,_token:_token },
             success: function (s) {
-//                alert("Success");
-                {{--window.location.href = '{{url("diet/list")}}';--}}
+
                 $("#ajaxData").html(s);
             }
 //            error: function(data){
