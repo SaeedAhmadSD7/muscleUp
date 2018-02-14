@@ -34,7 +34,7 @@ class DietProgram extends Model
     }
 
     public function food(){
-        return $this->belongsToMany(Food::class,'diet_food','diet_program_id','food_id')->withPivot('meal_id','quantity','calories','taketime')->withTimestamps();
+        return $this->belongsToMany(Food::class,'diet_food','diet_program_id','food_id' )->withPivot('meal_id','quantity','calories','taketime')->withTimestamps();
     }
 
 
@@ -44,36 +44,51 @@ class DietProgram extends Model
     }
 
 
-    public static function createorUpdateDiet($formData) {
-        if(array_key_exists('id',$formData)){
+    public static function createorUpdateDiet($formData)
+    {
+        if (array_key_exists('id', $formData)) {
             $dietProgram = DietProgram::find($formData['id']);
-        }
-        else{
+        } else {
             $dietProgram = new DietProgram();
         }
         //dd($formData);
         $dietProgram->title = $formData['title'];
         $dietProgram->description = $formData['description'];
         $dietProgram->save();
+        foreach ($formData['total_data'] as $data) {
 
-        $meal_data = array();
-        for ($i = 0 ; $i < count($formData['meal_id']); $i++){
+                $meal_data = array();
+                for ($i = 0; $i < count($data['meal_id']); $i++) {
+                    $meal_data[$i]['food_id'] = $data['food_id'][$i];
+                    $meal_data[$i]['meal_id'] = $data['meal_id'][$i];
+                    $meal_data[$i]['quantity'] = $data['quantity'][$i];
+                    $meal_data[$i]['calories'] = $data['calories'][$i];
+                    $meal_data[$i]['taketime'] = $data['taketime'][$i];
 
-            $meal_data[$i]['food_id'] = $formData['food_id'][$i];
-            $meal_data[$i]['meal_id'] = $formData['meal_id'][$i];
-            $meal_data[$i]['quantity'] = $formData['quantity'][$i];
-            $meal_data[$i]['calories'] = $formData['calories'][$i];
-            $meal_data[$i]['taketime'] = $formData['taketime'][$i];
+//                    $dietProgram->meal()->detach();
+//                    $dietProgram->food()->detach();
+                    $dietProgram->meal()->attach($data['meal_id']);
+                    $dietProgram->food()->attach($meal_data);
+                }
+
         }
+//            $meal_data = array();
+//            for ($i = 0; $i < count($mainData['meal_id']); $i++) {
+//
+//                $meal_data[$i]['food_id'] = $mainData['food_id'][$i];
+//                $meal_data[$i]['meal_id'] = $mainData['meal_id'][$i];
+//                $meal_data[$i]['quantity'] = $mainData['quantity'][$i];
+//                $meal_data[$i]['calories'] = $mainData['calories'][$i];
+//                $meal_data[$i]['taketime'] = $mainData['taketime'][$i];
+//            }
 
-        $dietProgram->meal()->detach();
-        $dietProgram->food()->detach();
 
 
-        $dietProgram->meal()->sync($formData['meal_id']);
-        $dietProgram->food()->sync($meal_data);
+
+//            $dietProgram->meal()->sync($ingleData['meal_id']);
+//            $dietProgram->food()->sync($meal_data);
+
     }
-
     public static function deleteDietProgram($id) {
         $dietProgram = DietProgram::find($id);
         $dietProgram->meal()->detach();

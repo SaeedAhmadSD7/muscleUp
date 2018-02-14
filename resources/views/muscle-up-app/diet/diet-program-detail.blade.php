@@ -1,3 +1,115 @@
+{{--@extends('muscle-up-app.instructor.dashboard.instructor-dashboard')--}}
+{{--@section('title','Diet program')--}}
+
+{{--@section('style-sheet')--}}
+    {{--<link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">--}}
+    {{--<link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">--}}
+    {{--<link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">--}}
+    {{--<link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">--}}
+    {{--<link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">--}}
+    {{--<link href="{{url('/admin-assets/widgets/timepicker/timepicker.css')}}" rel="stylesheet" type="text/css">--}}
+    {{--<link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">--}}
+    {{--<link href="{{url('/admin-assets/css/diet.css')}}" rel="stylesheet" type="text/css">--}}
+    {{--<link href="{{url('/admin-assets/icons/typicons/typicons.css')}}" rel="stylesheet" type="text/css">--}}
+    {{--<link href="{{url('/admin-assets/icons/elusive/elusive.css')}}" rel="stylesheet" type="text/css">--}}
+{{--@stop--}}
+
+{{--@section('content')--}}
+
+  {{--<div id="page-title">--}}
+        {{--<h2>Diet Program Detail</h2>--}}
+  {{--</div>--}}
+  {{--<div class="row mailbox-wrapper">--}}
+      {{--<div class="col-md-12">--}}
+          {{--<div class="content-box">--}}
+              {{--<div class="mail-toolbar clearfix">--}}
+                  {{--<div class="float-left">--}}
+                      {{--<h4 class="font-primary"> Diet Program Name: "{{$dietProgramDetails->title}}"</h4>--}}
+                  {{--</div>--}}
+              {{--</div>--}}
+              {{--<div class="email-body">--}}
+                  {{--<div class="example-box-wrapper">--}}
+                      {{--<table border="0" cellpadding="0" cellspacing="0" class="table table-striped table-bordered" id="datatable-example">--}}
+                          {{--<tr class="name">--}}
+                              {{--<th>Diet Name</th>--}}
+                              {{--<td>{{$dietProgramDetails->title}}</td>--}}
+                          {{--</tr>--}}
+
+                          {{--<tbody>--}}
+                          {{--<tr class="description">--}}
+                              {{--<th>Diet Description</th>--}}
+                              {{--<td>{{$dietProgramDetails->description}}</td>--}}
+                          {{--</tr>--}}
+
+
+
+
+
+
+
+                          {{--</tbody>--}}
+                      {{--</table>--}}
+                      {{--<h2>Meal Details:</h2>--}}
+                      {{--<table id="assignedTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered">--}}
+                          {{--<thead>--}}
+                          {{--<tr>--}}
+                              {{--<th >Serial</th>--}}
+                              {{--<th>Meal Number</th>--}}
+                              {{--<th>Food Name</th>--}}
+                              {{--<th >Quantity</th>--}}
+                              {{--<th>Calories</th>--}}
+                              {{--<th>Duration</th>--}}
+
+                          {{--</tr>--}}
+                          {{--</thead>--}}
+                          {{--<tbody>--}}
+                          {{--<tr id="tmpRow" class="fieldR">--}}
+                              {{--<td style='width:20px;text-align:center;'><span class="sr">1</span></td>--}}
+                              {{--<td>--}}
+                                  {{--<input type="text" class="form-control" value="{{$meal->title}}">--}}
+                              {{--</td>--}}
+                              {{--<td class="foodRow">--}}
+                                  {{--<input type="text" class="form-control food_name" id="food_name1"  value="{{$food->title}}"name="food_id" >--}}
+                              {{--</td>--}}
+                              {{--<td id="qtyRow">--}}
+
+                                  {{--<input class="form-control quantity" type="number" id="quantity1" value="{{$food_data->quantity}}" placeholder="Qrt:" style="width:60px;">--}}
+                              {{--</td>--}}
+                              {{--<td id="caloryRow">--}}
+                                  {{--<input class="form-control" type="text" id="calories1" name="calories" value="{{$food_data->calories}}" placeholder="Cal" style="width:60px;" readonly>--}}
+                              {{--</td>--}}
+                              {{--<td>--}}
+                                  {{--<input class="form-control time_take_input" type="text" value="{{$food_data->taketime}}" placeholder="Time" style="width:60px">--}}
+                              {{--</td>--}}
+                          {{--</tr>--}}
+                          {{--</tbody>--}}
+                          {{--<tfoot>--}}
+                          {{--<tr>--}}
+                              {{--<th colspan="7">--}}
+
+                              {{--</th>--}}
+                          {{--</tr>--}}
+                          {{--</tfoot>--}}
+                      {{--</table>--}}
+                  {{--</div>--}}
+              {{--</div>--}}
+              {{--<div class="button-pane">--}}
+                  {{--<a class="btn ra-100 btn-danger accept_request" href="{{route('delete-diet',$dietProgramDetails->id)}}"><i class="glyph-icon icon-mail-reply"></i> Delete Diet Program</a>--}}
+              {{--</div>--}}
+
+          {{--</div>--}}
+      {{--</div>--}}
+  {{--</div>--}}
+
+
+{{--@stop--}}
+
+@section('script')
+    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
+    <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
+    <script src="{{url('/admin-assets/js/diet.js')}}"></script>
+
+@stop
 @extends('muscle-up-app.instructor.dashboard.instructor-dashboard')
 
 @section('title','Diet program')
@@ -16,47 +128,9 @@
 @stop
 
 @section('content')
-    <table id="templete">
-        <tfoot>
-        <div class="tab-content">
-            <tr style="display: none;" id="tmpRow" class="fieldR">
-                <td style='width:20px;text-align:center;'><span class="sr"></span></td>
-                <td class="mealRow">
-                    <select class="form-control" name="meal_id[]" id="meal_no">
-                        <option value="0">Select Meal:</option>
-                        @foreach($meals as $meal)
-                            <option value="{{$meal->id}}">{{$meal->title}}</option>
-                        @endforeach
-                    </select>
-                </td>
-                <td class="foodRow">
-                    <select class="form-control food_name1" id="food_name" name="food_id[]">
-                        <option value="0">Select Food:</option>
-                        @foreach($foods as $food)
-                            <option data-calories="{{$food->calories}}" value="{{$food->id}}">{{$food->title}}</option>
-                        @endforeach
-                    </select>
-                </td>
-                <td id="qtyRow" class="qtyRow">
-                    <input class="form-control quantity1" type="number" id="quantity1" name="quantity[]"  placeholder="Qrt:" style="width:60px;">
-                </td>
-                <td id="caloryRow" class="caloryRow">
-                    <input class="form-control calories1" type="text" id="calories1" name="calories[]" placeholder="Cal" style="width:60px;" readonly>
-                </td>
-                <td>
-                    <input class="form-control time_take_input" type="text" name="taketime[]" placeholder="Time" style="width:60px" >
-                </td>
-                <td>
-                    <button class="remove_row btn btn-danger" type="button"><span class="">Delete</span></button>
-                </td>
-            </tr>
-        </div>
-        </tfoot>
-    </table>
-
     <div id="page-title">
         <h2>Diet Program</h2>
-        <p>Create Diet Program</p>
+        <p>Diet Program Detail</p>
         <div id="errors">
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
@@ -73,9 +147,7 @@
 
     <div class="panel">
         <div class="panel-body">
-            <div class="example-box-wrapper">
-                <form class="form-group diet-program form-horizontal bordered-row df" id="form-field" method="post" action="{{route('update-diet')}}">
-                    {{csrf_field()}}
+            <div class="example-box-wrapper form-group diet-program form-horizontal bordered-row">
                     <div class="tab-content">
                         <div class="form-wizard" id="form-wizard-3">
                             <div class="form-group first-group">
@@ -106,7 +178,7 @@
                                     <th>Quantity</th>
                                     <th>Calories</th>
                                     <th>Duration</th>
-                                    <th style="width: 150px; ">Action</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -115,7 +187,8 @@
                                     <tr class="fieldR">
 
 
-                                        <td style='width:20px;text-align:center;'><span class="sr"><?php echo $count;?></span></td>
+                                        <td style='width:20px;text-align:center;'>
+                                        <?php echo $count;?>
                                         <td >
 
 
@@ -143,29 +216,20 @@
                                         <td>
                                             <input class="form-control time_take_input" type="text" name="taketime[]" placeholder="Time" style="width:60px" value="{{$dietList->pivot->taketime}}" >
                                         </td>
-                                        <td>
-                                            <button class="remove_row btn btn-danger" type="button"><span class="glyphicon icon-typicons-cancel">Delete</span></button>
-                                        </td>
+
                                     </tr>
                                     <?php $count++; ?>
                                 @endforeach
                                 </tbody>
 
                                 <tfoot>
-                                    <tr>
-                                        <th colspan="7">
-                                            <div class="create">
-                                                <button type="button" id="assign" class="btn btn-primary duplicate"><span class=" glyphicon icon-typicons-plus">Add More..</span></button>
-                                            </div>
-                                        </th>
-                                    </tr>
+                                <tr>
+
+                                </tr>
                                 </tfoot>
                             </table>
-                            <div style="float:right; margin-right: 300px;">
-                                <input type="submit" value="Update" class="btn btn-success submit-btn">
-                            </div>
                         </div>
-                      </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -176,65 +240,4 @@
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/js/diet.js')}}"></script>
-
-
-    <script>
-           //   on quantity change
-
-            $("#assignedTable").on("keyup",".quantity1", function(){
-
-                var cal=$(this).parent().siblings().children('.food_name1').find(':selected').attr('data-calories');
-                var qty=$(this).val();
-                var newCal=cal*qty;
-                $(this).parent().siblings('.caloryRow').find('.calories1').val(newCal);
-
-
-
-        });
-    </script>
-    <script>
-        // on food change
-
-               $("#assignedTable").on("change",".food_name1", function(){
-
-                   var cal=$(this).find(':selected').attr('data-calories');
-                   var qty=$(this).parent().siblings('.qtyRow').find('.quantity1').val();
-                   var newCal=cal*qty;
-                   $(this).parent().siblings('.caloryRow').find('.calories1').val(newCal);
-
-           });
-</script>
-    <script>
-        // duplicate records
-
-//           $('.df').on('duplicate', function () {
-//               var formData = $('.diet-program').serialize();
-//               console.log(formData.split('&'));
-//
-//           });
-           var id= $('#assignedTable tbody tr').length;
-           $("#assignedTable").on('click', '.remove_row', function () {
-               $(this).closest('tr').remove();
-               countTableRows();
-               id--;
-               console.log("Del row now id is "+id);
-           });
-           $(document).on('click', '#assign', function () {
-               id++;
-               var tr = $('#tmpRow').clone().attr('id','row'+id).show().stop()
-                       .appendTo('#assignedTable tbody');
-               $('#row'+id+' span.sr').text(id)
-
-
-           });
-           function countTableRows() {
-               $("#assignedTable tr").each(function (i) {
-                   if (i >0) {
-                       $(this).attr('id','row'+i);
-                       $(this).find('td:first span').html(i);
-                   }
-               });
-           }
-
-    </script>
 @stop

@@ -35,7 +35,9 @@ class Food extends Model
     public function meal() {
         return $this->belongsToMany(Meal::class,'food_meal','food_id','meal_id')->withPivot('diet_program_id','quantity','calories','taketime')->withTimestamps();
     }
-
+    public function diet_program() {
+        return $this->belongsToMany(DietProgram::class ,'meal_id','quantity','calories','taketime' );
+    }
 
 
 

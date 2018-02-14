@@ -291,16 +291,22 @@ class TraineeController extends Controller
     public function dietProgram()
     {
         $trainee = Trainee::where('user_id', Auth::user()->id)->first();
+//        dd($trainee);
         $diet_allocation = $trainee->allocation;
+//        dd($diet_allocation);
         $program = $trainee->allocation->program;
+//        dd($program);
         $diet_program = $trainee->allocation->diet_program;
+//        dd($diet_program);
         $meal = $trainee->allocation->diet_program->meal;
+//        dd($meal);
         $food = $trainee->allocation->diet_program->food;
 
 
-//        if ($trainee->allocation) {
-//            $trainee->allocation->diet_program->meal;
-//            $trainee->allocation->diet_program->food;
+
+//        if ($trainee->dietallocation) {
+//            $trainee->dietallocation->diet_program->meal;
+//            $trainee->dietallocation->diet_program->food;
 //            $dietProgram = 1;
 //        } else {
 //            $dietProgram = 0;
@@ -313,7 +319,7 @@ class TraineeController extends Controller
     {
 
         $trainee = Trainee::where('user_id', Auth::user()->id)->first();
-
+//        dd($trainee);
         if ($trainee->allocation) {
 
             $days = array();
@@ -328,6 +334,7 @@ class TraineeController extends Controller
         } else {
             $phase_daycount = 0;
         }
+//        dd($phase_daycount);
 
         return view('muscle-up-app.trainee.workoutProgram.workoutProgram')->with(['trainee' => $trainee, 'phase_daycount' => $phase_daycount]);
     }
@@ -348,19 +355,22 @@ class TraineeController extends Controller
             $phase_daycount = array();
 
             foreach ($trainee->allocation->program->phase as $phase) {
-                $days[] = $phase->day()->get();
+                $days[] = $phase->day()->title;
 
             }
 
             foreach ($days as $phase_day) {
                 $phase_daycount[] = count($phase_day->unique()->toArray());
+
             }
+//           dd($phase_daycount);
             $trainee->allocation->program->phase;
             $trainee->allocation->diet_program->meal;
             $trainee->allocation->diet_program->food;
-        } else {
-            $phase_daycount = 0;
-        }
+            }
+//           else {
+//            $phase_daycount = 0;
+//        }
 
         return view('muscle-up-app.trainee.activity.activity')->with(['trainee' => $trainee, 'phase_daycount' => $phase_daycount]);
     }
@@ -375,7 +385,7 @@ class TraineeController extends Controller
     public function destroy($id)
     {
         $trainee = Trainee::find($id);
-        $trainee->allocation()->delete();
+        $trainee->dietallocation()->delete();
         $trainee->user()->delete();
         $trainee->delete();
         return redirect()->route('trainee-list');

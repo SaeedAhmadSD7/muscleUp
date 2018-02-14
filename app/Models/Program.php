@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $deleted_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \App\Models\Allocation $allocation
+ * @property-read \App\Models\DietAllocation $allocation
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Program[] $exercise
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Phase[] $phase
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Program whereCreatedAt($value)
@@ -42,7 +42,7 @@ class Program extends Model {
     }
 
     public function allocation() {
-        return $this->hasOne(Allocation::class);
+        return $this->hasOne(DietAllocation::class);
     }
 
 
