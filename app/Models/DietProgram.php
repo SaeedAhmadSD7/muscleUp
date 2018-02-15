@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\DB;
+use Exception;
+use Log;
 /**
  * App\Models\DietProgram
  *
@@ -46,59 +48,54 @@ class DietProgram extends Model
 
     public static function createorUpdateDiet($formData)
     {
-        if (array_key_exists('id', $formData)) {
-            $dietProgram = DietProgram::find($formData['id']);
-        } else {
-            $dietProgram = new DietProgram();
-        }
-        //dd($formData);
-        $dietProgram->title = $formData['title'];
-        $dietProgram->description = $formData['description'];
-        $dietProgram->save();
+        DB::beginTransaction();
+        try {
+            if (array_key_exists('id', $formData)) {
+                $dietProgram = DietProgram::find($formData['id']);
+            } else {
+                $dietProgram = new DietProgram();
+            }
+//        dd($formData['total_data']);
+            $dietProgram->title = $formData['title'];
+            $dietProgram->description = $formData['description'];
+            $dietProgram->save();
 //        $dd=self::find($dietProgram);
 //        dd($dd['id']);
-        $meal_data = array();
-        foreach ($formData['total_data'] as $data) {
-
-
+            foreach ($formData['total_data'] as $data) {
+                $meal_data = array();
+//dd($data);
                 for ($i = 0; $i < count($data['meal_id']); $i++) {
-                    $meal_data[$i]['food_id'] = $data['food_id'][$i];
-                    $meal_data[$i]['meal_id'] = $data['meal_id'][$i];
-                    $meal_data[$i]['quantity'] = $data['quantity'][$i];
-                    $meal_data[$i]['calories'] = $data['calories'][$i];
-                    $meal_data[$i]['taketime'] = $data['taketime'][$i];
-
-
-//                    $dietProgram->meal()->detach();
-//                    $dietProgram->food()->detach();
+                    $meal_data[$i]['food_id'] = $data['food_id'];
+                    $meal_data[$i]['meal_id'] = $data['meal_id'];
+                    $meal_data[$i]['quantity'] = $data['quantity'];
+                    $meal_data[$i]['calories'] = $data['calories'];
+                    $meal_data[$i]['taketime'] = $data['taketime'];
 
                     $dietProgram->meal()->attach($data['meal_id']);
                     $dietProgram->food()->attach($meal_data);
-                    $object=$dietProgram->food()->attach($meal_data);
-                    $detail = $object->pivot->where('meal_id', $data['meal_id'] )->where('food_id', $data['food_id']);
-//                    dd($object);
-//                    $detail=$object::where('meal_id', $data['meal_id'] )->where('food_id', $data['food_id']);
-//
-//                    if(isset($detail))
-//                    {
-//                        echo "error";
-////                        dd($detail);
-//
-//                    }
 
-
-                    $detail=$object::where('meal_id', $data['meal_id'] )->where('food_id', $data['food_id']);
-
-                    if(isset($detail))
-                    {
-                        echo "error";
-//                        dd($detail);
-
+                    $query = DB::table('diet_food')->select('meal_id', 'food_id')->where(['meal_id' => $data['meal_id'], 'food_id' => $data['food_id']])->get();
+//                    dd(count($query));
+                    if (count($query) > 1) {
+//                        dd("Plz enter different food against meal");
+                        throw new Exception("Plz enter different food against meal");
                     }
-
                 }
+            }
+            DB::commit();
         }
-    }
+        catch
+        (Exception $e) {
+//            Log::debug("something bad happened");
+            $error=$e->getMessage();
+            echo $error;
+            return $error;
+            DB::rollBack();
+//            return $e->getMessage();
+        }
+//        dd();
+//
+        }
     public static function deleteDietProgram($id) {
         $dietProgram = DietProgram::find($id);
         $dietProgram->meal()->detach();

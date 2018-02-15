@@ -15,6 +15,7 @@
 @stop
 
 @section('content')
+    <div id="ajaxData">
 
   <div id="page-title">
         <h2>Diet Program List</h2>
@@ -69,6 +70,8 @@
             </div>
         </div>
     </div>
+
+  </div>
 @stop
 
 @section('script')

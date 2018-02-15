@@ -14,6 +14,8 @@
 @stop
 
 @section('content')
+    <div id="ajaxData">
+
     <table id="templete">
         <tfoot>
             <div class="tab-content">
@@ -56,6 +58,7 @@
     <div id="page-title">
         <h2>Diet Program</h2>
         <p>Create Diet Program</p>
+
         <div id="errors">
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
@@ -164,15 +167,18 @@
             </div>
         </div>
     </div>
-    <div id="ajaxData">
 
     </div>
+    {{--<div id="response">--}}
+
+    {{--</div>--}}
 @stop
 
 @section('script')
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/js/diet.js')}}"></script>
+    <script src="{{url('/dist/js/AjaxCallMethod.js')}}" type="text/javascript"></script>
     <script>
         //   on quantity change
 
@@ -199,12 +205,6 @@
     </script>
 <script>
 
-
-//    $('.df').on('duplicate', function () {
-//        var formData = $('.diet-program').serialize();
-//        console.log(formData.split('&'));
-//
-//    });
     var id= $('#assignedTable tbody tr').length;
     $("#assignedTable").on('click', '.remove_row', function () {
         $(this).closest('tr').remove();
@@ -228,96 +228,9 @@
             }
         });
     }
-
-//    $('.df').on('submit', function () {
-//        var formData = $('.diet-program').serialize();
-//        console.log(formData.split('&'));
-//
-//    });
-
-//filter('formData[name$="[meal_id]"]').each(function() {
-//    $(this).rules("add", {
-//        meal_id: true,
-//        unique:true,
-//        required: true,
-//        messages: {
-//            meal_id: 'Already Exist'
-//
-//        }
-//    })
-//})
-//        alert(formData);
-
-
-//$( ".foodRow" ).each(function( index ) {
-//
-//    var a=$(".food_name1").find(':selected').attr('value');
-////    var a=$(".food_name1").find(':selected').val();
-//alert(a);
-//});
-
 </script>
-    <script>
-//        $(".assignedTable").on('submit' , function(){
-////            var a=$(this).children('.fieldR').children(".foodRow").children(".food_name1").val();
-////            alert(a);
-//
-//            $(".fieldR").each(function(){
-//                if($(this).children(".foodRow").children(".food_name1").val()==$(this).next().children(".foodRow").children(".food_name1").val())
-//                {
-////                    $(this).next("td.foodRow").children(".food_name1_").text("MATCHED!");
-//                    alert("ddddddddddddd");
-//                }
-//            });
-////            $( ".fieldR" ).each(function( index ) {
-////
-//////                var a=$(this).children('.foodRow').children(".food_name1").val();
-//////                  alert(a);
-////
-////            });
-////            var a=$(".food_name1").find(':selected').val();
-////            alert(a);
-//        });
-
-
-    </script>
 
     <script>
-
-//            $("input[name^='meal_id']").each(function(){
-//                meal_ids[$(this).attr('name')] = $(this).val();
-//                alert( meal_ids);
-//            });
-//            var formData=$(this).serialize();
-//            var map={};
-//            $(".meal_name1").each(function() {
-//                map[$(this).attr("name")] = $(this).val();
-//                alert(map);
-
-            //                $('.meal_name1').each(function () {
-//                    meal_ids = ($(this).val());
-//                    alert(food_ids);
-//                });
-//                $('.food_name1').each(function () {
-//                    food_ids = ($(this).val());
-//                    alert(food_ids);
-//                })
-//            });
-//            alert(meal_ids);
-//            $( ".fieldR" ).each(function( index ) {
-//                var food_id=$(this).children('.foodRow').children(".food_name1").val();
-//                  alert(food_id);
-//            });
-//            $( ".fieldR" ).each(function( index ) {
-//                var meal_id=$(this).children('.mealRow').children(".meal_name1").val();
-//                  alert(meal_id);
-//            });
-//
-//            var meal_ids = [];
-//            var food_ids = [];
-//            var calorie = [];
-//            var qnty = [];
-//            var serial = [];
 $('.df').on('submit', function (e) {
     e.preventDefault();
             var total_data = [];
@@ -333,53 +246,34 @@ $('.df').on('submit', function (e) {
                      quantity : $(this).children('.qtyRow').find('.quantity1').val(),
                      calories : $(this).children('.caloryRow').find('.calories1').val(),
                      taketime : $(this).children('.take_time').find('.take_time1').val()
-//
 
-            };
+                 };
                 total_data[count]=row;
-//                console.log(total_data);
 
 
                 count++;
-//                var a1=total_data[count]=row['food_id'];
-//                var a2=total_data[count]=row['meal_id'];
-//                alert(a1);
-//                alert(a2);
 
-//                alert(total_data[count][row]);
-//
-//                if( total_data[count-1]=row['food_id']  =  total_data[count]=row['food_id']  &&  total_data[count-1]=row['meal_id'] = total_data[count]=row['meal_id']);
-////                {
-////                    alert("already exist")
-////
-////                }
-//
-//
             });
 
-            var _token=$("#_token").val();
-            var title=$("#title").val();
-            var description=$("#description").val();
-//            var meal_id=row['meal'];
-//            var food_id=row['food'];
-//            var quantity=row['quantity'];
-//            var calories=row['calorie'];
-//            var take_time=row['take_time'];
-        $.ajax({
-            type: 'post',
-            url: '{{url("diet/add")}}',
-            data:{ title:title , description:description ,total_data ,_token:_token },
-            success: function (s) {
 
-                $("#ajaxData").html(s);
-            }
-//            error: function(data){
-//                var errors = data.responseJSON;
-//                console.log(errors);
-//                // Render the errors with js ...
-//            }
-
-        });
+        var _token=$("#_token").val();
+        var title=$("#title").val();
+        var description=$("#description").val();
+        var url,success,params;
+        var type='POST';
+        url='{{url("diet/add")}}';
+        params={
+            title:title ,
+            description:description,
+            total_data ,
+            _token:_token };
+            success=function(data){
+                if(isSet(data.response)) {
+                    $("#response").html(data.response);
+                    $('#ajaxData').html(data);
+                }
+        };
+        ajaxCallMethod(type,url,params,success);
 
         });
     </script>

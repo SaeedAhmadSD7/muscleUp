@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\DietCreateRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Exception;
+use Log;
+use Symfony\Component\Debug\ExceptionHandler;
 
 class DietProgramController extends Controller
 {
@@ -49,34 +53,10 @@ class DietProgramController extends Controller
 
     public function store(DietCreateRequest $request) {
         $formData = $request->all();
-//        $data=$formData['total_data'];
-//        dd($data);
-
-
-
         $dietPrograms=DietProgram::showAll();
-//        dd($dietPrograms->food());
-//        foreach($dietPrograms as $singleDiet)
-//        {
-////              dd($singleDiet);
-//                $ww = $singleDiet->food();
-//              dd($ww);
-//                foreach ($ww as $w) {
-//                    $w->pivot->food_id;
-//                    if($data['food_id'] == $w->pivot->food_id && $data['meal_id'] == $w->pivot->meal_id)
-//                    {
-//                        return "error";
-//                    }
-//                    dd("ddd");
-//            }
-//
-//                        dd();
-//                    }
-
-
-//        dd();
-        DietProgram::createorUpdateDiet($formData);
-        return redirect()->route('diet-list');
+       $message= DietProgram::createorUpdateDiet($formData);
+//        dd($message);
+         return view('muscle-up-app.diet.partial')->with('dietPrograms',$dietPrograms ,  'response' , $message);
 
 
     }
