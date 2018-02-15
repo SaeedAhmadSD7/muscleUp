@@ -42,6 +42,20 @@ class Phase extends Model {
         $phase = Phase::all();
         return $phase;
     }
+ public static function detailAdd($formData)
+    {
+
+        $phase = Phase::find($formData['phase_id']);
+        $phase_data = array();
+
+        $phase_data['phase_id']=$formData['phase_id'];
+        $phase_data['day_id']=$formData['day_id'];
+        $day=$formData['day_id'];
+        $phase_data['wbs_id']=$formData['wbs_id'];
+        $wbs=$formData['wbs_id'];
+        $phase->day()->attach($day,['wbs_id' =>$wbs]);
+
+    }
 
     public static function createUpdatePhase($formData)
     {
@@ -69,5 +83,11 @@ class Phase extends Model {
         $phase = self::find($id);
         $phase->day()->detach();
         $phase->delete();
+
+    }
+    public static function deleteDetailsPhase($data) {
+
+        $phase = self::find($data['phase_id']);
+        $phase->day()->detach($data['day_id'],['wbs_id'=>$data['wbs_id']]);
     }
 }

@@ -46,6 +46,16 @@ class Wbs extends Model
         return $Wbs;
     }
 
+    public static function storeWbsDetails($formData) {
+        $Wbs = Wbs::find($formData['wbs_id']);
+        $wbs_data = array();
+        $wbs_data['exercise_id'] = $formData['exercise_id'];
+        $wbs_data['set'] = $formData['set'];
+        $wbs_data['rep'] = $formData['rep'];
+        $wbs_data['rest'] = $formData['rest'];
+        $Wbs->exercise()->attach($wbs_data['exercise_id'],['set'=>$wbs_data['set'],'rep'=> $wbs_data['rep'],'rest'=>$wbs_data['rest']]);
+    }
+
     public static function createUpdateWbs($formData) {
         if(array_key_exists('id',$formData)) {
             $Wbs = Wbs::find($formData['id']);
@@ -70,9 +80,15 @@ class Wbs extends Model
         $Wbs->exercise()->attach($wbs_data);
     }
 
-    public static function deleteWbs($id) {
+    public static function deleteWbs($id)
+    {
         $Wbs = Wbs::find($id);
         $Wbs->exercise()->detach();
         $Wbs->delete();
+    }
+     public static function deleteDetailsWbs($data) {
+
+         $Wbs = Wbs::find($data['wbs_id']);
+        $Wbs->exercise()->detach($data['exercise_id']);
     }
 }

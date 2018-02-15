@@ -95,28 +95,29 @@
                                 <td>{{$allocatedTrainee->user->email}}</td>
                                 <td>{{$allocatedTrainee->pivot->type}}</td>
                                 <td>
-                                    <ul class="">
-                                        <li class="dropdown">
-                                            <a href="javascript:void(0);" class="dropdown-toggle "
-                                               data-toggle="dropdown">
-                                                <i class="glyphicon glyphicon-th-list"></i>
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a class="create_modal_btn" href=""><i
-                                                                class="glyphicon glyphicon-eye-open"></i> Detail </a>
-                                                </li>
-                                                <li><a class="btnEdit" href=""><i
-                                                                class="glyphicon glyphicon-question-sign"></i> Health
-                                                        FAQs </a></li>
-                                                <li><a class="btnEdit" href=""><i
-                                                                class="glyphicon glyphicon-dashboard"></i> Health
-                                                        Statistics </a></li>
-                                                <li><a class="btnDelete" href=""> <i
-                                                                class="glyphicon glyphicon-ban-circle"></i> Deactivate
-                                                    </a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+
+                    {{--<ul class="">--}}
+                                        {{--<li class="dropdown">--}}
+                                            {{--<a href="javascript:void(0);" class="dropdown-toggle "--}}
+                                               {{--data-toggle="dropdown">--}}
+                                                {{--<i class="glyphicon glyphicon-th-list"></i>--}}
+                                            {{--</a>--}}
+                                            {{--<ul class="dropdown-menu dropdown-menu-right">--}}
+                                                {{--<li><a class="create_modal_btn" href=""><i--}}
+                                                                {{--class="glyphicon glyphicon-eye-open"></i> Detail </a>--}}
+                                                {{--</li>--}}
+                                                {{--<li><a class="btnEdit" href=""><i--}}
+                                                                {{--class="glyphicon glyphicon-question-sign"></i> Health--}}
+                                                        {{--FAQs </a></li>--}}
+                                                {{--<li><a class="btnEdit" href=""><i--}}
+                                                                {{--class="glyphicon glyphicon-dashboard"></i> Health--}}
+                                                        {{--Statistics </a></li>--}}
+                                                {{--<li><a class="btnDelete" href=""> <i--}}
+                                                                {{--class="glyphicon glyphicon-ban-circle"></i> Deactivate--}}
+                                                    {{--</a></li>--}}
+                                            {{--</ul>--}}
+                                        {{--</li>--}}
+                                    {{--</ul>--}}
                                 </td>
                             </tr>
                         @endforeach
@@ -195,17 +196,17 @@
 <script>
 
 
-    $(document).ready(function () {
-        /* Datatables basic */
-//            $('#datatable-example').dataTable();
-
-        //*** trainee table detail action dropdown
-        $('.dropdown-toggle').click(function (e) {
-            e.preventDefault();
-            $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
-            e.stopImmediatePropagation();
-        })
-    });
+//    $(document).ready(function () {
+//        /* Datatables basic */
+////            $('#datatable-example').dataTable();
+//
+//        //*** trainee table detail action dropdown
+//        $('.dropdown-toggle').click(function (e) {
+//            e.preventDefault();
+//            $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
+//            e.stopImmediatePropagation();
+//        })
+//    });
 
 
 </script>
