@@ -81,7 +81,7 @@ class EmployeeController extends Controller
         $user->password = bcrypt($password);
         $user->branch_id=\Auth::user()->branch_id;
         $user->gym_id=\Auth::user()->gym_id;
-        $user['type'] = 'employee';
+        $user['type'] = 'instructor';
         $user->first_name=$request->first_name;
         $user->last_name=$request->last_name;
 //        $user->dial_code = '+27';
@@ -133,7 +133,7 @@ class EmployeeController extends Controller
             $instructors=Instructor::with('user')->paginate($limit);
         else
         $instructors=Instructor::with('user')->paginate(5);
-        return view('muscle-up-app.instructor.list')->with('instructors',$instructors)->render();
+        return view('muscle-up-app.instructor.partials.list')->with('instructors',$instructors)->render();
     }
     public function profileshow($id)
     {
@@ -281,7 +281,7 @@ class EmployeeController extends Controller
 //        $unAllocatedTrainees = $instructor->notMyTrainees()->get();
 //        dd($allocatedTrainees->count());
 
-        return view('muscle-up-app.instructor.dashboard.allocated-trainee-list', compact('allocatedTrainees','instructor','unAllocatedTrainees'));
+        return view('muscle-up-app.instructor.partials.allocated-trainee-list', compact('allocatedTrainees','instructor','unAllocatedTrainees'));
 
 //        return redirect()->route('instructor-show');
     }

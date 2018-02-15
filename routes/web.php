@@ -236,8 +236,8 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
 
         Route::group(['Trainee'], function () {
 
-//            Route::get('assign-trainee/list{id?}', ['as' => 'Instructor-trainee-list', 'uses' => 'TraineeController@traineesList']);
-//            Route::resource('trainee', "TraineeController");
+            Route::get('assign-trainee/list{id?}', ['as' => 'Instructor-trainee-list', 'uses' => 'TraineeController@traineesList']);
+            Route::resource('trainee', "TraineeController");
 //            Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
 //            Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
 //
@@ -277,10 +277,12 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
         Route::group(['WBS'], function () {
             Route::get('/wbs/list', ['uses' => 'WbsController@index', 'as' => 'wbs-list']);
             Route::get('/wbs/add', ['uses' => 'WbsController@create', 'as' => 'wbs-add']);
+            Route::post('/wbs/details', ['uses' => 'WbsController@addDetails', 'as' => 'wbs-addDetails']);
             Route::post('/wbs/store', ['uses' => 'WbsController@store', 'as' => 'wbs-store']);
             Route::get('/wbs/edit/{wbs}', ['uses' => 'WbsController@edit', 'as' => 'wbs-edit']);
             Route::post('/wbs/update/', ['uses' => 'WbsController@update', 'as' => 'wbs-update']);
             Route::get('/wbs/delete/{wbs}', ['uses' => 'WbsController@destroy', 'as' => 'wbs-delete']);
+            Route::post('/wbs/delete/details', ['uses' => 'WbsController@deleteDetails', 'as' => 'wbs-detailsDelete']);
 
         });
 
@@ -290,8 +292,11 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::post('phase/store', ['as' => 'phase_store', 'uses' => 'PhaseController@store']);
             Route::get('phase/list', ['as' => 'show-phase', 'uses' => 'PhaseController@show']);
             Route::get('phase/edit/{id?}', ['as' => 'edit-phase', 'uses' => 'PhaseController@edit']);
+            Route::post('phase/addDetails', ['as' => 'addDetails-phase', 'uses' => 'PhaseController@addDetails']);
             Route::post('phase/update', ['as' => 'update-phase', 'uses' => 'PhaseController@update']);
             Route::get('phase/delete/{id?}', ['as' => 'delete-phase', 'uses' => 'PhaseController@destroy']);
+            Route::post('/phase/delete/details', ['uses' => 'PhaseController@deleteDetails', 'as' => 'phase-detailsDelete']);
+
         });
 
         //***ProgramController

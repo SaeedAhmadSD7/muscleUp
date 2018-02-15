@@ -38,7 +38,8 @@
                     </select>
                 </td>
                 <td>
-                    <button class="remove_row btn btn-danger" type="button"><span class="glyph-icon icon-typicons-cancel"></span></button>
+                    <button class="remove_row btn btn-danger" type="button"><span
+                                class="glyph-icon icon-typicons-cancel"></span></button>
                 </td>
             </tr>
         </div>
@@ -66,7 +67,8 @@
     <div class="panel">
         <div class="panel-body">
             <div class="example-box-wrapper">
-                <form class="form-group diet-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('phase_store')}}">
+                <form class="form-group diet-program form-horizontal bordered-row" id="form-field" method="post"
+                      action="{{route('phase_store')}}">
                     {{csrf_field()}}
                     <div class="tab-content">
                         <div class="form-wizard" id="form-wizard-3">
@@ -84,13 +86,15 @@
 
                                 <div class="col-sm-6">
                                     <div class="input-group">
-                                        <textarea rows="5" cols="20" class="form-control" id="description" name="description"></textarea><br>
+                                        <textarea rows="5" cols="20" class="form-control" id="description"
+                                                  name="description"></textarea><br>
                                     </div>
                                 </div>
                             </div>
                             <hr>
                             <h2>Phase Details:</h2>
-                            <table id="assignedTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered">
+                            <table id="assignedTable" cellpadding="0" cellspacing="0" border="0"
+                                   class="table table-bordered">
                                 <thead>
                                 <tr>
                                     <th>Serial</th>

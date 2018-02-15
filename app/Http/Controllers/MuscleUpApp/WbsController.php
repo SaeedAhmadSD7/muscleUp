@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MuscleUpApp;
 
 
+use App\Http\Requests\WbsDetailsRequest;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\Wbs;
@@ -41,8 +42,36 @@ class WbsController extends Controller
     public function store(WbsCreateRequest $request) {
         $formData = $request->all();
         $formData['gym_id']=Auth::user()->gym_id;
-        Wbs::createUpdateWbs($formData);
-        return redirect()->route('wbs-list');
+        $wbs = new Wbs();
+        $wbs->title = $formData['title'];
+        $wbs->description = $formData['description'];
+        $wbs->gym_id = $formData['gym_id'];
+        $wbs->save();
+        $wbs_list = Wbs::all();
+//        Wbs::createUpdateWbs($formData);
+        return view('muscle-up-app.wbs.partials.wbs-list',compact('wbs_list'));
+    }
+
+    public function addDetails(WbsDetailsRequest $request) {
+        $formData = $request->all();
+        $formData['gym_id']=Auth::user()->gym_id;
+        Wbs::storeWbsDetails($formData);
+        return $this->ajaxList($formData['wbs_id']);
+//        Wbs::createUpdateWbs($formData);
+    }
+
+    public function ajaxList($wbs_id)
+    {
+
+        $wbs = Wbs::find($wbs_id);
+//        $wbs->exercise;
+        $exercise_list= Exercise::all();
+        $allocatedWbs= Wbs::find($wbs_id);
+        $allocatedWbs->exercise;
+//        $allocatedWbs=Wbs::find($id)->day()->get();
+
+        return view('muscle-up-app.wbs.partials.wbs-detail-list')->with(['wbs'=>$wbs,'exercise_list'=>$exercise_list, 'allocatedWbs'=>$allocatedWbs]);
+
     }
 
     /**
@@ -60,15 +89,18 @@ class WbsController extends Controller
      * @param  \App\Models\Wbs  $wbs
      * @return \Illuminate\Http\Response
      */
-    public function edit(Wbs $wbs)
+    public function edit($wbs_id)
     {
-        $wbs = Wbs::find($wbs->id);
-        $wbs->exercise;
+        $wbs = Wbs::find($wbs_id);
+//        $wbs->exercise;
         $exercise_list= Exercise::all();
-
-        return view('muscle-up-app.wbs.edit')->with(['wbs'=>$wbs,'exercise_list'=>$exercise_list]);
+        $allocatedWbs= Wbs::find($wbs_id);
+        $allocatedWbs->exercise;
+//        dd($allocatedWbs->exercise);
+        return view('muscle-up-app.wbs.detail-list')->with(['wbs'=>$wbs,'exercise_list'=>$exercise_list, 'allocatedWbs'=>$allocatedWbs]);
 
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -92,10 +124,20 @@ class WbsController extends Controller
      * @param  \App\Models\Wbs  $wbs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wbs $wbs)
+    public function destroy($wbs_id)
     {
-        Wbs::deleteWbs($wbs->id);
-        return redirect()->route('wbs-list');
+        Wbs::deleteWbs($wbs_id);
+        $wbs_list = Wbs::all();
+//        Wbs::createUpdateWbs($formData);
+        return view('muscle-up-app.wbs.partials.wbs-list',compact('wbs_list'));
+//        return redirect()->route('wbs-list');
+
+    }
+    public function deleteDetails(Request $request)
+    {
+        $data=$request->all();
+        Wbs::deleteDetailsWbs($data);
+        return $this->ajaxList($data['wbs_id']);
 
     }
 }

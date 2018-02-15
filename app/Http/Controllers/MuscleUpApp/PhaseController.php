@@ -49,14 +49,41 @@ class PhaseController extends Controller
      */
     public function store(PhaseCreateRequest $request)
     {
-//        $user = $this->_user;
+////        $user = $this->_user;
         $formData = $request->all();
         $formData['gym_id']=Auth::user()->gym_id;
-        Phase::createUpdatePhase($formData);
-        return redirect()->route('show-phase');
+//        Phase::createUpdatePhase($formData);
+        $phase = new Phase();
+        $phase->title = $formData['title'];
+        $phase->description = $formData['description'];
+        $phase->gym_id = $formData['gym_id'];
+        $phase->save();
+
+//        return redirect()->route('show-phase');
+        $phases=Phase::showAll();
+        return view('muscle-up-app.phase.partials.list',compact('phases'));
 
 
+    }
 
+    public function addDetails(Request $request)
+    {
+
+        $formData=$request->all();
+       $details=Phase::detailAdd($formData);
+        return $this->ajexList($formData['phase_id']);
+//        return view('muscle-up-app.phase.partials.phase-details-list',compact('phases'));
+    }
+
+    public function ajexList($id)
+    {
+        $phase = Phase::find($id);
+//        $phase->day;
+        $days= Day::showAll();
+        $wbs= Wbs::showAll();
+        $allocatedPhase=Phase::find($id)->day()->get();
+
+        return view('muscle-up-app.phase.partials.phase-details-list')->with(['phase'=>$phase,'days'=>$days,'wbs'=>$wbs,'allocatedPhases'=>$allocatedPhase]);
     }
 
     /**
@@ -68,8 +95,10 @@ class PhaseController extends Controller
     public function show()
     {
         $phases=Phase::showAll();
+
         return view('muscle-up-app.phase.list-phase',compact('phases'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -80,11 +109,12 @@ class PhaseController extends Controller
     public function edit($id)
     {
         $phase = Phase::find($id);
-        $phase->day;
+//        $phase->day;
         $days= Day::showAll();
         $wbs= Wbs::showAll();
+        $allocatedPhase=Phase::find($id)->day()->get();
 
-        return view('muscle-up-app.phase.edit-phase')->with(['phase'=>$phase,'days'=>$days,'wbs'=>$wbs]);
+        return view('muscle-up-app.phase.add-phase')->with(['phase'=>$phase,'days'=>$days,'wbs'=>$wbs,'allocatedPhases'=>$allocatedPhase]);
     }
 
     /**
@@ -129,6 +159,16 @@ class PhaseController extends Controller
     public function destroy($id)
     {
         Phase::deletePhase($id);
-        return redirect()->route('show-phase');
+        $phases=Phase::showAll();
+        return view('muscle-up-app.phase.partials.list',compact('phases'));
+//        return redirect()->route('show-phase');
+    }
+
+    public function deleteDetails(Request $request)
+    {
+        $data=$request->all();
+        Phase::deleteDetailsPhase($data);
+        return $this->ajexList($data['phase_id']);
+
     }
 }
