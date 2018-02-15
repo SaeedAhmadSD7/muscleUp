@@ -48,6 +48,7 @@
                                                     <i class="glyphicon glyphicon-th-list"></i>
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-right">
+                                                    <li><a class=""  href="{{route('diet_list_detail' , ['id'=>$dietProgram->id])}}" type="submit"><i class="glyphicon glyphicon-eye-open">Detail</i></a></li>
                                                     <li><a class="glyphicon glyphicon-edit"  href="{{route('edit-diet',['id'=>$dietProgram->id])}}" type="submit">Edit</a></li>
                                                     <li><a class="glyphicon glyphicon-trash"  href="{{route('delete-diet',['id'=>$dietProgram->id])}}" type="submit">Delete</a></li>
                                                 </ul>

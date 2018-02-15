@@ -268,6 +268,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::get('/diet/create', ['as' => 'diet-create', 'uses' => 'DietProgramController@create']);
             Route::post('/diet/add', ['as' => 'add-diet', 'uses' => 'DietProgramController@store']);
             Route::get('/diet/list', ['as' => 'diet-list', 'uses' => 'DietProgramController@index']);
+            Route::get('/diet/list/detail/{id}', ['as' => 'diet_list_detail', 'uses' => 'DietProgramController@diet_detail']);
             Route::get('/diet/edit/{id}', ['as' => 'edit-diet', 'uses' => 'DietProgramController@edit']);
             Route::post('/diet/update', ['as' => 'update-diet', 'uses' => 'DietProgramController@update']);
             Route::get('/diet/delete/{id}', ['as' => 'delete-diet', 'uses' => 'DietProgramController@delete']);

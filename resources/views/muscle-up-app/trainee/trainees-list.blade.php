@@ -4,6 +4,7 @@
 
 @section('page-heading')
     <h2>List of Trainees</h2>
+    <p>Please fill in all the information and then click Add Trainee.</p>
 @stop
 
 

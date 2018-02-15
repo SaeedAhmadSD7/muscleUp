@@ -8,9 +8,17 @@ use App\Models\Meal;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\DietCreateRequest;
+use Illuminate\Support\Facades\Validator;
+
 class DietProgramController extends Controller
 {
 
+    private $_dietProgram;
+
+    public function __construct(DietProgram $_dietProgram)
+    {
+        $this->_dietProgram = $_dietProgram;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +49,32 @@ class DietProgramController extends Controller
 
     public function store(DietCreateRequest $request) {
         $formData = $request->all();
-//        dd($formData);
+//        $data=$formData['total_data'];
+//        dd($data);
+
+
+
+        $dietPrograms=DietProgram::showAll();
+//        dd($dietPrograms->food());
+//        foreach($dietPrograms as $singleDiet)
+//        {
+////              dd($singleDiet);
+//                $ww = $singleDiet->food();
+//              dd($ww);
+//                foreach ($ww as $w) {
+//                    $w->pivot->food_id;
+//                    if($data['food_id'] == $w->pivot->food_id && $data['meal_id'] == $w->pivot->meal_id)
+//                    {
+//                        return "error";
+//                    }
+//                    dd("ddd");
+//            }
+//
+//                        dd();
+//                    }
+
+
+//        dd();
         DietProgram::createorUpdateDiet($formData);
         return redirect()->route('diet-list');
 
@@ -55,9 +88,16 @@ class DietProgramController extends Controller
     public function edit($id){
 
         $dietProgram = DietProgram::find($id);
-        $dietProgram->meal;
-        $dietProgram->food;
-//        dd($dietProgram);
+//        $meal=$dietProgram->meal;
+        $food=$dietProgram->food;
+//        dd($food);
+        $meal=$dietProgram->meal;
+//        foreach($meal as $m)
+////        {
+////            echo $m->title;
+////        }
+////        dd();
+
         $foods=Food::showAll();
         $meals=Meal::showAll();
          return view('muscle-up-app.diet.edit-diet-program')->with(['dietProgram'=>$dietProgram,'foods'=>$foods,'meals'=>$meals]);
@@ -69,6 +109,7 @@ class DietProgramController extends Controller
      */
     public function update(DietCreateRequest $request){
         $formData = $request->all();
+//        dd($formData);
         DietProgram::createorUpdateDiet($formData);
         return redirect()->route('diet-list');
 
@@ -78,6 +119,20 @@ class DietProgramController extends Controller
         return (DietProgram::find($dietProgram)->food()->where('meal_id',$meal)->get());
     }
 
+    public function diet_detail($id)
+    {
+        $dietProgram=DietProgram::find($id);
+//        $food_id=$dietProgram->food;
+//        dd($food_id);
+        $foods=Food::showAll();
+        $meals=Meal::showAll();
+//        dd($meal);
+//        $meal=$dietProgram->foods;
+//        dd($food);
+//        $mymeal=$meal->pivot->calories;
+//        $meal=$dietProgram->pivot->meal;
+        return view('muscle-up-app.diet.diet-program-detail')->with(['dietProgram'=>$dietProgram , 'foods'=>$foods  , 'meals'=>$meals]);
+    }
     /**
      * @param $id
      */

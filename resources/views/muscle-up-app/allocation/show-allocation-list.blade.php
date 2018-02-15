@@ -33,8 +33,8 @@
                         <th style="text-align:center;">Program</th>
                         <th style="text-align:center;">Diet Plan</th>
                         <th style="text-align:center;">Allocation Date:</th>
-                        <th width="20px">Edit</th>
-                        <th width="20px">Delete</th>
+                        <th>Action</th>
+
                     </tr>
                     </thead>
                     <tbody>

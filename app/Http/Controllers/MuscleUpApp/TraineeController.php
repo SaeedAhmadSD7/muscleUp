@@ -177,7 +177,7 @@ class TraineeController extends Controller
     {
         $instructors = Employee::all();
         $instructors->load('user');
-        $trainees = Trainee::all();
+        $trainees = Trainee::whereNull('employee_id')->get();
         $trainees->load('user');
         return view('muscle-up-app.trainee_allocation.create-allocation', compact('instructors', 'trainees'));
     }
@@ -338,22 +338,23 @@ class TraineeController extends Controller
     {
 
         $trainee = Trainee::where('user_id', Auth::user()->id)->first();
-        $p_day=array();
+
         if ($trainee->allocation) {
+
             $days = array();
             $phase_daycount = array();
             foreach ($trainee->allocation->program->phase as $phase) {
                 $days[] = $phase->day()->get();
-                $p_day[]=$phase->day()->first()->title;
             }
             foreach ($days as $phase_day) {
                 $phase_daycount[] = count($phase_day->unique()->toArray());
             }
+
         } else {
             $phase_daycount = 0;
         }
 
-        return view('muscle-up-app.trainee.workoutProgram.workoutProgram')->with(['trainee' => $trainee, 'phase_daycount' => $phase_daycount,'p_day' => $p_day]);
+        return view('muscle-up-app.trainee.workoutProgram.workoutProgram')->with(['trainee' => $trainee, 'phase_daycount' => $phase_daycount]);
     }
 
 
@@ -385,6 +386,7 @@ class TraineeController extends Controller
         } else {
             $phase_daycount = 0;
         }
+
         return view('muscle-up-app.trainee.activity.activity')->with(['trainee' => $trainee, 'phase_daycount' => $phase_daycount]);
     }
 

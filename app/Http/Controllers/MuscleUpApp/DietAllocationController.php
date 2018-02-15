@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\MuscleUpApp;
-;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
