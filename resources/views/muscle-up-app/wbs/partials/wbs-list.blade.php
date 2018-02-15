@@ -21,7 +21,7 @@
                     </div>
                     <div class="modal-body">
                         {{--{{csrf_field()}}--}}
-                        <div id="errors" class="alert alert-danger">
+                        <div id="errors">
 
                         </div>
                         <div class="form-group first-group">

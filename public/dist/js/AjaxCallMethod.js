@@ -9,6 +9,7 @@ function ajaxCallMethod(type, url, parameters, successCallback) {
             for (datos in data.responseJSON) {
                 errors += data.responseJSON[datos] + '<br>';
             }
+            $('#errors').addClass('alert alert-danger');
             $('#errors').html(errors);
         }
     });
