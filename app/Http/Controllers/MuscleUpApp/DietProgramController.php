@@ -6,6 +6,7 @@ use App\Models\DietProgram;
 use App\Models\Food;
 use App\Models\Meal;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\DietCreateRequest;
 use Illuminate\Support\Facades\Validator;
@@ -51,16 +52,29 @@ class DietProgramController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(DietCreateRequest $request) {
+    public function store(DietCreateRequest $request)
+    {
         $formData = $request->all();
-        $dietPrograms=DietProgram::showAll();
-       $message= DietProgram::createorUpdateDiet($formData);
-//        dd($message);
-         return view('muscle-up-app.diet.partial')->with('dietPrograms',$dietPrograms ,  'response' , $message);
+//        dd($formData['total_data']);
+        $message = DietProgram::createorUpdateDiet($formData);
+        $foods = Food::showAll();
+        $meals = Meal::showAll();
+        $dietPrograms = DietProgram::showAll();
+        if(isset($message))
+        {
+            return response()->json([$message],500);
+        }
+        else
+        {
+            return view('muscle-up-app.diet.partials.list-partial',compact('dietPrograms'));
+
+        }
+
+
+//        return view('muscle-up-app.diet.list-diet-program')->with('dietPrograms',$dietPrograms);
 
 
     }
-
     /**
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -90,8 +104,19 @@ class DietProgramController extends Controller
     public function update(DietCreateRequest $request){
         $formData = $request->all();
 //        dd($formData);
-        DietProgram::createorUpdateDiet($formData);
-        return redirect()->route('diet-list');
+        $id=$formData['id'];
+        $message=DietProgram::createorUpdateDiet($formData);
+        $dietPrograms=DietProgram::showAll();
+        if(isset($message))
+        {
+            return response()->json([$message],500);
+        }
+        else
+        {
+            return view('muscle-up-app.diet.partials.partial',compact('dietPrograms'));
+
+        }
+//        return view('muscle-up-app.diet.list-diet-program',compact('dietPrograms', 'message'));
 
     }
 
@@ -118,6 +143,8 @@ class DietProgramController extends Controller
      */
     public  function delete($id){
         DietProgram::deleteDietProgram($id);
-        return redirect()->route('diet-list');
+        $dietPrograms=DietProgram::showAll();
+        return view('muscle-up-app.diet.list-diet-program')->with('dietPrograms',$dietPrograms);
+
     }
 }

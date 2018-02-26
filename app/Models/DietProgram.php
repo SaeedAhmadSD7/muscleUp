@@ -55,52 +55,52 @@ class DietProgram extends Model
             } else {
                 $dietProgram = new DietProgram();
             }
-//        dd($formData['total_data']);
             $dietProgram->title = $formData['title'];
             $dietProgram->description = $formData['description'];
             $dietProgram->save();
-//        $dd=self::find($dietProgram);
-//        dd($dd['id']);
-            foreach ($formData['total_data'] as $data) {
-                $meal_data = array();
-//dd($data);
-                for ($i = 0; $i < count($data['meal_id']); $i++) {
+
+            $data = array();
+            $meal_data = array();
+            $meal_id=array();
+            $i=0;
+
+            foreach ($formData['total_data'] as $data)
+            {
                     $meal_data[$i]['food_id'] = $data['food_id'];
                     $meal_data[$i]['meal_id'] = $data['meal_id'];
                     $meal_data[$i]['quantity'] = $data['quantity'];
                     $meal_data[$i]['calories'] = $data['calories'];
                     $meal_data[$i]['taketime'] = $data['taketime'];
-
-                    $dietProgram->meal()->attach($data['meal_id']);
-                    $dietProgram->food()->attach($meal_data);
-
-                    $query = DB::table('diet_food')->select('meal_id', 'food_id')->where(['meal_id' => $data['meal_id'], 'food_id' => $data['food_id']])->get();
-//                    dd(count($query));
-                    if (count($query) > 1) {
-//                        dd("Plz enter different food against meal");
-                        throw new Exception("Plz enter different food against meal");
-                    }
-                }
+                    $meal_id[$i]=$data['meal_id'];
+                $i++;
             }
+                $dietProgram->meal()->sync($meal_id);
+                $dietProgram->food()->sync($meal_data);
+
+            for($i=0;$i<count($meal_data);$i++)
+            {
+                $query = DietFood::where('meal_id', $meal_data[$i]['meal_id'])->where('food_id', $meal_data[$i]['food_id'])->get();
+            }
+            if (count($query) > 1)
+                    {
+                        throw new Exception("Please enter different food against meal");
+                    }
             DB::commit();
         }
         catch
-        (Exception $e) {
-//            Log::debug("something bad happened");
+        (Exception $e)
+        {
             $error=$e->getMessage();
-            echo $error;
             return $error;
             DB::rollBack();
-//            return $e->getMessage();
         }
-//        dd();
-//
-        }
+    }
     public static function deleteDietProgram($id) {
         $dietProgram = DietProgram::find($id);
         $dietProgram->meal()->detach();
         $dietProgram->food()->detach();
         $dietProgram->delete();
+
     }
 
 

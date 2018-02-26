@@ -58,8 +58,10 @@
     <div id="page-title">
         <h2>Diet Program</h2>
         <p>Create Diet Program</p>
-
-        <div id="errors">
+            {{--@if(isset($message))--}}
+                {{--<div class="alert alert-danger" >{{$message}}</div>--}}
+            {{--@endif--}}
+        <div id="errors" >
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -169,9 +171,7 @@
     </div>
 
     </div>
-    {{--<div id="response">--}}
 
-    {{--</div>--}}
 @stop
 
 @section('script')
@@ -179,82 +179,29 @@
     <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
     <script src="{{url('/admin-assets/js/diet.js')}}"></script>
     <script src="{{url('/dist/js/AjaxCallMethod.js')}}" type="text/javascript"></script>
-    <script>
-        //   on quantity change
-
-        $("#assignedTable").on("keyup" , ".quantity1" , function(){
-                  var cal=$(this).parent().siblings().children('.food_name1').find(':selected').attr('data-calories');
-                  var qty=$(this).val();
-                  var newCal=cal*qty;
-                  $(this).parent().siblings('.caloryRow').find('.calories1').val(newCal);
-
-        });
-    </script>
+    <script src="{{url('/dist/js/diet.js')}}" type="text/javascript"></script>
     <script>
 
-        // on food change
 
-            $("#assignedTable").on( "change" , ".food_name1" , function(){
-                var cal=$(this).find(':selected').attr('data-calories');
-                var qty=$(this).parent().siblings('.qtyRow').find('.quantity1').val();
-                var newCal=cal*qty;
-                $(this).parent().siblings('.caloryRow').find('.calories1').val(newCal);
-
-            });
-
-    </script>
-<script>
-
-    var id= $('#assignedTable tbody tr').length;
-    $("#assignedTable").on('click', '.remove_row', function () {
-        $(this).closest('tr').remove();
-        countTableRows();
-        id--;
-        console.log("Del row now id is "+id);
-    });
-    $(document).on('click', '#assign', function () {
-        id++;
-        var tr = $('#tmpRow').clone().attr('id','row'+id).show().stop()
-                .appendTo('#assignedTable tbody');
-        $('#row'+id+' span.sr').text(id)
-
-
-    });
-    function countTableRows() {
-        $("#assignedTable tr").each(function (i) {
-            if (i >0) {
-                $(this).attr('id','row'+i);
-                $(this).find('td:first span').html(i);
-            }
-        });
-    }
-</script>
-
-    <script>
 $('.df').on('submit', function (e) {
     e.preventDefault();
             var total_data = [];
-            var row = [];
-            var count=0;
+
 
             $("#dtble .fieldR").each(function() {
-                 row=$(this).children('.serial').children('.sr').text();
-                 row= {
+                 total_data.push({
 
-                     food_id : $(this).children('.foodRow').children(".food_name1").val(),
-                     meal_id : $(this).children('.mealRow').children(".meal_name1").val(),
-                     quantity : $(this).children('.qtyRow').find('.quantity1').val(),
-                     calories : $(this).children('.caloryRow').find('.calories1').val(),
-                     taketime : $(this).children('.take_time').find('.take_time1').val()
+                     "food_id" : $(this).children('.foodRow').children(".food_name1").val(),
+                     "meal_id" : $(this).children('.mealRow').children(".meal_name1").val(),
+                     "quantity": $(this).children('.qtyRow').find('.quantity1').val(),
+                     "calories" : $(this).children('.caloryRow').find('.calories1').val(),
+                     "taketime" : $(this).children('.take_time').find('.take_time1').val()
 
-                 };
-                total_data[count]=row;
+                 });
 
 
-                count++;
 
             });
-
 
         var _token=$("#_token").val();
         var title=$("#title").val();
@@ -268,10 +215,7 @@ $('.df').on('submit', function (e) {
             total_data ,
             _token:_token };
             success=function(data){
-                if(isSet(data.response)) {
-                    $("#response").html(data.response);
                     $('#ajaxData').html(data);
-                }
         };
         ajaxCallMethod(type,url,params,success);
 

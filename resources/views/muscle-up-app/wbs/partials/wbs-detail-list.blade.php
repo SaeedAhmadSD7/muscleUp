@@ -1,3 +1,6 @@
+<div id="errors">
+
+</div>
 <div class="content-box">
     <div class="content-box-wrapper">
         <form action="{{route('wbs-addDetails')}}" method="post" id="form-field">
@@ -42,18 +45,18 @@
         </form>
     </div>
 </div>
-<div id="errors">
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
+{{--<div id="errors">--}}
+    {{--@if (count($errors) > 0)--}}
+        {{--<div class="alert alert-danger">--}}
+            {{--<strong>Whoops!</strong> There were some problems with your input.<br><br>--}}
+            {{--<ul>--}}
                 {{--@foreach ($errors->all() as $error)--}}
                 {{--<li>{{ $error }}</li>--}}
                 {{--@endforeach--}}
-            </ul>
-        </div>
-    @endif
-</div>
+            {{--</ul>--}}
+        {{--</div>--}}
+    {{--@endif--}}
+{{--</div>--}}
 <div class="panel">
     <div class="panel-body">
         <div class="example-box-wrapper">
