@@ -129,10 +129,8 @@ class EmployeeController extends Controller
     }
     public function ajaxshow() {
         $limit = Input::get('pageinateData');
-        if(isset($limit))
-            $instructors=Instructor::with('user')->paginate($limit);
-        else
-        $instructors=Instructor::with('user')->paginate(5);
+        $instructors=Employee::ajaxView($limit);
+
         return view('muscle-up-app.instructor.partials.list')->with('instructors',$instructors)->render();
     }
     public function profileshow($id)
