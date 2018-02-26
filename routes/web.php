@@ -262,6 +262,10 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
         });
 
         Route::group(['Trainee'], function () {
+            Route::get('/ajax/trainee/list', ['as' => 'ajax-trainee-list', 'uses' => 'TraineeController@ajaxtraineesList']);
+            Route::get('trainee/list/{id?}', ['as' => 'trainee-list', 'uses' => 'TraineeController@traineesList']);
+
+
         });
         //***DietProgramController
         Route::group(['DietProgram'], function () {

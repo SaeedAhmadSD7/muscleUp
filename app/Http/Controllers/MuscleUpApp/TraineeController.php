@@ -145,7 +145,7 @@ class TraineeController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function traineesList($id){
+    public function traineesList(){
         $user=Auth::user();
         $trainees = $this->_trainee->fetchRecords();
 

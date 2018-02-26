@@ -16,6 +16,7 @@
 
             </div>
         </div>
+
         {{--<div class="dataTables_paginate paging_bootstrap" id="datatable-example_paginate">--}}
         {{--<ul class="pagination">--}}
         {{--<li class="previous disabled"><a href="#">Previous</a></li>--}}
