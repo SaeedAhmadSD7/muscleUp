@@ -97,18 +97,9 @@
                                                 <i class="glyphicon glyphicon-th-list"></i>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a class="create_modal_btn" href=""><i
-                                                                class="glyphicon glyphicon-eye-open"></i> Detail
-                                                    </a></li>
-                                                <li><a class="btnEdit" href=""><i
-                                                                class="glyphicon glyphicon-question-sign"></i>
-                                                        Health FAQs </a></li>
-                                                <li><a class="btnEdit" href=""><i
-                                                                class="glyphicon glyphicon-dashboard"></i>
-                                                        Health Statistics </a></li>
                                                 {{--<li><a class="btnDelete" href="javascript:detachTrainee({{$phase->id}},{{$singleDbs->id}},{{$singleDbs->wbs->first()->id}})"> <i--}}
                                                 <li><a class="btnDelete" href="javascript:detachExercise({{$singleDbs->id}})">
-                                                        Deactivate </a></li>
+                                                        <i class="glyphicon glyphicon-remove"></i>Delete </a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -194,5 +185,15 @@
             $('#PhaseList').html(data);
         };
         ajaxCallMethod(type,url,params,success);
+    });
+    $(document).ready(function () {
+        /* Datatables basic */
+//            $('#datatable-example').dataTable();
+
+        //*** trainee table detail action dropdown
+        $('.dropdown-toggle').click(function (e) {
+            e.preventDefault();
+            $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
+        })
     });
 </script>

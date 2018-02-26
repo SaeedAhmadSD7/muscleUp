@@ -92,7 +92,7 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-right">
                                         <li><a class="glyphicon glyphicon-edit"
-                                               href="{{route('edit-phase',$phase->id)}}" type="submit">Edit</a>
+                                               href="{{route('edit-phase',$phase->id)}}" type="submit">Add Wbs</a>
                                         </li>
                                         <li><a class="glyphicon glyphicon-trash"
                                                href="{{route('delete-phase',$phase->id)}}"

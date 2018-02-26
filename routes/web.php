@@ -115,7 +115,6 @@ Route::group(['Public', 'namespace' => 'MuscleUpApp'], function () {
             return $response;
         });
     });
-
     Route::get('zz', ['as' => 'ta', 'uses' => 'TraineeController@create_allocation']);
 
 
@@ -183,6 +182,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
             Route::get('gyms/list', ['uses' => 'GymController@index', 'as' => 'gymIndex']);
             Route::get('gym-dashboard', ['uses' => 'GymController@dashboard', 'as' => 'gymDashboard']);
             Route::get('instructor/allocation/{id}', ['as' => 'instructor-allocation', 'uses' => 'EmployeeController@allocation']);
+
         });
 
         //***EmployeeController
@@ -207,15 +207,12 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
 
         //***TraineeController
         Route::group(['Trainee'], function () {
-            Route::resource('trainee', "TraineeController");
             Route::get('trainee/create', ['as' => 'trainee-create', 'uses' => 'TraineeController@create']);
+            Route::resource('trainee', "TraineeController");
             Route::post('trainee/upload-profile-pic', ['as' => 'uploadProfilePic', 'uses' => 'TraineeController@uploadProfilePic']);
             Route::post('trainee/remove-uploaded-profile-pic', ['as' => 'removeUploadedProfilePic', 'uses' => 'TraineeController@removeUploadedProfilePic']);
             Route::post('trainee/store', ['uses' => 'TraineeController@store', 'as' => 'trainee-store']);
-            Route::get('trainee/list/{id?}', ['as' => 'trainee-list', 'uses' => 'TraineeController@traineesList']);
-            Route::get('/ajax/trainee/list', ['as' => 'ajax-trainee-list', 'uses' => 'TraineeController@ajaxtraineesList']);
-            Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
-            Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
+           Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
             Route::get('trainee/allocation', ['as' => 'trainee-allocation', 'uses' => 'TraineeController@create_allocation']);
             Route::post('trainee/allocation/store', ['as' => 'trainee_allocation_store', 'uses' => 'TraineeController@store_allocation']);
             Route::get('trainee/allocation/list', ['as' => 'show-trainee-allocation', 'uses' => 'TraineeController@show_allocation']);
@@ -237,7 +234,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
         Route::group(['Trainee'], function () {
 
             Route::get('assign-trainee/list{id?}', ['as' => 'Instructor-trainee-list', 'uses' => 'TraineeController@traineesList']);
-            Route::resource('trainee', "TraineeController");
+//            Route::resource('trainee', "TraineeController");
 //            Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
 //            Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
 //
@@ -262,8 +259,11 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
         });
 
         Route::group(['Trainee'], function () {
+            Route::get('trainee/list', ['as' => 'trainee-list', 'uses' => 'TraineeController@traineesList']);
+
             Route::get('/ajax/trainee/list', ['as' => 'ajax-trainee-list', 'uses' => 'TraineeController@ajaxtraineesList']);
             Route::get('trainee/list/{id?}', ['as' => 'trainee-list', 'uses' => 'TraineeController@traineesList']);
+            Route::get('trainee/list/delete/{id}', ['as' => 'trainee-list-delete', 'uses' => 'TraineeController@destroy']);
 
 
         });
@@ -358,5 +358,9 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
         });
     });
 
+    Route::get('trainee/create', ['as' => 'trainee-create', 'uses' => 'TraineeController@create']);
+    Route::get('trainee/list', ['as' => 'trainee-list', 'uses' => 'TraineeController@traineesList']);
+    Route::get('/ajax/trainee/list', ['as' => 'ajax-trainee-list', 'uses' => 'TraineeController@ajaxtraineesList']);
+    Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
 
 });

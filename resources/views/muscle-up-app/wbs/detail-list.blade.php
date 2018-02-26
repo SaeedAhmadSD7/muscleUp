@@ -121,18 +121,9 @@
                                                         <i class="glyphicon glyphicon-th-list"></i>
                                                     </a>
                                                     <ul class="dropdown-menu dropdown-menu-right">
-                                                        <li><a class="create_modal_btn" href=""><i
-                                                                        class="glyphicon glyphicon-eye-open"></i> Detail
-                                                            </a></li>
-                                                        <li><a class="btnEdit" href=""><i
-                                                                        class="glyphicon glyphicon-question-sign"></i>
-                                                                Health FAQs </a></li>
-                                                        <li><a class="btnEdit" href=""><i
-                                                                        class="glyphicon glyphicon-dashboard"></i>
-                                                                Health Statistics </a></li>
-                                                                                                    {{--<li><a class="btnDelete" href="javascript:detachTrainee({{$phase->id}},{{$singleDbs->id}},{{$singleDbs->wbs->first()->id}})"> <i--}}
+                                                        {{--<li><a class="btnDelete" href="javascript:detachTrainee({{$phase->id}},{{$singleDbs->id}},{{$singleDbs->wbs->first()->id}})"> <i--}}
                                                         <li><a class="btnDelete" href="javascript:detachExercise({{$singleDbs->id}})">
-                                                                Deactivate </a></li>
+                                                                <i class="glyphicon glyphicon-remove"></i>Delete </a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -217,26 +208,9 @@
 
 @section('script')
 
-    <script src="{{url('/assets/js/branch.js')}}" type="text/javascript"></script>
+    {{--<script src="{{url('/assets/js/branch.js')}}" type="text/javascript"></script>--}}
     <script src="{{url('/dist/js/AjaxCallMethod.js')}}" type="text/javascript"></script>
 
-    <script>
-
-
-        $(document).ready(function () {
-            /* Datatables basic */
-            //            $('#datatable-example').dataTable();
-
-            //*** trainee table detail action dropdown
-            $('.dropdown-toggle').click(function (e) {
-                e.preventDefault();
-                $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
-                e.stopImmediatePropagation();
-            })
-        });
-
-
-    </script>
     <script>
 
         function detachExercise(exercice_id){
@@ -289,27 +263,38 @@
             };
             ajaxCallMethod(type,url,params,success);
         });
+        $(document).ready(function () {
+            /* Datatables basic */
+//            $('#datatable-example').dataTable();
+
+            //*** trainee table detail action dropdown
+            $('.dropdown-toggle').click(function (e) {
+                e.preventDefault();
+                $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
+                e.stopImmediatePropagation();
+            })
+        });
     </script>
 
 
-    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}"
-            type="text/javascript"></script>
-    <script src="{{url('/assets/js/add-instructor.js')}}" type="text/javascript"></script>
-    <script>
-        window.previewImage = "{{url('/resources/app/images/default.jpg')}}";
-        window.uploadProfilePic = "{{route('uploadProfilePic')}}";
-        window.removeUploadedProfilePic = "{{route('removeUploadedProfilePic')}}";
-    </script>
-    <script src="{{url('/resources/app/pages/js/create-instructor.js')}}" type="text/javascript"></script>
-    <script src="{{url('/resources/app/pages/js/create-trainee.js')}}" type="text/javascript"></script>
-    <script src="{{url('/resources/app/pages/js/request-gym.js')}}" type="text/javascript"></script>
+    {{--<script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}"--}}
+            {{--type="text/javascript"></script>--}}
+    {{--<script src="{{url('/assets/js/add-instructor.js')}}" type="text/javascript"></script>--}}
+    {{--<script>--}}
+        {{--window.previewImage = "{{url('/resources/app/images/default.jpg')}}";--}}
+        {{--window.uploadProfilePic = "{{route('uploadProfilePic')}}";--}}
+        {{--window.removeUploadedProfilePic = "{{route('removeUploadedProfilePic')}}";--}}
+    {{--</script>--}}
+    {{--<script src="{{url('/resources/app/pages/js/create-instructor.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{url('/resources/app/pages/js/create-trainee.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{url('/resources/app/pages/js/request-gym.js')}}" type="text/javascript"></script>--}}
 
 @stop
 
 
-@section('script')
-    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/admin-assets/js/diet.js')}}"></script>
-@stop
+{{--@section('script')--}}
+    {{--<script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{url('/admin-assets/widgets/timepicker/timepicker.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{url('/admin-assets/js/diet.js')}}"></script>--}}
+{{--@stop--}}

@@ -16,7 +16,6 @@
 
             </div>
         </div>
-
         {{--<div class="dataTables_paginate paging_bootstrap" id="datatable-example_paginate">--}}
         {{--<ul class="pagination">--}}
         {{--<li class="previous disabled"><a href="#">Previous</a></li>--}}
@@ -38,6 +37,19 @@
     <script src="{{url('/dist/js/AjaxCallMethod.js')}}" type="text/javascript"></script>
 
     <script>
+
+        $(document).ready(function(){
+            var url,success,params;
+            var type='GET';
+            url='/ajax/trainee/list?page=' + 1;
+            params='';
+            success=function(data){
+                $('#pg').css("display", "none");
+                $('#ajx').html(data);
+            };
+            ajaxCallMethod(type,url,params,success);
+
+        });
 
         /*==================== PAGINATION =========================*/
         $(window).on('hashchange',function(){
@@ -65,18 +77,7 @@
             getProducts(page);
         });
 
-        $(document).ready(function(){
-            var url,success,params;
-            var type='GET';
-            url='/ajax/trainee/list?page=' + 1;
-            params='';
-            success=function(data){
-                $('#pg').css("display", "none");
-                $('#ajx').html(data);
-            };
-            ajaxCallMethod(type,url,params,success);
 
-        });
 
     </script>
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>

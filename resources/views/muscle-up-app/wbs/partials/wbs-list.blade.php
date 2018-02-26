@@ -21,7 +21,7 @@
                     </div>
                     <div class="modal-body">
                         {{--{{csrf_field()}}--}}
-                        <div id="errors">
+                        <div id="errors" class="">
 
                         </div>
                         <div class="form-group first-group">
@@ -78,8 +78,8 @@
                                         <i class="glyphicon glyphicon-th-list"></i>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a class="glyphicon glyphicon-edit"  href="{{route('wbs-edit',$wbs)}}" type="submit">Edit</a></li>
-                                        <li><a class="glyphicon glyphicon-trash" href="{{route('wbs-delete', $wbs)}}" type="submit">Delete</a></li>
+                                        <li><a class="glyphicon glyphicon-edit"  href="{{route('wbs-edit',$wbs)}}" type="submit">Add Exercise</a></li>
+                                        <li><a class="glyphicon glyphicon-trash" href="javascript:detachwbs({{$wbs->id}})">Delete</a></li>
                                     </ul>
                                 </li>
                             </ul>

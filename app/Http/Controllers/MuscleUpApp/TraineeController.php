@@ -159,7 +159,7 @@ class TraineeController extends Controller
 //        ifisset($id);
         $trainees = $this->_trainee->fetchRecords($params);
 //        dd($trainees);
-        return View::make('muscle-up-app.trainee.list',compact('trainees','user'))->render();
+        return View::make('muscle-up-app.trainee.partials.list',compact('trainees','user'))->render();
     }
 
 

@@ -13,7 +13,7 @@
 
 @section('page-heading')
     <h2>Instructor List</h2>
-    <p>List of Instructors added</p>
+    <p>List of Instructors added.Click on Instructor name to assign Trainee to following instructor.</p>
 @stop
 
 
