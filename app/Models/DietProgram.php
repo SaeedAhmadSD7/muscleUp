@@ -83,13 +83,17 @@ class DietProgram extends Model
             for($i=0;$i<count($meal_data);$i++)
             {
                 $query = DietFood::where('meal_id', $meal_data[$i]['meal_id'])->where('food_id', $meal_data[$i]['food_id'])->get();
-            }
-//            dd($query);
 
-            if (count($query) > 1)
-                    {
-                        throw new Exception("Meal already exist.Please enter different food against meal");
-                    }
+                if (count($query) > 1)
+                {
+                    throw new Exception("Meal already exist.Please enter different food against meal");
+                    break;
+                }
+
+            }
+
+
+
             DB::commit();
         }
         catch
