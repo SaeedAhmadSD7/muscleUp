@@ -187,7 +187,6 @@ $('.df').on('submit', function (e) {
     e.preventDefault();
             var total_data = [];
 
-
             $("#dtble .fieldR").each(function() {
                  total_data.push({
 
@@ -198,8 +197,6 @@ $('.df').on('submit', function (e) {
                      "taketime" : $(this).children('.take_time').find('.take_time1').val()
 
                  });
-
-
 
             });
 

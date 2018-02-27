@@ -33,7 +33,6 @@ class DietProgramController extends Controller
         $dietPrograms=DietProgram::showAll();
         return view('muscle-up-app.diet.list-diet-program')->with('dietPrograms',$dietPrograms);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -44,7 +43,6 @@ class DietProgramController extends Controller
         $meals=Meal::showAll();
         return view('muscle-up-app.diet.diet-program')->with(['foods'=>$foods,'meals'=>$meals]);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -55,10 +53,9 @@ class DietProgramController extends Controller
     public function store(DietCreateRequest $request)
     {
         $formData = $request->all();
-//        dd($formData['total_data']);
         $message = DietProgram::createorUpdateDiet($formData);
-        $foods = Food::showAll();
-        $meals = Meal::showAll();
+//        $foods = Food::showAll();
+//        $meals = Meal::showAll();
         $dietPrograms = DietProgram::showAll();
         if(isset($message))
         {
@@ -69,11 +66,6 @@ class DietProgramController extends Controller
             return view('muscle-up-app.diet.partials.list-partial',compact('dietPrograms'));
 
         }
-
-
-//        return view('muscle-up-app.diet.list-diet-program')->with('dietPrograms',$dietPrograms);
-
-
     }
     /**
      * @param $id
@@ -82,29 +74,16 @@ class DietProgramController extends Controller
     public function edit($id){
 
         $dietProgram = DietProgram::find($id);
-//        $meal=$dietProgram->meal;
-        $food=$dietProgram->food;
-//        dd($food);
-        $meal=$dietProgram->meal;
-//        foreach($meal as $m)
-////        {
-////            echo $m->title;
-////        }
-////        dd();
-
         $foods=Food::showAll();
         $meals=Meal::showAll();
          return view('muscle-up-app.diet.edit-diet-program')->with(['dietProgram'=>$dietProgram,'foods'=>$foods,'meals'=>$meals]);
     }
-
 
     /**
      * @param Request $request
      */
     public function update(DietCreateRequest $request){
         $formData = $request->all();
-//        dd($formData);
-        $id=$formData['id'];
         $message=DietProgram::createorUpdateDiet($formData);
         $dietPrograms=DietProgram::showAll();
         if(isset($message))
@@ -113,13 +92,9 @@ class DietProgramController extends Controller
         }
         else
         {
-            return view('muscle-up-app.diet.partials.partial',compact('dietPrograms'));
-
+            return view('muscle-up-app.diet.partials.list-partial',compact('dietPrograms'));
         }
-//        return view('muscle-up-app.diet.list-diet-program',compact('dietPrograms', 'message'));
-
     }
-
     public function foodList($slug, $dietProgram, $meal) {
         return (DietProgram::find($dietProgram)->food()->where('meal_id',$meal)->get());
     }
@@ -127,15 +102,8 @@ class DietProgramController extends Controller
     public function diet_detail($id)
     {
         $dietProgram=DietProgram::find($id);
-//        $food_id=$dietProgram->food;
-//        dd($food_id);
         $foods=Food::showAll();
         $meals=Meal::showAll();
-//        dd($meal);
-//        $meal=$dietProgram->foods;
-//        dd($food);
-//        $mymeal=$meal->pivot->calories;
-//        $meal=$dietProgram->pivot->meal;
         return view('muscle-up-app.diet.diet-program-detail')->with(['dietProgram'=>$dietProgram , 'foods'=>$foods  , 'meals'=>$meals]);
     }
     /**
@@ -144,7 +112,7 @@ class DietProgramController extends Controller
     public  function delete($id){
         DietProgram::deleteDietProgram($id);
         $dietPrograms=DietProgram::showAll();
-        return view('muscle-up-app.diet.list-diet-program')->with('dietPrograms',$dietPrograms);
+        return view('muscle-up-app.diet.partials.list-partial')->with('dietPrograms',$dietPrograms);
 
     }
 }
