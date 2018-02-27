@@ -145,7 +145,7 @@ class TraineeController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function traineesList($id){
+    public function traineesList(){
         $user=Auth::user();
         $trainees = $this->_trainee->fetchRecords();
 
@@ -159,7 +159,7 @@ class TraineeController extends Controller
 //        ifisset($id);
         $trainees = $this->_trainee->fetchRecords($params);
 //        dd($trainees);
-        return View::make('muscle-up-app.trainee.list',compact('trainees','user'))->render();
+        return View::make('muscle-up-app.trainee.partials.list',compact('trainees','user'))->render();
     }
 
 

@@ -42,11 +42,7 @@ class WbsController extends Controller
     public function store(WbsCreateRequest $request) {
         $formData = $request->all();
         $formData['gym_id']=Auth::user()->gym_id;
-        $wbs = new Wbs();
-        $wbs->title = $formData['title'];
-        $wbs->description = $formData['description'];
-        $wbs->gym_id = $formData['gym_id'];
-        $wbs->save();
+        $wbs=Wbs::storeWbs($formData);
         $wbs_list = Wbs::all();
 //        Wbs::createUpdateWbs($formData);
         return view('muscle-up-app.wbs.partials.wbs-list',compact('wbs_list'));

@@ -59,6 +59,16 @@ class Employee extends Model
     }
 
 
+    public static function ajaxView($limit){
+        if(isset($limit))
+            $instructors=Instructor::with('user')->paginate($limit);
+        else
+            $instructors=Instructor::with('user')->paginate(5);
+        return $instructors;
+
+    }
+
+
 
 
 }

@@ -38,6 +38,19 @@
 
     <script>
 
+        $(document).ready(function(){
+            var url,success,params;
+            var type='GET';
+            url='/ajax/trainee/list?page=' + 1;
+            params='';
+            success=function(data){
+                $('#pg').css("display", "none");
+                $('#ajx').html(data);
+            };
+            ajaxCallMethod(type,url,params,success);
+
+        });
+
         /*==================== PAGINATION =========================*/
         $(window).on('hashchange',function(){
             page = window.location.hash.replace('#','');
@@ -64,18 +77,7 @@
             getProducts(page);
         });
 
-        $(document).ready(function(){
-            var url,success,params;
-            var type='GET';
-            url='/ajax/trainee/list?page=' + 1;
-            params='';
-            success=function(data){
-                $('#pg').css("display", "none");
-                $('#ajx').html(data);
-            };
-            ajaxCallMethod(type,url,params,success);
 
-        });
 
     </script>
     <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>

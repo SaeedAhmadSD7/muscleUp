@@ -40,6 +40,14 @@ class Wbs extends Model
     }
 
 
+    public static function storeWbs($formData){
+        $wbs = new Wbs();
+        $wbs->title = $formData['title'];
+        $wbs->description = $formData['description'];
+        $wbs->gym_id = $formData['gym_id'];
+        $wbs->save();
+        return "Success";
+    }
     public static function showAll() {
 
         $Wbs = Wbs::all();

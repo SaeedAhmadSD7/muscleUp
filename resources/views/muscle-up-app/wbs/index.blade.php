@@ -38,7 +38,7 @@
                         </div>
                         <div class="modal-body">
                             {{--{{csrf_field()}}--}}
-                            <div id="errors" class="alert alert-danger">
+                            <div id="errors" class="">
 
                             </div>
                             <div class="form-group first-group">
@@ -95,7 +95,7 @@
                                                     <i class="glyphicon glyphicon-th-list"></i>
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-right">
-                                                    <li><a class="glyphicon glyphicon-edit"  href="{{route('wbs-edit',$wbs)}}" type="submit">Edit</a></li>
+                                                    <li><a class="glyphicon glyphicon-edit"  href="{{route('wbs-edit',$wbs)}}" type="submit">Add Exercise</a></li>
                                                     <li><a class="glyphicon glyphicon-trash" href="javascript:detachwbs({{$wbs->id}})">Delete</a></li>
                                                 </ul>
                                             </li>
@@ -120,7 +120,6 @@
 
     <script>
         function detachwbs(wbs_id){
-
 
             token = $('input[name=_token]').val();
             var type,url,params,success;

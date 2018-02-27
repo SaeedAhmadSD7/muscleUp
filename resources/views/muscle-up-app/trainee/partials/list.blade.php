@@ -71,7 +71,6 @@
         $('.dropdown-toggle').click(function (e) {
             e.preventDefault();
             $(this).siblings('.dropdown-menu.dropdown-menu-right').toggle('show').show();
-            e.stopImmediatePropagation();
         })
     });
 

@@ -25,7 +25,7 @@
         <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Phase</span></a>
         <div class="sidebar-submenu">
             <ul>
-                <li><a href="{{route('phase')}}" title="Inbox"><span>Add Phase</span></a></li>
+                {{--<li><a href="{{route('phase')}}" title="Inbox"><span>Add Phase</span></a></li>--}}
                 <li><a href="{{route('show-phase')}}" title="Inbox"><span>View Phase List</span></a></li>
             </ul>
         </div>
@@ -34,7 +34,7 @@
         <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>WBS</span></a>
         <div class="sidebar-submenu">
             <ul>
-                <li><a href="{{route('wbs-add')}}" title="Inbox"><span>Add WBS</span></a></li>
+                {{--<li><a href="{{route('wbs-add')}}" title="Inbox"><span>Add WBS</span></a></li>--}}
                 <li><a href="{{route('wbs-list')}}" title="Inbox"><span>View WBS List</span></a></li>
             </ul>
         </div>
