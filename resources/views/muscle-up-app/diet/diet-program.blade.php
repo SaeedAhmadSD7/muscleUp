@@ -187,7 +187,6 @@ $('.df').on('submit', function (e) {
     e.preventDefault();
             var total_data = [];
 
-
             $("#dtble .fieldR").each(function() {
                  total_data.push({
 
@@ -198,8 +197,6 @@ $('.df').on('submit', function (e) {
                      "taketime" : $(this).children('.take_time').find('.take_time1').val()
 
                  });
-
-
 
             });
 
@@ -213,13 +210,15 @@ $('.df').on('submit', function (e) {
             title:title ,
             description:description,
             total_data ,
-            _token:_token };
+            _token:_token
+                };
             success=function(data){
-                    $('#ajaxData').html(data);
+                window.location.href = '{{url("diet/list")}}';
         };
         ajaxCallMethod(type,url,params,success);
 
         });
     </script>
+
 
 @stop

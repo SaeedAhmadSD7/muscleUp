@@ -62,8 +62,9 @@ class DietProgram extends Model
             $data = array();
             $meal_data = array();
             $meal_id=array();
+//            $query=array();
             $i=0;
-
+//dd($formData);
             foreach ($formData['total_data'] as $data)
             {
                     $meal_data[$i]['food_id'] = $data['food_id'];
@@ -72,19 +73,27 @@ class DietProgram extends Model
                     $meal_data[$i]['calories'] = $data['calories'];
                     $meal_data[$i]['taketime'] = $data['taketime'];
                     $meal_id[$i]=$data['meal_id'];
-                $i++;
+                    $i++;
             }
-                $dietProgram->meal()->sync($meal_id);
-                $dietProgram->food()->sync($meal_data);
-
+//            dd($meal_id);
+                      $dietProgram->meal()->detach($meal_id);
+                      $dietProgram->food()->detach($meal_data);
+                      $dietProgram->meal()->sync($meal_id);
+                      $dietProgram->food()->sync($meal_data);
             for($i=0;$i<count($meal_data);$i++)
             {
                 $query = DietFood::where('meal_id', $meal_data[$i]['meal_id'])->where('food_id', $meal_data[$i]['food_id'])->get();
+
+                if (count($query) > 1)
+                {
+                    throw new Exception("Meal already exist.Please enter different food against meal");
+                    break;
+                }
+
             }
-            if (count($query) > 1)
-                    {
-                        throw new Exception("Please enter different food against meal");
-                    }
+
+
+
             DB::commit();
         }
         catch

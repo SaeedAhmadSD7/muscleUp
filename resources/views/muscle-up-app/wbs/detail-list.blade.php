@@ -215,7 +215,6 @@
 
         function detachExercise(exercice_id){
 
-
             wbs_id=$("#wbs_id").val();
             token = $('input[name=_token]').val();
             var type,url,params,success;

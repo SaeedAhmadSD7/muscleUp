@@ -46,3 +46,26 @@ function countTableRows() {
     });
 }
 
+// Delete event delegation
+
+$('#ajaxData').delegate('.delbtn' , 'click' , function(){
+
+    var diet_id=$('.delbtn').attr('data-content');
+    token = $('input[name=_token]').val();
+    var type, url, params, success;
+    type = 'GET';
+    url = "/diet/delete/" + diet_id;
+    params = {
+        '_token': token
+    };
+    success = function (data) {
+
+        $('#ajaxData').innerHTML = '';
+        $('#ajaxData').html(data);
+    };
+    if (confirm('Are you sure you want to remove this record ?')) {
+        ajaxCallMethod(type, url, params, success);
+    }
+
+
+});

@@ -34,19 +34,15 @@
                                         <i class="glyphicon glyphicon-th-list"></i>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-right">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                         <li><a class=""  href="{{route('diet_list_detail' , ['id'=>$dietProgram->id])}}" type="submit"><i class="glyphicon glyphicon-eye-open">Detail</i></a></li>
                                         <li><a class="glyphicon glyphicon-edit"  href="{{route('edit-diet',['id'=>$dietProgram->id])}}" type="submit">Edit</a></li>
-                                        <li><a class="glyphicon glyphicon-trash"  href="{{route('delete-diet',['id'=>$dietProgram->id])}}" onclick="deleteDiet(this.value)" type="submit">Delete</a></li>
+                                        <li><a class="glyphicon glyphicon-trash delbtn"  data-content="{{$dietProgram->id}}">Delete</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </td>
-                        {{--<td width="20px">--}}
-                        {{--<a class="btn btn-primary" href="{{route('edit-diet',['id'=>$dietProgram->id])}}" type="submit"><span class="glyphicon icon-elusive-pencil"></span></a>--}}
-                        {{--</td>--}}
-                        {{--<td width="20px">--}}
-                        {{--<a class="btn btn-danger" href="{{route('delete-diet',['id'=>$dietProgram->id])}}" type="submit"><span class="glyphicon icon-typicons-cancel"></span></a>--}}
-                        {{--</td>--}}
                     </tr>
                     <?php $count++; ?>
                 @endforeach
@@ -56,12 +52,16 @@
     </div>
 </div>
 </div>
+
+    <script src="{{url('/dist/js/AjaxCallMethod.js')}}" type="text/javascript"></script>
+
+
 <script>
 
 
     $(document).ready(function () {
         /* Datatables basic */
-        $('#datatable-example').dataTable();
+//        $('#datatable-example').dataTable();
 
         //*** trainee table detail action dropdown
         $('.dropdown-toggle').click(function (e) {
@@ -72,27 +72,4 @@
     });
 
 
-</script>
-<script>
-
-    function deleteDiet(diet_id){
-
-
-        token = $('input[name=_token]').val();
-        var type,url,params,success;
-        type='GET';
-        url='{{url("diet/delete/")}}'+diet_id;
-        params={
-            '_token': token
-        };
-        success= function (data) {
-
-//                $('#ajaxData').innerHTML = '';
-            $('#ajaxData').html(data);
-        };
-        if(confirm('Are you sure to remove this record ?')) {
-            ajaxCallMethod(type, url, params, success);
-        }
-
-    }
 </script>
