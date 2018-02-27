@@ -38,7 +38,7 @@
 
                                         <li><a class=""  href="{{route('diet_list_detail' , ['id'=>$dietProgram->id])}}" type="submit"><i class="glyphicon glyphicon-eye-open">Detail</i></a></li>
                                         <li><a class="glyphicon glyphicon-edit"  href="{{route('edit-diet',['id'=>$dietProgram->id])}}" type="submit">Edit</a></li>
-                                        <li><a class="glyphicon glyphicon-trash"  href="javascript:deleteDiet({{$dietProgram->id}})">Delete</a></li>
+                                        <li><a class="glyphicon glyphicon-trash delbtn"  data-content="{{$dietProgram->id}}">Delete</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -53,7 +53,7 @@
 </div>
 </div>
 
-    {{--<script src="{{url('/dist/js/AjaxCallMethod.js')}}" type="text/javascript"></script>--}}
+    <script src="{{url('/dist/js/AjaxCallMethod.js')}}" type="text/javascript"></script>
 
 
 <script>
@@ -72,26 +72,4 @@
     });
 
 
-</script>
-<script>
-
-    function deleteDiet(diet_id){
-
-        token = $('input[name=_token]').val();
-        var type,url,params,success;
-        type='GET';
-        url='diet/delete/'+diet_id;
-        params={
-            '_token': token
-        };
-        success= function (data) {
-
-                $('#ajaxData').innerHTML = '';
-            $('#ajaxData').html(data);
-        };
-        if(confirm('Are you sure to remove this record ?')) {
-            ajaxCallMethod(type, url, params, success);
-        }
-
-    }
 </script>

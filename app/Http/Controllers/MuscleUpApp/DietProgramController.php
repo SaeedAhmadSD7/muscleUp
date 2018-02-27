@@ -110,6 +110,7 @@ class DietProgramController extends Controller
      * @param $id
      */
     public  function delete($id){
+
         DietProgram::deleteDietProgram($id);
         $dietPrograms=DietProgram::showAll();
         return view('muscle-up-app.diet.partials.list-partial')->with('dietPrograms',$dietPrograms);

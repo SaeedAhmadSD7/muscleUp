@@ -210,13 +210,15 @@ $('.df').on('submit', function (e) {
             title:title ,
             description:description,
             total_data ,
-            _token:_token };
+            _token:_token
+                };
             success=function(data){
-                    $('#ajaxData').html(data);
+                window.location.href = '{{url("diet/list")}}';
         };
         ajaxCallMethod(type,url,params,success);
 
         });
     </script>
+
 
 @stop
