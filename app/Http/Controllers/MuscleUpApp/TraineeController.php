@@ -7,6 +7,7 @@ use App\Http\Requests\HealthStatsRequest;
 use App\Http\Requests\PicUploadRequest;
 use App\Models\DietProgram;
 use App\Models\HealthQuestion;
+use App\Models\Instructor;
 use App\Models\Program;
 use App\Models\User;
 use App\Models\Trainee;
@@ -147,22 +148,32 @@ class TraineeController extends Controller
      */
     public function traineesList(){
         $user=Auth::user();
+        if($user->type=="Admin"){
         $trainees = $this->_trainee->fetchRecords();
-
-//        dd($trainees);
-        return view('muscle-up-app.trainee.trainees-list',compact('trainees','user'));
+            return view('muscle-up-app.trainee.trainees-list',compact('trainees','user'));
+        }
+        else if($user->type=="Instructor"){
+            $instructorTrainees=Instructor::where('user_id',$user->id)->first();
+            $instructorTrainees->trainees;
+            return view('muscle-up-app.trainee.trainees-list',compact('instructorTrainees','user'));
+        }
+        return view('error');
     }
     public function ajaxtraineesList(){
 
         $params['limit'] = Input::get('pageinateData');
         $user=Auth::user();
-//        ifisset($id);
-        $trainees = $this->_trainee->fetchRecords($params);
-//        dd($trainees);
-        return View::make('muscle-up-app.trainee.partials.list',compact('trainees','user'))->render();
+        if($user->type=="Admin"){
+            $trainees = $this->_trainee->fetchRecords($params);
+            return view('muscle-up-app.trainee.partials.list',compact('trainees','user'));
+        }
+        else if($user->type=="Instructor"){
+            $instructorTrainees=Instructor::where('user_id',$user->id)->first();
+            $instructorTrainees->trainees;
+            return view('muscle-up-app.trainee.partials.list',compact('instructorTrainees','user'));
+        }
+        return view('error');
     }
-
-
 
 
     /**

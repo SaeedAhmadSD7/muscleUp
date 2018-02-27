@@ -1,3 +1,4 @@
+@if(isset($trainees))
 <table border="0" cellpadding="0" cellspacing="0"
        class="table table-striped table-bordered" id="datatable-example">
     <thead>
@@ -8,7 +9,7 @@
     </tr>
     </thead>
 
-    <tbody id="ajx">
+    <tbody>
 
     @if($trainees == null)
         <tr class="odd gradeA">
@@ -58,7 +59,64 @@
     </tbody>
 </table>
 {{$trainees->links()}}
+@endif
+{{--------------------------------------------------------}}
+@if(isset($instructorTrainees))
+    <table border="0" cellpadding="0" cellspacing="0"
+           class="table table-striped table-bordered" id="datatable-example">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>email</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
 
+        <tbody>
+
+        @if($instructorTrainees == null)
+            <tr class="odd gradeA">
+                <td colspan="6"> There is no record found.</td>
+            </tr>
+        @else
+
+            @if($instructorTrainees->count() == 0)
+                <tr class="odd gradeX">
+                    <td colspan="6"> There is no record found.</td>
+                </tr>
+            @else
+                @foreach($instructorTrainees->trainees as $i=>$t)
+                    <tr class="{{ (($i+1)%2) ? "even" : "odd" }} gradeX">
+                        <td><img width="20%"
+                                 src="{{get_profile_pic_url($t->user->profile_img)}}"/>{{$t->user->first_name}} {{$t->user->last_name}}
+                            <kbd class="mL5">{{$t->code}}</kbd></td>
+                        <td>{{$t->user->email}}</td>
+                        <td>
+                            <ul class="">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle "
+                                       data-toggle="dropdown">
+                                        <i class="glyphicon glyphicon-th-list"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a class="create_modal_btn"
+                                               href="{{route('trainee-list-detail',$t->id)}}"><i
+                                                        class="glyphicon glyphicon-eye-open"></i> Detail
+                                            </a></li>
+                                        <li><a class="btnEdit" href="{{$t->id}}"><i
+                                                        class="glyphicon glyphicon-question-sign"></i>
+                                                Health FAQs </a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
+        @endif
+        </tbody>
+    </table>
+@endif
 
 <script>
 

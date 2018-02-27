@@ -37,7 +37,6 @@
     <script src="{{url('/dist/js/AjaxCallMethod.js')}}" type="text/javascript"></script>
 
     <script>
-
         $(document).ready(function(){
             var url,success,params;
             var type='GET';
