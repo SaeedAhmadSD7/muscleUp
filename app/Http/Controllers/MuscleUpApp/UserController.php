@@ -65,6 +65,12 @@ class UserController extends Controller
         return redirect(route('user.index'));
     }
 
+    public function passwordResetView(){
+        $user = Auth::user();
+        return view('muscle-up-app.user.index', compact('user', 'countries'));
+
+    }
+
 //    public function destroy($id)
 //    {
 //        $user = User::find($id);

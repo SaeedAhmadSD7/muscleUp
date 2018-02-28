@@ -358,9 +358,16 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
         });
     });
 
-    Route::get('trainee/create', ['as' => 'trainee-create', 'uses' => 'TraineeController@create']);
-    Route::get('trainee/list', ['as' => 'trainee-list', 'uses' => 'TraineeController@traineesList']);
-    Route::get('/ajax/trainee/list', ['as' => 'ajax-trainee-list', 'uses' => 'TraineeController@ajaxtraineesList']);
-    Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
+    //***TraineeController Routes used by both user types: Admin & Instructor
+    Route::group(['TraineeList'], function () {
 
+        Route::get('trainee/create', ['as' => 'trainee-create', 'uses' => 'TraineeController@create']);
+        Route::get('trainee/list', ['as' => 'trainee-list', 'uses' => 'TraineeController@traineesList']);
+        Route::get('/ajax/trainee/list', ['as' => 'ajax-trainee-list', 'uses' => 'TraineeController@ajaxtraineesList']);
+        Route::get('trainee/detail/{id}', ['as' => 'trainee-list-detail', 'uses' => 'TraineeController@trainee_detail']);
+    });
+    //****UserController Password Reset
+    Route::group(['userPasswordChange'], function () {
+    Route::get('password/reset', ['as' => 'password-reset', 'uses' => 'UserController@passwordResetView']);
+    });
 });
