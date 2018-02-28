@@ -102,6 +102,8 @@ class Trainee extends Model
         return $qry->paginate($limit);
     }
 
+
+
     public function instructors()
     {
         return $this->belongsToMany(Instructor::class, 'instructor_trainee');
