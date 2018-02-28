@@ -154,7 +154,10 @@ class TraineeController extends Controller
         }
         else if($user->type=="Instructor"){
             $instructorTrainees=Instructor::where('user_id',$user->id)->first();
-            $instructorTrainees->trainees;
+            if($instructorTrainees!=null)
+            {
+                $instructorTrainees->trainees;
+            }
             return view('muscle-up-app.trainee.trainees-list',compact('instructorTrainees','user'));
         }
         return view('error');
@@ -169,7 +172,10 @@ class TraineeController extends Controller
         }
         else if($user->type=="Instructor"){
             $instructorTrainees=Instructor::where('user_id',$user->id)->first();
-            $instructorTrainees->trainees;
+            if($instructorTrainees!=null)
+            {
+                $instructorTrainees->trainees;
+            }
             return view('muscle-up-app.trainee.partials.list',compact('instructorTrainees','user'));
         }
         return view('error');

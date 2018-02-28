@@ -66,6 +66,16 @@
                 </thead>
                 <tbody>
                 <?php $count=1; ?>
+                @if($wbs_list == null)
+                    <tr class="odd gradeA">
+                        <td colspan="6"> There is no record found.</td>
+                    </tr>
+                @else
+                    @if($wbs_list->count() == 0)
+                        <tr class="odd gradeX">
+                            <td colspan="6"> There is no record found.</td>
+                        </tr>
+                    @else
                 @foreach($wbs_list as $wbs)
                     <tr>
                         <td width="20px" style="text-align:center;"><h5><?php echo $count; ?></h5></td>
@@ -87,6 +97,8 @@
                     </tr>
                     <?php $count++; ?>
                 @endforeach
+                 @endif
+                    @endif
                 </tbody>
             </table>
         </div>
