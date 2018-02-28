@@ -41,4 +41,9 @@ class Instructor extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public static function getCountOfTraineesOfInstuctor(Instructor $instructor)
+    {
+        $allocatedTrainees = $instructor->trainees()->count();
+        return $allocatedTrainees;
+    }
 }

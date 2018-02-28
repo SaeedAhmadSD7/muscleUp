@@ -4,6 +4,10 @@ namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Http\Requests\InstructorCreateRequest;
 use App\Http\Requests\InstructorUpdateRequest;
+use App\Models\DietAllocation;
+use App\Models\DietProgram;
+use App\Models\Program;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Country;
 use App\Models\Employee;
 use App\Models\Trainee;
@@ -23,7 +27,6 @@ class EmployeeController extends Controller
     private $_employee;
     private $_user;
     private $_instructor;
-    private $_trainee;
 
     /**
      * EmployeeController constructor.
@@ -31,12 +34,11 @@ class EmployeeController extends Controller
      * @param $user
      * @param $instructor
      */
-    public function __construct(Employee $employee, User $user, Instructor $instructor,Trainee $trainee)
+    public function __construct(Employee $employee, User $user, Instructor $instructor)
     {
         $this->_employee = $employee;
         $this->_user = $user;
         $this->_instructor = $instructor;
-        $this->_trianee = $trainee;
     }
 
 
@@ -50,9 +52,18 @@ class EmployeeController extends Controller
     public function index()
     {
 
-//        $user=Auth::user();
-        $trainees = $this->_trainee->fetchRecords();
-        return view('muscle-up-app.instructor.index')->with('trainees',$trainees);
+        $user=get_auth_user();
+//        dd($user);
+        $instructor=Instructor::where('user_id',$user->id)->first();
+        if($instructor!=null)
+        {
+            $instructorTrainees=Instructor::getCountOfTraineesOfInstuctor($instructor);
+        }
+//        dd($instructorTrainees);
+        $programs=Program::showAll();
+        $dietPrograms=DietProgram::showAll();
+        $dietAllocations=DietAllocation::showall();
+        return view('muscle-up-app.instructor.index' , compact('instructorTrainees','programs','dietPrograms','dietAllocations'));
 
     }
 

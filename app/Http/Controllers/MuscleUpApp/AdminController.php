@@ -18,6 +18,7 @@ class AdminController extends Controller
     public function index(){
 
         return view('muscle-up-app.admin.index');
+
     }
     public function inbox(){
         $Requests = GymRequest::all();

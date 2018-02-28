@@ -183,4 +183,9 @@ class Trainee extends Model
         $response = ['success'=>true, 'error'=> false, 'message'=> 'Tainee has been Updated successfully!'];
         return $response;
     }
+
+    public function getCountOfTraineesOfInstuctor()
+    {
+        $this->employee->count();
+    }
 }
