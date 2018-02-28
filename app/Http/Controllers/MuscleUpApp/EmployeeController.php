@@ -23,6 +23,7 @@ class EmployeeController extends Controller
     private $_employee;
     private $_user;
     private $_instructor;
+    private $_trainee;
 
     /**
      * EmployeeController constructor.
@@ -30,11 +31,12 @@ class EmployeeController extends Controller
      * @param $user
      * @param $instructor
      */
-    public function __construct(Employee $employee, User $user, Instructor $instructor)
+    public function __construct(Employee $employee, User $user, Instructor $instructor,Trainee $trainee)
     {
         $this->_employee = $employee;
         $this->_user = $user;
         $this->_instructor = $instructor;
+        $this->_trianee = $trainee;
     }
 
 
@@ -48,7 +50,9 @@ class EmployeeController extends Controller
     public function index()
     {
 
-        return view('muscle-up-app.instructor.index');
+//        $user=Auth::user();
+        $trainees = $this->_trainee->fetchRecords();
+        return view('muscle-up-app.instructor.index')->with('trainees',$trainees);
 
     }
 

@@ -61,7 +61,7 @@ class DietAllocationController extends Controller
     public function show()
     {
         $allocations = DietAllocation::with('trainee','trainee.user','diet_program', 'program')->whereNotNull('program_id')->get();
-
+//dd($allocations);
         Session::flash('Success','Congratulations Work out and diet have been added allocated. ');
 
         return view('muscle-up-app.allocation.show-allocation-list',compact('allocations'));

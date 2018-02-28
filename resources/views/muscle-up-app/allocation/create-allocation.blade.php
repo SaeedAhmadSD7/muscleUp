@@ -25,7 +25,7 @@
     <div class="panel">
         <div class="panel-body">
             <div class="example-box-wrapper">
-                <form class="form-group allocate-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('diet_allocation_store')}}">
+                <form class="form-group allocate-program form-horizontal bordered-row" id="form-field" method="post" action="{{route('diet-allocation-store')}}">
                     {{csrf_field()}}
                     <div class="tab-content">
                         <div class="form-wizard" id="form-wizard-3">

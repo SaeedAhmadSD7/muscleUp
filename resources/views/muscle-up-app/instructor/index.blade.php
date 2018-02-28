@@ -14,8 +14,8 @@
         <div class="row">
             <div class="col-md-3">
                 <a class="tile-box tile-box-shortcut btn-danger" href="#" title="Example tile shortcut"><span
-                            class="bs-badge badge-absolute">1</span>
-                    <div class="tile-header">Reach</div>
+                            class="bs-badge badge-absolute">{{$trainees}}</span>
+                    <div class="tile-header">Trainees</div>
                     <div class="tile-content-wrapper"><i class="glyph-icon icon-file-photo-o"></i></div>
                 </a>
             </div>
