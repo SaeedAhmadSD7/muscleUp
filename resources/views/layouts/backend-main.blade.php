@@ -75,7 +75,7 @@
                                             <div class="user-info">
                                                 <span>{{get_auth_user_email()}}</span>
                                                 <a href="#" class="btn btn-primary" title="Edit profile">Edit profile</a>
-                                                <a href="#"  class="btn btn-primary" title="Change Password">Change Password</a>
+                                                <a href="{{route('password-reset-show')}}"  class="btn btn-primary" title="Change Password">Change Password</a>
                                             </div>
                                         </div>
                                         <div class="divider"></div>

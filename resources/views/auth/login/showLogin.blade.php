@@ -32,6 +32,12 @@
                                 </div>
                                 @endif
                             @endif
+                                @if(session('message'))
+                                    <div class="alert alert-success col-md-8 col-sm-12 col-md-offset-2 mB10">
+                                        <strong>Success!</strong> {{session('message')}}
+
+                                    </div>
+                                @endif
                             {{csrf_field()}}
 
                             <div class="fields clearfix">

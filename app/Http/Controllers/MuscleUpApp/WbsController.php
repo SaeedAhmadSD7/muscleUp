@@ -41,7 +41,8 @@ class WbsController extends Controller
      */
     public function store(WbsCreateRequest $request) {
         $formData = $request->all();
-        $formData['gym_id']=Auth::user()->gym_id;
+        $user_data=get_auth_user();
+        $formData['gym_id']=$user_data->gym_id;
         $wbs=Wbs::storeWbs($formData);
         $wbs_list = Wbs::all();
 //        Wbs::createUpdateWbs($formData);
@@ -50,7 +51,8 @@ class WbsController extends Controller
 
     public function addDetails(WbsDetailsRequest $request) {
         $formData = $request->all();
-        $formData['gym_id']=Auth::user()->gym_id;
+        $user_data=get_auth_user();
+        $formData['gym_id']=$user_data->gym_id;
         Wbs::storeWbsDetails($formData);
         return $this->ajaxList($formData['wbs_id']);
 //        Wbs::createUpdateWbs($formData);
@@ -107,8 +109,9 @@ class WbsController extends Controller
      */
     public function update(WbsCreateRequest $request, Wbs $wbs)
     {
+        $user_data=get_auth_user();
         $formData = $request->all();
-        $formData['gym_id']=Auth::user()->gym_id;
+        $formData['gym_id']=$user_data->gym_id;
         Wbs::createUpdateWbs($formData);
         return redirect()->route('wbs-list');
 

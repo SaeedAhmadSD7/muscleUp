@@ -58,7 +58,7 @@ class TraineeController extends Controller
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
             Image::make($avatar)->resize(300, 300)->save(public_path('/uploads/trainees/profile_imgs/' . $filename));
 
-            $user = Auth::user();
+            $user =get_auth_user();
 
             $trainee = $user->trainee;
 //            dd($trainee);
@@ -147,7 +147,7 @@ class TraineeController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function traineesList(){
-        $user=Auth::user();
+        $user=get_auth_user();
         if($user->type=="Admin"){
         $trainees = $this->_trainee->fetchRecords();
             return view('muscle-up-app.trainee.trainees-list',compact('trainees','user'));
@@ -165,7 +165,7 @@ class TraineeController extends Controller
     public function ajaxtraineesList(){
 
         $params['limit'] = Input::get('pageinateData');
-        $user=Auth::user();
+        $user=get_auth_user();
         if($user->type=="Admin"){
             $trainees = $this->_trainee->fetchRecords($params);
             return view('muscle-up-app.trainee.partials.list',compact('trainees','user'));

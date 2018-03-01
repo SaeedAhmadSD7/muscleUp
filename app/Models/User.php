@@ -92,4 +92,11 @@ class User extends Authenticatable
         return $this->hasMany(Instructor::class);
     }
 
+    public static function passwordResetFunc($password){
+        $user = get_auth_user();
+        $user->password= bcrypt($password);
+        $user->save();
+        Auth::logout();
+    }
+
 }

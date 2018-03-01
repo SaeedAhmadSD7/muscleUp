@@ -31,7 +31,8 @@ class DietAllocationController extends Controller
      */
     public function create()
     {
-        $employee = Auth::user()->employee;
+        $user=get_auth_user();
+        $employee = $user->employee;
 //      dd($employee['user_id']);
         $trainees=Trainee::all();
         $trainees->load('user');

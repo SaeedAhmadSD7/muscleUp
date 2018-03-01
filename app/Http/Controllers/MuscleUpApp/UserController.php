@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\MuscleUpApp;
 
+use App\Http\Requests\PasswordResetRequest;
 use App\Mail\Welcome;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -33,7 +34,7 @@ class UserController extends Controller
     }
 
     public function index() {
-        $user = Auth::user();
+        $user = get_auth_user();
         $countries = Country::all();
         return view('muscle-up-app.user.index', compact('user', 'countries'));
     }
@@ -48,7 +49,7 @@ class UserController extends Controller
     public function update(Request $request){
 //        dd($request->fileData[]);
 
-        $user = Auth::user();
+        $user = get_auth_user();
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
@@ -66,9 +67,15 @@ class UserController extends Controller
     }
 
     public function passwordResetView(){
-        $user = Auth::user();
-        return view('muscle-up-app.user.index', compact('user', 'countries'));
+        $user = get_auth_user();
+        return view('muscle-up-app.user.passwordChange', compact('user', 'countries'));
 
+    }
+
+    public function passwordReset(PasswordResetRequest $request){
+        $password=$request['password'];
+        $reset=$this->_user->passwordResetFunc($password);
+        return redirect('/login')->with('message','Password Reset Successfully.Please Login Again with new Password.');;
     }
 
 //    public function destroy($id)

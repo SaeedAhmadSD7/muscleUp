@@ -368,6 +368,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
     });
     //****UserController Password Reset
     Route::group(['userPasswordChange'], function () {
-    Route::get('password/reset', ['as' => 'password-reset', 'uses' => 'UserController@passwordResetView']);
+    Route::get('password/reset', ['as' => 'password-reset-show', 'uses' => 'UserController@passwordResetView']);
+    Route::post('password/update', ['as' => 'password-reset', 'uses' => 'UserController@passwordReset']);
     });
 });

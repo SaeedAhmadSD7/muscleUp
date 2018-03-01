@@ -49,9 +49,10 @@ class PhaseController extends Controller
      */
     public function store(PhaseCreateRequest $request)
     {
+        $user_data=get_auth_user();
 ////        $user = $this->_user;
         $formData = $request->all();
-        $formData['gym_id']=Auth::user()->gym_id;
+        $formData['gym_id']=$user_data->gym_id;
 //        Phase::createUpdatePhase($formData);
         $phase = new Phase();
         $phase->title = $formData['title'];
@@ -126,8 +127,9 @@ class PhaseController extends Controller
      */
     public function update(PhaseCreateRequest $request)
     {
+        $user_data=get_auth_user();
         $formData = $request->all();
-        $formData['gym_id']=Auth::user()->gym_id;
+        $formData['gym_id']=$user_data->gym_id;
         Phase::createUpdatePhase($formData);
         return redirect()->route('show-phase');
     }

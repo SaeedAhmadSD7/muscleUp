@@ -74,13 +74,14 @@ class EmployeeController extends Controller
     public function store(InstructorCreateRequest $request)
     {
 
+        $user_data=get_auth_user();
         $user = $this->_user;
         $user->email = $request->email;
 //        $password = str_random(8);
         $password="asdf1234";
         $user->password = bcrypt($password);
-        $user->branch_id=\Auth::user()->branch_id;
-        $user->gym_id=\Auth::user()->gym_id;
+        $user->branch_id=$user_data->branch_id;
+        $user->gym_id=$user_data->gym_id;
         $user['type'] = 'instructor';
         $user->first_name=$request->first_name;
         $user->last_name=$request->last_name;
@@ -95,7 +96,7 @@ class EmployeeController extends Controller
 
         $employee = $this->_employee;
         $employee->user_id=$user->id;
-        $employee->branch_id=\Auth::user()->branch_id;
+        $employee->branch_id=$user_data->branch_id;
         $employee->joining_date=$request->joining_date;
         $employee->quit_date=$request->quit_date;
         $employee->previous_salary=$request->previous_salary;
@@ -107,7 +108,7 @@ class EmployeeController extends Controller
         $instructor = $this->_instructor;
         $instructor->user_id = $user->id;
         $instructor->employee_id = $employee->id;
-        $instructor->branch_id = \Auth::user()->branch_id;
+        $instructor->branch_id = $user_data->branch_id;
         $instructor->save();
 
 //        Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));

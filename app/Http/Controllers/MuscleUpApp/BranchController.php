@@ -51,7 +51,7 @@ class BranchController extends Controller
 //    }
     public function index() {
 
-        $user = Auth::user();
+        $user = get_auth_user();
         $gyms=Branch::where('gym_id',$user->gym_id)->get();
         $countries = Country::all();   //only for user modal data
 //        dd($gyms->gym->title);
@@ -70,7 +70,8 @@ class BranchController extends Controller
 
 //dd(Auth::user()->id);
         $branch = $this->_branch;
-        $branch->gym_id = Auth::user()->gym_id;
+        $user_data = get_auth_user();
+        $branch->gym_id = $user_data->gym_id;
 //        $branch->branch_no = $request->branch_no;
         $branch->title = $request->branch_name;
 //        $branch->email = $request->branch_email;
@@ -87,7 +88,7 @@ class BranchController extends Controller
         //        dd($request)->all;
         $user = $this->_user;
         $user->branch_id = $branch->id;
-        $user->gym_id = Auth::user()->gym_id;
+        $user->gym_id = $user_data->gym_id;
         $user->first_name=$request->admin_name;
         $user->email = $request->admin_email;
 //        $password = str_random(8);
@@ -153,7 +154,7 @@ class BranchController extends Controller
      */
     public function edit($id)
     {
-        $user = Auth::user();
+        $user = get_auth_user();
         if(($id==0)){
             $id =$user->branch_id;
         }
@@ -174,7 +175,7 @@ class BranchController extends Controller
     public function update(BranchUpdateRequest $request, $id)
     {
 //        dd($request->title);
-        $user = Auth::user();
+        $user = get_auth_user();
 //        $id =$user->branch_id;
         $branch = Branch::find($id);
 //        $branch->branch_no = $request->branch_no;
