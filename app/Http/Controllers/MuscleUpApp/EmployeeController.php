@@ -4,6 +4,10 @@ namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Http\Requests\InstructorCreateRequest;
 use App\Http\Requests\InstructorUpdateRequest;
+use App\Models\DietAllocation;
+use App\Models\DietProgram;
+use App\Models\Program;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Country;
 use App\Models\Employee;
 use App\Models\Trainee;
@@ -48,7 +52,17 @@ class EmployeeController extends Controller
     public function index()
     {
 
-        return view('muscle-up-app.instructor.index');
+        $user=get_auth_user();
+        $instructor=$this->_instructor->where('user_id',$user->id)->first();
+        dd($instructor);
+        if($instructor!=null)
+        {
+            $instructorTrainees=$this->_instructor->getCountOfTraineesOfInstuctor($instructor);
+        }
+        $programs=Program::showAll();
+        $dietPrograms=DietProgram::showAll();
+        $dietAllocations=DietAllocation::showall();
+        return view('muscle-up-app.instructor.index' , compact('instructorTrainees','programs','dietPrograms','dietAllocations'));
 
     }
 
@@ -125,18 +139,18 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show() {
-        $instructors=Instructor::with('user')->paginate(5);
+        $instructors=$this->_instructor->with('user')->paginate(5);
         return view('muscle-up-app.instructor.instructor-list')->with('instructors',$instructors);
     }
     public function ajaxshow() {
         $limit = Input::get('pageinateData');
-        $instructors=Employee::ajaxView($limit);
+        $instructors=$this->_employee->ajaxView($limit);
 
         return view('muscle-up-app.instructor.partials.list')->with('instructors',$instructors)->render();
     }
     public function profileshow($id)
     {
-        $instructor=Instructor::find($id);
+        $instructor=$this->_instructor->find($id);
 //        dd($instructors);
         return view('muscle-up-app.instructor.instructor-profile')->with('instructor',$instructor);
     }
@@ -149,7 +163,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $employee= Employee::find($id);
+        $employee= $this->_employee->find($id);
         $employee->user;
         $countries=Country::all();
 
@@ -166,7 +180,7 @@ class EmployeeController extends Controller
     public function update(InstructorUpdateRequest $request, $id)
     {
 
-        $user = User::find($id);
+        $user = $this->_user->find($id);
         $user->first_name=$request->input('first_name');
         $user->last_name=$request->input('last_name');
 //        $user->dial_code = '+45';
@@ -198,7 +212,7 @@ class EmployeeController extends Controller
         $trainee_id = $request->input('trainee_id');
         $instructor_id = $request->input('instructor_id');
         $allocation_type = $request->input('allocationType');
-        $instructor = Instructor::find($instructor_id);
+        $instructor = $this->_instructor->find($instructor_id);
 
 //        $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
 //        if (!$instructor->trainees()->exists($trainee_id)) {
@@ -227,7 +241,7 @@ class EmployeeController extends Controller
     {
         $trainee_id = $request->input('trainee_id');
         $instructor_id = $request->input('instructor_id');
-        $instructor = Instructor::find($instructor_id);
+        $instructor = $this->_instructor->find($instructor_id);
         $instructor->trainees()->detach($trainee_id);
 
         Session::flash('Success','Congratulations Employee have been added successfully. Credentials have been mailed to entered email.');
@@ -238,7 +252,7 @@ class EmployeeController extends Controller
     public function allocation($id)
     {
 
-        $instructor = Instructor::find($id);
+        $instructor = $this->_instructor->find($id);
 //        dd($instructor->user->first_name);
 
         $allocatedTrainees = $instructor->trainees()->get();
@@ -263,7 +277,7 @@ class EmployeeController extends Controller
     public function ajaxAllocation($id)
     {
 
-        $instructor = Instructor::find($id);
+        $instructor = $this->_instructor->find($id);
 //        dd($instructor->user->first_name);
 
         $allocatedTrainees = $instructor->trainees()->get();
@@ -294,8 +308,8 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $employee = Employee::find($id);
-        $instructor=Instructor::where("employee_id",$id)->first();
+        $employee = $this->_employee->find($id);
+        $instructor=$this->_instructor->where("employee_id",$id)->first();
         $employee->user()->delete();
         $employee->delete();
         $instructor->delete();

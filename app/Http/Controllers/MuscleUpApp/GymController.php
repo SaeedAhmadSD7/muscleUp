@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\MuscleUpApp;
 
 use App\Mail\Welcome;
+use App\Models\Instructor;
+use App\Models\Trainee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -40,12 +42,22 @@ class GymController extends Controller
 
 
     public function dashboard() {
-        return view('muscle-up-app.gym.dashboard');
+        $user=get_auth_user();
+        $gym=$this->_gym->where('id',$user->gym_id)->first();
+        $branch=$this->_branch->where('gym_id',$user->gym_id)->first();
+        $gymBranches=$this->_gym->fetchGymsBranches($gym);
+        $gymInstructors=$this->_branch->fetchGymInstructors($branch);
+        $gymTrainees=$this->_branch->fetchGymTrainees($branch);
+//        dd($gymBranches);
+        return view('muscle-up-app.gym.dashboard' , compact('gymTrainees','gymInstructors','gymBranches'));
+
+
     }
 
     public function index() {
         $gyms = $this->_gym->fetchGymsRecord();
         return view('muscle-up-app.gym.index', compact('gyms'));
+
     }
 
     public function create(){

@@ -13,26 +13,38 @@
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-3">
-                <a class="tile-box tile-box-shortcut btn-danger" href="#" title="Example tile shortcut"><span
-                            class="bs-badge badge-absolute">1</span>
-                    <div class="tile-header">Reach</div>
-                    <div class="tile-content-wrapper"><i class="glyph-icon icon-file-photo-o"></i></div>
+                <a class="tile-box tile-box-shortcut btn-danger" href="{{route('trainee-list')}}" title="Example tile shortcut">
+                    <span class="bs-badge badge-absolute">
+                        @if(isset($gymTrainees))
+                            {{$gymTrainees}}
+                        @endif
+                    </span>
+                    <div class="tile-header">Trainees</div>
+                    <div class="tile-content-wrapper"><i class="glyph-icon icon-user"></i></div>
                 </a>
             </div>
 
             <div class="col-md-3">
-                <a class="tile-box tile-box-shortcut btn-success" href="#"
-                   title="Example tile shortcut">
-                    <div class="tile-header">Comments</div>
-                    <div class="tile-content-wrapper"><i class="glyph-icon icon-desktop"></i></div>
+                <a class="tile-box tile-box-shortcut btn-success" href="{{route('instructor-show')}}" title="Example tile shortcut">
+                    <span class="bs-badge badge-absolute">
+                        @if(isset($gymInstructors))
+                            {{$gymInstructors}}
+                        @endif
+                    </span>
+                    <div class="tile-header">Instructor</div>
+                    <div class="tile-content-wrapper"><i class="glyph-icon icon-user"></i></div>
                 </a>
             </div>
 
             <div class="col-md-3">
-                <a class="tile-box tile-box-shortcut btn-info" href="#"
-                   title="Example tile shortcut"><span class="bs-badge badge-absolute">2</span>
-                    <div class="tile-header">Reviews</div>
-                    <div class="tile-content-wrapper"><i class="glyph-icon icon-download"></i></div>
+                <a class="tile-box tile-box-shortcut btn-info" href="{{route('branch.index')}}" title="Example tile shortcut">
+                        <span class="bs-badge badge-absolute">
+                        @if(isset($gymBranches))
+                                {{$gymBranches}}
+                            @endif
+                    </span>
+                    <div class="tile-header">Branches</div>
+                    <div class="tile-content-wrapper"><i class="glyph-icon icon-bank"></i></div>
                 </a>
             </div>
 

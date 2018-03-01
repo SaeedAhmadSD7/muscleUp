@@ -57,6 +57,11 @@ class Trainee extends Model
         return $this-> belongsTo(Gym::class);
     }
 
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
     public function employee(){
         return $this->belongsTo(Employee::class);
     }
@@ -183,4 +188,6 @@ class Trainee extends Model
         $response = ['success'=>true, 'error'=> false, 'message'=> 'Tainee has been Updated successfully!'];
         return $response;
     }
+
+
 }

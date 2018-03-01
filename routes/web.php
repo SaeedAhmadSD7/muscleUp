@@ -317,7 +317,7 @@ Route::group(['Private', 'namespace' => 'MuscleUpApp', 'middleware' => 'auth'], 
         //***DietAllocationController
         Route::group(['DietAllocation'], function () {
             Route::get('diet-allocation/', ['as' => 'diet-allocation', 'uses' => 'DietAllocationController@create']);
-            Route::post('diet-allocation/store', ['as' => 'diet_allocation_store', 'uses' => 'DietAllocationController@store']);
+            Route::post('diet-allocation/store', ['as' => 'diet-allocation-store', 'uses' => 'DietAllocationController@store']);
             Route::get('/diet-allocation/list/', ['as' => 'show-diet-allocation', 'uses' => 'DietAllocationController@show']);
             Route::get('/diet-allocation/edit/{id}', ['as' => 'edit-diet-allocation', 'uses' => 'DietAllocationController@edit']);
             Route::post('/diet-allocation/update/{id}', ['as' => 'update-diet-allocation', 'uses' => 'DietAllocationController@update']);

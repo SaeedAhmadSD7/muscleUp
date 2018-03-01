@@ -13,34 +13,48 @@
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-3">
-                <a class="tile-box tile-box-shortcut btn-danger" href="#" title="Example tile shortcut"><span
-                            class="bs-badge badge-absolute">1</span>
-                    <div class="tile-header">Reach</div>
-                    <div class="tile-content-wrapper"><i class="glyph-icon icon-file-photo-o"></i></div>
+                <a class="tile-box tile-box-shortcut btn-danger" href="{{route('Instructor-trainee-list')}}" title="Example tile shortcut">
+                            @if(isset($instructorTrainees))
+                        <span class="bs-badge badge-absolute">{{$instructorTrainees}}</span>
+                    @endif
+                    <div class="tile-header">
+                            <span>Trainees</span>
+                    </div>
+                    <div class="tile-content-wrapper"><i class="glyph-icon icon-user"></i></div>
                 </a>
             </div>
 
             <div class="col-md-3">
-                <a class="tile-box tile-box-shortcut btn-success" href="#"
-                   title="Example tile shortcut">
-                    <div class="tile-header">Comments</div>
-                    <div class="tile-content-wrapper"><i class="glyph-icon icon-desktop"></i></div>
+                <a class="tile-box tile-box-shortcut btn-success" href="{{route('show-program')}}" title="Example tile shortcut">
+                    @if(isset($programs))
+                        <span class="bs-badge badge-absolute">{{count($programs)}}</span>
+                    @endif
+                    <div class="tile-header">Programs</div>
+                    <div class="tile-content-wrapper"><i class="glyph-icon icon-gift"></i></div>
                 </a>
             </div>
 
             <div class="col-md-3">
-                <a class="tile-box tile-box-shortcut btn-info" href="#"
-                   title="Example tile shortcut"><span class="bs-badge badge-absolute">2</span>
-                    <div class="tile-header">Reviews</div>
-                    <div class="tile-content-wrapper"><i class="glyph-icon icon-download"></i></div>
+                <a class="tile-box tile-box-shortcut btn-info" href="{{route('diet-list')}}" title="Example tile shortcut">
+                    <span class="bs-badge badge-absolute">
+                        @if(isset($programs))
+                        {{count($dietPrograms)}}
+                        @endif
+                    </span>
+                    <div class="tile-header">Diet Programs</div>
+                    <div class="tile-content-wrapper"><i class="glyph-icon icon-leaf"></i></div>
                 </a>
             </div>
 
             <div class="col-md-3">
-                <a class="tile-box tile-box-shortcut btn-warning" href="#"
-                   title="Example tile shortcut">
-                    <div class="tile-header">Visitors</div>
-                    <div class="tile-content-wrapper"><i class="glyph-icon icon-code-fork"></i></div>
+                <a class="tile-box tile-box-shortcut btn-warning" href="{{route('show-diet-allocation')}}" title="Example tile shortcut">
+                    <span class="bs-badge badge-absolute">
+                        @if(isset($programs))
+                        {{count($dietAllocations)}}
+                        @endif
+                    </span>
+                    <div class="tile-header">Diet Allocations</div>
+                    <div class="tile-content-wrapper"><i class="glyph-icon icon-random"></i></div>
                 </a>
             </div>
         </div>
