@@ -37,13 +37,17 @@ class Instructor extends Model
         return $this->belongsTo(Employee::class);
     }
 
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public static function getCountOfTraineesOfInstuctor(Instructor $instructor)
+
+    public function getCountOfTraineesOfInstuctor(Instructor $instructor)
     {
-        $allocatedTrainees = $instructor->trainees()->count();
-        return $allocatedTrainees;
+        return $instructor->trainees()->count();
     }
 }

@@ -48,4 +48,21 @@ class Branch extends Model
     function employee(){
         return $this->hasMany(Employee::class);
     }
+
+    function instructor(){
+        return $this->hasMany(Instructor::class);
+    }
+
+    function trainee(){
+        return $this->hasMany(Trainee::class);
+    }
+
+    public function fetchGymInstructors($branch)
+    {
+        return $branch->instructor()->count();
+    }
+    public function fetchGymTrainees($branch)
+    {
+        return $branch->trainee()->count();
+    }
 }

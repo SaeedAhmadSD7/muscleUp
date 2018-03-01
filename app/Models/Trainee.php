@@ -57,6 +57,11 @@ class Trainee extends Model
         return $this-> belongsTo(Gym::class);
     }
 
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
     public function employee(){
         return $this->belongsTo(Employee::class);
     }
@@ -184,8 +189,5 @@ class Trainee extends Model
         return $response;
     }
 
-    public function getCountOfTraineesOfInstuctor()
-    {
-        $this->employee->count();
-    }
+
 }

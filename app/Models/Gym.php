@@ -76,4 +76,13 @@ class Gym extends Model {
         $gym = $this->paginate(AppConstant::RECORD_LIMIT);
         return $gym;
     }
+
+    public function fetchGymsBranches($gym) {
+
+        return  $gym->branches()->count();
+    }
+
+
+
+
 }

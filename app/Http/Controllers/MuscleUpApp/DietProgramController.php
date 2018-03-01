@@ -30,7 +30,7 @@ class DietProgramController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $dietPrograms=DietProgram::showAll();
+        $dietPrograms=$this->_dietProgram->showAll();
         return view('muscle-up-app.diet.list-diet-program')->with('dietPrograms',$dietPrograms);
     }
     /**
@@ -53,10 +53,10 @@ class DietProgramController extends Controller
     public function store(DietCreateRequest $request)
     {
         $formData = $request->all();
-        $message = DietProgram::createorUpdateDiet($formData);
+        $message = $this->_dietProgram->createorUpdateDiet($formData);
 //        $foods = Food::showAll();
 //        $meals = Meal::showAll();
-        $dietPrograms = DietProgram::showAll();
+        $dietPrograms = $this->_dietProgram->showAll();
         if(isset($message))
         {
             return response()->json([$message],500);
@@ -73,7 +73,7 @@ class DietProgramController extends Controller
      */
     public function edit($id){
 
-        $dietProgram = DietProgram::find($id);
+        $dietProgram = $this->_dietProgram->find($id);
         $foods=Food::showAll();
         $meals=Meal::showAll();
          return view('muscle-up-app.diet.edit-diet-program')->with(['dietProgram'=>$dietProgram,'foods'=>$foods,'meals'=>$meals]);
@@ -84,8 +84,8 @@ class DietProgramController extends Controller
      */
     public function update(DietCreateRequest $request){
         $formData = $request->all();
-        $message=DietProgram::createorUpdateDiet($formData);
-        $dietPrograms=DietProgram::showAll();
+        $message=$this->_dietProgram->createorUpdateDiet($formData);
+        $dietPrograms=$this->_dietProgram->showAll();
         if(isset($message))
         {
             return response()->json([$message],500);
@@ -96,12 +96,12 @@ class DietProgramController extends Controller
         }
     }
     public function foodList($slug, $dietProgram, $meal) {
-        return (DietProgram::find($dietProgram)->food()->where('meal_id',$meal)->get());
+        return ($this->_dietProgram->find($dietProgram)->food()->where('meal_id',$meal)->get());
     }
 
     public function diet_detail($id)
     {
-        $dietProgram=DietProgram::find($id);
+        $dietProgram=$this->_dietProgram->find($id);
         $foods=Food::showAll();
         $meals=Meal::showAll();
         return view('muscle-up-app.diet.diet-program-detail')->with(['dietProgram'=>$dietProgram , 'foods'=>$foods  , 'meals'=>$meals]);
@@ -111,8 +111,8 @@ class DietProgramController extends Controller
      */
     public  function delete($id){
 
-        DietProgram::deleteDietProgram($id);
-        $dietPrograms=DietProgram::showAll();
+        $this->_dietProgram->deleteDietProgram($id);
+        $dietPrograms=$this->_dietProgram->showAll();
         return view('muscle-up-app.diet.partials.list-partial')->with('dietPrograms',$dietPrograms);
 
     }

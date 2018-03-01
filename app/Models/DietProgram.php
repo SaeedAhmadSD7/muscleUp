@@ -92,8 +92,6 @@ class DietProgram extends Model
 
             }
 
-
-
             DB::commit();
         }
         catch

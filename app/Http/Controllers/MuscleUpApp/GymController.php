@@ -42,14 +42,14 @@ class GymController extends Controller
 
 
     public function dashboard() {
-        $gym_id=Auth::user()->gym_id;
-        $branch_id=Auth::user()->branch_id;
-        $trainees=Trainee::where('branch_id',$branch_id)->get();
-        $instructors=Instructor::where('branch_id',$branch_id)->get();
-        $branches=Branch::where('gym_id',$gym_id)->get();
-//        dd($trainees);
-
-        return view('muscle-up-app.gym.dashboard' , compact('trainees','instructors','branches'));
+        $user=get_auth_user();
+        $gym=$this->_gym->where('id',$user->gym_id)->first();
+        $branch=$this->_branch->where('gym_id',$user->gym_id)->first();
+        $gymBranches=$this->_gym->fetchGymsBranches($gym);
+        $gymInstructors=$this->_branch->fetchGymInstructors($branch);
+        $gymTrainees=$this->_branch->fetchGymTrainees($branch);
+//        dd($gymBranches);
+        return view('muscle-up-app.gym.dashboard' , compact('gymTrainees','gymInstructors','gymBranches'));
 
 
     }

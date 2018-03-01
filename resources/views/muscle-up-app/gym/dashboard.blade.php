@@ -15,8 +15,8 @@
             <div class="col-md-3">
                 <a class="tile-box tile-box-shortcut btn-danger" href="{{route('trainee-list')}}" title="Example tile shortcut">
                     <span class="bs-badge badge-absolute">
-                        @if(isset($trainees))
-                            {{count($trainees)}}
+                        @if(isset($gymTrainees))
+                            {{$gymTrainees}}
                         @endif
                     </span>
                     <div class="tile-header">Trainees</div>
@@ -27,20 +27,20 @@
             <div class="col-md-3">
                 <a class="tile-box tile-box-shortcut btn-success" href="{{route('instructor-show')}}" title="Example tile shortcut">
                     <span class="bs-badge badge-absolute">
-                        @if(isset($instructors))
-                            {{count($instructors)}}
+                        @if(isset($gymInstructors))
+                            {{$gymInstructors}}
                         @endif
                     </span>
                     <div class="tile-header">Instructor</div>
-                    <div class="tile-content-wrapper"><i class="glyph-icon icon-gym"></i></div>
+                    <div class="tile-content-wrapper"><i class="glyph-icon icon-user"></i></div>
                 </a>
             </div>
 
             <div class="col-md-3">
                 <a class="tile-box tile-box-shortcut btn-info" href="{{route('branch.index')}}" title="Example tile shortcut">
                         <span class="bs-badge badge-absolute">
-                        @if(isset($branches))
-                                {{count($branches)}}
+                        @if(isset($gymBranches))
+                                {{$gymBranches}}
                             @endif
                     </span>
                     <div class="tile-header">Branches</div>

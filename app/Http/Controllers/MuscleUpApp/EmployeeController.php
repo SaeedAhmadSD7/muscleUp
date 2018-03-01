@@ -53,13 +53,12 @@ class EmployeeController extends Controller
     {
 
         $user=get_auth_user();
-//        dd($user);
-        $instructor=Instructor::where('user_id',$user->id)->first();
+        $instructor=$this->_instructor->where('user_id',$user->id)->first();
+        dd($instructor);
         if($instructor!=null)
         {
-            $instructorTrainees=Instructor::getCountOfTraineesOfInstuctor($instructor);
+            $instructorTrainees=$this->_instructor->getCountOfTraineesOfInstuctor($instructor);
         }
-//        dd($instructorTrainees);
         $programs=Program::showAll();
         $dietPrograms=DietProgram::showAll();
         $dietAllocations=DietAllocation::showall();
@@ -94,8 +93,8 @@ class EmployeeController extends Controller
 //        $password = str_random(8);
         $password="asdf1234";
         $user->password = bcrypt($password);
-        $user->branch_id=\Auth::user()->branch_id;
-        $user->gym_id=\Auth::user()->gym_id;
+        $user->branch_id=get_auth_user()->branch_id;
+        $user->gym_id=get_auth_user()->gym_id;
         $user['type'] = 'instructor';
         $user->first_name=$request->first_name;
         $user->last_name=$request->last_name;
@@ -110,7 +109,7 @@ class EmployeeController extends Controller
 
         $employee = $this->_employee;
         $employee->user_id=$user->id;
-        $employee->branch_id=\Auth::user()->branch_id;
+        $employee->branch_id=get_auth_user()->branch_id;
         $employee->joining_date=$request->joining_date;
         $employee->quit_date=$request->quit_date;
         $employee->previous_salary=$request->previous_salary;
@@ -122,7 +121,7 @@ class EmployeeController extends Controller
         $instructor = $this->_instructor;
         $instructor->user_id = $user->id;
         $instructor->employee_id = $employee->id;
-        $instructor->branch_id = \Auth::user()->branch_id;
+        $instructor->branch_id = get_auth_user()->branch_id;
         $instructor->save();
 
 //        Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));
@@ -139,18 +138,18 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show() {
-        $instructors=Instructor::with('user')->paginate(5);
+        $instructors=$this->_instructor->with('user')->paginate(5);
         return view('muscle-up-app.instructor.instructor-list')->with('instructors',$instructors);
     }
     public function ajaxshow() {
         $limit = Input::get('pageinateData');
-        $instructors=Employee::ajaxView($limit);
+        $instructors=$this->_employee->ajaxView($limit);
 
         return view('muscle-up-app.instructor.partials.list')->with('instructors',$instructors)->render();
     }
     public function profileshow($id)
     {
-        $instructor=Instructor::find($id);
+        $instructor=$this->_instructor->find($id);
 //        dd($instructors);
         return view('muscle-up-app.instructor.instructor-profile')->with('instructor',$instructor);
     }
@@ -163,7 +162,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $employee= Employee::find($id);
+        $employee= $this->_employee->find($id);
         $employee->user;
         $countries=Country::all();
 
@@ -180,7 +179,7 @@ class EmployeeController extends Controller
     public function update(InstructorUpdateRequest $request, $id)
     {
 
-        $user = User::find($id);
+        $user = $this->_user->find($id);
         $user->first_name=$request->input('first_name');
         $user->last_name=$request->input('last_name');
 //        $user->dial_code = '+45';
@@ -212,7 +211,7 @@ class EmployeeController extends Controller
         $trainee_id = $request->input('trainee_id');
         $instructor_id = $request->input('instructor_id');
         $allocation_type = $request->input('allocationType');
-        $instructor = Instructor::find($instructor_id);
+        $instructor = $this->_instructor->find($instructor_id);
 
 //        $instructor->trainees()->attach($trainee_id, ['type' => $allocation_type]);
 //        if (!$instructor->trainees()->exists($trainee_id)) {
@@ -241,7 +240,7 @@ class EmployeeController extends Controller
     {
         $trainee_id = $request->input('trainee_id');
         $instructor_id = $request->input('instructor_id');
-        $instructor = Instructor::find($instructor_id);
+        $instructor = $this->_instructor->find($instructor_id);
         $instructor->trainees()->detach($trainee_id);
 
         Session::flash('Success','Congratulations Employee have been added successfully. Credentials have been mailed to entered email.');
@@ -252,7 +251,7 @@ class EmployeeController extends Controller
     public function allocation($id)
     {
 
-        $instructor = Instructor::find($id);
+        $instructor = $this->_instructor->find($id);
 //        dd($instructor->user->first_name);
 
         $allocatedTrainees = $instructor->trainees()->get();
@@ -277,7 +276,7 @@ class EmployeeController extends Controller
     public function ajaxAllocation($id)
     {
 
-        $instructor = Instructor::find($id);
+        $instructor = $this->_instructor->find($id);
 //        dd($instructor->user->first_name);
 
         $allocatedTrainees = $instructor->trainees()->get();
@@ -308,8 +307,8 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $employee = Employee::find($id);
-        $instructor=Instructor::where("employee_id",$id)->first();
+        $employee = $this->_employee->find($id);
+        $instructor=$this->_instructor->where("employee_id",$id)->first();
         $employee->user()->delete();
         $employee->delete();
         $instructor->delete();
