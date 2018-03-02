@@ -75,6 +75,7 @@ class UserController extends Controller
     public function passwordReset(PasswordResetRequest $request){
         $password=$request['password'];
         $reset=$this->_user->passwordResetFunc($password);
+        Auth::logout();
         return redirect('/login')->with('message','Password Reset Successfully.Please Login Again with new Password.');;
     }
 

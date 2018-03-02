@@ -96,7 +96,6 @@ class User extends Authenticatable
         $user = get_auth_user();
         $user->password= bcrypt($password);
         $user->save();
-        Auth::logout();
     }
 
 }
