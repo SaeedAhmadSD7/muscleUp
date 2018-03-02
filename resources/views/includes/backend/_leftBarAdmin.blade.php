@@ -1,3 +1,6 @@
+<li class="menu-element">
+    <a href="{{route('gymDashboard')}}" title="Admin Dashboard"><i class="glyph-icon icon-linecons-tv"></i><span>Admin Dashboard</span></a>
+</li>
 <li class="header"><span>Members Area</span></li>
 <li class="menu-element">
     <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Trainees</span></a>

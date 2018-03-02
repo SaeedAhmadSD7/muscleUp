@@ -1,3 +1,6 @@
+<li class="menu-element">
+    <a href="{{route('traineeDashboard')}}" title="Trainee Dashboard"><i class="glyph-icon icon-linecons-tv"></i><span>Trainee Dashboard</span></a>
+</li>
 {!! $id = get_trainee_id() !!}
 
 <li class="header"><span>Members Area</span></li>

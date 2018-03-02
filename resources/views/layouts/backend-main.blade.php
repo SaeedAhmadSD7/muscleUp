@@ -31,12 +31,10 @@
             <div class="scroll-sidebar">
                 <ul id="sidebar-menu">
                     <li class="header"><span>Overview</span></li>
-                    <li class="menu-element">
-                        <a href="@yield('dashboard_link')"><i class="glyph-icon icon-linecons-tv"></i><span> @yield('user_type') Dashboard</span></a>
-                    </li>
+
                     @section('sidebar_content')
                         @if(get_auth_user_type() == \App\Utils\Globals\UserType::SUPER_ADMIN)
-                            @include('includes.backend._leftBarAdmin')
+                            @include('includes.backend._leftBarSuperAdmin')
                         @elseif(get_auth_user_type() == \App\Utils\Globals\UserType::ADMIN)
                             @include('includes.backend._leftBarAdmin')
                         @elseif(get_auth_user_type() == \App\Utils\Globals\UserType::TRAINEE)

@@ -1,3 +1,6 @@
+<li class="menu-element">
+    <a href="{{route('InstructorDashboard')}}" title="Instructor Dashboard"><i class="glyph-icon icon-linecons-tv"></i><span>Instructor Dashboard</span></a>
+</li>
 <li class="header"><span>Members Area</span></li>
 <li class="menu-element">
     <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Program</span></a>

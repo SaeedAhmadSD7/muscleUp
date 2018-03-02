@@ -1,3 +1,6 @@
+<li class="menu-element">
+    <a href="{{route('employeeDashboard')}}" title="Employee Dashboard"><i class="glyph-icon icon-linecons-tv"></i><span>Employee Dashboard</span></a>
+</li>
 <li class="header"><span>Members Area</span></li>
 <li class="menu-element">
     <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Trainees</span></a>

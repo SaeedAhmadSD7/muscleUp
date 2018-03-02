@@ -1,3 +1,6 @@
+<li class="menu-element">
+    <a href="{{route('adminDashboard')}}" title="Super Admin Dashboard"><i class="glyph-icon icon-linecons-tv"></i><span>Admin Dashboard</span></a>
+</li>
 <li class="header"><span>Request Box</span></li>
 <li class="menu-element">
     <a href="#"><i class="glyph-icon icon-linecons-tv"></i><span>Requests</span></a>
