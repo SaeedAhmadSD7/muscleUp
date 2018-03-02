@@ -10,9 +10,6 @@
     Trainee
 @stop
 
-@section('sidebar_content')
-
-@stop
 
 @section('content')
 

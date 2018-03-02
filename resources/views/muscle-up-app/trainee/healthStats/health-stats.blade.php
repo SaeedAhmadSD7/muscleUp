@@ -2,9 +2,6 @@
 
 @section('title','Health Stats')
 
-@section('sidebar_content')
-    @include('includes.backend._leftBarAdmin')
-@stop
 
 @section('page-heading')
     <h2>Record Health Stats</h2>

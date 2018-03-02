@@ -3,10 +3,6 @@
 @section('title','branch')
 
 
-@section('sidebar_content')
-    @include('includes.backend._leftBarAdmin')
-@stop
-
 @section('page-heading')
 
     <h2>Allocation: {{get_full_name($instructor->user)}}</h2>

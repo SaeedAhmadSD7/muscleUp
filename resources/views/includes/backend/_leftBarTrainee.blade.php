@@ -8,3 +8,8 @@
 <li class="menu-element"><a href="{{route('dietprogram-view')}}"><i class="glyph-icon icon-linecons-tv"></i><span>Diet Program</span></a></li>
 <li class="menu-element"><a href="{{route('workoutprogram-view')}}"><i class="glyph-icon icon-linecons-tv"></i><span>Workout Program</span></a></li>
 <li class="menu-element"><a href="{{route('trainee-activity')}}"><i class="glyph-icon icon-linecons-tv"></i><span>Progress</span></a></li>
+
+<li class="header"><span>Memebers Area</span></li>
+<li class="menu-element"><a href="{{route('dietprogram-view')}}"><i class="glyph-icon icon-linecons-tv"></i><span>Diet Program</span></a></li>
+<li class="menu-element"><a href="{{route('workoutprogram-view')}}"><i class="glyph-icon icon-linecons-tv"></i><span>Workout Program</span></a></li>
+<li class="menu-element"><a href="{{route('trainee-activity')}}"><i class="glyph-icon icon-linecons-tv"></i><span>Progress</span></a></li>

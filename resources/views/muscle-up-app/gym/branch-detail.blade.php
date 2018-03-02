@@ -10,9 +10,6 @@
     Admin
 @stop
 
-@section('sidebar_content')
-
-@stop
 
 @section('content')
     <div id="sb-site">

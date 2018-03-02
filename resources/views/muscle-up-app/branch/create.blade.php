@@ -2,11 +2,6 @@
 
 @section('title','branch')
 
-
-@section('sidebar_content')
-    @include('includes.backend._leftBarAdmin')
-@stop
-
 @section('page-heading')
 
     <h2>ADD New Branch</h2>
