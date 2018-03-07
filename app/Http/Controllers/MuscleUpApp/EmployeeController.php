@@ -54,7 +54,7 @@ class EmployeeController extends Controller
 
         $user=get_auth_user();
         $instructor=$this->_instructor->where('user_id',$user->id)->first();
-        dd($instructor);
+//        dd($instructor);
         if($instructor!=null)
         {
             $instructorTrainees=$this->_instructor->getCountOfTraineesOfInstuctor($instructor);

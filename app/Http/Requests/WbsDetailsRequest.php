@@ -20,9 +20,9 @@ class WbsDetailsRequest extends FormRequest
     public function rules()
     {
         return [
-            'set' => 'required |numeric| max:60',
-            'rep' =>  'required |numeric| max:60',
-            'rest' =>  'required | numeric | max:60',
+            'set' => 'required |numeric',
+            'rep' =>  'required |numeric',
+            'rest' =>  'required | numeric',
 
         ];
     }

@@ -21,7 +21,7 @@ class PhaseCreateRequest extends FormRequest
     {
         return [
             'title' => 'required  |unique:phases| max:60',
-            'description' => 'required| alpha | max:300',
+            'description' => 'required | max:300',
 
         ];
     }
@@ -33,8 +33,7 @@ class PhaseCreateRequest extends FormRequest
         return [
             'title.unique'=> 'This title is already taken.Select another one',
             'title.required' => 'Please enter "Program Name"',
-            'description.required' => 'Please enter "Description"',
-            'description.alpha' => 'Plz enter a valid description'
+            'description.required' => 'Please enter "Description"'
 
         ];
     }
