@@ -1,18 +1,12 @@
-@extends('muscle-up-app.instructor.dashboard.instructor-dashboard')
-@section('title','List of allocated program')
-@section('style-sheet')
-    <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/widgets/timepicker/timepicker.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/css/diet.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/icons/typicons/typicons.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/icons/elusive/elusive.css')}}" rel="stylesheet" type="text/css">
-@stop
+@extends('layouts.backend-main')
 
+@section('title','branch')
+
+@section('page-heading')
+
+    {{--<h2>ADD New Branch</h2>--}}
+    {{--<p>Please fill in all the information and then click on Add Company.</p>--}}
+@stop
 @section('content')
 
     <div id="page-title">
@@ -39,6 +33,7 @@
                     </thead>
                     <tbody>
                     <?php $count = 1 ; ?>
+                    {{--{{dd($allocations)}}--}}
                     @foreach($allocations as $allocation)
                         <tr>
                             {{--{{dd($allocation)}}--}}
