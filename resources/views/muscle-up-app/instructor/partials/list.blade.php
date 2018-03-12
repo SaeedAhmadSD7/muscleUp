@@ -14,7 +14,7 @@
             {{--<td>{{$counter}}</td>--}}
             <td class="Instructor-title-1">
                 {{--                                <img width="20%" src="{{get_profile_pic_url($instructor->user->profile_img)}}" /> --}}
-                <span class="instructorName"><a href="{{route('instructor-allocation', $instructor->id)}}" >{{get_full_name($instructor->user)}}</a></span> <kbd class="mL5">01{{$instructor->user->code}}</kbd></td>
+                <span class="instructorName">{{get_full_name($instructor->user)}}</span> <kbd class="mL5">01{{$instructor->user->code}}</kbd></td>
             <td>{{$instructor->user->email}}</td>
             <td class="date">{{$instructor->user->updated_at}}</td>
 
@@ -25,6 +25,7 @@
                             <i class="glyphicon glyphicon-th-list"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a class="btnEdit" href="{{route('instructor-allocation',$instructor->id)}}"><i class="glyphicon glyphicon-magnet"></i> Allocation</a></li>
                             <li><a class="btnEdit" href="{{route('instructor-edit',$instructor->id)}}"><i class="glyphicon glyphicon-dashboard"></i> Edit</a></li>
                             <li><a class="btnDelete" href="{{route('instructor-delete',$instructor->id)}}"> <i class="glyphicon glyphicon-ban-circle"></i> Delete</a></li>
                         </ul>
