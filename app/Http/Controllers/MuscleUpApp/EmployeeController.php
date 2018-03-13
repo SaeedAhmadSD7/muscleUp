@@ -119,10 +119,12 @@ class EmployeeController extends Controller
         $employee->exp_description=$request->exp_description;
         $user->employee()->save($employee);
 
+        $instructor_code = $user->id;
         $instructor = $this->_instructor;
         $instructor->user_id = $user->id;
         $instructor->employee_id = $employee->id;
         $instructor->branch_id = $user_data->branch_id;
+        $instructor->code = $instructor_code;
         $instructor->save();
 
 //        Mail::to($user->email)->send(new AddInstructorRequest($user->email,$password));

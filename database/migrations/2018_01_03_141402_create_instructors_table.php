@@ -18,6 +18,7 @@ class CreateInstructorsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('employee_id')->nullable();
             $table->integer('branch_id')->nullable();
+            $table->string('code',5)->nullable();
             $table->timestamps();
         });
     }
