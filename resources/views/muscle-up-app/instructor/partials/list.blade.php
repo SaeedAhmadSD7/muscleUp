@@ -14,7 +14,7 @@
             {{--<td>{{$counter}}</td>--}}
             <td class="Instructor-title-1">
                 {{--                                <img width="20%" src="{{get_profile_pic_url($instructor->user->profile_img)}}" /> --}}
-                <span class="instructorName">{{get_full_name($instructor->user)}}</span> <kbd class="mL5">01{{$instructor->user->code}}</kbd></td>
+                <span class="instructorName">{{get_full_name($instructor->user)}}</span> <kbd class="mL5">{{$instructor->code}}</kbd></td>
             <td>{{$instructor->user->email}}</td>
             <td class="date">{{$instructor->user->updated_at}}</td>
 
