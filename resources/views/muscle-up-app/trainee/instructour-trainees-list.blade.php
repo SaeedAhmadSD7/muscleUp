@@ -34,7 +34,7 @@
                         @foreach($trainees as $i=>$t)
 
                         <tr class="{{ (($i+1)%2) ? "even" : "odd" }} gradeX">
-                            <td><img width="20%" src="{{get_profile_pic_url($t->profile_img)}}" /> {{get_trainee_full_name($t)}} <kbd class="mL5">{{$t->code}}</kbd></td>
+                            <td><img width="10%" src="{{get_profile_pic_url($t->profile_img)}}" /> {{get_trainee_full_name($t)}} <kbd class="mL5">{{$t->code}}</kbd></td>
                             <td>{{$t->email}}</td>
                             <td>{{$t->initial_fee}}</td>
                             <td>
