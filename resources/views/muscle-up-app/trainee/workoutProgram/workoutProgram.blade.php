@@ -1,20 +1,10 @@
-@extends('muscle-up-app.trainee.dashboard.trainee-dashboard')
+@extends('layouts.backend-main')
+
 
 @section('title','Progress')
 
 @section('style-sheet')
-    <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
-    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/icons/typicons/typicons.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/assets/plugins/select2/css/select2.css')}}" rel="stylesheet">
-    <link href="{{url('/admin-assets/select2/css/select2-bootstrap.css')}}" rel="stylesheet">
-    <link href="{{url('/admin-assets/css/program-view.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/css/diet.css')}}" rel="stylesheet" type="text/css">
+
 @stop
 
 @section('page-heading')
@@ -88,7 +78,6 @@
 
 @section('script')
 
-    <script src="{{url('/assets/plugins/select2/js/select2.full.js')}}"></script>
-    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
+
     <script src="{{url('/admin-assets/js/workoutProgramView.js')}}" type="text/javascript"></script>
 @stop
