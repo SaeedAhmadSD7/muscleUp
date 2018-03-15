@@ -1,16 +1,9 @@
-@extends('muscle-up-app.instructor.dashboard.instructor-dashboard')
-@section('title','Allocation')
+@extends('layouts.backend-main')
 
-@section('style-sheet')
-    <link href="{{url('/admin-assets/helpers/typography.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/buttons.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/themes/components/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/helpers/border-radius.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/elements/forms.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/assets/plugins/datetimepicker/css/DateTimePicker.css')}}" rel="stylesheet">
-    <link href="{{url('/admin-assets/elements/tables.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/css/diet.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{url('/admin-assets/icons/typicons/typicons.css')}}" rel="stylesheet" type="text/css">
+@section('title','Instructor List')
+
+@section('title')
+    Gym Dashboard
 @stop
 
 @section('content')
@@ -41,7 +34,7 @@
                                 <tbody>
                                 <tr id="tmpRow" class="fieldR">
                                     <td>
-                                        <select class="form-control" name="trainee_id" id="">
+                                        <select class="form-control dropdownSelect2" name="trainee_id" id="">
                                             <option value="0">Select Trainee:</option>
 
                                         @foreach($trainees as $trainee)
@@ -50,7 +43,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select class="form-control" name="program_id" id="">
+                                        <select class="form-control dropdownSelect2" name="program_id" id="">
                                             <option value="0">Select Program:</option>
                                             @foreach($programs as $program)
                                                 <option value="{{$program->id}}">{{$program->title}}</option>
@@ -72,7 +65,7 @@
                                 <tbody>
                                 <tr id="tmpRow" class="fieldR">
                                     <td>
-                                        <select class="form-control" name="diet_program_id" id="">
+                                        <select class="form-control dropdownSelect2" name="diet_program_id" id="">
                                             <option value="0">Diet Plan:</option>
                                             @foreach($diets as $diet)
                                                 <option value="{{$diet->id}}">{{$diet->title}}</option>
@@ -117,31 +110,13 @@
 
 
 @section('script')
-    <script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/allocation.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/add-instructor.js')}}" type="text/javascript"></script>
-    <script>
-        window.previewImage = "{{url('/resources/app/images/default.jpg')}}";
-        window.uploadProfilePic = "{{route('uploadProfilePic')}}";
-        window.removeUploadedProfilePic = "{{route('removeUploadedProfilePic')}}";
-    </script>
-    <script src="{{url('/resources/app/pages/js/create-instructor.js')}}" type="text/javascript"></script>
-    <script src="{{url('/resources/app/pages/js/create-trainee.js')}}" type="text/javascript"></script>
-    <script src="{{url('/resources/app/pages/js/request-gym.js')}}" type="text/javascript"></script>
 
-    <script src="{{url('/assets/plugins/datetimepicker/js/DateTimePicker.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/plugins/jquery-validation-1.16.0/js/jquery.validate.js')}}" type="text/javascript"></script>
-    <script src="{{url('/assets/js/add-instructor.js')}}" type="text/javascript"></script>
     <script>
-        window.previewImage = "{{url('/resources/app/images/default.jpg')}}";
-        window.uploadProfilePic = "{{route('uploadProfilePic')}}";
-        window.removeUploadedProfilePic = "{{route('removeUploadedProfilePic')}}";
+        $(document).ready(function() {
+            $('.btn-date').DateTimePicker();
+            $('.dropdownSelect2').select2();
+
+        });
     </script>
-    <script src="{{url('/resources/app/pages/js/create-instructor.js')}}" type="text/javascript"></script>
-    <script src="{{url('/resources/app/pages/js/create-trainee.js')}}" type="text/javascript"></script>
-    <script src="{{url('/resources/app/pages/js/request-gym.js')}}" type="text/javascript"></script>
+
 @stop

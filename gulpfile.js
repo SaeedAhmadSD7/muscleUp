@@ -149,6 +149,8 @@ elixir(function(mix) {
 
         //***Common-Styles
         "/assets/common/plugins/datetimepicker/css/DateTimePicker.css",
+            "/assets/frontend/plugins/select2/css/select2.css",
+            "/assets/frontend/plugins/select2/css/select2-bootstrap.css",
         "/assets/common/css/custom.css",
 
         ],
@@ -238,6 +240,7 @@ elixir(function(mix) {
             //***Common-JS
             "/assets/common/js/jquery.validate.js",
             "/assets/common/plugins/datetimepicker/js/DateTimePicker.js",
+            "/assets/frontend/plugins/select2/js/select2.full.js",
             "/assets/common/js/custom.js",
         ],
         'public/dist/js/backend-app.js',
