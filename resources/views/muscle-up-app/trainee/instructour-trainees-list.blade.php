@@ -64,9 +64,7 @@
 @stop
 
 @section('script')
-    {{--<script src="{{url('/admin-assets/widgets/button/button.js')}}" type="text/javascript"></script>--}}
-    {{--<script src="{{url('/assets/js/trainee-inbox.js')}}" type="text/javascript"></script>--}}
-    {{--<script src="{{url('/assets/js/inbox.js')}}" type="text/javascript"></script>--}}
+
 
     <script>
 
