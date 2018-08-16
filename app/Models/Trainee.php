@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Utils\Globals\UserType;
 use Illuminate\Database\Eloquent\Model;
 use App\Utils\Globals\AppConstant;
+use Illuminate\Support\Facades\DB;
 
 /**
  * App\Models\Trainee
@@ -90,17 +91,48 @@ class Trainee extends Model
     public function fetchRecords(array $params=[])
     {
         $limit = isset($params['limit']) ? $params['limit'] : AppConstant::RECORD_LIMIT;
-        $oderBy = isset($params['orderBy']) ? $params['orderBy'] : ['created_at|DESC'];
+//        $oderBy = isset($params['orderBy']) ? $params['orderBy'] : ['created_at|DESC'];
 
-        $qry = $this->from('trainees AS t')
-            ->select(['b.id AS bId','u.id AS uId','t.id','t.code', 'u.first_name','u.last_name','u.email','profile_img','t.initial_fee'])
-            ->join('users AS u','u.id','t.user_id')
-            ->join('branches AS b','b.id','t.branch_id');
+        $key = isset($params['searchInput']) ? $params['searchInput'] : '';
 
-        foreach ($oderBy as $o){
-            list($oderByCol,$direction) = explode('|',$o);
-            $qry->orderBy('t.'.$oderByCol,$direction);
-        }
+        $qry = DB::table('wels AS w')
+            ->select(['w.form_no','w.old_student_id','w.vu_reg_no','w.name','w.father','w.study_program','w.degree_program',
+                'w.study_at','w.student_mailing_address','w.student_permanent_address','w.student_vu_email','w.student_personal_email'
+                ,'w.student_phone_no','w.mobile',])
+
+            ->orWhere('w.form_no' , 'LIKE', '%' . $key . '%')
+            ->orWhere('w.old_student_id' , 'LIKE', '%' . $key . '%')
+            ->orWhere('w.vu_reg_no' , 'LIKE', '%' . $key . '%')
+            ->orWhere('w.name' , 'LIKE', '%' . $key . '%')
+            ->orWhere('w.father' , 'LIKE', '%' . $key . '%')
+            ->orWhere('w.study_program' , 'LIKE', '%' . $key . '%')
+            ->orWhere('w.degree_program' , 'LIKE', '%' . $key . '%')
+            ->orWhere('w.study_at' , 'LIKE', '%' . $key . '%')
+            ->orWhere('w.student_mailing_address' , 'LIKE', '%' . $key . '%')
+            ->orWhere('w.student_permanent_address' , 'LIKE', '%' . $key . '%')
+            ->orWhere('w.student_vu_email' , 'LIKE', '%' . $key . '%')
+            ->orWhere('w.student_personal_email' , 'LIKE', '%' . $key . '%')
+            ->orWhere('w.student_phone_no' , 'LIKE', '%' . $key . '%')
+            ->orWhere('w.mobile' , 'LIKE', '%' . $key . '%')
+
+//->where('w.vu_reg_no' , 'LIKE', '%' . '014-VU' . '%')
+//            ->join('wels AS w','w.vu_reg_no','l.vu_reg_no')
+;
+
+
+//        $qry = DB::table('lds AS l')
+//            ->select(['w.form_no','w.old_student_id','w.vu_reg_no','w.name','w.father','w.study_program','w.degree_program','w.study_at','w.student_mailing_address','w.student_permanent_address','w.student_vu_email','w.student_personal_email','w.student_phone_no','w.mobile',])
+//            ->join('wels AS w','w.vu_reg_no','l.vu_reg_no');
+
+//        $qry = $this->from('trainees AS t')
+//            ->select(['b.id AS bId','u.id AS uId','t.id','t.code', 'u.first_name','u.last_name','u.email','profile_img','t.initial_fee'])
+//            ->join('users AS u','u.id','t.user_id')
+//            ->join('branches AS b','b.id','t.branch_id');
+
+//        foreach ($oderBy as $o){
+//            list($oderByCol,$direction) = explode('|',$o);
+//            $qry->orderBy('t.'.$oderByCol,$direction);
+//        }
 //        $qry->groupBy(['b.id','u.id','t.id','u.first_name','u.last_name','u.email','t.initial_fee','t.created_at']);
 //      dd($qry->toSql());
 //        dd($limit);

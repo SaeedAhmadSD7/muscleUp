@@ -152,32 +152,35 @@ class TraineeController extends Controller
         $trainees = $this->_trainee->fetchRecords();
             return view('muscle-up-app.trainee.trainees-list',compact('trainees','user'));
         }
-        else if($user->type=="Instructor"){
-            $instructorTrainees=Instructor::where('user_id',$user->id)->first();
-            if($instructorTrainees!=null)
-            {
-                $instructorTrainees->trainees;
-            }
-            return view('muscle-up-app.trainee.trainees-list',compact('instructorTrainees','user'));
-        }
+//        else if($user->type=="Instructor"){
+//            $instructorTrainees=Instructor::where('user_id',$user->id)->first();
+//            if($instructorTrainees!=null)
+//            {
+//                $instructorTrainees->trainees;
+//            }
+//            return view('muscle-up-app.trainee.trainees-list',compact('instructorTrainees','user'));
+//        }
         return view('error');
     }
     public function ajaxtraineesList(){
 
         $params['limit'] = Input::get('pageinateData');
+        $params['searchInput'] = Input::get('searchInput');
         $user=get_auth_user();
         if($user->type=="Admin"){
             $trainees = $this->_trainee->fetchRecords($params);
+
+//            dd($trainees);
             return view('muscle-up-app.trainee.partials.list',compact('trainees','user'));
         }
-        else if($user->type=="Instructor"){
-            $instructorTrainees=Instructor::where('user_id',$user->id)->first();
-            if($instructorTrainees!=null)
-            {
-                $instructorTrainees->trainees;
-            }
-            return view('muscle-up-app.trainee.partials.list',compact('instructorTrainees','user'));
-        }
+//        else if($user->type=="Instructor"){
+//            $instructorTrainees=Instructor::where('user_id',$user->id)->first();
+//            if($instructorTrainees!=null)
+//            {
+//                $instructorTrainees->trainees;
+//            }
+//            return view('muscle-up-app.trainee.partials.list',compact('instructorTrainees','user'));
+//        }
         return view('error');
     }
 

@@ -11,7 +11,9 @@
 @section('content')
     <div class="panel">
         <div class="panel-body">
-            <h3 class="title-hero">Trainees</h3>
+            <h3 class="title-hero">Trainees {{ $trainees->count()}}</h3>
+
+            <input type="text" id="searchInput" value="" placeholder="Search hear">
             <div id="ajx" class="example-box-wrapper">
 
             </div>
@@ -26,9 +28,10 @@
         {{--</div>--}}
         {{--{{$trainees->links()}}--}}
         <select id="issueinput5" name="limit">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="500">500</option>
         </select>
     </div>
 @stop
@@ -73,7 +76,32 @@
         }
         $('#issueinput5').on('change', function() {
             page = window.location.hash.replace('#','');
-            getProducts(page);
+            var recordCount = $('#issueinput5').val();
+            var searchInput = $('#searchInput').val()
+            var url,success,params;
+            var type='GET';
+            url='/ajax/trainee/list?page='+'' +'&pageinateData='+recordCount +'&searchInput='+searchInput ;
+//            params={'pageinateData':$('#issueinput5').val()};
+//            params={'searchInput':$('#searchInput').val()};
+            success=function(data){
+                $('#ajx').html(data);
+            };
+            ajaxCallMethod(type,url,params,success);
+        });
+
+        $('#searchInput').on('keyup', function() {
+
+            var recordCount = $('#issueinput5').val();
+            var searchInput = $('#searchInput').val()
+            var url,success,params;
+            var type='GET';
+            url='/ajax/trainee/list?page='+'' +'&pageinateData='+recordCount +'&searchInput='+searchInput ;
+//            params={'pageinateData':$('#issueinput5').val()};
+//            params={'searchInput':$('#searchInput').val()};
+            success=function(data){
+                $('#ajx').html(data);
+            };
+            ajaxCallMethod(type,url,params,success);
         });
 
 
